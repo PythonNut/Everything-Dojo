@@ -1,4 +1,4 @@
-Everything-Dojo
+Everything Dojo
 ===============
 
-Testing some stuff here
+Home page of the AoPS Blog Resource Project.
