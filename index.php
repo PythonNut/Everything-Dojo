@@ -1,8 +1,8 @@
-<?php include('header'); ?>
+<?php include('include/header.php'); ?>
 
 <body>
 
-<?php include('login-bar.php'); ?>
+<?php include('include/login-bar.php'); ?>
 <div id="index-content">
 	<div id="index-content-inner">
     	<div class="index-row">
