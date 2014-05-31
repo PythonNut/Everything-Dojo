@@ -4,25 +4,45 @@
 /* General */
 html{
 	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
 }
 body{
 	height: 100%;
+	width: 100%;
+}
+div.clear-40{
+	clear: both;
+	height: 40px;
 }
 
 /* Index items */
+div#index-content{
+	width: 100%;
+}
+div#index-content-inner{
+	width: 640px;
+	margin-left: auto;
+	margin-right: auto;
+}
 div.index-item{
 	height: 350px;
 	width: 300px;
 }
 div#index-database{
 	background-color: #d553cb;
+	float: left;
 }
 div#index-themizer{
 	background-color: #57c639;
+	float: right;
 }
 div#index-tryit{
 	background-color: #ff6c00;
+	float: left;
 }
 div#index-discuss{
 	background-color: #509aff;
+	float: right;
 }
