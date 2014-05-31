@@ -7,5 +7,13 @@
 </head>
 
 <body>
+
+<div id="content-main">
+	<div class="index-item" id="index-database"></div>
+    <div class="index-item" id="index-themizer"></div>
+    <div class="index-item" id="index-tryit"></div>
+    <div class="index-item" id="index-discuss"></div>
+</div>
+
 </body>
 </html>

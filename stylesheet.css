@@ -1,3 +1,28 @@
 @charset "utf-8";
 /* CSS Document */
 
+/* General */
+html{
+	height: 100%;
+}
+body{
+	height: 100%;
+}
+
+/* Index items */
+div.index-item{
+	height: 350px;
+	width: 300px;
+}
+div#index-database{
+	background-color: #d553cb;
+}
+div#index-themizer{
+	background-color: #57c639;
+}
+div#index-tryit{
+	background-color: #ff6c00;
+}
+div#index-discuss{
+	background-color: #509aff;
+}
