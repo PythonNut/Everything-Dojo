@@ -31,28 +31,28 @@ div.clear-40{
 }
 
 /* Login bar */
-div#login-bar{
+#login-bar{
 	text-align: right;
 	color: #9f9f9f;
 	height: 80px;
 	width: 100%;
 }
-div#login-bar-inner{
+#login-bar-inner{
 	margin-top: 10px;
 	margin-right: 30px;
 }
 
 /* Index items */
-div#index-content{
+#index-content{
 	min-height: 100%;
 	width: 100%;
 	margin-bottom: -70px;
 }
-div#index-content:after{
+#index-content:after{
 	content: "";
 	display: block;
 }
-div#index-content-inner{
+#index-content-inner{
 	width: 640px;
 	height: 740px;
 	margin-left: auto;
@@ -62,57 +62,60 @@ div.index-item{
 	height: 350px;
 	width: 300px;
 }
-div#index-database{
+
+/* 
+ * #index-database - database tile
+ * #index-themizer - themizer tile
+ * #index-tryit    - try-it tile
+ * #index-discuss  - forum tile
+ */
+#index-database{
 	background-color: #d553cb;
 	float: left;
 }
-div#index-themizer{
+#index-database:hover{
+	background-color: #a91c9e;
+}
+
+#index-themizer{
 	background-color: #57c639;
 	float: right;
 }
-div#index-tryit{
+#index-themizer:hover{
+	background-color: #3cab1e;
+}
+
+#index-tryit{
 	background-color: #ff6c00;
 	float: left;
 }
-img.index-img{
-	margin-top: 80px;
-	margin-left: 15px;
+#index-tryit:hover{
+	background-color: #ce6417;
 }
-div#index-discuss{
+
+#index-discuss{
 	background-color: #509aff;
 	float: right;
 }
-div#index-footer, div#index-content:after{
+#index-discuss:hover{
+	background-color: #448ae9;
+}
+
+#index-footer, #index-content:after{
 	text-align: center;
 	height: 70px;
 	line-height: 70px;
 	vertical-align: center;
 	width: 100%;
 }
+.index-img{
+	margin-top: 80px;
+	margin-left: 15px;
+}
 
 /* Links */
 a.index-item{
 	border: 0;
 	outline: none;
-}
-
-/* Tiles
- * tyxchen: change background colour of tiles on hover */
-
-/* database */
-#index-database:hover{
-	background-color: #a91c9e;
-}
-/* themizer */
-#index-themizer:hover{
-	background-color: #3cab1e;
-}
-/* try-it */
-#index-tryit:hover{
-	background-color: #ce6417;
-}
-/* forum */
-#index-discuss:hover{
-	background-color: #448ae9;
 }
 
