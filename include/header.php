@@ -23,7 +23,7 @@ $(document).ready(function() {
 		   $(this).css({"cursor":"pointer"});
         }, 
         function () {
-        	$(this).css({"background-color":"#57c639"});
+        	$(this).css({"background-color":"#51b835"});
     	}
 	);
 	$('div#index-tryit').hover(
