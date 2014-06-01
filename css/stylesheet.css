@@ -95,3 +95,24 @@ a.index-item{
 	border: 0;
 	outline: none;
 }
+
+/* Tiles
+ * tyxchen: change background colour of tiles on hover */
+
+/* database */
+#index-database:hover{
+	background-color: #a91c9e;
+}
+/* themizer */
+#index-themizer:hover{
+	background-color: #3cab1e;
+}
+/* try-it */
+#index-tryit:hover{
+	background-color: #ce6417;
+}
+/* forum */
+#index-discuss:hover{
+	background-color: #448ae9;
+}
+

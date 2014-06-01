@@ -3,47 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Everything Dojo - AoPS Blog Resource</title>
-<link href="stylesheet.css" rel="stylesheet" type="text/css" />
+<link href="css/stylesheet.css" rel="stylesheet" type="text/css" />
 <script src="js/jquery.js"></script>
 
-<script type="text/javascript">
-$(document).ready(function() {
-	$('div#index-database').hover(
-        function () {
-           $(this).css({"background-color":"#a91c9e"});
-		   $(this).css({"cursor":"pointer"});
-        }, 
-        function () {
-        	$(this).css({"background-color":"#cc3ac1"});
-    	}
-	);
-	$('div#index-themizer').hover(
-        function () {
-           $(this).css({"background-color":"#3cab1e"});
-		   $(this).css({"cursor":"pointer"});
-        }, 
-        function () {
-        	$(this).css({"background-color":"#57c639"});
-    	}
-	);
-	$('div#index-tryit').hover(
-        function () {
-           $(this).css({"background-color":"#ce6417"});
-		   $(this).css({"cursor":"pointer"});
-        }, 
-        function () {
-        	$(this).css({"background-color":"#ff6c00"});
-    	}
-	);
-	$('div#index-discuss').hover(
-        function () {
-           $(this).css({"background-color":"#448ae9"});
-		   $(this).css({"cursor":"pointer"});
-        }, 
-        function () {
-        	$(this).css({"background-color":"#509aff"});
-    	}
-	);			
-});
-</script>
 </head>
+
