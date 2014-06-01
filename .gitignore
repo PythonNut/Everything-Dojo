@@ -1,0 +1,23 @@
+# added by NeoMathematicalKid (@tyxchen) 
+# on 2014-06-01T14:54:38-05:00
+
+# temporary files added by text editors
+
+*.*~
+.*.*.swp
+
+# OS-generated files
+
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# zipped files
+
+*.zip
+*.7z
+*.tar
+*.bz2
+*.gz
