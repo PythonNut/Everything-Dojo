@@ -6,14 +6,14 @@ Everything Dojo v2.0
 
 /*--FONT IMPORT--*/
 @font-face {
-    font-family: 'lato';
-    src: url('fonts/lato-lig-webfont.eot');
-    src: url('fonts/lato-lig-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/lato-lig-webfont.woff') format('woff'),
-         url('fonts/lato-lig-webfont.ttf') format('truetype'),
-         url('fonts/lato-lig-webfont.svg#latolight') format('svg');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'lato';
+  src: url('fonts/lato-lig-webfont.eot');
+  src: url('fonts/lato-lig-webfont.eot?#iefix') format('embedded-opentype'),
+       url('fonts/lato-lig-webfont.woff') format('woff'),
+       url('fonts/lato-lig-webfont.ttf') format('truetype'),
+       url('fonts/lato-lig-webfont.svg#latolight') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
 /*--LINKS--*/
@@ -53,7 +53,7 @@ body {
   height: 100%;
   width: 100%;
   margin: 0;
-  padding: 0; 
+  padding: 0;
 }
 
 div.clear-40 {
@@ -104,19 +104,40 @@ div.index-item {
  * #index-tryit    - try-it tile
  * #index-discuss  - forum tile
  */
-#index-database { background-color: #d553cb; float: left; }
-#index-database:hover { background-color: #a91c9e; }
+#index-database {
+  background-color: #d553cb;
+  float: left;
+}
+#index-database:hover {
+  background-color: #a91c9e;
+}
 
-#index-themizer { background-color: #51b835; float: right; }
-#index-themizer:hover { background-color: #3cab1e; }
+#index-themizer {
+  background-color: #51b835;
+  float: right;
+}
+#index-themizer:hover {
+  background-color: #3cab1e;
+}
 
-#index-tryit { background-color: #ff6c00; float: left; }
-#index-tryit:hover { background-color: #ce6417; }
+#index-tryit {
+  background-color: #ff6c00;
+  float: left;
+}
+#index-tryit:hover {
+  background-color: #ce6417;
+}
 
-#index-discuss { background-color: #509aff; float: right; }
-#index-discuss:hover { background-color: #448ae9; }
+#index-discuss {
+  background-color: #509aff;
+  float: right;
+}
+#index-discuss:hover {
+  background-color: #448ae9;
+}
 
-#index-footer, #index-content:after {
+#index-footer,
+#index-content:after {
   text-align: center;
   height: 70px;
   line-height: 70px;
