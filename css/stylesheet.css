@@ -1,7 +1,10 @@
 @charset "utf-8";
-/* CSS Document */
+/*
+Everything Dojo v2.0
+(c) 2014 Everything Dojo
+*/
 
-/* General */
+/*--FONT IMPORT--*/
 @font-face {
     font-family: 'lato';
     src: url('fonts/lato-lig-webfont.eot');
@@ -13,6 +16,31 @@
     font-style: normal;
 }
 
+/*--LINKS--*/
+a.index-item {
+  border: 0;
+  outline: none;
+}
+
+div.index-text {
+  font-family: "Lato";
+  margin-top: 80px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+/*--TYPESETTING--*/
+span.index-title {
+  font-size: 50px;
+  color: #fff;
+}
+
+span.index-text {
+  font-size: 20px;
+  color: #fff;
+}
+
+/*--LAYOUT--*/
 html {
   font-family: "Lato", "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   height: 100%;
@@ -33,7 +61,7 @@ div.clear-40 {
   height: 40px;
 }
 
-/* Login bar */
+/*--LOGIN BAR--*/
 #login-bar {
   text-align: right;
   color: #9f9f9f;
@@ -46,7 +74,7 @@ div.clear-40 {
   margin-right: 30px;
 }
 
-/* Index items */
+/*--INDEX ITEMS--*/
 #index-content {
   min-height: 100%;
   width: 100%;
@@ -76,69 +104,22 @@ div.index-item {
  * #index-tryit    - try-it tile
  * #index-discuss  - forum tile
  */
-#index-database {
-  background-color: #d553cb;
-  float: left;
-}
+#index-database { background-color: #d553cb; float: left; }
+#index-database:hover { background-color: #a91c9e; }
 
-#index-database:hover {
-  background-color: #a91c9e;
-}
+#index-themizer { background-color: #51b835; float: right; }
+#index-themizer:hover { background-color: #3cab1e; }
 
-#index-themizer {
-  background-color: #51b835;
-  float: right;
-}
+#index-tryit { background-color: #ff6c00; float: left; }
+#index-tryit:hover { background-color: #ce6417; }
 
-#index-themizer:hover {
-  background-color: #3cab1e;
-}
+#index-discuss { background-color: #509aff; float: right; }
+#index-discuss:hover { background-color: #448ae9; }
 
-#index-tryit {
-  background-color: #ff6c00;
-  float: left;
-}
-#index-tryit:hover {
-  background-color: #ce6417;
-}
-
-#index-discuss {
-  background-color: #509aff;
-  float: right;
-}
-
-#index-discuss:hover {
-  background-color: #448ae9;
-}
-
-#index-footer,
-#index-content:after {
+#index-footer, #index-content:after {
   text-align: center;
   height: 70px;
   line-height: 70px;
   vertical-align: center;
   width: 100%;
-}
-
-/* Links */
-a.index-item {
-  border: 0;
-  outline: none;
-}
-
-div.index-text {
-  font-family: "Lato";
-  margin-top: 80px;
-  margin-left: 15px;
-  margin-right: 15px;
-}
-
-span.index-title {
-  font-size: 50px;
-  color: #fff;
-}
-
-span.index-text {
-  font-size: 20px;
-  color: #fff;
 }
