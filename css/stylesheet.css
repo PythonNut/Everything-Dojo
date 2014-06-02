@@ -93,9 +93,10 @@ div.clear-40 {
   margin-right: auto;
 }
 
-div.index-item {
-  height: 350px;
-  width: 300px;
+div.index-item{
+  overflow: auto;
+  height: 35vh;
+  width: 25vw;
 }
 
 /* 
