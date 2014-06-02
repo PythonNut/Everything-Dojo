@@ -22,7 +22,7 @@ include('include/header.php');
                     <div class="index-text">
                         <span class="index-title">THEMIZER</span>
                         <br />
-                        <span class="index-text">Want to customize a theme for yourself? Then themeizer is the tool for you!</span>
+                        <span class="index-text">Want to customize a theme for yourself? Then themizer is the tool for you!</span>
                     </div>
                 </div>
             </a>
