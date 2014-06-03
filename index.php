@@ -1,6 +1,6 @@
 <?php 
 include('include/include.php');
-include('include/header.php?title=Everything%20Dojo%20-%20AoPS%20Blog%20Resource'); 
+include('include/header.php'); 
 ?>
 <?php include('include/login-bar.php'); ?>
 <div id="index-content">
