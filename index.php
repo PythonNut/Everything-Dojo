@@ -1,13 +1,13 @@
 <?php 
 include('include/include.php');
-include('include/header.php'); 
+generateHeader('Everything Dojo - AoPS Blog Resource');
+include('include/login-bar.php');
 ?>
-<?php include('include/login-bar.php'); ?>
 <div id="index-content">
   <div id="index-content-inner">
     <div class="index-row">
 
-      <a href=<?php echo "\"" . URL_DATABASE . "\""; ?> class="index-link">
+      <a href=<?php echo '"' . URL_DATABASE . '"'; ?> class="index-link">
         <div class="index-item" id="index-database">
           <div class="index-text-container">
             <h3 class="index-title">DATABASE</h3>
@@ -16,7 +16,7 @@ include('include/header.php');
         </div>
       </a>
 
-      <a href=<?php echo "\"" . URL_THEMIZER . "\""; ?> class="index-link">
+      <a href=<?php echo '"' . URL_THEMIZER . '"'; ?> class="index-link">
         <div class="index-item" id="index-themizer">
           <div class="index-text-container">
             <h3 class="index-title">THEMIZER</h3>
@@ -31,7 +31,7 @@ include('include/header.php');
 
     <div class="index-row">
 
-      <a href=<?php echo "\"" . URL_TRYIT . "\""; ?> class="index-link">
+      <a href=<?php echo '"' . URL_TRYIT . '"'; ?> class="index-link">
         <div class="index-item" id="index-tryit">
           <div class="index-text-container">
             <h3 class="index-title">TRY-IT</h3>
@@ -40,7 +40,7 @@ include('include/header.php');
         </div>
       </a>
 
-      <a href=<?php echo "\"" . URL_DISCUSS . "\""; ?> class="index-link">
+      <a href=<?php echo '"' . URL_DISCUSS . '"'; ?> class="index-link">
         <div class="index-item" id="index-discuss">
           <div class="index-text-container">
             <h3 class="index-title">DISCUSS</h3>
