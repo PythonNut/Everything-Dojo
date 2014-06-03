@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 
-    <title><?php echo $_GET['title']; ?></title> <!-- Everything Dojo - AoPS Blog Resource -->
+    <title>Everything Dojo - AoPS Blog Resource</title>
 
     <link href="css/normalize.css" rel="stylesheet">
     <link href="css/stylesheet.css" rel="stylesheet">
