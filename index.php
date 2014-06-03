@@ -10,7 +10,7 @@ include('include/header.php');
       <a href=<?php echo "\"" . URL_DATABASE . "\""; ?> class="index-link">
         <div class="index-item" id="index-database">
           <div class="index-text-container">
-		    <h3 class="index-title">DATABASE</h3>
+            <h3 class="index-title">DATABASE</h3>
             <p class="index-text">A collection of AoPS Blog CSS themes for your perusal.</p>
           </div>
         </div>
