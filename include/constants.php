@@ -1,5 +1,5 @@
 <?php
-define("COPYRIGHT", "&copy; 2014 Insert Group Name Here");
+define("COPYRIGHT", "&copy; 2014 Everything Dojo");
 
 define("URL_DATABASE", "http://rebuild.everythingdojo.com");
 define("URL_DISCUSS", "http://rebuild.everythingdojo.com");
