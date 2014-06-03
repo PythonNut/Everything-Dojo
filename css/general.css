@@ -1,3 +1,4 @@
+/* general.css */
 
 /* TODO: edit for mobile devices in portrait mode. Will
  *       probably need @media.
@@ -16,23 +17,37 @@
 }
 
 /*--LINKS--*/
+
+/*
+ * Don't need `outline: none;` as it is already defined in normalize.css
+ * for links
+ */
+
 .index-link {
   border: 0;
-  outline: none;
 }
 
 /*--TYPESETTING--*/
-.index-text {
-  font-size: inherit;
-  color: #fff;
-}
+
+/*
+ * 1. Remove margins applied automatically to h3 by the browser
+ *    so that there isn't space between .index-title and .index-text
+ * 2. Make sure .index-text inherits font-size
+ */
 
 .index-title {
   font-size: 2.5em;
   color: #fff;
+  margin: 0; /* 1 */
+}
+
+.index-text {
+  font-size: inherit; /* 2 */
+  color: #fff;
 }
 
 /*--LAYOUT--*/
+
 html {
   font-family: "Lato", "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   height: 100%;
@@ -55,6 +70,7 @@ body {
 }
 
 /*--LOGIN BAR--*/
+
 #login-bar {
   text-align: right;
   color: #9f9f9f;
@@ -68,6 +84,7 @@ body {
 }
 
 /*--INDEX ITEMS--*/
+
 #index-content {
   min-height: 100%;
   width: 100%;
