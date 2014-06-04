@@ -1,9 +1,9 @@
-<?php 
+<?php
   include('include/include.php');
-  generateHeader('Try-It');
+  generateHeader('Themizer');
 ?>
 
-<div id="tryit-header"></div>
+<div id="themizer-header"></div>
 
 <?php
   include('include/footer.php');

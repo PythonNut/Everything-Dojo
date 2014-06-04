@@ -1,0 +1,129 @@
+/* index.css */
+
+/*--LINKS--*/
+
+/*
+ * Don't need `outline: none;` as it is already defined in normalize.css
+ * for links
+ */
+
+.index-link {
+  border: 0;
+}
+
+/*--TYPESETTING--*/
+
+/*
+ * 1. Remove margins applied automatically to h3 by the browser
+ *    so that there isn't space between .index-title and .index-text
+ * 2. Make sure .index-text inherits font-size
+ */
+
+.index-title {
+  font-size: 2.5em;
+  color: #fff;
+  margin: 0; /* 1 */
+}
+
+.index-text {
+  font-size: inherit; /* 2 */
+  color: #fff;
+}
+
+.index.clear-row {
+  height: 4.44vh;
+}
+
+/*--INDEX ITEMS--*/
+
+#index-content {
+  min-height: 100%;
+  width: 100%;
+  margin-bottom: -8.89vh; /* tyxchen: originally 7.78vh, but 8.89 looks better */
+}
+
+/* is this clearfix? */
+#index-content:after {
+  content: "";
+  display: block;
+}
+
+#index-content:after {
+  height: 7.78vh;
+  width: 100%;
+  text-align: center;
+  line-height: 7.78vh;
+  vertical-align: center;
+}
+
+#index-content-inner {
+  width: 71.11vh;
+  height: 82.22vh;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.index-item{
+  overflow: auto;
+  height: 38.89vh;
+  width: 33.33vh;
+}
+
+.index-text-container {
+  margin-top: 8.89vh;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+/* 
+ * #index-database - database tile
+ * #index-themizer - themizer tile
+ * #index-tryit    - try-it tile
+ * #index-discuss  - forum tile
+ * 
+ * Layout so that @tyxchen doesn't get confused (hate me all you want):
+ * 
+ * ----------------------------
+ * |             |            |
+ * | database    | themizer   |
+ * |             |            |
+ * ----------------------------
+ * |             |            |
+ * | try-it      | discuss    |
+ * |             |            |
+ * ----------------------------
+ *
+ */
+
+#index-database {
+  background-color: #d553cb;
+  float: left;
+}
+#index-database:hover {
+  background-color: #a91c9e;
+}
+
+#index-themizer {
+  background-color: #51b835;
+  float: right;
+}
+#index-themizer:hover {
+  background-color: #3cab1e;
+}
+
+#index-tryit {
+  background-color: #ff6c00;
+  float: left;
+}
+#index-tryit:hover {
+  background-color: #ce6417;
+}
+
+#index-discuss {
+  background-color: #509aff;
+  float: right;
+}
+#index-discuss:hover {
+  background-color: #448ae9;
+}
+

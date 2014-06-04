@@ -1,7 +1,7 @@
 <?php 
-include('include/include.php');
-generateHeader('Everything Dojo - AoPS Blog Resource');
-include('include/login-bar.php');
+  include('include/include.php');
+  generateHeader('Index');
+  include('include/login-bar.php');
 ?>
 <div id="index-content">
   <div id="index-content-inner">
@@ -27,7 +27,7 @@ include('include/login-bar.php');
       
     </div>
 
-    <div class="clear-row"></div>
+    <div class="index clear-row"></div> <!-- may change .index later on -->
 
     <div class="index-row">
 
@@ -55,6 +55,6 @@ include('include/login-bar.php');
 </div>
 
 <?php
-include('include/footer.php');
+  include('include/footer.php');
 ?>
 
