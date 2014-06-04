@@ -1,12 +1,6 @@
 /* index.css */
 
 /*--LINKS--*/
-
-/*
- * Don't need `outline: none;` as it is already defined in normalize.css
- * for links
- */
-
 .index-link {
   border: 0;
 }
@@ -19,20 +13,23 @@
  * 2. Make sure .index-text inherits font-size
  */
 
-.index-title {
-  font-size: 2.5em;
-  color: #fff;
-  margin: 0; /* 1 */
-}
-
-.index-text {
-  font-size: inherit; /* 2 */
-  color: #fff;
-}
-
-.index.clear-row {
-  height: 4.44vh;
-}
+/*
+commented for now because of image replacement (Dojo)
+	.index-title {
+	  font-size: 2.5em;
+	  color: #fff;
+	  margin: 0; 
+	}
+	
+	.index-text {
+	  font-size: inherit; 
+	  color: #fff;
+	}
+	
+	.index.clear-row {
+	  height: 4.44vh;
+	}
+*/
 
 /*--INDEX ITEMS--*/
 
@@ -69,13 +66,13 @@
   width: 34vh;
 }
 
-.index-text-container {
+.index-item-container {
   margin-top: 8.89vh;
   margin-left: 3%;
   margin-right: 3%;
 }
 
-.index-text-container img {
+.index-item-container img {
 	width: 30vh;
 }
 

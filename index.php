@@ -9,7 +9,7 @@
 
       <a href=<?php echo '"' . URL_DATABASE . '"'; ?> class="index-link">
         <div class="index-item" id="index-database">
-        	<div class="index-text-container">
+        	<div class="index-item-container">
 				<img src="images/index-database.png" />
             </div>
         </div>
@@ -17,7 +17,7 @@
 
       <a href=<?php echo '"' . URL_THEMIZER . '"'; ?> class="index-link">
         <div class="index-item" id="index-themizer">
-        	<div class="index-text-container">
+        	<div class="index-item-container">
 				<img src="images/index-themizer.png" />
             </div>
         </div>
@@ -31,7 +31,7 @@
 
       <a href=<?php echo '"' . URL_TRYIT . '"'; ?> class="index-link">
         <div class="index-item" id="index-tryit">
-        	<div class="index-text-container">
+        	<div class="index-item-container">
 				<img src="images/index-tryit.png" />
             </div>
         </div>
@@ -39,7 +39,7 @@
 
       <a href=<?php echo '"' . URL_DISCUSS . '"'; ?> class="index-link">
         <div class="index-item" id="index-discuss">
-        	<div class="index-text-container">
+        	<div class="index-item-container">
 				<img src="images/index-discuss.png" />
             </div>
         </div>
