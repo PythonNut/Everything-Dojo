@@ -8,28 +8,25 @@
 /*--TYPESETTING--*/
 
 /*
- * 1. Remove margins applied automatically to h3 by the browser
+ * 1. Make sure .index-text inherits font-size
+ * 2. Remove margins applied automatically to elements by the browser
  *    so that there isn't space between .index-title and .index-text
- * 2. Make sure .index-text inherits font-size
  */
 
-/*
-commented for now because of image replacement (Dojo)
-	.index-title {
-	  font-size: 2.5em;
-	  color: #fff;
-	  margin: 0; 
-	}
-	
-	.index-text {
-	  font-size: inherit; 
-	  color: #fff;
-	}
-	
-	.index.clear-row {
-	  height: 4.44vh;
-	}
-*/
+.index-title,
+.index-text {
+  font-size: inherit; /* 1 */
+  color: #fff;
+  margin: 0; /* 2 */
+}
+
+.index-title {
+  font-size: 2.5em;
+}
+
+.index.clear-row {
+  height: 4.44vh;
+}
 
 /*--INDEX ITEMS--*/
 
@@ -62,19 +59,21 @@ commented for now because of image replacement (Dojo)
 
 .index-item {
   overflow: auto;
-  height: 39vh;
-  width: 34vh;
+  height: 38.89vh;
+  width: 33.33vh;
 }
 
-.index-item-container {
+.index-text-container {
   margin-top: 8.89vh;
-  margin-left: 3%;
-  margin-right: 3%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
+/* commented out for text 
 .index-item-container img {
 	width: 30vh;
 }
+*/
 
 /* 
  * #index-database - database tile
