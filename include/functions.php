@@ -21,8 +21,6 @@ function generateHeader($title, $titleAdd="", $html="") {
     <link href="css/normalize.css" rel="stylesheet">
     <link href="css/general.css" rel="stylesheet">
     <link href="css/' . $convert[$title] . '.css" rel="stylesheet">
-
-    <script src="js/jquery.js"></script>
     ' . $html . '
   </head>
 
