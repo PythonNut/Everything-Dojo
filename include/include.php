@@ -1,5 +1,5 @@
 <?php
-include('constants.php');
-inlcude('functions.php');
+  include('constants.php');
+  include('functions.php');
 ?>
 
