@@ -8,7 +8,7 @@
     <div class="noscript wrapper">
       <div class="noscript content">
         <div class="noscript image">
-          <img src="/images/noscript.png">
+          <img src="images/noscript.png">
         </div>
         <h3 class="noscript header">
           Sorry, but Themizer requires JavaScript.
