@@ -62,6 +62,8 @@
   overflow: auto;
   height: 38.89vh;
   width: 33.33vh;
+  -webkit-transition: background-color 0.5s ease;
+  transition: background-color 0.5s ease;
 }
 
 .index-text-container {
