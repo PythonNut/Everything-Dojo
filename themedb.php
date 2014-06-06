@@ -1,8 +1,9 @@
 <?php
   include('include/include.php');
-  generateHeader('Theme Database');
+  generateHeader('Database');
 ?>
 
 <?php include('include/unavailable.php'); ?>
 
 <?php include('include/footer.php');
+
