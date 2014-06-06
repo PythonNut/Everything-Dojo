@@ -6,6 +6,7 @@
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, sans-serif;
   box-sizing: border-box;
 }
+
 .noscript.background {
   position: fixed;
   top: 0;
@@ -14,6 +15,7 @@
   width: 100%;
   height: 100%;
 }
+
 .noscript.wrapper {
   position: fixed;
   top: 10%;
@@ -21,24 +23,29 @@
   width: 80%;
   height: 80%;
   background-color: white;
+  padding: 10vh;
   border: 1px silver solid;
   box-shadow: 0 0 15px white;
+  -webkit-box-shadow: 0 0 25px white; /* fix incorrect box-shadow sizing in WebKit */
   border-radius: 10px;
-  padding: 10vh;
 }
+
 .noscript.content {
   box-sizing: content-box;
 }
+
 .noscript.image {
   height: 45vh;
-  display: block; /* allows for centering by margins */
+  display: block; /* allows for centring by margins */
   margin-left: auto;
   margin-right: auto;
 }
+
 .noscript.text, .noscript.header {
   text-align: center;
   font-size: 1.2em;
 }
+
 .noscript.header {
   font-size: 1.8em;
   margin-top: 1.2em;
