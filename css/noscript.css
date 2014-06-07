@@ -4,6 +4,7 @@
 
 .noscript {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, sans-serif;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 .noscript.background {
@@ -27,6 +28,7 @@
   padding: 10vh;
 }
 .noscript.content {
+  -moz-box-sizing: content-box;
   box-sizing: content-box;
 }
 .noscript.image {
