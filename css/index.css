@@ -60,16 +60,16 @@
 
 .index-item {
   overflow: auto;
-  height: 38.89vh;
-  width: 33.33vh;
+  height: 39vh;
+  width: 34vh;
   -webkit-transition: background-color 0.5s ease;
   transition: background-color 0.5s ease;
 }
 
 .index-text-container {
-  margin-top: 8.89vh;
-  margin-left: 5%;
-  margin-right: 5%;
+  margin-top: 8.8vh;
+  margin-left: 3%;
+  margin-right: 3%;
 }
 
 /* commented out for text 
