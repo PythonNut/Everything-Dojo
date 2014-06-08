@@ -37,5 +37,4 @@
 # added to .gitignore so that people
 # can't randomly view on GitHub
 
-include/constants.php
-#edited there by Red--change it if I did it wrong. I don't understand .gitignore very well
+creds.php
