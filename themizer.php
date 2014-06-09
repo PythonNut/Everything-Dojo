@@ -1,16 +1,8 @@
 <?php
-  include('include/include.php');
-  generateHeader('Themizer');
+  $title = "Themizer";
+  include("dbc.php");
+  session_start();
+  get_header();
 ?>
 
-<?php
-  include('include/unavailable.php');
-  include('include/noscript.php');
-?>
-
-<div id="themizer-header"></div>
-
-<?php
-  include('include/footer.php');
-?>
-
+<?php get_footer(); ?>
