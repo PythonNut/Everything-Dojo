@@ -32,6 +32,11 @@
 .htpasswd
 .htusers
 
+# PHP error log
+# probs shouldn't be on GH
+
+error_log
+
 # database creds
 #
 # added to .gitignore so that people
