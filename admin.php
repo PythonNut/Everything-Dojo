@@ -37,7 +37,7 @@ list($active) = mysql_fetch_row($rs_active);
 <?php
   $title = "Admin CP";
   //dbc already included
-  get_header($title);
+  get_header();
 ?>
   <h2>Admin CP</h2>
   <p>Total users: <?php echo $all;?><br />

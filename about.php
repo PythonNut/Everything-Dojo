@@ -2,7 +2,7 @@
   $title = "About";
   include("dbc.php");
   session_start();
-  get_header($title);
+  get_header();
 ?>
   <p>Everything Dojo is an awesome blogs tool.</p>
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
