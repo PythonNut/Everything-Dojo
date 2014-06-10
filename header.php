@@ -24,7 +24,7 @@
   <body>
 
     <div id="wrap">
-
+	  <?php if ($title == "Home"){ ?>
       <header>
 
         <div id="headerwrap">
@@ -81,5 +81,5 @@
         </div>
 
       </header>
-  
+  	  <?php } ?>
       <div id="content">
