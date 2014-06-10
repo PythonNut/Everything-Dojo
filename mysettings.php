@@ -51,7 +51,7 @@ $rs_settings = mysql_query("SELECT * FROM $table WHERE id=\"".$_SESSION['user_id
   $title = "My Settings";
   //dbc already included
   page_protect();
-  get_header();
+  get_header($title);
 ?>
   <?php
   if(!empty($err))  {

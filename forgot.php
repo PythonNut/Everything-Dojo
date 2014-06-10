@@ -58,7 +58,7 @@ This is an automated response. Do not reply to this email.";
   $title = "Forgot Password";
   //dbc already included
   session_start();
-  get_header();
+  get_header($title);
 ?>
   <?php //spit out all errors
   if(!empty($err))  {

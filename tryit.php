@@ -2,7 +2,7 @@
   $title = "Try-It";
   include("dbc.php");
   session_start();
-  get_header();
+  get_header($title);
 ?>
 
 <div id="tryit-header"><div class="tryit-title">TRY-IT</div></div>

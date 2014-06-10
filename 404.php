@@ -1,6 +1,7 @@
 <?php
+  $title = '404';
   include("dbc.php");
-  get_header('404', '<style>
+  get_header($title, '<style>
       .not-found-img.centre {
         display: block;
         margin: 0 auto; /* Centers the image */

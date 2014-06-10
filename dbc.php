@@ -312,7 +312,7 @@
   }
 
   function get_footer() {
-    include("footer.php");
+    include("include/footer.php");
   }
 
   /*constants*/
