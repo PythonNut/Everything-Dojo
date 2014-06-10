@@ -6,10 +6,10 @@ Based heavily off of Balakrishnan's PHP Login Script v2.3
 I now claim it as my own since I have changed so much it cannot be called his anymore.
 
 /************* MYSQL DATABASE SETTINGS ******************/
-define ("DB_HOST", "xxxxxxxxxxxx"); // set database host
-define ("DB_USER", "xxxxxxxxxxxx"); // set database user
-define ("DB_PASS", "xxxxxxxxxxxx"); // set database password
-define ("DB_NAME", "xxxxxxxxxxxx"); // set database name
+define ("DB_HOST", "localhost"); // set database host
+define ("DB_USER", "cyneerco_evdo"); // set database user
+define ("DB_PASS", "3?x.L@r(5=%K"); // set database password
+define ("DB_NAME", "cyneerco_evdo"); // set database name
 define ("TB_NAME", "xxxxxxxxxxxx"); // set table name for containing users
 
 $link = mysql_connect(DB_HOST, DB_USER, DB_PASS) or die("Couldn't make connection.");
