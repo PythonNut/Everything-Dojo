@@ -2,7 +2,7 @@
   $title = "Logout Successful";
   include("dbc.php");
   session_start();
-  get_header();
+  get_header($title);
 ?>
   <?php header('Refresh: 3; URL=index.php'); ?>
   <p>Succesful logout! You will now be redirected to the home page...</p>

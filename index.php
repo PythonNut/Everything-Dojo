@@ -2,7 +2,7 @@
   $title = "Home";
   include("dbc.php");
   session_start();
-  get_header();
+  get_header($title);
 ?>
   <div id="index-inner">
       <div class="index-row">
