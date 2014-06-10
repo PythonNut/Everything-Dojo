@@ -24,7 +24,7 @@
   <li>Build your own theme with the <a class="themizer-link" href="themizer.php">Themizer</a>.</li>
   <li>If you want to test out a theme before using it on your blog, <a class="tryit-link" href="tryit.php">Try-it</a> is the place for you.</li>
   <li>Talk about stuff (like themes, HTML, and rants on 404 pages) on the <a class="discussion-link" href="discussion.php">fora</a> of this site.</li>
-  <li>Report this page to us at <a class="email" href="mailto:404@everythingdojo.com">404@everythingdojo.com</a></li>
+  <li>Report this page to us at <a class="email" href="mailto:error@evverythingdojo.com">error@evverythingdojo.com</a></li>
 <ul>
 
 <?php get_footer(); ?>
