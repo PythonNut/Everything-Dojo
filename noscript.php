@@ -1,9 +1,10 @@
 <noscript>
+<link rel="stylesheet" type="text/css" href="/css/noscript.css" />
   <div class="noscript background">
     <div class="noscript wrapper">
       <div class="noscript content">
         <div class="noscript image content">
-          <img class="noscript image" src="images/noscript.png">
+          <img class="noscript image" src="/images/noscript.png">
         </div>
         <h3 class="noscript header">
           Sorry, but this page requires JavaScript.
@@ -15,4 +16,3 @@
     </div>
   </div>
 </noscript>
-
