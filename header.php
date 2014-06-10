@@ -5,11 +5,16 @@
 
     <title>Everything Dojo &bullet; <?php global $title; print $title; ?></title>
 
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="shortcut icon" href="/images/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
     <?php global $extra_style; print $extra_style; ?>
 
+    <?php
+    // don't load jQ if page doesn't need it
+    if ($title == "Home") { ?>
     <script src="/js/jquery-2.1.1.min.js"></script>
+    <?php } ?>
+
     <?php global $extra_js; print $extra_js; ?>
 
     <?php include("noscript.php"); ?>
