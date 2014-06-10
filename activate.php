@@ -92,7 +92,7 @@ This is an automated response. Do not reply to this email.";
     $title = "Account Activation";
     //dbc has been included already
     session_start();
-    get_header($title);
+    get_header();
 ?>
   <?php //spit out all errors
   if(!empty($err))  {
