@@ -88,7 +88,7 @@ This is an automated response. Do not reply to this email.";
   $title = "Register";
   //dbc already included
   session_start();
-  get_header($title);
+  get_header();
 ?>
   <?php
   if (isset($_GET['done'])) { ?>
