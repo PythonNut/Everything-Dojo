@@ -1,6 +1,4 @@
 <?php
-//include('constants.php');
-
   //error_reporting("off"); uncomment for unnecessary "warnings" that PHP is smart enough to ignore
   /*************** PHP LOGIN SCRIPT V 1.0*********************
   (c) 2012-2014 Red Sun
@@ -12,7 +10,7 @@
   define ("DB_USER", "cyneerco_evdo"); // set database user
   define ("DB_PASS", "3?x.L@r(5=%K"); // set database password
   define ("DB_NAME", "cyneerco_evdo"); // set database name
-  define ("TB_NAME", "xxxxxxxxxxxx"); // set table name for containing users
+  define ("TB_NAME", "users"); // set table name for containing users
 
   $link = mysql_connect(DB_HOST, DB_USER, DB_PASS) or die("Couldn't make connection.");
   $db = mysql_select_db(DB_NAME, $link) or die("Couldn't select database");
@@ -27,9 +25,9 @@
   date_default_timezone_set("America/New_York");
 
   /*************** reCAPTCHA KEYS****************/
-  //https://www.google.com/recaptcha/admin/site?siteid=xxxxxxxxxxxx
-  $publickey = "xxxxxxxxxxxx";
-  $privatekey = "xxxxxxxxxxxx";
+  //https://www.google.com/recaptcha/admin#site/318046216
+  $publickey = "6LcIAPUSAAAAAJeEkhZwNKNsM6RBNtN_iKcF80xi";
+  $privatekey = "6LcIAPUSAAAAAOWFKdYaYgFudsAMkDQjjf_QiT7L";
 
   //you're done. below is other stuff that you only need to modify if you need to modify it. :P :D
 
