@@ -1,5 +1,5 @@
 <?php 
-include ("dbc.php");
+  include("include/include.php");
 page_protect();
 
 if(!checkAdmin()) {

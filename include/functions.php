@@ -1,36 +1,4 @@
 <?php
-  //error_reporting("off"); uncomment for unnecessary "warnings" that PHP is smart enough to ignore
-  /*************** PHP LOGIN SCRIPT V 1.0*********************
-  (c) 2012-2014 Red Sun
-  Based heavily off of Balakrishnan's PHP Login Script v2.3
-  I now claim it as my own since I have changed so much it cannot be called his anymore.
-
-  /************* MYSQL DATABASE SETTINGS ******************/
-  define ("DB_HOST", "localhost"); // set database host
-  define ("DB_USER", "cyneerco_evdo"); // set database user
-  define ("DB_PASS", "3?x.L@r(5=%K"); // set database password
-  define ("DB_NAME", "cyneerco_evdo"); // set database name
-  define ("TB_NAME", "users"); // set table name for containing users
-
-  $link = mysql_connect(DB_HOST, DB_USER, DB_PASS) or die("Couldn't make connection.");
-  $db = mysql_select_db(DB_NAME, $link) or die("Couldn't select database");
-
-  define('SALT_LENGTH', 9); // salt for password
-
-  /* Specify user levels */
-  define ("ADMIN_LEVEL", 5);
-  define ("USER_LEVEL", 1);
-  define ("GUEST_LEVEL", 0);
-
-  date_default_timezone_set("America/New_York");
-
-  /*************** reCAPTCHA KEYS****************/
-  //https://www.google.com/recaptcha/admin#site/318046216
-  $publickey = "6LcIAPUSAAAAAJeEkhZwNKNsM6RBNtN_iKcF80xi";
-  $privatekey = "6LcIAPUSAAAAAOWFKdYaYgFudsAMkDQjjf_QiT7L";
-
-  //you're done. below is other stuff that you only need to modify if you need to modify it. :P :D
-
   /**** PAGE PROTECT CODE  ********************************
   This code protects pages to only logged in users. If users have not logged in then it will redirect to login page. Remember this code must be placed on very top of any html or php page.
   ********************************************************/
@@ -229,22 +197,10 @@
   /*regular site functions*/
 
   function get_header() {
-    include("header.php");
+    include("include/header.php");
   }
 
   function get_footer() {
-    include("footer.php");
+    include("include/footer.php");
   }
-
-  /*constants*/
-  define("URL_DATABASE", "database.php");
-  define("URL_DISCUSS", "discuss.php");
-  define("URL_THEMIZER", "themizer.php");
-  define("URL_TRYIT", "tryit.php");
-
-  define("VERSION_DATABASE", "1.0");
-  define("VERSION_DISCUSS", "1.0");
-  define("VERSION_THEMIZER", "1.0");
-  define("VERSION_TRYIT", "1.0");
 ?>
-

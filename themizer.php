@@ -1,6 +1,6 @@
 <?php
   $title = "Themizer";
-  include("dbc.php");
+  include("include/include.php");
   session_start();
   get_header();
 ?>

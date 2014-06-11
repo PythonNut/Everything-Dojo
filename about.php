@@ -1,6 +1,6 @@
 <?php
   $title = "About";
-  include("dbc.php");
+  include("include/include.php");
   session_start();
   get_header();
 ?>

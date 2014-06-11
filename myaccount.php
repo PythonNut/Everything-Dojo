@@ -1,6 +1,6 @@
 <?php
   $title = "My Account";
-  include("dbc.php");
+  include("include/include.php");
   session_start();
   page_protect();
   get_header();

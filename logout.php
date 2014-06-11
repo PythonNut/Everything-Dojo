@@ -1,4 +1,4 @@
 <?php
-include("dbc.php");
+include("include/include.php");
 logout();
 ?>
