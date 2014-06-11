@@ -42,4 +42,4 @@ error_log
 # added to .gitignore so that people
 # can't randomly view on GitHub
 
-dbc.php
+include/db.php
