@@ -5,18 +5,27 @@
 
     <title>Everything Dojo &bullet; <?php global $title; print $title; ?></title>
 
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <?php global $extra_style; print $extra_style; ?>
 
-    <script src="/js/jquery-2.1.1.min.js"></script>
+    <?php
+    // we don't need jQuery on some pages
+    if ($title != "Home" || $title != "About") { ?>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <?php } ?>
+
     <?php global $extra_js; print $extra_js; ?>
 
-    <?php include("noscript.php"); ?>
+    <noscript>
+      <link rel="alternate stylesheet" type="text/css" href="/noscript.css">
+    </noscript>
     
   </head>
 
   <body>
+
+    <?php include("noscript.php"); ?>
 
     <div id="wrap">
 
@@ -78,3 +87,4 @@
       </header>
   
       <div id="content">
+

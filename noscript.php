@@ -1,5 +1,4 @@
 <noscript>
-<link rel="stylesheet" type="text/css" href="/noscript.css" />
   <div class="noscript background">
     <div class="noscript wrapper">
       <div class="noscript content">
