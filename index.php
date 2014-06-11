@@ -1,9 +1,8 @@
 <?php
   $title = "Home";
-  include("dbc.php");
+  include("include/include.php");
   session_start();
-//get_header();
-  include("header.php");
+  	get_header();
 ?>
   <div id="index-inner">
       <div class="index-row">

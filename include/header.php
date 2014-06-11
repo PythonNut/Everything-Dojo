@@ -6,7 +6,7 @@
     <title>Everything Dojo &bullet; <?php global $title; print $title; ?></title>
 
     <link rel="shortcut icon" href="images/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <?php global $extra_style; print $extra_style; ?>
 
     <?php
@@ -18,7 +18,7 @@
     <?php global $extra_js; print $extra_js; ?>
 
     <noscript>
-      <link rel="alternate stylesheet" type="text/css" href="/noscript.css">
+      <link rel="alternate stylesheet" type="text/css" href="css/noscript.css">
     </noscript>
     
   </head>
