@@ -1,5 +1,5 @@
 <?php
-  include('include/constants.php');
+//include('constants.php');
 
   //error_reporting("off"); uncomment for unnecessary "warnings" that PHP is smart enough to ignore
   /*************** PHP LOGIN SCRIPT V 1.0*********************
@@ -230,99 +230,23 @@
   /****************************END OF LOGIN SCRIPT FUNCTIONS*********************************/
   /*regular site functions*/
 
-  function get_header($title = '', $extraStyle='', $extraJS = '', $html = '') {
-    echo '<!DOCTYPE html>
-          <html>
-            <head>
-
-              <title>Everything Dojo - ' . $title . '</title>
-
-              <link rel="shortcut icon" href="/images/favicon.ico" />
-              <link rel="stylesheet" type="text/css" href="/css/style.css" />
-              ' .  $extra_style . '
-
-              ' . $title == 'Home' ? '<script src="/js/jquery-2.1.1.min.js"></script>' : '' . '
-
-              ' . $extraJS . '
-
-              ' . NOSCRIPT . '
-
-              ' . $html . '   
-            </head>
-
-            <body>
-
-              <div id="wrap">
-              ' . $title == 'Home' ? '
-                <header>
-
-                  <div id="headerwrap">
-
-                    ' . $title == "Database" ? '
-
-                    <script>$("header").addClass("database");</script>
-                    <h1>Database</h1>
-
-                    ' : $title == 'Themizer' ? '
-
-                    <script>$("header").addClass("themizer");</script>
-                    <h1>Themizer</h1>
-
-                    ' : $title == 'Try-It' ? '
-
-                    <script>$("header").addClass("tryit");</script>
-                    <h1>Try-It</h1>
-
-                    ' : $title == 'Discuss' ? '
-
-                    <script>$("header").addClass("discuss");</script>
-                    <h1>Discuss</h1>
-
-                    ' : '
-
-                    <div id="logo">
-                      <a href="/"><img src="/images/logo.png"/></a>
-                    </div>
-
-                    <nav>
-                      <ul>
-                        <li><a href="/" id="nav-home">Home</a></li>
-                        ' . isset($_SESSION['user_id']) ? '
-                        <li><a href="myaccount.php" id="menu-myaccount">My Account</a></li>
-                        <li><a href="mysettings.php" id="menu-mysettings">My Settings</a></li>
-                        ' .  checkAdmin() ? '
-                        <li><a href="admin.php" id="menu-admin">Admin CP</a></li>
-                        ' : '' . '
-                        <li><a href="logout.php" id="menu-logout">Logout</a></li>
-                        ' : '' . '
-                        ' . !isset($_SESSION['user_id']) ? '
-                        <li><a href="login.php" id="menu-login">Login</a></li>
-                        <li><a href="register.php" id="menu-register">Register</a></li>
-                        ' : '' . '
-                      </ul>
-                    </nav>
-
-                    ' . '
-
-                  </div>
-
-                </header>
-                ' : '' . '
-                <div id="content">';
+  function get_header() {
+    include("header.php");
   }
 
   function get_footer() {
-    include("include/footer.php");
+    include("footer.php");
   }
 
   /*constants*/
-  define("URL_DATABASE", "/database.php");
-  define("URL_DISCUSS", "/discuss.php");
-  define("URL_THEMIZER", "/themizer.php");
-  define("URL_TRYIT", "/tryit.php");
+  define("URL_DATABASE", "database.php");
+  define("URL_DISCUSS", "discuss.php");
+  define("URL_THEMIZER", "themizer.php");
+  define("URL_TRYIT", "tryit.php");
 
   define("VERSION_DATABASE", "1.0");
   define("VERSION_DISCUSS", "1.0");
   define("VERSION_THEMIZER", "1.0");
   define("VERSION_TRYIT", "1.0");
 ?>
+
