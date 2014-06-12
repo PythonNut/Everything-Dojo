@@ -64,20 +64,20 @@ input[type="submit"], input[type="button"], input[type="reset"], button {
   outline: none;
   background: #85B900;
   border: none;
-  border-radius: 2px;
+  border-radius: 0.17em;
   color: #fff;
   cursor: pointer;
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
-  font-size: 12px;
-  line-height: 24px;
-  margin: 5px 0;
-  padding: 0 10px;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+  font-size: 0.7rem;
+  line-height: 2em;
+  margin: 0.42em 0;
+  padding: 0 0.6rem;
+  text-shadow: 0 -0.06rem 0 rgba(0, 0, 0, 0.3);
 }
 
 input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hover, button:hover {
   background: #739F02;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3) inset;
+  box-shadow: 0 0 0.36rem rgba(0, 0, 0, 0.3) inset;
 }
 
 input[type="submit"].inline, input[type="button"].inline, input[type="reset"].inline, button.inline {
@@ -88,21 +88,21 @@ input[type="submit"].inline, input[type="button"].inline, input[type="reset"].in
 /*--INPUTS AND TEXTAREAS--*/
 input {
   background: #fff;
-  border: 1px solid #222;
-  border-radius: 3px;
-  padding: 5px;
-  margin-bottom: 5px;
+  border: 0.06rem solid #222;
+  border-radius: 0.18rem;
+  padding: 0.3rem;
+  margin-bottom: 0.3rem;
 }
 
 textarea {
   background: #fff;
-  border: 1px solid #222;
-  border-radius: 3px;
-  padding: 5px;
-  margin-bottom: 5px;
+  border: 0.06rem solid #222;
+  border-radius: 0.18rem;
+  padding: 0.3rem;
+  margin-bottom: 0.3rem;
   resize: none;
   font-family: Arial;
-  width: 475px;
+  width: 34.773vw;
 }
 
 input:focus, textarea:focus { outline: none; }
@@ -141,35 +141,39 @@ label { display: block; }
   font-weight: 300;
   color: white;
   text-transform: uppercase;
-  font-size: 48px;
-  line-height: 60px; /* computed height of logo - 4 */
-  padding: 4px 10px;
-  margin: 10px;
-  height: 64px;
+  font-size: 2.82rem;
+  line-height: 1.25em;
+  padding: 0.24rem 0.6rem;
+  margin: 0.6rem;
+  height: 1.334em;
 }
 
 h2, h4 {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
-  margin-bottom: 5px;
+  margin-bottom: 0.3rem;
 }
 
-p { margin-bottom: 10px; }
+p { margin-bottom: 0.6rem; }
 
 p:last-child { margin-bottom: 0; }
 
 i, .i { font-family: AmbleItalic, sans-serif; }
 
-code { font-family: "Courier New", Courier, monospace; }
+code { font-family: Monaco, "Courier New", Courier, monospace; }
 
 .small { font-size: 0.65em; }
 
 
 /*--LAYOUT--*/
-body {
-  font-family: amble, sans-serif;
-  background: white;
+
+:root:not(svg) {
+  font-family: Amble, HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 2.22vh;
   text-rendering: optimizeLegibility;
+}
+
+body {
+  background: white;
 }
 
 div#wrap { width: 90%; margin: 0 auto; }
@@ -178,7 +182,7 @@ div#wrap { width: 90%; margin: 0 auto; }
   display: block;
   overflow: auto;
   width: auto;
-  margin: 20px auto;
+  margin: 2.604vh auto;
   min-height: 100%;
   width: 70%;
   margin-bottom: -8.89vh; /* tyxchen: originally 7.78vh, but 8.89 looks better */
@@ -189,7 +193,7 @@ div#wrap { width: 90%; margin: 0 auto; }
 header {
   overflow: auto;
   background: white;
-  margin: 0px auto;
+  margin: 0 auto;
   width: 111.11%;
   position: relative;
   left: -5.55%;
@@ -199,10 +203,10 @@ div#headerwrap {
   margin-left: 5.55%;
   position: relative;
   width: 90%;
-  height: 84px;
+  height: 10.94vh;
 }
 
-div#logo { position: absolute; top: 0; left: 0; margin: 10px; }
+div#logo { position: absolute; top: 0; left: 0; margin: 1.302vh; }
 div#logo img { margin-bottom: -0.52083vh; height: 8.33333vh; }
 
 nav {
@@ -223,9 +227,9 @@ nav ul li { display: inline-block; }
 nav ul a {
   color: #000000;
   float: left;
-  font-size: 1.41176em;
+  font-size: 1.412rem;
   line-height: 2.5em;
-  padding: 0.166667em 0.416667em;
+  padding: 0.167rem 0.417rem;
   text-decoration: none;
 }
 
@@ -254,9 +258,9 @@ footer a { color: #bbb; }
 
 .msg {
   background: rgba(124, 171, 0, 0.4);
-  border: 0.06em solid #222;
-  padding: 0.6em;
-  margin-bottom: 0.6em;
+  border: 0.06rem solid #222;
+  padding: 0.6rem;
+  margin-bottom: 0.6rem;
   font-weight: bold;
 }
 
@@ -268,23 +272,23 @@ footer a { color: #bbb; }
 table {
   width: 90%;
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
-  font-size: 0.7em;
+  font-size: 0.7rem;
   text-align: left;
   border-collapse: collapse;
-  border: 0.06em solid #222;
-  margin: 1.2em;
+  border: 0.06rem solid #222;
+  margin: 1.2rem;
   background: #fff;
   color: #777;
 }
 
 th {
   font-weight: normal;
-  font-size: 0.8em;
-  border-bottom: 0.06em dashed #222;
+  font-size: 0.8rem;
+  border-bottom: 0.06rem dashed #222;
   padding: 0.7em 1em;
 }
 
-td { padding: 0.4em 1em; }
+td { padding: 0.5em 1.2em; }
 
 tbody tr:hover td {
   color: #555;
@@ -296,12 +300,12 @@ table a { color: #F99819 !important; }
 
 /*--USER ANNOUNCEMENTS--*/
 #announcements {
-  border: 0.06em solid #222;
-  padding: 0.6em;
-  margin-bottom: 0.6em;
+  border: 0.06rem solid #222;
+  padding: 0.6rem;
+  margin-bottom: 0.6rem;
 }
 
-#announcements ul li { margin-left: 1.5em; }
+#announcements ul li { margin-left: 1.5rem; }
 
 /*--INDEX PAGE TILES--*/
 /*
@@ -319,7 +323,7 @@ table a { color: #F99819 !important; }
 }
 
 .index-title {
-  font-size: 2.5em;
+  font-size: 2.5rem;
   font-weight: 300;
   text-transform: uppercase;
 }
