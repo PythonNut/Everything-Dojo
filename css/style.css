@@ -203,14 +203,14 @@ div#headerwrap {
 }
 
 div#logo { position: absolute; top: 0; left: 0; margin: 10px; }
-div#logo img { margin-bottom: -4px; }
+div#logo img { margin-bottom: -0.52083vh; height: 8.33333vh; }
 
 nav {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
   position: absolute;
   right: 0;
-  margin: 10px;
-  height: 64px;
+  margin: 1.302083vh;
+  height: 8.33333vh;
 }
 
 nav ul {
@@ -221,11 +221,11 @@ nav ul {
 nav ul li { display: inline-block; }
 
 nav ul a {
-  color: #000;
-  font-size: 24px;
-  line-height: 60px; /* computed height of logo - 4 */
+  color: #000000;
   float: left;
-  padding: 4px 10px;
+  font-size: 1.41176em;
+  line-height: 2.5em;
+  padding: 0.166667em 0.416667em;
   text-decoration: none;
 }
 
@@ -238,7 +238,7 @@ nav ul a:hover {
 footer {
   display: block;
   text-align: center;
-  padding: 20px;
+  padding: 2.604167vh;
   color: #bbb;
 }
 
@@ -254,9 +254,9 @@ footer a { color: #bbb; }
 
 .msg {
   background: rgba(124, 171, 0, 0.4);
-  border: 1px solid #222;
-  padding: 10px;
-  margin-bottom: 10px;
+  border: 0.06em solid #222;
+  padding: 0.6em;
+  margin-bottom: 0.6em;
   font-weight: bold;
 }
 
@@ -268,23 +268,23 @@ footer a { color: #bbb; }
 table {
   width: 90%;
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
-  font-size: 12px;
+  font-size: 0.7em;
   text-align: left;
   border-collapse: collapse;
-  border: 1px solid #222;
-  margin: 20px;
+  border: 0.06em solid #222;
+  margin: 1.2em;
   background: #fff;
   color: #777;
 }
 
 th {
   font-weight: normal;
-  font-size: 14px;
-  border-bottom: 1px dashed #222;
-  padding: 12px 17px;
+  font-size: 0.8em;
+  border-bottom: 0.06em dashed #222;
+  padding: 0.7em 1em;
 }
 
-td { padding: 7px 17px; }
+td { padding: 0.4em 1em; }
 
 tbody tr:hover td {
   color: #555;
@@ -296,12 +296,12 @@ table a { color: #F99819 !important; }
 
 /*--USER ANNOUNCEMENTS--*/
 #announcements {
-  border: 1px solid #222;
-  padding: 10px;
-  margin-bottom: 10px;
+  border: 0.06em solid #222;
+  padding: 0.6em;
+  margin-bottom: 0.6em;
 }
 
-#announcements ul li { margin-left: 25px; }
+#announcements ul li { margin-left: 1.5em; }
 
 /*--INDEX PAGE TILES--*/
 /*
