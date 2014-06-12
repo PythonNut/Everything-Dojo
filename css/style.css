@@ -250,7 +250,7 @@ header[class]::before {
   width: -webkit-calc(100%);
 }
 header.database::before { background: #d553cb; }
-header.themizer::before { background: #51b835;}
+header.themizer::before { background: #51b835; }
 header.tryit::before    { background: #ff6c00; }
 header.discuss::before  { background: #509aff; }
 
