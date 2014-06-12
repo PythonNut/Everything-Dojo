@@ -1,14 +1,15 @@
 <?php
   $title = '404';
-  include("dbc.php");
+  include("include/include.php");
   $extra_style = "<style>
       .not-found-img.centre {
         display: block;
         margin: 0 auto; /* Centers the image */
+        width: 80vh;
       }
 
       .email::after {
-        content: " \2709"; /* Adds an envelope after emails */
+        content: \" \\2709\"; /* Adds an envelope after emails */
         font-size: 18px;
       }
     </style>";
