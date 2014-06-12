@@ -1,0 +1,11 @@
+<?xml version="1.0" standalone="yes"?>
+<svg width="64" height="64" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+<!-- TODO: add text -->
+
+<g>
+<path style="fill:#d553cb; stroke:none;" d="M0 0L0 29L29 29L29 0L0 0z"/>
+<path style="fill:#57c739; stroke:none;" d="M35 0L35 29L64 29L64 0L35 0z"/>
+<path style="fill:#ff6c00; stroke:none;" d="M0 35L0 64L29 64L29 35L0 35z"/>
+<path style="fill:#5199ff; stroke:none;" d="M35 35L35 64L64 64L64 35L35 35z"/>
+</g>
+</svg>
