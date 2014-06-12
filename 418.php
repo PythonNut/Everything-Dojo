@@ -1,6 +1,6 @@
 <?php
   $title = "418";
-  include("dbc.php");
+  include("include/include.php");
   get_header();
 ?>
 
