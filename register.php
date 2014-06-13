@@ -92,7 +92,7 @@ This is an automated response. Do not reply to this email.";
 ?>
   <?php
   if (isset($_GET['done'])) { ?>
-  <p>Thank you; your registration is now complete. After activation, you can <a href="login.php">login here</a>.</p>
+  <p>Thank you; your registration is now complete. After activation, you can login <a href="login.php">here</a>.</p>
   <?php
   } else { ?>
 
