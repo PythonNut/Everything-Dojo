@@ -3,7 +3,7 @@
 
   <head>
 
-    <title>Everything Dojo &bullet; <?php global $title; print $title; ?></title>
+    <title>Everything Dojo &bull; <?php global $title; print $title; ?></title>
 
     <link rel="shortcut icon" href="images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="css/normalize.css">
