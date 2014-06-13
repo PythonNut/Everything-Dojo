@@ -274,7 +274,7 @@ footer a { color: #bbb; }
 #errors { color: red; }
 
 .msg {
-  background: rgba(124, 171, 0, 0.4);
+  background: white;
   border: 0.06rem solid #222;
   padding: 0.6rem;
   margin-bottom: 0.6rem;
