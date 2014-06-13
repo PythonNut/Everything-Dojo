@@ -69,7 +69,7 @@ input[type="submit"], input[type="button"], input[type="reset"], button {
   cursor: pointer;
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
   font-size: 0.7rem;
-  line-height: 2em;
+  height: 2em;
   margin: 0.42em 0;
   padding: 0 0.6rem;
   text-shadow: 0 -0.06rem 0 rgba(0, 0, 0, 0.3);
@@ -88,7 +88,7 @@ input[type="submit"].inline, input[type="button"].inline, input[type="reset"].in
 /*--INPUTS AND TEXTAREAS--*/
 input {
   background: #fff;
-  border: 0.06rem solid #222;
+  border: 1px solid #222;
   border-radius: 0.18rem;
   padding: 0.3rem;
   margin-bottom: 0.3rem;
@@ -96,7 +96,7 @@ input {
 
 textarea {
   background: #fff;
-  border: 0.06rem solid #222;
+  border: 1px solid #222;
   border-radius: 0.18rem;
   padding: 0.3rem;
   margin-bottom: 0.3rem;
@@ -275,7 +275,7 @@ footer a { color: #bbb; }
 
 .msg {
   background: rgba(124, 171, 0, 0.4);
-  border: 0.06rem solid #222;
+  border: 1px solid #222;
   padding: 0.6rem;
   margin-bottom: 0.6rem;
   font-weight: bold;
@@ -292,7 +292,7 @@ table {
   font-size: 0.7rem;
   text-align: left;
   border-collapse: collapse;
-  border: 0.06rem solid #222;
+  border: 1px solid #222;
   margin: 1.2rem;
   background: #fff;
   color: #777;
@@ -301,7 +301,7 @@ table {
 th {
   font-weight: normal;
   font-size: 0.8rem;
-  border-bottom: 0.06rem dashed #222;
+  border-bottom: 1px dashed #222;
   padding: 0.7em 1em;
 }
 
@@ -317,7 +317,7 @@ table a { color: #F99819 !important; }
 
 /*--USER ANNOUNCEMENTS--*/
 #announcements {
-  border: 0.06rem solid #222;
+  border: 1px solid #222;
   padding: 0.6rem;
   margin-bottom: 0.6rem;
 }
