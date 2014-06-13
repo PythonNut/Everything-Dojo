@@ -132,7 +132,7 @@ label { display: block; }
 
 /*--COLORS--*/
 .database { background: #d553cb; }
-.themizer { background: #51b835;}
+.themizer { background: #51b835; }
 .tryit    { background: #ff6c00; }
 .discuss  { background: #509aff; }
 
@@ -250,7 +250,7 @@ header[class]::before {
   width: 100%;
 }
 header.database::before { background: #d553cb; }
-header.themizer::before { background: #51b835;}
+header.themizer::before { background: #51b835; }
 header.tryit::before    { background: #ff6c00; }
 header.discuss::before  { background: #509aff; }
 
@@ -275,8 +275,8 @@ footer a:hover { color: #999; }
 #errors { color: red; }
 
 .msg {
-  background: rgba(124, 171, 0, 0.4);
-  border: 1px solid #222;
+  background: white;
+  border: 0.06rem solid #222;
   padding: 0.6rem;
   margin-bottom: 0.6rem;
   font-weight: bold;
