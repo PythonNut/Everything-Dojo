@@ -72,11 +72,11 @@ Activation Code: $activ_code
 
 $a_link
 
-Administrator @ATCO
+Administrator @Everything Dojo
 ______________________________________________________
 This is an automated response. Do not reply to this email.";
 
-    mail($usr_email, "Thank you for registering with ATCO", $message, "From: \"ATCO Registration\" <auto-reply@$host>\r\n");
+    mail($usr_email, "Thank you for registering with Everything Dojo", $message, "From: \"Everything Dojo Registration\" <auto-reply@$host>\r\n");
 
     header("Location: register.php?done=yes");
     exit();
