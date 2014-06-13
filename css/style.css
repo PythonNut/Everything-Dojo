@@ -264,6 +264,7 @@ footer {
 }
 
 footer a { color: #bbb; }
+footer a:hover { color: #999; }
 
 
 /*--MISCELLANEOUS CLASSES AND IDS--*/
