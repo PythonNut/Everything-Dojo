@@ -72,7 +72,7 @@ input[type="submit"], input[type="button"], input[type="reset"], button {
   height: 2em;
   margin: 0.42em 0;
   padding: 0 0.6rem;
-  text-shadow: 0 -0.06rem 0 rgba(0, 0, 0, 0.3);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
 }
 
 input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hover, button:hover {
@@ -275,8 +275,8 @@ footer a:hover { color: #999; }
 #errors { color: red; }
 
 .msg {
-  background: white;
-  border: 0.06rem solid #222;
+  background: rgba(124, 171, 0, 0.4);
+  border: 1px solid #222;
   padding: 0.6rem;
   margin-bottom: 0.6rem;
   font-weight: bold;
