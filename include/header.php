@@ -19,9 +19,9 @@
     <?php global $extra_js; print $extra_js; ?>
 
     <noscript>
-      <link rel="alternate stylesheet" type="text/css" href="css/noscript.css">
+      <link rel="stylesheet" type="text/css" href="css/noscript.css">
     </noscript>
-    
+
   </head>
 
   <body>
