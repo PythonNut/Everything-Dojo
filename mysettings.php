@@ -69,12 +69,13 @@ $rs_settings = mysql_query("SELECT * FROM $table WHERE id=\"".$_SESSION['user_id
   <p>Here you can make changes to your profile. Right now, the only thing you can change is your password.</p>
   <form name="pform" id="pform" method="post" action="mysettings.php">
     <label>Old Password</label>
-    <input type="password" name="pwd_old" />
+    <input type="password" name="pwd_old">
     <label>New Password</label>
-    <input type="password" name="pwd_new" />
+    <label class="small i">Must be at least 4 characters long.</label>
+    <input type="password" name="pwd_new">
     <label>Retype Password</label>
-    <input type="password" name="pwd_again" />
-    <input type="submit" name="doUpdate" />
+    <input type="password" name="pwd_again">
+    <input type="submit" name="doUpdate">
   </form>
   <?php } //end no msg ?>
 <?php get_footer(); ?>
