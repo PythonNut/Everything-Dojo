@@ -238,6 +238,22 @@ nav ul a:hover {
   color: #666;
 }
 
+/* Fix bug in chrome where white bar appears at top of subpages */
+
+header[class]::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -webkit-calc(-2vh);
+  left: 0;
+  height: -webkit-calc(2vh);
+  width: -webkit-calc(100%);
+}
+header.database::before { background: #d553cb; }
+header.themizer::before { background: #51b835;}
+header.tryit::before    { background: #ff6c00; }
+header.discuss::before  { background: #509aff; }
+
 
 /*--FOOTER--*/
 footer {
