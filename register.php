@@ -68,15 +68,15 @@ Thank you for registering with us. Here are your login details:
 
 User ID: $user_name
 Password: $pwdcensored
-Activation Code: $active_code
+Activation Code: $activ_code
 
 $a_link
 
-Administrator @ATCO
+Administrator @Everything Dojo
 ______________________________________________________
 This is an automated response. Do not reply to this email.";
 
-    mail($usr_email, "Thank you for registering with ATCO", $message, "From: \"ATCO Registration\" <auto-reply@$host>\r\n");
+    mail($usr_email, "Thank you for registering with Everything Dojo", $message, "From: \"Everything Dojo Registration\" <auto-reply@$host>\r\n");
 
     header("Location: register.php?done=yes");
     exit();
@@ -92,7 +92,7 @@ This is an automated response. Do not reply to this email.";
 ?>
   <?php
   if (isset($_GET['done'])) { ?>
-  <p>Thank you; your registration is now complete. After activation, you can <a href="login.php">login here</a>.</p>
+  <p>Thank you; your registration is now complete. After activation, you can login <a href="login.php">here</a>.</p>
   <?php
   } else { ?>
 
@@ -109,7 +109,7 @@ This is an automated response. Do not reply to this email.";
   <form action="register.php" method="post" name="regForm">
     <label>Username</label>
     <label class="small i">Only letters, numbers, and underscores, from 3-20 characters long.</label>
-    <input name="user_name" type="text" class="required username" minlength="5" /> 
+    <input name="user_name" type="text" class="required username" minlength="5"> 
     <label>Email</label>
     <label class="small i">Must be valid. We'll use it to send you confirmation information and other important things like that. We'll keep it completely hush-hush, promise.</label>
     <input name="usr_email" type="text" class="required email"> 
@@ -117,7 +117,7 @@ This is an automated response. Do not reply to this email.";
     <label class="small i">Must be at least 4 characters long.</label>
     <input name="pwd" type="password" class="required password" minlength="5"> 
     <label>Retype Password</label>
-    <input name="pwd2"  id="pwd2" class="required password" type="password" minlength="5" equalto="#pwd">
+    <input name="pwd2" id="pwd2" class="required password" type="password" minlength="5" equalto="#pwd">
     <label>Image Verification</label>
     <?php 
       require_once('recaptchalib.php');

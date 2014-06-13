@@ -3,9 +3,13 @@
 <!-- TODO: add text -->
 
 <g>
-<path style="fill:#d553cb; stroke:none;" d="M0 0L0 29L29 29L29 0L0 0z"/>
-<path style="fill:#57c739; stroke:none;" d="M35 0L35 29L64 29L64 0L35 0z"/>
-<path style="fill:#ff6c00; stroke:none;" d="M0 35L0 64L29 64L29 35L0 35z"/>
-<path style="fill:#5199ff; stroke:none;" d="M35 35L35 64L64 64L64 35L35 35z"/>
+<path style="fill:#d600d0; stroke:none;" d="M0 0L0 29L29 29L29 0L0 0z"/>
+<text x="7" y="23" font-family="Lato Light" font-size="24" fill="#fff">E</text>
+<path style="fill:#4ddf00; stroke:none;" d="M35 0L35 29L64 29L64 0L35 0z"/>
+<text x="42" y="24" font-family="Lato Light" font-size="24" fill="#fff">V</text>
+<path style="fill:#f47000; stroke:none;" d="M0 35L0 64L29 64L29 35L0 35z"/>
+<text x="6" y="58" font-family="Lato Light" font-size="24" fill="#fff">D</text>
+<path style="fill:#7661ff; stroke:none;" d="M35 35L35 64L64 64L64 35L35 35z"/>
+<text x="40" y="58" font-family="Lato Light" font-size="24" fill="#fff">O</text>
 </g>
 </svg>
