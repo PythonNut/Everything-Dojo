@@ -6,7 +6,6 @@ $table = TB_NAME;
 if (isset($_POST['doReset'])) {
   $err = array();
   $msg = array();
-
   foreach($_POST as $key => $value) {
     $data[$key] = filter($value);
   }
@@ -17,12 +16,11 @@ if (isset($_POST['doReset'])) {
 
   $user_email = $data['user_email'];
   //check if activ code and user is valid as precaution
-  //$rs_check = mysql_query("SELECT id FROM $table where user_email='$user_email'") or die (mysql_error()); 
-  //$num = mysql_num_rows($rs_check);
-  $rs_check = $dbc->prepare("SELECT id FROM ? WHERE user_email=?");
-  $rs_check->execute(array($table, $user_email));
-  $num = $rs_check->fetchAll(PDO::FETCH_ASSOC);
-  $num = count($num);
+  $rs_check = mysql_query("SELECT id FROM $table where user_email='$user_email'") or die (mysql_error()); 
+  $num = mysql_num_rows($rs_check);
+  //$rs_check = $dbc->prepare("SELECT id FROM ? WHERE user_email=?");
+  //$rs_check->execute(array($table, $user_email));
+  //$num = count($rs_check->fetchAll(PDO::FETCH_ASSOC));
   if ( $num <= 0 ) {
     $err[] = "Sorry, no such account exists.";
   }
