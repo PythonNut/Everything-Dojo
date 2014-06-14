@@ -148,6 +148,7 @@ label { display: block; }
   padding: 0.24rem 0.6rem;
   margin: 0.6rem;
   height: 1.334em;
+  position: absolute;
 }
 
 h2, h4 {
@@ -237,22 +238,6 @@ nav ul a {
 nav ul a:hover {
   color: #666;
 }
-
-/* Fix bug where white bar appears at top of subpages */
-
-header[class]::before {
-  content: "";
-  display: block;
-  position: absolute;
-  top: -2vh;
-  left: 0;
-  height: 2vh;
-  width: 100%;
-}
-header.database::before { background: #d553cb; }
-header.themizer::before { background: #51b835; }
-header.tryit::before    { background: #ff6c00; }
-header.discuss::before  { background: #509aff; }
 
 
 /*--FOOTER--*/
