@@ -201,15 +201,15 @@ header {
   left: -5.55%;
 }
 
-div#headerwrap {
+#headerwrap {
   margin-left: 5.55%;
   position: relative;
   width: 90%;
-  height: 10.94vh;
+  height: 11.6vh;
 }
 
-div#logo { position: absolute; top: 0; left: 0; margin: 1.302vh; }
-div#logo img { margin-bottom: -0.52083vh; height: 8.33333vh; }
+#logo { position: absolute; top: 0; left: 0; margin: 1.302vh; }
+#logo img { margin-bottom: -0.52083vh; height: 8.33333vh; }
 
 nav {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
