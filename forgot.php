@@ -33,8 +33,8 @@ if (isset($_POST['doReset'])) {
     $pwd_reset = PwdHash($new_pwd);
     //$sha1_new = sha1($new); 
     //set update sha1 of new password + salt
-    $rs_activ = $dbc->query("UPDATE $table SET pwd='$pwd_reset' WHERE user_email='$user_email'");
-
+    $rs_activ = $dbc->prepare("UPDATE ? SET pwd=? WHERE user_email=?");
+    $rs_activ->execute(array($table, $pwd_reset, $user_email));
     $host = $_SERVER['HTTP_HOST'];
 
     //send email
