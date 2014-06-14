@@ -16,11 +16,13 @@ if (isset($_POST['doReset'])) {
   }
 
   $user_email = $data['user_email'];
-
   //check if activ code and user is valid as precaution
-  $rs_check = mysql_query("SELECT id FROM $table where user_email='$user_email'") or die (mysql_error()); 
-  $num = mysql_num_rows($rs_check);
-
+  //$rs_check = mysql_query("SELECT id FROM $table where user_email='$user_email'") or die (mysql_error()); 
+  //$num = mysql_num_rows($rs_check);
+  $rs_check = $dbc->prepare("SELECT id FROM ? WHERE user_email=?");
+  $rs_check->execute(array($table, $user_email));
+  $num = $rs_check->fetchAll(PDO::FETCH_ASSOC);
+  $num = count($num);
   if ( $num <= 0 ) {
     $err[] = "Sorry, no such account exists.";
   }
@@ -31,7 +33,7 @@ if (isset($_POST['doReset'])) {
     $pwd_reset = PwdHash($new_pwd);
     //$sha1_new = sha1($new); 
     //set update sha1 of new password + salt
-    $rs_activ = mysql_query("UPDATE $table SET pwd='$pwd_reset' WHERE user_email='$user_email'") or die(mysql_error());
+    $rs_activ = $dbc->query("UPDATE $table SET pwd='$pwd_reset' WHERE user_email='$user_email'");
 
     $host = $_SERVER['HTTP_HOST'];
 
