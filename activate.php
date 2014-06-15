@@ -54,9 +54,9 @@ if (isset($_POST['doActivate'])) {
   //check if activ code and user is valid as precaution
   //$rs_check = mysql_query("SELECT id FROM $table WHERE user_email='$user_email' AND activation_code='$activ'") or die (mysql_error()); 
   //$num = mysql_num_rows($rs_check);
-  $rs_check = $dbc->prepare("SELECT id FROM ? WHERE user_email=? AND activation_code=?");
-  $rs_check->execute(array($table, $user, $activ));
-  $num = count($rs_check->fetchAll(PDO::FETCH_ASSOC));
+  //$rs_check = $dbc->prepare("SELECT id FROM ? WHERE user_email='?' AND activation_code='?'");
+  //$rs_check->execute(array($table, $user, $activ));
+  //$num = count($rs_check->fetchAll(PDO::FETCH_ASSOC));
 
 
   $user_email = mysql_real_escape_string($_POST['user_email']);
@@ -71,8 +71,8 @@ if (isset($_POST['doActivate'])) {
   //set approved field to 1 to activate the user
   if(empty($err)) {
 
-    $rs_activ = $dbc->prepare("UPDATE ? SET approved='1' WHERE user_email=? AND activation_code = ? ");
-	$rs_activ->execute(array($table, $user_email, $activ));
+    //$rs_activ = $dbc->prepare("UPDATE ? SET approved='1' WHERE user_email='?' AND activation_code = '?' ");
+	//$rs_activ->execute(array($table, $user_email, $activ));
     //$rs_activ = mysql_query("UPDATE $table SET approved='1' WHERE md5_id='$user' AND activation_code = '$activ' ") or die(mysql_error());
 
     $rs_activ = mysql_query("UPDATE $table SET approved='1' WHERE user_email='$user_email' AND activation_code = '$activ'") or die(mysql_error());
