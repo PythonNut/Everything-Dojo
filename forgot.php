@@ -15,7 +15,7 @@ if (isset($_POST['doReset'])) {
   }
 
   $user_email = $data['user_email'];
-  check if activ code and user is valid as precaution
+  //check if activ code and user is valid as precaution
   $rs_check = mysql_query("SELECT id FROM $table where user_email='$user_email'") or die (mysql_error()); 
   $num = mysql_num_rows($rs_check);
   //$rs_check = $dbc->prepare("SELECT id FROM ? WHERE user_email=?");
