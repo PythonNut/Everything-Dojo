@@ -103,6 +103,7 @@ textarea {
   resize: none;
   font-family: Arial;
   width: 34.773vw;
+  box-sizing: content-box;
 }
 
 input:focus, textarea:focus { outline: none; }
@@ -184,7 +185,6 @@ body {
 #content {
   display: block;
   overflow: auto;
-  width: auto;
   margin: 2.604vh auto;
   min-height: 100%;
   width: 70%;
@@ -299,7 +299,7 @@ tbody tr:hover td {
   background: rgba(147, 204, 0, 0.7);
 }
 
-table a { color: #F99819 !important; }
+table a { color: #F99819; }
 
 
 /*--USER ANNOUNCEMENTS--*/
@@ -339,7 +339,6 @@ table a { color: #F99819 !important; }
   width: 100%;
   text-align: center;
   line-height: 7.78vh;
-  vertical-align: center;
 }
 
 #index-inner {
