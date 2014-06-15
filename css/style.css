@@ -179,7 +179,7 @@ body {
   background: white;
 }
 
-div#wrap { width: 90%; margin: 0 auto; }
+#wrap { width: 90%; margin: 0 auto; }
 
 #content {
   display: block;
