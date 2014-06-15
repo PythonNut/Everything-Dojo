@@ -1,5 +1,7 @@
 <?php
   /*constants*/
+	define("THEMEDB_TABLE", "theme_database");
+	
   define("URL_DATABASE", "database.php");
   define("URL_DISCUSS", "discuss.php");
   define("URL_THEMIZER", "themizer.php");

@@ -7,6 +7,7 @@ Please do not plagiarize
 
 /*--FONT IMPORT--*/
 @import url(http://fonts.googleapis.com/css?family=Cuprum:700);
+@import url('database.css');
 
 @font-face {
   font-family: 'Amble';
@@ -187,7 +188,7 @@ body {
   overflow: auto;
   margin: 2.604vh auto;
   min-height: 100%;
-  width: 70%;
+  width: 70vw;
   margin-bottom: -8.89vh; /* tyxchen: originally 7.78vh, but 8.89 looks better */
 }
 
