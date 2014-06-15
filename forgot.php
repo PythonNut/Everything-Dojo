@@ -74,7 +74,7 @@ This is an automated response. Do not reply to this email.";
   } else {
   ?>
   <p>If you have forgot your password, you can reset it and a new password will be sent to your email address.</p>
- 
+
   <form action="forgot.php" method="post" name="actForm" id="actForm">
     <label>Your Email</label>
     <input name="user_email" type="text" class="required email" size="25"></td>
