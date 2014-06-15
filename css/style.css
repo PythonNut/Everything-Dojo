@@ -143,13 +143,13 @@ label { display: block; }
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
   font-weight: 300;
   color: white;
+  display: inline-block;
   text-transform: uppercase;
   font-size: 2.82rem;
   line-height: 1.25em;
   padding: 0.24rem 0.6rem;
   margin: 0.6rem;
   height: 1.334em;
-  position: absolute;
 }
 
 h2, h4 {
