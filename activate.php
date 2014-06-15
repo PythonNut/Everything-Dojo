@@ -36,7 +36,7 @@ if(isset($get['user']) && !empty($get['activ_code']) && !empty($get['user']) && 
   if(empty($err)) {
   // set the approved field to 1 to activate the account
     $rs_activ = $dbc->prepare("UPDATE ? SET approved='1' WHERE md5_id=? AND activation_code = ? ");
-	$rs_activ->execute(array($table, $user, $activ));
+    $rs_activ->execute(array($table, $user, $activ));
     //$rs_activ = mysql_query("UPDATE $table SET approved='1' WHERE md5_id='$user' AND activation_code = '$activ' ") or die(mysql_error());
     $rs_activ = mysql_query("UPDATE $table SET approved='1' WHERE md5_id='$user' AND activation_code = '$activ' ") or die(mysql_error());
     $msg[] = "Thank you. Your account has been activated. You can now <a href=\"login.php\">login</a>.";
