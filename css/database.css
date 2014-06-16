@@ -8,10 +8,40 @@
 	margin-right: auto;
 }
 .db-tile{
+	font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
 	float: left;
 	background-color: #a91c9e;
 	height: 34vh;
 	width: 20vw;
+	color: white;
+	vertical-align: middle;	
+}
+.db-tile:hover{
+	background-color: #8c1883;
+}
+.db-tile-title{
+	text-transform: uppercase;	
+	font-size: 2.5em;
+}
+.db-tile-inner{
+	margin-top: 5.5vh;
+	margin-left: 3%;
+	margin-right: 3%;
+}
+.col{
+	width: 18vw;
+	float: left;
+}
+#col2, #col3{
+	margin-left: 2vw;
+}
+input[type=radio]{
+	float: left;
+	clear: both;
+}
+label{
+	float: left;
+	margin-left: 1%;
 }
 #request, #view{
 	margin-left: 2vw;
