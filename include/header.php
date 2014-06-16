@@ -57,7 +57,7 @@
           <?php } else { ?>
 
           <div id="logo">
-            <a href="/"><img src="/images/logo.png"/></a>
+            <a href="/"><img src="/images/logo.svg"/></a>
           </div>
 
           <nav>
