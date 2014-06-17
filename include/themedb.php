@@ -6,15 +6,15 @@
 class themedb{
 	
 	// Modifying/inserting methods
-		
+
 	function approve_theme(){
 	}
 	
 	function submit_theme(){
 	}
-	
+
 	// Getting methods
-	
+
 	function get_themes($id = 'all'){
 		if($id == 'all'){
 			// Select all approved themes but unvalidated
@@ -70,6 +70,11 @@ class themedb{
 			$owner_id 		= array();
 			$i = 0;
 			// Assign themes to array
+<<<<<<< HEAD
+			$name = array();
+			$i=0;
+=======
+>>>>>>> database stuff
 			while ($i < $num) {
 				$id[] 					= mysql_result($result,$i,"id");
 				$name[] 				= mysql_result($result,$i,"name");
@@ -80,6 +85,10 @@ class themedb{
 				$submit_id[] 		= mysql_result($result,$i,"submited_by_id");
 				$owner_id[] 		= mysql_result($result,$i,"owner_id");
 				$i++;
+<<<<<<< HEAD
+			}
+
+=======
 			}			
 			$validated = array(
 					'count'				=> $i,
@@ -98,12 +107,13 @@ class themedb{
 				'validated'		=> $validated
 			);			
 			
+>>>>>>> database stuff
 			return $data;
 		}
 		else{
 		}
 	}
-	
+
 }
 $themedb = new themedb();
 ?>

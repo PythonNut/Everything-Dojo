@@ -1,6 +1,5 @@
 <?php
 	$data = $themedb->get_themes();
-	print_r($data['validated']);
 ?>
 <h2>Validated Themes</h2>
 
@@ -30,3 +29,4 @@
 </table>
 
 <h2>Unvalidated Themes</h2>
+>>>>>>> database stuff
