@@ -29,4 +29,3 @@
 </table>
 
 <h2>Unvalidated Themes</h2>
->>>>>>> database stuff
