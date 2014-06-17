@@ -7,7 +7,6 @@ Please do not plagiarize
 
 /*--FONT IMPORT--*/
 @import url(http://fonts.googleapis.com/css?family=Cuprum:700);
-@import url('database.css');
 
 @font-face {
   font-family: 'Amble';
@@ -52,7 +51,8 @@ a {
   text-decoration: none;
 }
 
-a:hover { color: #658800; }
+a:hover  { color: #658800; }
+a:active { outline: none; }
 
 
 /*--LISTS--*/
@@ -62,7 +62,6 @@ a:hover { color: #658800; }
 /* Based heavily on Quizlet buttons, thank you! */
 input[type="submit"], input[type="button"], input[type="reset"], button {
   display: block;
-  outline: none;
   background: #85B900;
   border: none;
   border-radius: 0.17em;
