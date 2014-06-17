@@ -24,6 +24,9 @@
 			case 'submit':
 				include('include/themedb/submit_body.php');
 				break;
+			case 'view':
+				include('include/themedb/view_body.php');
+				break;
 		}
 	}
 ?>
