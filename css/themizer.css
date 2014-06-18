@@ -1,0 +1,81 @@
+/* Themizer CSS */
+
+@import url('fonts.css');
+.themizer { background: #51b835; }
+
+/*--SIDEBAR--*/
+#sidebar {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: black;
+  color: white;
+}
+
+#sidebar-inner {
+  position: relative;
+  width: 35vh;
+  background: black;
+}
+
+/*--LAYOUT AND HEADER--*/
+:root:not(svg) {
+  font-family: Amble, HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 2.22vh;
+  text-rendering: optimizeLegibility;
+}
+
+body { overflow: hidden; }
+
+header {
+  background: white;
+  margin: 0 auto;
+  width: 111.11%;
+  position: relative;
+  left: -5.55%;
+}
+
+#headerwrap {
+  margin-left: 5.55%;
+  position: relative;
+  width: 81%; /* 90% * 90% because #wrap width doesn't exist anymore */
+  height: 11.6vh;
+}
+
+#headerwrap h1 {
+  font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+  font-weight: 300;
+  color: white;
+  text-transform: uppercase;
+  font-size: 2.82rem;
+  line-height: 1.25em;
+  padding: 0.24rem 0.6rem;
+  margin: 0.6rem;
+  height: 1.334em;
+  position: absolute;
+}
+
+/*--SLIDE BUTTONS--*/
+.slideButton { position: absolute; }
+
+#headerButton {
+  width: 3.5rem;
+  height: 1.75rem;
+  top: 11.6vh;
+  left: 50%;
+  margin-left: -1.75rem;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+#sideButton {
+  width: 1.75rem;
+  height: 3.5rem;
+  left: 35vh;
+  top: 50%;
+  margin-top: -1.75rem;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
