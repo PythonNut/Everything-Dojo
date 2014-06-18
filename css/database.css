@@ -35,6 +35,12 @@
 #col2, #col3{
 	margin-left: 2vw;
 }
+#col3{
+	clear: right;
+}
+#fields{
+	float: left;
+}
 input[type=radio]{
 	float: left;
 	clear: both;
