@@ -143,7 +143,7 @@ label { display: block; }
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
   font-weight: 300;
   color: white;
-  display: inline-block;
+  display: inline-block; /* prevent body from being pushed down by sticky footer */
   text-transform: uppercase;
   font-size: 2.82rem;
   line-height: 1.25em;
@@ -170,6 +170,10 @@ code { font-family: Monaco, "Courier New", Courier, monospace; }
 
 /*--LAYOUT--*/
 
+:root:not(svg), body {
+  height: 100%;
+}
+
 :root:not(svg) {
   font-family: Amble, HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 2.22vh;
@@ -188,7 +192,6 @@ body {
   margin: 2.604vh auto;
   min-height: 100%;
   width: 70vw;
-  margin-bottom: -8.89vh; /* tyxchen: originally 7.78vh, but 8.89 looks better */
 }
 
 
@@ -241,6 +244,7 @@ nav ul a:hover {
 
 
 /*--FOOTER--*/
+
 footer {
   display: block;
   text-align: center;
@@ -250,6 +254,21 @@ footer {
 
 footer a { color: #bbb; }
 footer a:hover { color: #999; }
+
+/**
+ * Sticky footer
+ * based on http://ryanfait.com/html5-sticky-footer/ with a few modifications
+ */
+
+footer, .push {
+  height: 16.0156vh; /* '.push' must be the same height as 'footer' */
+  box-sizing: border-box;
+}
+
+#wrap {
+  min-height: 100%;
+  margin: 0 auto -16.0156vh;
+}
 
 
 /*--MISCELLANEOUS CLASSES AND IDS--*/
@@ -330,15 +349,6 @@ table a { color: #F99819; }
   font-size: 2.5rem;
   font-weight: 300;
   text-transform: uppercase;
-}
-
-#content:after {
-  content: "";
-  display: block;
-  height: 7.78vh;
-  width: 100%;
-  text-align: center;
-  line-height: 7.78vh;
 }
 
 #index-inner {
