@@ -49,10 +49,10 @@ Please do not plagiarize
 a {
   color: #7CAB00;
   text-decoration: none;
+  outline: none;
 }
 
 a:hover  { color: #658800; }
-a:active { outline: none; }
 
 
 /*--LISTS--*/
