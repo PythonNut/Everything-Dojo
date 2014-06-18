@@ -16,7 +16,7 @@
 
 #sidebar-inner {
   position: relative;
-  width: 35vh;
+  width: 17vw;
   background: black;
 }
 
@@ -73,7 +73,7 @@ header {
 #sideButton {
   width: 1.75rem;
   height: 3.5rem;
-  left: 35vh;
+  left: 17vw;
   top: 50%;
   margin-top: -1.75rem;
   border-top-right-radius: 4px;
