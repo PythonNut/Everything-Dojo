@@ -15,7 +15,7 @@
     if ($title != "Home" || $title != "About") { ?>
     <script src="js/jquery-2.1.1.min.js"></script>
     <?php } ?>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 
     <?php global $extra_js; print $extra_js; ?>
 
