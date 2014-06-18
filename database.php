@@ -14,8 +14,8 @@
   }
 
   if(!isset($_SESSION['user_id'])){
-    $level = "guest";
-    // end guest case
+		include('include/themedb/view_body.php');
+  // end guest case
   }
   else{
     switch($mode){
@@ -23,12 +23,19 @@
         include('include/themedb/index_body.php');
         break;
       case 'submit':
+?>
+				<a href="<?php echo URL_DATABASE; ?>">Back to Database Index</a>
+<?php
         include('include/themedb/submit_body.php');
         break;
       case 'view':
+?>
+				<a href="<?php echo URL_DATABASE; ?>">Back to Database Index</a>
+<?php
         include('include/themedb/view_body.php');
         break;
-    }
+    // end user mode
+		}
   }
 ?>
 

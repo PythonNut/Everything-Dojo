@@ -19,4 +19,10 @@
     <input type="radio" name="stage" value="[ALPHA]" id="[ALPHA]" /><label for="[ALPHA]">[ALPHA]</label><br />
     <input type="radio" name="stage" value="[BETA]" id="[BETA]" /><label for="[BETA]">[BETA] </label> 
   </div>
+  <div id="fields">
+    Theme Description (optional):<br />
+    <textarea></textarea><br />
+    Theme CSS:<br />
+    <textarea></textarea>
+  </div>
 </form>
