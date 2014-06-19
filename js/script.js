@@ -66,11 +66,11 @@ function themizer() {
   //option slides sliding init
   $(".option").each(function() {
     var id = $(this).attr('id');
-    $("#" + id + " .option-title").append("<div class=\"collapsebutton\" onclick=\"optionToggle('" + id + "')\">Up</div>");
+    $("#" + id + " .option-title").attr("onclick", "optionToggle('" + id + "')");
     optionToggle(id);
   });
   var firstop = $(".option:first-of-type").attr('id');
-  $("#" + firstop + " .collapsebutton").html("Up");
+  $("#" + firstop + " .option-title").removeClass("collapsed").addClass("expanded");
   $("#" + firstop + " .option-wrap").slideDown(0);
    
   //view mode radios
@@ -81,12 +81,11 @@ function themizer() {
 
 function optionToggle(id) {
   $("#" + id + " .option-wrap").slideToggle();
-  var content = $("#" + id + " .collapsebutton").html();
-  if (content == "Up") {
-    $("#" + id + " .collapsebutton").html("Down");
-  } else {
-    $("#" + id + " .collapsebutton").html("Up");
-  }
+  var content = $("#" + id + " .option-title");
+    if (content.hasClass("collapsed"))
+      content.removeClass("collapsed").addClass("expanded");
+    else
+      content.removeClass("expanded").addClass("collapsed");
 }
 
 /*laquo «
