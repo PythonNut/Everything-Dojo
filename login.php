@@ -18,13 +18,20 @@ if (isset($_POST['doLogin'])) {
   $pass = $data['pwd'];
   $user_cond = "user_name='$user_email'";
   
-  $result = mysql_query("SELECT id, pwd, user_name, approved, user_level FROM $table WHERE $user_cond") or die (mysql_error()); 
+  $result = mysql_query("SELECT id, pwd, user_name, approved, user_level FROM $table WHERE $user_cond") or die (mysql_error());
+  
+  
+  //PDO is commented out
+  //$result = $dbc->prepare("SELECT id, pwd, user_name, approved, user_level FROM ? WHERE ?");
+  //$result->execute(array($table, $user_cond));
+  //$username_match = count($result->fetchAll(PDO::FETCH_ASSOC));
+  
   $username_match = mysql_num_rows($result);
 
   // Match row found with more than 1 results  - the user is authenticated. 
   if ($username_match > 0) { 
   
-    list($id, $pwd, $user_name, $approved, $user_level) = mysql_fetch_row($result);
+    list($id, $pwd, $user_name, $approved, $user_level) = mysql_fetch_row($result);	 //replace with $result->fetchAll(PDO::FETCH_ASSOC)[0] for PDO
     
     if(!$approved) {
       $err[] = "Account not activated. Please contact the administrator to activate.";
