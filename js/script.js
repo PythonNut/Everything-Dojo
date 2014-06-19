@@ -63,11 +63,30 @@ function themizer() {
   //set index to be default mode
   $("input[name='view'][value='index']").prop("checked", "checked");
   $("#blog-body").load("blog-index.html");
-  
+  //option slides sliding init
+  $(".option").each(function() {
+    var id = $(this).attr('id');
+    $("#" + id + " .option-title").append("<div class=\"collapsebutton\" onclick=\"optionToggle('" + id + "')\">Up</div>");
+    optionToggle(id);
+  });
+  var firstop = $(".option:first-of-type").attr('id');
+  $("#" + firstop + " .collapsebutton").html("Up");
+  $("#" + firstop + " .option-wrap").slideDown(0);
+   
   //view mode radios
-  $("input[name='view']").click(function() {
+  $("input[name='view']").change(function() {
     $("#blog-body").load("blog-" + $("input[name='view']:checked").val() + ".html");
   });
+}
+
+function optionToggle(id) {
+  $("#" + id + " .option-wrap").slideToggle();
+  var content = $("#" + id + " .collapsebutton").html();
+  if (content == "Up") {
+    $("#" + id + " .collapsebutton").html("Down");
+  } else {
+    $("#" + id + " .collapsebutton").html("Up");
+  }
 }
 
 /*laquo «

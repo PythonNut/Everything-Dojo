@@ -4,7 +4,8 @@
   session_start();
   $extra_style = "<link rel=\"stylesheet\" href=\"css/blog-style.css\" />
   <link rel=\"stylesheet\" href=\"css/themizer.css\" />";
-  $extra_js = "<script>$(function(){
+  $extra_js = "<script>
+  $(function(){
     sliderSidebar('themizer-inner');
     themizer();
   });</script>";
@@ -12,13 +13,32 @@
 ?>
 <div id="sidebar">
   <div id="sidebar-inner">
+    <h2 id="sideheadbar" class="themizer">Themizer</h2>
+    
     <div class="option" id="option-view">
-      <h5 class="option-title">Blog View</h5>
-      <p><input type="radio" name="view" value="index" /><label for="view" class="inline">Index</label></p>
-      <p><input type="radio" name="view" value="blog" /><label for="view" class="inline">Blog Post</label></p>
-      <p><input type="radio" name="view" value="post" /><label for="view" class="inline">Post New Entry</label></p>
-      <p><input type="radio" name="view" value="comment" /><label for="view" class="inline">Post New Comment</label></p>
+      <div class="option-title">
+        <h5>Blog View</h5>
+      </div>
+      <div class="option-wrap">
+        <p><input type="radio" name="view" value="index" /><label for="view" class="radio">Index</label></p>
+        <p><input type="radio" name="view" value="blog" /><label for="view" class="radio">Blog Post</label></p>
+        <p><input type="radio" name="view" value="post" /><label for="view" class="radio">Post New Entry</label></p>
+        <p><input type="radio" name="view" value="comment" /><label for="view" class="radio">Post New Comment</label></p>
+      </div>
     </div>
+    
+    <div class="option" id="option-base">
+      <div class="option-title">
+        <h5>Base Theme</h5>
+      </div>
+      <div class="option-wrap">
+        <p><input type="radio" name="base" value="index" /><label for="base" class="radio">Legit by Dojo</label></p>
+        <p><input type="radio" name="base" value="blog" /><label for="base" class="radio">Calm by Red</label></p>
+        <p><input type="radio" name="base" value="post" /><label for="base" class="radio">Post New Entry</label></p>
+        <p><input type="radio" name="base" value="comment" /><label for="base" class="radio">Post New Comment</label></p>
+      </div>
+    </div>
+    
   </div>
 </div>
 <div id="blog-body"></div>
