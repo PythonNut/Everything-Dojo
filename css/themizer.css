@@ -94,6 +94,7 @@ body { overflow: hidden; }
 }
 
 #sidebar .option-title h5 {
+  position: relative;
   display: inline-block;
   margin: 0;
   text-transform: uppercase;
@@ -104,15 +105,48 @@ body { overflow: hidden; }
 }
 
 #sidebar .collapsebutton {
+  position: relative;
+}
+
+#sidebar .collapsebutton::before,
+#sidebar .collapsebutton::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 9px;
+  width: 7px;
+  height: 3px;
+  background: #fff;
+  -webkit-transition: transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out;
+}
+
+#sidebar .collapsebutton::after {
+  right: 2px;
+}
+
+.collapsed .collapsebutton::after,
+.expanded .collapsebutton::before {
+  transform: skewY(20deg);
+}
+
+.expanded .collapsebutton::after,
+.collapsed .collapsebutton::before {
+  transform: skewY(-20deg);
+}
+
+/*
+#sidebar .collapsebutton {
   position: absolute;
   display: inline-block;
   height: 1.5em;
   line-height: 1.5em;
   top: 50%;
-  right: 10px; /* l-r padding from #sidebar .option-title */
+  right: 10px;  l-r padding from #sidebar .option-title
   margin-top: -0.75em;
   cursor: pointer;
 }
+*/
 
 
 /*--INPUTS--*/

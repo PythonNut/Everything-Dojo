@@ -18,6 +18,7 @@
     <div class="option" id="option-view">
       <div class="option-title">
         <h5>Blog View</h5>
+        <span class="collapsebutton"></span>
       </div>
       <div class="option-wrap">
         <p><input type="radio" name="view" value="index" /><label for="view" class="radio">Index</label></p>
@@ -30,6 +31,7 @@
     <div class="option" id="option-base">
       <div class="option-title">
         <h5>Base Theme</h5>
+        <span class="collapsebutton"></span>
       </div>
       <div class="option-wrap">
         <p><input type="radio" name="base" value="index" /><label for="base" class="radio">Legit by Dojo</label></p>
