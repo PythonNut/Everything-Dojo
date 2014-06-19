@@ -40,8 +40,6 @@ body { overflow: hidden; }
   text-align: center;
   font-size: 2.7em;
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
-  border-top: 0.1em solid white;
-  border-bottom: 0.1em solid white;
 }
 
 #sidebar p { margin-bottom: 0.6rem; }
@@ -106,6 +104,7 @@ body { overflow: hidden; }
 
 #sidebar .collapsebutton {
   position: relative;
+  float: right;
 }
 
 #sidebar .collapsebutton::before,
@@ -121,9 +120,7 @@ body { overflow: hidden; }
   transition: transform 0.5s ease-in-out;
 }
 
-#sidebar .collapsebutton::after {
-  right: 2px;
-}
+#sidebar .collapsebutton::after { right: 2px; }
 
 .collapsed .collapsebutton::after,
 .expanded .collapsebutton::before {
@@ -134,19 +131,6 @@ body { overflow: hidden; }
 .collapsed .collapsebutton::before {
   transform: skewY(-20deg);
 }
-
-/*
-#sidebar .collapsebutton {
-  position: absolute;
-  display: inline-block;
-  height: 1.5em;
-  line-height: 1.5em;
-  top: 50%;
-  right: 10px;  l-r padding from #sidebar .option-title
-  margin-top: -0.75em;
-  cursor: pointer;
-}
-*/
 
 
 /*--INPUTS--*/
