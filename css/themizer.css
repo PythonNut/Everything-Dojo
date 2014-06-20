@@ -4,8 +4,7 @@ Everything in here is prefixed with #sidebar so that we can load this after blog
 As is such, everything that is not the blog-*.html files should be contained within the #sidebar*/
 
 @import url('fonts.css');
-#sidebar .themizer { background: #51b835; }
-
+.themizer { background: #51b835; }
 
 /*--LAYOUT--*/
 #sidebar {
@@ -14,32 +13,51 @@ As is such, everything that is not the blog-*.html files should be contained wit
   top: 0;
   left: 0;
   height: 100%;
-  background: black;
+  background: #101010;
   color: white;
   font-size: 2.22vh;
   font-family: Amble, HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: left;
   text-rendering: optimizeLegibility;
 }
 
-#sidebar #sidebar-inner {
+#sidebar-inner {
   position: relative;
-  width: 17vw;
-  background: black;
+  width: 35vh;
+  background: #101010;
 }
 
 body { overflow: hidden; }
 
 
 /*--TYPESETTING--*/
-#sidebar h2#sideheadbar {
+#sideheadbar {
   display: block;
-  height: 12vh;
-  line-height: 12vh;
+  height: 10vh;
+  line-height: 10vh;
   color: white;
   text-transform: uppercase;
   text-align: center;
   font-size: 2.7em;
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+}
+
+#sideheadbar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 2vh;
+  height: 10vh;
+  background: #57c639;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.opened #sideheadbar::after {
+  left: 35vh;
+}
+.closed #sideheadbar::after {
+  left: 0;
 }
 
 #sidebar p { margin-bottom: 0.6rem; }
@@ -57,9 +75,10 @@ body { overflow: hidden; }
 #sidebar .inline { display: inline; }
 
 /*--SLIDE BUTTONS--*/
-#sidebar .slideButton { position: absolute; }
+.slideButton { position: absolute; }
 
-#sidebar #headerButton {
+/* commented out because we aren't sliding the header in/out in any way
+#headerButton {
   width: 3.5rem;
   height: 1.75rem;
   top: 11.6vh;
@@ -68,73 +87,85 @@ body { overflow: hidden; }
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
 }
+*/
 
-#sidebar #sideButton {
-  width: 1.75rem;
-  height: 3.5rem;
-  left: 17vw;
-  top: 50%;
-  margin-top: -1.75rem;
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
+#sideButton {
+  width: 2vh;
+  height: 100%;
+  left: 35vh;
+  top: 0;
+  background: #212121;
 }
 
+.closed #sideButton {
+  height: 5vh;
+  top: 47.5vh;
+  border-radius: 0 4px 4px 0;
+  background: #101010;
+}
 
 /*--OPTION SLIDES--*/
-#sidebar .option { margin: 10px; border: 3px solid rgba(100, 100, 100, 0.9); }
-#sidebar .option-wrap { padding: 10px 14px; margin: 0; }
+.option { margin: 10px; border: 3px solid rgba(100, 100, 100, 0.9); }
+.option-wrap { padding: 10px 14px; margin: 0; }
 
-#sidebar .option-title {
+.option-title {
   display: block;
-  padding: 4px 10px;
+  padding: 0.2em 0.5em;
   background: rgba(100, 100, 100, 0.9);
   position: relative;
 }
 
-#sidebar .option-title h5 {
+.option-title h5 {
   position: relative;
   display: inline-block;
   margin: 0;
-  text-transform: uppercase;
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+  font-weight: 300;
   height: 1.5em;
   line-height: 1.5em;
   font-size: 1.5em;
 }
 
-#sidebar .collapsebutton {
+/**
+ * Collapse option button styling
+ */
+
+.collapsebutton {
   position: relative;
   float: right;
 }
 
-#sidebar .collapsebutton::before,
-#sidebar .collapsebutton::after {
+.collapsebutton::before,
+.collapsebutton::after {
   content: "";
   position: absolute;
-  top: 5px;
-  right: 9px;
-  width: 7px;
-  height: 3px;
+  top: 1em;
+  right: 0.9em;
+  width: 0.5em;
+  height: 0.2em;
   background: #fff;
   -webkit-transition: transform 0.5s ease-in-out;
   transition: transform 0.5s ease-in-out;
 }
 
-#sidebar .collapsebutton::after { right: 2px; }
+.collapsebutton::after { right: 0.5em; }
 
-.collapsed .collapsebutton::after,
-.expanded .collapsebutton::before {
+.expanded .collapsebutton::before,
+.collapsed .collapsebutton::after {
+  -webkit-transform: skewY(20deg);
   transform: skewY(20deg);
 }
 
 .expanded .collapsebutton::after,
 .collapsed .collapsebutton::before {
+  -webkit-transform: skewY(-20deg);
   transform: skewY(-20deg);
 }
 
 
 /*--INPUTS--*/
-#sidebar label.radio, #sidebar label.checkbox {
+.radio,
+.checkbox {
   display: inline-block;
   height: 13px;
   margin-left: 5px;
