@@ -44,9 +44,11 @@ function sliderSidebar() {
   // main sliding function
   $("#sideButton").click(function() {
     if (openSide) {
-      $("#sidebar").removeClass("opened").addClass("closed").animate({
+      $("#sidebar").animate({
         left: -sideWidth
-      }, 400);
+      }, 400, function() {
+        $(this).removeClass("opened").addClass("closed");
+      });
       $("#sideButton").animate({
         left: sideWidth
       }, 400);
@@ -83,10 +85,40 @@ function themizer() {
   var firstop = $(".option:first-of-type").attr('id');
   $("#" + firstop + " .option-title").removeClass("collapsed").addClass("expanded");
   $("#" + firstop + " .option-wrap").slideDown(0);
-   
+
   // view mode radios
   $("input[name='view']").change(function() {
     $("#blog-body").load("blog-" + $("input[name='view']:checked").val() + ".html");
+  });
+
+  // Side show/hide button stuff
+  // find width of sidebar and of button
+  var sideWidth = $("#sidebar").width();
+  var sideButtonWidth = $("#sideButton").width();
+  // hide #sideButton
+  $("#sideButton").click(function() {
+    if ($("#sidebar").css("left") !== 0 && !$("#sidebar").hasClass("closed")) {
+      $("#sideButton").addClass("triggered");
+      setTimeout(function() {
+        $("#sideButton").removeClass("triggered").animate({
+          left: sideWidth - sideButtonWidth
+        }, 900);
+      }, 4000);
+    }
+  });
+  // show #sideButton
+  $(window).mousemove(function() {
+    if (!$("#sideButton").hasClass("triggered") && $("#sidebar").hasClass("closed")) {
+      $("#sideButton").addClass("triggered").animate({
+        left: sideWidth
+      }, 100);
+      setTimeout(function() {
+        $("#sideButton").removeClass("triggered").animate({
+          left: sideWidth - sideButtonWidth
+        }, 900);
+      }, 4000);
+    }
+//    alert("test");
   });
 }
 
@@ -104,9 +136,9 @@ function optionToggle(id) {
 
 // originally written by levans as a hide tag mod
 function post_hide(self) {
-  var e = $(self);
-  var d = e.next();
-  d.toggle();
+  var label = $(self);
+  var hide = label.next();
+  hide.toggle();
 }
 
 // toggle_month for archives
