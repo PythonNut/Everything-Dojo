@@ -102,7 +102,7 @@ function themizer() {
       setTimeout(function() {
         $("#sideButton").removeClass("triggered").animate({
           left: sideWidth - sideButtonWidth
-        }, 900);
+        }, 1500);
       }, 4000);
     }
   });
@@ -115,10 +115,9 @@ function themizer() {
       setTimeout(function() {
         $("#sideButton").removeClass("triggered").animate({
           left: sideWidth - sideButtonWidth
-        }, 900);
+        }, 1500);
       }, 4000);
     }
-//    alert("test");
   });
 }
 
