@@ -5,6 +5,8 @@
 
     <title>Everything Dojo &bull; <?php global $title; print $title; ?></title>
 
+    <meta charset="utf-8">
+
     <link href="images/favicon.ico" rel="shortcut icon">
     <link href="css/normalize.css" type="text/css" rel="stylesheet">
     <link href="css/style.css" type="text/css" rel="stylesheet">
@@ -67,7 +69,7 @@
             <?php if(isset($_SESSION['user_id'])) { ?>
               <li><a href="myaccount.php" id="menu-myaccount">My Account</a></li>
               <li><a href="mysettings.php" id="menu-mysettings">My Settings</a></li>
-              <?php 
+              <?php
               // will not work if dbc is not included on page
               if (checkAdmin()) {
               ?>
@@ -87,6 +89,6 @@
         </div>
 
       </header>
-  
+
       <div id="content">
 
