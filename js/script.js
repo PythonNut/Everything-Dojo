@@ -49,7 +49,7 @@ function sliderSidebar() {
       }, 400, function() {
         $(this).removeClass("opened").addClass("closed");
       });
-      $("#sideButton").animate({
+      $(this).animate({
         left: sideWidth
       }, 400);
       openSide = false;
@@ -97,28 +97,44 @@ function themizer() {
   var sideButtonWidth = $("#sideButton").width();
   // hide #sideButton
   $("#sideButton").click(function() {
-    if ($("#sidebar").css("left") !== 0 && !$("#sidebar").hasClass("closed")) {
+    if ($("#sidebar").css("left") == "0px" && !$("#sidebar").hasClass("closed")) {
       $("#sideButton").addClass("triggered");
+
       setTimeout(function() {
-        $("#sideButton").removeClass("triggered").animate({
+        $("#sideButton").removeClass("triggered");
+        $(".closed #sideButton").animate({
           left: sideWidth - sideButtonWidth
         }, 1500);
       }, 4000);
     }
   });
-  // show #sideButton
-  $(window).mousemove(function() {
-    if (!$("#sideButton").hasClass("triggered") && $("#sidebar").hasClass("closed")) {
-      $("#sideButton").addClass("triggered").animate({
-        left: sideWidth
-      }, 100);
-      setTimeout(function() {
-        $("#sideButton").removeClass("triggered").animate({
+  // taken and modified from http://css-tricks.com/snippets/jquery/fire-event-when-user-is-idle/
+  var idleTimer = null;
+  var idleState = false;
+  var idleWait = 4000;
+
+  $(window).bind('mousemove scroll', function() {
+      clearTimeout(idleTimer);
+
+      if (idleState == true) {
+        // Reactivated event
+        $(".closed #sideButton").addClass("triggered").animate({
+          left: sideWidth
+        }, 100);
+      }
+
+      idleState = false;
+
+      idleTimer = setTimeout(function () {
+      // Idle Event
+        $("#sideButton").removeClass("triggered");
+        $(".closed #sideButton").animate({
           left: sideWidth - sideButtonWidth
-        }, 1500);
-      }, 4000);
-    }
+        });
+      idleState = true; }, idleWait);
   });
+
+  $(window).trigger("mousemove");
 }
 
 function optionToggle(id) {
