@@ -35,10 +35,8 @@
         <span class="collapsebutton"></span>
       </div>
       <div class="option-wrap">
-        <p><input type="radio" name="base" value="index"><label for="base" class="radio">Legit by Dojo</label></p>
+        <p><input type="radio" name="base" value="original"><label for="base" class="radio">Core by Dojo</label></p>
         <p><input type="radio" name="base" value="blog"><label for="base" class="radio">Calm by Red</label></p>
-        <p><input type="radio" name="base" value="post"><label for="base" class="radio">Post New Entry</label></p>
-        <p><input type="radio" name="base" value="comment"><label for="base" class="radio">Post New Comment</label></p>
       </div>
     </div>
 

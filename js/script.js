@@ -89,6 +89,7 @@ function themizer() {
 
   // set index to be default mode
   $("input[name='view'][value='index']").prop("checked", "checked");
+  $("input[name='base'][value='original']").prop("checked", "checked");
   $("#blog-body").load("blog-index.html");
 
   // option slides sliding init
@@ -106,6 +107,9 @@ function themizer() {
   // view mode radios
   $("input[name='view']").change(function() {
     $("#blog-body").load("blog-" + $("input[name='view']:checked").val() + ".html");
+  });
+  $("input[name='base']").change(function() {
+    $("head").append("<link href='blog-" + $("input[name='base']:checked").val() + ".css' type='text/css' rel='stylesheet'>");
   });
 
   // Show/hide sideButton
@@ -143,7 +147,7 @@ function themizer() {
       idleTimer = setTimeout(function() {
         // Idle Event
         $("#sideButton").removeClass("triggered");
-        $(".closed #sideButton").animate({
+        $(".closed #sideButton:not(:hover)").animate({
           left: sideWidth - sideButtonWidth
         }, 1500);
         idleState = true;
