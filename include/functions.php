@@ -24,10 +24,10 @@
 
   function filter($data) {
     $data = trim(addslashes(htmlentities(strip_tags($data))));
-    
+
     if (get_magic_quotes_gpc())
       $data = stripslashes($data);
-    
+
     $data = mysql_real_escape_string($data);
     // Please replace with mysqli and setup a fake link
     return $data;
@@ -52,7 +52,7 @@
         $str = substr($str,0,$spc_pos);
 
     return $str . "...";
-  } 
+  }
 
   function isEmail($email) {
     return preg_match('/^\S+@[\w\d.-]{2,}\.[\w]{2,6}$/iU', $email) ? TRUE : FALSE;
@@ -64,8 +64,8 @@
     } else {
       return false;
     }
-   }  
-   
+   }
+
   function isURL($url) {
     if (preg_match('/^(http|https|ftp):\/\/([A-Z0-9][A-Z0-9_-]*(?:\.[A-Z0-9][A-Z0-9_-]*)+):?(\d+)?\/?/i', $url)) {
       return true;
@@ -80,22 +80,22 @@
 
     if (strcmp($x, $y) != 0) {
       return false;
-    } 
+    }
     return true;
   }
 
   function GenPwd($length = 7) {
     $password = "";
     $possible = "0123456789bcdfghjkmnpqrstvwxyz"; //no vowels
-    
-    $i = 0; 
-    
+
+    $i = 0;
+
     while ($i < $length) {
-    
+
     $char = substr($possible, mt_rand(0, strlen($possible)-1), 1);
-       
-    
-    if (!strstr($password, $char)) { 
+
+
+    if (!strstr($password, $char)) {
       $password .= $char;
       $i++;
     }
@@ -108,15 +108,15 @@
 
   function GenKey($length = 7) {
     $password = "";
-    $possible = "0123456789abcdefghijkmnopqrstuvwxyz"; 
+    $possible = "0123456789abcdefghijkmnopqrstuvwxyz";
 
-    $i = 0; 
+    $i = 0;
 
-    while ($i < $length) { 
+    while ($i < $length) {
 
       $char = substr($possible, mt_rand(0, strlen($possible)-1), 1);
 
-      if (!strstr($password, $char)) { 
+      if (!strstr($password, $char)) {
         $password .= $char;
         $i++;
       }
@@ -133,8 +133,8 @@
 
     $table = TB_NAME;
     if(isset($_SESSION['user_id'])) {
-	  //$result = $dbc->prepare("UPDATE $tableSET ckey = '', ctime = '' WHERE id = ?");
-  	  //$result->execute(array($_SESSION[user_id]));
+    //$result = $dbc->prepare("UPDATE $tableSET ckey = '', ctime = '' WHERE id = ?");
+    //$result->execute(array($_SESSION[user_id]));
       mysql_query("UPDATE $table
              SET ckey = '', ctime = ''
              WHERE id = $_SESSION[user_id]") or die(mysql_error());

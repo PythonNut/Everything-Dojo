@@ -17,35 +17,35 @@ if (isset($_POST['doLogin'])) {
   $user_email = $data['username'];
   $pass = $data['pwd'];
   $user_cond = "user_name='$user_email'";
-  
+
   $result = mysql_query("SELECT id, pwd, user_name, approved, user_level FROM $table WHERE $user_cond") or die (mysql_error());
-  
-  
+
+
   //PDO is commented out
   //$result = $dbc->prepare("SELECT id, pwd, user_name, approved, user_level FROM ? WHERE ?");
   //$result->execute(array($table, $user_cond));
   //$username_match = count($result->fetchAll(PDO::FETCH_ASSOC));
-  
+
   $username_match = mysql_num_rows($result);
 
-  // Match row found with more than 1 results  - the user is authenticated. 
-  if ($username_match > 0) { 
-  
-    list($id, $pwd, $user_name, $approved, $user_level) = mysql_fetch_row($result);	 //replace with $result->fetchAll(PDO::FETCH_ASSOC)[0] for PDO
-    
+  // Match row found with more than 1 results  - the user is authenticated.
+  if ($username_match > 0) {
+
+    list($id, $pwd, $user_name, $approved, $user_level) = mysql_fetch_row($result); //replace with $result->fetchAll(PDO::FETCH_ASSOC)[0] for PDO
+
     if(!$approved) {
       $err[] = "Account not activated. Please contact the administrator to activate.";
     }
-     
+
     //check against salt
-    if ($pwd === PwdHash($pass, substr($pwd, 0, 9))) { 
+    if ($pwd === PwdHash($pass, substr($pwd, 0, 9))) {
       if(empty($err)) {
-        // this sets session and logs user in  
+        // this sets session and logs user in
         session_start();
         session_regenerate_id(TRUE); //prevent against session fixation attacks.
 
-        // this sets variables in the session 
-        $_SESSION['user_id']= $id;  
+        // this sets variables in the session
+        $_SESSION['user_id']= $id;
         $_SESSION['user_name'] = $user_name;
         $_SESSION['user_level'] = $user_level;
         $_SESSION['HTTP_USER_AGENT'] = md5($_SERVER['HTTP_USER_AGENT']);
