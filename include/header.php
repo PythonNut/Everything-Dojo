@@ -29,7 +29,12 @@
 
   <body>
 
-    <?php include("noscript.php"); ?>
+    <?php // is there a better way to do this?
+    if ($title != "Home" || $title != "About" || $title != "Account Activation" ||
+        $title != "Forgot Password" || $title != "Logout Successful" ||
+        $title != "403" || $title != "404" || $title != "418" || $title != "500")
+      include("noscript.php");
+    ?>
 
     <div id="wrap">
 
