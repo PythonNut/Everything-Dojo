@@ -112,27 +112,22 @@ function themizer() {
   // find width of sidebar and of sideButton
   var sideWidth = $("#sidebar").width();
   var sideButtonWidth = $("#sideButton").width();
+  // set whether user is active or not for later
+  var idleTimer = null;
+  var idleState = true;
 
   // modify sideButton on click
   $("#sideButton").click(function() {
     if ($("#sidebar").css("left") == "0px" && $("#sidebar").hasClass("opened")) { // fires when sidebar is to be closed
       $("#sideButton").addClass("triggered");
+      idleState = true; // for later
 
       // timeout to remove triggered class and to hide sideButton
-      setTimeout(function() {
-        $("#sideButton").removeClass("triggered");
-        $(".closed #sideButton").animate({
-          left: sideWidth - sideButtonWidth
-        }, 1500);
-      }, 4000);
     }
   });
 
   // show sideButton on hover + scroll
   // taken and modified from http://css-tricks.com/snippets/jquery/fire-event-when-user-is-idle/
-  var idleTimer = null;
-  var idleState = false;
-
   $(window).bind('mousemove scroll', function() {
       clearTimeout(idleTimer); // clear timeout if user acts
 
@@ -152,7 +147,7 @@ function themizer() {
         $("#sideButton").removeClass("triggered");
         $(".closed #sideButton").animate({
           left: sideWidth - sideButtonWidth
-        });
+        }, 1500);
         idleState = true;
       }, 4000);
   });
