@@ -124,7 +124,7 @@ function themizer() {
     }
   });
 
-  // show sideButton on hover + scroll
+  // show sideButton on mousemove + scroll
   // taken and modified from http://css-tricks.com/snippets/jquery/fire-event-when-user-is-idle/
   $(window).bind('mousemove scroll', function() {
       clearTimeout(idleTimer); // clear timeout if user acts
@@ -141,7 +141,7 @@ function themizer() {
 
       // user inactive
       idleTimer = setTimeout(function() {
-      // Idle Event
+        // Idle Event
         $("#sideButton").removeClass("triggered");
         $(".closed #sideButton").animate({
           left: sideWidth - sideButtonWidth
@@ -160,10 +160,11 @@ function optionToggle(id) {
   $("#" + id + " .option-wrap").slideToggle();
   var content = $("#" + id + " .option-title");
 
-    if (content.hasClass("collapsed"))
-      content.removeClass("collapsed").addClass("expanded");
-    else
-      content.removeClass("expanded").addClass("collapsed");
+  if (content.hasClass("collapsed")) {
+    content.removeClass("collapsed").addClass("expanded");
+  } else {
+    content.removeClass("expanded").addClass("collapsed");
+  }
 }
 
 /*laquo «
