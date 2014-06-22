@@ -168,30 +168,4 @@ function optionToggle(id) {
 }
 
 /*laquo «
-&#187;) and it will looks like »*/
-
-// originally written by levans as a hide tag mod
-function post_hide(self) {
-  var label = $(self);
-  var hide = label.next();
-  hide.toggle();
-}
-
-// toggle_month for archives
-// from the blog software
-function toggle_month(month) {
-  thisMonth = document.getElementById('month_' + month);
-  thisImg = document.getElementById('month_image_' + month);
-
-  if (thisMonth && thisImg) {
-    if (thisMonth.style.display == "none") {
-      thisMonth.style.display = "block";
-      thisImg.src = "http://www.artofproblemsolving.com/Forum/blog/styles/hyperion/images/minus.gif";
-      thisImg.alt = '-';
-    } else {
-      thisMonth.style.display = "none";
-      thisImg.src = "http://www.artofproblemsolving.com/Forum/blog/styles/hyperion/images/plus.gif";
-      thisImg.alt = '+';
-    }
-  }
-}
+&#187; and it will looks like »*/
