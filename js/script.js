@@ -121,8 +121,6 @@ function themizer() {
     if ($("#sidebar").css("left") == "0px" && $("#sidebar").hasClass("opened")) { // fires when sidebar is to be closed
       $("#sideButton").addClass("triggered");
       idleState = true; // for later
-
-      // timeout to remove triggered class and to hide sideButton
     }
   });
 

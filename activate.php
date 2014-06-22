@@ -1,4 +1,4 @@
-<?php 
+<?php
 include("include/include.php");
 
 $table = TB_NAME;
@@ -19,17 +19,17 @@ if(isset($get['user']) && !empty($get['activ_code']) && !empty($get['user']) && 
   $rs_check->execute(array($table, $user, $activ));
   $num = count($rs_check->fetchAll(PDO::FETCH_ASSOC));
   //check if activ code and user is valid
-  //$rs_check = mysql_query("SELECT id FROM $table WHERE md5_id='$user' AND activation_code='$activ'") or die (mysql_error()); 
+  //$rs_check = mysql_query("SELECT id FROM $table WHERE md5_id='$user' AND activation_code='$activ'") or die (mysql_error());
   //$num = mysql_num_rows($rs_check);
 
   $user = mysql_real_escape_string($get['user']);
   $activ = mysql_real_escape_string($get['activ_code']);
 
   //check if activ code and user is valid
-  $rs_check = mysql_query("SELECT id FROM $table WHERE md5_id='$user' AND activation_code='$activ'") or die (mysql_error()); 
+  $rs_check = mysql_query("SELECT id FROM $table WHERE md5_id='$user' AND activation_code='$activ'") or die (mysql_error());
   $num = mysql_num_rows($rs_check);
-  // Match row found with more than 1 results  - the user is authenticated. 
-  if ($num <= 0) { 
+  // Match row found with more than 1 results  - the user is authenticated.
+  if ($num <= 0) {
     $err[] = "Sorry, no such account exists or the activation code is invalid.";
   }
 
@@ -52,7 +52,7 @@ if (isset($_POST['doActivate'])) {
   //$user_email = mysql_real_escape_string($_POST['user_email']);
   //$activ = mysql_real_escape_string($_POST['activ_code']);
   //check if activ code and user is valid as precaution
-  //$rs_check = mysql_query("SELECT id FROM $table WHERE user_email='$user_email' AND activation_code='$activ'") or die (mysql_error()); 
+  //$rs_check = mysql_query("SELECT id FROM $table WHERE user_email='$user_email' AND activation_code='$activ'") or die (mysql_error());
   //$num = mysql_num_rows($rs_check);
   //$rs_check = $dbc->prepare("SELECT id FROM ? WHERE user_email='?' AND activation_code='?'");
   //$rs_check->execute(array($table, $user, $activ));
@@ -62,17 +62,17 @@ if (isset($_POST['doActivate'])) {
   $user_email = mysql_real_escape_string($_POST['user_email']);
   $activ = mysql_real_escape_string($_POST['activ_code']);
   //check if activ code and user is valid as precaution
-  $rs_check = mysql_query("SELECT id FROM $table WHERE user_email='$user_email' AND activation_code='$activ'") or die (mysql_error()); 
+  $rs_check = mysql_query("SELECT id FROM $table WHERE user_email='$user_email' AND activation_code='$activ'") or die (mysql_error());
   $num = mysql_num_rows($rs_check);
-  // Match row found with more than 1 results  - the user is authenticated. 
-  if ($num <= 0) { 
+  // Match row found with more than 1 results  - the user is authenticated.
+  if ($num <= 0) {
     $err[] = "Sorry, no such account exists or the activation code is invalid.";
   }
   //set approved field to 1 to activate the user
   if(empty($err)) {
 
     //$rs_activ = $dbc->prepare("UPDATE ? SET approved='1' WHERE user_email='?' AND activation_code = '?' ");
-	//$rs_activ->execute(array($table, $user_email, $activ));
+    //$rs_activ->execute(array($table, $user_email, $activ));
     //$rs_activ = mysql_query("UPDATE $table SET approved='1' WHERE md5_id='$user' AND activation_code = '$activ' ") or die(mysql_error());
 
     $rs_activ = mysql_query("UPDATE $table SET approved='1' WHERE user_email='$user_email' AND activation_code = '$activ'") or die(mysql_error());
@@ -92,18 +92,18 @@ if(isset($_POST['doResend'])) {
   $rs_check->execute(array($table, $user_email));
   $row = $rs_check->fetchAll(PDO::FETCH_ASSOC);
   $num = count($row);
-  //$rs_check = mysql_query("SELECT md5_id, approved, activation_code FROM $table WHERE user_email='$user_email'") or die (mysql_error()); 
+  //$rs_check = mysql_query("SELECT md5_id, approved, activation_code FROM $table WHERE user_email='$user_email'") or die (mysql_error());
   //$row = mysql_fetch_assoc($rs_check);
   //$num = mysql_num_rows($rs_check);
 
 
   $user_email = mysql_real_escape_string($_POST['user_email']);
   //check if activ code and user is valid as precaution
-  $rs_check = mysql_query("SELECT md5_id, approved, activation_code FROM $table WHERE user_email='$user_email'") or die (mysql_error()); 
+  $rs_check = mysql_query("SELECT md5_id, approved, activation_code FROM $table WHERE user_email='$user_email'") or die (mysql_error());
   $row = mysql_fetch_assoc($rs_check);
   $num = mysql_num_rows($rs_check);
-  // Match row found with more than 1 results  - the user is authenticated. 
-  if ($num <= 0) { 
+  // Match row found with more than 1 results  - the user is authenticated.
+  if ($num <= 0) {
     $err[] = "Sorry, that email isn't registered.";
   } elseif ($row['approved'] == 1) {
     $err[] = "That account has already been activated! No need to get the activation code again!";
@@ -159,7 +159,7 @@ This is an automated response. Do not reply to this email.";
     <input name="activ_code" type="password" size="25" />
     <input name="doActivate" type="submit" value="Activate" />
   </form>
-  
+
   <p>Can't find the email with the activation code? Get it resent to you:</p>
   <form action="activate.php" method="post" name="resend" id="resendForm">
     <label>Email</label>
