@@ -23,7 +23,10 @@ a:hover { color: #658800; }
 
 
 /*--LISTS--*/
-
+ul {
+  padding-left: 1em;
+  margin-left: 1em;
+}
 
 /*--BUTTONS--*/
 /* Based heavily on Quizlet buttons, thank you! */
@@ -305,6 +308,21 @@ table a { color: #F99819; }
 
 #announcements ul li { margin-left: 1.5rem; }
 
+/**
+ * Errors
+ */
+
+.error-img {
+  display: block;
+  margin: 0 auto; /* Centers the image */
+  width: 60vh;
+}
+
+.email::after {
+  content: " \2709"; /* Adds an envelope after emails */
+  font-size: 1em;
+}
+
 /*--INDEX PAGE TILES--*/
 /*
  * 1. Make sure .index-text inherits font-size
@@ -349,14 +367,14 @@ table a { color: #F99819; }
 
 .index-row { margin: 3.11vh 0; }
 
-/* 
+/*
  * #index-database - database tile
  * #index-themizer - themizer tile
  * #index-tryit    - try-it tile
  * #index-discuss  - forum tile
- * 
+ *
  * Layout so that @tyxchen doesn't get confused (hate me all you want):
- * 
+ *
  * ----------------------------
  * |             |            |
  * | database    | themizer   |

@@ -4,6 +4,7 @@
 
 .noscript {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, sans-serif;
+  font-size: 2.22vh;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
@@ -47,10 +48,12 @@
 .noscript.text, .noscript.header {
   text-align: center;
   font-size: 1.2em;
+  line-height: 2em;
 }
 
 .noscript.header {
   font-size: 1.8em;
   margin-top: 1.2em;
+  line-height: 1.8em;
 }
 
