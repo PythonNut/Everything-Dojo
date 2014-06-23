@@ -125,33 +125,49 @@ function themizer() {
     if ($("#sidebar").css("left") == "0px" && $("#sidebar").hasClass("opened")) { // fires when sidebar is to be closed
       $("#sideButton").addClass("triggered");
       idleState = true; // for later
+    } else {
+      $("#sideButton").removeClass("targeted");
     }
   });
 
   // show sideButton on mousemove + scroll
   // taken and modified from http://css-tricks.com/snippets/jquery/fire-event-when-user-is-idle/
-  $(window).bind('mousemove scroll', function() {
-      clearTimeout(idleTimer); // clear timeout if user acts
+  $(window).bind('mousemove scroll', function(event) {
+    clearTimeout(idleTimer); // clear timeout if user acts
 
-      // user active
-      if (idleState == true) {
-        // Reactivated event
-        $(".closed #sideButton").addClass("triggered").animate({
-          left: sideWidth
-        }, 100);
-      }
+    // user active
+    if (idleState == true) {
+      // Reactivated event
+      $(".closed #sideButton").addClass("triggered").animate({
+        left: sideWidth
+      }, 100);
+    }
 
-      idleState = false;
+    if (event.pageX < sideWidth*2/3) {
+      $(".closed #sideButton").addClass("targeted");
+    } else {
+//      alert("hi");
+      $(".closed #sideButton").removeClass("targeted");
+    }
 
-      // user inactive
-      idleTimer = setTimeout(function() {
-        // Idle Event
-        $("#sideButton").removeClass("triggered");
-        $(".closed #sideButton:not(:hover)").animate({
-          left: sideWidth - sideButtonWidth
-        }, 1500);
-        idleState = true;
-      }, 4000);
+    idleState = false;
+
+    // user inactive
+    idleTimer = setTimeout(function() {
+      // Idle Event
+      // cursor outside target zone
+      $("#sideButton").removeClass("triggered");
+      $(".closed #sideButton:not(:hover):not(.targeted)").animate({
+        left: sideWidth - sideButtonWidth
+      }, 1500);
+      // cursor inside target zone
+      $(".closed #sideButton.targeted:not(:hover)").animate({
+        left: sideWidth - 2*sideButtonWidth
+      }, 3000, function() {
+        $("#sideButton").removeClass("targeted");
+      });
+      idleState = true;
+    }, 4000);
   });
 
   $(window).mousemove();
