@@ -2,9 +2,11 @@
   $title = "Themizer";
   include("include/include.php");
   session_start();
-  $extra_style = "<link rel=\"stylesheet\" href=\"css/blog-style.css\" />
-  <link rel=\"stylesheet\" href=\"css/themizer.css\" />";
+  $extra_style = "<link rel=\"stylesheet\" href=\"css/blog-style.css\">
+  <link rel=\"stylesheet\" href=\"css/themizer.css\">
+  <link rel=\"stylesheet\" href=\"css/spectrum.css\">";
   $extra_js = "<script src=\"js/blog-fn.js\"></script>
+  <script src=\"js/spectrum.js\" onload=\"$.fn.spectrum.load = false;\"></script>
   <script>
   $(function(){
     sliderSidebar('themizer-inner');
