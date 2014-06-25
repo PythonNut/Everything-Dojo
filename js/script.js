@@ -105,11 +105,11 @@ function themizer() {
   $("#" + firstop + " .option-wrap").slideDown(0);
 
   // view mode radios
-  $("input[name='view']").change(function() {
-    $("#blog-body").load("blog-" + $("input[name='view']:checked").val() + ".html");
+  $("[name='view']").change(function() {
+    $("#blog-body").load("blog-" + $("[name='view']:checked").val() + ".html");
   });
-  $("input[name='base']").change(function() {
-    $("head").append("<link href='blog-" + $("input[name='base']:checked").val() + ".css' type='text/css' rel='stylesheet'>");
+  $("[name='base']").change(function() {
+    $("head").append("<link href='blog-" + $("[name='base']:checked").val() + ".css' type='text/css' rel='stylesheet'>");
   });
 
   // Show/hide sideButton
@@ -143,10 +143,10 @@ function themizer() {
       }, 100);
     }
 
+    // user mouse in "targeted" zone
     if (event.pageX < sideWidth*2/3) {
       $(".closed #sideButton").addClass("targeted");
     } else {
-//      alert("hi");
       $(".closed #sideButton").removeClass("targeted");
     }
 
