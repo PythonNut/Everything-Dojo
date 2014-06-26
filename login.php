@@ -58,11 +58,11 @@ if (isset($_POST['doLogin'])) {
         header("Location: myaccount.php");
       }
     } else {
-      $err[] = "Invalid Login. Please check your password spelling and try again.";
+      $err[] = "Invalid Login. Please check your username and/or password spelling and try again.";
     } //else if the password is bad
 
   } else {
-    $err[] = "Invalid login. Please check your username spelling and try again.";
+    $err[] = "Invalid login. Please check your username and/or password spelling and try again.";
   } //else if the username wasn't found
 
 } //if the page is logging in
