@@ -124,7 +124,7 @@ function themizer() {
   $("#sideButton").click(function() {
     if ($("#sidebar").css("left") == "0px" && $("#sidebar").hasClass("opened")) { // fires when sidebar is to be closed
       $("#sideButton").addClass("triggered");
-      idleState = true; // for later
+      idleState = true; // since user is active
     } else {
       $("#sideButton").removeClass("targeted");
     }
@@ -144,6 +144,8 @@ function themizer() {
     }
 
     // user mouse in "targeted" zone
+    // We cannot use jQuery animations as they are too CPU-intensive
+    // Instead, we just add .targeted.
     if (event.pageX < sideWidth*2/3) {
       $(".closed #sideButton").addClass("targeted");
     } else {
@@ -186,6 +188,14 @@ function optionToggle(id) {
     content.removeClass("expanded").addClass("collapsed");
   }
 }
+
+/**
+ * Generate random colour
+ *
+ * May or may not use http://llllll.li/randomColor/ in the future
+ */
+
+var randomColour = function() { return '#'+Math.floor(Math.random()*16777215).toString(16); };
 
 /*laquo «
 &#187; and it will looks like »*/
