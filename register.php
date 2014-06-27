@@ -54,14 +54,14 @@ if(isset($_POST['doRegister']))  {
           VALUES ('$usr_email', '$sha1pass', now(), '$user_ip', '$activ_code', '$user_name')";
 
     mysql_query($sql_insert,$link) or die("Insertion Failed: ".mysql_error());
-    $user_id = mysql_insert_id($link);  
+    $user_id = mysql_insert_id($link);
     $md5_id = md5($user_id);
     mysql_query("UPDATE $table SET md5_id='$md5_id' WHERE id='$user_id'");
     $pwdcensored = substr($data['pwd'], 0, 3).str_repeat("*", strlen($data['pwd']) - 3);
 
-    $a_link = "You can activate your account at this link:\nhttp://$host/activate.php?user=$md5_id&activ_code=$activ_code"; 
+    $a_link = "You can activate your account at this link:\nhttp://$host/activate.php?user=$md5_id&activ_code=$activ_code";
 
-    $message = 
+    $message =
 "Hello,
 
 Thank you for registering with us. Here are your login details:
@@ -80,12 +80,13 @@ This is an automated response. Do not reply to this email.";
 
     header("Location: register.php?done=yes");
     exit();
-  } 
+  }
 }
 
 ?>
 <?php
   $title = "Register";
+  $extra_js = "<script src='js/register.js'></script>";
   //dbc already included
   session_start();
   get_header();
@@ -104,22 +105,22 @@ This is an automated response. Do not reply to this email.";
       }
     } ?>
   </p>
-  
+
   <p>Register here. Please fill out all fields.</p>
   <form action="register.php" method="post" name="regForm">
     <label>Username</label>
     <label class="small i">Only letters, numbers, and underscores, from 3-20 characters long.</label>
-    <input name="user_name" type="text" class="required username" minlength="5"> 
+    <input name="user_name" type="text" class="required username" onkeydown="validate('user_name')">
     <label>Email</label>
     <label class="small i">Must be valid. We'll use it to send you confirmation information and other important things like that. We'll keep it completely hush-hush, promise.</label>
-    <input name="usr_email" type="text" class="required email"> 
+    <input name="usr_email" type="text" class="required email" onkeydown="validate('usr_email')">
     <label>Password</label>
     <label class="small i">Must be at least 4 characters long.</label>
-    <input name="pwd" type="password" class="required password" minlength="5"> 
+    <input name="pwd" type="password" class="required password" minlength="5">
     <label>Retype Password</label>
     <input name="pwd2" id="pwd2" class="required password" type="password" minlength="5" equalto="#pwd">
     <label>Image Verification</label>
-    <?php 
+    <?php
       require_once('recaptchalib.php');
       echo recaptcha_get_html($publickey);
     ?><br />
