@@ -26,10 +26,12 @@ function err(name, msg)
     el.parentNode.insertBefore(div, el.nextSibling);
     div.className += "error";
     div.innerHTML = msg;
+    document.getElementById("doRegister").setAttribute("disabled", "disabled");
   } else if (el.nextElementSibling.className == "error") {
     // removes error
     el.className = el.className.replace(/(?:^|\s)invalid(?!\S)/, ''); // https://stackoverflow.com/a/9959811
     el.parentNode.removeChild(el.nextElementSibling);
+    document.getElementById("doRegister").removeAttribute("disabled");
   }
 }
 
@@ -58,6 +60,33 @@ function validate(name)
     var email = field.value;
     if (!email.match(/^\S+@[\w\d.-]{2,}\.[\w]{2,6}$/i)) {
       err(name, "Email entered is not a valid email.");
+    } else {
+      err(name, "remove");
+    }
+  }
+
+  /**
+   * WARNING:
+   * THE FOLLOWING LINES OF CODE ARE UNTESTED
+   */
+
+  // Password
+  if (name == "pwd") {
+    var pwd = field.value;
+    if (pwd.length < 6) {
+      err(name, "Passwords must be at least 6 characters long");
+    } else {
+      err(name, "remove");
+    }
+  }
+
+  // Password verification
+  // There has to be a better way to do this
+  if (name == "pwd2") {
+    var original = document.querySelector("[name='pwd']").value,
+        verify   = field.value;
+    if (original != verify) {
+      err(name, "Passwords do not match");
     } else {
       err(name, "remove");
     }

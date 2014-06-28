@@ -43,6 +43,7 @@ input[type="submit"], input[type="button"], input[type="reset"], button {
   margin: 0.42em 0;
   padding: 0 0.6rem;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+  width: auto;
 }
 
 input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hover, button:hover {
@@ -62,6 +63,7 @@ input {
   border-radius: 0.18rem;
   padding: 0.3rem;
   margin-bottom: 0.3rem;
+  width: 10em;
 }
 
 textarea {
@@ -244,6 +246,36 @@ footer, .push {
 .inline { display: inline; }
 
 #errors { color: red; }
+
+.field { position: relative; }
+.invalid {
+  border-color: #b00;
+  background-color: #ffeded;
+}
+.error {
+  position: absolute;
+  left: 12rem;
+  bottom: 0.2rem;
+  max-width: 20em;
+  background: #ffe7e7;
+  font-family: "Lato", sans-serif;
+  font-size: 0.95em;
+  color: #555;
+  border: 1px solid #ffbcbc;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  opacity: 0.95;
+}
+/*.error::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-width: 5px 5px 5px 0;
+  border-style: solid;
+  border-color: transparent red;
+}*/
 
 .msg {
   background: rgba(124, 171, 0, 0.4);

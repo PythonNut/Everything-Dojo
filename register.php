@@ -110,20 +110,30 @@ This is an automated response. Do not reply to this email.";
   <form action="register.php" method="post" name="regForm">
     <label>Username</label>
     <label class="small i">Only letters, numbers, and underscores, from 3-20 characters long.</label>
+    <div class="field">
     <input name="user_name" type="text" class="required username" onkeydown="validate('user_name')">
+    </div>
     <label>Email</label>
     <label class="small i">Must be valid. We'll use it to send you confirmation information and other important things like that. We'll keep it completely hush-hush, promise.</label>
+    <div class="field">
     <input name="usr_email" type="text" class="required email" onkeydown="validate('usr_email')">
+    </div>
     <label>Password</label>
-    <label class="small i">Must be at least 4 characters long.</label>
-    <input name="pwd" type="password" class="required password" minlength="5">
+    <label class="small i">Must be at least 6 characters long.</label>
+    <div class="field">
+    <input name="pwd" type="password" class="required password" onkeydown="validate('pwd')"> <!-- TODO: Find replacement for onkeydown as it only "works" every other event -->
+    </div>
     <label>Retype Password</label>
-    <input name="pwd2" id="pwd2" class="required password" type="password" minlength="5" equalto="#pwd">
+    <div class="field">
+    <input name="pwd2" id="pwd2" class="required password" type="password" oninput="validate('pwd2')">
+    </div>
     <label>Image Verification</label>
+    <div class="field">
     <?php
       require_once('recaptchalib.php');
       echo recaptcha_get_html($publickey);
-    ?><br />
+    ?>
+    </div>
     <input name="doRegister" type="submit" id="doRegister" value="Register">
   </form>
   <?php } //end not done ?>
