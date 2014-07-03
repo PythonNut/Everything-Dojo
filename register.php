@@ -107,25 +107,27 @@ This is an automated response. Do not reply to this email.";
   </p>
 
   <p>Register here. Please fill out all fields.</p>
+  <!-- Find way to remove errors with onblur
+       May need to rewrite validate() and apply on regForm -->
   <form action="register.php" method="post" name="regForm">
     <label>Username</label>
     <label class="small i">Only letters, numbers, and underscores, from 3-20 characters long.</label>
     <div class="field">
-    <input name="user_name" type="text" class="required username" onkeydown="validate('user_name')">
+    <input name="user_name" type="text" class="required username" onkeyup="validate('user_name')">
     </div>
     <label>Email</label>
     <label class="small i">Must be valid. We'll use it to send you confirmation information and other important things like that. We'll keep it completely hush-hush, promise.</label>
     <div class="field">
-    <input name="usr_email" type="text" class="required email" onkeydown="validate('usr_email')">
+    <input name="usr_email" type="text" class="required email" onkeyup="validate('usr_email')">
     </div>
     <label>Password</label>
     <label class="small i">Must be at least 6 characters long.</label>
     <div class="field">
-    <input name="pwd" type="password" class="required password" onkeydown="validate('pwd')"> <!-- TODO: Find replacement for onkeydown as it only "works" every other event -->
+    <input name="pwd" type="password" class="required password" onkeyup="validate('pwd')">
     </div>
     <label>Retype Password</label>
     <div class="field">
-    <input name="pwd2" id="pwd2" class="required password" type="password" oninput="validate('pwd2')">
+    <input name="pwd2" type="password" class="required password" id="pwd2" onkeyup="validate('pwd2')">
     </div>
     <label>Image Verification</label>
     <div class="field">
