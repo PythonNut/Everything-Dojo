@@ -4,39 +4,72 @@
 
 // Get form element
 //var form = document.getElementsByTagName("form")[0];
-//var form = function() { document.getElementById("register"); };
+
+// Create div to wrap messages in
+// Placed here so as to not mess them up
+var div = document.createElement("div");
 
 /**
- * Throw errors
- * @param {String} name Name of element next to which we throw errors to
- * @param {String} msg Error message to display to user. If "remove", removes error message.
+ * Adds messages next to elements
+ * @param {String} selector Valid CSS selector to select element to add message next to
+ * @param {String} msg Message to display to user. If "remove", removes displayed error message.
+ * @param {String} msgClass Type of message. Can be "error", "valid", or "notification".
+ * @param {Function} fn Function that can be called on remove or other
+ */
+
+function message(selector, msg, msgClass, fn)
+{
+  // Default argument testing
+  msg = msg || "remove";
+
+  // Correllate msgClass with corresponding class for selector
+  var type = {
+    "error"       : " invalid",
+    "valid"       : " valid",
+    "notification": ""
+  };
+
+  // Get elClass
+  var elClass  = type[msgClass];
+
+  // Get element to display message next to
+  var el = document.querySelector(selector);
+
+  if (msg != "remove") {
+    el.className += (el.className.indexOf(elClass) == -1) ? elClass : "";
+
+    // insert message in DOM right after element
+    el.parentNode.insertBefore(div, el.nextSibling);
+    div.className = msgClass;
+    div.innerHTML = msg;
+  } else if (el.nextElementSibling.className == msgClass) {
+    // removes error
+    el.className = el.className.replace(elClass, "");
+    el.parentNode.removeChild(el.nextElementSibling);
+  }
+
+  fn();
+}
+
+/**
+ * Throws verification errors
+ * @param {String} name Name of element with error
+ * @param {String} msg Error message to display to user. If "remove", removes displayed error message.
  */
 
 function err(name, msg)
 {
-  // (1) Get field with error
-  // (2) Create div to wrap error message in
-  var el  = document.querySelector("[name='" + name + "']"), // (1)
-      div = document.createElement("div");                   // (2)
+  // Get field with error
+  var element = "[name='" + name + "']";
 
-  if (el.className.indexOf("invalid") == -1 && msg != "remove") {
-    el.className += " invalid";
-
-    // insert error message in DOM right after offending field
-    el.parentNode.insertBefore(div, el.nextSibling);
-    div.className += "error";
-    div.innerHTML = msg;
-    document.getElementById("doRegister").setAttribute("disabled", "disabled");
-  } else if (el.nextElementSibling.className == "error") {
-    // removes error
-    el.className = el.className.replace(/(?:^|\s)invalid(?!\S)/, ''); // https://stackoverflow.com/a/9959811
-    el.parentNode.removeChild(el.nextElementSibling);
-    document.getElementById("doRegister").removeAttribute("disabled");
-  }
+  message(element, msg, "error", function() {
+    var submit = document.getElementById("doRegister");
+    msg != "remove" ? submit.setAttribute("disabled", "disabled") : submit.removeAttribute("disabled");
+  });
 }
 
 /**
- * Validate text that is entered into the fields
+ * Validates text that is entered into the fields
  * @param {String} name Name of field to be validated
  */
 
@@ -46,6 +79,7 @@ function validate(name)
   var field = document.querySelector("[name='" + name + "']");
 
   // Username
+  // TODO: Add AJAX to send usernames to PHP backend to check if they are free
   if (name == "user_name") {
     var user = field.value;
     if (!user.match(/^[a-z\d_]{3,20}$/i)) {
@@ -65,16 +99,11 @@ function validate(name)
     }
   }
 
-  /**
-   * WARNING:
-   * THE FOLLOWING LINES OF CODE ARE UNTESTED
-   */
-
   // Password
   if (name == "pwd") {
     var pwd = field.value;
     if (pwd.length < 6) {
-      err(name, "Passwords must be at least 6 characters long");
+      err(name, "Passwords must be at least 6 characters long.");
     } else {
       err(name, "remove");
     }
@@ -86,7 +115,7 @@ function validate(name)
     var original = document.querySelector("[name='pwd']").value,
         verify   = field.value;
     if (original != verify) {
-      err(name, "Passwords do not match");
+      err(name, "Passwords do not match.");
     } else {
       err(name, "remove");
     }
