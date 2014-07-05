@@ -17,7 +17,9 @@ if(isset($_POST['doUpdate'])) {
   if($old === PwdHash($_POST['pwd_old'], $old_salt)) {
     if(checkPwd($_POST['pwd_new'], $_POST['pwd_again'])) {
       $newsha1 = PwdHash($_POST['pwd_new']);
-      mysql_query("UPDATE $table SET pwd=\"".$newsha1."\" WHERE id=\"".$_SESSION['user_id']."\"");
+      //mysql_query("UPDATE $table SET pwd=\"".$newsha1."\" WHERE id=\"".$_SESSION['user_id']."\"");
+	  $result = $dbc->prepare("UPDATE $table SET pwd = ? WHERE id = ?");
+	  $result->execute(array($newsha1,$_SESSION['user_id']));
       $msg[] = "Your password has been updated!";
     } else {
       $err[] = "Passwords must be at least 4 characters long, or your new passwords don't match.";
@@ -45,7 +47,9 @@ while ($row_settings = mysql_fetch_array($rs_settings)) {}
 and output a bunch of forms
 */
  
-$rs_settings = mysql_query("SELECT * FROM $table WHERE id=\"".$_SESSION['user_id']."\""); 
+//$rs_settings = mysql_query("SELECT * FROM $table WHERE id=\"".$_SESSION['user_id']."\""); 
+$rs_settings = $dbc->prepare("SELECT * FROM $table WHERE id = ?");
+$rs_settings->execute(array($_SESSION['user_id']));
 ?>
 <?php
   $title = "My Settings";

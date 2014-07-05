@@ -39,8 +39,11 @@ if(isset($_POST['doRegister']))  {
   $usr_email = $data['usr_email'];
   $user_name = $data['user_name'];
 
-  $rs_duplicate = mysql_query("SELECT count(*) AS total FROM $table WHERE user_email='$usr_email' OR user_name='$user_name'") or die(mysql_error());
-  list($total) = mysql_fetch_row($rs_duplicate);
+  $rs_duplicate = $dbc->prepare("SELECT count(*) AS total FROM $table WHERE user_email=? OR user_name=?");
+  $rs_duplicate->execute(array($usr_email,$user_name));
+  $list($total) = $rs_duplicate->fetchAll(PDO::FETCH_ASSOC)[0];
+  //$rs_duplicate = mysql_query("SELECT count(*) AS total FROM $table WHERE user_email='$usr_email' OR user_name='$user_name'") or die(mysql_error());
+  //list($total) = mysql_fetch_row($rs_duplicate);
 
   if ($total > 0) {
     $err[] = "The username/email already exists. Please try again with different username and email.";
@@ -52,11 +55,14 @@ if(isset($_POST['doRegister']))  {
 
     $sql_insert = "INSERT INTO $table (user_email, pwd, date, users_ip, activation_code, user_name)
           VALUES ('$usr_email', '$sha1pass', now(), '$user_ip', '$activ_code', '$user_name')";
-
-    mysql_query($sql_insert,$link) or die("Insertion Failed: ".mysql_error());
-    $user_id = mysql_insert_id($link);
+	$sql_insert = $dbc->prepare("INSERT INTO $table (user_email, pwd, date, users_ip, activation_code, user_name) VALUES (?,?,now(),?,?,?)");
+	$sql_insert->execute(array($usr_email,$sha1pass,$user_ip,$activ_code,$user_name));
+    //mysql_query($sql_insert,$link) or die("Insertion Failed: ".mysql_error());
+    //$user_id = mysql_insert_id($link);
+	$user_id = $dbc->lastInsertId();
     $md5_id = md5($user_id);
     mysql_query("UPDATE $table SET md5_id='$md5_id' WHERE id='$user_id'");
+	($dbc->prepare("UPDATE $table SET md5=? WHERE id=?"))->execute(array($md5_id,$user_id));
     $pwdcensored = substr($data['pwd'], 0, 3).str_repeat("*", strlen($data['pwd']) - 3);
 
     $a_link = "You can activate your account at this link:\nhttp://$host/activate.php?user=$md5_id&activ_code=$activ_code";
