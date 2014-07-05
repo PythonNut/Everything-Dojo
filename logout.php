@@ -1,4 +1,4 @@
 <?php
-include("include/include.php");
-logout();
+  include("include/include.php");
+  logout();
 ?>

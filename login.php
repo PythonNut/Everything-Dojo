@@ -16,17 +16,16 @@ if (isset($_POST['doLogin'])) {
 
   $user_email = $data['username'];
   $pass = $data['pwd'];
-  $user_cond = "user_name='$user_email'";
 
-  $result = mysql_query("SELECT id, pwd, user_name, approved, user_level FROM $table WHERE $user_cond") or die (mysql_error());
+  //$result = mysql_query("SELECT id, pwd, user_name, approved, user_level FROM $table WHERE $user_cond") or die (mysql_error());
 
 
   //PDO is commented out
-  //$result = $dbc->prepare("SELECT id, pwd, user_name, approved, user_level FROM ? WHERE ?");
-  //$result->execute(array($table, $user_cond));
-  //$username_match = count($result->fetchAll(PDO::FETCH_ASSOC));
+  $result = $dbc->prepare("SELECT id, pwd, user_name, approved, user_level FROM $table WHERE user_name = ?");
+  $result->execute(array($user_email));
+  $username_match = count($result->fetchAll(PDO::FETCH_ASSOC));
 
-  $username_match = mysql_num_rows($result);
+  //$username_match = mysql_num_rows($result);
 
   // Match row found with more than 1 results  - the user is authenticated.
   if ($username_match > 0) {
@@ -53,7 +52,9 @@ if (isset($_POST['doLogin'])) {
         //update the timestamp and key for cookie
         $stamp = time();
         $ckey = GenKey();
-        mysql_query("UPDATE $table SET ctime = '$stamp', ckey = '$ckey' WHERE id = '$id'") or die(mysql_error());
+		$result = $dbc->prepare("UPDATE $table SET ctime = ?, ckey = ? WHERE id = ?");
+  		$result->execute(array($stamp,$ckey,$id));
+        //mysql_query("UPDATE $table SET ctime = '$stamp', ckey = '$ckey' WHERE id = '$id'") or die(mysql_error());
 
         header("Location: myaccount.php");
       }
