@@ -54,16 +54,16 @@ if (isset($_POST['doActivate'])) {
   //check if activ code and user is valid as precaution
   //$rs_check = mysql_query("SELECT id FROM $table WHERE user_email='$user_email' AND activation_code='$activ'") or die (mysql_error());
   //$num = mysql_num_rows($rs_check);
-  //$rs_check = $dbc->prepare("SELECT id FROM ? WHERE user_email='?' AND activation_code='?'");
-  //$rs_check->execute(array($table, $user, $activ));
-  //$num = count($rs_check->fetchAll(PDO::FETCH_ASSOC));
+  $rs_check = $dbc->prepare("SELECT id FROM ? WHERE user_email='?' AND activation_code='?'");
+  $rs_check->execute(array($table, $user, $activ));
+  $num = count($rs_check->fetchAll(PDO::FETCH_ASSOC));
 
 
-  $user_email = mysql_real_escape_string($_POST['user_email']);
-  $activ = mysql_real_escape_string($_POST['activ_code']);
+  //$user_email = mysql_real_escape_string($_POST['user_email']);
+  //$activ = mysql_real_escape_string($_POST['activ_code']);
   //check if activ code and user is valid as precaution
-  $rs_check = mysql_query("SELECT id FROM $table WHERE user_email='$user_email' AND activation_code='$activ'") or die (mysql_error());
-  $num = mysql_num_rows($rs_check);
+  //$rs_check = mysql_query("SELECT id FROM $table WHERE user_email='$user_email' AND activation_code='$activ'") or die (mysql_error());
+  //$num = mysql_num_rows($rs_check);
   // Match row found with more than 1 results  - the user is authenticated.
   if ($num <= 0) {
     $err[] = "Sorry, no such account exists or the activation code is invalid.";
