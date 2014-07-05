@@ -23,14 +23,16 @@ if (isset($_POST['doLogin'])) {
   //PDO is commented out
   $result = $dbc->prepare("SELECT id, pwd, user_name, approved, user_level FROM $table WHERE user_name = ?");
   $result->execute(array($user_email));
-  $username_match = count($result->fetchAll(PDO::FETCH_ASSOC));
-
+  $user_array = $result->fetchAll(PDO::FETCH_ASSOC);
+  $username_match = count($user_array);
+  $user_array = $user_array[0];
+  
+  
   //$username_match = mysql_num_rows($result);
 
   // Match row found with more than 1 results  - the user is authenticated.
   if ($username_match > 0) {
-    $user_array = $result->fetch(PDO::FETCH_ASSOC)[0]; //replace with $result->fetchAll(PDO::FETCH_ASSOC)[0] for PDO
-
+    //$user_array = $result->fetchAll(PDO::FETCH_ASSOC)[0]; //replace with $result->fetchAll(PDO::FETCH_ASSOC)[0] for PDO
     if(!$user_array['approved']) {
       $err[] = "Account not activated. Please contact the administrator to activate.";
     }
@@ -41,7 +43,6 @@ if (isset($_POST['doLogin'])) {
         // this sets session and logs user in
         session_start();
         session_regenerate_id(TRUE); //prevent against session fixation attacks.
-
         // this sets variables in the session
         $_SESSION['user_id']= $user_array['id'];
         $_SESSION['user_name'] = $user_array['user_name'];

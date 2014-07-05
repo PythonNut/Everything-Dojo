@@ -53,8 +53,7 @@ if(isset($_POST['doRegister']))  {
 
   if(empty($err)) {
 
-    $sql_insert = "INSERT INTO $table (user_email, pwd, date, users_ip, activation_code, user_name)
-          VALUES ('$usr_email', '$sha1pass', now(), '$user_ip', '$activ_code', '$user_name')";
+    //$sql_insert = "INSERT INTO $table (user_email, pwd, date, users_ip, activation_code, user_name) VALUES ('$usr_email', '$sha1pass', now(), '$user_ip', '$activ_code', '$user_name')";
 	$sql_insert = $dbc->prepare("INSERT INTO $table (user_email, pwd, date, users_ip, activation_code, user_name) VALUES (?,?,now(),?,?,?)");
 	$sql_insert->execute(array($usr_email,$sha1pass,$user_ip,$activ_code,$user_name));
     //mysql_query($sql_insert,$link) or die("Insertion Failed: ".mysql_error());
