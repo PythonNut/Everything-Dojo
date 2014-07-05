@@ -29,10 +29,9 @@ if (isset($_POST['doLogin'])) {
 
   // Match row found with more than 1 results  - the user is authenticated.
   if ($username_match > 0) {
+    $user_array = $result->fetch(PDO::FETCH_ASSOC)[0]; //replace with $result->fetchAll(PDO::FETCH_ASSOC)[0] for PDO
 
-    list($id, $pwd, $user_name, $approved, $user_level) = mysql_fetch_row($result); //replace with $result->fetchAll(PDO::FETCH_ASSOC)[0] for PDO
-
-    if(!$approved) {
+    if(!$user_array['approved']) {
       $err[] = "Account not activated. Please contact the administrator to activate.";
     }
 
@@ -44,16 +43,16 @@ if (isset($_POST['doLogin'])) {
         session_regenerate_id(TRUE); //prevent against session fixation attacks.
 
         // this sets variables in the session
-        $_SESSION['user_id']= $id;
-        $_SESSION['user_name'] = $user_name;
-        $_SESSION['user_level'] = $user_level;
+        $_SESSION['user_id']= $user_array['id'];
+        $_SESSION['user_name'] = $user_array['user_name'];
+        $_SESSION['user_level'] = $user_array['user_level'];
         $_SESSION['HTTP_USER_AGENT'] = md5($_SERVER['HTTP_USER_AGENT']);
 
         //update the timestamp and key for cookie
         $stamp = time();
         $ckey = GenKey();
 		$result = $dbc->prepare("UPDATE $table SET ctime = ?, ckey = ? WHERE id = ?");
-  		$result->execute(array($stamp,$ckey,$id));
+  		$result->execute(array($stamp,$ckey,$user_array['id']));
         //mysql_query("UPDATE $table SET ctime = '$stamp', ckey = '$ckey' WHERE id = '$id'") or die(mysql_error());
 
         header("Location: myaccount.php");
