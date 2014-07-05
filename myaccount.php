@@ -10,8 +10,11 @@
   <p>Your User ID: <?php echo $_SESSION['user_id']; ?></p>
   <div id="announcements">
     <?php
-    $result = mysql_query("SELECT data FROM data WHERE fetchname = 'announcements'") or die(); 
-    $announcements = explode("~", mysql_result($result, 0));
+    $result = $dbc->prepare("SELECT data FROM data WHERE fetchname = 'announcements'");
+	$result->execute();
+	$result = $result->fetchAll(PDO::FETCH_ASSOC);
+    //$result = mysql_query("SELECT data FROM data WHERE fetchname = 'announcements'") or die(); 
+    $announcements = explode("~", $result[0]);
     if (empty($announcements[0])) {
       $title = "Announcements for Users from Admins: There are currently no announcements.";
       unset($announcements[0]);

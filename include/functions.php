@@ -133,11 +133,11 @@
 
     $table = TB_NAME;
     if(isset($_SESSION['user_id'])) {
-    //$result = $dbc->prepare("UPDATE $tableSET ckey = '', ctime = '' WHERE id = ?");
-    //$result->execute(array($_SESSION[user_id]));
-      mysql_query("UPDATE $table
+    $result = $dbc->prepare("UPDATE $table SET ckey = '', ctime = '' WHERE id = ?");
+    $result->execute(array($_SESSION[user_id]));
+    /*mysql_query("UPDATE $table
              SET ckey = '', ctime = ''
-             WHERE id = $_SESSION[user_id]") or die(mysql_error());
+             WHERE id = $_SESSION[user_id]") or die(mysql_error());*/
     }
 
     /************ Delete the sessions****************/

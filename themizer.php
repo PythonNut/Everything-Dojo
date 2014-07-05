@@ -44,3 +44,4 @@
 </div>
 <div id="blog-body"></div>
 <?php //no footer here ?>
+

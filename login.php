@@ -16,24 +16,24 @@ if (isset($_POST['doLogin'])) {
 
   $user_email = $data['username'];
   $pass = $data['pwd'];
-  $user_cond = "user_name='$user_email'";
 
-  $result = mysql_query("SELECT id, pwd, user_name, approved, user_level FROM $table WHERE $user_cond") or die (mysql_error());
+  //$result = mysql_query("SELECT id, pwd, user_name, approved, user_level FROM $table WHERE $user_cond") or die (mysql_error());
 
 
   //PDO is commented out
-  //$result = $dbc->prepare("SELECT id, pwd, user_name, approved, user_level FROM ? WHERE ?");
-  //$result->execute(array($table, $user_cond));
-  //$username_match = count($result->fetchAll(PDO::FETCH_ASSOC));
-
-  $username_match = mysql_num_rows($result);
+  $result = $dbc->prepare("SELECT id, pwd, user_name, approved, user_level FROM $table WHERE user_name = ?");
+  $result->execute(array($user_email));
+  $user_array = $result->fetchAll(PDO::FETCH_ASSOC);
+  $username_match = count($user_array);
+  $user_array = $user_array[0];
+  
+  
+  //$username_match = mysql_num_rows($result);
 
   // Match row found with more than 1 results  - the user is authenticated.
   if ($username_match > 0) {
-
-    list($id, $pwd, $user_name, $approved, $user_level) = mysql_fetch_row($result); //replace with $result->fetchAll(PDO::FETCH_ASSOC)[0] for PDO
-
-    if(!$approved) {
+    //$user_array = $result->fetchAll(PDO::FETCH_ASSOC)[0]; //replace with $result->fetchAll(PDO::FETCH_ASSOC)[0] for PDO
+    if(!$user_array['approved']) {
       $err[] = "Account not activated. Please contact the administrator to activate.";
     }
 
@@ -43,17 +43,18 @@ if (isset($_POST['doLogin'])) {
         // this sets session and logs user in
         session_start();
         session_regenerate_id(TRUE); //prevent against session fixation attacks.
-
         // this sets variables in the session
-        $_SESSION['user_id']= $id;
-        $_SESSION['user_name'] = $user_name;
-        $_SESSION['user_level'] = $user_level;
+        $_SESSION['user_id']= $user_array['id'];
+        $_SESSION['user_name'] = $user_array['user_name'];
+        $_SESSION['user_level'] = $user_array['user_level'];
         $_SESSION['HTTP_USER_AGENT'] = md5($_SERVER['HTTP_USER_AGENT']);
 
         //update the timestamp and key for cookie
         $stamp = time();
         $ckey = GenKey();
-        mysql_query("UPDATE $table SET ctime = '$stamp', ckey = '$ckey' WHERE id = '$id'") or die(mysql_error());
+		$result = $dbc->prepare("UPDATE $table SET ctime = ?, ckey = ? WHERE id = ?");
+  		$result->execute(array($stamp,$ckey,$user_array['id']));
+        //mysql_query("UPDATE $table SET ctime = '$stamp', ckey = '$ckey' WHERE id = '$id'") or die(mysql_error());
 
         header("Location: myaccount.php");
       }
