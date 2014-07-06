@@ -252,30 +252,53 @@ footer, .push {
   border-color: #b00;
   background-color: #ffeded;
 }
-.error {
+.good {
+  border-color: #0b0;
+  background-color: #edffed;
+}
+.error,
+.valid{
   position: absolute;
   left: 12rem;
   bottom: 0.2rem;
   max-width: 20em;
-  background: #ffe7e7;
+  color: #555;
   font-family: "Lato", sans-serif;
   font-size: 0.95em;
-  color: #555;
-  border: 1px solid #ffbcbc;
   border-radius: 0.2rem;
   padding: 0.5rem;
   opacity: 0.95;
 }
-/*.error::before {
+.error {
+  background: #ffe7e7;
+  border: 1px solid #ffbcbc;
+}
+.valid {
+  background: #e7ffe7;
+  border: 1px solid #bcffbc;
+}
+
+.error::before,
+.valid::before,
+.notification::before {
   content: "";
   position: absolute;
-  left: 0;
+  left: -0.7rem;
+  bottom: .4rem;
   width: 0;
   height: 0;
-  border-width: 5px 5px 5px 0;
   border-style: solid;
-  border-color: transparent red;
-}*/
+  border-width: 7px 7px 7px 0;
+}
+.error::before{
+  border-color: transparent #ffbcbc;
+}
+.valid::before {
+  border-color: transparent #bcffbc;
+}
+.notification::before {
+  border-color: transparent #bcbcff;
+}
 
 .msg {
   background: rgba(124, 171, 0, 0.4);
