@@ -5,6 +5,23 @@ $table = TB_NAME;
 
 $err = array();
 
+/**
+ * Checks if usernames are free, used in conjunction with AJAX
+ */
+
+// if (isset($_GET['username'])) { // && isset($_GET['email'])) {
+//   $username = $_GET['username'];
+//   $email = $_GET['email'];
+//   $rs_duplicate = mysql_query("SELECT count(*) AS total FROM $table WHERE user_name='$username'") or die(mysql_error()); // TODO: add user email
+//   list($total) = mysql_fetch_row($rs_duplicate);
+//
+//   if ($total > 0) {
+//     http_response_code(400);
+//   } else {
+//     http_response_code(200);
+//   }
+// }
+
 if(isset($_POST['doRegister']))  {
   foreach($_POST as $key => $value) {
     $data[$key] = filter($value);
@@ -112,27 +129,25 @@ This is an automated response. Do not reply to this email.";
   </p>
 
   <p>Register here. Please fill out all fields.</p>
-  <!-- Find way to remove errors with onblur
-       May need to rewrite validate() and apply on regForm -->
   <form action="register.php" method="post" name="regForm">
     <label>Username</label>
     <label class="small i">Only letters, numbers, and underscores, from 3-20 characters long.</label>
     <div class="field">
-    <input name="user_name" type="text" class="required username" onkeyup="validate('user_name')">
+      <input name="user_name" type="text" class="required username" onkeyup="validate(this.name)" onblur="err(this.name, 'remove')">
     </div>
     <label>Email</label>
     <label class="small i">Must be valid. We'll use it to send you confirmation information and other important things like that. We'll keep it completely hush-hush, promise.</label>
     <div class="field">
-    <input name="usr_email" type="text" class="required email" onkeyup="validate('usr_email')">
+      <input name="usr_email" type="text" class="required email" onkeyup="validate(this.name)" onblur="err(this.name, 'remove')">
     </div>
     <label>Password</label>
     <label class="small i">Must be at least 6 characters long.</label>
     <div class="field">
-    <input name="pwd" type="password" class="required password" onkeyup="validate('pwd')">
+      <input name="pwd" type="password" class="required password" onkeyup="validate(this.name)" onblur="err(this.name, 'remove')">
     </div>
     <label>Retype Password</label>
     <div class="field">
-    <input name="pwd2" type="password" class="required password" id="pwd2" onkeyup="validate('pwd2')">
+      <input name="pwd2" type="password" class="required password" id="pwd2" onkeyup="validate(this.name)" onblur="err(this.name, 'remove')">
     </div>
     <label>Image Verification</label>
     <div class="field">
