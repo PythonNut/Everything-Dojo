@@ -25,7 +25,7 @@ function message(selector, msg, msgClass, fn)
   // Correllate msgClass with corresponding class for selector
   var type = {
     "error"       : " invalid",
-    "valid"       : " valid",
+    "valid"       : " good",
     "notification": ""
   };
 
@@ -56,7 +56,7 @@ function message(selector, msg, msgClass, fn)
 }
 
 /**
- * Throws verification error. Is a wrapper for message().
+ * Throws verification error(s). Is a wrapper for message().
  * @param {String} name Name of element with error
  * @param {String} msg Error message to display to user. Takes same arguments as `msg` in message(), and can be empty in place of "remove".
  */
@@ -70,6 +70,20 @@ function err(name, msg)
     var submit = document.getElementById("doRegister");
     (msg != "remove" && msg != "removeAll") ? submit.setAttribute("disabled", "disabled") : submit.removeAttribute("disabled");
   });
+}
+
+/**
+ * Tells user that a field is valid. Is a wrapper for message().
+ * @param {String} name Name of valid field
+ * @param {String} msg Message to display to user. Takes same arguments as `msg` in message(), and can be empty in place of "remove".
+ */
+
+function valid(name, msg)
+{
+  // Get field
+  var element = "[name='" + name + "']";
+
+  message(element, msg, "valid");
 }
 
 /** 
@@ -113,11 +127,14 @@ function validate(name)
   if (name == "user_name") {
     var user = field.value;
     if (!user.match(/^[a-z\d_]{3,20}$/i)) {
+      valid(name);
       err(name, "Invalid username. Usernames must be 3-20 characters long and can only contain alphanumeric characters and underscores.");
 //    } else if (!checkUsername(user)) {
+//      valid(name);
 //      err(name, "Username already exists! Please choose a new one.");
     } else {
       err(name);
+      valid(name, "Username is valid");
     }
   }
 
