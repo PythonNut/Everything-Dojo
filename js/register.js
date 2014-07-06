@@ -12,7 +12,7 @@ var div = document.createElement("div");
 /**
  * Adds messages next to elements
  * @param {String} selector Valid CSS selector to select element to add message next to
- * @param {String} msg Message to display to user. If "remove", removes displayed error message.
+ * @param {String} msg Message to display to user. Can be a string, "remove", or "removeAll".
  * @param {String} msgClass Type of message. Can be "error", "valid", or "notification".
  * @param {Function} fn Function that can be called on remove or other
  */
@@ -20,7 +20,7 @@ var div = document.createElement("div");
 function message(selector, msg, msgClass, fn)
 {
   // Default argument testing
-  msg = msg || "remove";
+  msg = msg || "removeAll";
 
   // Correllate msgClass with corresponding class for selector
   var type = {
@@ -35,26 +35,30 @@ function message(selector, msg, msgClass, fn)
   // Get element to display message next to
   var el = document.querySelector(selector);
 
-  if (msg != "remove") {
+  if (msg != "remove" && msg != "removeAll") {
     el.className += (el.className.indexOf(elClass) == -1) ? elClass : "";
 
     // insert message in DOM right after element
     el.parentNode.insertBefore(div, el.nextSibling);
     div.className = msgClass;
     div.innerHTML = msg;
-  } else if (el.nextElementSibling.className == msgClass) {
-    // removes error
-    el.className = el.className.replace(elClass, "");
+  } else if (el.nextElementSibling && el.nextElementSibling.className == msgClass) {
+    // removes error if msg is removeAll
+    if (msg == "removeAll") {
+      el.className = el.className.replace(elClass, "");
+    }
     el.parentNode.removeChild(el.nextElementSibling);
   }
 
-  fn();
+  if (typeof fn === "function") {
+    fn();
+  }
 }
 
 /**
- * Throws verification errors
+ * Throws verification error. Is a wrapper for message().
  * @param {String} name Name of element with error
- * @param {String} msg Error message to display to user. If "remove", removes displayed error message.
+ * @param {String} msg Error message to display to user. Takes same arguments as `msg` in message(), and can be empty in place of "remove".
  */
 
 function err(name, msg)
@@ -64,12 +68,38 @@ function err(name, msg)
 
   message(element, msg, "error", function() {
     var submit = document.getElementById("doRegister");
-    msg != "remove" ? submit.setAttribute("disabled", "disabled") : submit.removeAttribute("disabled");
+    (msg != "remove" && msg != "removeAll") ? submit.setAttribute("disabled", "disabled") : submit.removeAttribute("disabled");
   });
 }
 
+/** 
+ * Checks to see if usernames are available.
+ * @param {String} username Username to be checked
+ */
+
+// function checkUsername(username) {
+//   var ajax = new XMLHttpRequest();
+//   ajax.onreadystatechange = function() {
+//     if (ajax.readyState == 4 ) {
+//       if(ajax.status == 200){
+//         return true;
+//       }
+//       else if(ajax.status == 400) {
+//         return false;
+//       }
+//       else {
+//         err("user_name", "A " + ajax.status + " error occurred. Please try again.", "error");
+//       }
+//     }
+//   }
+// 
+//   ajax.open("GET", "register.php?username=" + username, true);
+//   ajax.send();
+// }
+
+
 /**
- * Validates text that is entered into the fields
+ * Validates text that is entered into the fields.
  * @param {String} name Name of field to be validated
  */
 
@@ -84,18 +114,20 @@ function validate(name)
     var user = field.value;
     if (!user.match(/^[a-z\d_]{3,20}$/i)) {
       err(name, "Invalid username. Usernames must be 3-20 characters long and can only contain alphanumeric characters and underscores.");
+//    } else if (!checkUsername(user)) {
+//      err(name, "Username already exists! Please choose a new one.");
     } else {
-      err(name, "remove");
+      err(name);
     }
   }
 
   // Email
   if (name == "usr_email") {
     var email = field.value;
-    if (!email.match(/^\S+@[\w\d.-]{2,}\.[\w]{2,6}$/i)) {
+    if (!email.match(/^\S+@([\w\d-]{2,}\.){1,2}[\w]{2,6}$/i)) {
       err(name, "Email entered is not a valid email.");
     } else {
-      err(name, "remove");
+      err(name);
     }
   }
 
@@ -105,7 +137,7 @@ function validate(name)
     if (pwd.length < 6) {
       err(name, "Passwords must be at least 6 characters long.");
     } else {
-      err(name, "remove");
+      err(name);
     }
   }
 
@@ -117,7 +149,8 @@ function validate(name)
     if (original != verify) {
       err(name, "Passwords do not match.");
     } else {
-      err(name, "remove");
+      err(name);
     }
   }
 }
+
