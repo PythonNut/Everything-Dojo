@@ -42,10 +42,18 @@
 
         <div id="headerwrap">
 
-          <?php if ($title == "Database") { ?>
+          <?php
+          if ($title == "Database") {
+            global $mode; // mode only matters if the DB is open
+          ?>
 
           <script>$("header").addClass("database");</script>
           <h1>Database</h1>
+
+          <?php if ($mode == "view") { ?>
+          <script src="/js/db-search.js"></script>
+          <input class="search" type="text" placeholder="Search...">
+          <?php } ?>
 
           <?php } elseif ($title == "Themizer") { ?>
 
