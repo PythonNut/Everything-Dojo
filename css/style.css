@@ -283,7 +283,7 @@ footer, .push {
 .notification::before {
   content: "";
   position: absolute;
-  left: -0.7rem;
+  left: -7px;
   bottom: .4rem;
   width: 0;
   height: 0;
