@@ -5,7 +5,7 @@
 
 /*--LAYOUT--*/
 #sidebar {
-  position: absolute;
+  position: fixed;
   z-index: 100;
   top: 0;
   left: 0;
@@ -23,8 +23,6 @@
   width: 35vh;
   background: #101010;
 }
-
-body { overflow: hidden; }
 
 /*--GENERAL--*/
 
