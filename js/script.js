@@ -78,12 +78,6 @@ function sliderSidebar() {
 
 function themizer() {
   // init
-  // unload style.css. Too much messing up stuff.
-  $("link[href='css/style.css']").remove();
-
-  // remove the header :D
-  $("header").remove();
-
   // edit id of the wrapping #content to avoid conflict with #content in blog HTML
   $("#content:first-of-type").attr("id", "themizer-content");
 
