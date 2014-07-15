@@ -8,8 +8,11 @@
     <meta charset="utf-8">
 
     <link href="images/favicon.ico" rel="shortcut icon">
+    <?php if ($title != "Themizer") { ?>
     <link href="css/normalize.css" type="text/css" rel="stylesheet">
     <link href="css/style.css" type="text/css" rel="stylesheet">
+    <?php } ?>
+
     <?php global $extra_style; print $extra_style; ?>
 
     <?php
@@ -29,40 +32,40 @@
 
   <body>
 
-    <?php // is there a better way to do this?
-    if ($title != "Home" || $title != "About" || $title != "Account Activation" ||
-        $title != "Forgot Password" || $title != "Logout Successful" ||
-        $title != "403" || $title != "404" || $title != "418" || $title != "500")
+    <?php if (!in_array($title, array(
+        "Home",
+        "About",
+        "Account Activation",
+        "Forgot Password",
+        "Logout Successful",
+        "403",
+        "404",
+        "410",
+        "418",
+        "500"
+      ))) {
       include("noscript.php");
-    ?>
+    } ?>
 
     <div id="wrap">
 
-      <header>
-
+      <?php
+      if (in_array($title, array("Database", "Discuss"))) {
+        echo '<header class="' . strtolower($title) . '">
         <div id="headerwrap">
-
-          <?php if ($title == "Database") { ?>
-
-          <script>$("header").addClass("database");</script>
-          <h1>Database</h1>
-
-          <?php } elseif ($title == "Themizer") { ?>
-
-          <script>$("header").addClass("themizer");</script>
-          <h1>Themizer</h1>
-
-          <?php } elseif ($title == "Try-It") { ?>
-
-          <script>$("header").addClass("tryit");</script>
+          <h1>' . $title . '</h1>
+        </div>
+      </header>';
+      } elseif ($title == "Try-it") {
+        echo '<header class="tryit">
+        <div id="headerwrap">
           <h1>Try-It</h1>
-
-          <?php } elseif ($title == "Discuss") { ?>
-
-          <script>$("header").addClass("discuss");</script>
-          <h1>Discuss</h1>
-
-          <?php } else { ?>
+        </div>
+      </header>';
+      } elseif ($title != "Themizer") {
+        echo '<header>
+        <div id="headerwrap">';
+      ?>
 
           <div id="logo">
             <a href="/"><img src="/images/logo.svg"/></a>
@@ -89,11 +92,11 @@
             </ul>
           </nav>
 
-          <?php } ?>
-
         </div>
 
       </header>
+
+      <?php } ?>
 
       <div id="content">
 
