@@ -14,36 +14,37 @@
 
   if(!isset($_SESSION['user_id'])) {
 ?>
-    <a href="index.php">Back Home</a>
-<?php
-    include('include/themedb/view_body.php');
-  // end guest case
-  } else {
-    switch($mode) {
-      case 'index':
+<div id="content">
+  <a href="index.php">Back Home</a>
+  <?php
+      include('include/themedb/view_body.php');
+    // end guest case
+    } else {
+      switch($mode) {
+        case 'index':
 
-        include('include/themedb/index_body.php');
-        break;
-      case 'submit':
-?>
-        <a href="<?php echo URL_DATABASE; ?>">Back to Database Index</a>
-<?php
-        include('include/themedb/submit_body.php');
-        break;
-      case 'request':
-?>
-        <a href="<?php echo URL_DATABASE; ?>">Back to Database Index</a>
-<?php
-        break;
-      case 'view':
-?>
-        <a href="<?php echo URL_DATABASE; ?>">Back to Database Index</a>
-<?php
-        include('include/themedb/view_body.php');
-        break;
-    // end user mode
+          include('include/themedb/index_body.php');
+          break;
+        case 'submit':
+  ?>
+          <a href="<?php echo URL_DATABASE; ?>">Back to Database Index</a>
+  <?php
+          include('include/themedb/submit_body.php');
+          break;
+        case 'request':
+  ?>
+          <a href="<?php echo URL_DATABASE; ?>">Back to Database Index</a>
+  <?php
+          break;
+        case 'view':
+  ?>
+          <a href="<?php echo URL_DATABASE; ?>">Back to Database Index</a>
+  <?php
+          include('include/themedb/view_body.php');
+          break;
+      // end user mode
+      }
     }
-  }
-?>
-
+  ?>
+</div>
 <?php get_footer(); ?>

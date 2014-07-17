@@ -8,6 +8,7 @@ Please do not plagiarize
 /*--FONT IMPORT--*/
 @import url('fonts.css');
 
+
 /*--UNIVERSAL RESET--*/
 * { margin: 0; padding: 0; }
 
@@ -52,6 +53,16 @@ input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hove
 
 input[type="submit"].inline, input[type="button"].inline, input[type="reset"].inline, button.inline {
   display: inline; /* because of precedence rules + jquery (preventing use of !important) */
+}
+
+.linkbutton {
+  background: transparent;
+  display: table;
+  padding: 10px 15px;
+  border-radius: 0.3em;
+  border: 1px solid #7CAB00;
+  font-size: 2em;
+  margin: 0.7em auto;
 }
 
 
@@ -159,7 +170,6 @@ body { background: white; }
   overflow: auto;
   margin: 2.604vh auto;
   min-height: 100%;
-  width: 70vw;
 }
 
 
@@ -243,6 +253,8 @@ footer, .push {
 
 .inline { display: inline; }
 
+.uppercase { text-transform: uppercase; }
+
 #errors { color: red; }
 
 .msg {
@@ -308,9 +320,7 @@ table a { color: #F99819; }
 
 #announcements ul li { margin-left: 1.5rem; }
 
-/**
- * Errors
- */
+/*--ERRORS--*/
 
 .error-img {
   display: block;

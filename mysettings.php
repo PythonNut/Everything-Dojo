@@ -53,6 +53,7 @@ $rs_settings = mysql_query("SELECT * FROM $table WHERE id=\"".$_SESSION['user_id
   page_protect();
   get_header();
 ?>
+<div id="content">
   <?php
   if(!empty($err))  {
     echo "<p id=\"errors\">";
@@ -78,4 +79,5 @@ $rs_settings = mysql_query("SELECT * FROM $table WHERE id=\"".$_SESSION['user_id
     <input type="submit" name="doUpdate">
   </form>
   <?php } //end no msg ?>
+</div>
 <?php get_footer(); ?>
