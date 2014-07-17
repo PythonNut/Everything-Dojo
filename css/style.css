@@ -182,9 +182,36 @@ header {
 #logo { position: absolute; top: 0; left: 0; margin: 1.302vh; }
 #logo img { margin-bottom: -0.52083vh; height: 8.33333vh; }
 
+.breadcrumbs {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.breadcrumbs #logo {
+  margin-right: -4%;
+  margin-left: -4%;
+}
+
+.breadcrumbs #logo img {
+  height: 2.5rem;
+}
+
+#headerwrap > .breadcrumbs > h1 {
+  color: black;
+  font-size: 1.5rem;
+  line-height: 4rem;
+  padding: 0;
+  margin: 0 0.4rem;
+}
+
+#headerwrap .breadcrumbs a {
+  color: #666;
+}
+
 nav {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
   position: absolute;
+  top: 0;
   right: 0;
   margin: 1.302083vh;
   height: 8.33333vh;
@@ -198,7 +225,7 @@ nav ul {
 nav ul li { display: inline-block; }
 
 nav ul a {
-  color: #000000;
+  color: black;
   float: left;
   font-size: 1.412rem;
   line-height: 2.5em;
@@ -254,18 +281,6 @@ footer, .push {
 }
 
 .textcenter { display: block; text-align: center; margin: 0; }
-
-.slideButton {
-  width: 3.5rem;
-  height: 1.75rem;
-  position: absolute;
-  top: 10.94vh;
-  left: 50%;
-  margin-left: -1.75rem;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-}
-
 
 /*--TABLES--*/
 /*table design from smashingmagazine.com, thank you*/
