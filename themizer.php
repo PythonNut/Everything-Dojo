@@ -1,25 +1,18 @@
 <?php
-  $title = "Themizer";
-  $index = TRUE;
-
+  if (!isset($_GET['mode'])) {
+    $_GET['mode'] = "regular";
+  }
   if ($_GET["mode"] == "regular") {
     $title = "Themizer (Regular Mode)";
-    $index = FALSE;
   } elseif ($_GET["mode"] == "development") {
     $title = "Themizer (Development Mode)";
-    $index = FALSE;
   }
-
   include("include/include.php");
   session_start();
-
-  $extra_style = $index ? "" : "<link rel=\"stylesheet\" href=\"css/blog-style.css\">
+  $extra_style = "<link rel=\"stylesheet\" href=\"css/blog-style.css\">
   <link rel=\"stylesheet\" href=\"css/themizer.css\">
   <link rel=\"stylesheet\" href=\"css/spectrum.css\">";
-  $extra_js = $index ? "<script>
-  $(function() {
-    tabs('home');
-  });</script>" : "<script src=\"js/blog-fn.js\"></script>
+  $extra_js = "<script src=\"js/blog-fn.js\"></script>
   <script src=\"js/spectrum.js\" onload=\"$.fn.spectrum.load = false;\"></script>
   <script>
   $(function(){
@@ -62,7 +55,6 @@
 
 <div id="blog-body"></div>
 
-<?php } else { ?>
+<?php } elseif ($_GET["mode"] == "development") { ?>
 
-<?php get_footer();
- } ?>
+<?php } ?>

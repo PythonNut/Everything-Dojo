@@ -65,7 +65,7 @@
         </section>
       </header>
 
-      <?php } elseif ($title == "Themizer") { ?>
+      <?php } elseif ($title == "Themizer Index") { ?>
 
       <header class="">
         <section id="headerwrap">

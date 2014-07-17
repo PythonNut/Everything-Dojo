@@ -80,7 +80,7 @@ function sliderSidebar() {
  * Switch between tabs
  * Lots of bits taken and modified from Chris Coyier's Magic Line
  * http://css-tricks.com/jquery-magicline-navigation/
- */
+ *
 function tabs(open) {
   var $el, leftPos,
       $defaultOpen = $("#" + open);
@@ -100,7 +100,7 @@ function tabs(open) {
       left: -$defaultOpen.position().left
     });
   });
-}
+} */
 
 function themizer() {
   // init
