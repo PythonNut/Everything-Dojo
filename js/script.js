@@ -76,6 +76,32 @@ function sliderSidebar() {
   });
 }
 
+/**
+ * Switch between tabs
+ * Lots of bits taken and modified from Chris Coyier's Magic Line
+ * http://css-tricks.com/jquery-magicline-navigation/
+ */
+function tabs(open) {
+  var $el, leftPos,
+      $defaultOpen = $("#" + open);
+
+  $(".tabs").append("<span id='pointer'></span>");
+  var $pointer = $("#pointer");
+
+  $pointer.css("left", $(".tab[data-tab='#" + open + "']").position().left + $(".tab[data-tab='#" + open + "']").width()/2 - $pointer.width()/2);
+  $(".tabs ul li a").click(function() {
+    $el = $(this);
+    $defaultOpen = $($el.data("tab"));
+    leftPos = $el.position().left + $el.width()/2 - $pointer.width/2;
+    $pointer.stop().animate({
+      left: leftPos
+    });
+    $("#content > article").animate({ // need good class name
+      left: -$defaultOpen.position().left
+    });
+  });
+}
+
 function themizer() {
   // init
   // edit id of the wrapping #content to avoid conflict with #content in blog HTML

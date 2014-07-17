@@ -8,7 +8,7 @@
     <meta charset="utf-8">
 
     <link href="images/favicon.ico" rel="shortcut icon">
-    <?php if ($title != "Themizer") { ?>
+    <?php if ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)") { ?>
     <link href="css/normalize.css" type="text/css" rel="stylesheet">
     <link href="css/style.css" type="text/css" rel="stylesheet">
     <?php } ?>
@@ -47,29 +47,56 @@
       include("noscript.php");
     } ?>
 
-    <div id="wrap">
+    <main id="wrap">
 
       <?php
       if (in_array($title, array("Database", "Discuss"))) {
         echo '<header class="' . strtolower($title) . '">
-        <div id="headerwrap">
+        <section id="headerwrap">
           <h1>' . $title . '</h1>
-        </div>
+        </section>
       </header>';
       } elseif ($title == "Try-it") {
-        echo '<header class="tryit">
-        <div id="headerwrap">
+      ?>
+
+      <header class="tryit">
+        <section id="headerwrap">
           <h1>Try-It</h1>
-        </div>
-      </header>';
-      } elseif ($title != "Themizer") {
+        </section>
+      </header>
+
+      <?php } elseif ($title == "Themizer") { ?>
+
+      <header class="">
+        <section id="headerwrap">
+          <nav class="breadcrumbs">
+            <div id="logo">
+              <a href="/"><img src="/images/logo.svg" alt="Logo" /></a>
+            </div>
+            <h1 class="big">
+              > <a href="">THEMIZER</a>
+            </h1>
+          </nav>
+
+          <nav class="tabs">
+            <ul>
+              <li><a href="#" class="tab" data-tab="#home">Home</a></li>
+              <li><a href="#" class="tab" data-tab="#changelog">Changelog</a></li>
+              <li><a href="#" class="tab" data-tab="#roadmap">Roadmap</a></li>
+            </ul>
+          </nav>
+
+        </section>
+      </header>
+
+      <?php } elseif ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)") {
         echo '<header>
         <div id="headerwrap">';
       ?>
 
-          <div id="logo">
+          <section id="logo">
             <a href="/"><img src="/images/logo.svg"/></a>
-          </div>
+          </section>
 
           <nav>
             <ul>
@@ -92,7 +119,7 @@
             </ul>
           </nav>
 
-        </div>
+        </section>
 
       </header>
 
