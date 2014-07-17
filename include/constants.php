@@ -3,7 +3,7 @@
   define("THEMEDB_TABLE", "theme_database");
   define("URL_DATABASE", "database.php");
   define("URL_DISCUSS", "discuss.php");
-  define("URL_THEMIZER", "themizer.php");
+  define("URL_THEMIZER", "themizerindex.php");
   define("URL_TRYIT", "tryit.php");
 
   define("VERSION_DATABASE", "2.0");
