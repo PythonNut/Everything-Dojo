@@ -6,6 +6,7 @@
     body {
       overflow-x: hidden;
     }
+    
     #themizer-bar {
       background: #212121;
       height: 30vh;

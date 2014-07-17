@@ -1,6 +1,6 @@
       <div class="push"></div>
 
-    </div><?php //end wrap ?>
+    </main><?php //end wrap ?>
 
     <footer>
       <p><a href="/">Home</a> &bull; <a href="/about.php">About</a></p>
