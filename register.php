@@ -90,6 +90,7 @@ This is an automated response. Do not reply to this email.";
   session_start();
   get_header();
 ?>
+<div id="content">
   <?php
   if (isset($_GET['done'])) { ?>
   <p>Thank you; your registration is now complete. After activation, you can login <a href="login.php">here</a>.</p>
@@ -126,4 +127,5 @@ This is an automated response. Do not reply to this email.";
     <input name="doRegister" type="submit" id="doRegister" value="Register">
   </form>
   <?php } //end not done ?>
+</div>
 <?php get_footer(); ?>

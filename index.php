@@ -4,6 +4,10 @@
   session_start();
   get_header();
 ?>
+<div id="content">
+  <?php if(!empty($_GET['msg']))  {
+    echo "<div class=\"msg\">" . $_GET['msg'] . "</div>";
+  } ?>
   <div id="index-inner">
     <div class="index-row">
 
@@ -51,4 +55,5 @@
 
     </div>
   </div>
+</div>
 <?php get_footer(); ?>

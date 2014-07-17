@@ -39,6 +39,7 @@ list($active) = mysql_fetch_row($rs_active);
   //dbc already included
   get_header();
 ?>
+<div id="content">
   <h2>Admin CP</h2>
   <p>Total users: <?php echo $all;?><br />
   Active users: <?php echo $active; ?><br />
@@ -179,4 +180,5 @@ list($active) = mysql_fetch_row($rs_active);
     <input type="button" value="Remove Text Box" id="removeButton" class="inline" />
     <input name="announcementsSubmit" type="submit" value="Update" />
   </form>
+</div>
 <?php get_footer(); ?>
