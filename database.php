@@ -4,13 +4,14 @@
   include("include/include.php");
   include("include/themedb.php");
   session_start();
-  get_header();
 
   if(isset($_GET['mode'])) {
     $mode = $_GET['mode'];
   } else {
     $mode = 'index';
   }
+  
+  get_header();
 
   if(!isset($_SESSION['user_id'])) {
 ?>
