@@ -26,8 +26,9 @@ if (isset($_POST['doLogin'])) {
   $user_array = $result->fetchAll(PDO::FETCH_ASSOC);
   $username_match = count($user_array);
   $user_array = $user_array[0];
-  
-  
+  $pwd = $user_array['pwd'];
+
+
   //$username_match = mysql_num_rows($result);
 
   // Match row found with more than 1 results  - the user is authenticated.
@@ -52,8 +53,8 @@ if (isset($_POST['doLogin'])) {
         //update the timestamp and key for cookie
         $stamp = time();
         $ckey = GenKey();
-		$result = $dbc->prepare("UPDATE $table SET ctime = ?, ckey = ? WHERE id = ?");
-  		$result->execute(array($stamp,$ckey,$user_array['id']));
+        $result = $dbc->prepare("UPDATE $table SET ctime = ?, ckey = ? WHERE id = ?");
+        $result->execute(array($stamp,$ckey,$user_array['id']));
         //mysql_query("UPDATE $table SET ctime = '$stamp', ckey = '$ckey' WHERE id = '$id'") or die(mysql_error());
 
         header("Location: myaccount.php");
