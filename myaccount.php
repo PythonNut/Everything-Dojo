@@ -5,13 +5,13 @@
   page_protect();
   get_header();
 ?>
-<div id="content">
+<section id="content">
   <h2>Welcome, <?php echo $_SESSION['user_name']; ?></h2>
   <p>This is the my account page. There is basically nothing here right now, but more is always to be added sometime.</p>
   <p>Your User ID: <?php echo $_SESSION['user_id']; ?></p>
   <div id="announcements">
     <?php
-    $result = mysql_query("SELECT data FROM data WHERE fetchname = 'announcements'") or die(); 
+    $result = mysql_query("SELECT data FROM data WHERE fetchname = 'announcements'") or die();
     $announcements = explode("~", mysql_result($result, 0));
     if (empty($announcements[0])) {
       $title = "Announcements for Users from Admins: There are currently no announcements.";
@@ -32,5 +32,6 @@
       echo "</ul>";
     } ?>
   </div>
-</div>
+</section>
+
 <?php get_footer(); ?>

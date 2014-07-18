@@ -1,4 +1,4 @@
-<?php 
+<?php
   include("include/include.php");
 page_protect();
 
@@ -39,7 +39,7 @@ list($active) = mysql_fetch_row($rs_active);
   //dbc already included
   get_header();
 ?>
-<div id="content">
+<section id="content">
   <h2>Admin CP</h2>
   <p>Total users: <?php echo $all;?><br />
   Active users: <?php echo $active; ?><br />
@@ -107,7 +107,7 @@ list($active) = mysql_fetch_row($rs_active);
   </table>
   <?php } ?>
   <?php
-  $result = mysql_query("SELECT data FROM data WHERE fetchname='announcements' limit 1") or die(); 
+  $result = mysql_query("SELECT data FROM data WHERE fetchname='announcements' limit 1") or die();
   $announcements = explode("~", mysql_result($result, 0));
   if (count($announcements) == 0) {
     $counter = 2;
@@ -126,7 +126,7 @@ list($active) = mysql_fetch_row($rs_active);
 
     $("#addButton").click(function() {
       if(counter == 11){
-        return false; 
+        return false;
       }
       if(counter == 2) {
         $("#removeButton").show();
@@ -180,5 +180,6 @@ list($active) = mysql_fetch_row($rs_active);
     <input type="button" value="Remove Text Box" id="removeButton" class="inline" />
     <input name="announcementsSubmit" type="submit" value="Update" />
   </form>
-</div>
+</section>
+
 <?php get_footer(); ?>
