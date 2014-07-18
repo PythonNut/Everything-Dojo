@@ -14,7 +14,7 @@
 
   if(!isset($_SESSION['user_id'])) {
 ?>
-<div id="content">
+<section id="content">
   <a href="index.php">Back Home</a>
   <?php
       include('include/themedb/view_body.php');
@@ -46,5 +46,6 @@
       }
     }
   ?>
-</div>
+</section>
+
 <?php get_footer(); ?>

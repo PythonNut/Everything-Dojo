@@ -4,7 +4,8 @@
   session_start();
   get_header();
 ?>
-<div id="content">
+<section id="content">
 
-</div>
+</section>
+
 <?php get_footer(); ?>

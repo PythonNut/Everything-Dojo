@@ -4,7 +4,7 @@
   session_start();
   get_header();
 ?>
-<div id="content">
+<section id="content">
   <p>Everything Dojo is an awesome blogs tool.</p>
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
   tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -12,5 +12,6 @@
   consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
   cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
   proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-</div>
+</section>
+
 <?php get_footer(); ?>

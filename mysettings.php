@@ -1,4 +1,4 @@
-<?php 
+<?php
 include("include/include.php");
 
 $table = TB_NAME;
@@ -44,8 +44,8 @@ then loop
 while ($row_settings = mysql_fetch_array($rs_settings)) {}
 and output a bunch of forms
 */
- 
-$rs_settings = mysql_query("SELECT * FROM $table WHERE id=\"".$_SESSION['user_id']."\""); 
+
+$rs_settings = mysql_query("SELECT * FROM $table WHERE id=\"".$_SESSION['user_id']."\"");
 ?>
 <?php
   $title = "My Settings";
@@ -53,7 +53,7 @@ $rs_settings = mysql_query("SELECT * FROM $table WHERE id=\"".$_SESSION['user_id
   page_protect();
   get_header();
 ?>
-<div id="content">
+<section id="content">
   <?php
   if(!empty($err))  {
     echo "<p id=\"errors\">";
@@ -79,5 +79,6 @@ $rs_settings = mysql_query("SELECT * FROM $table WHERE id=\"".$_SESSION['user_id
     <input type="submit" name="doUpdate">
   </form>
   <?php } //end no msg ?>
-</div>
+</section>
+
 <?php get_footer(); ?>

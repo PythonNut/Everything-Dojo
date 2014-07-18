@@ -4,7 +4,7 @@
   session_start();
   get_header();
 ?>
-<div id="content">
+<section id="content">
   <?php if(!empty($_GET['msg']))  {
     echo "<div class=\"msg\">" . $_GET['msg'] . "</div>";
   } ?>
@@ -28,11 +28,11 @@
           </div>
         </div>
       </a>
-      
+
     </div>
 
     <div class="clear"></div>
-    
+
     <div class="index-row">
 
       <a href=<?php echo '"' . URL_TRYIT . '"'; ?> class="index-link">
@@ -55,5 +55,6 @@
 
     </div>
   </div>
-</div>
+</section>
+
 <?php get_footer(); ?>
