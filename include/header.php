@@ -74,7 +74,7 @@
               <a href="/"><img src="/images/logo.svg" alt="Logo" /></a>
             </div>
             <h1 class="big">
-              > <a href="">THEMIZER</a>
+              > <a class="uppercase" href="">Themizer</a>
             </h1>
           </nav>
 
