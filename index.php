@@ -6,7 +6,7 @@
 ?>
 <section id="content">
   <?php if(!empty($_GET['msg']))  {
-    echo "<div class=\"msg\">" . $_GET['msg'] . "</div>";
+    echo "<div class=\"msg\">" . filter($_GET['msg']) . "</div>";
   } ?>
   <div id="index-inner">
     <div class="index-row">
