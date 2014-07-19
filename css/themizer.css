@@ -89,6 +89,7 @@
   left: 35vh;
   top: 0;
   background: #212121;
+  -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
 
@@ -117,6 +118,7 @@
   height: 100vh;
   width: 4vh;
   border-radius: 0;
+  -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 
@@ -141,7 +143,7 @@
   display: inline-block;
   margin: 0;
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   height: 1.5em;
   line-height: 1.5em;
   font-size: 1.5em;
@@ -165,7 +167,7 @@
   width: 0.5em;
   height: 0.2em;
   background: #fff;
-  -webkit-transition: transform 0.5s ease-in-out;
+  -webkit-transition: -webkit-transform 0.5s ease-in-out;
   transition: transform 0.5s ease-in-out;
 }
 
