@@ -77,30 +77,19 @@ function sliderSidebar() {
 }
 
 /**
- * Switch between tabs
- * Lots of bits taken and modified from Chris Coyier's Magic Line
- * http://css-tricks.com/jquery-magicline-navigation/
+ * Scroll to element
+ * Based on https://stackoverflow.com/a/6677069
  *
-function tabs(open) {
-  var $el, leftPos,
-      $defaultOpen = $("#" + open);
+ * @param {String} el Selector of element which we scroll to
+ * @param {Integer} [duration=1000] Duration, in milliseconds, of the animation
+ */
+function scrollTo(el, duration) {
+  duration = duration || 1000;
 
-  $(".tabs").append("<span id='pointer'></span>");
-  var $pointer = $("#pointer");
-
-  $pointer.css("left", $(".tab[data-tab='#" + open + "']").position().left + $(".tab[data-tab='#" + open + "']").width()/2 - $pointer.width()/2);
-  $(".tabs ul li a").click(function() {
-    $el = $(this);
-    $defaultOpen = $($el.data("tab"));
-    leftPos = $el.position().left + $el.width()/2 - $pointer.width/2;
-    $pointer.stop().animate({
-      left: leftPos
-    });
-    $("#content > article").animate({ // need good class name
-      left: -$defaultOpen.position().left
-    });
-  });
-} */
+  $('html, body').animate({
+    scrollTop: $(el).offset().top
+  }, duration);
+}
 
 function themizer() {
   // init

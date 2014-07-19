@@ -67,7 +67,7 @@
 
       <?php } elseif ($title == "Themizer Index") { ?>
 
-      <header class="">
+      <header id="top">
         <section id="headerwrap">
           <nav class="breadcrumbs">
             <div id="logo">
@@ -78,11 +78,12 @@
             </h1>
           </nav>
 
-          <nav class="tabs">
+          <nav>
             <ul>
-              <li><a href="#" class="tab" data-tab="#home">Home</a></li>
-              <li><a href="#" class="tab" data-tab="#changelog">Changelog</a></li>
-              <li><a href="#" class="tab" data-tab="#roadmap">Roadmap</a></li>
+              <li><a onclick="scrollTo('#top')">Home</a></li>
+              <li><a onclick="scrollTo('#features')">Features</a></li>
+              <li><a onclick="scrollTo('#changelog')">Changelog</a></li>
+              <li><a onclick="scrollTo('#roadmap')">Roadmap</a></li>
             </ul>
           </nav>
 

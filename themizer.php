@@ -57,4 +57,6 @@
 
 <?php } elseif ($_GET["mode"] == "development") { ?>
 
+<?php include("unavailable.php"); ?>
+
 <?php } ?>
