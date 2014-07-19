@@ -40,31 +40,45 @@
       top: 5vh;
     }
     #left-wrap .heading { width: 7em; }
-    #right-wrap { float: right; top: 0;}
-    #right-wrap img {height: 50vh;}
+    #right-wrap { float: right; top: 0; }
+    #right-wrap img {height: 50vh; }
+
+    #themizer-bar .note {
+      text-align: center;
+      font-size: 1.1em;
+      margin-top: 4vh;
+      margin-left: 2em;
+    }
+
+    #themizer-bar .note a {
+      color: #5dc350;
+    }
 
     .linkbutton {
       color: #40902a;
       border-color: #5dc350;
       font-family: 'Lato Light';
-      padding: 5px 7px;
+      padding: 4px 8px;
       font-size: 1.5em;
       margin-top: 7vh;
+      transition: 0.5s ease;
     }
+    .linkbutton:hover { background-color: #40902a; border-color: #40902a; color: #ccc; }
   </style>";
   get_header();
 ?>
-<div id="themizer-bar">
-  <div id="themizer-inner-wrap">
-    <div id="left-wrap">
+<section id="themizer-bar">
+  <section id="themizer-inner-wrap">
+    <section id="left-wrap">
       <p class="heading">Style your blog, the easy way.</p>
       <a href="themizer.php" class="linkbutton uppercase">Get Started</a>
-    </div>
-    <div id="right-wrap">
+      <p class="note">Are you a developer? <a href="themizer.php?mode=development">Click Here</a> to go to development mode.</p>
+    </section>
+    <section id="right-wrap">
       <img src="images/themizer-open.png"/>
-    </div>
-  </div>
-</div>
-<div id="content">
-</div>
+    </section>
+  </section>
+</section>
+<section id="content">
+</section>
 <?php get_footer(); ?>
