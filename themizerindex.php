@@ -21,10 +21,12 @@
     .linkbutton {
       color: #48a730;
       border-color: #5dc350;
-      font-family: 'Lato Light';
-      padding: 4px 8px;
+      font-family: 'Lato', sans-serif;
+      font-weight: 400;
+      padding: 0.25em 0.4em 0.2em;
       font-size: 1.5em;
       margin-top: 7vh;
+      -webkit-transition: 0.5s ease;
       transition: 0.5s ease;
     }
     .linkbutton:hover {
@@ -74,7 +76,8 @@
       position: relative;
       left: -12.5%;
       padding: 2em;
-      font-family: 'Lato Hairline', 'Lucida Grande', 'Lucida Sans Unicode', sans-serif;
+      font-family: 'Lato Hairline', 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', sans-serif;
+      font-weight: 100; /* epiphany aka safari for linux doesn't do it right without this */
     }
     #themizer-bar .note {
       text-align: center;
