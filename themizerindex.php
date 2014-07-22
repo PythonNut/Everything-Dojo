@@ -71,7 +71,7 @@
       height: 50vh;
       box-shadow: inset 0 0 2em 0 #000;
       color: white;
-      margin: 10px auto;
+      margin: .5em auto;
       width: 125%;
       position: relative;
       left: -12.5%;
