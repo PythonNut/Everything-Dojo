@@ -22,6 +22,18 @@ a {
 
 a:hover { color: #658800; }
 
+/*--IMAGES--*/
+
+/*
+ * (1) Fix bug in IE where images can't be resized
+ * (2) Make resized images look nicer in IE
+ */
+
+img {
+  width: inherit; /* (1) */
+  height: inherit; /* (1) */
+  -ms-interpolation-mode: bicubic; /* (2) */
+}
 
 /*--LISTS--*/
 ul {
@@ -186,8 +198,18 @@ header {
   height: 11.6vh;
 }
 
-#logo { position: absolute; top: 0; left: 0; margin: 1.302vh; }
-#logo img { margin-bottom: -0.52083vh; height: 8.33333vh; }
+#logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 1.302vh;
+}
+#logo img {
+  margin-bottom: -0.52083vh;
+  /* fix IE not resizing images correctly */
+  max-width: 3.75rem;
+  max-height: 3.75rem;
+}
 
 .breadcrumbs {
   position: absolute;
@@ -200,7 +222,9 @@ header {
 }
 
 .breadcrumbs #logo img {
-  height: 2.5rem;
+  /* fix IE not resizing images correctly */
+  max-width: 2.5rem;
+  max-height: 2.5rem;
 }
 
 #headerwrap > .breadcrumbs > h1 {
