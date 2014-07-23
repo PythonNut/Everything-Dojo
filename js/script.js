@@ -148,12 +148,14 @@ function themizer() {
   });
 
   // resize sidebar
+  // modified from https://stackoverflow.com/a/4139860
 
   $("#side-resizer").mousedown(function() {
-    $(document).mousemove(function(event) { // use document as window is reserved for sideBbutton when triggered
+    $(document).mousemove(function(event) { // use document as window is reserved for sideButton when triggered
       var mousePosX = event.pageX;
-      sideWidth = mousePosX > 35*vh ? mousePosX : sideWidth;
+      sideWidth = mousePosX > 35*vh ? mousePosX : sideWidth; // set original width as minimum
       $("#sidebar-inner").width(sideWidth);
+      // move sideButton and remove transitions as they screw the former up
       $("#side-button").css({
         "left": sideWidth,
         "-webkit-transition": "0s linear",
@@ -163,6 +165,11 @@ function themizer() {
   });
   $(document).bind("mouseup click", function() {
     $(document).unbind("mousemove");
+    // readd transitions
+    $("#side-button").css({
+      "-webkit-transition": "",
+      "transition": ""
+    });
   });
 
   // Show/hide sideButton
