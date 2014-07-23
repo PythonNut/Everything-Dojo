@@ -26,27 +26,29 @@
   <section id="sidebar-inner">
     <h2 id="sideheadbar" class="themizer">Themizer</h2>
 
-    <section class="option" id="option-view">
-      <section class="option-title">
-        <h5>Blog View</h5>
-        <span class="collapsebutton"></span>
+    <section class="options">
+      <section class="option" id="option-view">
+        <section class="option-title">
+          <h5>Blog View</h5>
+          <span class="collapsebutton"></span>
+        </section>
+        <section class="option-wrap">
+          <p><input type="radio" name="view" value="index"><label for="view" class="radio">Index</label></p>
+          <p><input type="radio" name="view" value="blog"><label for="view" class="radio">Blog Post</label></p>
+          <p><input type="radio" name="view" value="post"><label for="view" class="radio">Post New Entry</label></p>
+          <p><input type="radio" name="view" value="comment"><label for="view" class="radio">Post New Comment</label></p>
+        </section>
       </section>
-      <section class="option-wrap">
-        <p><input type="radio" name="view" value="index"><label for="view" class="radio">Index</label></p>
-        <p><input type="radio" name="view" value="blog"><label for="view" class="radio">Blog Post</label></p>
-        <p><input type="radio" name="view" value="post"><label for="view" class="radio">Post New Entry</label></p>
-        <p><input type="radio" name="view" value="comment"><label for="view" class="radio">Post New Comment</label></p>
-      </section>
-    </section>
 
-    <section class="option" id="option-base">
-      <section class="option-title">
-        <h5>Base Theme</h5>
-        <span class="collapsebutton"></span>
-      </section>
-      <section class="option-wrap">
-        <p><input type="radio" name="base" value="original"><label for="base" class="radio">Core by Dojo</label></p>
-        <p><input type="radio" name="base" value="blog"><label for="base" class="radio">Calm by Red</label></p>
+      <section class="option" id="option-base">
+        <section class="option-title">
+          <h5>Base Theme</h5>
+          <span class="collapsebutton"></span>
+        </section>
+        <section class="option-wrap">
+          <p><input type="radio" name="base" value="original"><label for="base" class="radio">Core by Dojo</label></p>
+          <p><input type="radio" name="base" value="blog"><label for="base" class="radio">Calm by Red</label></p>
+        </section>
       </section>
     </section>
 

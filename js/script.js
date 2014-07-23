@@ -158,7 +158,6 @@ function themizer() {
       // move sideButton and remove transitions as they screw the former up
       $("#side-button").css({
         "left": sideWidth,
-        "-webkit-transition": "0s linear",
         "transition": "0s linear"
       });
     });
@@ -167,7 +166,6 @@ function themizer() {
     $(document).unbind("mousemove");
     // readd transitions
     $("#side-button").css({
-      "-webkit-transition": "",
       "transition": ""
     });
   });
