@@ -51,6 +51,7 @@
     </section>
 
   </section>
+  <div id="side-resizer"></div>
 </aside>
 
 <div id="blog-body"></div>

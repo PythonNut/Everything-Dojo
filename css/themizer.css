@@ -12,7 +12,6 @@
   height: 100%;
   background: #101010;
   color: white;
-  font-size: 2.22vh;
   font-family: Amble, HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-align: left;
   text-rendering: optimizeLegibility;
@@ -58,7 +57,7 @@
 }
 
 .opened #sideheadbar::after {
-  left: 35vh;
+  right: -2vh;
 }
 .closed #sideheadbar::after {
   left: 0;
@@ -78,23 +77,42 @@
 
 #sidebar .inline { display: inline; }
 
+/*--RESIZER--*/
+#side-resizer {
+  position: absolute;
+  top: 0;
+  right: -5vh;
+  width: 3vh;
+  height: 100vh;
+  cursor: e-resize;
+  pointer-events: all;
+  /* Prevent accidental selection of content in sidebar (occurs in WebKit/Blink) */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.closed #side-resizer {
+  pointer-events: none;
+}
+
 /*--SLIDE BUTTONS--*/
 .slideButton {
   position: absolute;
   cursor: pointer;
 }
 
-#sideButton {
+#side-button {
   width: 2vh;
   height: 100%;
-  left: 35vh;
   top: 0;
   background: #212121;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
 
-.closed #sideButton {
+.closed #side-button {
   height: 5vh;
   top: 47.5vh;
   border-radius: 0 4px 4px 0;
@@ -106,7 +124,7 @@
  * should probably change later
  * in conjunction with planned mousemove() event
  */
-.closed #sideButton::after {
+.closed #side-button::after {
   content: "";
   position: absolute;
   top: -47.5vh;
@@ -114,7 +132,7 @@
   width: 2vh;
 }
 
-#sideButton.targeted {
+#side-button.targeted {
   top: 0;
   height: 100vh;
   width: 4vh;

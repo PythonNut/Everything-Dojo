@@ -41,14 +41,15 @@ function sliderSidebar() {
   var sideWidth = $("#sidebar").width();
 
   // add open/hide button
-  $("#sidebar").append("<div id=\"sideButton\" class=\"slideButton right\"></div>");
+  $("#sidebar").append("<div id=\"side-button\" class=\"slideButton right\"></div>");
 
   // sidebar is opened at first
   var openSide = true;
   $("#sidebar").addClass("opened");
 
   // main sliding function
-  $("#sideButton").click(function() {
+  $("#side-button").click(function() {
+    sideWidth = $("#sidebar").width(); // in case sidebar has been resized
     if (openSide) {
       $("#sidebar").animate({
         left: -sideWidth
@@ -91,14 +92,39 @@ function scrollTo(el, duration) {
   }, duration);
 }
 
+/**
+ * Themizer init
+ */
 function themizer() {
-  // init
+  /*************
+   * VARIABLES *
+   *************/
+  // get viewport height
+  var vh = $(window).height()/100;
+
+  // find width of sidebar and of sideButton
+  var sideWidth       = 35*vh,
+      sideButtonWidth =  2*vh;
+
+  // set whether user is active or not for later
+  var idleTimer = null,
+      idleState = true;
+
+  /*************
+   * FUNCTIONS *
+   *************/
+  // Set sidebar styles
+  $("#sidebar")      .css("font-size", 2.22*vh);
+  $("#sidebar-inner").width(sideWidth);
+  $("#side-button").css("left", sideWidth);
+
   // edit id of the wrapping #content to avoid conflict with #content in blog HTML
   $("#content:first-of-type").attr("id", "themizer-content");
 
   // set index to be default mode
-  $("input[name='view'][value='index']").prop("checked", "checked");
+  $("input[name='view'][value='index']")   .prop("checked", "checked");
   $("input[name='base'][value='original']").prop("checked", "checked");
+
   $("#blog-body").load("blog-index.html");
 
   // option slides sliding init
@@ -121,21 +147,33 @@ function themizer() {
     $("head").append("<link href='blog-" + $("[name='base']:checked").val() + ".css' type='text/css' rel='stylesheet'>");
   });
 
-  // Show/hide sideButton
-  // find width of sidebar and of sideButton
-  var sideWidth = $("#sidebar").width();
-  var sideButtonWidth = $("#sideButton").width();
-  // set whether user is active or not for later
-  var idleTimer = null;
-  var idleState = true;
+  // resize sidebar
 
+  $("#side-resizer").mousedown(function() {
+    $(document).mousemove(function(event) { // use document as window is reserved for sideBbutton when triggered
+      var mousePosX = event.pageX;
+      sideWidth = mousePosX > 35*vh ? mousePosX : sideWidth;
+      $("#sidebar-inner").width(sideWidth);
+      $("#side-button").css({
+        "left": sideWidth,
+        "-webkit-transition": "0s linear",
+        "transition": "0s linear"
+      });
+    });
+  });
+  $(document).bind("mouseup click", function() {
+    $(document).unbind("mousemove");
+  });
+
+  // Show/hide sideButton
   // modify sideButton on click
-  $("#sideButton").click(function() {
-    if ($("#sidebar").css("left") == "0px" && $("#sidebar").hasClass("opened")) { // fires when sidebar is to be closed
-      $("#sideButton").addClass("triggered");
+  $("#side-button").click(function() {
+    // fires when sidebar is to be closed
+    if ($("#sidebar").css("left") == "0px" && $("#sidebar").hasClass("opened")) {
+      $("#side-button").addClass("triggered");
       idleState = true; // since user is active
     } else {
-      $("#sideButton").removeClass("targeted");
+      $("#side-button").removeClass("targeted");
     }
   });
 
@@ -147,7 +185,7 @@ function themizer() {
     // user active
     if (idleState == true) {
       // Reactivated event
-      $(".closed #sideButton").addClass("triggered").animate({
+      $(".closed #side-button").addClass("triggered").animate({
         left: sideWidth
       }, 100);
     }
@@ -156,9 +194,9 @@ function themizer() {
     // We cannot use jQuery animations as they are too CPU-intensive
     // Instead, we just add .targeted.
     if (event.pageX < sideWidth*2/3) {
-      $(".closed #sideButton").addClass("targeted");
+      $(".closed #side-button").addClass("targeted");
     } else {
-      $(".closed #sideButton").removeClass("targeted");
+      $(".closed #side-button").removeClass("targeted");
     }
 
     idleState = false;
@@ -167,15 +205,15 @@ function themizer() {
     idleTimer = setTimeout(function() {
       // Idle Event
       // cursor outside target zone
-      $("#sideButton").removeClass("triggered");
-      $(".closed #sideButton:not(:hover):not(.targeted)").animate({
+      $("#side-button").removeClass("triggered");
+      $(".closed #side-button:not(:hover):not(.targeted)").animate({
         left: sideWidth - sideButtonWidth
       }, 1500);
       // cursor inside target zone
-      $(".closed #sideButton.targeted:not(:hover)").animate({
+      $(".closed #side-button.targeted:not(:hover)").animate({
         left: sideWidth - 2*sideButtonWidth
       }, 3000, function() {
-        $("#sideButton").removeClass("targeted");
+        $("#side-button").removeClass("targeted");
       });
       idleState = true;
     }, 4000);
