@@ -122,8 +122,8 @@ function themizer() {
   $("#content:first-of-type").attr("id", "themizer-content");
 
   // set index to be default mode
-  $("input[name='view'][value='index']")   .prop("checked", "checked");
-  $("input[name='base'][value='original']").prop("checked", "checked");
+  $("[name='view'] [value='index']")   .prop("checked", "checked");
+  $("[name='base'] [value='original']").prop("checked", "checked");
 
   $("#blog-body").load("blog-index.html");
 
@@ -141,10 +141,10 @@ function themizer() {
 
   // view mode radios
   $("[name='view']").change(function() {
-    $("#blog-body").load("blog-" + $("[name='view']:checked").val() + ".html");
+    $("#blog-body").load("blog-" + $("[name='view'] :checked").val() + ".html");
   });
   $("[name='base']").change(function() {
-    $("head").append("<link href='blog-" + $("[name='base']:checked").val() + ".css' type='text/css' rel='stylesheet'>");
+    $("head").append("<link href='blog-" + $("[name='base'] :checked").val() + ".css' type='text/css' rel='stylesheet'>");
   });
 
   // resize sidebar
