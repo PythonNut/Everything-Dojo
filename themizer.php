@@ -55,6 +55,47 @@
       </section>
     </section>
 
+    <section class="option" id="option-body">
+      <section class="option-title">
+        <h5>Body</h5>
+        <span class="collapsebutton"></span>
+      </section>
+      <section class="option-wrap">
+        <p data-name="backgroundColor">
+          <span class="label">Background Color</span>
+          <input type="text" class="text" data-id="spectrum-body-backgroundColor" value="white">
+          <input type="color" class="spectrum" id="spectrum-body-backgroundColor" value="#FFFFFF" data-el="body" data-prop="background-color">
+        </p>
+        <p data-name="backgroundImage">
+          <span class="label optional">Background Image URL</span>
+          <input type="text" class="text" id="body-backgroundImage">
+        </p>
+        <section data-name="backgroundRepeat">
+          <span class="label">Background Repeat</span>
+          <p>
+            <label class="label" for="body-backgroundRepeat-repeatAll">repeat-all</label>
+            <input type="radio" class="radio" id="body-backgroundRepeat-repeatAll" name="body-backgroundRepeat" value="repeat-all" checked>
+            <span class="input-button"></span>
+          </p>
+          <p>
+            <label class="label" for="body-backgroundRepeat-repeatY">repeat-y</label>
+            <input type="radio" class="radio" id="body-backgroundRepeat-repeatY" name="body-backgroundRepeat" value="repeat-y">
+            <span class="input-button"></span>
+          </p>
+          <p>
+            <label class="label" for="body-backgroundRepeat-repeatX">repeat-x</label>
+            <input type="radio" class="radio" id="body-backgroundRepeat-repeatX" name="body-backgroundRepeat" value="repeat-x">
+            <span class="input-button"></span>
+          </p>
+          <p>
+            <label class="label" for="body-backgroundRepeat-noRepeat">no-repeat</label>
+            <input type="radio" class="radio" id="body-backgroundRepeat-noRepeat" name="body-backgroundRepeat" value="no-repeat">
+            <span class="input-button"></span>
+          </p>
+        </section>
+      </section>
+    </section>
+
     <!-- `span` and not `a` to avoid accidental styling in Firefox  -->
     <span href="#" class="linkbutton" id="submit">Get Code</span>
 

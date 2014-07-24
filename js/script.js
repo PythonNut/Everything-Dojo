@@ -121,10 +121,6 @@ function themizer() {
   // edit id of the wrapping #content to avoid conflict with #content in blog HTML
   $("#content:first-of-type").attr("id", "themizer-content");
 
-  // set index to be default mode
-  $("[name='view'] [value='index']")   .prop("checked", "checked");
-  $("[name='base'] [value='original']").prop("checked", "checked");
-
   $("#blog-body").load("blog-index.html");
 
   // option slides sliding init
@@ -149,7 +145,6 @@ function themizer() {
 
   // resize sidebar
   // modified from https://stackoverflow.com/a/4139860
-
   $("#side-resizer").mousedown(function() {
     $(document).mousemove(function(event) { // use document as window is reserved for sideButton when triggered
       var mousePosX = event.pageX;
@@ -222,6 +217,28 @@ function themizer() {
       });
       idleState = true;
     }, 4000);
+  });
+
+  /**
+   * Themizer body
+   */
+  $("#body-backgroundImage").change(function() {
+    $("body").css("background-image", "url('" + $(this).val() + "')");
+  });
+  $("[name='body-backgroundRepeat']").change(function() {
+    $("body").css("background-repeat", $("[name='body-backgroundRepeat']:checked").val());
+  })
+  // Spectrum
+  $(".spectrum").spectrum({
+    preferredFormat: "name",
+    showAlpha: true,
+    showInitial: true,
+    clickoutFiresChange: true,
+    showButtons: false,
+    move: function(color) {
+            $("[data-id='" + $(this).attr("id") + "']").val(color);
+            $($(this).data("el")).css($(this).data("prop"), color.toString());
+          }
   });
 
   $(window).mousemove();
