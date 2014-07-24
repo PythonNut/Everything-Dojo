@@ -241,6 +241,23 @@ function themizer() {
             $($(this).data("el")).css($(this).data("prop"), color.toString());
           }
   });
+  $(".text[data-id^='spectrum']").keyup(function() {
+    var color = $(this).val();
+    $($(this).next().data("el")).css($(this).next().data("prop"), color.toString());
+    // reinitialize everything because we can't just init one property
+    $(this).next().spectrum({
+      color: color,
+      preferredFormat: "name",
+      showAlpha: true,
+      showInitial: true,
+      clickoutFiresChange: true,
+      showButtons: false,
+      move: function(color) {
+              $("[data-id='" + $(this).attr("id") + "']").val(color);
+              $($(this).data("el")).css($(this).data("prop"), color.toString());
+            }
+    });
+  });
 
   $(window).mousemove();
 }
