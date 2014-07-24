@@ -126,6 +126,7 @@ function themizer() {
   $("[name='base'] [value='original']").prop("checked", "checked");
 
   $("#blog-body").load("blog-index.html");
+  $("head").append("<link href='css/style.core.css' type='text/css' rel='stylesheet' id='base-theme'>");
 
   // option slides sliding init
   $(".option").each(function() {
@@ -144,7 +145,7 @@ function themizer() {
     $("#blog-body").load("blog-" + $("[name='view'] :checked").val() + ".html");
   });
   $("[name='base']").change(function() {
-    $("head").append("<link href='blog-" + $("[name='base'] :checked").val() + ".css' type='text/css' rel='stylesheet'>");
+    $("link[id='base-theme']").attr('href', "css/style." + $("[name='base'] :checked").val() + ".css");
   });
 
   // resize sidebar
