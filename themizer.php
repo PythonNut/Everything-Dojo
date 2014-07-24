@@ -19,6 +19,7 @@
     sliderSidebar('themizer-inner');
     themizer();
   });</script>";
+
   get_header();
 ?>
 <?php if ($_GET["mode"] == "regular") { ?>
@@ -26,31 +27,36 @@
   <section id="sidebar-inner">
     <h2 id="sideheadbar" class="themizer">Themizer</h2>
 
-    <section class="options">
-      <section class="option" id="option-view">
-        <section class="option-title">
-          <h5>Blog View</h5>
-          <span class="collapsebutton"></span>
-        </section>
-        <section class="option-wrap">
-          <p><input type="radio" name="view" value="index"><label for="view" class="radio">Index</label></p>
-          <p><input type="radio" name="view" value="blog"><label for="view" class="radio">Blog Post</label></p>
-          <p><input type="radio" name="view" value="post"><label for="view" class="radio">Post New Entry</label></p>
-          <p><input type="radio" name="view" value="comment"><label for="view" class="radio">Post New Comment</label></p>
-        </section>
+    <section class="option" id="option-view">
+      <section class="option-title">
+        <h5>Blog View</h5>
+        <span class="collapsebutton"></span>
       </section>
-
-      <section class="option" id="option-base">
-        <section class="option-title">
-          <h5>Base Theme</h5>
-          <span class="collapsebutton"></span>
-        </section>
-        <section class="option-wrap">
-          <p><input type="radio" name="base" value="original"><label for="base" class="radio">Core by Dojo</label></p>
-          <p><input type="radio" name="base" value="blog"><label for="base" class="radio">Calm by Red</label></p>
-        </section>
+      <section class="option-wrap">
+        <select name="view">
+          <option value="index">Index</option>
+          <option value="blog">Post</option>
+          <option value="post">Post New Entry</option>
+          <option value="comment">Post New Comment</option>
+        </select>
       </section>
     </section>
+
+    <section class="option" id="option-base">
+      <section class="option-title">
+        <h5>Base Theme</h5>
+        <span class="collapsebutton"></span>
+      </section>
+      <section class="option-wrap">
+        <select name="base">
+          <option value="original">Core by Dojo</option>
+          <option value="calm">Calm by Red</option>
+        </select>
+      </section>
+    </section>
+
+    <!-- `span` and not `a` to avoid accidental styling in Firefox  -->
+    <span href="#" class="linkbutton" id="submit">Get Code</span>
 
   </section>
   <div id="side-resizer"></div>
@@ -63,3 +69,6 @@
 <?php include("unavailable.php"); ?>
 
 <?php } ?>
+
+</body>
+</html>
