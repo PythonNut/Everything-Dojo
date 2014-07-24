@@ -49,7 +49,7 @@
       </section>
       <section class="option-wrap">
         <select name="base">
-          <option value="original">Core by Dojo</option>
+          <option value="core">Core by Dojo</option>
           <option value="calm">Calm by Red</option>
         </select>
       </section>
