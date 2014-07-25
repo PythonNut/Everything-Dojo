@@ -234,14 +234,15 @@ function themizer() {
     clickoutFiresChange: true,
     showButtons: false,
     move: function(color) {
-            $("[data-id='" + $(this).attr("id") + "']").val(color);
+            $(this).prev().val(color);
             $($(this).data("el")).css($(this).data("prop"), color);
           }
   });
   $(".spectrum.text").keyup(function() {
-    var color = $(this).val();
-    $($(this).next().data("el")).css($(this).next().data("prop"), color);
-    $(this).next().spectrum("set", color);
+    var color  = $(this).val(),
+        picker = $(this).next();
+    $(picker.data("el")).css(picker.data("prop"), color);
+    $(picker.spectrum("set", color));
   });
 
   $(window).mousemove();

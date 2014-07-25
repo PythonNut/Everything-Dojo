@@ -11,9 +11,9 @@
   session_start();
   $extra_style = "<link rel=\"stylesheet\" href=\"css/blog-style.css\">
   <link rel=\"stylesheet\" href=\"css/themizer.css\">
-  <link rel=\"stylesheet\" href=\"css/spectrum.css\">";
+  <link rel=\"stylesheet\" href=\"css/spectrum.min.css\">";
   $extra_js = "<script src=\"js/blog-fn.js\"></script>
-  <script src=\"js/spectrum.js\" onload=\"$.fn.spectrum.load = false;\"></script>
+  <script src=\"js/spectrum-1.3.4.min.js\" onload=\"$.fn.spectrum.load = false;\"></script>
   <script>
   $(function(){
     sliderSidebar('themizer-inner');
