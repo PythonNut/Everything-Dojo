@@ -241,19 +241,7 @@ function themizer() {
   $(".spectrum.text").keyup(function() {
     var color = $(this).val();
     $($(this).next().data("el")).css($(this).next().data("prop"), color);
-    // reinitialize everything because we can't just init one property
-    $(this).next().spectrum({
-      color: color,
-      preferredFormat: "name",
-      showAlpha: true,
-      showInitial: true,
-      clickoutFiresChange: true,
-      showButtons: false,
-      move: function(color) {
-              $("[data-id='" + $(this).attr("id") + "']").val(color);
-              $($(this).data("el")).css($(this).data("prop"), color);
-            }
-    });
+    $(this).next().spectrum("set", color);
   });
 
   $(window).mousemove();

@@ -24,8 +24,8 @@
 ?>
 <?php if ($_GET["mode"] == "regular") { ?>
 <aside id="sidebar">
+  <h2 id="sideheadbar" class="themizer">Themizer</h2>
   <section id="sidebar-inner">
-    <h2 id="sideheadbar" class="themizer">Themizer</h2>
 
     <section class="option" id="option-view">
       <section class="option-title">
@@ -64,14 +64,14 @@
         <section data-name="backgroundColor">
           <span class="label">Background Color</span>
           <p>
-            <input type="text" class="spectrum text" data-id="spectrum-body-backgroundColor" value="white">
+            <input type="text" class="spectrum text" data-id="spectrum-body-backgroundColor" value="white" spellcheck="false">
             <input type="color" class="spectrum color-picker" id="spectrum-body-backgroundColor" value="#FFFFFF" data-el="body" data-prop="background-color">
           </p>
         </section>
-        <p data-name="backgroundImage">
+        <section data-name="backgroundImage">
           <span class="label optional">Background Image URL</span>
           <input type="text" class="text" id="body-backgroundImage">
-        </p>
+        </section>
         <section data-name="backgroundRepeat">
           <span class="label">Background Repeat</span>
           <p>
