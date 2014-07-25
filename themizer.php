@@ -61,11 +61,13 @@
         <span class="collapsebutton"></span>
       </section>
       <section class="option-wrap">
-        <p data-name="backgroundColor">
+        <section data-name="backgroundColor">
           <span class="label">Background Color</span>
-          <input type="text" class="text" data-id="spectrum-body-backgroundColor" value="white">
-          <input type="color" class="spectrum" id="spectrum-body-backgroundColor" value="#FFFFFF" data-el="body" data-prop="background-color">
-        </p>
+          <p>
+            <input type="text" class="spectrum text" data-id="spectrum-body-backgroundColor" value="white">
+            <input type="color" class="spectrum color-picker" id="spectrum-body-backgroundColor" value="#FFFFFF" data-el="body" data-prop="background-color">
+          </p>
+        </section>
         <p data-name="backgroundImage">
           <span class="label optional">Background Image URL</span>
           <input type="text" class="text" id="body-backgroundImage">

@@ -118,9 +118,6 @@ function themizer() {
   $("#sidebar-inner").width(sideWidth);
   $("#side-button").css("left", sideWidth);
 
-  // edit id of the wrapping #content to avoid conflict with #content in blog HTML
-  $("#content:first-of-type").attr("id", "themizer-content");
-
   $("#blog-body").load("blog-index.html");
   $("head").append("<link href='css/style.core.css' type='text/css' rel='stylesheet' id='base-theme'>");
 
@@ -147,7 +144,7 @@ function themizer() {
   // resize sidebar
   // modified from https://stackoverflow.com/a/4139860
   $("#side-resizer").mousedown(function() {
-    $(document).mousemove(function(event) { // use document as window is reserved for sideButton when triggered
+    $(document).mousemove(function(event) { // use document to avoid conflict with sideButton
       var mousePosX = event.pageX;
       sideWidth = mousePosX > 35*vh ? mousePosX : sideWidth; // set original width as minimum
       $("#sidebar-inner").width(sideWidth);
@@ -230,7 +227,7 @@ function themizer() {
     $("body").css("background-repeat", $("[name='body-backgroundRepeat']:checked").val());
   })
   // Spectrum
-  $(".spectrum").spectrum({
+  $(".spectrum.color-picker").spectrum({
     preferredFormat: "name",
     showAlpha: true,
     showInitial: true,
@@ -238,12 +235,12 @@ function themizer() {
     showButtons: false,
     move: function(color) {
             $("[data-id='" + $(this).attr("id") + "']").val(color);
-            $($(this).data("el")).css($(this).data("prop"), color.toString());
+            $($(this).data("el")).css($(this).data("prop"), color);
           }
   });
-  $(".text[data-id^='spectrum']").keyup(function() {
+  $(".spectrum.text").keyup(function() {
     var color = $(this).val();
-    $($(this).next().data("el")).css($(this).next().data("prop"), color.toString());
+    $($(this).next().data("el")).css($(this).next().data("prop"), color);
     // reinitialize everything because we can't just init one property
     $(this).next().spectrum({
       color: color,
@@ -254,7 +251,7 @@ function themizer() {
       showButtons: false,
       move: function(color) {
               $("[data-id='" + $(this).attr("id") + "']").val(color);
-              $($(this).data("el")).css($(this).data("prop"), color.toString());
+              $($(this).data("el")).css($(this).data("prop"), color);
             }
     });
   });

@@ -36,7 +36,13 @@
 #sidebar option {
   background-color: #212121;
   color: #aaa;
+  font-size: inherit;
   border: none;
+}
+
+.text {
+  width: 100%;
+  padding: 0 0.1em;
 }
 
 .linkbutton {
@@ -214,6 +220,70 @@
   display: inline-block;
   height: 13px;
   margin-left: 5px;
+}
+
+/**
+ * Styling for Spectrum components
+ *
+ * .spectrum              - Text inputs that bind with Spectrum
+ *
+ * .sp-replacer           - The Spectrum replacer
+ *   .sp-preview          - Acts as a mask for the Spectrum colour swatch
+ *     .sp-preview-inner  - The Spectrum colour swatch
+ *   .sp-dd               - The cute little arrow in the replacer.
+ *
+ * .sp-container          - Contains the Spectrum colour picker
+ *   .sp-picker-container - Contains the Spectrum colour sliders
+ *     .sp-alpha          - Acts as a mask for the Spectrum alpha slider
+ *       .sp-alpha-inner  - The Spectrum alpha slider
+ *     .sp-thumb-el       - The Spectrum initial colour swatch
+ */
+
+.spectrum {
+  width: 84%;
+  height: 1.5em;
+}
+
+.sp-replacer,
+.sp-preview,
+.sp-container {
+  padding: 0 !important;
+  border: 0 !important;
+  margin: 0 !important;
+}
+.sp-preview,
+.sp-alpha,
+.sp-thumb-el {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gcZAggl+4iZ2wAAACRJREFUGNNjnDlzJgMq2LNnD5oIEwMRYDAqYsH0i4uLy3DxHQBdFQcZw8RJyQAAAABJRU5ErkJggg==') !important;
+}
+.sp-replacer {
+  background: #101010 !important;
+  width: 14%;
+  height: 1.5em;
+  box-sizing: border-box;
+  vertical-align: top !important;
+  margin-left: -2% !important;
+}
+.sp-preview {
+  width: 100% !important;
+  height: 1.5em !important;
+}
+.sp-dd {
+  display: none;
+}
+.sp-container {
+  background: #222 !important;
+  box-shadow: 0 0 3px 2px #222;
+}
+.sp-picker-container {
+  border-left: none !important;
+}
+.sp-alpha {
+  background-size: contain;
+}
+.sp-alpha-inner {
+  background-image: -webkit-linear-gradient(left, transparent, black) !important;
+  background-image: linear-gradient(to right, transparent, black) !important;
 }
 
 /*--MISCELLANEOUS CLASSES--*/
