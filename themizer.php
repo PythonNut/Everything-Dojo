@@ -64,19 +64,19 @@
         <section data-name="backgroundColor">
           <span class="label">Background Color</span>
           <p>
-            <input type="text" class="spectrum text" data-id="spectrum-body-backgroundColor" value="white" spellcheck="false">
-            <input type="color" class="spectrum color-picker" id="spectrum-body-backgroundColor" value="#FFFFFF" data-el="body" data-prop="background-color">
+            <input type="text" class="spectrum text" id="text-body-backgroundColor" value="white" spellcheck="false">
+            <input type="color" class="spectrum color-picker" id="spectrum-body-backgroundColor" value="#FFFFFF">
           </p>
         </section>
         <section data-name="backgroundImage">
           <span class="label optional">Background Image URL</span>
-          <input type="text" class="text" id="body-backgroundImage">
+          <input type="text" class="text" id="body-backgroundImage" spellcheck="false">
         </section>
         <section data-name="backgroundRepeat">
           <span class="label">Background Repeat</span>
           <p>
             <label class="label" for="body-backgroundRepeat-repeatAll">repeat-all</label>
-            <input type="radio" class="radio" id="body-backgroundRepeat-repeatAll" name="body-backgroundRepeat" value="repeat-all" checked>
+            <input type="radio" class="radio" id="body-backgroundRepeat-repeatAll" name="body-backgroundRepeat" value="repeat-all">
             <span class="input-button"></span>
           </p>
           <p>
@@ -94,6 +94,10 @@
             <input type="radio" class="radio" id="body-backgroundRepeat-noRepeat" name="body-backgroundRepeat" value="no-repeat">
             <span class="input-button"></span>
           </p>
+        </section>
+        <section data-name="fontFamily">
+          <span class="label">Font Family</span>
+          <input type="text" class="text" id="body-fontFamily" value="Calibri" spellcheck="false">
         </section>
       </section>
     </section>

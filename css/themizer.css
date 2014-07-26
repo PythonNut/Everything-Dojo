@@ -47,6 +47,7 @@
 }
 
 .text {
+  height: 1.7em;
   padding: 0.1em 0.2em;
 }
 
@@ -251,7 +252,6 @@
  */
 
 .spectrum {
-  height: 1.7em;
   padding-right: 1.9em;
   box-sizing: border-box;
 }
@@ -303,7 +303,8 @@
 }
 
 /*--MISCELLANEOUS CLASSES--*/
-#sidebar p {
+#sidebar p,
+#sidebar section[data-name] {
   margin-bottom: 0.6rem;
   position: relative;
 }
@@ -322,4 +323,9 @@
 }
 #sidebar .inline {
   display: inline;
+}
+/* Validate inputs */
+#sidebar .invalid {
+  background: #b00 !important;
+  box-shadow: none; /* Prevent Firefox from automatically applying box-shadow to invalid inputs */
 }
