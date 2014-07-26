@@ -5,22 +5,31 @@ $table = TB_NAME;
 
 $err = array();
 
-/**
- * Checks if usernames are free, used in conjunction with AJAX
- */
+// Checks if usernames are free
+if (isset($_GET['username'])) {
+  $username = $_GET['username'];
+  $rs_duplicate = mysql_query("SELECT count(*) AS total FROM $table WHERE user_name='$username'") or die(mysql_error());
+  list($total) = mysql_fetch_row($rs_duplicate);
 
-// if (isset($_GET['username'])) { // && isset($_GET['email'])) {
-//   $username = $_GET['username'];
-//   $email = $_GET['email'];
-//   $rs_duplicate = mysql_query("SELECT count(*) AS total FROM $table WHERE user_name='$username'") or die(mysql_error()); // TODO: add user email
-//   list($total) = mysql_fetch_row($rs_duplicate);
-//
-//   if ($total > 0) {
-//     http_response_code(400);
-//   } else {
-//     http_response_code(200);
-//   }
-// }
+  if ($total > 0) {
+    http_response_code(400);
+  } else {
+    http_response_code(200);
+  }
+}
+
+// Checks if emails exist in database
+if (isset($_GET['email'])) {
+  $email = $_GET['email'];
+  $rs_duplicate = mysql_query("SELECT count(*) AS total FROM $table WHERE user_email='$email'") or die(mysql_error());
+  list($total) = mysql_fetch_row($rs_duplicate);
+
+  if ($total > 0) {
+    http_response_code(400);
+  } else {
+    http_response_code(200);
+  }
+}
 
 if(isset($_POST['doRegister']))  {
   foreach($_POST as $key => $value) {
