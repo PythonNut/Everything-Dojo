@@ -12,7 +12,7 @@ var div = document.createElement("div");
 /**
  * Adds messages next to elements
  * @param {String} selector Valid CSS selector to select element to add message next to
- * @param {String} msg Message to display to user. Can be a string, "remove", or "removeAll".
+ * @param {String} [msg="removeAll"] Message to display to user.
  * @param {String} msgClass Type of message. Can be "error", "valid", or "notification".
  * @param {Function} fn Function that can be called on remove or other
  */
@@ -58,7 +58,7 @@ function message(selector, msg, msgClass, fn)
 /**
  * Throws verification error(s). Is a wrapper for message().
  * @param {String} name Name of element with error
- * @param {String} msg Error message to display to user. Takes same arguments as `msg` in message(), and can be empty in place of "remove".
+ * @param {String} [msg="removeAll"] Error message to display to user. Takes same arguments as `msg` in message()
  */
 
 function err(name, msg)
@@ -75,7 +75,7 @@ function err(name, msg)
 /**
  * Tells user that a field is valid. Is a wrapper for message().
  * @param {String} name Name of valid field
- * @param {String} msg Message to display to user. Takes same arguments as `msg` in message(), and can be empty in place of "remove".
+ * @param {String} [msg="removeAll"] Message to display to user. Takes same arguments as `msg` in message()
  */
 
 function valid(name, msg)
@@ -85,32 +85,6 @@ function valid(name, msg)
 
   message(element, msg, "valid");
 }
-
-/** 
- * Checks to see if usernames are available.
- * @param {String} username Username to be checked
- */
-
-// function checkUsername(username) {
-//   var ajax = new XMLHttpRequest();
-//   ajax.onreadystatechange = function() {
-//     if (ajax.readyState == 4 ) {
-//       if(ajax.status == 200){
-//         return true;
-//       }
-//       else if(ajax.status == 400) {
-//         return false;
-//       }
-//       else {
-//         err("user_name", "A " + ajax.status + " error occurred. Please try again.", "error");
-//       }
-//     }
-//   }
-// 
-//   ajax.open("GET", "register.php?username=" + username, true);
-//   ajax.send();
-// }
-
 
 /**
  * Validates text that is entered into the fields.
@@ -129,22 +103,60 @@ function validate(name)
     if (!user.match(/^[a-z\d_]{3,20}$/i)) {
       valid(name);
       err(name, "Invalid username. Usernames must be 3-20 characters long and can only contain alphanumeric characters and underscores.");
-//    } else if (!checkUsername(user)) {
-//      valid(name);
-//      err(name, "Username already exists! Please choose a new one.");
     } else {
       err(name);
-      valid(name, "Username is valid");
+      // ajax to verify username
+      var ajaxName = new XMLHttpRequest();
+      ajaxName.onreadystatechange = function() {
+        if (ajaxName.readyState == 4 ) {
+          if (ajaxName.status == 200) {
+            err(name);
+            valid(name, "Username is valid.");
+          }
+          else if (ajaxName.status == 400) {
+            valid(name);
+            err(name, "Username already exists! Please choose a new one.");
+          }
+          else {
+            valid(name);
+            err(name, "A " + ajaxName.status + " error occurred. Please try again.", "error");
+          }
+        }
+      };
+
+      ajaxName.open("GET", "register.php?username=" + user, true);
+      ajaxName.send();
     }
   }
 
   // Email
   if (name == "usr_email") {
     var email = field.value;
-    if (!email.match(/^\S+@([\w\d-]{2,}\.){1,2}[\w]{2,6}$/i)) {
+    if (!email.match(/^\S+@(localhost|([\w\d-]{2,}\.){1,2}[\w]{2,6})$/i)) {
       err(name, "Email entered is not a valid email.");
     } else {
       err(name);
+      // ajax to verify email
+      var ajaxEmail = new XMLHttpRequest();
+      ajaxEmail.onreadystatechange = function() {
+        if (ajaxEmail.readyState == 4 ) {
+          if (ajaxEmail.status == 200) {
+            err(name);
+            valid(name, "Email is valid.");
+          }
+          else if (ajaxEmail.status == 400) {
+            valid(name);
+            err(name, "Email address already exists in our database! Please do not create multis.");
+          }
+          else {
+            valid(name);
+            err(name, "A " + ajaxEmail.status + " error occurred. Please try again.", "error");
+          }
+        }
+      };
+
+      ajaxEmail.open("GET", "register.php?email=" + email, true);
+      ajaxEmail.send();
     }
   }
 
