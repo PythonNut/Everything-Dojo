@@ -264,8 +264,8 @@ function themizer() {
             // this is as the IDs follow the pattern
             // spectrum-<selector>-<CSSProperty (camelCased)>
             // Hence, we can deconstruct the id to produce our desired selectors.
-            var id = $(this).attr("id").split(/-/),
-                el = id[1],
+            var id   = $(this).attr("id").split(/-/),
+                el   = id[1],
                 prop = id[2].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase();
             $(this).prev().val(color);
             $(el).css(prop, color);
@@ -274,8 +274,11 @@ function themizer() {
   // Set color picker to corresponding text input's value when user types
   $(".spectrum.text").keyup(function() {
     var color  = $(this).val(),
-        picker = $(this).next();
-    $(picker.data("el")).css(picker.data("prop"), color);
+        picker = $(this).next(),
+        id     = $(this).attr("id").split(/-/),
+        el     = id[1],
+        prop   = id[2].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase();
+    $(el).css(prop, color);
     $(picker.spectrum("set", color));
   });
   // Reposition picker when user scrolls sidebar
