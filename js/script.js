@@ -218,31 +218,69 @@ function themizer() {
   });
 
   /**
-   * Themizer body
+   * Styling
+   *
+   * TODO: OOP this
    */
+
+  // General
+
+  // Check inputs for validity
+  $("[type='url']").keyup(function() {
+    $(this).val().match(/^https?:\/\/[a-z0-9-\.]+\.[a-z]{2,4}\/([^\s<>%"\,\{\}\\|\\\^\[\]`]+)?\.(gif|jpg|jpeg|png|php|svg)$/) ? $(this).removeClass("invalid") : $(this).addClass("invalid");
+  });
+
+  // Body
   $("#body-backgroundImage").change(function() {
-    $("body").css("background-image", "url('" + $(this).val() + "')");
+    if (!$(this).hasClass("invalid")) { // check for validity
+      $("body").css("background-image", "url('" + $(this).val() + "')");
+    }
   });
   $("[name='body-backgroundRepeat']").change(function() {
     $("body").css("background-repeat", $("[name='body-backgroundRepeat']:checked").val());
-  })
-  // Spectrum
+  });
+  $("#body-fontFamily").change(function() {
+    var font = $(this).val();
+    if (font.indexOf(" ") !== -1) {
+      font = '"' + font + '"';
+    }
+    // clear font if field is empty
+    font ? $("body").css("font-family", font + ", Calibri, Verdana, Arial, sans-serif") : $("body").css("font-family", "");
+  });
+
+  //
+  /**
+   * Spectrum
+   */
+
+  // Initialize default settings
   $(".spectrum.color-picker").spectrum({
     preferredFormat: "name",
     showAlpha: true,
     showInitial: true,
-    clickoutFiresChange: true,
     showButtons: false,
+    // change corresponding text input's value when user drags slider(s)
     move: function(color) {
+            // this is as the IDs follow the pattern
+            // spectrum-<selector>-<CSSProperty (camelCased)>
+            // Hence, we can deconstruct the id to produce our desired selectors.
+            var id = $(this).attr("id").split(/-/),
+                el = id[1],
+                prop = id[2].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase();
             $(this).prev().val(color);
-            $($(this).data("el")).css($(this).data("prop"), color);
+            $(el).css(prop, color);
           }
   });
+  // Set color picker to corresponding text input's value when user types
   $(".spectrum.text").keyup(function() {
     var color  = $(this).val(),
         picker = $(this).next();
     $(picker.data("el")).css(picker.data("prop"), color);
     $(picker.spectrum("set", color));
+  });
+  // Reposition picker when user scrolls sidebar
+  $("#sidebar-inner").bind("scroll", function() {
+    $(".spectrum.color-picker").spectrum("reflow");
   });
 
   $(window).mousemove();
