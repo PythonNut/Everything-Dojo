@@ -51,6 +51,15 @@
   padding: 0.1em 0.2em;
 }
 
+.title {
+  font-family: "Lato", "Lucida Grande",  "Lucida Sans Unicode", sans-serif;
+  font-weight: 400;
+}
+
+.label {
+  color: #ccc;
+}
+
 .linkbutton {
   display: block;
   color: #48a730;
@@ -228,10 +237,21 @@
 .checkbox {
   position: absolute;
   right: 0;
-  display: inline-block;
-  width: auto !important;
-  height: 13px;
-  margin-left: 5px;
+  opacity: 0;
+  margin: 0;
+  z-index: 10;
+}
+.radio + .input-button {
+  position: absolute;
+  right: 0;
+  width: 0.5em;
+  height: 0.5em;
+  background: #ccc;
+  border: 0.3em solid #ccc;
+  border-radius: 50%;
+}
+.radio:checked + .input-button {
+  background: #337cff;
 }
 
 /**
