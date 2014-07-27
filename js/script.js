@@ -118,8 +118,8 @@ function themizer() {
   $("#sidebar-inner").width(sideWidth);
   $("#side-button").css("left", sideWidth);
 
-  $("#blog-body").load("blog-index.html");
-  $("head").append("<link href='css/style.core.css' type='text/css' rel='stylesheet' id='base-theme'>");
+  $("#blog-body").load("blog/blog-index.html");
+  $("head").append("<link href='blog/css/core.css' type='text/css' rel='stylesheet' id='base-theme'>");
 
   // option slides sliding init
   $(".option").each(function() {
@@ -135,10 +135,10 @@ function themizer() {
 
   // view mode radios
   $("[name='view']").change(function() {
-    $("#blog-body").load("blog-" + $("[name='view'] :checked").val() + ".html");
+    $("#blog-body").load("blog/blog-" + $("[name='view'] :checked").val() + ".html");
   });
   $("[name='base']").change(function() {
-    $("link[id='base-theme']").attr('href', "css/style." + $("[name='base'] :checked").val() + ".css");
+    $("link[id='base-theme']").attr('href', "blog/css/" + $("[name='base'] :checked").val() + ".css");
   });
 
   // resize sidebar
@@ -230,19 +230,26 @@ function themizer() {
    * @param {String}  [value]   Value to assign to CSS property
    */
   $.fn.style = function(useName, value) {
-    var cssId    = useName ? this.attr("name") : this.attr("id"), // Create a temp variable from which we decompose the selector and property
-        id       = useName ? "[name='" + this.attr("name") + "']" : "#" + this.attr("id"), // Get selector of corresponding field
-        cssArray = cssId.split("-"), // Split cssId into array so we can decompose it
-        el       = cssArray[0].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("class_", ".").replace("id_", "#"), // Get selector for elements
-        prop     = cssArray[1].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase(), // Get CSS property
+    var // Get selector of corresponding field
+        id       = useName ? "[name='" + this.attr("name") + "']" : "#" + this.attr("id"),
+        // Create a temp variable from which we decompose the selector and property
+        cssId    = useName ? this.attr("name") : this.attr("id"),
+        // Split cssId into array so we can decompose it
+        cssArray = cssId.split("-"),
+        // Get selector for elements
+        el       = cssArray[0].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("class_", ".").replace("id_", "#"),
+        // Get CSS property
+        prop     = cssArray[1].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase(),
+        // Value of `this`
         thisVal;
 
     this.change(function() {
-      thisVal = !useName ? value || this.value : null;
+      thisVal = !useName ? value || this.value : null; // this.val() throws error
 
-      if (!$(id).hasClass("invalid")) { // hack as this.hasClass() doesn't work
+      if (!$(this).hasClass("invalid")) {
         switch(prop) {
-          case "font-family": // font-family
+          // font-family
+          case "font-family":
             var font = thisVal;
             if (font.indexOf(" ") !== -1) {
               font = '"' + font + '"';
@@ -250,21 +257,25 @@ function themizer() {
             font ? $(el).css("font-family", font + ", Calibri, Verdana, Arial, sans-serif") : $(el).css("font-family", "");
             break;
 
-          case "background-image": // background-image
+          // background-image
+          case "background-image":
             $(el).css("background-image", "url(" + thisVal + ")");
             break;
 
-          case "background-repeat": // background-repeat
+          // background-repeat
+          case "background-repeat":
             thisVal = $(id + ":checked").val();
             $(el).css("background-repeat", thisVal);
             break;
 
+          // default case
           default:
             $(el).css(prop, thisVal);
         }
       }
     });
   };
+
   // Check inputs for validity
   $("[type='url']").keyup(function() {
     $(this).val().match(/^https?:\/\/[a-z0-9-\.]+\.[a-z]{2,4}\/([^\s<>%"\,\{\}\\|\\\^\[\]`]+)?\.(gif|jpg|jpeg|png|php|svg)$/) ? $(this).removeClass("invalid") : $(this).addClass("invalid");
