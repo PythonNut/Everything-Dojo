@@ -219,36 +219,62 @@ function themizer() {
 
   /**
    * Styling
-   *
-   * TODO: OOP this
    */
 
   // General
 
+  /**
+   * Style elements targeted by Themizer
+   *
+   * @param {Boolean} [useName] Use name to refer to selector
+   * @param {String}  [value]   Value to assign to CSS property
+   */
+  $.fn.style = function(useName, value) {
+    var cssId    = useName ? this.attr("name") : this.attr("id"), // Create a temp variable from which we decompose the selector and property
+        id       = useName ? "[name='" + this.attr("name") + "']" : "#" + this.attr("id"), // Get selector of corresponding field
+        cssArray = cssId.split("-"), // Split cssId into array so we can decompose it
+        el       = cssArray[0].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("class_", ".").replace("id_", "#"), // Get selector for elements
+        prop     = cssArray[1].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase(), // Get CSS property
+        thisVal;
+
+    this.change(function() {
+      thisVal = !useName ? value || this.value : null;
+
+      if (!$(id).hasClass("invalid")) { // hack as this.hasClass() doesn't work
+        switch(prop) {
+          case "font-family": // font-family
+            var font = thisVal;
+            if (font.indexOf(" ") !== -1) {
+              font = '"' + font + '"';
+            }
+            font ? $(el).css("font-family", font + ", Calibri, Verdana, Arial, sans-serif") : $(el).css("font-family", "");
+            break;
+
+          case "background-image": // background-image
+            $(el).css("background-image", "url(" + thisVal + ")");
+            break;
+
+          case "background-repeat": // background-repeat
+            thisVal = $(id + ":checked").val();
+            $(el).css("background-repeat", thisVal);
+            break;
+
+          default:
+            $(el).css(prop, thisVal);
+        }
+      }
+    });
+  };
   // Check inputs for validity
   $("[type='url']").keyup(function() {
     $(this).val().match(/^https?:\/\/[a-z0-9-\.]+\.[a-z]{2,4}\/([^\s<>%"\,\{\}\\|\\\^\[\]`]+)?\.(gif|jpg|jpeg|png|php|svg)$/) ? $(this).removeClass("invalid") : $(this).addClass("invalid");
   });
 
   // Body
-  $("#body-backgroundImage").change(function() {
-    if (!$(this).hasClass("invalid")) { // check for validity
-      $("body").css("background-image", "url('" + $(this).val() + "')");
-    }
-  });
-  $("[name='body-backgroundRepeat']").change(function() {
-    $("body").css("background-repeat", $("[name='body-backgroundRepeat']:checked").val());
-  });
-  $("#body-fontFamily").change(function() {
-    var font = $(this).val();
-    if (font.indexOf(" ") !== -1) {
-      font = '"' + font + '"';
-    }
-    // clear font if field is empty
-    font ? $("body").css("font-family", font + ", Calibri, Verdana, Arial, sans-serif") : $("body").css("font-family", "");
-  });
+  $("#body-backgroundImage").style();
+  $("[name='body-backgroundRepeat']").style(1);
+  $("#body-fontFamily").style();
 
-  //
   /**
    * Spectrum
    */
