@@ -70,7 +70,7 @@
         </section>
         <section data-name="backgroundImage">
           <span class="title optional">Background Image URL</span>
-          <input type="text" class="text" id="body-backgroundImage" spellcheck="false">
+          <input type="url" class="text" id="body-backgroundImage" spellcheck="false">
         </section>
         <section data-name="backgroundRepeat">
           <span class="title">Background Repeat</span>
