@@ -41,6 +41,7 @@
   width: 100%;
   background-color: #212121;
   color: #aaa;
+  font-family: inherit;
   font-size: inherit;
   border: none;
   outline: none;
@@ -58,6 +59,12 @@
 
 .label {
   color: #ccc;
+  font-size: 0.9em;
+}
+
+.optional::after {
+  content: " (Optional)";
+  font-size: 0.62em;
 }
 
 .linkbutton {
@@ -212,7 +219,7 @@
   position: absolute;
   top: 1em;
   right: 0.9em;
-  width: 0.5em;
+  width: 0.43em;
   height: 0.2em;
   background: #fafafa;
   -webkit-transition: -webkit-transform 0.5s ease-in-out;
@@ -241,17 +248,21 @@
   margin: 0;
   z-index: 10;
 }
-.radio + .input-button {
+.radio + .input-button,
+.checkbox + .input-button {
   position: absolute;
   right: 0;
   width: 0.5em;
   height: 0.5em;
   background: #ccc;
   border: 0.3em solid #ccc;
-  border-radius: 50%;
 }
-.radio:checked + .input-button {
+.radio:checked + .input-button,
+.checkbox:checked + .input-button {
   background: #337cff;
+}
+.radio + .input-button {
+  border-radius: 50%;
 }
 
 /**
@@ -325,8 +336,9 @@
 /*--MISCELLANEOUS CLASSES--*/
 #sidebar p,
 #sidebar section[data-name] {
-  margin-bottom: 0.6rem;
   position: relative;
+  margin-top: 0.3em;
+  margin-bottom: 0.6em;
 }
 #sidebar i,
 #sidebar .i {
