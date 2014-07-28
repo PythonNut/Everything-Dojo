@@ -14,7 +14,7 @@
   </thead>
   <tbody>
   <?php
-  for($i=0; $i<$data['validated']['count']; $i++) {
+  for($i=0; $i<count($data['validated']['id']); $i++) {
   ?>
     <tr>
       <td><?php echo "<b>".$data['validated']['name'][$i]."</b><br />".$data['validated']['description'][$i]; ?></td>
@@ -41,7 +41,7 @@
   </thead>
   <tbody>
   <?php
-  for($i=0; $i<$data['unvalidated']['count']; $i++) {
+  for($i=0; $i<count($data['unvalidated']['id']); $i++) {
   ?>
     <tr>
       <td><?php echo "<b>".$data['unvalidated']['name'][$i]."</b><br />".$data['unvalidated']['description'][$i]; ?></td>
