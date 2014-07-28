@@ -4,6 +4,7 @@
 #tile-container {
   height: 34vh;
   width: 64vw;
+  margin-top: 4vh;
   margin-left: auto;
   margin-right: auto;
 }
