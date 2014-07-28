@@ -124,8 +124,8 @@ function themizer() {
   // option slides sliding init
   $(".option").each(function() {
     var id = $(this).attr('id');
-    $("#" + id + " .option-title").attr("onclick", "optionToggle('" + id + "')");
-    optionToggle(id);
+    $("#" + id + " .option-title").attr("onclick", "$(this).optionToggle()");
+    $(this).optionToggle();
   });
 
   // set first option to be open
@@ -221,61 +221,6 @@ function themizer() {
    * Styling
    */
 
-  // General
-
-  /**
-   * Style elements targeted by Themizer
-   *
-   * @param {Boolean} [useName] Use name to refer to selector
-   * @param {String}  [value]   Value to assign to CSS property
-   */
-  $.fn.style = function(useName, value) {
-    var // Get selector of corresponding field
-        id       = useName ? "[name='" + this.attr("name") + "']" : "#" + this.attr("id"),
-        // Create a temp variable from which we decompose the selector and property
-        cssId    = useName ? this.attr("name") : this.attr("id"),
-        // Split cssId into array so we can decompose it
-        cssArray = cssId.split("-"),
-        // Get selector for elements
-        el       = cssArray[0].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("class_", ".").replace("id_", "#"),
-        // Get CSS property
-        prop     = cssArray[1].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase(),
-        // Value of `this`
-        thisVal;
-
-    this.change(function() {
-      thisVal = !useName ? value || this.value : null; // this.val() throws error
-
-      if (!$(this).hasClass("invalid")) {
-        switch(prop) {
-          // font-family
-          case "font-family":
-            var font = thisVal;
-            if (font.indexOf(" ") !== -1) {
-              font = '"' + font + '"';
-            }
-            font ? $(el).css("font-family", font + ", Calibri, Verdana, Arial, sans-serif") : $(el).css("font-family", "");
-            break;
-
-          // background-image
-          case "background-image":
-            $(el).css("background-image", "url(" + thisVal + ")");
-            break;
-
-          // background-repeat
-          case "background-repeat":
-            thisVal = $(id + ":checked").val();
-            $(el).css("background-repeat", thisVal);
-            break;
-
-          // default case
-          default:
-            $(el).css(prop, thisVal);
-        }
-      }
-    });
-  };
-
   // Check inputs for validity
   $("[type='url']").keyup(function() {
     $(this).val().match(/^https?:\/\/[a-z0-9-\.]+\.[a-z]{2,4}\/([^\s<>%"\,\{\}\\|\\\^\[\]`]+)?\.(gif|jpg|jpeg|png|php|svg)$/) ? $(this).removeClass("invalid") : $(this).addClass("invalid");
@@ -327,18 +272,79 @@ function themizer() {
 }
 
 /**
- * Toggle options
+ * jQuery plugins
  */
-function optionToggle(id) {
-  $("#" + id + " .option-wrap").slideToggle();
-  var content = $("#" + id + " .option-title");
+(function($) {
 
-  if (content.hasClass("collapsed")) {
-    content.removeClass("collapsed").addClass("expanded");
-  } else {
-    content.removeClass("expanded").addClass("collapsed");
-  }
-}
+  /**
+   * Style elements targeted by Themizer
+   *
+   * @param {Boolean} [useName] Use name to refer to selector
+   * @param {String}  [value]   Value to assign to CSS property
+   */
+
+  $.fn.style = function(useName, value) {
+    var // Get selector of corresponding field
+        id       = useName ? "[name='" + this.attr("name") + "']" : "#" + this.attr("id"),
+        // Create a temp variable from which we decompose the selector and property
+        cssId    = useName ? this.attr("name") : this.attr("id"),
+        // Split cssId into array so we can decompose it
+        cssArray = cssId.split("-"),
+        // Get selector for elements
+        el       = cssArray[0].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("class_", ".").replace("id_", "#"),
+        // Get CSS property
+        prop     = cssArray[1].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase(),
+        // Value of `this`
+        thisVal;
+
+    this.change(function() {
+      thisVal = !useName ? value || this.value : null; // this.val() throws error
+
+      if (!$(this).hasClass("invalid")) {
+        switch(prop) {
+          // font-family
+          case "font-family":
+            var font = thisVal;
+            if (font.indexOf(" ") !== -1) {
+              font = '"' + font + '"';
+            }
+            font ? $(el).css("font-family", font + ", Calibri, Verdana, Arial, sans-serif") : $(el).css("font-family", "");
+            break;
+
+          // background-image
+          case "background-image":
+            $(el).css("background-image", "url(" + thisVal + ")");
+            break;
+
+          // background-repeat
+          case "background-repeat":
+            thisVal = $(id + ":checked").val();
+            $(el).css("background-repeat", thisVal);
+            break;
+
+          // default case
+          default:
+            $(el).css(prop, thisVal);
+        }
+      }
+    });
+  };
+
+  /**
+   * Toggle options
+   */
+  $.fn.optionToggle = function() {
+    var id = $(this).parent().attr("id");
+    $("#" + id + " .option-wrap").slideToggle();
+    var content = $("#" + id + " .option-title");
+
+    if (content.hasClass("collapsed")) {
+      content.removeClass("collapsed").addClass("expanded");
+    } else {
+      content.removeClass("expanded").addClass("collapsed");
+    }
+  };
+}(jQuery));
 
 /**
  * Generate random colour
