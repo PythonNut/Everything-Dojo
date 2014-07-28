@@ -16,12 +16,13 @@ class themedb {
   // Getting methods
 
   function get_themes($id = 'all') {
+		global $dbc;
+		
     if($id == 'all') {
       // Select all approved themes but unvalidated
       $query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `approved` = 1 AND `validated` = 0";
-      $result = mysql_query($query);
-      $num = mysql_num_rows($result);
 
+      // Assign themes to array
       $id          = array();
       $name        = array();
       $description = array();
@@ -30,21 +31,19 @@ class themedb {
       $version     = array();
       $submit_id   = array();
       $owner_id    = array();
-      $i = 0;
-      // Assign themes to array
-      while ($i < $num) {
-        $id[]          = mysql_result($result,$i,"id");
-        $name[]        = mysql_result($result,$i,"name");
-        $description[] = mysql_result($result,$i,"description");
-        $stage[]       = mysql_result($result,$i,"stage");
-        $author[]      = mysql_result($result,$i,"author");
-        $version[]     = mysql_result($result,$i,"version");
-        $submit_id[]   = mysql_result($result,$i,"submited_by_id");
-        $owner_id[]    = mysql_result($result,$i,"owner_id");
-        $i++;
-      }
+			
+			foreach ($dbc->query($query) as $row) {
+        $id[]          = $row["id"];
+        $name[]        = $row["name"];
+        $description[] = $row["description"];
+        $stage[]       = $row["stage"];
+        $author[]      = $row["author"];
+        $version[]     = $row["version"];
+        $submit_id[]   = $row["submited_by_id"];
+        $owner_id[]    = $row["owner_id"];
+			}
+
       $unvalidated = array(
-          'count'       => $i,
           'id'          => $id,
           'name'        => $name,
           'description' => $description,
@@ -54,11 +53,10 @@ class themedb {
           'submit_id'   => $submit_id,
           'owner_id'    => $owner_id
       );
+			
 
       // Select all approved themes and validated
       $query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `approved` = 1 AND `validated` = 1";
-      $result = mysql_query($query);
-      $num = mysql_num_rows($result);
 
       // Assign themes to array
       $id          = array();
@@ -69,21 +67,19 @@ class themedb {
       $version     = array();
       $submit_id   = array();
       $owner_id    = array();
-      $i = 0;
-
-      while ($i < $num) {
-        $id[]          = mysql_result($result,$i,"id");
-        $name[]        = mysql_result($result,$i,"name");
-        $description[] = mysql_result($result,$i,"description");
-        $stage[]       = mysql_result($result,$i,"stage");
-        $author[]      = mysql_result($result,$i,"author");
-        $version[]     = mysql_result($result,$i,"version");
-        $submit_id[]   = mysql_result($result,$i,"submited_by_id");
-        $owner_id[]    = mysql_result($result,$i,"owner_id");
-        $i++;
-      }
+			
+			foreach ($dbc->query($query) as $row) {
+        $id[]          = $row["id"];
+        $name[]        = $row["name"];
+        $description[] = $row["description"];
+        $stage[]       = $row["stage"];
+        $author[]      = $row["author"];
+        $version[]     = $row["version"];
+        $submit_id[]   = $row["submited_by_id"];
+        $owner_id[]    = $row["owner_id"];
+			}
+			
       $validated = array(
-          'count'       => $i,
           'id'          => $id,
           'name'        => $name,
           'description' => $description,
@@ -98,6 +94,7 @@ class themedb {
         'unvalidated' => $unvalidated,
         'validated'   => $validated
       );
+			
       return $data;
     }
     else {
