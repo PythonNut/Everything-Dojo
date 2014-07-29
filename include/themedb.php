@@ -10,7 +10,21 @@ class themedb {
   function approve_theme() {
   }
 
-  function submit_theme() {
+  function submit_theme($data) {
+		global $dbc;
+		
+		$query = "INSERT INTO " . THEMEDB_TABLE . " (`id`, `approved`, `validated`, `validate_request`, `name`, `description`, `code`, `stage`, `author`, `screenshot`, `version`, `submitted_by`, `submitted_by_id`, `owner`, `owner_id`) VALUES (NULL, 0, 0, 0, :name, :description, :code, :stage, :author, :screenshot, :version, :submitted_by, :submitted_by_id, NULL, NULL)";
+		$sth = $dbc->prepare($query);
+		$sth->execute(array(
+			':name' 							=> $data['name'],
+			':description'				=> $data['description'],
+			':code' 							=> $data['code'],
+			':stage'							=> $data['stage'],
+			':screenshot'					=> $data['screenshot'],
+			':version'						=> $data['version'],
+			':submitted_by'				=> $data['submitted_by'],
+			':submitted_by_id'		=> $data['submitted_by_id']
+		));
   }
 
   // Getting methods
@@ -100,7 +114,7 @@ class themedb {
     else {
 			$query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `id` = :id";
 			$sth = $dbc->prepare($query);
-			$sth->execute(array('id' => $id));
+			$sth->execute(array(':id' => $id));
     	$result = $sth->fetch(PDO::FETCH_ASSOC);
 			
 			return $result;
