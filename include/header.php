@@ -15,7 +15,7 @@
     <?php
     // we don't need jQuery on some pages
     if ($title != "Home" || $title != "About") { ?>
-    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="js/script.js"></script>
     <?php } ?>
 
