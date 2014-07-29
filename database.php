@@ -42,9 +42,9 @@
         break;
       case 'view':
 ?>
-        <a href="<?php echo URL_DATABASE; ?>">Back to Database Index</a>
-<?php
-        include('include/themedb/view_body.php');
+        <a href="<?php echo URL_DATABASE; ?>">Back to Database Index</a> <?php if($_GET['view'] != ''){ ?> | <a href="<?php echo URL_DATABASE; ?>?mode=view">Back to View Options</a><?php } ?>
+<?php				
+				include('include/themedb/view_body.php');
         break;
 			case 'mcp':
 				if($_SESSION['user_level'] == 5){
