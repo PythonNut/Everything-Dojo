@@ -4,6 +4,9 @@
   include("include/include.php");
   include("include/themedb.php");
   session_start();
+	$extra_style = "<link rel=\"stylesheet\" href=\"css/prism.css\" />
+  <link rel=\"stylesheet\" href=\"css/database.css\" />";
+  $extra_js = "<script src=\"js/prism.js\"></script>";
   get_header();
 
   if(isset($_GET['mode'])) {
@@ -11,7 +14,28 @@
   } else {
     $mode = 'index';
   }
-	
+?>
+					<nav class="db-nav">
+            <ul>
+              <li><a href="/" id="nav-home">Home</a></li>
+            <?php if(isset($_SESSION['user_id'])) { ?>
+              <li><a href="myaccount.php" id="menu-myaccount">My Account</a></li>
+              <li><a href="mysettings.php" id="menu-mysettings">My Settings</a></li>
+              <?php
+              // will not work if dbc is not included on page
+              if (checkAdmin()) {
+              ?>
+              <li><a href="admin.php" id="menu-admin">Admin CP</a></li>
+              <?php } //end admin ?>
+              <li><a href="logout.php" id="menu-logout">Logout</a></li>
+            <?php } ?>
+            <?php if(!isset($_SESSION['user_id'])) { ?>
+              <li><a href="login.php" id="menu-login">Login</a></li>
+              <li><a href="register.php" id="menu-register">Register</a></li>
+            <?php } ?>
+            </ul>
+          </nav>
+<?php	
   if(!isset($_SESSION['user_id'])) {
 ?>
     <a href="index.php">Back Home</a>

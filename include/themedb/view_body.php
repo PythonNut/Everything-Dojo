@@ -120,7 +120,9 @@
       <img src="<?php echo $style['screenshot']; ?>" /><br />
       <b>Code:</b><br />
       <div class="code">
-      <?php echo nl2br($style['code']); ?>
+        <pre>
+<code class="language-css"><?php echo nl2br($style['code']); ?></code>
+        </pre>
       </div>
 <?php			
 			}

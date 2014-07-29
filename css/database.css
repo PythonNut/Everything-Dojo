@@ -13,6 +13,15 @@ a.database-link{
 	color: white;
 }
 
+.db-nav{
+	padding: 0;
+}
+
+.db-nav ul li a{
+	line-height: normal;
+	padding-top: 0;
+}
+
 .db-tile {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
   float: left;
@@ -81,11 +90,9 @@ textarea#css{
 }
 
 div.code{
-	border: 1px black solid;
-	height: 30vh;
+	font-size: 12px;
+	height: 45vh;
 	overflow: auto;
-	padding: .5%;
-	background-color: #eee;
 }
 
 tr.style:hover{
@@ -94,6 +101,10 @@ tr.style:hover{
 
 #request,
 #view,
-#development {
+{
   margin-left: 2vw;
+}
+
+#development{
+	float: right;
 }
