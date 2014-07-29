@@ -21,8 +21,9 @@
   </div>
   <div id="fields">
     Theme Description (optional):<br />
-    <textarea id="description"></textarea><br />
+    <textarea id="description" name="description"></textarea><br />
     Theme CSS:<br />
-    <textarea id="css"></textarea>
+    <textarea id="css" name="code"></textarea>
+  	<input type="submit" name="submit" style="font-size: 15px;" />
   </div>
 </form>
