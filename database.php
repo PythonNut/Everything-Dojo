@@ -11,17 +11,22 @@
   } else {
     $mode = 'index';
   }
-
+	
   if(!isset($_SESSION['user_id'])) {
 ?>
     <a href="index.php">Back Home</a>
 <?php
     include('include/themedb/view_body.php');
   // end guest case
-  } else {
-    switch($mode) {
+  } 
+	else {
+	  switch($mode) {
       case 'index':
-
+				if($_SESSION['user_level'] == 5){
+				?>
+					<a href="<?php echo URL_DATABASE; ?>?mode=mcp">Moderator Control Panel</a>
+				<?php	
+				}
         include('include/themedb/index_body.php');
         break;
       case 'submit':
@@ -41,6 +46,14 @@
 <?php
         include('include/themedb/view_body.php');
         break;
+			case 'mcp':
+				if($_SESSION['user_level'] == 5){
+					include('include/themedb/mcp_body.php');
+				}
+				else{
+					include('include/themedb/view_body.php');
+				}
+				break;
     // end user mode
     }
   }

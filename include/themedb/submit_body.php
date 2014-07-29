@@ -15,14 +15,14 @@
   </div>
   <div class="col" id="col3">
     Theme stage:<br />
-    <input type="radio" name="stage" value="[DEV]" id="[DEV]" /><label for="[DEV]">[DEV]</label><br />
+    <input type="radio" name="stage" value="[DEV]" id="[DEV]" checked="yes" /><label for="[DEV]">[DEV]</label><br />
     <input type="radio" name="stage" value="[ALPHA]" id="[ALPHA]" /><label for="[ALPHA]">[ALPHA]</label><br />
     <input type="radio" name="stage" value="[BETA]" id="[BETA]" /><label for="[BETA]">[BETA] </label>
   </div>
   <div id="fields">
     Theme Description (optional):<br />
-    <textarea></textarea><br />
+    <textarea id="description"></textarea><br />
     Theme CSS:<br />
-    <textarea></textarea>
+    <textarea id="css"></textarea>
   </div>
 </form>
