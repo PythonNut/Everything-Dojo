@@ -80,6 +80,18 @@ textarea#css{
 	font-family: "Courier New", Courier, monospace;
 }
 
+div.code{
+	border: 1px black solid;
+	height: 30vh;
+	overflow: auto;
+	padding: .5%;
+	background-color: #eee;
+}
+
+tr.style:hover{
+	cursor: pointer;
+}
+
 #request,
 #view,
 #development {

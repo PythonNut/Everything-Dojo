@@ -98,7 +98,13 @@ class themedb {
       return $data;
     }
     else {
-    }
+			$query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `id` = :id";
+			$sth = $dbc->prepare($query);
+			$sth->execute(array('id' => $id));
+    	$result = $sth->fetch(PDO::FETCH_ASSOC);
+			
+			return $result;
+		}
   }
 
 }
