@@ -30,9 +30,8 @@
   <body>
 
     <?php // is there a better way to do this?
-    if ($title != "Home" || $title != "About" || $title != "Account Activation" ||
-        $title != "Forgot Password" || $title != "Logout Successful" ||
-        $title != "403" || $title != "404" || $title != "418" || $title != "500")
+    $pages = array("Home", "About", "Account Activation", "Forgot Password", "Logout Successful", "403", "404", "418", "500");
+    if(!in_array($title, $pages))
       include("error/noscript.php");
     ?>
 
