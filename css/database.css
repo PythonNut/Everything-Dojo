@@ -52,14 +52,24 @@
   float: left;
 }
 
-input[type=radio] {
-  float: left;
-  clear: both;
+input[type="radio"]{
+	width: auto;
+	margin-right: 3px;
 }
 
-label {
-  float: left;
-  margin-left: 1%;
+label{
+	display: inline;
+}
+
+textarea#description{
+	width: 65vw;
+	height: 10vh;
+}
+
+textarea#css{
+	width: 65vw;
+	height: 30vh;
+	font-family: "Courier New", Courier, monospace;
 }
 
 #request,
