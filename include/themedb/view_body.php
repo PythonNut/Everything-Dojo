@@ -48,7 +48,7 @@
           $description .= ' (...)';
         }
       ?>
-        <tr>
+        <tr class="style" onclick="document.location = '<?php echo URL_DATABASE; ?>?mode=view&view=style&id=<?php echo $data['validated']['id'][$i]; ?>'">
           <td><?php echo "<b>".$data['validated']['name'][$i]."</b><br />" . $description; ?></td>
           <td><?php echo $data['validated']['author'][$i]; ?></td>
           <td><?php echo $data['validated']['version'][$i]; ?></td>
@@ -87,7 +87,7 @@
           $description .= ' (...)';
         }
       ?>
-        <tr>
+        <tr class="style" onclick="document.location = '<?php echo URL_DATABASE; ?>?mode=view&view=style&id=<?php echo $data['unvalidated']['id'][$i]; ?>'">
           <td><?php echo "<b>".$data['unvalidated']['name'][$i]."</b><br />".$description; ?></td>
           <td><?php echo $data['unvalidated']['author'][$i]; ?></td>
           <td><?php echo $data['unvalidated']['version'][$i]; ?></td>
@@ -99,6 +99,31 @@
       </tbody>
     </table>
 <?php
-		break;
+			break;
+		case 'style':
+?>
+			<h2>View Style</h2>
+<?php		
+			$id = $_GET['id'];
+			
+			$style = $themedb->get_themes($id);
+			if($id == '' || count($style) == 0){
+?>
+      This style does not exist.
+<?php			
+			}
+			else{
+?>
+			<h4><?php echo $style['name']; ?> v. <?php echo $style['version']; ?> by <?php echo $style['author']; ?> <?php echo $style['stage']; ?></h4>
+      <?php echo $style['description']; ?><br />
+      <b>Screenshot:</b><br />
+      <img src="<?php echo $style['screenshot']; ?>" /><br />
+      <b>Code:</b><br />
+      <div class="code">
+      <?php echo nl2br($style['code']); ?>
+      </div>
+<?php			
+			}
+			break;
 	}
 ?>
