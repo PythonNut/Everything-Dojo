@@ -30,6 +30,10 @@
   box-sizing: border-box;
   background: #101010;
   padding-top: 5.32em;
+}
+
+#sidebar-inner-scrollable {
+  height: 100%;
   overflow-y: auto;
 }
 
@@ -55,6 +59,7 @@
 .title {
   font-family: "Lato", "Lucida Grande",  "Lucida Sans Unicode", sans-serif;
   font-weight: 400;
+  white-space: pre;
 }
 
 .label {

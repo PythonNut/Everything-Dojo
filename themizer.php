@@ -26,6 +26,7 @@
 <aside id="sidebar">
   <h2 id="sideheadbar" class="themizer">Themizer</h2>
   <section id="sidebar-inner">
+    <section id="sidebar-inner-scrollable">
 
     <section class="option" id="option-view">
       <section class="option-title">
@@ -108,9 +109,68 @@
       </section>
     </section>
 
+    <section class="option" id="option-wrapper">
+      <section class="option-title">
+        <h5>Wrapper</h5>
+        <span class="collapsebutton"></span>
+      </section>
+      <section class="option-wrap">
+        <section data-name="backgroundColor">
+          <span class="title">Background Color</span>
+          <p>
+            <input type="text" class="spectrum text" id="text-id_wrapper-backgroundColor" value="#EDEDEA" spellcheck="false">
+            <input type="color" class="spectrum color-picker" id="spectrum-id_wrapper-backgroundColor" value="#EDEDEA">
+          </p>
+        </section>
+      </section>
+    </section>
+
+    <section class="option" id="option-entries">
+      <section class="option-title">
+        <h5>Entries</h5>
+        <span class="collapsebutton"></span>
+      </section>
+      <section class="option-wrap">
+        <section data-name="backgroundColor">
+          <span class="title">Background Color <span class="small">(Entries)</span></span>
+          <p>
+            <input type="text" class="spectrum text" id="text-class_entry-backgroundColor" value="#EDEDEA" spellcheck="false">
+            <input type="color" class="spectrum color-picker" id="spectrum-class_entry-backgroundColor" value="#EDEDEA">
+          </p>
+          <span class="title">Background Color <span class="small">(Entrywrap)</span></span>
+          <p>
+            <input type="text" class="spectrum text" id="text-class_entrywrap-backgroundColor" value="#EDEDEA" spellcheck="false">
+            <input type="color" class="spectrum color-picker" id="spectrum-class_entrywrap-backgroundColor" value="#EDEDEA">
+          </p>
+        </section>
+      </section>
+    </section>
+
+    <section class="option" id="option-shouts">
+      <section class="option-title">
+        <h5>Shouts</h5>
+        <span class="collapsebutton"></span>
+      </section>
+      <section class="option-wrap">
+        <section data-name="backgroundColor">
+          <span class="title">Background Color <span class="small">(Odd-numbered)</span></span>
+          <p>
+            <input type="text" class="spectrum text" id="text-class_row1-backgroundColor" value="#EDEDEA" spellcheck="false">
+            <input type="color" class="spectrum color-picker" id="spectrum-class_row1-backgroundColor" value="#EDEDEA">
+          </p>
+          <span class="title">Background Color <span class="small">(Even-numbered)</span></span>
+          <p>
+            <input type="text" class="spectrum text" id="text-class_row2-backgroundColor" value="#EDEDEA" spellcheck="false">
+            <input type="color" class="spectrum color-picker" id="spectrum-class_row2-backgroundColor" value="#EDEDEA">
+          </p>
+        </section>
+      </section>
+    </section>
+
     <!-- `span` and not `a` to avoid accidental styling in Firefox  -->
     <span href="#" class="linkbutton" id="submit">Get Code</span>
 
+  </section>
   </section>
   <div id="side-resizer"></div>
 </aside>
