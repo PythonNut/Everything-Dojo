@@ -16,7 +16,7 @@
   <script src=\"js/spectrum-1.3.4.min.js\" onload=\"$.fn.spectrum.load = false;\"></script>
   <script>
   $(function(){
-    sliderSidebar('themizer-inner');
+    $().sliderSidebar();
     themizer();
   });</script>";
 
@@ -77,24 +77,28 @@
         <section data-name="backgroundRepeat">
           <span class="title">Background Repeat</span>
           <p>
-            <label class="label" for="body-backgroundRepeat-repeatAll">repeat-all</label>
-            <input type="radio" class="radio" id="body-backgroundRepeat-repeatAll" name="body-backgroundRepeat" value="" checked>
-            <span class="input-button"></span>
+            <label class="label">repeat-all
+              <input type="radio" class="radio" id="body-backgroundRepeat-repeatAll" name="body-backgroundRepeat" value="" checked>
+              <span class="input-button"></span>
+            </label>
           </p>
           <p>
-            <label class="label" for="body-backgroundRepeat-repeatY">repeat-y</label>
-            <input type="radio" class="radio" id="body-backgroundRepeat-repeatY" name="body-backgroundRepeat" value="repeat-y">
-            <span class="input-button"></span>
+            <label class="label">repeat-y
+              <input type="radio" class="radio" id="body-backgroundRepeat-repeatY" name="body-backgroundRepeat" value="repeat-y">
+              <span class="input-button"></span>
+            </label>
           </p>
           <p>
-            <label class="label" for="body-backgroundRepeat-repeatX">repeat-x</label>
-            <input type="radio" class="radio" id="body-backgroundRepeat-repeatX" name="body-backgroundRepeat" value="repeat-x">
-            <span class="input-button"></span>
+            <label class="label">repeat-x
+              <input type="radio" class="radio" id="body-backgroundRepeat-repeatX" name="body-backgroundRepeat" value="repeat-x">
+              <span class="input-button"></span>
+            </label>
           </p>
           <p>
-            <label class="label" for="body-backgroundRepeat-noRepeat">no-repeat</label>
-            <input type="radio" class="radio" id="body-backgroundRepeat-noRepeat" name="body-backgroundRepeat" value="no-repeat">
-            <span class="input-button"></span>
+            <label class="label">no-repeat
+              <input type="radio" class="radio" id="body-backgroundRepeat-noRepeat" name="body-backgroundRepeat" value="no-repeat">
+              <span class="input-button"></span>
+            </label>
           </p>
         </section>
         <section data-name="fontFamily">

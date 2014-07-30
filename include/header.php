@@ -80,10 +80,10 @@
 
           <nav>
             <ul>
-              <li><a onclick="scrollTo('#top')">Home</a></li>
-              <li><a onclick="scrollTo('#features')">Features</a></li>
-              <li><a onclick="scrollTo('#changelog')">Changelog</a></li>
-              <li><a onclick="scrollTo('#roadmap')">Roadmap</a></li>
+              <li><a onclick="$('#top').scrollTo()">Home</a></li>
+              <li><a onclick="$('#features').scrollTo()">Features</a></li>
+              <li><a onclick="$('#changelog').scrollTo()">Changelog</a></li>
+              <li><a onclick="$('#roadmap').scrollTo()">Roadmap</a></li>
             </ul>
           </nav>
 
