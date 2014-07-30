@@ -14,7 +14,7 @@ var styles = {};
  * @param {Integer} [nth] If specified, the nth last element of the array
  */
 Array.prototype.last = function(nth) {
-  return this[this.length - (1 <= nth <= this.length ? nth : 1)];
+  return this[this.length - (1 <= nth && nth <= this.length ? nth : 1)];
 };
 
 /******************
@@ -153,7 +153,7 @@ Array.prototype.last = function(nth) {
 
           // background-image
           case "background-image":
-            $(el).css("background-image", "url(" + thisVal + ")");
+            $(el).css("background-image", "url(" + (thisVal.indexOf("http") === -1 ? "//" + thisVal : thisVal) + ")");
             break;
 
           // background-repeat
@@ -172,21 +172,23 @@ Array.prototype.last = function(nth) {
     });
   };
 
-  /**
-   * Toggle options
-   */
-  $.fn.optionToggle = function () {
-    var id = $(this).parent().attr("id");
-    $("#" + id + " .option-wrap").slideToggle();
-    var content = $("#" + id + " .option-title");
-
-    if (content.hasClass("collapsed")) {
-      content.removeClass("collapsed").addClass("expanded");
-    } else {
-      content.removeClass("expanded").addClass("collapsed");
-    }
-  };
 }(jQuery));
+
+/**
+ * Toggle options
+ *
+ * Used to be jQuery plugin, but due to weird bugs was moved back to being a standalone function
+ */
+function optionToggle (id) {
+  $("#" + id + " .option-wrap").slideToggle();
+  var content = $("#" + id + " .option-title");
+
+  if (content.hasClass("collapsed")) {
+    content.removeClass("collapsed").addClass("expanded");
+  } else {
+    content.removeClass("expanded").addClass("collapsed");
+  }
+};
 
 /**
  * Themizer init
@@ -220,8 +222,8 @@ function themizer () {
   // option slides sliding init
   $(".option").each(function () {
     var id = $(this).attr('id');
-    $("#" + id + " .option-title").attr("onclick", "$(this).optionToggle()");
-    $(this).optionToggle();
+    $("#" + id + " .option-title").attr("onclick", "optionToggle('" + id + "')");
+    optionToggle(id);
   });
 
   // set first option to be open
@@ -314,7 +316,7 @@ function themizer () {
   });
   $("#submit").click(function () {
     for (var i in styles)
-      alert(i + ":" + styles[i]); // debugging
+      console.log(i + ":" + styles[i]); // debugging
   });
 
   /**
@@ -323,7 +325,7 @@ function themizer () {
 
   // Check inputs for validity
   $("[type='url']").keyup(function () {
-    $(this).val().match(/^https?:\/\/[a-z0-9-\.]+\.[a-z]{2,4}\/([^\s<>%"\,\{\}\\|\\\^\[\]`]+)?\.(gif|jpg|jpeg|png|php|svg)(\?\w=\w)?(&\w=\w)*/) ? $(this).removeClass("invalid") : $(this).addClass("invalid");
+    $(this).val().match(/^(https?:\/\/)?[a-z0-9-\.]+\.[a-z]{2,4}\/([^\s<>%"\,\{\}\\|\\\^\[\]`]+)?\.(gif|jpg|jpeg|png|php|svg)(\?\w=\w)?(&\w=\w)*/) ? $(this).removeClass("invalid") : $(this).addClass("invalid");
   });
 
   // Body
@@ -347,13 +349,13 @@ function themizer () {
             // spectrum-<selector>-<CSSProperty (camelCased)>
             // Hence, we can deconstruct the id to produce our desired selectors.
             var id   = $(this).attr("id").split(/-/),
-                el   = id[1],
+                el   = id[1].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("class_", ".").replace("id_", "#"),
                 prop = id[2].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase();
             $(this).prev().val(color);
             $(el).css(prop, color);
 
             // update styles
-            styles[el + "-" + prop] = color;
+            styles[id[1] + "-" + id[2]] = color;
           }
   });
   // Set color picker to corresponding text input's value when user types
@@ -361,13 +363,13 @@ function themizer () {
     var color  = $(this).val(),
         picker = $(this).next(),
         id     = $(this).attr("id").split(/-/),
-        el     = id[1],
+        el     = id[1].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("class_", ".").replace("id_", "#"),
         prop   = id[2].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase();
     $(el).css(prop, color);
     $(picker.spectrum("set", color));
 
     // update styles
-    styles[el + "-" + prop] = color;
+    styles[id[1] + "-" + id[2]] = color;
   });
   // Reposition picker when user scrolls sidebar
   $("#sidebar-inner").bind("scroll", function () {
