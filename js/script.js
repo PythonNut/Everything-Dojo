@@ -1,7 +1,18 @@
 // js/jQ functions that are available to run on any page. requires jQuery.
 
 // Set object for styling
-var styles = {};
+var styles = {
+  "baseTheme"                       : "core",
+  "body-backgroundColor"            : "white",
+  "body-backgroundImage"            : "",
+  "body-backgroundRepeat"           : "",
+  "body-fontFamily"                 : "",
+  "id_wrapper-backgroundColor"      : "#EDEDEA",
+  "class_entry-backgroundColor"     : "#EDEDEA",
+  "class_entrywrap-backgroundColor" : "#EDEDEA",
+  "class_row1-backgroundColor"      : "#EDEDEA",
+  "class_row2-backgroundColor"      : "#EDEDEA"
+};
 
 
 /*******************
@@ -9,12 +20,13 @@ var styles = {};
  *******************/
 
 /**
- * Returns the `nth` last element of an array. If `nth` is not specified, returns the last element instead.
+ * Returns the `nth` last element of an array. If `nth` is not
+ * specified or `nth > Array.length`, returns the last element instead.
  *
  * @param {Integer} [nth] If specified, the nth last element of the array
  */
 Array.prototype.last = function(nth) {
-  return this[this.length - (1 <= nth && nth <= this.length ? nth : 1)];
+  return this[this.length - (1 <= nth && nth < this.length ? nth : 1)];
 };
 
 /******************
@@ -23,9 +35,9 @@ Array.prototype.last = function(nth) {
 
 (function ($) {
   /**
-   * makes the header an absolutely positioned element
-   * with a slide in/out button for pages which can't
-   * have elements affecting viewport size (themizer, try-it)
+   * makes the header an absolutely positioned element with a slide
+   * in/out button for pages which can't have elements affecting
+   * viewport size (themizer, try-it)
    */
 
   $.fn.sliderHeader = function () {
@@ -100,7 +112,7 @@ Array.prototype.last = function(nth) {
   };
 
   /**
-   * Scroll to element
+   * Scroll to an element.
    * Based on https://stackoverflow.com/a/6677069
    *
    * @param {Integer} [duration=1000] Duration, in milliseconds, of the animation
@@ -117,10 +129,12 @@ Array.prototype.last = function(nth) {
   };
 
   /**
-   * Style elements targeted by Themizer
+   * Style an element with a CSS property and a valid value, with the
+   * former two being derived from `<selector>` and the latter being
+   * derived from `<selector>`'s value.
    *
-   * @param {Boolean} [useName] Use name to refer to selector
-   * @param {String}  [value]   Value to assign to CSS property
+   * @param {Boolean} [useName] Whether or not the fields should be selected by their `name` attribute
+   * @param {String}  [value]   An optional value to assign to the CSS property
    */
 
   $.fn.style = function (useName, value) {
@@ -237,6 +251,7 @@ function themizer () {
   });
   $("[name='base']").change(function () {
     $("link[id='base-theme']").attr('href', "blog/css/" + $("[name='base'] :checked").val() + ".css");
+    styles.baseTheme = $("[name='base'] :checked").val();
   });
 
   // resize sidebar
