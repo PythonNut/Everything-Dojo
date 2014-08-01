@@ -9,6 +9,19 @@
   margin-right: auto;
 }
 
+a.database-link{
+	color: white;
+}
+
+.db-nav{
+	padding: 0;
+}
+
+.db-nav ul li a{
+	line-height: normal;
+	padding-top: 0;
+}
+
 .db-tile {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
   float: left;
@@ -17,6 +30,10 @@
   width: 20vw;
   color: white;
   vertical-align: middle;
+}
+
+.db-tile-large{
+	width: 31vw;
 }
 
 .db-tile:hover {
@@ -52,17 +69,42 @@
   float: left;
 }
 
-input[type=radio] {
-  float: left;
-  clear: both;
+input[type="radio"]{
+	width: auto;
+	margin-right: 3px;
 }
 
-label {
-  float: left;
-  margin-left: 1%;
+label{
+	display: inline;
+}
+
+textarea#description{
+	width: 65vw;
+	height: 10vh;
+}
+
+textarea#css{
+	width: 65vw;
+	height: 30vh;
+	font-family: "Courier New", Courier, monospace;
+}
+
+div.code{
+	font-size: 12px;
+	height: 45vh;
+	overflow: auto;
+}
+
+tr.style:hover{
+	cursor: pointer;
 }
 
 #request,
-#view {
+#view
+{
   margin-left: 2vw;
+}
+
+#development{
+	float: right;
 }
