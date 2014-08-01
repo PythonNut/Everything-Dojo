@@ -1,6 +1,10 @@
 @charset "utf-8";
 /* CSS Document */
 
+h2.view-header{
+	margin-top: 3vh;
+}
+
 #tile-container {
   height: 34vh;
   width: 64vw;
@@ -13,8 +17,26 @@ a.database-link{
 	color: white;
 }
 
+div.mcp-link{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	height: 15vh;
+	line-height: 15vh;
+	vertical-align: bottom;
+}
+a.mcp-link:link{
+	font-family: 'lato';
+	font-size: 1.5rem;
+}
+
 .db-nav{
+	margin-top: -1vh;
 	padding: 0;
+}
+
+.db-nav ul li a{
+	font-size: 1.2rem;
 }
 
 .db-nav ul li a{
