@@ -44,7 +44,7 @@
         "418",
         "500"
       ))) {
-      include("noscript.php");
+      include("error/noscript.php");
     } ?>
 
     <main id="wrap">
