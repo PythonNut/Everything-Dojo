@@ -69,10 +69,10 @@
     #themizer-bar {
       background: #212121;
       height: 50vh;
-      box-shadow: inset 0 0 2em 0 #000;
+      box-shadow: inset 0 0 1em 0 #222;
       color: white;
       margin: .5em auto;
-      width: 125%;
+      width: 100vw;
       position: relative;
       left: -12.5%;
       padding: 2em;
@@ -82,8 +82,7 @@
     #themizer-bar .note {
       text-align: center;
       font-size: 1.1em;
-      margin-top: 4vh;
-      margin-left: 2em;
+      margin-top: 5vh;
     }
     #themizer-bar .note a {
       color: #5dc350;
@@ -92,26 +91,31 @@
     #themizer-inner-wrap {
       margin-left: 12.5%;
       list-style: none;
-      position: relative;
     }
 
     #left-wrap {
-      float: left;
-      width: 50%;
       position: absolute;
-      left: -10vw;
-      top: 5vh;
+      left: 0;
+      top: 7vh;
+      width: 50%;
+      box-sizing: border-box;
+      padding-left: 8vw;
     }
     #left-wrap .heading {
       width: 7em;
     }
 
     #right-wrap {
-      float: right;
-      top: 0;
+      position: absolute;
+      right: -5em;
+      width: 50%;
     }
     #right-wrap img {
       height: 50vh;
+      width: 89vh; /* img { height: inherit; width: inherit; } */
+      /* sigh, IE */
+      max-height: 50vh;
+      max-width: 89vh;
     }
 
     #content h1 {
