@@ -8,7 +8,7 @@
   <link rel=\"stylesheet\" href=\"css/database.css\" />";
   $extra_js = "<script src=\"js/prism.js\"></script>";
   get_header();
-
+	
   if(isset($_GET['mode'])) {
     $mode = $_GET['mode'];
   } else {
