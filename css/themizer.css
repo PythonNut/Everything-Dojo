@@ -3,6 +3,7 @@
 @import url('fonts.css');
 .themizer { background: #51b835; }
 
+
 /*--LAYOUT--*/
 #sidebar {
   position: fixed;
@@ -37,8 +38,8 @@
   overflow-y: auto;
 }
 
-/*--GENERAL--*/
 
+/*--GENERAL--*/
 #sidebar input,
 #sidebar select,
 #sidebar option {
@@ -87,6 +88,7 @@
   cursor: pointer;
 }
 
+
 /*--HEADER--*/
 #sideheadbar {
   position: absolute;
@@ -102,6 +104,7 @@
   margin-bottom: 0.5em;
   z-index: 100;
 }
+
 #sideheadbar::after {
   content: "";
   position: absolute;
@@ -112,12 +115,10 @@
   pointer-events: none;
   z-index: 100;
 }
-.opened #sideheadbar::after {
-  right: -2vh;
-}
-.closed #sideheadbar::after {
-  left: 0;
-}
+
+.opened #sideheadbar::after { right: -2vh; }
+.closed #sideheadbar::after { left: 0; }
+
 
 /*--RESIZER--*/
 #side-resizer {
@@ -129,9 +130,8 @@
   cursor: e-resize;
   pointer-events: all;
 }
-.closed #side-resizer {
-  pointer-events: none;
-}
+
+.closed #side-resizer { pointer-events: none; }
 
 /*--SLIDE BUTTONS--*/
 .slideButton {
@@ -147,6 +147,7 @@
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+
 .closed #side-button {
   height: 5vh;
   top: 47.5vh;
@@ -166,6 +167,7 @@
   height: 100vh;
   width: 2vh;
 }
+
 #side-button.targeted {
   top: 0;
   height: 100vh;
@@ -175,15 +177,19 @@
   transition: all 0.3s ease;
 }
 
+
 /*--OPTION SLIDES--*/
 .option {
   border: 3px solid #444;
   margin: 0 10px;
 }
+
 .option-wrap {
   padding: 10px 14px;
   margin: 0;
+  display: none; /* as a default so there's not loading delay */
 }
+
 .option-title {
   position: relative;
   display: block;
@@ -196,6 +202,7 @@
   -ms-user-select: none;
   user-select: none;
 }
+
 .option-title h5 {
   position: relative;
   display: inline-block;
@@ -206,6 +213,7 @@
   line-height: 1.5em;
   font-size: 1.5em;
 }
+
 .option:last-of-type .option-title {
   border-bottom: none;
 }
@@ -218,6 +226,7 @@
   position: relative;
   float: right;
 }
+
 .collapsebutton::before,
 .collapsebutton::after {
   content: "";
@@ -230,19 +239,21 @@
   -webkit-transition: -webkit-transform 0.5s ease-in-out;
   transition: transform 0.5s ease-in-out;
 }
-.collapsebutton::after {
-  right: 0.5em;
-}
+
+.collapsebutton::after { right: 0.5em; }
+
 .expanded .collapsebutton::before,
 .collapsed .collapsebutton::after {
   -webkit-transform: skewY(-20deg);
   transform: skewY(-20deg);
 }
+
 .expanded .collapsebutton::after,
 .collapsed .collapsebutton::before {
   -webkit-transform: skewY(20deg);
   transform: skewY(20deg);
 }
+
 
 /*--INPUTS--*/
 .radio,
@@ -253,6 +264,7 @@
   margin: 0;
   z-index: 10;
 }
+
 .radio + .input-button,
 .checkbox + .input-button {
   position: absolute;
@@ -262,13 +274,13 @@
   background: #ccc;
   border: 0.3em solid #ccc;
 }
+
 .radio:checked + .input-button,
 .checkbox:checked + .input-button {
   background: #337cff;
 }
-.radio + .input-button {
-  border-radius: 50%;
-}
+
+.radio + .input-button { border-radius: 50%; }
 
 /**
  * Styling for Spectrum components
@@ -299,11 +311,13 @@
   border: 0 !important;
   margin: 0 !important;
 }
+
 .sp-preview,
 .sp-alpha,
 .sp-thumb-el {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gcZAggl+4iZ2wAAACRJREFUGNNjnDlzJgMq2LNnD5oIEwMRYDAqYsH0i4uLy3DxHQBdFQcZw8RJyQAAAABJRU5ErkJggg==') !important;
 }
+
 .sp-replacer {
   position: absolute;
   top: 0;
@@ -315,28 +329,29 @@
   vertical-align: top !important;
   margin-left: -2% !important;
 }
+
 .sp-preview {
   width: 100% !important;
   height: 1.7em !important;
 }
-.sp-dd {
-  display: none;
-}
+
+.sp-dd { display: none; }
+
 .sp-container {
   position: fixed !important;
   background: #222 !important;
   box-shadow: 0 0 3px 2px #222;
 }
-.sp-picker-container {
-  border-left: none !important;
-}
-.sp-alpha {
-  background-size: contain;
-}
+
+.sp-picker-container { border-left: none !important; }
+
+.sp-alpha { background-size: contain; }
+
 .sp-alpha-inner {
   background-image: -webkit-linear-gradient(left, transparent, black) !important;
   background-image: linear-gradient(to right, transparent, black) !important;
 }
+
 
 /*--MISCELLANEOUS CLASSES--*/
 #sidebar p,
@@ -345,22 +360,28 @@
   margin-top: 0.3em;
   margin-bottom: 0.6em;
 }
+
 #sidebar i,
 #sidebar .i {
   font-family: AmbleItalic, sans-serif;
 }
+
 #sidebar code {
   font-family: Monaco, "Courier New", Courier, monospace;
 }
+
 #sidebar .small {
   font-size: 0.65em;
 }
+
 #sidebar .clear {
   clear: both;
 }
+
 #sidebar .inline {
   display: inline;
 }
+
 /* Validate inputs */
 #sidebar .invalid,
 #sidebar :invalid {
