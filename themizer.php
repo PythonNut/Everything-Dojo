@@ -79,7 +79,7 @@
             <span class="title">Background Repeat</span>
             <p>
               <label class="label">repeat-all
-                <input type="radio" class="radio" id="body-backgroundRepeat-repeatAll" name="body-backgroundRepeat" value="" checked>
+                <input type="radio" class="radio" id="body-backgroundRepeat-repeatAll" name="body-backgroundRepeat" value="repeat" checked>
                 <span class="input-button"></span>
               </label>
             </p>
