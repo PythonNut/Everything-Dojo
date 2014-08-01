@@ -20,7 +20,7 @@ if (isset($_POST['doReset'])) {
   //$num = mysql_num_rows($rs_check);
   $rs_check = $dbc->prepare("SELECT id FROM $table WHERE user_email=?");
   $rs_check->execute(array($user_email));
-  $num = count($rs_check->fetchAll(PDO::FETCH_ASSOC));
+  $num = $rs_check->rowCount();
   if ( $num <= 0 ) {
     $err[] = "Sorry, no such account exists.";
   }

@@ -28,7 +28,8 @@
     if (get_magic_quotes_gpc())
       $data = stripslashes($data);
 
-    $data = mysql_real_escape_string($data);
+		// No need for this with PDO
+    // $data = mysql_real_escape_string($data);
     // Please replace with mysqli and setup a fake link
     return $data;
   }
@@ -128,17 +129,18 @@
   }
 
   function logout() {
-    global $db;
+    global $dbc;
     session_start();
 
     $table = TB_NAME;
     if(isset($_SESSION['user_id'])) {
-/*      $result = $dbc->prepare("UPDATE $table SET ckey = '', ctime = '' WHERE id = ?");
-      $result->execute(array($_SESSION['user_id']));*/
-    mysql_query("UPDATE $table
+			$result = $dbc->prepare("UPDATE $table SET ckey = '', ctime = '' WHERE id = ?");
+    	$result->execute(array($_SESSION['user_id']));
+		}
+    /*mysql_query("UPDATE $table
              SET ckey = '', ctime = ''
              WHERE id = $_SESSION[user_id]") or die(mysql_error());
-    }
+    */
 
     /************ Delete the sessions****************/
     unset($_SESSION['user_id']);
