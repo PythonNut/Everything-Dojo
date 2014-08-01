@@ -236,8 +236,7 @@ function themizer () {
   // option slides sliding init
   $(".option").each(function () {
     var id = $(this).attr('id');
-    $("#" + id + " .option-title").attr("onclick", "optionToggle('" + id + "')");
-    optionToggle(id);
+    $("#" + id + " .option-title").attr("onclick", "optionToggle('" + id + "')").addClass("collapsed");
   });
 
   // set first option to be open
