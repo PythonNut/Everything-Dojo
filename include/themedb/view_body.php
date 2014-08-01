@@ -101,12 +101,12 @@
 <?php
 			break;
 		case 'style':
-?>
-			<h2>View Style</h2>
-<?php		
 			$id = $_GET['id'];
-			
-			$style = $themedb->get_themes($id);
+			$style = $themedb->get_themes($id, $_SESSION['user_id']);
+?>
+ >> <?php if($style['validated'] == 1){?><a href="<?php echo URL_DATABASE; ?>?mode=view&view=complete">Completed Themes</a><?php }else{?><a href="<?php echo URL_DATABASE; ?>?mode=view&view=development">Development Themes</a> <?php } ?>
+
+<?php		
 			if($id == '' || count($style) == 0){
 ?>
       This style does not exist.
@@ -114,10 +114,10 @@
 			}
 			else{
 ?>
-			<h4><?php echo $style['name']; ?> v. <?php echo $style['version']; ?> by <?php echo $style['author']; ?> <?php echo $style['stage']; ?></h4>
+			<h2 class="view-header"><?php echo $style['name']; ?> v. <?php echo $style['version']; ?> by <?php echo $style['author']; ?> <?php echo $style['stage']; ?></h2>
       <?php echo $style['description']; ?><br />
       <b>Screenshot:</b><br />
-      <img src="<?php echo $style['screenshot']; ?>" /><br />
+      <img src="<?php echo $style['screenshot']; ?>" style="max-width: 65vw" /><br />
       <b>Code:</b><br />
       <div class="code">
         <pre>

@@ -21,12 +21,6 @@
             <?php if(isset($_SESSION['user_id'])) { ?>
               <li><a href="myaccount.php" id="menu-myaccount">My Account</a></li>
               <li><a href="mysettings.php" id="menu-mysettings">My Settings</a></li>
-              <?php
-              // will not work if dbc is not included on page
-              if (checkAdmin()) {
-              ?>
-              <li><a href="admin.php" id="menu-admin">Admin CP</a></li>
-              <?php } //end admin ?>
               <li><a href="logout.php" id="menu-logout">Logout</a></li>
             <?php } ?>
             <?php if(!isset($_SESSION['user_id'])) { ?>
@@ -37,21 +31,18 @@
           </nav>
 <?php	
   if(!isset($_SESSION['user_id'])) {
-?>
-    <a href="index.php">Back Home</a>
-<?php
     include('include/themedb/view_body.php');
-  // end guest case
-  } 
+		// end guest case
+	}
 	else {
 	  switch($mode) {
       case 'index':
-				if($_SESSION['user_level'] == 5){
-				?>
-					<a href="<?php echo URL_DATABASE; ?>?mode=mcp">Moderator Control Panel</a>
-				<?php	
-				}
         include('include/themedb/index_body.php');
+  if($_SESSION['user_level'] == 5){
+?>
+	<div class="mcp-link"><a href="<?php echo URL_DATABASE; ?>?mode=mcp" class="mcp-link">ThemeDB Moderator CP</a></div>
+<?php	
+	}					
         break;
       case 'submit':
 ?>
@@ -66,7 +57,7 @@
         break;
       case 'view':
 ?>
-        <a href="<?php echo URL_DATABASE; ?>">Back to Database Index</a> <?php if($_GET['view'] != ''){ ?> | <a href="<?php echo URL_DATABASE; ?>?mode=view">Back to View Options</a><?php } ?>
+        <?php if($_GET['view'] != ''){ ?><a href="<?php echo URL_DATABASE; ?>">Database Index</a> >> <a href="<?php echo URL_DATABASE; ?>?mode=view">View Options</a><?php } ?>
 <?php				
 				include('include/themedb/view_body.php');
         break;
