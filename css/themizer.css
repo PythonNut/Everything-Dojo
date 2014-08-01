@@ -362,7 +362,10 @@
   display: inline;
 }
 /* Validate inputs */
+#sidebar .invalid,
+#sidebar :invalid {
+  box-shadow: none; /* Prevent Firefox from automatically applying box-shadow to invalid inputs */
+}
 #sidebar .invalid {
   background: #b00 !important;
-  box-shadow: none; /* Prevent Firefox from automatically applying box-shadow to invalid inputs */
 }

@@ -18,7 +18,7 @@
     <?php
     // we don't need jQuery on some pages
     if ($title != "Home" || $title != "About") { ?>
-    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/jquery-2.1.1.min.js"></script>
     <script src="js/script.js"></script>
     <?php } ?>
 
@@ -90,10 +90,9 @@
         </section>
       </header>
 
-      <?php } elseif ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)") {
-        echo '<header>
-        <div id="headerwrap">';
-      ?>
+      <?php } elseif ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)") { ?>
+        <header>
+        <section id="headerwrap">
 
           <section id="logo">
             <a href="/"><img src="/images/logo.svg"/></a>
