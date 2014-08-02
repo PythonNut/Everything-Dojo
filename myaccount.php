@@ -11,10 +11,10 @@
   <div id="announcements">
     <?php
     $result = $dbc->prepare("SELECT data FROM data WHERE fetchname = 'announcements'");
-	$result->execute();
-	$result = $result->fetchAll(PDO::FETCH_ASSOC);
-    //$result = mysql_query("SELECT data FROM data WHERE fetchname = 'announcements'") or die(); 
-    $announcements = explode("~", $result[0]);
+    $result->execute();
+    $result = $result->fetchAll(PDO::FETCH_ASSOC);
+
+    $announcements = explode("~", $result[0]['data']);
     if (empty($announcements[0])) {
       $title = "Announcements for Users from Admins: There are currently no announcements.";
       unset($announcements[0]);

@@ -20,19 +20,18 @@ if(isset($_POST['announcementsSubmit'])) {
     }
   }
   $implode = substr($implode, 1);
-  $sql = "UPDATE data
-      SET data=\"".$implode."\"
-      WHERE fetchname=\"announcements\"";
-  mysql_query($sql, $link) or die("Update Failed:" . mysql_error());
+  $query = "UPDATE data SET data = ? WHERE fetchname = 'announcements'";
+  $sth = $dbc->prepare($query);
+  $sth->execute(array("$implode"));
 }
 
-$rs_all = mysql_query("SELECT count(*) AS total_all FROM $table") or die(mysql_error());
-$rs_active = mysql_query("SELECT count(*) AS total_active FROM $table WHERE approved = 1") or die(mysql_error());
-$rs_total_pending = mysql_query("SELECT count(*) AS total_pending FROM $table WHERE approved = 0");
+$rs_all = $dbc->query("SELECT count(*) AS total_all FROM $table")->fetchColumn();
+$rs_active = $dbc->query("SELECT count(*) AS total_active FROM $table WHERE approved = 1")->fetchColumn();
+$rs_total_pending = $dbc->query("SELECT count(*) AS total_pending FROM $table WHERE approved = 0")->fetchColumn();
 
-list($total_pending) = mysql_fetch_row($rs_total_pending);
-list($all) = mysql_fetch_row($rs_all);
-list($active) = mysql_fetch_row($rs_active);
+list($total_pending) = $rs_total_pending;
+list($all) = $rs_all;
+list($active) = $rs_active;
 ?>
 <?php
   $title = "Admin CP";
@@ -59,13 +58,17 @@ list($active) = mysql_fetch_row($rs_active);
   if (isset($_GET['doSearch'])) {
     $open = TRUE;
     $sql = "SELECT * FROM $table";
-    $rs_total = mysql_query($sql) or die(mysql_error());
-    $total = mysql_num_rows($rs_total);
+    $total = $dbc->prepare($sql);
+    $total->execute();
+    $total = $total->fetchAll(PDO::FETCH_ASSOC);
+    $total = count($total);
 
     if (!isset($_GET['page'])) { $start = 0; }
     else { $start = ($_GET['page'] - 1) * $page_limit; }
 
-    $rs_results = mysql_query($sql." LIMIT $start, $page_limit") or die(mysql_error());
+    $rs_results = $dbc->prepare($sql . " LIMIT $start, $page_limit");
+    $rs_results->execute();
+    $rs_results = $rs_results->fetchAll(PDO::FETCH_ASSOC);
     $total_pages = ceil($total / $page_limit);
     if ($total > $page_limit) {
       echo "<div>Pages:";
@@ -88,7 +91,7 @@ list($active) = mysql_fetch_row($rs_active);
       <th>Approval</th>
     </tr>
     <?php
-    while ($rrows = mysql_fetch_array($rs_results)) {
+    foreach($rs_results as $rrows){
       list($year, $month, $day) = explode("-", $rrows['date']);
       $timestamp = mktime(0, 0, 0, $month, 10);
       $monthName = date("F", $timestamp);
@@ -106,8 +109,11 @@ list($active) = mysql_fetch_row($rs_active);
   </table>
   <?php } ?>
   <?php
-  $result = mysql_query("SELECT data FROM data WHERE fetchname='announcements' limit 1") or die(); 
-  $announcements = explode("~", mysql_result($result, 0));
+  $result = $dbc->prepare("SELECT data FROM data WHERE fetchname = 'announcements' LIMIT 1");
+  $result->execute();
+  $result = $result->fetchAll(PDO::FETCH_ASSOC);
+
+  $announcements = explode("~", $result[0]['data']);
   if (count($announcements) == 0) {
     $counter = 2;
   } else {
@@ -131,7 +137,7 @@ list($active) = mysql_fetch_row($rs_active);
         $("#removeButton").show();
       }
       var newTextBoxDiv = $(document.createElement("div")).attr("id", "textboxdiv" + counter);
-      newTextBoxDiv.after().html("<label class=\"inline\">"+counter+" </label>" +
+      newTextBoxDiv.after().html("<label class=\"inline\">" + counter + " </label>" +
       "<input type=\"text\" name=\"announcements[]\" id=\"textbox" + counter + "\" autocomplete=\"off\" size=\"100\" />");
       newTextBoxDiv.appendTo("#textboxgroup");
       counter++;
