@@ -6,55 +6,55 @@
 ?>
 <section id="content">
   <?php if(!empty($_GET['msg']))  {
-    echo "<div class=\"msg\">" . filter($_GET['msg']) . "</div>";
+    echo "<p class=\"msg\">" . filter($_GET['msg']) . "</p>";
   } ?>
-  <div id="index-inner">
-    <div class="index-row">
+  <section id="index-inner">
+    <section class="index-row">
 
       <a href=<?php echo '"' . URL_DATABASE . '"'; ?> class="index-link">
-        <div class="index-item database" id="index-database">
-          <div class="index-text-container">
+        <section class="index-item database" id="index-database">
+          <article class="index-text-container">
             <h4 class="index-title">Database</h4>
             <p class="index-text">A collection of AoPS Blog CSS themes for your perusal.</p>
-          </div>
-        </div>
+          </article>
+        </section>
       </a>
 
       <a href=<?php echo '"' . URL_THEMIZER . '"'; ?> class="index-link">
-        <div class="index-item themizer" id="index-themizer">
-          <div class="index-text-container">
+        <section class="index-item themizer" id="index-themizer">
+          <article class="index-text-container">
             <h4 class="index-title">Themizer</h4>
             <p class="index-text">Want to customize a theme for yourself? Then themizer is the tool for you!</p>
-          </div>
-        </div>
+          </article>
+        </section>
       </a>
 
-    </div>
+    </section>
 
     <div class="clear"></div>
 
-    <div class="index-row">
+    <section class="index-row">
 
       <a href=<?php echo '"' . URL_TRYIT . '"'; ?> class="index-link">
-        <div class="index-item tryit" id="index-tryit">
-          <div class="index-text-container">
+        <section class="index-item tryit" id="index-tryit">
+          <article class="index-text-container">
             <h4 class="index-title">Try-It</h4>
             <p class="index-text">Want to try out a theme before you actually use it on your blog? Give it a try with this tool!</p>
-          </div>
-        </div>
+          </article>
+        </section>
       </a>
 
       <a href=<?php echo '"' . URL_DISCUSS . '"'; ?> class="index-link">
-        <div class="index-item discuss" id="index-discuss">
-          <div class="index-text-container">
+        <section class="index-item discuss" id="index-discuss">
+          <article class="index-text-container">
             <h4 class="index-title">Discuss</h4>
             <p class="index-text">Come join our community of fellow AoPS bloggers and stylists!</p>
-          </div>
-        </div>
+          </article>
+        </section>
       </a>
 
-    </div>
-  </div>
+    </section>
+  </section>
 </section>
 
 <?php get_footer(); ?>
