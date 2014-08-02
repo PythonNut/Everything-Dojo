@@ -1,28 +1,29 @@
 <?php
   $data = $themedb->get_themes();
-	$view = $_GET['view'];
+  $view = $_GET['view'];
 
-	switch($view){
-		case '';
+  switch ($view){
+    case '':
 ?>
   <div id="tile-container">
-     <a href="<?php echo URL_DATABASE; ?>?mode=view&view=complete" class="database-link">
-     <div class="db-tile db-tile-large" id="complete">
-       <div class="db-tile-inner">
-        <span class="db-tile-title">Completed</span><br />Themes on this page have been validated by a theme moderator. These themes are bug free and can be used in your blog without worry.
+    <a href="<?php echo URL_DATABASE; ?>?mode=view&view=complete" class="database-link">
+      <div class="db-tile db-tile-large" id="complete">
+        <div class="db-tile-inner">
+         <span class="db-tile-title">Completed</span><br />Themes on this page have been validated by a theme moderator. These themes are bug free and can be used in your blog without worry.
+        </div>
       </div>
-    </div>
     </a>
     <a href="<?php echo URL_DATABASE; ?>?mode=view&view=development" class="database-link">
-    <div class="db-tile db-tile-large" id="development">
-      <div class="db-tile-inner">
-        <span class="db-tile-title">Development</span><br />Themes on this page have been approved, but not yet validated. They are still in development and may have some bugs that need to be ironed out.
-    </div>
+      <div class="db-tile db-tile-large" id="development">
+        <div class="db-tile-inner">
+          <span class="db-tile-title">Development</span><br />Themes on this page have been approved, but not yet validated. They are still in development and may have some bugs that need to be ironed out.
+        </div>
+      </div>
     </a>
-  </div>	
-<?php		
-			break;
-		case 'complete';
+  </div>
+<?php
+      break;
+    case 'complete':
 ?>
     <h2>Completed Themes</h2>
     
@@ -60,8 +61,8 @@
       </tbody>
     </table>
 <?php
-			break;
-		case 'development':
+      break;
+    case 'development':
 ?>    
     <h2>Themes in Development</h2>
     
@@ -99,22 +100,22 @@
       </tbody>
     </table>
 <?php
-			break;
-		case 'style':
+      break;
+    case 'style':
 ?>
-			<h2>View Style</h2>
-<?php		
-			$id = $_GET['id'];
-			
-			$style = $themedb->get_themes($id);
-			if($id == '' || count($style) == 0){
+      <h2>View Style</h2>
+<?php
+      $id = $_GET['id'];
+
+      $style = $themedb->get_themes($id);
+      if($id == '' || count($style) == 0){
 ?>
       This style does not exist.
-<?php			
-			}
-			else{
+<?php
+      }
+      else{
 ?>
-			<h4><?php echo $style['name']; ?> v. <?php echo $style['version']; ?> by <?php echo $style['author']; ?> <?php echo $style['stage']; ?></h4>
+      <h4><?php echo $style['name']; ?> v. <?php echo $style['version']; ?> by <?php echo $style['author']; ?> <?php echo $style['stage']; ?></h4>
       <?php echo $style['description']; ?><br />
       <b>Screenshot:</b><br />
       <img src="<?php echo $style['screenshot']; ?>" /><br />
@@ -124,8 +125,8 @@
 <code class="language-css"><?php echo nl2br($style['code']); ?></code>
         </pre>
       </div>
-<?php			
-			}
-			break;
-	}
+<?php
+      }
+      break;
+  }
 ?>

@@ -28,7 +28,7 @@
     if (get_magic_quotes_gpc())
       $data = stripslashes($data);
 
-		// No need for this with PDO
+    // No need for this with PDO
     // $data = mysql_real_escape_string($data);
     // Please replace with mysqli and setup a fake link
     return $data;
@@ -56,7 +56,7 @@
   }
 
   function isEmail($email) {
-    return preg_match('/^\S+@[\w\d.-]{2,}\.[\w]{2,6}$/iU', $email) ? TRUE : FALSE;
+    return preg_match('/^\S+@([\w\d.-]{2,}\.[\w]{2,6}|localhost)$/iU', $email) ? TRUE : FALSE;
   }
 
   function isUserID($username) {
@@ -134,13 +134,9 @@
 
     $table = TB_NAME;
     if(isset($_SESSION['user_id'])) {
-			$result = $dbc->prepare("UPDATE $table SET ckey = '', ctime = '' WHERE id = ?");
-    	$result->execute(array($_SESSION['user_id']));
-		}
-    /*mysql_query("UPDATE $table
-             SET ckey = '', ctime = ''
-             WHERE id = $_SESSION[user_id]") or die(mysql_error());
-    */
+      $result = $dbc->prepare("UPDATE $table SET ckey = '', ctime = '' WHERE id = ?");
+      $result->execute(array($_SESSION['user_id']));
+    }
 
     /************ Delete the sessions****************/
     unset($_SESSION['user_id']);
@@ -197,11 +193,10 @@
     return $implode;
   }
 
-	function br2nl($string)
-	{
-			return preg_replace('/\<br(\s*)?\/?\>/i', "\n", $string);
-	}  
-	
+  function br2nl($string) {
+    return preg_replace('/\<br(\s*)?\/?\>/i', "\n", $string);
+  }
+
   /****************************END OF LOGIN SCRIPT FUNCTIONS*********************************/
   /*regular site functions*/
 

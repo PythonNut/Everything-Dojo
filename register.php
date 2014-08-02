@@ -8,12 +8,10 @@ $err = array();
 // Checks if usernames are free
 if (isset($_GET['username'])) {
   $username = $_GET['username'];
-	$query = "SELECT count(*) AS total FROM $table WHERE user_name=?";
-	$rs_duplicate = $dbc->prepare($query);
-	$rs_duplicate->execute(array($username));
-  // $rs_duplicate = mysql_query("SELECT count(*) AS total FROM $table WHERE user_name='$username'") or die(mysql_error());
-  // list($total) = mysql_fetch_row($rs_duplicate);
-	list($total) = $rs_duplicate->fetchColumn();
+  $query = "SELECT count(*) AS total FROM $table WHERE user_name=?";
+  $rs_duplicate = $dbc->prepare($query);
+  $rs_duplicate->execute(array($username));
+  list($total) = $rs_duplicate->fetchColumn();
 
   if ($total > 0) {
     http_response_code(400);
@@ -25,12 +23,10 @@ if (isset($_GET['username'])) {
 // Checks if emails exist in database
 if (isset($_GET['email'])) {
   $email = $_GET['email'];
-  // $rs_duplicate = mysql_query("SELECT count(*) AS total FROM $table WHERE user_email='$email'") or die(mysql_error());
-  // list($total) = mysql_fetch_row($rs_duplicate);
-	$query = "SELECT count(*) AS total FROM $table WHERE user_email=?";
-	$rs_duplicate = $dbc->prepare($query);
-	$rs_duplicate->execute(array($email));
-	list($total) = $rs_duplicate->fetchColumn();
+  $query = "SELECT count(*) AS total FROM $table WHERE user_email=?";
+  $rs_duplicate = $dbc->prepare($query);
+  $rs_duplicate->execute(array($email));
+  list($total) = $rs_duplicate->fetchColumn();
 
   if ($total > 0) {
     http_response_code(400);
@@ -73,15 +69,10 @@ if(isset($_POST['doRegister']))  {
   $usr_email = $data['usr_email'];
   $user_name = $data['user_name'];
 
-  //$rs_duplicate = $dbc->prepare("SELECT count(*) AS total FROM $table WHERE user_email=? OR user_name=?");
-  //$rs_duplicate->execute(array($usr_email,$user_name));
-  //$list($total) = $rs_duplicate->fetchAll(PDO::FETCH_ASSOC)[0];
-  // $rs_duplicate = mysql_query("SELECT count(*) AS total FROM $table WHERE user_email='$usr_email' OR user_name='$user_name'") or die(mysql_error());
-  // list($total) = mysql_fetch_row($rs_duplicate);
-	$query = "SELECT count(*) AS total FROM $table WHERE user_email=? OR user_name=?";
-	$rs_duplicate = $dbc->prepare($query);
-	$rs_duplicate->execute(array($usr_email, $user_name));
-	list($total) = $rs_duplicate->fetchColumn();
+  $query = "SELECT count(*) AS total FROM $table WHERE user_email=? OR user_name=?";
+  $rs_duplicate = $dbc->prepare($query);
+  $rs_duplicate->execute(array($usr_email, $user_name));
+  list($total) = $rs_duplicate->fetchColumn();
 
   if ($total > 0) {
     $err[] = "The username/email already exists. Please try again with different username and email.";

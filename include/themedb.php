@@ -5,49 +5,49 @@
 */
 class themedb {
 
-	function __construct($dbc){
-		$this->dbc = $dbc;
-	}
+  function __construct($dbc){
+    $this->dbc = $dbc;
+  }
 
   // Modifying/inserting methods
 
   function approve_theme() {
   }
 
-	/*
-	* submit_theme($data)
-	* Desc: Submits a theme to the database
-	* $data: The data from 
-	*/
+  /*
+  * submit_theme($data)
+  * Desc: Submits a theme to the database
+  * $data: The data from
+  */
   function submit_theme($data) {
-		$query = "INSERT INTO `" . THEMEDB_TABLE . "` (`id`, `approved`, `validated`, `validate_request`, `name`, `description`, `code`, `stage`, `author`, `screenshot`, `version`, `submitted_by`, `submitted_by_id`, `owner`, `owner_id`) VALUES (NULL, 0, 0, 0, :name, :description, :code, :stage, :author, :screenshot, :version, :submitted_by, :submitted_by_id, NULL, NULL)";
-		$sth = $this->dbc->prepare($query);
-		
-		$sth->execute(array(
-			':name'							=> $data['name'],
-			':description'			=> $data['description'],
-			':code'							=> $data['code'],
-			':stage'						=> $data['stage'],
-			':author'						=> $data['author'],
-			':screenshot'				=> $data['screenshot'],
-			':version'					=> $data['version'],
-			':submitted_by'			=> $data['submitted_by'],
-			':submitted_by_id'	=> $data['submitted_by_id']
-		));
-		
-		$id = $this->dbc->lastInsertId();
-		return $id;
+    $query = "INSERT INTO `" . THEMEDB_TABLE . "` (`id`, `approved`, `validated`, `validate_request`, `name`, `description`, `code`, `stage`, `author`, `screenshot`, `version`, `submitted_by`, `submitted_by_id`, `owner`, `owner_id`) VALUES (NULL, 0, 0, 0, :name, :description, :code, :stage, :author, :screenshot, :version, :submitted_by, :submitted_by_id, NULL, NULL)";
+    $sth = $this->dbc->prepare($query);
+
+    $sth->execute(array(
+      ':name'            => $data['name'],
+      ':description'     => $data['description'],
+      ':code'            => $data['code'],
+      ':stage'           => $data['stage'],
+      ':author'          => $data['author'],
+      ':screenshot'      => $data['screenshot'],
+      ':version'         => $data['version'],
+      ':submitted_by'    => $data['submitted_by'],
+      ':submitted_by_id' => $data['submitted_by_id']
+    ));
+
+    $id = $this->dbc->lastInsertId();
+    return $id;
   }
 
   // Getting methods
 
-	/*
-	* get_themes($id)
-	* Desc: Gets either a list of all the themes sorted by validated/unvalidated or one theme
-	* $id: Either nothing to get all themes or an id number
-	*/
+  /*
+  * get_themes($id)
+  * Desc: Gets either a list of all the themes sorted by validated/unvalidated or one theme
+  * $id: Either nothing to get all themes or an id number
+  */
   function get_themes($id = 'all') {
-		if($id == 'all') {
+    if($id == 'all') {
       // Select all approved themes but unvalidated
       $query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `approved` = 1 AND `validated` = 0";
 
@@ -60,8 +60,8 @@ class themedb {
       $version     = array();
       $submit_id   = array();
       $owner_id    = array();
-			
-			foreach ($this->dbc->query($query) as $row) {
+
+      foreach ($this->dbc->query($query) as $row) {
         $id[]          = $row["id"];
         $name[]        = $row["name"];
         $description[] = $row["description"];
@@ -70,7 +70,7 @@ class themedb {
         $version[]     = $row["version"];
         $submit_id[]   = $row["submited_by_id"];
         $owner_id[]    = $row["owner_id"];
-			}
+      }
 
       $unvalidated = array(
           'id'          => $id,
@@ -82,7 +82,7 @@ class themedb {
           'submit_id'   => $submit_id,
           'owner_id'    => $owner_id
       );
-			
+
 
       // Select all approved themes and validated
       $query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `approved` = 1 AND `validated` = 1";
@@ -96,8 +96,8 @@ class themedb {
       $version     = array();
       $submit_id   = array();
       $owner_id    = array();
-			
-			foreach ($this->dbc->query($query) as $row) {
+
+      foreach ($this->dbc->query($query) as $row) {
         $id[]          = $row["id"];
         $name[]        = $row["name"];
         $description[] = $row["description"];
@@ -106,8 +106,8 @@ class themedb {
         $version[]     = $row["version"];
         $submit_id[]   = $row["submited_by_id"];
         $owner_id[]    = $row["owner_id"];
-			}
-			
+      }
+
       $validated = array(
           'id'          => $id,
           'name'        => $name,
@@ -123,17 +123,17 @@ class themedb {
         'unvalidated' => $unvalidated,
         'validated'   => $validated
       );
-			
+
       return $data;
     }
     else {
-			$query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `id` = :id";
-			$sth = $this->dbc->prepare($query);
-			$sth->execute(array(':id' => $id));
-    	$result = $sth->fetch(PDO::FETCH_ASSOC);
-			
-			return $result;
-		}
+      $query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `id` = :id";
+      $sth = $this->dbc->prepare($query);
+      $sth->execute(array(':id' => $id));
+      $result = $sth->fetch(PDO::FETCH_ASSOC);
+
+      return $result;
+    }
   }
 
 }

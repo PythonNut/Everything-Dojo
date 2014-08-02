@@ -13,24 +13,10 @@ if(isset($get['user']) && !empty($get['activ_code']) && !empty($get['user']) && 
   $msg = array();
   $user = $get['user'];
   $activ = $get['activ_code'];
-  //$user = mysql_real_escape_string($get['user']);
-  //$activ = mysql_real_escape_string($get['activ_code']);
   $rs_check = $dbc->prepare("SELECT id FROM ".$table." WHERE md5_id=? AND activation_code=?");
   $rs_check->execute(array($user, $activ));
-	$rs_check->fetchAll(PDO::FETCH_ASSOC);
+  $rs_check->fetchAll(PDO::FETCH_ASSOC);
   $num = $rs_check->rowCount();
-  //check if activ code and user is valid
-  //$rs_check = mysql_query("SELECT id FROM $table WHERE md5_id='$user' AND activation_code='$activ'") or die (mysql_error());
-  //$num = mysql_num_rows($rs_check);
-
-  // $user = mysql_real_escape_string($get['user']);
-  // $activ = mysql_real_escape_string($get['activ_code']);
-
-  //check if activ code and user is valid
-  // $rs_check = mysql_query("SELECT id FROM $table WHERE md5_id='$user' AND activation_code='$activ'") or die (mysql_error());
-	// $rs_check = $dbc->prepare("SELECT id FROM $table WHERE md5_id=? AND activation_code=?")->execute(array($user, $activ));
-  // $num = mysql_num_rows($rs_check);
-	// $num = $rs_check->fetchAll(PDO::FETCH_ASSOC)->rowCount(); 
   // Match row found with more than 1 results  - the user is authenticated.
   if ($num <= 0) {
     $err[] = "Sorry, no such account exists or the activation code is invalid.";
@@ -40,8 +26,7 @@ if(isset($get['user']) && !empty($get['activ_code']) && !empty($get['user']) && 
   // set the approved field to 1 to activate the account
     $rs_activ = $dbc->prepare("UPDATE ".$table." SET approved='1' WHERE md5_id=? AND activation_code = ? ");
     $rs_activ->execute(array($user, $activ));
-    //$rs_activ = mysql_query("UPDATE $table SET approved='1' WHERE md5_id='$user' AND activation_code = '$activ' ") or die(mysql_error());
-    // $rs_activ = mysql_query("UPDATE $table SET approved='1' WHERE md5_id='$user' AND activation_code = '$activ' ") or die(mysql_error());
+
     $msg[] = "Thank you. Your account has been activated. You can now <a href=\"login.php\">login</a>.";
   }
 }
@@ -52,35 +37,20 @@ if (isset($_POST['doActivate'])) {
   $msg = array();
   $user_email = $_POST['user_email'];
   $activ = $_POST['activ_code'];
-  //$user_email = mysql_real_escape_string($_POST['user_email']);
-  //$activ = mysql_real_escape_string($_POST['activ_code']);
-  //check if activ code and user is valid as precaution
-  //$rs_check = mysql_query("SELECT id FROM $table WHERE user_email='$user_email' AND activation_code='$activ'") or die (mysql_error());
-  //$num = mysql_num_rows($rs_check);
   $rs_check = $dbc->prepare("SELECT id FROM ".$table." WHERE user_email=? AND activation_code=?");
   $rs_check->execute(array($user_email, $activ));
-	$rs_check->fetchAll(PDO::FETCH_ASSOC);
+  $rs_check->fetchAll(PDO::FETCH_ASSOC);
   $num = $rs_check->rowCount();
 
 
-  //$user_email = mysql_real_escape_string($_POST['user_email']);
-  //$activ = mysql_real_escape_string($_POST['activ_code']);
-  //check if activ code and user is valid as precaution
-  //$rs_check = mysql_query("SELECT id FROM $table WHERE user_email='$user_email' AND activation_code='$activ'") or die (mysql_error());
-  //$num = mysql_num_rows($rs_check);
   // Match row found with more than 1 results  - the user is authenticated.
   if ($num <= 0) {
     $err[] = "Sorry, no such account exists or the activation code is invalid.";
   }
   //set approved field to 1 to activate the user
   if(empty($err)) {
-
-    //$rs_activ = $dbc->prepare("UPDATE ? SET approved='1' WHERE user_email='?' AND activation_code = '?' ");
-    //$rs_activ->execute(array($table, $user_email, $activ));
-    //$rs_activ = mysql_query("UPDATE $table SET approved='1' WHERE md5_id='$user' AND activation_code = '$activ' ") or die(mysql_error());
-	$rs_activ = $dbc->prepare("UPDATE ".$table." SET approved='1' WHERE user_email=? AND activation_code = ?");
-	$rs_activ->execute(array($user_email,$activ));
-    //$rs_activ = mysql_query("UPDATE $table SET approved='1' WHERE user_email='$user_email' AND activation_code = '$activ'") or die(mysql_error());
+    $rs_activ = $dbc->prepare("UPDATE ".$table." SET approved='1' WHERE user_email=? AND activation_code = ?");
+    $rs_activ->execute(array($user_email,$activ));
 
     $msg[] = "Thank you. Your account has been activated. You can now <a href=\"login.php\">login</a>.";
   }
@@ -90,23 +60,9 @@ if(isset($_POST['doResend'])) {
   $err = array();
   $msg = array();
 
-  //$user_email = $_POST['user_email'];
-  //$user_email = mysql_real_escape_string($_POST['user_email']);
-  //check if activ code and user is valid as precaution
-  //$rs_check = $dbc->prepare("SELECT md5_id, approved, activation_code FROM ? WHERE user_email=?");
-  //$rs_check->execute(array($table, $user_email));
-  //$row = $rs_check->fetchAll(PDO::FETCH_ASSOC);
-  //$num = count($row);
-  //$rs_check = mysql_query("SELECT md5_id, approved, activation_code FROM $table WHERE user_email='$user_email'") or die (mysql_error());
-  //$row = mysql_fetch_assoc($rs_check);
-  //$num = mysql_num_rows($rs_check);
 
 
-  $user_email = $_POST['user_email'];	//no escaping needed because of PDO
-  //check if activ code and user is valid as precaution
-  //$rs_check = mysql_query("SELECT md5_id, approved, activation_code FROM $table WHERE user_email='$user_email'") or die (mysql_error());
-  //$row = mysql_fetch_assoc($rs_check);
-  //$num = mysql_num_rows($rs_check);
+  $user_email = $_POST['user_email']; //no escaping needed because of PDO
   $rs_check = $dbc->prepare("SELECT md5_id, approved, activation_code FROM ".$table." WHERE user_email = ?");
   $rs_check->execute(array($user_email));
   $row = $rs_check->fetchAll(PDO::FETCH_ASSOC);

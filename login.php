@@ -17,10 +17,6 @@ if (isset($_POST['doLogin'])) {
   $user_email = $data['username'];
   $pass = $data['pwd'];
 
-  //$result = mysql_query("SELECT id, pwd, user_name, approved, user_level FROM $table WHERE $user_cond") or die (mysql_error());
-
-
-  //PDO is commented out
   $result = $dbc->prepare("SELECT id, pwd, user_name, approved, user_level FROM $table WHERE user_name = ?");
   $result->execute(array($user_email));
   $user_array = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -28,12 +24,8 @@ if (isset($_POST['doLogin'])) {
   $user_array = $user_array[0];
   $pwd = $user_array['pwd'];
 
-
-  //$username_match = mysql_num_rows($result);
-
   // Match row found with more than 1 results  - the user is authenticated.
   if ($username_match > 0) {
-    //$user_array = $result->fetchAll(PDO::FETCH_ASSOC)[0]; //replace with $result->fetchAll(PDO::FETCH_ASSOC)[0] for PDO
     if(!$user_array['approved']) {
       $err[] = "Account not activated. Please contact the administrator to activate.";
     }
@@ -55,7 +47,6 @@ if (isset($_POST['doLogin'])) {
         $ckey = GenKey();
         $result = $dbc->prepare("UPDATE $table SET ctime = ?, ckey = ? WHERE id = ?");
         $result->execute(array($stamp,$ckey,$user_array['id']));
-        //mysql_query("UPDATE $table SET ctime = '$stamp', ckey = '$ckey' WHERE id = '$id'") or die(mysql_error());
 
         header("Location: myaccount.php");
       }
