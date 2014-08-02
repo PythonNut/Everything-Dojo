@@ -9,8 +9,8 @@
 
     <link href="images/favicon.ico" rel="shortcut icon">
     <?php if ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)") { ?>
-    <link href="css/normalize.css" type="text/css" rel="stylesheet">
-    <link href="css/style.css" type="text/css" rel="stylesheet">
+    <link href="/css/normalize.css" type="text/css" rel="stylesheet">
+    <link href="/css/style.css" type="text/css" rel="stylesheet">
     <?php } ?>
 
     <?php global $extra_style; print $extra_style; ?>
@@ -19,13 +19,13 @@
     // we don't need jQuery on some pages
     if ($title != "Home" || $title != "About") { ?>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="/js/script.js"></script>
     <?php } ?>
 
     <?php global $extra_js; print $extra_js; ?>
 
     <noscript>
-      <link href="css/noscript.css" type="text/css" rel="stylesheet">
+      <link href="/css/noscript.css" type="text/css" rel="stylesheet">
     </noscript>
 
   </head>
@@ -94,27 +94,27 @@
         <header>
         <section id="headerwrap">
 
-          <section id="logo">
+          <figure id="logo">
             <a href="/"><img src="/images/logo.svg"/></a>
-          </section>
+          </figure>
 
           <nav>
             <ul>
               <li><a href="/" id="nav-home">Home</a></li>
             <?php if(isset($_SESSION['user_id'])) { ?>
-              <li><a href="myaccount.php" id="menu-myaccount">My Account</a></li>
-              <li><a href="mysettings.php" id="menu-mysettings">My Settings</a></li>
+              <li><a href="/myaccount.php" id="menu-myaccount">My Account</a></li>
+              <li><a href="/mysettings.php" id="menu-mysettings">My Settings</a></li>
               <?php
               // will not work if dbc is not included on page
               if (checkAdmin()) {
               ?>
-              <li><a href="admin.php" id="menu-admin">Admin CP</a></li>
+              <li><a href="/admin.php" id="menu-admin">Admin CP</a></li>
               <?php } //end admin ?>
-              <li><a href="logout.php" id="menu-logout">Logout</a></li>
+              <li><a href="/logout.php" id="menu-logout">Logout</a></li>
             <?php } ?>
             <?php if(!isset($_SESSION['user_id'])) { ?>
-              <li><a href="login.php" id="menu-login">Login</a></li>
-              <li><a href="register.php" id="menu-register">Register</a></li>
+              <li><a href="/login.php" id="menu-login">Login</a></li>
+              <li><a href="/register.php" id="menu-register">Register</a></li>
             <?php } ?>
             </ul>
           </nav>
