@@ -76,20 +76,14 @@ if(isset($_POST['doRegister']))  {
 
   if ($total > 0) {
     $err[] = "The username/email already exists. Please try again with different username and email.";
-    //header("Location: register.php?msg=$err");
-    //exit();
   }
 
   if(empty($err)) {
 
-    //$sql_insert = "INSERT INTO $table (user_email, pwd, date, users_ip, activation_code, user_name) VALUES ('$usr_email', '$sha1pass', now(), '$user_ip', '$activ_code', '$user_name')";
     $sql_insert = $dbc->prepare("INSERT INTO $table (user_email, pwd, date, users_ip, activation_code, user_name) VALUES (?,?,NOW(),?,?,?)");
     $sql_insert->execute(array($usr_email,$sha1pass,$user_ip,$activ_code,$user_name));
-    //mysql_query($sql_insert,$link) or die("Insertion Failed: ".mysql_error());
-    //$user_id = mysql_insert_id($link);
     $user_id = $dbc->lastInsertId();
     $md5_id = md5($user_id);
-    //mysql_query("UPDATE $table SET md5_id='$md5_id' WHERE id='$user_id'");
     $dbc->prepare("UPDATE $table SET md5_id=? WHERE id=?")->execute(array($md5_id,$user_id));
     $pwdcensored = substr($data['pwd'], 0, 3).str_repeat("*", strlen($data['pwd']) - 3);
 

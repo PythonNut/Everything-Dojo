@@ -83,4 +83,5 @@ if (isset($_POST['doLogin'])) {
     <input name="doLogin" type="submit" value="Login">
   </form>
 </section>
+
 <?php get_footer(); ?>

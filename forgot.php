@@ -16,8 +16,6 @@ if (isset($_POST['doReset'])) {
 
   $user_email = $data['user_email'];
   //check if activ code and user is valid as precaution
-  //$rs_check = mysql_query("SELECT id FROM $table where user_email='$user_email'") or die (mysql_error()); 
-  //$num = mysql_num_rows($rs_check);
   $rs_check = $dbc->prepare("SELECT id FROM $table WHERE user_email=?");
   $rs_check->execute(array($user_email));
   $num = $rs_check->rowCount();
@@ -29,7 +27,6 @@ if (isset($_POST['doReset'])) {
 
     $new_pwd = GenPwd();
     $pwd_reset = PwdHash($new_pwd);
-    //$sha1_new = sha1($new); 
     //set update sha1 of new password + salt
     $rs_activ = $dbc->prepare("UPDATE $table SET pwd=? WHERE user_email='?'");
     $rs_activ->execute(array($pwd_reset, $user_email));
@@ -83,4 +80,5 @@ This is an automated response. Do not reply to this email.";
   </form>
   <?php } //end else (that there's no messages) ?>
 </section>
+
 <?php get_footer(); ?>
