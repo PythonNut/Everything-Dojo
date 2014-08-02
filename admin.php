@@ -38,6 +38,7 @@ list($active) = $rs_active;
   //dbc already included
   get_header();
 ?>
+<section id="content">
   <h2>Admin CP</h2>
   <p>Total users: <?php echo $all;?><br />
   Active users: <?php echo $active; ?><br />
@@ -185,4 +186,6 @@ list($active) = $rs_active;
     <input type="button" value="Remove Text Box" id="removeButton" class="inline" />
     <input name="announcementsSubmit" type="submit" value="Update" />
   </form>
+</section>
+
 <?php get_footer(); ?>

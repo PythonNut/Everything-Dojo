@@ -12,6 +12,8 @@
   });</script>";
   get_header();
 ?>
+<?php include("unavailable.php"); ?>
+<!--
 <div id="sidebar">
   <div id="sidebar-inner">
     <h2 id="sideheadbar" class="themizer">Themizer</h2>
@@ -43,5 +45,7 @@
   </div>
 </div>
 <div id="blog-body"></div>
-<?php //no footer here ?>
+-->
 
+</body>
+</html>

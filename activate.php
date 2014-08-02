@@ -101,6 +101,7 @@ This is an automated response. Do not reply to this email.";
   session_start();
   get_header();
 ?>
+<section id="content">
   <?php //spit out all errors
   if(!empty($err))  {
     echo "<p id=\"errors\">";
@@ -132,4 +133,6 @@ This is an automated response. Do not reply to this email.";
     <input name="doResend" type="submit" value="Resend" />
   </form>
   <?php } //end no messages ?>
+</section>
+
 <?php get_footer(); ?>

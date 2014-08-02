@@ -58,6 +58,7 @@ $rs_settings->execute(array($_SESSION['user_id']));
   page_protect();
   get_header();
 ?>
+<section id="content">
   <?php
   if (!empty($err)) {
     echo "<p id=\"errors\">";
@@ -83,4 +84,5 @@ $rs_settings->execute(array($_SESSION['user_id']));
     <input type="submit" name="doUpdate">
   </form>
   <?php } //end no msg ?>
+</section>
 <?php get_footer(); ?>

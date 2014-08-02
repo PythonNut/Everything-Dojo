@@ -65,6 +65,7 @@ if (isset($_POST['doLogin'])) {
   //dbc was already got at the top; don't try again
   get_header();
 ?>
+<section id="content">
   <?php //spit out all errors
   if(!empty($err))  {
     echo "<p id=\"errors\">";
@@ -81,4 +82,5 @@ if (isset($_POST['doLogin'])) {
     <input name="pwd" type="password" class="required password" id="password" size="25"><br />
     <input name="doLogin" type="submit" value="Login">
   </form>
+</section>
 <?php get_footer(); ?>
