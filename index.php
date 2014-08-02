@@ -4,6 +4,10 @@
   session_start();
   get_header();
 ?>
+<section id="content">
+  <?php if(!empty($_GET['msg'])) {
+    echo "<article class=\"msg\">" . filter($_GET['msg']) . "</article>";
+  } ?>
   <div id="index-inner">
     <div class="index-row">
 
@@ -51,4 +55,5 @@
 
     </div>
   </div>
+</section>
 <?php get_footer(); ?>

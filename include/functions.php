@@ -146,7 +146,7 @@
     session_unset();
     session_destroy();
 
-    header("Location: logoutdone.php");
+    header("Location: index.php?msg=You have been successfully logged out.");
   }
 
   // Password and salt generation

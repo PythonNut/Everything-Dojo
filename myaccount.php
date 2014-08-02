@@ -5,6 +5,7 @@
   page_protect();
   get_header();
 ?>
+<section id="content">
   <h2>Welcome, <?php echo $_SESSION['user_name']; ?></h2>
   <p>This is the my account page. There is basically nothing here right now, but more is always to be added sometime.</p>
   <p>Your User ID: <?php echo $_SESSION['user_id']; ?></p>
@@ -34,4 +35,5 @@
       echo "</ul>";
     } ?>
   </div>
+</section>
 <?php get_footer(); ?>

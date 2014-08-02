@@ -60,6 +60,7 @@ This is an automated response. Do not reply to this email.";
   session_start();
   get_header();
 ?>
+<section id="content">
   <?php //spit out all errors
   if(!empty($err))  {
     echo "<p id=\"errors\">";
@@ -77,8 +78,9 @@ This is an automated response. Do not reply to this email.";
 
   <form action="forgot.php" method="post" name="actForm" id="actForm">
     <label>Your Email</label>
-    <input name="user_email" type="text" class="required email" size="25"></td>
+    <input name="user_email" type="text" class="required email" size="25">
     <input name="doReset" type="submit" value="Reset">
   </form>
   <?php } //end else (that there's no messages) ?>
+</section>
 <?php get_footer(); ?>
