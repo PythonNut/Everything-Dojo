@@ -1,6 +1,10 @@
 @charset "utf-8";
 /* CSS Document */
 
+h2.view-header{
+  margin-top: 3vh;
+}
+
 #tile-container {
   height: 34vh;
   width: 64vw;
@@ -10,16 +14,34 @@
 }
 
 a.database-link{
-	color: white;
+  color: white;
+}
+
+div.mcp-link{
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  height: 15vh;
+  line-height: 15vh;
+  vertical-align: bottom;
+}
+a.mcp-link:link{
+  font-family: 'lato';
+  font-size: 1.5rem;
 }
 
 .db-nav{
-	padding: 0;
+  margin-top: -1vh;
+  padding: 0;
 }
 
 .db-nav ul li a{
-	line-height: normal;
-	padding-top: 0;
+  font-size: 1.2rem;
+}
+
+.db-nav ul li a{
+  line-height: normal;
+  padding-top: 0;
 }
 
 .db-tile {
@@ -33,7 +55,7 @@ a.database-link{
 }
 
 .db-tile-large{
-	width: 31vw;
+  width: 31vw;
 }
 
 .db-tile:hover {
@@ -51,52 +73,40 @@ a.database-link{
   margin-right: 3%;
 }
 
-.col {
-  width: 18vw;
-  float: left;
-}
-
-#col2,
-#col3 {
-  margin-left: 2vw;
-}
-
-#col3 {
-  clear: right;
-}
-
-#fields{
-  float: left;
-}
-
 input[type="radio"]{
-	width: auto;
-	margin-right: 3px;
+  width: auto;
+  margin-right: 3px;
+  margin-left: 1vw;
 }
 
 label{
-	display: inline;
+  display: inline;
 }
 
 textarea#description{
-	width: 65vw;
-	height: 10vh;
+  width: 65vw;
+  height: 10vh;
 }
 
 textarea#css{
-	width: 65vw;
-	height: 30vh;
-	font-family: "Courier New", Courier, monospace;
+  width: 65vw;
+  height: 30vh;
+  font-family: "Courier New", Courier, monospace;
 }
 
 div.code{
-	font-size: 12px;
-	height: 45vh;
-	overflow: auto;
+  font-size: 12px;
+  height: 45vh;
+  overflow: auto;
+}
+
+div.code pre{
+  margin: 0;
+  border-radius: 0;
 }
 
 tr.style:hover{
-	cursor: pointer;
+  cursor: pointer;
 }
 
 #request,
@@ -106,5 +116,5 @@ tr.style:hover{
 }
 
 #development{
-	float: right;
+  float: right;
 }
