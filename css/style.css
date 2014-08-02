@@ -301,11 +301,22 @@ footer, .push {
 }
 
 .msg {
+  position: absolute;
+  top: 5.5rem;
+  left: 30%;
+  width: 40%;
   background: rgba(124, 171, 0, 0.4);
-  border: 1px solid #222;
-  padding: 0.6rem;
-  margin-bottom: 0.6rem;
-  font-weight: bold;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.9em;
+  font-weight: 400;
+  text-align: center;
+  padding: 0.6em;
+  border: 1px solid rgba(124, 171, 0, 0.7);
+  border-radius: 1em;
+}
+
+.msg + * {
+  margin-top: 3rem;
 }
 
 .textcenter { display: block; text-align: center; margin: 0; }
