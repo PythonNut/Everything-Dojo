@@ -7,22 +7,22 @@
 
     <meta charset="utf-8">
 
-    <link href="images/favicon.ico" rel="shortcut icon">
-    <link href="css/normalize.css" type="text/css" rel="stylesheet">
-    <link href="css/style.css" type="text/css" rel="stylesheet">
+    <link href="/images/favicon.ico" rel="shortcut icon">
+    <link href="/css/normalize.css" type="text/css" rel="stylesheet">
+    <link href="/css/style.css" type="text/css" rel="stylesheet">
     <?php global $extra_style; print $extra_style; ?>
 
     <?php
     // we don't need jQuery on some pages
     if ($title != "Home" || $title != "About") { ?>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="/js/script.js"></script>
     <?php } ?>
 
     <?php global $extra_js; print $extra_js; ?>
 
     <noscript>
-      <link href="css/noscript.css" type="text/css" rel="stylesheet">
+      <link href="<?php print $dir_loc; ?>css/noscript.css" type="text/css" rel="stylesheet">
     </noscript>
 
   </head>
@@ -32,7 +32,7 @@
     <?php // is there a better way to do this?
     $pages = array("Home", "About", "Account Activation", "Forgot Password", "Logout Successful", "403", "404", "418", "500");
     if(!in_array($title, $pages))
-      include("error/noscript.php");
+      include("/error/noscript.php");
     ?>
 
     <div id="wrap">
@@ -63,9 +63,9 @@
 
           <?php } else { ?>
 
-          <div id="logo">
+          <figure id="logo">
             <a href="/"><img src="/images/logo.svg" alt="Logo" /></a>
-          </div>
+          </figure>
 
           <nav>
             <ul>
