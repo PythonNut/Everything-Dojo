@@ -47,8 +47,7 @@ then loop
 while ($row_settings = mysql_fetch_array($rs_settings)) {}
 and output a bunch of forms
 */
- 
-//$rs_settings = mysql_query("SELECT * FROM $table WHERE id=\"".$_SESSION['user_id']."\""); 
+
 $rs_settings = $dbc->prepare("SELECT * FROM $table WHERE id = ?");
 $rs_settings->execute(array($_SESSION['user_id']));
 ?>
