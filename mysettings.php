@@ -9,17 +9,18 @@ $msg = array();
 
 if(isset($_POST['doUpdate'])) {
 
-  $rs_pwd = mysql_query("SELECT pwd FROM $table WHERE id=\"".$_SESSION['user_id']."\"");
-  list($old) = mysql_fetch_row($rs_pwd);
-  $old_salt = substr($old, 0, 9);
+  $rs_pwd = $dbc->prepare("SELECT pwd FROM $table WHERE id=?");
+  $rs_pwd->execute(array($_SESSION['user_id']));
+  $rs_pwd = $rs_pwd->fetchAll(PDO::FETCH_ASSOC);
+  list($old) = $rs_pwd;
+  $old_salt = substr($old['pwd'], 0, 9);
 
   //check for old password in md5 format
-  if($old === PwdHash($_POST['pwd_old'], $old_salt)) {
+  if($old['pwd'] === PwdHash($_POST['pwd_old'], $old_salt)) {
     if(checkPwd($_POST['pwd_new'], $_POST['pwd_again'])) {
       $newsha1 = PwdHash($_POST['pwd_new']);
-      //mysql_query("UPDATE $table SET pwd=\"".$newsha1."\" WHERE id=\"".$_SESSION['user_id']."\"");
-	  $result = $dbc->prepare("UPDATE $table SET pwd = ? WHERE id = ?");
-	  $result->execute(array($newsha1,$_SESSION['user_id']));
+      $result = $dbc->prepare("UPDATE $table SET pwd = ? WHERE id = ?");
+      $result->execute(array($newsha1,$_SESSION['user_id']));
       $msg[] = "Your password has been updated!";
     } else {
       $err[] = "Passwords must be at least 4 characters long, or your new passwords don't match.";
@@ -58,7 +59,7 @@ $rs_settings->execute(array($_SESSION['user_id']));
   get_header();
 ?>
   <?php
-  if(!empty($err))  {
+  if (!empty($err)) {
     echo "<p id=\"errors\">";
     foreach ($err as $e) {
       echo $e."<br />";
@@ -66,7 +67,7 @@ $rs_settings->execute(array($_SESSION['user_id']));
     echo "</p>";
   }
 
-  if(!empty($msg))  {
+  if (!empty($msg)) {
     echo "<div class=\"msg\">".$msg[0]."</div>";
   } else { ?>
   <h2>My Settings</h2>
