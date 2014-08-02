@@ -46,7 +46,7 @@ class themedb {
   * Desc: Gets either a list of all the themes sorted by validated/unvalidated or one theme
   * $id: Either nothing to get all themes or an id number
   */
-  function get_themes($id = 'all') {
+  function get_themes($id = 'all', $user_id = 0) {
     if($id == 'all') {
       // Select all approved themes but unvalidated
       $query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `approved` = 1 AND `validated` = 0";
@@ -125,12 +125,23 @@ class themedb {
       );
 
       return $data;
-    }
-    else {
-      $query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `id` = :id";
+    } else {
+      $query = "SELECT `owner_id` FROM `" . THEMEDB_TABLE . "` WHERE `id` = :id";
       $sth = $this->dbc->prepare($query);
       $sth->execute(array(':id' => $id));
-      $result = $sth->fetch(PDO::FETCH_ASSOC);
+      $owner = $sth->fetchColumn();
+
+      if($owner == NULL) {
+        $query = "SELECT * FROM `" . THEMEDB_TABLE . "` WHERE `id` = :id AND (`approved` = 1 OR `submitted_by_id` = :user_id)";
+        $sth = $this->dbc->prepare($query);
+        $sth->execute(array(':id' => $id, ':user_id' => $user_id));
+        $result = $sth->fetch(PDO::FETCH_ASSOC);
+      } else {
+        $query = "SELECT * FROM `" . THEMEDB_TABLE . "` WHERE `id` = :id AND (`approved` = 1 OR `owner_id` = :user_id)";
+        $sth = $this->dbc->prepare($query);
+        $sth->execute(array(':id' => $id, ':user_id' => $user_id));
+        $result = $sth->fetch(PDO::FETCH_ASSOC);
+      }
 
       return $result;
     }
