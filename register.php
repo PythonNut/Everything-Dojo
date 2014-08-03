@@ -141,11 +141,13 @@ This is an automated response. Do not reply to this email.";
     <label class="small i">Only letters, numbers, and underscores, from 3-20 characters long.</label>
     <div class="field">
       <input name="user_name" type="text" class="required username" onkeyup="validate(this.name)" onblur="err(this.name, 'remove')">
+      <img class="wait" src="images/loading.gif" alt="Please wait...">
     </div>
     <label>Email</label>
     <label class="small i">Must be valid. We'll use it to send you confirmation information and other important things like that. We'll keep it completely hush-hush, promise.</label>
     <div class="field">
       <input name="usr_email" type="text" class="required email" onkeyup="validate(this.name)" onblur="err(this.name, 'remove')">
+      <img class="wait" src="images/loading.gif" alt="Please wait...">
     </div>
     <label>Password</label>
     <label class="small i">Must be at least 6 characters long.</label>
