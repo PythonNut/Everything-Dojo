@@ -22,7 +22,7 @@
     <?php global $extra_js; print $extra_js; ?>
 
     <noscript>
-      <link href="<?php print $dir_loc; ?>css/noscript.css" type="text/css" rel="stylesheet">
+      <link href="css/noscript.css" type="text/css" rel="stylesheet">
     </noscript>
 
   </head>

@@ -248,6 +248,14 @@ footer, .push {
 #errors { color: red; }
 
 .field { position: relative; }
+
+.wait {
+  display: none;
+  position: absolute;
+  top: 0.2rem;
+  left: 11rem;
+  height: 1.5rem;
+}
 .invalid {
   border-color: #b00;
   background-color: #ffeded;

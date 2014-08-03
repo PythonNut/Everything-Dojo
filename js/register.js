@@ -2,9 +2,6 @@
  * Verification for register.php *
  *********************************/
 
-// Get form element
-//var form = document.getElementsByTagName("form")[0];
-
 // Create div to wrap messages in
 // Placed here so as to not mess them up
 var div = document.createElement("div");
@@ -97,14 +94,21 @@ function validate(name)
   var field = document.querySelector("[name='" + name + "']");
 
   // Username
-  // TODO: Add AJAX to send usernames to PHP backend to check if they are free
+  // window.userTimeout is an ugly global variable hack so that we can
+  // preserve the UX delay without any bugs caused by it (e.g. invalid
+  // username message being overwritten by valid username message)
   if (name == "user_name") {
     var user = field.value;
     if (!user.match(/^[a-z\d_]{3,20}$/i)) {
+      clearTimeout(window.userTimeout);
       valid(name);
       err(name, "Invalid username. Usernames must be 3-20 characters long and can only contain alphanumeric characters and underscores.");
+      field.parentNode.lastElementChild.style.display = "none"; // hide loading gif
     } else {
+      clearTimeout(window.userTimeout);
       err(name);
+      valid(name);
+      field.parentNode.lastElementChild.style.display = "inline"; // show loading gif
       // ajax to verify username
       var ajaxName = new XMLHttpRequest();
       ajaxName.onreadystatechange = function() {
@@ -121,21 +125,33 @@ function validate(name)
             valid(name);
             err(name, "A " + ajaxName.status + " error occurred. Please try again.", "error");
           }
+          field.parentNode.lastElementChild.style.display = "none"; // hide loading gif
         }
       };
 
-      ajaxName.open("GET", "register.php?username=" + user, true);
-      ajaxName.send();
+      // set 400ms timeout because we're getting results too fast, and
+      // users won't know whether the AJAX got through or not :P
+      window.userTimeout = setTimeout(function() {
+        ajaxName.open("GET", "register.php?username=" + user, true);
+        ajaxName.send();
+      }, 400);
     }
   }
 
   // Email
+  // For explanation of window.emailTimeout, see Username.
   if (name == "usr_email") {
     var email = field.value;
     if (!email.match(/^\S+@(localhost|([\w\d-]{2,}\.){1,2}[\w]{2,6})$/i)) {
+      clearTimeout(window.emailTimeout);
+      valid(name);
       err(name, "Email entered is not a valid email.");
+      field.parentNode.lastElementChild.style.display = "none"; // hide loading gif
     } else {
+      clearTimeout(window.emailTimeout);
       err(name);
+      valid(name);
+      field.parentNode.lastElementChild.style.display = "inline"; // show loading gif
       // ajax to verify email
       var ajaxEmail = new XMLHttpRequest();
       ajaxEmail.onreadystatechange = function() {
@@ -152,11 +168,15 @@ function validate(name)
             valid(name);
             err(name, "A " + ajaxEmail.status + " error occurred. Please try again.", "error");
           }
+          field.parentNode.lastElementChild.style.display = "none"; // hide loading gif
         }
       };
 
-      ajaxEmail.open("GET", "register.php?email=" + email, true);
-      ajaxEmail.send();
+      // set 400ms timeout for same reasons as with username
+      window.emailTimeout = setTimeout(function() {
+        ajaxEmail.open("GET", "register.php?email=" + email, true);
+        ajaxEmail.send();
+      }, 400);
     }
   }
 
