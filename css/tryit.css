@@ -1,0 +1,124 @@
+/*
+Everything Dojo CSS
+(c)2014 Everything Dojo (original skin by Red)
+Please do not plagiarize
+*/
+
+
+/*--FONT IMPORT--*/
+@import url('fonts.css');
+
+/*--UNIVERSAL RESET--*/
+* { margin: 0; padding: 0; }
+
+/*--BUTTONS--*/
+/* Based heavily on Quizlet buttons, thank you! */
+.tryit-button {
+  display: block;
+  background: #85B900;
+  border: none;
+  border-radius: 0.17em;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+  font-size: 0.7rem;
+  height: 2em;
+  margin: 0.42em 0;
+  padding: 0 0.6rem;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+  width: auto;
+}
+
+.tryit-button:hover {
+  background: #739F02;
+  box-shadow: 0 0 0.36rem rgba(0, 0, 0, 0.3) inset;
+}
+
+
+
+/*--COLORS--*/
+.database { background: #d553cb; }
+.themizer { background: #51b835; }
+.tryit    { background: #ff6c00; }
+.discuss  { background: #509aff; }
+
+
+/*--TYPESETTING--*/
+#headerwrap h1 {
+  font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+  font-weight: 300;
+  color: white;
+  display: inline-block; /* prevent body from being pushed down by sticky footer */
+  text-transform: uppercase;
+  font-size: 2.82rem;
+  line-height: 1.25em;
+  padding: 0.24rem 0.6rem;
+  margin: 0.6rem;
+  height: 1.334em;
+  position: absolute;
+}
+
+.small { font-size: 0.65em; }
+
+
+body { background: white; }
+
+#wrap { width: 90%; margin: 0 auto; }
+
+#content {
+  display: block;
+  overflow: auto;
+  margin: 2.604vh auto;
+  min-height: 100%;
+  width: 70vw;
+}
+
+
+/*--HEADER AND NAV--*/
+header {
+  background: white;
+  margin: 0 auto;
+  width: 111.11%;
+  position: relative;
+  left: -5.55%;
+}
+
+#headerwrap {
+  margin-left: 5.55%;
+  position: relative;
+  width: 90%;
+  height: 11.6vh;
+}
+
+#logo { position: absolute; top: 0; left: 0; margin: 1.302vh; }
+#logo img { margin-bottom: -0.52083vh; height: 8.33333vh; }
+
+
+/*--FOOTER--*/
+footer {
+  display: block;
+  text-align: center;
+  padding: 2.604167vh;
+  color: #bbb;
+  font-family: Amble, HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+footer a { color: #bbb; }
+footer a:hover { color: #999; }
+
+/**
+ * Sticky footer
+ * based on http://ryanfait.com/html5-sticky-footer/ with a few modifications
+ */
+
+footer, .push {
+  height: 16.0156vh; /* '.push' must be the same height as 'footer' */
+  box-sizing: border-box;
+}
+
+#wrap {
+  min-height: 100%;
+  margin: 0 auto -17.0156vh;
+}
+
+

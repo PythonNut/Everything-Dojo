@@ -6,10 +6,10 @@
     </div>
   </div>
   </a>
-  <a href="<?php echo URL_DATABASE; ?>?mode=request" class="database-link">
+  <a href="<?php echo URL_DATABASE; ?>?mode=manage" class="database-link">
   <div class="db-tile" id="request">
     <div class="db-tile-inner">
-      <span class="db-tile-title">Request</span><br />On this page, you can request validation which will move it to the [RELEASE] stage for styles that you have submitted.
+      <span class="db-tile-title">Manage</span><br />On this page, you can manage and view all your themes. You can also request [RELEASE] status for any of your approved themes.
     </div>
   </div>
   </a>
