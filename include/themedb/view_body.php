@@ -85,14 +85,22 @@
 <?php
 			break;
 		case 'style':
+<<<<<<< HEAD
+=======
+			$id = $_GET['id'];
+			$style = $themedb->get_themes($id, $_SESSION['user_id']);
+>>>>>>> FETCH_HEAD
 ?>
  >> <?php if($style['validated'] == 1){?><a href="<?php echo URL_DATABASE; ?>?mode=view&view=complete">Completed Themes</a><?php }else{?><a href="<?php echo URL_DATABASE; ?>?mode=view&view=development">Development Themes</a> <?php } ?>
 
 <?php		
+<<<<<<< HEAD
 			$id = $_GET['id'];
 			$edit = $themedb->check_owner($id, $_SESSION['user_id']);
 			$style = $themedb->get_themes($id, $_SESSION['user_id']);
 			
+=======
+>>>>>>> FETCH_HEAD
 			if($id == '' || count($style) == 0){
 ?>
       This style does not exist.
@@ -100,8 +108,12 @@
 			}
 			else{
 ?>
+<<<<<<< HEAD
 <h2 class="view-header"><?php echo $style['name']; ?> v. <?php echo $style['version']; ?> by <?php echo $style['author']; ?> <?php echo $style['stage']; ?></h2>
 			<?php if($edit == true){ ?><a href="<?php echo URL_DATABASE?>?mode=view&view=edit"><img src="../../images/edit.png" width="15" /> Edit Theme</a><br /><?php } ?>
+=======
+			<h2 class="view-header"><?php echo $style['name']; ?> v. <?php echo $style['version']; ?> by <?php echo $style['author']; ?> <?php echo $style['stage']; ?></h2>
+>>>>>>> FETCH_HEAD
       <?php echo $style['description']; ?><br />
       <b>Screenshot:</b><br />
       <img src="<?php echo $style['screenshot']; ?>" style="max-width: 65vw" /><br />
