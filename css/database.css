@@ -1,8 +1,8 @@
 @charset "utf-8";
 /* CSS Document */
 
-.view-header {
-  margin-top: 3vh;
+h2.view-header{
+	margin-top: 3vh;
 }
 
 #tile-container {
@@ -13,32 +13,35 @@
   margin-right: auto;
 }
 
-.database-link {
-  color: white;
+a.database-link{
+	color: white;
 }
 
-div.mcp-link {
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  height: 15vh;
-  line-height: 15vh;
-  vertical-align: bottom;
+div.mcp-link{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	height: 15vh;
+	line-height: 15vh;
+	vertical-align: bottom;
 }
-a.mcp-link:link {
-  font-family: 'lato';
-  font-size: 1.5rem;
-}
-
-.db-nav {
-  margin-top: -1vh;
-  padding: 0;
+a.mcp-link:link{
+	font-family: 'lato';
+	font-size: 1.5rem;
 }
 
-.db-nav ul li a {
-  font-size: 1.2rem;
-  line-height: normal;
-  padding-top: 0;
+.db-nav{
+	margin-top: -1vh;
+	padding: 0;
+}
+
+.db-nav ul li a{
+	font-size: 1.2rem;
+}
+
+.db-nav ul li a{
+	line-height: normal;
+	padding-top: 0;
 }
 
 .db-tile {
@@ -51,8 +54,8 @@ a.mcp-link:link {
   vertical-align: middle;
 }
 
-.db-tile-large {
-  width: 31vw;
+.db-tile-large{
+	width: 31vw;
 }
 
 .db-tile:hover {
@@ -70,47 +73,94 @@ a.mcp-link:link {
   margin-right: 3%;
 }
 
-[type="radio"] {
-  width: auto;
-  margin-right: 3px;
-  margin-left: 1vw;
+.col {
+  width: 18vw;
+  float: left;
 }
 
-label {
-  display: inline;
-}
-
-#description {
-  width: 65vw;
-  height: 10vh;
-}
-
-#css {
-  width: 65vw;
-  height: 30vh;
-  font-family: "Courier New", Courier, monospace;
-}
-
-.code {
-  font-size: 12px;
-  height: 45vh;
-  overflow: auto;
-}
-
-.code pre {
-  margin: 0;
-  border-radius: 0;
-}
-
-tr.style:hover {
-  cursor: pointer;
-}
-
-#request,
-#view {
+#col2,
+#col3 {
   margin-left: 2vw;
 }
 
-#development {
-  float: right;
+#col3 {
+  clear: right;
+}
+
+#fields{
+  float: left;
+}
+
+input[type="radio"]{
+	width: auto;
+	margin-right: 3px;
+}
+
+label{
+	display: inline;
+}
+
+textarea#description{
+	width: 65vw;
+	height: 10vh;
+}
+
+textarea#css{
+	width: 65vw;
+	height: 30vh;
+	font-family: "Courier New", Courier, monospace;
+}
+
+div.code{
+	font-size: 12px;
+	height: 45vh;
+	overflow: auto;
+}
+
+table.manage-table{
+	width: 100%;
+	margin: 1vh 0 0 0;
+}
+
+tr.style:hover{
+	cursor: pointer;
+}
+
+td.med-col{
+	width: 20%;
+}
+
+td.small-col{
+	width: 15%;
+}
+
+#request,
+#view
+{
+  margin-left: 2vw;
+}
+
+#development{
+	float: right;
+}
+
+.manage-item{
+	width: 90%;
+	margin-bottom: 1vh;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.manage-header{
+	background-color: #a91c9e;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: .5vw;
+	padding-bottom: .5vw;
+	border-bottom: 3px #d553cb solid;
+}
+
+.manage-header h4{
+	color: white;
+	margin-left: 2vw;
 }

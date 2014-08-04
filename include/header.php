@@ -6,17 +6,21 @@
     <title>Everything Dojo &bull; <?php global $title; print $title; ?></title>
 
     <meta charset="utf-8">
-
-    <link href="/images/favicon.ico" rel="shortcut icon">
-    <link href="/css/normalize.css" type="text/css" rel="stylesheet">
-    <link href="/css/style.css" type="text/css" rel="stylesheet">
+    <link href="images/favicon.ico" rel="shortcut icon">
+    <link href="css/normalize.css" type="text/css" rel="stylesheet">
+    <link href="css/style.css" type="text/css" rel="stylesheet">
+    
     <?php global $extra_style; print $extra_style; ?>
 
     <?php
     // we don't need jQuery on some pages
     if ($title != "Home" || $title != "About") { ?>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="/js/script.js"></script>
+    <script src="js/script.js"></script>
+    <?php } ?>
+    <?php 
+    if ($title == "Try-It") { ?>
+    <link href='css/tryit.css' rel='stylesheet' type='text/css'>
     <?php } ?>
 
     <?php global $extra_js; print $extra_js; ?>
@@ -32,7 +36,7 @@
     <?php // is there a better way to do this?
     $pages = array("Home", "About", "Account Activation", "Forgot Password", "Logout Successful", "403", "404", "418", "500");
     if(!in_array($title, $pages))
-      include("/error/noscript.php");
+      include("error/noscript.php");
     ?>
 
     <div id="wrap">
@@ -55,7 +59,23 @@
 
           <script>$("header").addClass("tryit");</script>
           <h1>Try-It</h1>
-
+          
+          <form method="get" id="select-theme" name="select-theme" style="margin-left:200px; padding-top:20px;">
+            <select id="select" name="select">
+            <?php
+              include("db.php");
+              include("themedb.php");
+              $data = $themedb->get_themes();
+              //cache the theme id
+              $ids = $data['validated']['id'];
+              $names = $data['validated']['name'];
+              foreach ($names as $key => $theme) {
+	            echo '<option id="'.$ids[$key].'" name="'.$ids[$key].'" value="'.$ids[$key].'">'.$theme.'</option>';
+              }
+            ?>
+            </select>
+            <input type="submit" id="select-submit" name="select-submit" value="Go!" class="tryit-button"/>
+          </form>
           <?php } elseif ($title == "Discuss") { ?>
 
           <script>$("header").addClass("discuss");</script>
@@ -63,9 +83,9 @@
 
           <?php } else { ?>
 
-          <figure id="logo">
+          <div id="logo">
             <a href="/"><img src="/images/logo.svg" alt="Logo" /></a>
-          </figure>
+          </div>
 
           <nav>
             <ul>
@@ -93,3 +113,6 @@
         </div>
 
       </header>
+
+      <div id="content">
+

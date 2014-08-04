@@ -1,3 +1,6 @@
+        <div class="clear"></div><?php //clear floating of main and side, for good measure ?>
+      </div><?php //end #content ?>
+
       <div class="push"></div>
 
     </div><?php //end wrap ?>

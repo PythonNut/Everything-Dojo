@@ -28,7 +28,7 @@
     if (get_magic_quotes_gpc())
       $data = stripslashes($data);
 
-    // No need for this with PDO
+		// No need for this with PDO
     // $data = mysql_real_escape_string($data);
     // Please replace with mysqli and setup a fake link
     return $data;
@@ -56,7 +56,7 @@
   }
 
   function isEmail($email) {
-    return preg_match('/^\S+@([\w\d.-]{2,}\.[\w]{2,6}|localhost)$/iU', $email) ? TRUE : FALSE;
+    return preg_match('/^\S+@[\w\d.-]{2,}\.[\w]{2,6}$/iU', $email) ? TRUE : FALSE;
   }
 
   function isUserID($username) {
@@ -134,9 +134,13 @@
 
     $table = TB_NAME;
     if(isset($_SESSION['user_id'])) {
-      $result = $dbc->prepare("UPDATE $table SET ckey = '', ctime = '' WHERE id = ?");
-      $result->execute(array($_SESSION['user_id']));
-    }
+			$result = $dbc->prepare("UPDATE $table SET ckey = '', ctime = '' WHERE id = ?");
+    	$result->execute(array($_SESSION['user_id']));
+		}
+    /*mysql_query("UPDATE $table
+             SET ckey = '', ctime = ''
+             WHERE id = $_SESSION[user_id]") or die(mysql_error());
+    */
 
     /************ Delete the sessions****************/
     unset($_SESSION['user_id']);
@@ -146,12 +150,12 @@
     session_unset();
     session_destroy();
 
-    header("Location: index.php?msg=You have been successfully logged out.");
+    header("Location: logoutdone.php");
   }
 
   // Password and salt generation
-  function PwdHash($pwd, $salt = null) {
-    if ($salt === null) {
+  function PwdHash($pwd, $salt = NULL) {
+    if ($salt === NULL) {
       $salt = substr(md5(uniqid(rand(), true)), 0, SALT_LENGTH);
     } else {
       $salt = substr($salt, 0, SALT_LENGTH);
@@ -193,18 +197,33 @@
     return $implode;
   }
 
-  function br2nl($string) {
-    return preg_replace('/\<br(\s*)?\/?\>/i', "\n", $string);
-  }
-
+	function br2nl($string)
+	{
+		return preg_replace('/\<br(\s*)?\/?\>/i', "\n", $string);
+	}  
+	
+	function shorten_desc($description){
+		$description = br2nl($description);
+		$count = str_word_count($description);
+		$description = implode(' ', array_slice(explode(' ', $description), 0, 10));
+		if(strlen($description) > 80){
+			$description = substr($description, 0, 80);
+		}
+		if($count > 10){
+			$description .= ' (...)';
+		}
+		
+		return $description;
+	}
+	
   /****************************END OF LOGIN SCRIPT FUNCTIONS*********************************/
   /*regular site functions*/
 
-  function get_header($n=0) {
-    include(str_repeat('../', $n) . "include/header.php");
+  function get_header() {
+    include("include/header.php");
   }
 
-  function get_footer($n=0) {
-    include(str_repeat('../', $n) . "include/footer.php");
+  function get_footer() {
+    include("include/footer.php");
   }
 ?>
