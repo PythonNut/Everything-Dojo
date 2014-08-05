@@ -1,4 +1,4 @@
-<?php 
+<?php
   include("include/include.php");
 page_protect();
 
@@ -110,11 +110,10 @@ list($active) = $rs_active;
   </table>
   <?php } ?>
   <?php
-  $result = $dbc->prepare("SELECT data FROM data WHERE fetchname = 'announcements' LIMIT 1");
-  $result->execute();
-  $result = $result->fetchAll(PDO::FETCH_ASSOC);
 
-  $announcements = explode("~", $result[0]['data']);
+  $result = mysql_query("SELECT data FROM data WHERE fetchname='announcements' limit 1") or die();
+  $announcements = explode("~", mysql_result($result, 0));
+
   if (count($announcements) == 0) {
     $counter = 2;
   } else {
@@ -132,7 +131,7 @@ list($active) = $rs_active;
 
     $("#addButton").click(function() {
       if(counter == 11){
-        return false; 
+        return false;
       }
       if(counter == 2) {
         $("#removeButton").show();

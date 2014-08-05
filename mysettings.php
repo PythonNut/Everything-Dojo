@@ -1,4 +1,4 @@
-<?php 
+<?php
 include("include/include.php");
 
 $table = TB_NAME;
