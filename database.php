@@ -6,7 +6,8 @@
   session_start();
 	$extra_style = "<link rel=\"stylesheet\" href=\"css/prism.css\" />
   <link rel=\"stylesheet\" href=\"css/database.css\" />";
-  $extra_js = "<script src=\"js/prism.js\"></script>";
+  $extra_js = "<script src=\"js/prism.js\"></script>
+	<script src=\"js/database.js\"></script>";
   get_header();
 	
   if(isset($_GET['mode'])) {
@@ -15,7 +16,6 @@
     $mode = 'index';
   }
 ?>
-<section id="content">
 					<nav class="db-nav">
             <ul>
               <li><a href="/" id="nav-home">Home</a></li>
@@ -75,7 +75,5 @@
     }
 	}
   ?>
-</section>
-
 
 <?php get_footer(); ?>

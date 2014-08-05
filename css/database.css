@@ -8,7 +8,7 @@ h2.view-header{
 #tile-container {
   height: 34vh;
   width: 64vw;
-  margin-top: 4vh;
+  margin-top: 8vh;
   margin-left: auto;
   margin-right: auto;
 }
@@ -31,8 +31,8 @@ a.mcp-link:link{
 }
 
 .db-nav{
-	margin-top: -1vh;
 	padding: 0;
+	top: auto;
 }
 
 .db-nav ul li a{
@@ -153,10 +153,17 @@ td.small-col{
 
 .manage-header{
 	background-color: #a91c9e;
+	background-image: url('../../images/down-arrow.png');
+	background-repeat: no-repeat;
+	background-size: 1.5vh;
+	background-origin: content-box;
+	background-position: center left;
+	height: 2.5vh;
+	line-height: 2.5vh;
+	vertical-align: middle;
 	margin-left: auto;
 	margin-right: auto;
-	padding-top: .5vw;
-	padding-bottom: .5vw;
+	padding: .5vh .5vw;
 	border-bottom: 3px #d553cb solid;
 }
 
