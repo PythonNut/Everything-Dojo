@@ -5,7 +5,7 @@
   get_header();
 ?>
 <section id="content">
-  <?php if(!empty($_GET['msg'])) {
+  <?php if(!empty($_GET['msg']))  {
     echo "<p class=\"msg\">" . filter($_GET['msg']) . "</p>";
   } ?>
   <section id="index-inner">
@@ -28,11 +28,9 @@
           </article>
         </section>
       </a>
-      
     </section>
 
     <div class="clear"></div>
-    
     <section class="index-row">
 
       <a href=<?php echo '"' . URL_TRYIT . '"'; ?> class="index-link">

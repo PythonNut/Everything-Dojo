@@ -1,4 +1,4 @@
-<?php 
+<?php
 include("include/include.php");
 
 $table = TB_NAME;
@@ -11,7 +11,7 @@ if (isset($_POST['doReset'])) {
   }
 
   if(!isEmail($data['user_email'])) {
-    $err[] = "Please enter a valid email"; 
+    $err[] = "Please enter a valid email";
   }
 
   $user_email = $data['user_email'];
@@ -71,6 +71,7 @@ This is an automated response. Do not reply to this email.";
     echo "<div class=\"msg\">" . $msg[0] . "</div>";
   } else {
   ?>
+<section id="content">
   <p>If you have forgot your password, you can reset it and a new password will be sent to your email address.</p>
 
   <form action="forgot.php" method="post" name="actForm" id="actForm">

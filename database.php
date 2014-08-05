@@ -15,6 +15,7 @@
     $mode = 'index';
   }
 ?>
+<section id="content">
 					<nav class="db-nav">
             <ul>
               <li><a href="/" id="nav-home">Home</a></li>
@@ -72,8 +73,9 @@
 				break;
     // end user mode
     }
-  }
-?>
+	}
+  ?>
+</section>
 
 
 <?php get_footer(); ?>

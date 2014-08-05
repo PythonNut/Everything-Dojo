@@ -150,7 +150,7 @@
     session_unset();
     session_destroy();
 
-    header("Location: logoutdone.php");
+    header("Location: index.php?msg=You have been successfully logged out.");
   }
 
   // Password and salt generation
@@ -219,11 +219,11 @@
   /****************************END OF LOGIN SCRIPT FUNCTIONS*********************************/
   /*regular site functions*/
 
-  function get_header() {
-    include("include/header.php");
+  function get_header($n=0) {
+    include(str_repeat('../', $n) . "include/header.php");
   }
 
-  function get_footer() {
-    include("include/footer.php");
+  function get_footer($n=0) {
+    include(str_repeat('../', $n) . "include/footer.php");
   }
 ?>
