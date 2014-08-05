@@ -85,14 +85,13 @@
 <?php
 			break;
 		case 'style':
+			$id = $_GET['id'];
+			$edit = $themedb->check_owner($id, $_SESSION['user_id']);
+			$style = $themedb->get_themes($id, $_SESSION['user_id']);
 ?>
  >> <?php if($style['validated'] == 1){?><a href="<?php echo URL_DATABASE; ?>?mode=view&view=complete">Completed Themes</a><?php }else{?><a href="<?php echo URL_DATABASE; ?>?mode=view&view=development">Development Themes</a> <?php } ?>
 
 <?php		
-			$id = $_GET['id'];
-			$edit = $themedb->check_owner($id, $_SESSION['user_id']);
-			$style = $themedb->get_themes($id, $_SESSION['user_id']);
-		
 			if($id == '' || count($style) == 0){
 ?>
       This style does not exist.
@@ -102,7 +101,7 @@
 ?>
 
 <h2 class="view-header"><?php echo $style['name']; ?> v. <?php echo $style['version']; ?> by <?php echo $style['author']; ?> <?php echo $style['stage']; ?></h2>
-			<?php if($edit == true){ ?><a href="<?php echo URL_DATABASE?>?mode=view&view=edit"><img src="../../images/edit.png" width="15" /> Edit Theme</a><br /><?php } ?>
+			<?php if($edit == true){ ?><a href="<?php echo URL_DATABASE; ?>?mode=edit&id=<?php echo $id; ?>"><img src="../../images/edit.png" class="img-edit" /> Edit Theme</a> <a href="<?php echo URL_DATABASE; ?>?mode=settings&id=<?php echo $id; ?>"><img src="../../images/gear.png" class="img-edit" /> Manage Settings</a><br /><?php } ?>
       <?php echo $style['description']; ?><br />
       <b>Screenshot:</b><br />
       <img src="<?php echo $style['screenshot']; ?>" style="max-width: 65vw" /><br />

@@ -16,9 +16,10 @@
     $mode = 'index';
   }
 ?>
+<section id="content">
 					<nav class="db-nav">
             <ul>
-              <li><a href="/" id="nav-home">Home</a></li>
+              <li><a href="/" id="nav-home">EvDo Home</a></li>
             <?php if(isset($_SESSION['user_id'])) { ?>
               <li><a href="myaccount.php" id="menu-myaccount">My Account</a></li>
               <li><a href="mysettings.php" id="menu-mysettings">My Settings</a></li>
@@ -71,9 +72,21 @@
 					include('include/themedb/view_body.php');
 				}
 				break;
+			case 'edit':
+?>
+				<a href="<?php echo URL_DATABASE; ?>">Back to Database Index</a>
+<?php			
+				include('include/themedb/edit_body.php');
+				break;
+			case 'settings':
+?>
+				<a href="<?php echo URL_DATABASE; ?>">Back to Database Index</a>
+<?php			
+				include('include/themedb/settings_body.php');
+				break;
     // end user mode
     }
 	}
   ?>
-
+</section>
 <?php get_footer(); ?>

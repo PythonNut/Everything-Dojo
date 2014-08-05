@@ -216,6 +216,15 @@
 		return $description;
 	}
 	
+	function redirect($url)
+	{
+		$string = '<script type="text/javascript">';
+		$string .= 'window.location = "' . $url . '"';
+		$string .= '</script>';
+	
+		echo $string;
+	}
+	
   /****************************END OF LOGIN SCRIPT FUNCTIONS*********************************/
   /*regular site functions*/
 

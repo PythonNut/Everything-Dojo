@@ -3,7 +3,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
 ?>
 <h2>Manage Your Themes</h2>
 <div class="manage-item">
-	<div class="manage-header" id="header-1" style="background-image: url('../../images/up-arrow.png');"><h4>Unapproved Themes</h4></div>
+	<div class="manage-header" id="header-1" style="background-image: url('../../images/up-arrow.png');"><h4>Unapproved Themes (<?php echo count($data['unapproved']) ?>)</h4></div>
   <div id="manage-1">
     <table class="manage-table">
     	<thead style="border-bottom: 1px black solid;">
@@ -45,7 +45,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
     </div>
 </div>
 <div class="manage-item">
-	<div class="manage-header" id="header-2"><h4>Approved Themes</h4></div>
+	<div class="manage-header" id="header-2"><h4>Approved Themes (<?php echo count($data['approved']) ?>)</h4></div>
  	<div id="manage-2">
     <table class="manage-table">
     	<thead style="border-bottom: 1px black solid;">
@@ -87,7 +87,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
     </div>
 </div>
 <div class="manage-item">
-	<div class="manage-header" id="header-3"><h4>Themes with Validation Request</h4></div>
+	<div class="manage-header" id="header-3"><h4>Themes with Validation Request (<?php echo count($data['validate_request']) ?>)</h4></div>
   <div id="manage-3">
     <table class="manage-table">
     	<thead style="border-bottom: 1px black solid;">
@@ -129,7 +129,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
     </div>
 </div>
 <div class="manage-item">
-	<div class="manage-header" id="header-4"><h4>Validated Themes</h4></div>
+	<div class="manage-header" id="header-4"><h4>Validated Themes (<?php echo count($data['validated']) ?>)</h4></div>
   <div id="manage-4">
     <table class="manage-table">
     	<thead style="border-bottom: 1px black solid;">

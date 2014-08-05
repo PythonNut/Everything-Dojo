@@ -91,7 +91,7 @@ a.mcp-link:link{
   float: left;
 }
 
-input[type="radio"]{
+input[type="radio"], input[type="checkbox"]{
 	width: auto;
 	margin-right: 3px;
 }
@@ -103,6 +103,7 @@ label{
 textarea#description{
 	width: 65vw;
 	height: 10vh;
+	font-family: Amble, HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 textarea#css{
@@ -111,10 +112,48 @@ textarea#css{
 	font-family: "Courier New", Courier, monospace;
 }
 
+#popup-users{
+	background-color: #a91c9e;
+	width: 50vw;
+	height: 50vh;
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;	
+	padding: 2vh 2vw;
+}
+
+#popup-users h2{
+	color: white;
+}
+
+#popup-wrapper{
+	height: 40vh;
+	width: 45vw;
+	margin-left: auto;
+	margin-right: auto;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	padding: 0;
+}
+
+#popup-inner{
+	background-color: white;
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
 div.code{
 	font-size: 12px;
 	height: 45vh;
 	overflow: auto;
+}
+
+img.img-edit{
+	height: 15px;
+	width: 15px;
 }
 
 table.manage-table{

@@ -11,7 +11,15 @@ session_start();
 			$data['submitted_by_id'] = $_SESSION['user_id'];
 			$id = $themedb->submit_theme($data);
 			
-			header('Location: http://' . URL_DATABASE . '?mode=view&view=style&id=' . $id);			
+			header('Location: ' . SITE_ROOT . URL_DATABASE . '?mode=view&view=style&id=' . $id);			
+			break;
+		case 'edit-theme':
+			$data = $_POST;
+			$id = $themedb->edit_theme($data);
+			
+			header('Location: ' . SITE_ROOT . URL_DATABASE . '?mode=view&view=style&id=' . $id);
+			break;
+		case 'settings':
 			break;
 	}
 ?>

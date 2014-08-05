@@ -1,5 +1,6 @@
 // JavaScript Document
 $(document).ready(function(){
+	$("div#popup-users").hide();
 	for(i=2;i<=4;i++){
 		$("#manage-"+i).hide();
 	}
@@ -39,4 +40,17 @@ $(document).ready(function(){
         }
     });
 	});
+	
+	// For closing the users popup on body click
+	$('body').click(function(e){
+	  if($(e.target).closest('.view, #popup-users').length === 0){
+			$( "#popup-users" ).hide("fast", "swing");
+	  }
+	});
 });
+function popup_users(){
+	$("div#popup-users").toggle(350);
+}
+function idFill(id){
+	$("#user_id").val(id);
+}
