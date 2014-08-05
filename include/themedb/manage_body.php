@@ -12,6 +12,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
          	<td class="med-col">Author</td>
         	<td class="small-col">Version</td>
         	<td class="small-col">Stage</td>
+        	<td class="small-col">Manage</td>
         </tr>
       </thead>
    		<tbody>
@@ -20,6 +21,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
 			?>
       	<tr>
         	<td><b>No unapproved themes</b></td>
+          <td>-</td>
           <td>-</td>
           <td>-</td>
           <td>-</td>
@@ -35,6 +37,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
         	<td><?php echo $data['unapproved'][$i]['author']; ?></td>
         	<td><?php echo $data['unapproved'][$i]['version']; ?></td>
         	<td><?php echo $data['unapproved'][$i]['stage']; ?></td>
+        	<td><a href="<?php echo URL_DATABASE; ?>?mode=edit&id=<?php echo $data['unapproved'][$i]['id']; ?>"><img src="../../images/edit.png" class="img-edit" /></a> <a href="<?php echo URL_DATABASE; ?>?mode=settings&id=<?php echo $data['unapproved'][$i]['id']; ?>"><img src="../../images/gear.png" class="img-edit" /></a></td>
         </tr>
       <?php	
 					}
@@ -54,6 +57,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
          	<td class="med-col">Author</td>
         	<td class="small-col">Version</td>
         	<td class="small-col">Stage</td>
+        	<td class="small-col">Manage</td>
         </tr>
       </thead>
    		<tbody>
@@ -65,6 +69,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
           <td>-</td>
           <td>-</td>
           <td>-</td>
+        	<td>-</td>
         </tr>
       <?php	
 				}
@@ -77,6 +82,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
         	<td><?php echo $data['approved'][$i]['author']; ?></td>
         	<td><?php echo $data['approved'][$i]['version']; ?></td>
         	<td><?php echo $data['approved'][$i]['stage']; ?></td>
+        	<td><a href="<?php echo URL_DATABASE; ?>?mode=edit&id=<?php echo $data['approved'][$i]['id']; ?>"><img src="../../images/edit.png" class="img-edit" /></a> <a href="<?php echo URL_DATABASE; ?>?mode=settings&id=<?php echo $data['approved'][$i]['id']; ?>"><img src="../../images/gear.png" class="img-edit" /></a></td>
         </tr>
       <?php	
 					}
@@ -96,6 +102,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
          	<td class="med-col">Author</td>
         	<td class="small-col">Version</td>
         	<td class="small-col">Stage</td>
+        	<td class="small-col">Manage</td>
         </tr>
       </thead>
    		<tbody>
@@ -104,6 +111,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
 			?>
       	<tr>
         	<td><b>No themes with validate request.</b></td>
+          <td>-</td>
           <td>-</td>
           <td>-</td>
           <td>-</td>
@@ -119,6 +127,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
         	<td><?php echo $data['validate_request'][$i]['author']; ?></td>
         	<td><?php echo $data['validate_request'][$i]['version']; ?></td>
         	<td><?php echo $data['validate_request'][$i]['stage']; ?></td>
+        	<td><a href="<?php echo URL_DATABASE; ?>?mode=edit&id=<?php echo $data['validate_request'][$i]['id']; ?>"><img src="../../images/edit.png" class="img-edit" /></a> <a href="<?php echo URL_DATABASE; ?>?mode=settings&id=<?php echo $data['validate_request'][$i]['id']; ?>"><img src="../../images/gear.png" class="img-edit" /></a></td>
         </tr>
       <?php	
 					}
@@ -138,6 +147,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
          	<td class="med-col">Author</td>
         	<td class="small-col">Version</td>
         	<td class="small-col">Stage</td>
+        	<td class="small=col">Manage</td>
         </tr>
       </thead>
    		<tbody>
@@ -146,6 +156,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
 			?>
       	<tr>
         	<td><b>No validated themes</b></td>
+          <td>-</td>
           <td>-</td>
           <td>-</td>
           <td>-</td>
@@ -161,6 +172,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
         	<td><?php echo $data['validated'][$i]['author']; ?></td>
         	<td><?php echo $data['validated'][$i]['version']; ?></td>
         	<td><?php echo $data['validated'][$i]['stage']; ?></td>
+          <td><a href="<?php echo URL_DATABASE; ?>?mode=edit&id=<?php echo $data['validated'][$i]['id']; ?>"><img src="../../images/edit.png" class="img-edit" /></a> <a href="<?php echo URL_DATABASE; ?>?mode=settings&id=<?php echo $data['validated'][$i]['id']; ?>"><img src="../../images/gear.png" class="img-edit" /></a></td>
         </tr>
       <?php	
 					}
