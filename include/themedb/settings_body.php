@@ -9,13 +9,26 @@ else{
 	$development_stages = array('[DEV]', '[ALPHA]', '[BETA]');
 	$users = $themedb->get_popup_users();
 ?>
+ >> <?php if($style['validated'] == 1){?><a href="<?php echo URL_DATABASE; ?>?mode=view&view=complete">Completed Themes</a><?php }else{?><a href="<?php echo URL_DATABASE; ?>?mode=view&view=development">Development Themes</a> <?php } ?> >> <a href="<?php echo URL_DATABASE;?>?mode=view&view=style&id=<?php echo $id; ?>">View Theme</a>
 <h2>Manage Theme Settings</h2>
 <form method="post" action="include/db-handler.php">
 		<?php
 			if(in_array($style['stage'], $development_stages) == true){
+				if($style['validate_request'] == 0){
 		?>
-    <input type="checkbox" name="request" /> Request Validation<br />
+    <input type="checkbox" name="request" value="1" /> Request Validation<br />
     <?php	
+				}
+				else{
+		?>
+    Validation already requested<br />
+    <?php		
+				}
+			}
+			else{
+		?>
+    <input type="hidden" name="request" value="1" />
+    <?php		
 			}
 		?>
     <div id="popup-users">
@@ -44,7 +57,8 @@ else{
         </table>
     	 </div>
     </div>
-    Transfer Ownership To: <a href="javascript:;" onclick="popup_users()" class="view">Click to View Users</a><br />
+    Transfer Ownership To:<br /> 
+    <a href="javascript:;" onclick="popup_users()" class="view">Click to View Users</a><br />
     User ID: <input type="text" style="width: 30px" name="user_id" id="user_id" />
   	<input type="submit" name="submit" style="font-size: 15px;" />
     <input type="hidden" name="id" value="<?php echo $id; ?>" />

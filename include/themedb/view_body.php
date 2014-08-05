@@ -17,6 +17,7 @@
     <div class="db-tile db-tile-large" id="development">
       <div class="db-tile-inner">
         <span class="db-tile-title">Development</span><br />Themes on this page have been approved, but not yet validated. They are still in development and may have some bugs that need to be ironed out.
+    	</div>
     </div>
     </a>
   </div>	

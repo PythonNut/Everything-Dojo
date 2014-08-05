@@ -133,14 +133,13 @@ textarea#css{
 	width: 45vw;
 	margin-left: auto;
 	margin-right: auto;
-	overflow-y: scroll;
+	overflow-y: auto;
 	overflow-x: hidden;
 	padding: 0;
 }
 
 #popup-inner{
 	background-color: white;
-	height: 100%;
 	width: 100%;
 	margin: 0;
 }

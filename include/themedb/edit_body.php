@@ -8,6 +8,7 @@ else{
 	$style = $themedb->get_themes($id, $_SESSION['user_id']);
 	$development_stages = array('[DEV]', '[ALPHA]', '[BETA]');
 ?>
+ >> <?php if($style['validated'] == 1){?><a href="<?php echo URL_DATABASE; ?>?mode=view&view=complete">Completed Themes</a><?php }else{?><a href="<?php echo URL_DATABASE; ?>?mode=view&view=development">Development Themes</a> <?php } ?> >> <a href="<?php echo URL_DATABASE;?>?mode=view&view=style&id=<?php echo $id; ?>">View Theme</a>
 <h2>Edit Theme</h2>
 <form method="post" action="include/db-handler.php">
   <div class="col" id="col1">

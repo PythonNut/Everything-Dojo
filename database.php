@@ -74,13 +74,13 @@
 				break;
 			case 'edit':
 ?>
-				<a href="<?php echo URL_DATABASE; ?>">Back to Database Index</a>
+				<a href="<?php echo URL_DATABASE; ?>">Database Index</a> >> <a href="<?php echo URL_DATABASE; ?>?mode=view">View Options</a>
 <?php			
 				include('include/themedb/edit_body.php');
 				break;
 			case 'settings':
 ?>
-				<a href="<?php echo URL_DATABASE; ?>">Back to Database Index</a>
+				<a href="<?php echo URL_DATABASE; ?>">Database Index</a> >> <a href="<?php echo URL_DATABASE; ?>?mode=view">View Options</a>
 <?php			
 				include('include/themedb/settings_body.php');
 				break;

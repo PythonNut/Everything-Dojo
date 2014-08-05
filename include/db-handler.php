@@ -20,6 +20,10 @@ session_start();
 			header('Location: ' . SITE_ROOT . URL_DATABASE . '?mode=view&view=style&id=' . $id);
 			break;
 		case 'settings':
+			$data = $_POST;
+			$id = $themedb->edit_settings($data);
+			
+			header('Location: ' . SITE_ROOT . URL_DATABASE . '?mode=view&view=style&id=' . $id);
 			break;
 	}
 ?>

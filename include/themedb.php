@@ -15,6 +15,33 @@ class themedb {
   }
 
 	/*
+	* edit_settings($data)
+	* Desc: Edits a theme setting
+	* $data: The data from the form
+	*/
+	function edit_settings($data){
+		if($data['request'] == 1){
+			$query = "UPDATE `" . THEMEDB_TABLE . "` SET `validate_request` = 1 WHERE `id` = :id";
+			$sth = $this->dbc->prepare($query);
+			
+			$sth->execute(array(
+				':id' => $data['id']
+			));
+		}
+		if($data['user_id'] != NULL){
+			$query = "UPDATE `" . THEMEDB_TABLE . "` SET `owner_id` = :owner WHERE `id` = :id";
+			$sth = $this->dbc->prepare($query);
+			
+			$sth->execute(array(
+				':owner' => $data['user_id'],
+				':id' => $data['id']
+			));
+		}
+		
+		return $data['id'];
+	}
+
+	/*
 	* edit_theme($data)
 	* Desc: Edits a theme in the database
 	* $data: The data from the form
