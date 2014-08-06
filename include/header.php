@@ -6,7 +6,7 @@
     <title>Everything Dojo &bull; <?php global $title; print $title; ?></title>
 
     <meta charset="utf-8">
-    <link href="images/favicon.ico" rel="shortcut icon">
+    <link href="/images/favicon.ico" rel="shortcut icon">
     <?php if ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)") { ?>
     <link href="/css/normalize.css" type="text/css" rel="stylesheet">
     <link href="/css/style.css" type="text/css" rel="stylesheet">
@@ -21,7 +21,7 @@
     <?php } ?>
     <?php 
     if ($title == "Try-It") { ?>
-    <link href='css/tryit.css' rel='stylesheet' type='text/css'>
+    <link href='/css/tryit.css' rel='stylesheet' type='text/css'>
     <?php } ?>
 
     <?php global $extra_js; print $extra_js; ?>
@@ -96,9 +96,9 @@
         <header>
         <section id="headerwrap">
 
-          <div id="logo">
+          <figure id="logo">
             <a href="/"><img src="/images/logo.svg" alt="Logo" /></a>
-          </div>
+          </figure>
 
           <nav>
             <ul>
