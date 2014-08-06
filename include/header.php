@@ -58,7 +58,7 @@
           <h1>' . $title . '</h1>
         </section>
       </header>';
-      } elseif ($title == "Try-it") {
+      } elseif ($title == "Try-It") {
       ?>
 
       <header class="tryit">
