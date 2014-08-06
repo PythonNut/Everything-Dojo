@@ -66,9 +66,15 @@
         break;
 			case 'mcp':
 				if($_SESSION['user_level'] == 5){
+?>
+        <a href="<?php echo URL_DATABASE; ?>">Back to Database Index</a>
+<?php
 					include('include/themedb/mcp_body.php');
 				}
 				else{
+?>
+        <?php if($_GET['view'] != ''){ ?><a href="<?php echo URL_DATABASE; ?>">Database Index</a> >> <a href="<?php echo URL_DATABASE; ?>?mode=view">View Options</a><?php } ?>
+<?php		
 					include('include/themedb/view_body.php');
 				}
 				break;

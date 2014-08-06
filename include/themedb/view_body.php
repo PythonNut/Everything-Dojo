@@ -87,8 +87,14 @@
 			break;
 		case 'style':
 			$id = $_GET['id'];
+			if($_SESSION['user_level'] == 5){
+				$moderator = 1;
+			}
+			else{
+				$moderator = 0;
+			}
 			$edit = $themedb->check_owner($id, $_SESSION['user_id']);
-			$style = $themedb->get_themes($id, $_SESSION['user_id']);
+			$style = $themedb->get_themes($id, $_SESSION['user_id'], $moderator);
 ?>
  >> <?php if($style['validated'] == 1){?><a href="<?php echo URL_DATABASE; ?>?mode=view&view=complete">Completed Themes</a><?php }else{?><a href="<?php echo URL_DATABASE; ?>?mode=view&view=development">Development Themes</a> <?php } ?>
 

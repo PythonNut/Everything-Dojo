@@ -127,7 +127,7 @@ class themedb {
 	* Desc: Gets either a list of all the themes sorted by validated/unvalidated or one theme
 	* $id: Either nothing to get all themes or an id number
 	*/
-  function get_themes($id = 'all', $user_id = 0){
+  function get_themes($id = 'all', $user_id = 0, $moderator = 0){
 		if($id == 'all') {
       // Select all approved themes but unvalidated
       $query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `approved` = 1 AND `validated` = 0";
@@ -213,22 +213,54 @@ class themedb {
 			$sth->execute(array(':id' => $id));
 			$owner = $sth->fetchColumn();
 			
-			if($owner == NULL){			
-				$query = "SELECT * FROM `" . THEMEDB_TABLE . "` WHERE `id` = :id AND (`approved` = 1 OR `submitted_by_id` = :user_id)";
-				$sth = $this->dbc->prepare($query);
-				$sth->execute(array(':id' => $id, ':user_id' => $user_id));
-				$result = $sth->fetch(PDO::FETCH_ASSOC);
+			if($moderator == 0){
+				if($owner == NULL){			
+					$query = "SELECT * FROM `" . THEMEDB_TABLE . "` WHERE `id` = :id AND (`approved` = 1 OR `submitted_by_id` = :user_id)";
+					$sth = $this->dbc->prepare($query);
+					$sth->execute(array(':id' => $id, ':user_id' => $user_id));
+					$result = $sth->fetch(PDO::FETCH_ASSOC);
+				}
+				else{			
+					$query = "SELECT * FROM `" . THEMEDB_TABLE . "` WHERE `id` = :id AND (`approved` = 1 OR `owner_id` = :user_id)";
+					$sth = $this->dbc->prepare($query);
+					$sth->execute(array(':id' => $id, ':user_id' => $user_id));
+					$result = $sth->fetch(PDO::FETCH_ASSOC);
+				}
 			}
-			else{			
-				$query = "SELECT * FROM `" . THEMEDB_TABLE . "` WHERE `id` = :id AND (`approved` = 1 OR `owner_id` = :user_id)";
+			else{
+				$query = "SELECT * FROM `" . THEMEDB_TABLE . "` WHERE `id` = :id";
 				$sth = $this->dbc->prepare($query);
-				$sth->execute(array(':id' => $id, ':user_id' => $user_id));
-				$result = $sth->fetch(PDO::FETCH_ASSOC);
+				$sth->execute(array(':id' => $id));
+				$result = $sth->fetch(PDO::FETCH_ASSOC);			
 			}
 			
 			return $result;
 		}
   }
+	
+	/*
+	* get_mcp_styles()
+	* Desc: get themes for the mcp to display
+	*/
+	function get_mcp_styles(){
+		$query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `approved` = 0";
+		$sth = $this->dbc->prepare($query);
+		$sth->execute(array(
+			'user_id' => $user_id
+		));
+		
+		$result['unapproved'] = $sth->fetchAll(PDO::FETCH_ASSOC);
+		
+		$query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `validate_request` = 1 AND `validated` = 0";
+		$sth = $this->dbc->prepare($query);
+		$sth->execute(array(
+			'user_id' => $user_id
+		));
+		
+		$result['validate_request'] = $sth->fetchAll(PDO::FETCH_ASSOC);
+		
+		return $result;
+	}
 
 	/*
 	* get_own_themes($user_id)

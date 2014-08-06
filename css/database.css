@@ -205,6 +205,10 @@ td.small-col{
 	border-bottom: 3px #d553cb solid;
 }
 
+.manage-header:hover{
+	cursor: pointer;
+}
+
 .manage-header h4{
 	color: white;
 	margin-left: 2vw;
