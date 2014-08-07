@@ -22,6 +22,7 @@
   }
 ?>
 <section id="content">
+<<<<<<< HEAD
 	<div id="notifications">
   	<div class="notification-arrow-up"></div>
     <div id="notification-body">
@@ -65,6 +66,8 @@
     </div>
   </div>
   			<div id="navigation">
+=======
+>>>>>>> FETCH_HEAD
 					<nav class="db-nav">
             <ul>
             	<li><a href="/" id="nav-home">EvDo Home</a></li>
@@ -138,4 +141,9 @@
 	}
   ?>
 </section>
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> FETCH_HEAD
 <?php get_footer(); ?>
