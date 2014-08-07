@@ -23,9 +23,12 @@
 ?>
 <section id="content">
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> FETCH_HEAD
+=======
+>>>>>>> ThemeDB
 	<div id="notifications">
   	<div class="notification-arrow-up"></div>
     <div id="notification-body">
@@ -70,10 +73,13 @@
   </div>
   			<div id="navigation">
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> FETCH_HEAD
 >>>>>>> FETCH_HEAD
+=======
+>>>>>>> ThemeDB
 					<nav class="db-nav">
             <ul>
             	<li><a href="/" id="nav-home">EvDo Home</a></li>
@@ -148,6 +154,7 @@
   ?>
 </section>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 =======
@@ -155,4 +162,6 @@
 
 >>>>>>> FETCH_HEAD
 >>>>>>> FETCH_HEAD
+=======
+>>>>>>> ThemeDB
 <?php get_footer(); ?>
