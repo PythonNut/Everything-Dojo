@@ -31,7 +31,7 @@ else{
     <?php		
 			}
 		?>
-    <div id="popup-users">
+    <div id="popup-box">
     	<h2>View Users</h2>
       <span style="color: white; ">Click a username to fill the user id box.</span>
       <div id="popup-wrapper">
@@ -58,7 +58,7 @@ else{
     	 </div>
     </div>
     Transfer Ownership To:<br /> 
-    <a href="javascript:;" onclick="popup_users()" class="view">Click to View Users</a><br />
+    <a href="javascript:;" onclick="popup_box()" class="view">Click to View Users</a><br />
     User ID: <input type="text" style="width: 30px" name="user_id" id="user_id" />
   	<input type="submit" name="submit" style="font-size: 15px;" />
     <input type="hidden" name="id" value="<?php echo $id; ?>" />

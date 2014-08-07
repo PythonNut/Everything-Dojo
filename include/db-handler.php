@@ -25,5 +25,21 @@ session_start();
 			
 			header('Location: ' . SITE_ROOT . URL_DATABASE . '?mode=view&view=style&id=' . $id);
 			break;
+		case 'approve':
+			$data = $_POST;
+			$owner = $themedb->get_owner($data['id']);
+			$notification->insert_notification(1, $data['id'], $owner);
+			$themedb->approve_theme($data['id']);
+			
+			header('Location: ' . SITE_ROOT . URL_DATABASE . '?mode=mcp');
+			break;
+		case 'validate':
+			$data = $_POST;
+			$owner = $themedb->get_owner($_POST['id']);
+			$notification->insert_notification(2, $_POST['id'], $owner);
+			$themedb->validate_theme($_POST['id']);
+			
+			header('Location: ' . SITE_ROOT . URL_DATABASE . '?mode=mcp');
+			break;
 	}
 ?>

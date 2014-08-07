@@ -11,7 +11,30 @@ class themedb {
 
   // Modifying/inserting methods
 
-  function approve_theme(){
+	/*
+	* approve_theme($id)
+	* Desc: Approves a theme
+	*/
+  function approve_theme($id){
+		$query = "UPDATE `" . THEMEDB_TABLE . "` SET `approved` = 1 WHERE `id` = :id";
+		$sth = $this->dbc->prepare($query);
+		
+		$sth->execute(array(
+			':id' => $id
+		));
+  }
+
+	/*
+	* validate_theme($id)
+	* Desc: Validates a theme
+	*/
+  function validate_theme($id){
+		$query = "UPDATE `" . THEMEDB_TABLE . "` SET `validated` = 1 WHERE `id` = :id";
+		$sth = $this->dbc->prepare($query);
+		
+		$sth->execute(array(
+			':id' => $id
+		));
   }
 
 	/*
@@ -119,6 +142,27 @@ class themedb {
 			else{
 				return false;
 			}
+		}
+	}
+	
+	/*
+	* get_owner($id)
+	* Desc: Get owner id or submitted id
+	*/
+	function get_owner($id){
+		$query = "SELECT `submitted_by_id`, `owner_id` FROM `" . THEMEDB_TABLE . "` WHERE `id` = :id";
+		$sth = $this->dbc->prepare($query);
+		
+		$sth->execute(array(
+			'id' => $id
+		));
+		
+		$data = $sth->fetch(PDO::FETCH_ASSOC);
+		if($data['owner_id'] == NULL){
+			return $data['submitted_by_id'];
+		}
+		else{
+			return $data['owner_id'];
 		}
 	}
 

@@ -1,6 +1,7 @@
 // JavaScript Document
 $(document).ready(function(){
-	$("div#popup-users").hide();
+	$("div#popup-box").hide();
+	$("div#notifications").hide();
 	for(i=2;i<=4;i++){
 		$("#manage-"+i).hide();
 	}
@@ -43,13 +44,29 @@ $(document).ready(function(){
 	
 	// For closing the users popup on body click
 	$('body').click(function(e){
-	  if($(e.target).closest('.view, #popup-users').length === 0){
-			$( "#popup-users" ).hide("fast", "swing");
+	  if($(e.target).closest('.view, #popup-box').length === 0){
+			$( "#popup-box" ).hide("fast", "swing");
+	  }
+	});
+	$('body').click(function(e){
+	  if($(e.target).closest('.notification-link, #notifications').length === 0){
+			$( "#notifications" ).hide("fast", "swing");
 	  }
 	});
 });
-function popup_users(){
-	$("div#popup-users").toggle(350);
+function popup_box(){
+	$("div#popup-box").toggle(350);
+}
+function popup_options(mode, id){
+	$("h2#popup-header").text(mode);
+	$("h2#popup-header").css('textTransform', 'capitalize');
+	$("span#replace").text(mode);
+	$("input#replace-id").val(id);
+	$("input#replace-form").val(mode);
+	$("div#popup-box").toggle(350);
+}
+function show_notifications(){
+	$("div#notifications").toggle(350);
 }
 function idFill(id){
 	$("#user_id").val(id);

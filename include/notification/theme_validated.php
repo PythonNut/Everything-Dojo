@@ -8,7 +8,7 @@ class theme_approved{
 	
 	function get_data(){
 		$data = array(
-			'subject'			=> 'Your theme was approved!',
+			'subject'			=> 'Your theme was validated!',
 			'color'				=> 'D553CB',
 			'location'		=> 'Database'
 		);

@@ -319,6 +319,14 @@ footer, .push {
 #errors { color: red; }
 
 .field { position: relative; }
+
+.wait {
+  display: none;
+  position: absolute;
+  top: 0.2rem;
+  left: 11rem;
+  height: 1.5rem;
+}
 .invalid {
   border-color: #b00;
   background-color: #ffeded;
@@ -372,6 +380,22 @@ footer, .push {
 }
 
 .msg {
+  position: absolute;
+  top: 5.5rem;
+  left: 30%;
+  width: 40%;
+  background: rgba(124, 171, 0, 0.4);
+  font-family: 'Lato', sans-serif;
+  font-size: 0.9em;
+  font-weight: 400;
+  text-align: center;
+  padding: 0.6em;
+  border: 1px solid rgba(124, 171, 0, 0.7);
+  border-radius: 1em;
+}
+
+.msg + * {
+  margin-top: 3rem;
   background: rgba(124, 171, 0, 0.4);
   border: 1px solid #222;
   padding: 0.6rem;
@@ -512,3 +536,82 @@ table a { color: #F99819; }
 
 #index-discuss        { float: right; }
 #index-discuss:hover  { background: #448ae9; }
+
+/*
+* Notification
+*/
+#notifications{
+	position: absolute;
+	right: 5vw;
+	margin-top: 4vh;
+	display: block;
+	width: 30vw;
+}
+
+.notification-arrow-up{
+	width: 0; 
+	height: 0; 
+	margin-left: 27vw;
+	border-left: 1vw solid transparent;
+	border-right: 1vw solid transparent;	
+	border-bottom: 1vw solid #212121;
+}
+
+#notification-body{
+	width: 30vw;
+	border: 1px #212121 solid;
+	background-color: white;
+}
+
+#notification-header{
+	font-family: 'lato';
+	width: 30vw;
+	background-color: #212121;
+	border-bottom: 1px #bbb solid;
+	color: white;
+	height: 5vh;
+	line-height: 5vh;
+	vertical-align: middle;
+}
+
+#notification-header b{
+	margin-left: 3vh;
+}
+
+.notification{
+	height: 8vh;
+	border-bottom: 1px #bbb solid;
+}
+
+.notification-color{
+	height: 6vh;
+	line-height: 6vh;
+	width: 6vh;
+	margin-top: 1vh;
+	margin-left: 1vh;
+	float: left;
+	color: white;
+	text-align: center;
+	vertical-align: middle;
+	font-family: 'lato';
+	font-size: 4vh;
+}
+
+.notification-text{
+	height: 4vh;
+	float: left;
+	margin-top: 1vh;
+	margin-left: 1vw;
+}
+
+.time{
+	height: 1vh;
+	color: #333;
+	float: right;
+	font-size: .7em;
+	margin-right: 1vw;
+}
+
+#notification-footer{
+	text-align: center;
+}
