@@ -56,7 +56,7 @@
       if (in_array($title, array("Database", "Discuss"))) {
         echo '<header class="' . strtolower($title) . '">
         <section id="headerwrap">
-          <h1>' . $title . '</h1>
+          <h1><a href="' . strtolower($title) . '.php">' . $title . '</a></h1>
         </section>
       </header>';
       } elseif ($title == "Try-It") {
@@ -65,7 +65,7 @@
       <header class="tryit">
         <section id="headerwrap">
 
-          <h1 style="text-align: left !important;">Try-It</h1>
+          <h1 style="text-align: left !important;"><a href="tryit.php">Try-It</a></h1>
 
           <form method="get" id="select-theme" name="select-theme" style="margin-left:4em;">
             <section class="option-wrap">
