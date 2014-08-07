@@ -108,7 +108,23 @@
 ?>
 
 <h2 class="view-header"><?php echo $style['name']; ?> v. <?php echo $style['version']; ?> by <?php echo $style['author']; ?> <?php echo $style['stage']; ?></h2>
-			<?php if($edit == true){ ?><a href="<?php echo URL_DATABASE; ?>?mode=edit&id=<?php echo $id; ?>"><img src="../../images/edit.png" class="img-edit" /> Edit Theme</a> <a href="<?php echo URL_DATABASE; ?>?mode=settings&id=<?php echo $id; ?>"><img src="../../images/gear.png" class="img-edit" /> Manage Settings</a><br /><?php } ?>
+<div id="popup-box">
+	<h2 id="popup-header"></h2>
+  <span style="color: white;">Confirm your action in the box below.</span>
+  <div id="popup-wrapper">
+  	<div id="popup-inner">
+    	<div id="popup-form">
+      	Are you sure you want to <span id="replace"></span> this theme?
+        <form action="include/db-handler.php" method="post">
+        	<input type="submit" name="submit" value="Confirm" style="font-size: 15px;" />
+        	<input type="hidden" value="" name="id" id="replace-id" />
+        	<input type="hidden" value="" name="mode" id="replace-form" />
+        </form>
+    	</div>
+    </div>
+  </div>
+</div>
+			<?php if($edit == true){ ?><a href="<?php echo URL_DATABASE; ?>?mode=edit&id=<?php echo $id; ?>"><img src="../../images/edit.png" class="img-edit" /> Edit Theme</a> <a href="<?php echo URL_DATABASE; ?>?mode=settings&id=<?php echo $id; ?>"><img src="../../images/gear.png" class="img-edit" /> Manage Settings</a> <a href="javascript:;" class="view" onclick="popup_options('delete', <?php echo $style['id']; ?>);"><img src="../../images/trash.png" class="img-edit" /> Delete Theme</a><br /><?php } ?>
       <?php echo $style['description']; ?><br />
       <b>Screenshot:</b><br />
       <img src="<?php echo $style['screenshot']; ?>" style="max-width: 65vw" /><br />

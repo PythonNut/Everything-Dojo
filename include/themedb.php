@@ -29,13 +29,26 @@ class themedb {
 	* Desc: Validates a theme
 	*/
   function validate_theme($id){
-		$query = "UPDATE `" . THEMEDB_TABLE . "` SET `validated` = 1 WHERE `id` = :id";
+		$query = "UPDATE `" . THEMEDB_TABLE . "` SET `validated` = 1, `stage` = '[RELEASE]' WHERE `id` = :id";
 		$sth = $this->dbc->prepare($query);
 		
 		$sth->execute(array(
 			':id' => $id
 		));
   }
+
+	/*
+	* delete_theme($id)
+	* Desc: Removes a theme from the database
+	*/
+	function delete_theme($id){
+		$query = "DELETE FROM `" . THEMEDB_TABLE . "` WHERE `id` = :id";
+		$sth = $this->dbc->prepare($query);
+		
+		$sth->execute(array(
+			':id' => $id
+		));
+	}
 
 	/*
 	* edit_settings($data)

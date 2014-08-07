@@ -41,5 +41,11 @@ session_start();
 			
 			header('Location: ' . SITE_ROOT . URL_DATABASE . '?mode=mcp');
 			break;
+		case 'delete':
+			$data = $_POST;
+			$themedb->delete_theme($data['id']);
+			
+			header('Location: ' . SITE_ROOT . URL_DATABASE . '?mode=manage');
+			break;
 	}
 ?>
