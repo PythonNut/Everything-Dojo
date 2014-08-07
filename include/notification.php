@@ -36,6 +36,7 @@ class notification{
 		
 		$result = $sth->fetch(PDO::FETCH_ASSOC);
 		$name = $result['name'];
+		
 		$file = 'notification/' . $name . '.php';
 		include_once($file);
 		
@@ -58,6 +59,22 @@ class notification{
 			':item' => $item_id,
 			':user' => $user_id,
 			':time' => time()
+		));
+	}
+	
+	function mark_read($id){
+		$query = "UPDATE `notifications` SET `read` = 1 WHERE `id` = :id";
+		$sth = $this->dbc->prepare($query);
+		$sth->execute(array(
+			':id' => $id
+		));
+	}
+	
+	function mark_all_read($user_id){
+		$query = "UPDATE `notifications` SET `read` = 1 WHERE `user_id` = :user_id";
+		$sth = $this->dbc->prepare($query);
+		$sth->execute(array(
+			':user_id' => $user_id
 		));
 	}
 }

@@ -30,9 +30,17 @@ a.mcp-link:link{
 	font-size: 1.5rem;
 }
 
+#navigation{
+	position: absolute;
+	right: 0;
+	width: 40vw;
+	height: auto;
+}
+
 .db-nav{
 	padding: 0;
-	top: auto;
+	position: absolute;
+	height: auto;
 }
 
 .db-nav ul li a{

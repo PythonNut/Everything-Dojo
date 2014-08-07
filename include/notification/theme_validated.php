@@ -1,5 +1,5 @@
 <?php
-class theme_approved{
+class theme_validated{
 	public $id;
 	
 	function __construct($item_id){

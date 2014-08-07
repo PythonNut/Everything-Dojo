@@ -68,6 +68,20 @@ function popup_options(mode, id){
 function show_notifications(){
 	$("div#notifications").toggle(350);
 }
+function mark_read(id){
+	$.ajax({ url: '/include/ajax_handler.php',
+    data: {action: 'mark_read', notification_id: id},
+    type: 'post',
+    success: function(){}
+	});
+}
+function mark_all_read(user_id){
+	$.ajax({ url: '/include/ajax_handler.php',
+    data: {action: 'mark_all_read', user_id: user_id},
+    type: 'post',
+    success: function(){location.reload();}
+	});
+}
 function idFill(id){
 	$("#user_id").val(id);
 }

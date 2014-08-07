@@ -583,6 +583,18 @@ table a { color: #F99819; }
 	border-bottom: 1px #bbb solid;
 }
 
+.unread{
+	background-color: #edffc1;
+}
+
+.unread:hover{
+	background-color: #e0ffbe;
+}
+
+.read:hover{
+	background-color: #edffc1;
+}
+
 .notification-color{
 	height: 6vh;
 	line-height: 6vh;

@@ -27,12 +27,16 @@
     <div id="notification-body">
       <div id="notification-header">
         <b>Notifications:</b>
+        	<a href="javascript:;" style="float: right; margin-right: 2vw;" onClick="mark_all_read(<?php echo $_SESSION['user_id']; ?>)">Mark all read</a>
       </div>
       <?php
 			if(count($notification_data) == 0){
 			?>
       <a href="javascript:;">
-      <div id="notification-0"></div>
+      <div id="notification-0" class="notification read">
+      	<div class="notification-color" style="background-color: #ccc"></div>
+      	<div class="notification-text">No notifications</div>
+      </div>
       </a>
       <?php
 			}
@@ -40,15 +44,15 @@
 				foreach($notification_data as $notif){
 					$notif_data = $notification->get_notif_obj($notif['notification_type'], $notif['item_id']);
 			?>
-      <a href="<?php echo $notif_data['url']; ?>">	
+      <a href="<?php echo $notif_data['url']; ?>" onClick="mark_read(<?php echo $notif['id']; ?>)">	
         <div id="notification-<?php echo $notif['id']; ?>" class="notification <?php if($notif['read'] == 0){ echo 'unread'; }else{ 'read'; } ?> ">
       		<div class="notification-color" style="background-color: #<?php echo $notif_data['data']['color']; ?>"><?php echo substr($notif_data['data']['location'], 0, 1); ?></div>
 					<div class="notification-text">
 						<?php echo $notif_data['data']['subject']; ?>
-            <p class="time">
-            	<?php echo date('D M j, Y g:i a', $notif['timestamp']); ?>
-            </p>
           </div>
+          <p class="time">
+           	<?php echo date('D M d, Y g:i a', $notif['timestamp']); ?>
+          </p>
       	</div>
       </a>
       <?php
@@ -60,6 +64,7 @@
       </div>
     </div>
   </div>
+  			<div id="navigation">
 					<nav class="db-nav">
             <ul>
             	<li><a href="/" id="nav-home">EvDo Home</a></li>
@@ -68,6 +73,7 @@
             <?php } ?>
             </ul>
           </nav>
+        </div>
 <?php	
   if(!isset($_SESSION['user_id'])) {
     include('include/themedb/view_body.php');
