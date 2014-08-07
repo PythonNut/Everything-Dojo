@@ -396,11 +396,6 @@ footer, .push {
 
 .msg + * {
   margin-top: 3rem;
-  background: rgba(124, 171, 0, 0.4);
-  border: 1px solid #222;
-  padding: 0.6rem;
-  margin-bottom: 0.6rem;
-  font-weight: bold;
 }
 
 .textcenter { display: block; text-align: center; margin: 0; }

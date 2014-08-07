@@ -7,7 +7,7 @@
 
     <meta charset="utf-8">
     <link href="/images/favicon.ico" rel="shortcut icon">
-    <?php if ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)") { ?>
+    <?php if ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)" && $title != "Try-It") { ?>
     <link href="/css/normalize.css" type="text/css" rel="stylesheet">
     <link href="/css/style.css" type="text/css" rel="stylesheet">
     <?php } ?>
@@ -64,7 +64,34 @@
 
       <header class="tryit">
         <section id="headerwrap">
-          <h1>Try-It</h1>
+
+          <h1 style="text-align: left !important;">Try-It</h1>
+
+          <form method="get" id="select-theme" name="select-theme" style="margin-left:4em;">
+            <section class="option-wrap">
+              <select id="select" name="select">
+              <?php
+                include("db.php");
+                include("themedb.php");
+                $data = $themedb->get_themes();
+                //cache the theme id
+                $ids = $data['validated']['id'];
+                $names = $data['validated']['name'];
+                $selected = $_GET['select'];
+                foreach ($names as $key => $theme) {
+                  if ($selected == $ids[$key]){
+                    echo '<option id="'.$ids[$key].'" name="'.$ids[$key].'" value="'.$ids[$key].'" selected>'.$theme.'</option>';
+                  }
+                  else{
+                    echo '<option id="'.$ids[$key].'" name="'.$ids[$key].'" value="'.$ids[$key].'">'.$theme.'</option>';
+                  }
+
+                }
+              ?>
+              </select>
+            </section>
+            <input type="submit" id="select-submit" name="select-submit" value="Go!" class="tryit-button"/>
+          </form>
         </section>
       </header>
 
@@ -94,43 +121,9 @@
       </header>
 
       <?php } elseif ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)") { ?>
-        <header>
+
+      <header>
         <section id="headerwrap">
-
-          <script>$("header").addClass("tryit");</script>
-          <h1 style="text-align: left !important;">Try-It</h1>
-          
-          <form method="get" id="select-theme" name="select-theme" style="margin-left:200px; padding-top:20px;">
-            <section class="option-wrap">
-              <select id="select" name="select">
-              <?php
-                include("db.php");
-                include("themedb.php");
-                $data = $themedb->get_themes();
-                //cache the theme id
-                $ids = $data['validated']['id'];
-                $names = $data['validated']['name'];
-                $selected = $_GET['select'];
-                foreach ($names as $key => $theme) {
-                  if ($selected == $ids[$key]){
-                    echo '<option id="'.$ids[$key].'" name="'.$ids[$key].'" value="'.$ids[$key].'" selected>'.$theme.'</option>';
-                  }
-                  else{
-                    echo '<option id="'.$ids[$key].'" name="'.$ids[$key].'" value="'.$ids[$key].'">'.$theme.'</option>';
-                  }
-
-                }
-              ?>
-              </select>
-            </section>
-            <input type="submit" id="select-submit" name="select-submit" value="Go!" class="tryit-button"/>
-          </form>
-          <?php } elseif ($title == "Discuss") { ?>
-
-          <script>$("header").addClass("discuss");</script>
-          <h1>Discuss</h1>
-
-          <?php } else { ?>
 
           <div id="logo">
             <a href="/"><img src="/images/logo.svg" alt="Logo" /></a>
@@ -156,9 +149,7 @@
             <?php } ?>
             </ul>
           </nav>
-
         </section>
-
       </header>
 
       <?php } ?>
