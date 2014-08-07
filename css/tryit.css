@@ -51,6 +51,16 @@ Please do not plagiarize
   position: absolute;
 }
 
+#headerwrap h1 a,
+#headerwrap h1 a:active {
+  color: white;
+  text-decoration: none;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  margin: 0;
+}
+
 .small { font-size: 0.65em; }
 
 

@@ -154,6 +154,10 @@ label { display: block; }
   position: absolute;
 }
 
+#headerwrap h1 a {
+  color: white;
+}
+
 h2, h4 {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
   margin-bottom: 0.3rem;
