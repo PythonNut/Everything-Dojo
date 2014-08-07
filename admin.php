@@ -111,8 +111,11 @@ list($active) = $rs_active;
   <?php } ?>
   <?php
 
-  $result = mysql_query("SELECT data FROM data WHERE fetchname='announcements' limit 1") or die();
-  $announcements = explode("~", mysql_result($result, 0));
+  $result = $dbc->prepare("SELECT data FROM data WHERE fetchname='announcements' limit 1");
+  $result->execute();
+  $result = $result->fetchAll(PDO::FETCH_ASSOC);
+
+  $announcements = explode("~", $result[0]['data']);
 
   if (count($announcements) == 0) {
     $counter = 2;
