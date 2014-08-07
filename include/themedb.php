@@ -11,15 +11,101 @@ class themedb {
 
   // Modifying/inserting methods
 
-  function approve_theme() {
+	/*
+	* approve_theme($id)
+	* Desc: Approves a theme
+	*/
+  function approve_theme($id){
+		$query = "UPDATE `" . THEMEDB_TABLE . "` SET `approved` = 1 WHERE `id` = :id";
+		$sth = $this->dbc->prepare($query);
+		
+		$sth->execute(array(
+			':id' => $id
+		));
   }
+
+	/*
+	* validate_theme($id)
+	* Desc: Validates a theme
+	*/
+  function validate_theme($id){
+		$query = "UPDATE `" . THEMEDB_TABLE . "` SET `validated` = 1, `stage` = '[RELEASE]' WHERE `id` = :id";
+		$sth = $this->dbc->prepare($query);
+		
+		$sth->execute(array(
+			':id' => $id
+		));
+  }
+
+	/*
+	* delete_theme($id)
+	* Desc: Removes a theme from the database
+	*/
+	function delete_theme($id){
+		$query = "DELETE FROM `" . THEMEDB_TABLE . "` WHERE `id` = :id";
+		$sth = $this->dbc->prepare($query);
+		
+		$sth->execute(array(
+			':id' => $id
+		));
+	}
+
+	/*
+	* edit_settings($data)
+	* Desc: Edits a theme setting
+	* $data: The data from the form
+	*/
+	function edit_settings($data){
+		if($data['request'] == 1){
+			$query = "UPDATE `" . THEMEDB_TABLE . "` SET `validate_request` = 1 WHERE `id` = :id";
+			$sth = $this->dbc->prepare($query);
+			
+			$sth->execute(array(
+				':id' => $data['id']
+			));
+		}
+		if($data['user_id'] != NULL){
+			$query = "UPDATE `" . THEMEDB_TABLE . "` SET `owner_id` = :owner WHERE `id` = :id";
+			$sth = $this->dbc->prepare($query);
+			
+			$sth->execute(array(
+				':owner' => $data['user_id'],
+				':id' => $data['id']
+			));
+		}
+		
+		return $data['id'];
+	}
+
+	/*
+	* edit_theme($data)
+	* Desc: Edits a theme in the database
+	* $data: The data from the form
+	*/
+	function edit_theme($data){
+		$query = "UPDATE `" . THEMEDB_TABLE . "` SET `name` = :name, `description` = :description, `code` = :code, `stage` = :stage, `author` = :author, `screenshot` = :screenshot, `version` = :version WHERE `id` = :id";
+		$sth = $this->dbc->prepare($query);
+		
+		$sth->execute(array(
+			':name'							=> $data['name'],
+			':description'			=> $data['description'],
+			':code'							=> $data['code'],
+			':stage'						=> $data['stage'],
+			':author'						=> $data['author'],
+			':screenshot'				=> $data['screenshot'],
+			':version'					=> $data['version'],
+			':id'								=> $data['id']
+		));
+
+		return $data['id'];
+	}
 
 	/*
 	* submit_theme($data)
 	* Desc: Submits a theme to the database
-	* $data: The data from 
+	* $data: The data from the form
 	*/
-  function submit_theme($data) {
+  function submit_theme($data){
 		$query = "INSERT INTO `" . THEMEDB_TABLE . "` (`id`, `approved`, `validated`, `validate_request`, `name`, `description`, `code`, `stage`, `author`, `screenshot`, `version`, `submitted_by`, `submitted_by_id`, `owner`, `owner_id`) VALUES (NULL, 0, 0, 0, :name, :description, :code, :stage, :author, :screenshot, :version, :submitted_by, :submitted_by_id, NULL, NULL)";
 		$sth = $this->dbc->prepare($query);
 		
@@ -42,7 +128,6 @@ class themedb {
   // Getting methods
 
 	/*
-<<<<<<< HEAD
 	* check_owner($id, $user_id)
 	* Desc: checks if a user is an owner for a style id
 	*/
@@ -72,15 +157,34 @@ class themedb {
 			}
 		}
 	}
+	
+	/*
+	* get_owner($id)
+	* Desc: Get owner id or submitted id
+	*/
+	function get_owner($id){
+		$query = "SELECT `submitted_by_id`, `owner_id` FROM `" . THEMEDB_TABLE . "` WHERE `id` = :id";
+		$sth = $this->dbc->prepare($query);
+		
+		$sth->execute(array(
+			'id' => $id
+		));
+		
+		$data = $sth->fetch(PDO::FETCH_ASSOC);
+		if($data['owner_id'] == NULL){
+			return $data['submitted_by_id'];
+		}
+		else{
+			return $data['owner_id'];
+		}
+	}
 
 	/*
-=======
->>>>>>> FETCH_HEAD
 	* get_themes($id)
 	* Desc: Gets either a list of all the themes sorted by validated/unvalidated or one theme
 	* $id: Either nothing to get all themes or an id number
 	*/
-  function get_themes($id = 'all', $user_id = 0) {
+  function get_themes($id = 'all', $user_id = 0, $moderator = 0){
 		if($id == 'all') {
       // Select all approved themes but unvalidated
       $query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `approved` = 1 AND `validated` = 0";
@@ -166,33 +270,37 @@ class themedb {
 			$sth->execute(array(':id' => $id));
 			$owner = $sth->fetchColumn();
 			
-			if($owner == NULL){			
-				$query = "SELECT * FROM `" . THEMEDB_TABLE . "` WHERE `id` = :id AND (`approved` = 1 OR `submitted_by_id` = :user_id)";
-				$sth = $this->dbc->prepare($query);
-				$sth->execute(array(':id' => $id, ':user_id' => $user_id));
-				$result = $sth->fetch(PDO::FETCH_ASSOC);
+			if($moderator == 0){
+				if($owner == NULL){			
+					$query = "SELECT * FROM `" . THEMEDB_TABLE . "` WHERE `id` = :id AND (`approved` = 1 OR `submitted_by_id` = :user_id)";
+					$sth = $this->dbc->prepare($query);
+					$sth->execute(array(':id' => $id, ':user_id' => $user_id));
+					$result = $sth->fetch(PDO::FETCH_ASSOC);
+				}
+				else{			
+					$query = "SELECT * FROM `" . THEMEDB_TABLE . "` WHERE `id` = :id AND (`approved` = 1 OR `owner_id` = :user_id)";
+					$sth = $this->dbc->prepare($query);
+					$sth->execute(array(':id' => $id, ':user_id' => $user_id));
+					$result = $sth->fetch(PDO::FETCH_ASSOC);
+				}
 			}
-			else{			
-				$query = "SELECT * FROM `" . THEMEDB_TABLE . "` WHERE `id` = :id AND (`approved` = 1 OR `owner_id` = :user_id)";
+			else{
+				$query = "SELECT * FROM `" . THEMEDB_TABLE . "` WHERE `id` = :id";
 				$sth = $this->dbc->prepare($query);
-				$sth->execute(array(':id' => $id, ':user_id' => $user_id));
-				$result = $sth->fetch(PDO::FETCH_ASSOC);
+				$sth->execute(array(':id' => $id));
+				$result = $sth->fetch(PDO::FETCH_ASSOC);			
 			}
 			
 			return $result;
 		}
   }
-
+	
 	/*
-	* get_own_themes($user_id)
-	* Desc: get own themes for the request view
+	* get_mcp_styles()
+	* Desc: get themes for the mcp to display
 	*/
-	function get_own_themes($user_id){
-<<<<<<< HEAD
-		$query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `approved` = 0 AND ((`owner_id` IS NULL AND `submitted_by_id` = :user_id) OR (`owner_id` = :user_id))";
-=======
-		$query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `approved` = 0 AND (`submitted_by_id` = :user_id OR `owner_id` = :user_id)";
->>>>>>> FETCH_HEAD
+	function get_mcp_styles(){
+		$query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `approved` = 0";
 		$sth = $this->dbc->prepare($query);
 		$sth->execute(array(
 			'user_id' => $user_id
@@ -200,11 +308,31 @@ class themedb {
 		
 		$result['unapproved'] = $sth->fetchAll(PDO::FETCH_ASSOC);
 		
-<<<<<<< HEAD
+		$query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `validate_request` = 1 AND `validated` = 0";
+		$sth = $this->dbc->prepare($query);
+		$sth->execute(array(
+			'user_id' => $user_id
+		));
+		
+		$result['validate_request'] = $sth->fetchAll(PDO::FETCH_ASSOC);
+		
+		return $result;
+	}
+
+	/*
+	* get_own_themes($user_id)
+	* Desc: get own themes for the request view
+	*/
+	function get_own_themes($user_id){
+		$query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `approved` = 0 AND ((`owner_id` IS NULL AND `submitted_by_id` = :user_id) OR (`owner_id` = :user_id))";
+		$sth = $this->dbc->prepare($query);
+		$sth->execute(array(
+			'user_id' => $user_id
+		));
+		
+		$result['unapproved'] = $sth->fetchAll(PDO::FETCH_ASSOC);
+		
 		$query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `approved` = 1 AND `validate_request` = 0 AND `validated` = 0 AND ((`owner_id` IS NULL AND `submitted_by_id` = :user_id) OR (`owner_id` = :user_id))";
-=======
-		$query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `approved` = 1 AND `validate_request` = 0 AND `validated` = 0 AND (`submitted_by_id` = :user_id OR `owner_id` = :user_id)";
->>>>>>> FETCH_HEAD
 		$sth = $this->dbc->prepare($query);
 		$sth->execute(array(
 			'user_id' => $user_id
@@ -212,11 +340,7 @@ class themedb {
 		
 		$result['approved'] = $sth->fetchAll(PDO::FETCH_ASSOC);
 		
-<<<<<<< HEAD
 		$query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `approved` = 1 AND `validate_request` = 1 AND `validated` = 0 AND ((`owner_id` IS NULL AND `submitted_by_id` = :user_id) OR (`owner_id` = :user_id))";
-=======
-		$query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `approved` = 1 AND `validate_request` = 1 AND `validated` = 0 AND (`submitted_by_id` = :user_id OR `owner_id` = :user_id)";
->>>>>>> FETCH_HEAD
 		$sth = $this->dbc->prepare($query);
 		$sth->execute(array(
 			'user_id' => $user_id
@@ -224,17 +348,27 @@ class themedb {
 		
 		$result['validate_request'] = $sth->fetchAll(PDO::FETCH_ASSOC); 
 		
-<<<<<<< HEAD
 		$query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `validated` = 1 AND ((`owner_id` IS NULL AND `submitted_by_id` = :user_id) OR (`owner_id` = :user_id))";
-=======
-		$query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `validated` = 1 AND (`submitted_by_id` = :user_id OR `owner_id` = :user_id)";
->>>>>>> FETCH_HEAD
 		$sth = $this->dbc->prepare($query);
 		$sth->execute(array(
 			'user_id' => $user_id
 		));
 		
 		$result['validated'] = $sth->fetchAll(PDO::FETCH_ASSOC);
+		
+		return $result;
+	}
+	
+	/*
+	* get_popup_users()
+	* Desc: Gets users for the popup
+	*/
+	function get_popup_users(){
+		$query = "SELECT `id`, `user_name` FROM " . USERS_TABLE;
+		$sth = $this->dbc->prepare($query);
+		$sth->execute();
+		
+		$result = $sth->fetchAll(PDO::FETCH_ASSOC);
 		
 		return $result;
 	}

@@ -8,7 +8,7 @@ h2.view-header{
 #tile-container {
   height: 34vh;
   width: 64vw;
-  margin-top: 4vh;
+  margin-top: 8vh;
   margin-left: auto;
   margin-right: auto;
 }
@@ -30,9 +30,17 @@ a.mcp-link:link{
 	font-size: 1.5rem;
 }
 
+#navigation{
+	position: absolute;
+	right: 0;
+	width: 40vw;
+	height: auto;
+}
+
 .db-nav{
-	margin-top: -1vh;
 	padding: 0;
+	position: absolute;
+	height: auto;
 }
 
 .db-nav ul li a{
@@ -91,7 +99,7 @@ a.mcp-link:link{
   float: left;
 }
 
-input[type="radio"]{
+input[type="radio"], input[type="checkbox"]{
 	width: auto;
 	margin-right: 3px;
 }
@@ -103,6 +111,7 @@ label{
 textarea#description{
 	width: 65vw;
 	height: 10vh;
+	font-family: Amble, HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 textarea#css{
@@ -111,10 +120,62 @@ textarea#css{
 	font-family: "Courier New", Courier, monospace;
 }
 
+#popup-box{
+	background-color: #a91c9e;
+	width: 50vw;
+	height: 50vh;
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;	
+	padding: 2vh 2vw;
+  -moz-box-shadow:    0px 0px 10px #333;
+  -webkit-box-shadow: 0px 0px 10px #333;
+  box-shadow:         0px 0px 10px #333;
+}
+
+#popup-box h2{
+	color: white;
+}
+
+#popup-wrapper{
+	background-color: white;
+	height: 40vh;
+	width: 45vw;
+	margin-top: 1vh;
+	margin-left: auto;
+	margin-right: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding: 0;
+}
+
+#popup-inner{
+	background-color: white;
+	width: 100%;
+	margin: 0;
+}
+
+#popup-form{
+	margin: 15vh auto auto auto;
+	text-align: center;
+}
+
+#popup-form input[type=submit]{
+	margin-left: auto;
+	margin-right: auto;
+}
+
 div.code{
 	font-size: 12px;
 	height: 45vh;
 	overflow: auto;
+}
+
+img.img-edit{
+	height: 15px;
+	width: 15px;
 }
 
 table.manage-table{
@@ -153,11 +214,22 @@ td.small-col{
 
 .manage-header{
 	background-color: #a91c9e;
+	background-image: url('../../images/down-arrow.png');
+	background-repeat: no-repeat;
+	background-size: 1.5vh;
+	background-origin: content-box;
+	background-position: center left;
+	height: 2.5vh;
+	line-height: 2.5vh;
+	vertical-align: middle;
 	margin-left: auto;
 	margin-right: auto;
-	padding-top: .5vw;
-	padding-bottom: .5vw;
+	padding: .5vh .5vw;
 	border-bottom: 3px #d553cb solid;
+}
+
+.manage-header:hover{
+	cursor: pointer;
 }
 
 .manage-header h4{
