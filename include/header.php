@@ -21,12 +21,8 @@
     <?php } ?>
     <?php 
     if ($title == "Try-It") { ?>
-<<<<<<< HEAD
     <link href='css/blog-style.css' rel='stylesheet' type='text/css'>
     <link href='css/tryit.css' rel='stylesheet' type='text/css'>
-=======
-    <link href='/css/tryit.css' rel='stylesheet' type='text/css'>
->>>>>>> FETCH_HEAD
     <?php } ?>
 
     <?php global $extra_js; print $extra_js; ?>
@@ -101,7 +97,6 @@
         <header>
         <section id="headerwrap">
 
-<<<<<<< HEAD
           <script>$("header").addClass("tryit");</script>
           <h1 style="text-align: left !important;">Try-It</h1>
           
@@ -138,11 +133,8 @@
           <?php } else { ?>
 
           <div id="logo">
-=======
-          <figure id="logo">
->>>>>>> FETCH_HEAD
             <a href="/"><img src="/images/logo.svg" alt="Logo" /></a>
-          </figure>
+          </div>
 
           <nav>
             <ul>
