@@ -6,7 +6,7 @@
     <title>Everything Dojo &bull; <?php global $title; print $title; ?></title>
 
     <meta charset="utf-8">
-    <link href="images/favicon.ico" rel="shortcut icon">
+    <link href="/images/favicon.ico" rel="shortcut icon">
     <?php if ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)") { ?>
     <link href="/css/normalize.css" type="text/css" rel="stylesheet">
     <link href="/css/style.css" type="text/css" rel="stylesheet">
@@ -21,7 +21,12 @@
     <?php } ?>
     <?php 
     if ($title == "Try-It") { ?>
+<<<<<<< HEAD
+    <link href='css/blog-style.css' rel='stylesheet' type='text/css'>
     <link href='css/tryit.css' rel='stylesheet' type='text/css'>
+=======
+    <link href='/css/tryit.css' rel='stylesheet' type='text/css'>
+>>>>>>> FETCH_HEAD
     <?php } ?>
 
     <?php global $extra_js; print $extra_js; ?>
@@ -58,7 +63,7 @@
           <h1>' . $title . '</h1>
         </section>
       </header>';
-      } elseif ($title == "Try-it") {
+      } elseif ($title == "Try-It") {
       ?>
 
       <header class="tryit">
@@ -96,9 +101,48 @@
         <header>
         <section id="headerwrap">
 
+<<<<<<< HEAD
+          <script>$("header").addClass("tryit");</script>
+          <h1 style="text-align: left !important;">Try-It</h1>
+          
+          <form method="get" id="select-theme" name="select-theme" style="margin-left:200px; padding-top:20px;">
+            <section class="option-wrap">
+              <select id="select" name="select">
+              <?php
+                include("db.php");
+                include("themedb.php");
+                $data = $themedb->get_themes();
+                //cache the theme id
+                $ids = $data['validated']['id'];
+                $names = $data['validated']['name'];
+                $selected = $_GET['select'];
+                foreach ($names as $key => $theme) {
+                  if ($selected == $ids[$key]){
+                    echo '<option id="'.$ids[$key].'" name="'.$ids[$key].'" value="'.$ids[$key].'" selected>'.$theme.'</option>';
+                  }
+                  else{
+                    echo '<option id="'.$ids[$key].'" name="'.$ids[$key].'" value="'.$ids[$key].'">'.$theme.'</option>';
+                  }
+
+                }
+              ?>
+              </select>
+            </section>
+            <input type="submit" id="select-submit" name="select-submit" value="Go!" class="tryit-button"/>
+          </form>
+          <?php } elseif ($title == "Discuss") { ?>
+
+          <script>$("header").addClass("discuss");</script>
+          <h1>Discuss</h1>
+
+          <?php } else { ?>
+
           <div id="logo">
+=======
+          <figure id="logo">
+>>>>>>> FETCH_HEAD
             <a href="/"><img src="/images/logo.svg" alt="Logo" /></a>
-          </div>
+          </figure>
 
           <nav>
             <ul>
