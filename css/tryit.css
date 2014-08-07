@@ -34,31 +34,38 @@ Please do not plagiarize
 /*--COLORS--*/
 .tryit    { background: #ff6c00; }
 
+/**
+ * TYPESETTING
+ *
+ * The highly specific selectors and `!important`s are to reset any
+ * styling that may have been applied by blog styles
+ */
 
-/*--TYPESETTING--*/
-#headerwrap h1 {
-  font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
-  font-weight: 400;
-  color: white;
-  display: inline-block; /* prevent body from being pushed down by sticky footer */
-  text-transform: uppercase;
-  font-size: inherit;
-  line-height: 1.25em;
-  letter-spacing: 0;
-  padding: 0.24rem 0.6rem;
-  margin: 0.6rem;
-  height: 1.334em;
-  position: absolute;
+html > body > #wrap > header > #headerwrap > h1,
+html > body > #wrap > header > #headerwrap > h1 > a,
+html > body > #wrap > header > #headerwrap > h1 > a:active {
+  position: static !important;
+  display: inline-block !important;
+  background: none !important;
+  color: white !important;
+  line-height: inherit !important;
+  font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif !important;
+  font-size: inherit !important;
+  font-weight: 400 !important;
+  text-align: left !important;
+  text-decoration: none !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  margin: 0 !important;
 }
-
-#headerwrap h1 a,
-#headerwrap h1 a:active {
-  color: white;
-  text-decoration: none;
-  padding: 0;
-  border: 0;
-  box-shadow: none;
-  margin: 0;
+html > body > #wrap > header > #headerwrap > h1 {
+  position: absolute !important;
+  padding: 0.1em 0 !important;
+  margin: 0.3em !important;
+  height: 1.334em !important;
 }
 
 .small { font-size: 0.65em; }
