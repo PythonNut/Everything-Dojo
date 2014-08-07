@@ -6,7 +6,7 @@
     <title>Everything Dojo &bull; <?php global $title; print $title; ?></title>
 
     <meta charset="utf-8">
-    <link href="images/favicon.ico" rel="shortcut icon">
+    <link href="/images/favicon.ico" rel="shortcut icon">
     <?php if ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)") { ?>
     <link href="/css/normalize.css" type="text/css" rel="stylesheet">
     <link href="/css/style.css" type="text/css" rel="stylesheet">
@@ -21,7 +21,7 @@
     <?php } ?>
     <?php 
     if ($title == "Try-It") { ?>
-    <link href='css/tryit.css' rel='stylesheet' type='text/css'>
+    <link href='/css/tryit.css' rel='stylesheet' type='text/css'>
     <?php } ?>
 
     <?php global $extra_js; print $extra_js; ?>
@@ -58,7 +58,11 @@
           <h1>' . $title . '</h1>
         </section>
       </header>';
+<<<<<<< HEAD
       } elseif ($title == "Try-it") {
+=======
+      } elseif ($title == "Try-It") {
+>>>>>>> FETCH_HEAD
       ?>
 
       <header class="tryit">
@@ -66,6 +70,7 @@
           <h1>Try-It</h1>
         </section>
       </header>
+<<<<<<< HEAD
 
       <?php } elseif ($title == "Themizer Index") { ?>
 
@@ -97,8 +102,41 @@
         <section id="headerwrap">
 
           <div id="logo">
+=======
+
+      <?php } elseif ($title == "Themizer Index") { ?>
+
+      <header id="top">
+        <section id="headerwrap">
+          <nav class="breadcrumbs">
+            <div id="logo">
+              <a href="/"><img src="/images/logo.svg" alt="Logo" /></a>
+            </div>
+            <h1 class="big">
+              > <a class="uppercase" href="">Themizer</a>
+            </h1>
+          </nav>
+
+          <nav>
+            <ul>
+              <li><a onclick="$('#top').scrollTo()">Home</a></li>
+              <li><a onclick="$('#features').scrollTo()">Features</a></li>
+              <li><a onclick="$('#changelog').scrollTo()">Changelog</a></li>
+              <li><a onclick="$('#roadmap').scrollTo()">Roadmap</a></li>
+            </ul>
+          </nav>
+
+        </section>
+      </header>
+
+      <?php } elseif ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)") { ?>
+        <header>
+        <section id="headerwrap">
+
+          <figure id="logo">
+>>>>>>> FETCH_HEAD
             <a href="/"><img src="/images/logo.svg" alt="Logo" /></a>
-          </div>
+          </figure>
 
           <nav>
             <ul>
