@@ -107,7 +107,7 @@
       else{
 ?>
 
-<h2 class="view-header"><?php echo filter($style['name']); ?> v. <?php echo filter($style['version']); ?> by <?php echo filter($style['author']); ?> <?php echo filter($style['stage']); ?></h2>
+<h2 class="view-header"><?php echo $style['name']; ?> v. <?php echo $style['version']; ?> by <?php echo $style['author']; ?> <?php echo $style['stage']; ?></h2>
 <div id="popup-box">
   <h2 id="popup-header"></h2>
   <span style="color: white;">Confirm your action in the box below.</span>
@@ -124,8 +124,8 @@
     </div>
   </div>
 </div>
-      <?php if($edit == true){ ?><a href="<?php echo URL_DATABASE; ?>?mode=edit&id=<?php echo $id; ?>"><img src="../../images/edit.png" class="img-edit" /> Edit Theme</a> <a href="<?php echo URL_DATABASE; ?>?mode=settings&id=<?php echo $id; ?>"><img src="../../images/gear.png" class="img-edit" /> Manage Settings</a> <a href="javascript:;" class="view" onclick="popup_options('delete', <?php echo $style['id']; ?>);"><img src="../../images/trash.png" class="img-edit" /> Delete Theme</a><br /><?php } ?>
-      <?php echo filter($style['description']); ?><br />
+      <?php if($edit == true || checkAdmin() == 1){ ?><a href="<?php echo URL_DATABASE; ?>?mode=edit&id=<?php echo $id; ?>"><img src="../../images/edit.png" class="img-edit" /> Edit Theme</a> <a href="<?php echo URL_DATABASE; ?>?mode=settings&id=<?php echo $id; ?>"><img src="../../images/gear.png" class="img-edit" /> Manage Settings</a> <a href="javascript:;" class="view" onclick="popup_options('delete', <?php echo $style['id']; ?>);"><img src="../../images/trash.png" class="img-edit" /> Delete Theme</a><br /><?php } ?>
+      <?php echo $style['description']; ?><br />
       <b>Screenshot:</b><br />
       <img src="<?php echo $style['screenshot']; ?>" style="max-width: 65vw" /><br />
       <b>Code:</b><br />
