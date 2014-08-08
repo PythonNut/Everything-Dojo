@@ -132,12 +132,6 @@
             <?php if(isset($_SESSION['user_id'])) { ?>
               <li><a href="/myaccount.php" id="menu-myaccount">My Account</a></li>
               <li><a href="/mysettings.php" id="menu-mysettings">My Settings</a></li>
-              <?php
-              // will not work if dbc is not included on page
-              if (checkAdmin()) {
-              ?>
-              <li><a href="/admin.php" id="menu-admin">Admin CP</a></li>
-              <?php } //end admin ?>
               <li><a href="/logout.php" id="menu-logout">Logout</a></li>
             <?php } ?>
             <?php if(!isset($_SESSION['user_id'])) { ?>
