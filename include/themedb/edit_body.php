@@ -1,11 +1,16 @@
 <?php
 $id = $_GET['id'];
 $edit = $themedb->check_owner($id, $_SESSION['user_id']);
-if($edit == false){
+if($edit == false && checkAdmin() == 0){
   redirect(URL_DATABASE);
 }
 else{
-  $style = $themedb->get_themes($id, false, $_SESSION['user_id']);
+	if(checkAdmin() == 0){
+  	$style = $themedb->get_themes($id, false, $_SESSION['user_id']);
+	}
+	else{
+		$style = $themedb->get_themes($id, false, $_SESSION['user_id'], 1);
+	}
   $development_stages = array('[DEV]', '[ALPHA]', '[BETA]');
 ?>
  >> <?php if($style['validated'] == 1){?><a href="<?php echo URL_DATABASE; ?>?mode=view&view=complete">Completed Themes</a><?php }else{?><a href="<?php echo URL_DATABASE; ?>?mode=view&view=development">Development Themes</a> <?php } ?> >> <a href="<?php echo URL_DATABASE;?>?mode=view&view=style&id=<?php echo $id; ?>">View Theme</a>
