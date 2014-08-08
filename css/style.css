@@ -536,101 +536,101 @@ table a { color: #F99819; }
 #index-discuss        { float: right; }
 #index-discuss:hover  { background: #448ae9; }
 
-/*
-* Notification
-*/
+/**
+ * Notifications
+ */
 #notifications{
-	position: absolute;
-	right: 5vw;
-	margin-top: 4vh;
-	display: block;
-	width: 30vw;
+  position: absolute;
+  right: 5vw;
+  margin-top: 4vh;
+  display: block;
+  width: 30vw;
 }
 
 .notification-arrow-up{
-	width: 0; 
-	height: 0; 
-	margin-left: 27vw;
-	border-left: 1vw solid transparent;
-	border-right: 1vw solid transparent;	
-	border-bottom: 1vw solid #212121;
+  width: 0;
+  height: 0;
+  border-color: #212121 transparent;
+  border-style: solid;
+  border-width: 0 1vw 0;
+  margin-left: 27vw;
 }
 
 #notification-body{
-	width: 30vw;
-	border: 1px #212121 solid;
-	background-color: white;
+  width: 30vw;
+  background-color: white;
+  border: 1px #212121 solid;
 }
 
 #notification-header{
-	font-family: 'lato';
-	width: 30vw;
-	background-color: #212121;
-	border-bottom: 1px #bbb solid;
-	color: white;
-	height: 5vh;
-	line-height: 5vh;
-	vertical-align: middle;
+  width: 30vw;
+  height: 5vh;
+  font-family: 'Lato', sans-serif;
+  line-height: 5vh;
+  background-color: #212121;
+  color: white;
+  vertical-align: middle;
+  border-bottom: 1px #bbb solid;
 }
 
 #notification-header b{
-	margin-left: 3vh;
+  margin-left: 3vh;
 }
 
 .notification{
-	height: 8vh;
-	border-bottom: 1px #bbb solid;
+  height: 8vh;
+  border-bottom: 1px #bbb solid;
 }
 
 .notification:before{
-	border: 0;
+  border: 0;
 }
 
 .unread{
-	background-color: #edffc1;
+  background-color: #edffc1;
 }
 
 .unread:hover{
-	background-color: #e0ffbe;
+  background-color: #e0ffbe;
 }
 
 .read:hover{
-	background-color: #edffc1;
+  background-color: #edffc1;
 }
 
 .notification-color{
-	height: 6vh;
-	line-height: 6vh;
-	width: 6vh;
-	margin-top: 1vh;
-	margin-left: 1vh;
-	float: left;
-	color: white;
-	text-align: center;
-	vertical-align: middle;
-	font-family: 'lato';
-	font-size: 4vh;
+  float: left;
+  width: 6vh;
+  height: 6vh;
+  line-height: 6vh;
+  color: white;
+  font-family: 'lato';
+  font-size: 4vh;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 1vh;
+  margin-left: 1vh;
 }
 
 .notification-text{
-	height: 4vh;
-	float: left;
-	margin-top: 1vh;
-	margin-left: 1vw;
+  height: 4vh;
+  float: left;
+  margin-top: 1vh;
+  margin-left: 1vw;
 }
 
 .time{
-	height: 1vh;
-	color: #333;
-	float: right;
-	font-size: .7em;
-	margin-right: 1vw;
+  float: right;
+  height: 1vh;
+  color: #333;
+  font-size: .7em;
+  margin-right: 1vw;
 }
 
 #notification-footer{
-	text-align: center;
-	height: 5vh;
-	line-height: 5vh;
-	vertical-align: middle;
+  height: 5vh;
+  line-height: 5vh;
+  text-align: center;
+  vertical-align: middle;
 }
 

@@ -24,7 +24,7 @@
     <textarea id="description" name="description"></textarea><br />
     Theme CSS:<br />
     <textarea id="css" name="code"></textarea>
-  	<input type="submit" name="submit" style="font-size: 15px;" />
+    <input type="submit" name="submit" style="font-size: 15px;" />
     <input type="hidden" name="mode" value="submit-theme" />
   </div>
 </form>
