@@ -583,6 +583,10 @@ table a { color: #F99819; }
 	border-bottom: 1px #bbb solid;
 }
 
+.notification:before{
+	border: 0;
+}
+
 .unread{
 	background-color: #edffc1;
 }
@@ -626,4 +630,7 @@ table a { color: #F99819; }
 
 #notification-footer{
 	text-align: center;
+	height: 5vh;
+	line-height: 5vh;
+	vertical-align: middle;
 }

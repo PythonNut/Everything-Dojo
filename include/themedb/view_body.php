@@ -94,7 +94,7 @@
 				$moderator = 0;
 			}
 			$edit = $themedb->check_owner($id, $_SESSION['user_id']);
-			$style = $themedb->get_themes($id, $_SESSION['user_id'], $moderator);
+			$style = $themedb->get_themes($id, false, $_SESSION['user_id'], $moderator);
 ?>
  >> <?php if($style['validated'] == 1){?><a href="<?php echo URL_DATABASE; ?>?mode=view&view=complete">Completed Themes</a><?php }else{?><a href="<?php echo URL_DATABASE; ?>?mode=view&view=development">Development Themes</a> <?php } ?>
 
