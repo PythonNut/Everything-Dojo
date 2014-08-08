@@ -541,18 +541,18 @@ table a { color: #F99819; }
  */
 #notifications{
   position: absolute;
-  right: 5vw;
-  margin-top: 4vh;
-  display: block;
-  width: 30vw;
+	display: block;
+	/* position for index page */
+	right: 15vw;
+	top: 7.5vh;
 }
 
 .notification-arrow-up{
   width: 0;
   height: 0;
-  border-color: #212121 transparent;
-  border-style: solid;
-  border-width: 0 1vw 0;
+  border-left: 2vh solid transparent;
+	border-right: 2vh solid transparent;
+	border-bottom: 2vh solid #212121;
   margin-left: 27vw;
 }
 

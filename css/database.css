@@ -236,3 +236,10 @@ td.small-col{
   color: white;
   margin-left: 2vw;
 }
+
+/* notification placement for database page */
+div#notifications{
+	right: 5vw;
+  margin-top: 4vh;
+  width: 30vw;
+}
