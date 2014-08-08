@@ -190,34 +190,34 @@
     return $implode;
   }
 
-	function br2nl($string)
-	{
-		return preg_replace('/\<br(\s*)?\/?\>/i', "\n", $string);
-	}  
-	
-	function shorten_desc($description){
-		$description = br2nl($description);
-		$count = str_word_count($description);
-		$description = implode(' ', array_slice(explode(' ', $description), 0, 10));
-		if(strlen($description) > 80){
-			$description = substr($description, 0, 80);
-		}
-		if($count > 10){
-			$description .= ' (...)';
-		}
-		
-		return $description;
-	}
-	
-	function redirect($url)
-	{
-		$string = '<script type="text/javascript">';
-		$string .= 'window.location = "' . $url . '"';
-		$string .= '</script>';
-	
-		echo $string;
-	}
-	
+  function br2nl($string)
+  {
+    return preg_replace('/\<br(\s*)?\/?\>/i', "\n", $string);
+  }
+
+  function shorten_desc($description){
+    $description = br2nl($description);
+    $count = str_word_count($description);
+    $description = implode(' ', array_slice(explode(' ', $description), 0, 10));
+    if(strlen($description) > 80){
+      $description = substr($description, 0, 80);
+    }
+    if($count > 10){
+      $description .= ' (...)';
+    }
+
+    return $description;
+  }
+
+  function redirect($url)
+  {
+    $string = '<script type="text/javascript">';
+    $string .= 'window.location = "' . $url . '"';
+    $string .= '</script>';
+
+    echo $string;
+  }
+
   /****************************END OF LOGIN SCRIPT FUNCTIONS*********************************/
   /*regular site functions*/
 

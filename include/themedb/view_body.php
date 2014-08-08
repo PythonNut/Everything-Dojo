@@ -1,9 +1,9 @@
 <?php
   $data = $themedb->get_themes();
-	$view = $_GET['view'];
+  $view = $_GET['view'];
 
-	switch($view){
-		case '';
+  switch($view){
+    case '';
 ?>
   <div id="tile-container">
      <a href="<?php echo URL_DATABASE; ?>?mode=view&view=complete" class="database-link">
@@ -17,13 +17,13 @@
     <div class="db-tile db-tile-large" id="development">
       <div class="db-tile-inner">
         <span class="db-tile-title">Development</span><br />Themes on this page have been approved, but not yet validated. They are still in development and may have some bugs that need to be ironed out.
-    	</div>
+      </div>
     </div>
     </a>
-  </div>	
-<?php		
-			break;
-		case 'complete';
+  </div>
+<?php
+      break;
+    case 'complete';
 ?>
     <h2>Completed Themes</h2>
     
@@ -53,8 +53,8 @@
       </tbody>
     </table>
 <?php
-			break;
-		case 'development':
+      break;
+    case 'development':
 ?>    
     <h2>Themes in Development</h2>
     
@@ -84,47 +84,47 @@
       </tbody>
     </table>
 <?php
-			break;
-		case 'style':
-			$id = $_GET['id'];
-			if($_SESSION['user_level'] == 5){
-				$moderator = 1;
-			}
-			else{
-				$moderator = 0;
-			}
-			$edit = $themedb->check_owner($id, $_SESSION['user_id']);
-			$style = $themedb->get_themes($id, false, $_SESSION['user_id'], $moderator);
+      break;
+    case 'style':
+      $id = $_GET['id'];
+      if($_SESSION['user_level'] == 5){
+        $moderator = 1;
+      }
+      else{
+        $moderator = 0;
+      }
+      $edit = $themedb->check_owner($id, $_SESSION['user_id']);
+      $style = $themedb->get_themes($id, false, $_SESSION['user_id'], $moderator);
 ?>
  >> <?php if($style['validated'] == 1){?><a href="<?php echo URL_DATABASE; ?>?mode=view&view=complete">Completed Themes</a><?php }else{?><a href="<?php echo URL_DATABASE; ?>?mode=view&view=development">Development Themes</a> <?php } ?>
 
-<?php		
-			if($id == '' || count($style) == 0){
+<?php
+      if($id == '' || count($style) == 0){
 ?>
       This style does not exist.
-<?php			
-			}
-			else{
+<?php
+      }
+      else{
 ?>
 
 <h2 class="view-header"><?php echo $style['name']; ?> v. <?php echo $style['version']; ?> by <?php echo $style['author']; ?> <?php echo $style['stage']; ?></h2>
 <div id="popup-box">
-	<h2 id="popup-header"></h2>
+  <h2 id="popup-header"></h2>
   <span style="color: white;">Confirm your action in the box below.</span>
   <div id="popup-wrapper">
-  	<div id="popup-inner">
-    	<div id="popup-form">
-      	Are you sure you want to <span id="replace"></span> this theme?
+    <div id="popup-inner">
+      <div id="popup-form">
+        Are you sure you want to <span id="replace"></span> this theme?
         <form action="include/db-handler.php" method="post">
-        	<input type="submit" name="submit" value="Confirm" style="font-size: 15px;" />
-        	<input type="hidden" value="" name="id" id="replace-id" />
-        	<input type="hidden" value="" name="mode" id="replace-form" />
+          <input type="submit" name="submit" value="Confirm" style="font-size: 15px;" />
+          <input type="hidden" value="" name="id" id="replace-id" />
+          <input type="hidden" value="" name="mode" id="replace-form" />
         </form>
-    	</div>
+      </div>
     </div>
   </div>
 </div>
-			<?php if($edit == true){ ?><a href="<?php echo URL_DATABASE; ?>?mode=edit&id=<?php echo $id; ?>"><img src="../../images/edit.png" class="img-edit" /> Edit Theme</a> <a href="<?php echo URL_DATABASE; ?>?mode=settings&id=<?php echo $id; ?>"><img src="../../images/gear.png" class="img-edit" /> Manage Settings</a> <a href="javascript:;" class="view" onclick="popup_options('delete', <?php echo $style['id']; ?>);"><img src="../../images/trash.png" class="img-edit" /> Delete Theme</a><br /><?php } ?>
+      <?php if($edit == true){ ?><a href="<?php echo URL_DATABASE; ?>?mode=edit&id=<?php echo $id; ?>"><img src="../../images/edit.png" class="img-edit" /> Edit Theme</a> <a href="<?php echo URL_DATABASE; ?>?mode=settings&id=<?php echo $id; ?>"><img src="../../images/gear.png" class="img-edit" /> Manage Settings</a> <a href="javascript:;" class="view" onclick="popup_options('delete', <?php echo $style['id']; ?>);"><img src="../../images/trash.png" class="img-edit" /> Delete Theme</a><br /><?php } ?>
       <?php echo $style['description']; ?><br />
       <b>Screenshot:</b><br />
       <img src="<?php echo $style['screenshot']; ?>" style="max-width: 65vw" /><br />
@@ -134,8 +134,8 @@
 <code class="language-css"><?php echo nl2br($style['code']); ?></code>
         </pre>
       </div>
-<?php			
-			}
-			break;
-	}
+<?php
+      }
+      break;
+  }
 ?>
