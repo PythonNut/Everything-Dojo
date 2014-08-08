@@ -1,6 +1,5 @@
 <?php
   $title = "Database";
-  $extra_style = '<link href="css/database.css" type="text/css" rel="stylesheet">';
   include("include/include.php");
   include("include/themedb.php");
   session_start();
@@ -44,7 +43,7 @@
 				foreach($notification_data as $notif){
 					$notif_data = $notification->get_notif_obj($notif['notification_type'], $notif['item_id']);
 			?>
-      <a href="<?php echo $notif_data['url']; ?>" onClick="mark_read(<?php echo $notif['id']; ?>)">	
+      <a href="<?php echo $notif_data['url']; ?>" class="notification-item-link" onClick="mark_read(<?php echo $notif['id']; ?>)">	
         <div id="notification-<?php echo $notif['id']; ?>" class="notification <?php if($notif['read'] == 0){ echo 'unread'; }else{ echo 'read'; } ?> ">
       		<div class="notification-color" style="background-color: #<?php echo $notif_data['data']['color']; ?>"><?php echo substr($notif_data['data']['location'], 0, 1); ?></div>
 					<div class="notification-text">
@@ -60,7 +59,7 @@
 			}
 			?>
       <div id="notification-footer">
-      	<a href="">See All</a>
+      	<a href="notifications.php">See All</a>
       </div>
     </div>
   </div>

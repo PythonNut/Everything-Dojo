@@ -64,9 +64,7 @@
 
       <header class="tryit">
         <section id="headerwrap">
-
           <h1 style="text-align: left !important;"><a href="tryit.php">Try-It</a></h1>
-
           <form method="get" id="select-theme" name="select-theme" style="margin-left:4em;">
             <section class="option-wrap">
               <select id="select" name="select">
@@ -124,7 +122,6 @@
 
       <header>
         <section id="headerwrap">
-
           <div id="logo">
             <a href="/"><img src="/images/logo.svg" alt="Logo" /></a>
           </div>
