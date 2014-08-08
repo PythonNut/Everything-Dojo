@@ -1,0 +1,87 @@
+@charset "UTF-8";
+/* CSS Document */
+#announcements marquee{
+  display: inline-block;
+}
+#announcements h3{
+  text-align: center;
+}
+.discuss-announcement{
+  display: inline-block;
+}
+.discuss-featured{
+  min-width: 300px;
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #FFFFFF;
+  margin: 0px 10px;
+  display: inline-block;
+  vertical-align: top;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 500ms ease;
+}
+.discuss-featured:hover{
+  background-color: #509aff;
+  background-size: 150% 150%;
+  transition: all 500ms ease;
+}
+.discuss-featured-text{
+  margin-top: 290px;
+  vertical-align: bottom;
+  height: 100px;
+  min-height: 100px;
+  padding: 20px 10px;
+  background-color: #000000;
+  color: #FFFFFF;
+  overflow: hidden;
+  overflow-y: auto;
+  transition: all 500ms ease;
+}
+.discuss-featured:hover > .discuss-featured-text{
+  margin-top: 160px;
+  transition: all 500ms ease;
+}
+#discuss-round-left{
+  height: 30px;
+  width: 30px;
+  text-align: center;
+  line-height: 30px;
+  border: 1px solid black;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 20px;
+  display: inline-block;
+  background-color: #FFFFFF;
+  color: #000000;
+  transition: all 500ms ease;
+}
+#discuss-round-left:hover{
+  background-color: #000000;
+  color: #FFFFFF;
+  transition: all 500ms ease;
+}
+#discuss-round-right{
+  height: 30px;
+  width: 30px;
+  text-align: center;
+  line-height: 30px;
+  border: 1px solid black;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 20px;
+  display: inline-block;
+  color: #000000;
+  transition: all 500ms ease;
+}
+#discuss-round-right:hover{
+  background-color: #000000;
+  color: #FFFFFF;
+  transition: all 500ms ease;
+}
