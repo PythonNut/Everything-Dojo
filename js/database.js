@@ -66,7 +66,7 @@ function popup_options(mode, id) {
   $("#popup-box").toggle(350);
 }
 function show_notifications() {
-  $("d#notifications").toggle(350);
+  $("#notifications").toggle(350);
 }
 function mark_read(id) {
   $.ajax({

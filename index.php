@@ -1,8 +1,15 @@
 <?php
   $title = "Home";
   include("include/include.php");
+	$extra_js = "<script src=\"js/index.js\"></script>";
   session_start();
-  get_header();
+  
+	if($_SESSION['user_id'] != NULL){
+		$unread_count = $notification->count_unread($_SESSION['user_id']);
+		$notification_data = $notification->get_notifications($_SESSION['user_id']);
+	}
+	
+	get_header(0, $unread_count);
 ?>
 <section id="content">
   <?php if(!empty($_GET['msg']))  {
