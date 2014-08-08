@@ -184,10 +184,13 @@ class themedb {
 	* Desc: Gets either a list of all the themes sorted by validated/unvalidated or one theme
 	* $id: Either nothing to get all themes or an id number
 	*/
-  function get_themes($id = 'all', $user_id = 0, $moderator = 0){
+  function get_themes($id = 'all', $alpha = false, $user_id = 0, $moderator = 0){
 		if($id == 'all') {
       // Select all approved themes but unvalidated
       $query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `approved` = 1 AND `validated` = 0";
+			if($alpha == true){
+				$query .= " ORDER BY `name`";
+			}
 
       // Assign themes to array
       $id          = array();
@@ -224,6 +227,9 @@ class themedb {
 
       // Select all approved themes and validated
       $query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `approved` = 1 AND `validated` = 1";
+			if($alpha == true){
+				$query .= " ORDER BY `name`";
+			}
 
       // Assign themes to array
       $id          = array();
