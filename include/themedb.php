@@ -87,14 +87,14 @@ class themedb {
     $sth = $this->dbc->prepare($query);
 
     $sth->execute(array(
-      ':name'              => $data['name'],
-      ':description'      => $data['description'],
-      ':code'              => $data['code'],
-      ':stage'            => $data['stage'],
-      ':author'            => $data['author'],
-      ':screenshot'        => $data['screenshot'],
-      ':version'          => $data['version'],
-      ':id'                => $data['id']
+      ':name'              => strip_tags($data['name']),
+      ':description'      => strip_tags($data['description']),
+      ':code'              => strip_tags($data['code']),
+      ':stage'            => strip_tags($data['stage']),
+      ':author'            => strip_tags($data['author']),
+      ':screenshot'        => strip_tags($data['screenshot']),
+      ':version'          => strip_tags($data['version']),
+      ':id'                => strip_tags($data['id'])
     ));
 
     return $data['id'];
@@ -110,15 +110,15 @@ class themedb {
     $sth = $this->dbc->prepare($query);
 
     $sth->execute(array(
-      ':name'              => $data['name'],
-      ':description'      => $data['description'],
-      ':code'              => $data['code'],
-      ':stage'            => $data['stage'],
-      ':author'            => $data['author'],
-      ':screenshot'        => $data['screenshot'],
-      ':version'          => $data['version'],
-      ':submitted_by'      => $data['submitted_by'],
-      ':submitted_by_id'  => $data['submitted_by_id']
+      ':name'              => strip_tags($data['name']),
+      ':description'      => strip_tags($data['description']),
+      ':code'              => strip_tags($data['code']),
+      ':stage'            => strip_tags($data['stage']),
+      ':author'            => strip_tags($data['author']),
+      ':screenshot'        => strip_tags($data['screenshot']),
+      ':version'          => strip_tags($data['version']),
+      ':submitted_by'      => strip_tags($data['submitted_by']),
+      ':submitted_by_id'  => strip_tags($data['submitted_by_id'])
     ));
 
     $id = $this->dbc->lastInsertId();
