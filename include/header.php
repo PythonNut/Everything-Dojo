@@ -56,7 +56,7 @@
       if (in_array($title, array("Database", "Discuss"))) {
         echo '<header class="' . strtolower($title) . '">
         <section id="headerwrap">
-          <h1>' . $title . '</h1>
+          <a href="' . URL_DATABASE . '"><h1>' . $title . '</h1></a>
         </section>
       </header>';
       } elseif ($title == "Try-It") {
