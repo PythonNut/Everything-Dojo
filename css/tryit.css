@@ -75,9 +75,10 @@ body { background: white; }
 
 /*--HEADER AND NAV--*/
 header {
-  background: white;
+  position: relative;
   margin: 0 auto;
   font-size: 2.22vh;
+  z-index: 2147483647; /* CSS values are stored as 32-bit signed integers, hence this number */
 }
 
 #headerwrap {
