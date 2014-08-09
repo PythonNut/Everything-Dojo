@@ -8,6 +8,7 @@
 }
 #discuss-announcements{
   display: inline-block;
+  vertical-align: top;
 }
 #fora{
   width: 81vw;
@@ -170,10 +171,4 @@ td.med-col{
 
 td.small-col{
   width: 15%;
-}
-#topic-main{
-  border: 1px solid black;
-}
-#topic-main-text{
-  padding: 1em 1em;
 }

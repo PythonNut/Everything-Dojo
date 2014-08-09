@@ -15,7 +15,7 @@
 
     $announcements = explode("~", $result[0]['data']);
   ?>
-  <?php //if (!empty($announcements[0])) {?>
+  <?php if (!empty($announcements[0])) {?>
   <section id="announcements">
     <h3>Announcements: </h3>
     <div class="discuss-round" id="discuss-round-left"><span class="discuss-round"></span></div>
@@ -70,7 +70,7 @@
         });
       </script>        
     </section>
-    <?php //} ?>
+    <?php } ?>
     <br/>
     <?php
     switch($view){
