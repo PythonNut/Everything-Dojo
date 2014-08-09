@@ -29,7 +29,7 @@
     <section id="sidebar-inner-scrollable">
 
       <section class="option" id="option-view">
-        <section class="option-title">
+        <section class="option-title expanded">
           <h5>Blog View</h5>
           <span class="collapsebutton"></span>
         </section>
