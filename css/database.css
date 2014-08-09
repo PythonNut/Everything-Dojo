@@ -212,17 +212,12 @@ div.code {
 
 .manage-header {
   background-color: #a91c9e;
-  background-image: url('../../images/down-arrow.png');
-  background-repeat: no-repeat;
-  background-size: 1.5vh;
-  background-origin: content-box;
-  background-position: center left;
   height: 2.5vh;
   line-height: 2.5vh;
   vertical-align: middle;
   margin-left: auto;
   margin-right: auto;
-  padding: .5vh .5vw;
+  padding: 1vh 0.5vw 0.7vh;
   border-bottom: 3px #d553cb solid;
 }
 
@@ -232,9 +227,17 @@ div.code {
 
 .manage-header h4 {
   color: white;
-  margin-left: 2vw;
+  margin-left: 1vw;
 }
 
+.option-wrap {
+  display: none; /* eliminate loading delay */
+}
+
+.collapsebutton::before,
+.collapsebutton::after {
+  top: -0.9em;
+}
 /* notification placement for database page */
 #notifications {
   top: 19vh;

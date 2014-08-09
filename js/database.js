@@ -2,45 +2,13 @@
 $(document).ready(function() {
   $("#popup-box").hide();
   $("#notifications").hide();
-  for (var i=2; i<=4; i++) {
-    $("#manage-" + i).hide();
-  }
-  $("#header-1").click(function() {
-    $("#manage-1").slideToggle(350, function() {
-      if($(this).is(':visible')) {
-        $('#header-1').css('background-image','url(../../images/up-arrow.png)');
-      } else {
-        $('#header-1').css('background-image','url(../../images/down-arrow.png)');
-      }
-    });
+
+  // Options
+  $(".manage-item").each(function () {
+    $("#" + $(this).attr("id") + " .option-title").attr("onclick", "optionToggle('" + $(this).attr("id") + "')").addClass("collapsed");
   });
-  $("#header-2").click(function() {
-    $("#manage-2").slideToggle(350, function() {
-      if($(this).is(':visible')) {
-          $('#header-2').css('background-image','url(../../images/up-arrow.png)');
-      } else {
-          $('#header-2').css('background-image','url(../../images/down-arrow.png)');
-      }
-    });
-  });
-  $("#header-3").click(function() {
-    $("#manage-3").slideToggle(350, function() {
-      if($(this).is(':visible')) {
-          $('#header-3').css('background-image','url(../../images/up-arrow.png)');
-      } else {
-          $('#header-3').css('background-image','url(../../images/down-arrow.png)');
-      }
-    });
-  });
-  $("#header-4").click(function() {
-    $("#manage-4").slideToggle(350, function() {
-      if($(this).is(':visible')) {
-          $('#header-4').css('background-image','url(../../images/up-arrow.png)');
-      } else {
-          $('#header-4').css('background-image','url(../../images/down-arrow.png)');
-      }
-    });
-  });
+  $(".expanded").removeClass("collapsed");
+  $(".expanded").next().slideDown(0);
 
   // For closing the users popup on body click
   $('body').click(function(e) {

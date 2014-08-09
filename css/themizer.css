@@ -228,40 +228,6 @@
   border-bottom: none;
 }
 
-/**
- * Collapse option button styling
- */
-
-.collapsebutton {
-  position: relative;
-  float: right;
-}
-.collapsebutton::before,
-.collapsebutton::after {
-  content: "";
-  position: absolute;
-  top: 1em;
-  right: 0.9em;
-  width: 0.43em;
-  height: 0.2em;
-  background: #fafafa;
-  -webkit-transition: -webkit-transform 0.5s ease-in-out;
-  transition: transform 0.5s ease-in-out;
-}
-.collapsebutton::after {
-   right: 0.5em;
-}
-.expanded .collapsebutton::before,
-.collapsed .collapsebutton::after {
-  -webkit-transform: skewY(-20deg);
-  transform: skewY(-20deg);
-}
-.expanded .collapsebutton::after,
-.collapsed .collapsebutton::before {
-  -webkit-transform: skewY(20deg);
-  transform: skewY(20deg);
-}
-
 /*--INPUTS--*/
 
 .radio,
