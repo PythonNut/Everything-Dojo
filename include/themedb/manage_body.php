@@ -19,7 +19,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
   </div>
 </div>
 <div class="manage-item" id="manage-1">
-  <div class="option-title manage-header expanded" id="header-1" style="background-image: url('../../images/up-arrow.png');">
+  <div class="option-title manage-header expanded" id="header-1">
     <h4>Unapproved Themes (<?php echo count($data['unapproved']) ?>)</h4>
     <span class="collapsebutton"></span>
   </div>
