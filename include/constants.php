@@ -3,6 +3,7 @@
 	
 	/* discuss table constants */
 	define("DISCUSS_FORUM_TABLE", "discuss_forums");
+	define("DISCUSS_TOPICS_TRACK_SPECIAL_TABLE", "discuss_topics_track_special");
 	
   define("THEMEDB_TABLE", "theme_database");
   define("SITE_ROOT", "http://rebuild.everythingdojo.com/");

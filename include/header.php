@@ -53,13 +53,20 @@
     <main id="wrap">
 
       <?php
-      if (in_array($title, array("Database", "Discuss"))) {
+      if ($title == "Database") {
         echo '<header class="' . strtolower($title) . '">
         <section id="headerwrap">
           <a href="' . URL_DATABASE . '"><h1>' . $title . '</h1></a>
         </section>
       </header>';
-      } elseif ($title == "Try-It") {
+      } 
+			elseif ($title == "Discuss") {
+				echo '<header class="' . strtolower($title) . '">
+        <section id="headerwrap">
+          <a href="' . URL_DISCUSS . '"><h1>' . $title . '</h1></a>
+        </section>
+      </header>';
+			} elseif ($title == "Try-It") {
       ?>
 
       <header class="tryit">
