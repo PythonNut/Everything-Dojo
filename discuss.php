@@ -67,6 +67,9 @@
 			case '':
 				include('include/discuss/index_body.php');
 				break;
+			case 'forum':
+				include('include/discuss/forum_body.php');
+				break;
 		}
 		?>
 </section>
