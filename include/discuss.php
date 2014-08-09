@@ -11,7 +11,22 @@ class discuss {
 	
 	function get_fora($forum_id = 'all', $parent_id = 'all'){
       if ($forum_id != 'all'){
-        $query = "SELECT * FROM " . DISCUSS_FORUM_TABLE;
+        $query = "SELECT * FROM " . DISCUSS_FORUM_TABLE . " WHERE id = '".intval($forum_id)."'";
+        $sth = $this->dbc->prepare($query);
+		$sth->execute();
+		
+		$result = $sth->fetchAll(PDO::FETCH_ASSOC);
+		
+		return $result;
+      }
+      else if ($parent_id != 'all'){
+        $query = "SELECT * FROM " . DISCUSS_FORUM_TABLE . " WHERE parent = '".intval($parent_id)."'";
+        $sth = $this->dbc->prepare($query);
+		$sth->execute();
+		
+		$result = $sth->fetchAll(PDO::FETCH_ASSOC);
+		
+		return $result;
       }
       else{
 		$query = "SELECT * FROM " . DISCUSS_FORUM_TABLE;
