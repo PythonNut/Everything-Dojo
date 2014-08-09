@@ -10,6 +10,10 @@ class discuss {
   }
 	
 	function get_fora($forum_id = 'all', $parent_id = 'all'){
+      if ($forum_id != 'all'){
+        $query = "SELECT * FROM " . DISCUSS_FORUM_TABLE;
+      }
+      else{
 		$query = "SELECT * FROM " . DISCUSS_FORUM_TABLE;
 		$sth = $this->dbc->prepare($query);
 		$sth->execute();
@@ -17,6 +21,7 @@ class discuss {
 		$result = $sth->fetchAll(PDO::FETCH_ASSOC);
 		
 		return $result;
+      }
 	}
 
 	function get_topics($id, $user_id){

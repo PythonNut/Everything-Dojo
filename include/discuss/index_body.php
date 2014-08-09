@@ -1,9 +1,9 @@
 <?php
   if (empty($_GET['id'])){
-    $fora = $discuss->get_fora('0');
+    $fora = $discuss->get_fora('all', '0');
   }
   else{
-    $fora = $discuss->get_fora(intval($_GET['id']));
+    $fora = $discuss->get_fora('all', intval($_GET['id']));
   }
 ?>
 <h2 style="text-align: center;">EverythingDojo Discussion Forum</h2>
