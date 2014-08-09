@@ -27,7 +27,21 @@ class discuss {
 			':id' => $id
 		));
 		
+		$type = $sth->fetch(PDO::FETCH_ASSOC);
+		$type = $type['type'];
 		
+		// special fora
+		// 1 -> theme discussion
+		
+		if($type == 0){
+			switch($id){
+				case 1:
+					$query = "SELECT * FROM ";
+					break;
+			}
+		}
+		
+		return $result;
 	}
 
 }
