@@ -1,5 +1,9 @@
 <?php
   /*constants*/
+	
+	/* discuss table constants */
+	define("DISCUSS_FORUM_TABLE", "discuss_forums");
+	
   define("THEMEDB_TABLE", "theme_database");
   define("SITE_ROOT", "http://rebuild.everythingdojo.com/");
   define("USERS_TABLE", "users");
