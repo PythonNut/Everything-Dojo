@@ -18,9 +18,12 @@ $data = $themedb->get_mcp_styles();
     </div>
   </div>
 </div>
-<div class="manage-item">
-  <div class="manage-header" id="header-1" style="background-image: url('../../images/up-arrow.png');"><h4>Unapproved Themes (<?php echo count($data['unapproved']) ?>)</h4></div>
-  <div id="manage-1">
+<div class="manage-item" id="manage-1">
+  <div class="option-title manage-header expanded" id="header-1">
+    <h4>Unapproved Themes (<?php echo count($data['unapproved']) ?>)</h4>
+    <span class="collapsebutton"></span>
+  </div>
+  <div class="option-wrap">
     <table class="manage-table">
       <thead style="border-bottom: 1px black solid;">
         <tr>
@@ -63,9 +66,12 @@ $data = $themedb->get_mcp_styles();
     </table>
     </div>
 </div>
-<div class="manage-item">
-  <div class="manage-header" id="header-2" style="background-image: url('../../images/up-arrow.png');"><h4>Validate Requests (<?php echo count($data['validate_request']) ?>)</h4></div>
-  <div id="manage-2">
+<div class="manage-item" id="manage-2">
+  <div class="option-title manage-header expanded" id="header-2">
+    <h4>Validate Requests (<?php echo count($data['validate_request']) ?>)</h4>
+    <span class="collapsebutton"></span>
+  </div>
+  <div class="option-wrap">
     <table class="manage-table">
       <thead style="border-bottom: 1px black solid;">
         <tr>
