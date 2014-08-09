@@ -241,10 +241,9 @@ function themizer () {
     $("#" + id + " .option-title").attr("onclick", "optionToggle('" + id + "')").addClass("collapsed");
   });
 
-  // set first option to be open
-  var firstop = $(".option:first-of-type").attr('id');
-  $("#" + firstop + " .option-title").removeClass("collapsed").addClass("expanded");
-  $("#" + firstop + " .option-wrap").slideDown(0);
+  // set all options with class `expanded` to be open
+  $(".expanded").removeClass("collapsed");
+  $(".expanded").next().slideDown(0);
 
   // view mode radios
   $("[name='view']").change(function () {
