@@ -152,12 +152,17 @@
   height: 100%;
   top: 0;
   background: #212121;
+  color: #aaa;
+  line-height: 100vh;
+  text-indent: 0.1em;
+  vertical-align: middle;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
 .closed #side-button {
   height: 5vh;
   top: 47.5vh;
+  line-height: 5vh;
   border-radius: 0 0.3em 0.3em 0;
   background: #101010;
 }
@@ -179,6 +184,8 @@
   top: 0;
   height: 100vh;
   width: 4vh;
+  line-height: 100vh;
+  text-indent: 0.5em;
   border-radius: 0;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;

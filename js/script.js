@@ -75,7 +75,7 @@ Array.prototype.last = function(nth) {
     var sideWidth = $("#sidebar").width();
 
     // add open/hide button
-    $("#sidebar").append("<div id=\"side-button\" class=\"slideButton right\"></div>");
+    $("#sidebar").append("<div id=\"side-button\" class=\"slideButton right\">&laquo;</div>");
 
     // sidebar is opened at first
     var openSide = true;
@@ -91,7 +91,8 @@ Array.prototype.last = function(nth) {
           $(this).removeClass("opened").addClass("closed");
         });
 
-        $(this).animate({
+        $(this).html("&raquo;")
+               .animate({
           left: sideWidth
         }, 400);
 
@@ -102,7 +103,8 @@ Array.prototype.last = function(nth) {
           left: 0
         }, 400);
 
-        $(this).animate({
+        $(this).html("&laquo;")
+               .animate({
           left: sideWidth
         }, 400);
 
