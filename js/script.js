@@ -217,7 +217,7 @@ function themizer () {
   var vh = $(window).height()/100;
 
   // find width of sidebar and of sideButton
-  var sideWidth       = 35*vh,
+  var sideWidth       = 32*vh,
       sideButtonWidth =  2*vh;
 
   // set whether user is active or not for later
@@ -228,7 +228,7 @@ function themizer () {
    * FUNCTIONS *
    *************/
   // Set sidebar styles
-  $("#sidebar")      .css("font-size", 2.22*vh);
+  $("#sidebar")      .css("font-size", 2*vh);
   $("#sidebar-inner").width(sideWidth);
   $("#side-button").css("left", sideWidth);
 
@@ -259,7 +259,7 @@ function themizer () {
   $("#side-resizer").mousedown(function () {
     $(document).mousemove(function (event) { // use document to avoid conflict with sideButton
       var mousePosX = event.pageX;
-      sideWidth = mousePosX > 35*vh ? mousePosX : sideWidth; // set original width as minimum
+      sideWidth = mousePosX > 32*vh ? mousePosX : sideWidth; // set original width as minimum
       $("#sidebar-inner").width(sideWidth);
       // move sideButton and remove transitions as they screw the former up
       $("#side-button").css({
