@@ -9,7 +9,7 @@ class discuss {
     $this->dbc = $dbc;
   }
 	
-	function get_fora(){
+	function get_fora($forum_id = 'all', $parent_id = 'all'){
 		$query = "SELECT * FROM " . DISCUSS_FORUM_TABLE;
 		$sth = $this->dbc->prepare($query);
 		$sth->execute();

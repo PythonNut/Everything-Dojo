@@ -43,3 +43,4 @@ error_log
 
 include/db.php
 include/creds.php
+include/header.php
