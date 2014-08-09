@@ -8,8 +8,8 @@
     <meta charset="utf-8">
     <link href="/images/favicon.ico" rel="shortcut icon">
     <?php if ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)" && $title != "Try-It") { ?>
-    <link href="/css/normalize.css" type="text/css" rel="stylesheet">
-    <link href="/css/style.css" type="text/css" rel="stylesheet">
+    <link href="css/normalize.css" type="text/css" rel="stylesheet">
+    <link href="css/style.css" type="text/css" rel="stylesheet">
     <?php } ?>
     <?php global $extra_style; print $extra_style; ?>
 
