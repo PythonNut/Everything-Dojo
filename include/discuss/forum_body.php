@@ -23,7 +23,7 @@
     <table class="discuss-table">
       <thead style="border-bottom: 1px black solid;">
         <tr>
-          <td>Topics</td>
+          <td>Topic</td>
           <td class="med-col">Author</td>
           <td class="small-col">Comments</td>
           <td class="small-col">Views</td>
@@ -35,7 +35,7 @@
 			if(count($topics) == 0){
 			?>
       	<tr style="cursor:pointer;">
-        	<td>No topics</td>
+          <td>No topics</td>
           <td>-</td>
           <td>-</td>
           <td>-</td>

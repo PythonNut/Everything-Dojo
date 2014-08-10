@@ -3,11 +3,23 @@
   include("include/include.php");
   include("include/discuss.php");
   session_start();
+  /*
+  $_SESSION['user_id']= 7;
+  $_SESSION['user_name'] = 'encadyma';
+  $_SESSION['user_level'] = 5;
+  $_SESSION['HTTP_USER_AGENT'] = md5($_SERVER['HTTP_USER_AGENT']);*/
   $extra_style = "<link rel=\"stylesheet\" href=\"css/discuss.css\" />";
   get_header();
   $view = $_GET['view'];
 ?>
 <section id="content">
+  <?php if (!empty($_SESSION['user_id'])){ ?>
+  <h3>Welcome, <?php echo $discuss->get_user($_SESSION['user_id'])['user_name'];?>!</h3>
+  <br/>
+  <?php } else{ ?>
+  <h3>Hello Guest. Please <a href="login.php">sign in</a>.</h3>
+  <br/>
+  <?php } ?>
   <?php 
     $result = $dbc->prepare("SELECT data FROM data WHERE fetchname = 'announcements'");
     $result->execute();
@@ -75,11 +87,10 @@
     <?php
     switch($view){
       case '':
-				echo '<a href="' . URL_DISCUSS. '">Back to Discuss Index</a>';
         include('include/discuss/index_body.php');
         break;
       case 'forum':
-				echo '<a href="' . URL_DISCUSS. '">Back to Discuss Index</a>';
+        echo '&laquo; <a href="' . URL_DISCUSS. '">Back to Discuss Index</a>';
         include('include/discuss/forum_body.php');
         break;
       case 'topic':

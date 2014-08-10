@@ -22,12 +22,13 @@
   <h1 style="text-align:center;"><?php echo $topic['title'];?></h1>
   <div id="topic-main">
     <div id="topic-main-text">
+      <?php $user = $discuss->get_user(intval($topic['user_id']))['user_name'];?>
       <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $topic['title'];?></h2>
       <div style="display:inline-block; opacity: 0.6;">Posted by <?php echo $user;?> on <?php echo date('D M d, Y g:i a', $topic['time']);?></div>
       <p><?php echo $topic['text'];?></p>
     </div>
   </div>
-  
+  <?php var_export($topic);?>
   <?php if (!empty($posts)){ ?>
   <?php var_export($posts);?>
     <?php foreach ($posts as $post){?>
