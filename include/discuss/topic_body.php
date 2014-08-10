@@ -45,7 +45,7 @@
           <div class="topic-reply-top">
             <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $post['title'];?></h2>
             <div style="display:inline-block; opacity: 0.6;">
-              Posted by <?php echo $user['user_name'];?> on <?php echo date('m/d/Y, H:i:s', $post['time']);?></div>
+              Posted by <?php echo $user['user_name'];?> on <?php echo date('D M d, Y g:i a', $post['time']);?></div>
             <?php if ($_SESSION['user_id'] > 0){ ?>
             <div class="topic-reply-thanks">&uarr; &nbsp;&nbsp;<?php $thanks = $discuss->thanks($post['post_id'], $mode = 1, $user_id = $_SESSION['user_id']); echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div>
             <?php }?>

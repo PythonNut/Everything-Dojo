@@ -174,6 +174,7 @@ td.small-col{
 .topic-reply-thanks{
   display: inline-block;
   height: 30px;
+  margin-left: 1em;
   width: 30px;
   border: 1px solid black;
   text-align: center;
@@ -230,6 +231,9 @@ td.small-col{
   border-top: 0px solid white;
 }
 .topic-reply-top{
-  background-color: #000000;
-  color: #FFFFFF;
+  padding: 0.5em 1em;
+}
+.topic-reply p{
+  padding: 0em 1.5em;
+  padding-bottom: 0.5em;
 }
