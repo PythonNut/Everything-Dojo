@@ -3,7 +3,7 @@
   include("include/include.php");
   $extra_js = "<script src=\"js/index.js\"></script>";
   session_start();
-  
+
   if($_SESSION['user_id'] != NULL) {
     $unread_count = $notification->count_unread($_SESSION['user_id']);
     $notification_data = $notification->get_notifications($_SESSION['user_id']);
@@ -12,11 +12,7 @@
   get_header(0, $unread_count);
 ?>
 <section id="content">
-  <?php if(!empty($_GET['msg']))  {
-    echo "<p class=\"msg\">" . filter($_GET['msg']) . "</p>";
-  } ?>
-  
-<div id="notifications">
+  <div id="notifications">
     <div class="notification-arrow-up"></div>
     <div id="notification-body">
       <div id="notification-header">
@@ -56,7 +52,12 @@
         <a href="notifications.php">See All</a>
       </div>
     </div>
-  </div>  
+  </div>
+
+  <?php if(!empty($_GET['msg']))  {
+    echo "<p class=\"msg\">" . filter($_GET['msg']) . "</p>";
+  } ?>
+
   <section id="index-inner">
     <section class="index-row">
 
