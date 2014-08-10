@@ -91,6 +91,13 @@
   border: 1px solid #5dc350;
   margin: 10px;
   cursor: pointer;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+.linkbutton:hover {
+  background-color: #41962c;
+  border-color: #40902a;
+  color: #fafafa;
 }
 
 /*--HEADER--*/
@@ -103,7 +110,7 @@
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
   font-size: 2.7em;
   line-height: 1.6em;
-  color: white;
+  color: #fafafa;
   text-transform: uppercase;
   text-align: center;
   margin-bottom: 0.5em;

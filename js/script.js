@@ -381,7 +381,7 @@ function themizer () {
         el     = id[1].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("class_", ".").replace("id_", "#"),
         prop   = id[2].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase();
     $(el).css(prop, color);
-    $(picker.spectrum("set", color));
+    $(picker).spectrum("set", color);
 
     // update styles
     styles[id[1] + "-" + id[2]] = color;
