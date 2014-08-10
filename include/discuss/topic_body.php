@@ -14,6 +14,13 @@
       $posts = $discuss->get_posts(intval($_GET['t']), 'all', 0);
     }
   }
+  if (!empty($_SESSION['user_id'])){
+    $type = 0;
+    if ($_GET['f'] == 1){
+      $type = 1;
+    }
+    $discuss->view_topic(intval($_GET['t']), $type, intval($_SESSION['user_id']));
+  }
 ?>
 
 <?php if (!empty($topic) and (!empty($topic['title']))){ ?>

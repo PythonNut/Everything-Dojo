@@ -84,6 +84,24 @@ class discuss {
 		$view_array = array_unique($result);
 		return count($view_array);
 	}
+    function view_topic($id, $type, $user_id){
+        if (empty($user_id)){
+          return false;
+        }
+		if($type == 1){
+			$query = "INSERT INTO ".DISCUSS_TOPICS_TRACK_SPECIAL_TABLE." (`user_id`, `style_id`, `timestamp`) VALUES (:user, :id, :time);";
+		}
+		else{
+			$query = "INSERT INTO ".DISCUSS_TOPICS_TRACK_TABLE." (`user_id`, `style_id`, `timestamp`) VALUES (:user, :id, :time);";
+		}
+		$sth = $this->dbc->prepare($query);
+		$result = $sth->execute(array(
+			':id' => intval($id),
+            ':user' => intval($user_id),
+            ':time' => intval(time())
+		));
+		return $result;
+	}
 
 	// get topics for view page
 	function get_topics($id, $user_id){
