@@ -17,17 +17,18 @@
   }
 ?>
 
-<?php if (!empty($topic)){ ?>
+<?php if (!empty($topic) and (!empty($topic['title']))){ ?>
 
 <section id="topic">
+  <h1 style="text-align:center;"><?php echo $topic['title'];?></h1>
   <div id="topic-main">
     <div id="topic-main-text">
       <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $topic['title'];?></h2>
       <div style="display:inline-block; opacity: 0.6;">Posted by <?php echo $user;?> on <?php echo date('D M d, Y g:i a', $topic['time']);?></div>
-      <p><?php echo $topic['description'];?></p>
+      <p><?php echo $topic['text'];?></p>
     </div>
   </div>
-  <?php if (!empty($posts)){ var_export($posts); ?>
+  <?php if (!empty($posts)){ ?>
     <?php foreach ($posts as $post){?>
       <div class="topic-reply">
         <div class="topic-reply-text">
@@ -48,4 +49,7 @@
   <?php } ?>
 </section>
 
-<?php } ?>
+<?php } else{
+  echo "<h1 style='text-align:center;'>Topic Not Found</h1>";
+  echo "<p style='text-align:center;'>The topic you were looking for is not found. Don't worry, though; Try going <a href='discuss.php'>back to Discuss home page</a> or try our other services!</p>";
+}?>
