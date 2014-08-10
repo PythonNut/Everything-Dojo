@@ -75,10 +75,11 @@
     <?php
     switch($view){
       case '':
+				echo '<a href="' . URL_DISCUSS. '">Back to Discuss Index</a>';
         include('include/discuss/index_body.php');
         break;
       case 'forum':
-        include('include/discuss/index_body.php');
+				echo '<a href="' . URL_DISCUSS. '">Back to Discuss Index</a>';
         include('include/discuss/forum_body.php');
         break;
       case 'topic':
