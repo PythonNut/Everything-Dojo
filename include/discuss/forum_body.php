@@ -1,16 +1,16 @@
 <?php
-	$id = $_GET['id'];
-	if($id == ''){
-		redirect(URL_DISCUSS);
-	}
-	else{
-		if(!isset($_SESSION['user_id'])){
-			$user_id = 0;
-		}
-		else{
-			$user_id = $_SESSION['user_id'];
-		}
-		$topics = $discuss->get_topics(intval($id), $user_id);
+  $id = $_GET['id'];
+  if($id == ''){
+    redirect(URL_DISCUSS);
+  }
+  else{
+    if(!isset($_SESSION['user_id'])){
+      $user_id = 0;
+    }
+    else{
+      $user_id = $_SESSION['user_id'];
+    }
+    $topics = $discuss->get_topics(intval($id), $user_id);
   }
   ?>
 
