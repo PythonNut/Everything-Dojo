@@ -37,9 +37,7 @@
       <p><?php echo $topic['text'];?></p>
     </div>
   </div>
-  <?php var_export($topic);?>
   <?php if (!empty($posts)){ ?>
-  <?php var_export($posts);?>
     <?php foreach ($posts as $post){?>
       <div class="topic-reply">
         <div class="topic-reply-text">
@@ -59,7 +57,10 @@
     <?php } ?>
   <?php } ?>
 </section>
+<a href="#topic-create-comment">+ Add a comment</a>
+<form id="topic-create-comment">
 
+</form>
 <?php } else{
   echo "<h1 style='text-align:center;'>Topic Not Found</h1>";
   echo "<p style='text-align:center;'>The topic you were looking for is not found. Don't worry, though; Try going <a href='discuss.php'>back to Discuss home page</a> or try our other services!</p>";

@@ -173,7 +173,6 @@ td.small-col{
 }
 .topic-reply-thanks{
   display: inline-block;
-  margin: 1em;
   height: 30px;
   width: 30px;
   border: 1px solid black;
@@ -204,7 +203,7 @@ td.small-col{
 }
 #topic-main{
   border: 1px solid black;
-  border-radius: 5px;
+  border-radius: 5px 0px 0px 5px;
   padding: 1em 1em;
 }
 #discuss-topic-header{
@@ -220,15 +219,17 @@ td.small-col{
   border: 2px solid black;
   background-position: center;
   cursor: pointer;
-  -webkit-filter: grayscale(1);
-  filter: grayscale(1);
   -webkit-transition: all 500ms ease;
   transition: all 500ms ease;
 }
-#discuss-topic-header:hover{
-  background-size: 120% 120%;
-  -webkit-filter: grayscale(0);
-  filter: grayscale(0);
-  -webkit-transition: all 500ms ease;
-  transition: all 500ms ease;
+.topic-reply{
+  border: 1px solid black;
+  border-radius: 0px;
+  margin-left: 2em; 
+  border-left: 5px solid #0000FF;
+  border-top: 0px solid white;
+}
+.topic-reply-top{
+  background-color: #000000;
+  color: #FFFFFF;
 }
