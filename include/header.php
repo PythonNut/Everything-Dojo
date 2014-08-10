@@ -35,7 +35,8 @@
 
   <body>
 
-    <?php if (!in_array($title, array(
+    <?php 
+    if (!in_array($title, array(
         "Home",
         "About",
         "Account Activation",
