@@ -11,34 +11,67 @@ class discuss {
 	
 	function get_fora($forum_id = 'all', $parent_id = 'all'){
       if ($forum_id != 'all'){
-        $query = "SELECT * FROM " . DISCUSS_FORUM_TABLE . " WHERE id = '".intval($forum_id)."'";
+        $query = "SELECT * FROM " . DISCUSS_FORUM_TABLE . " WHERE `id` = :id";
         $sth = $this->dbc->prepare($query);
-		$sth->execute();
+				$sth->execute(array(
+					':id' => $forum_id
+				));
 		
-		$result = $sth->fetchAll(PDO::FETCH_ASSOC);
+				$result = $sth->fetch(PDO::FETCH_ASSOC);
 		
-		return $result;
+				return $result;
       }
       else if ($parent_id != 'all'){
-        $query = "SELECT * FROM " . DISCUSS_FORUM_TABLE . " WHERE parent = '".intval($parent_id)."'";
+        $query = "SELECT * FROM " . DISCUSS_FORUM_TABLE . " WHERE `parent` = :id";
         $sth = $this->dbc->prepare($query);
-		$sth->execute();
+				$sth->execute(array(
+					':id' => $forum_id
+				));
 		
-		$result = $sth->fetchAll(PDO::FETCH_ASSOC);
+				$result = $sth->fetchAll(PDO::FETCH_ASSOC);
 		
-		return $result;
+				return $result;
       }
       else{
-		$query = "SELECT * FROM " . DISCUSS_FORUM_TABLE;
-		$sth = $this->dbc->prepare($query);
-		$sth->execute();
-		
-		$result = $sth->fetchAll(PDO::FETCH_ASSOC);
-		
-		return $result;
+				$query = "SELECT * FROM " . DISCUSS_FORUM_TABLE;
+				$sth = $this->dbc->prepare($query);
+				$sth->execute();
+				
+				$result = $sth->fetchAll(PDO::FETCH_ASSOC);
+				
+				return $result;
       }
 	}
 
+	// get count of all posts in topic
+	function get_comment_count($topic_id, $type){
+		if($type == 0){
+			$query = "SELECT COUNT(*) FROM `" . DISCUSS_POSTS_SPECIAL_TABLE . "` WHERE `style_id` = :topic_id";
+			$sth = $this->dbc->prepare($query);
+			$sth->execute(array(
+				':topic_id' => $topic_id
+			));
+
+			$count = $sth->fetchColumn();
+		}
+		else{
+			$query = "SELECT COUNT(*) FROM `" . DISCUSS_POSTS_TABLE . "` WHERE `topic_id` = :topic_id";
+			$sth = $this->dbc->prepare($query);
+			$sth->execute(array(
+				':topic_id' => $topic_id
+			));			
+			
+			$count = $sth->fetchColumn();
+		}
+		
+		return $count;
+	}
+
+	// get views
+	function get_view(){
+	}
+
+	// get topics for view page
 	function get_topics($id, $user_id){
 		// make sure the type is not special
 		$query = "SELECT `type` FROM " . DISCUSS_FORUM_TABLE . " WHERE `id` = :id";
@@ -53,11 +86,12 @@ class discuss {
 		// special fora
 		if($type == 0){
 			if($id == 1){
-					$query = "SELECT `id` AS `topic_id`, `name` AS `title`, `description` FROM `" . THEMEDB_TABLE . "`";
+					$query = "SELECT `id` AS `topic_id`, `submitted_by_id` AS `user_id`, `name` AS `title` FROM `" . THEMEDB_TABLE . "`";
 					$sth = $this->dbc->prepare($query);
 					$sth->execute();			
 					$result = $sth->fetchAll(PDO::FETCH_ASSOC);
-					foreach($result as $row){
+					for($i=0;$i<count($result);$i++){
+						// check if user viewed
 						$query = "SELECT COUNT(*) FROM `" . DISCUSS_TOPICS_TRACK_SPECIAL_TABLE . "` WHERE `style_id` = :id AND `user_id` = :user_id";
 						$sth = $this->dbc->prepare($query);
 						$sth->execute(array(
@@ -66,22 +100,53 @@ class discuss {
 						));						
 						$count = $sth->fetchColumn();
 						if($count == 0){
-							$row['read'] = 0;
+							$result[$i]['read'] = 0;
 						}
 						else{
-							$row['read'] = 1;
+							$result[$i]['read'] = 1;
 						}
+						
+						// find comment count
+						$result[$i]['comment_count'] = $this->get_comment_count($result[$i]['topic_id'], $type);
 					}
+			}
+			else{
+				// other ids here
 			}
 		}
 		else{
-          
+    	$query = "SELECT * FROM `" . DISCUSS_TOPIC_TABLE . "` WHERE `forum_id` = :id";
+			$sth = $this->dbc->prepare($query);
+			$sth->execute(array(
+				':id' => $id
+			));      
+			$result = $sth->fetchAll(PDO::FETCH_ASSOC);
+			
+			for($i=0;$i<count($result);$i++){
+				// check if user viewed
+				$query = "SELECT COUNT(*) FROM `" . DISCUSS_TOPICS_TRACK_TABLE . "` WHERE `style_id` = :id AND `user_id` = :user_id";
+				$sth = $this->dbc->prepare($query);
+				$sth->execute(array(
+					':id' 			=> $row['id'],
+					':user_id'	=> $user_id
+				));						
+				$count = $sth->fetchColumn();
+				if($count == 0){
+					$result[$i]['read'] = 0;
+				}
+				else{
+					$result[$i]['read'] = 1;
+				}				
+				
+				// find comment count
+				$result[$i]['comment_count'] = $this->get_comment_count($row['id'], $type);
+			}
 		}
 		
 		return $result;
 	}
 	
-   //get specific topic
+  // get specific topic
   function get_topic($topic_id, $type = 0){
 		if($type == 1){
 			//get style alone
