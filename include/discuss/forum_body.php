@@ -22,7 +22,7 @@
         <tr>
           <td class="small-col">Title</td>
           <td class="med-col">Description</td>
-          <td class="small-col">View Count</td>
+          <td class="small-col">Category</td>
           <td class="small-col">Posts</td>
         <tr>
       </thead>
@@ -31,7 +31,7 @@
         <tr style="cursor:pointer;" onclick="window.location.href='<?php echo URL_DISCUSS; ?>?view=topic&f=<?php echo intval($id); ?>&t=<?php echo $topic['topic_id']; ?>'">
           <td><?php echo $topic['title'];?></td>
           <td><?php echo shorten_desc($topic['description'],0,100);?></td>
-          <td><?php echo $topic['views'];?></td>
+          <td><?php echo $discuss->get_fora(intval($id))[0]['name']." > ".$topic['title'];?></td>
           <td></td>
         </tr>
       <?php } ?>

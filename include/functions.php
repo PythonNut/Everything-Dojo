@@ -21,6 +21,7 @@
       exit();
     }
   }
+
   function get_user($user_id){
 		global $dbc;
 		
