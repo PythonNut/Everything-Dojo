@@ -1,5 +1,5 @@
 <?php
-  $id = $_GET['id'];
+  $id = $_GET['f'];
   if($id == ''){
     redirect(URL_DISCUSS);
   }
@@ -12,30 +12,52 @@
     }
     $topics = $discuss->get_topics(intval($id), $user_id);
   }
-  ?>
 
-<?php if (!empty($topics)){?>
+	$forum_data = $discuss->get_fora($id);
+	$type = $forum_data['type'];
+?>
+
 <section id="discuss-topics" style="clear:left;">
-  <h3 style="text-align: center;">Topics</h3>
+  <h3 style="text-align: center;"><?php echo $forum_data['name']; ?></h3>
+  <p style="text-align: center;"><?php echo $forum_data['description']; ?></p>
     <table class="discuss-table">
       <thead style="border-bottom: 1px black solid;">
         <tr>
-          <td class="small-col">Title</td>
-          <td class="med-col">Description</td>
-          <td class="small-col">Category</td>
-          <td class="small-col">Posts</td>
+          <td>Topics</td>
+          <td class="med-col">Author</td>
+          <td class="small-col">Comments</td>
+          <td class="small-col">Views</td>
+          <td class="med-col">Last View</td> 
         <tr>
       </thead>
       <tbody>
-      <?php foreach($topics as $topic){ ?>
+      <?php
+			if(count($topics) == 0){
+			?>
+      	<tr style="cursor:pointer;">
+        	<td>No topics</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+        </tr>
+      <?php
+			}
+			foreach($topics as $topic){ 
+				$username = get_user($topic['user_id']);
+				$comments = $topic['comment_count'];
+				if($type == 1){
+					$comments = $comments - 1;
+				}
+			?>
         <tr style="cursor:pointer;" onclick="window.location.href='<?php echo URL_DISCUSS; ?>?view=topic&f=<?php echo intval($id); ?>&t=<?php echo $topic['topic_id']; ?>'">
           <td><?php echo $topic['title'];?></td>
-          <td><?php echo shorten_desc($topic['description'],0,100);?></td>
-          <td><?php echo $discuss->get_fora(intval($id))[0]['name']." > ".$topic['title'];?></td>
+          <td><?php echo $username; ?></td>
+          <td><?php echo $comments; ?></td>
+          <td></td>
           <td></td>
         </tr>
       <?php } ?>
       </tbody>
     </table>
 </section>
-<?php } ?>

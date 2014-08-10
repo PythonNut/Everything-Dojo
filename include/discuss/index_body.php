@@ -6,7 +6,7 @@
   <?php
   foreach($fora as $forum){
   ?>
-  <a href="<?php echo URL_DISCUSS; ?>?view=forum&id=<?php echo $forum['id']; ?>">
+  <a href="<?php echo URL_DISCUSS; ?>?view=forum&f=<?php echo $forum['id']; ?>">
 	<section class="discuss-fora">
   	<div class="discuss-arrow-up"></div>
 		<div class="discuss-fora-text">
