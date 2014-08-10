@@ -80,8 +80,16 @@ class discuss {
 			':id' => $id
 		));
 		$result = $sth->fetchAll(PDO::FETCH_ASSOC);
-
-		$view_array = array_unique($result);
+		$view_array = array();
+        foreach($result as $user){
+          if (in_array($user,$view_array)){
+            continue;
+          }
+          else{
+            $view_array[] = $user;
+            continue;
+          }
+        }
 		return count($view_array);
 	}
     function view_topic($id, $type, $user_id){
@@ -208,7 +216,8 @@ class discuss {
           'time' => 1388534400,
           'last_timestamp' => 1388534400,       //dojo what is this
           'text' => $style['description'],
-          'topic_id' => intval($topic_id)
+          'topic_id' => intval($topic_id),
+          'photo_attach' => $style['screenshot']
         );
         return $result;
       }
