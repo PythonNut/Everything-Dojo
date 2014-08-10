@@ -26,7 +26,9 @@
 <?php if (!empty($topic) and (!empty($topic['title']))){ ?>
 <a href="<?php echo URL_DISCUSS; ?>?view=forum&f=<?php echo intval($topic['forum_id']);?>">&laquo; Back to <?php echo $discuss->get_fora(intval($topic['forum_id']))['name'];?></a>
 <section id="topic">
-  <h1 style="text-align:center;"><?php echo $topic['title'];?></h1>
+  <div id="discuss-topic-header">
+    <h1 style="text-align:center;"><?php echo $topic['title'];?></h1>
+  </div>
   <div id="topic-main">
     <div id="topic-main-text">
       <?php $user = $discuss->get_user(intval($topic['user_id']))['user_name'];?>

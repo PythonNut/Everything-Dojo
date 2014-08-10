@@ -213,7 +213,7 @@ class discuss {
         //export result
         $result = array(
           'forum_id' => 1,
-          'user_id' => intval($style['id']),
+          'user_id' => intval($style['submitted_by_id']),
           'title' => $style['name'],
           'time' => 1388534400,
           'last_timestamp' => 1388534400,       //dojo what is this
