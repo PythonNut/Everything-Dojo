@@ -191,6 +191,8 @@ class discuss {
 		
 		return $result;
 	}
+  
+    //this is used heavily in Discuss, so just keep this.
     function get_user($user_id){
       $query ="SELECT * FROM users WHERE id = :id";
       $sth = $this->dbc->prepare($query);
