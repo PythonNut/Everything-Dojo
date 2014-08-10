@@ -29,8 +29,8 @@
     <section id="sidebar-inner-scrollable">
 
       <section class="option" id="option-view">
-        <section class="option-title expanded">
-          <h5>Blog View</h5>
+        <section class="option-title">
+          <h5>Blog Page</h5>
           <span class="collapsebutton"></span>
         </section>
         <section class="option-wrap">
@@ -57,7 +57,7 @@
       </section>
 
       <section class="option" id="option-body">
-        <section class="option-title">
+        <section class="option-title expanded">
           <h5>Body</h5>
           <span class="collapsebutton"></span>
         </section>
