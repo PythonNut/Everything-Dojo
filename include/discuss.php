@@ -88,6 +88,27 @@ class discuss {
 		
 		return $result;
 	}
+    //get specific topic
+    function get_topic($topic_id){
+      $query = "SELECT * FROM " . DISCUSS_TOPIC_TABLE . " WHERE `id` = :id";
+      $sth = $this->dbc->prepare($query);
+      $sth->execute(array(
+		':id' => $topic_id
+      ));
+      $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+      return $result;
+    }
+    //get posts from topic with id ($topic_id) [optional: also gets posts from user with id ($user_id)]
+    function get_posts($topic_id = 'all', $user_id = 'all'){
+      if ($topic_id != 'all'){
+        if ($topic_id == 1){
+          $query = "SELECT * FROM " . DISCUSS_TOPIC_TABLE . " WHERE `id` = 1";
+        }
+      }
+      if ($user_id != 'all'){
+        
+      }
+    }
 
 }
 $discuss = new discuss($dbc);

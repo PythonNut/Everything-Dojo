@@ -4,7 +4,7 @@
     exit("404 topic not found: we couldn't find your topic because it doesn't exist. Don't worry, though; Try going <a href='discuss.php'>back to Discuss home page</a> or try our other services!");
   }
   else{
-    $topic = $discuss->get_topics(intval($_GET['id']))[0];
+    $topic = $discuss->get_topic(intval($_GET['id']))[0];
     $posts = $discuss->get_posts(intval($_GET['id']));
     $discuss->view_topic(intval($_GET['id']));
   }
