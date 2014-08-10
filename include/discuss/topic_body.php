@@ -13,12 +13,11 @@
       $topic = $discuss->get_topic(intval($_GET['t']))[0];
       $posts = $discuss->get_posts(intval($_GET['t']), 'all', 0);
     }
-
   }
 ?>
 
 <?php if (!empty($topic) and (!empty($topic['title']))){ ?>
-
+<a href="<?php echo URL_DISCUSS; ?>?view=forum&f=<?php echo intval($topic['forum_id']);?>">&laquo; Back to <?php echo $discuss->get_fora(intval($topic['forum_id']))['name'];?></a>
 <section id="topic">
   <h1 style="text-align:center;"><?php echo $topic['title'];?></h1>
   <div id="topic-main">
@@ -28,7 +27,9 @@
       <p><?php echo $topic['text'];?></p>
     </div>
   </div>
+  
   <?php if (!empty($posts)){ ?>
+  <?php var_export($posts);?>
     <?php foreach ($posts as $post){?>
       <div class="topic-reply">
         <div class="topic-reply-text">
