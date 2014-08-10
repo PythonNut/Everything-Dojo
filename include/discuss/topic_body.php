@@ -5,13 +5,14 @@
   }
   else{
     //check if special
-    if ($_GET['t'] == 2){
-      $topic = $discuss->get_topic(intval($_GET['f']), 1)[0];
+    if ($_GET['f'] == 1){
+      $topic = $discuss->get_topic(intval($_GET['t']), 1);
+      var_export($topic);
     }
     else{
-      $topic = $discuss->get_topic(intval($_GET['f']))[0];
+      $topic = $discuss->get_topic(intval($_GET['t']))[0];
     }
-    $posts = $discuss->get_posts(intval($_GET['f']));
+    $posts = $discuss->get_posts(intval($_GET['t']));
   }
 ?>
 
@@ -20,7 +21,7 @@
 <section id="topic">
   <div id="topic-main">
     <div id="topic-main-text">
-      <?php $user = $discuss->get_user($topic['user_id']);?>
+      <?php $user = get_user($topic['user_id']);?>
       <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $topic['title'];?></h2>
       <div style="display:inline-block; opacity: 0.6;">Posted by <?php echo $user['user_name'];?> on <?php echo date('m/d/Y, H:i:s', $topic['time']);?></div>
       <p><?php echo $topic['description'];?></p>
