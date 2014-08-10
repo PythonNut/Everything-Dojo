@@ -165,6 +165,13 @@ class discuss {
 		
 		return $result;
 	}
+    function get_user($user_id){
+      $query ="SELECT * FROM users WHERE id = :id";
+      $sth = $this->dbc->prepare($query);
+      $sth->execute(array(':id' => intval($user_id)));   
+      $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+      return $result[0];
+    }
     //get specific topic
     function get_topic($topic_id, $type = 0){
       if ($type == 1){
@@ -183,7 +190,7 @@ class discuss {
         ));
         $style_fix = $sth->fetchAll(PDO::FETCH_ASSOC)[0];
         
-        //check if patch is empty, if not then replace with tmp
+        //check if patch is empty, if so then replace with tmp
         if (empty($style_fix)){
           $style_fix = array(
             'user_id' => intval($style['submitted_by_id']),
