@@ -83,7 +83,7 @@ class themedb {
   * $data: The data from the form
   */
   function edit_theme($data){
-    $query = "UPDATE `" . THEMEDB_TABLE . "` SET `name` = :name, `description` = :description, `code` = :code, `stage` = :stage, `author` = :author, `screenshot` = :screenshot, `version` = :version WHERE `id` = :id";
+    $query = "UPDATE `" . THEMEDB_TABLE . "` SET `name` = :name, `description` = :description, `code` = :code, `stage` = :stage, `author` = :author, `screenshot` = :screenshot, `version` = :version, `last_timestamp` = :last WHERE `id` = :id";
     $sth = $this->dbc->prepare($query);
 
     $sth->execute(array(
@@ -94,7 +94,8 @@ class themedb {
       ':author'            => strip_tags($data['author']),
       ':screenshot'        => strip_tags($data['screenshot']),
       ':version'          => strip_tags($data['version']),
-      ':id'                => strip_tags($data['id'])
+      ':id'                => strip_tags($data['id']),
+			':last'							=> time()
     ));
 
     return $data['id'];
@@ -106,7 +107,7 @@ class themedb {
   * $data: The data from the form
   */
   function submit_theme($data){
-    $query = "INSERT INTO `" . THEMEDB_TABLE . "` (`id`, `approved`, `validated`, `validate_request`, `name`, `description`, `code`, `stage`, `author`, `screenshot`, `version`, `submitted_by`, `submitted_by_id`, `owner`, `owner_id`) VALUES (NULL, 0, 0, 0, :name, :description, :code, :stage, :author, :screenshot, :version, :submitted_by, :submitted_by_id, NULL, NULL)";
+    $query = "INSERT INTO `" . THEMEDB_TABLE . "` (`id`, `approved`, `validated`, `validate_request`, `name`, `description`, `code`, `stage`, `author`, `screenshot`, `version`, `submitted_by`, `submitted_by_id`, `owner`, `owner_id`, `timestamp`) VALUES (NULL, 0, 0, 0, :name, :description, :code, :stage, :author, :screenshot, :version, :submitted_by, :submitted_by_id, NULL, NULL, :time)";
     $sth = $this->dbc->prepare($query);
 
     $sth->execute(array(
@@ -118,7 +119,8 @@ class themedb {
       ':screenshot'        => strip_tags($data['screenshot']),
       ':version'          => strip_tags($data['version']),
       ':submitted_by'      => strip_tags($data['submitted_by']),
-      ':submitted_by_id'  => strip_tags($data['submitted_by_id'])
+      ':submitted_by_id'  => strip_tags($data['submitted_by_id']),
+			':time'								=> time()
     ));
 
     $id = $this->dbc->lastInsertId();
