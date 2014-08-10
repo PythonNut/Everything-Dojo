@@ -6,7 +6,7 @@
   define("DISCUSS_TOPIC_TABLE", "discuss_topics");   //all the topics/threads
   define("DISCUSS_POSTS_TABLE", "discuss_posts");    //all the posts and replies
   define("DISCUSS_POSTS_SPECIAL_TABLE", "discuss_posts_special");    //all the posts and replies for special topics
-  define("DISCUSS_TOPICS_TRACK_TABLE". "discuss_topics_track");
+  define("DISCUSS_TOPICS_TRACK_TABLE", "discuss_topics_track");
   define("DISCUSS_TOPICS_TRACK_SPECIAL_TABLE", "discuss_topics_track_special");
 	
   define("THEMEDB_TABLE", "theme_database");

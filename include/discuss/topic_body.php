@@ -55,6 +55,7 @@
         </div>
       </div>
     <?php } ?>
+    <?php if ($_SESSION['user_id']){ ?>
     <script>
       var thankedPosts = [<?php echo implode(",", $thankedposts);?>];
       function thankpost(post_id){
@@ -62,10 +63,9 @@
           alert("You already thanked this comment!");
         }
         else{
-          $.post("include/discuss/topic_ajax.php", {action: "thank", type: <?php if ($_GET['f'] == 1){echo "3";} else{echo "2";}?>, id: post_id}, function(data) {
-            alert(data);
-            if (data == "true"){
-              $('#topic-reply-thanks-'+post_id).addClass('topic-reply-thanked');                    
+          $.post("include/discuss/topic_ajax.php", {action: "thank", mode: <?php if (intval($_GET['f']) == 1){echo "3";} else{echo "2";}?>, id: post_id}, function(data) {
+            if (data == "success"){
+              $('#topic-reply-thanks-'+post_id).addClass('topic-reply-thanked');             
             }
             else{
               alert("We can't thank the post for some reason. Check your internet connection.");
@@ -74,9 +74,7 @@
         }
       }
     </script>
-    <div class="empty-script">
-      <?php include('include/discuss/topic_ajax.php'); ?>
-    </div>
+    <?php } ?>
   <?php } ?>
 </section>
 <br/>

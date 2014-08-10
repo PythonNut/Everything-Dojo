@@ -311,21 +311,23 @@ class discuss {
           }
         }
         else if ($mode == 2){
-          $query = "SELECT thanks FROM ".DISCUSS_POSTS_TABLE." WHERE post_id = :id";
+          $query = "SELECT thanks FROM ".DISCUSS_POSTS_SPECIAL_TABLE." WHERE post_id = :id";
           $sth = $this->dbc->prepare($query);
           $sth->execute(array(
             ':id' => intval($post_id)
           ));
           $result = $sth->fetchAll(PDO::FETCH_ASSOC);
           $result = explode("|",$result[0]['thanks']);
-          if (!empty($user_id)){
+          if (empty($result[0])){
+            $result = array();
+          }
+          if (empty($user_id)){
             return false;
           }
           else{
-            $username = $this->get_user($user_id)['user_name'];
             $found = false;
             foreach($result as $thank){
-              if ($thank == $username){
+              if ($thank == $user_id){
                 $found = true;
                 break;
               }
@@ -335,14 +337,14 @@ class discuss {
             }
             else{
               $result[] = intval($user_id);
-              $result = implode("|",$result);
-              $query = "UPDATE ".DISCUSS_POSTS_TABLE." SET thanks = :result WHERE post_id = :id";
+              $finalstring = implode("|",$result);
+              $query = "UPDATE ".DISCUSS_POSTS_SPECIAL_TABLE." SET thanks = :result WHERE post_id = :id";
               $sth = $this->dbc->prepare($query);
-              $result = $sth->execute(array(
-                ':result' => $result,
+              $bresult = $sth->execute(array(
+                ':result' => $finalstring,
                 ':id' => intval($post_id)
               ));
-              return $result;
+              return $bresult;
             }
           }
         }
@@ -353,15 +355,19 @@ class discuss {
             ':id' => intval($post_id)
           ));
           $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-          $result = explode("|",$result[0]['thanks']);
-          if (!empty($user_id)){
+          if (empty($result[0]['thanks'])){
+            $result = array();
+          }
+          else{
+            $result = explode("|",$result[0]['thanks']);
+          }
+          if (empty($user_id)){
             return false;
           }
           else{
-            $username = $this->get_user($user_id)['user_name'];
             $found = false;
             foreach($result as $thank){
-              if ($thank == $username){
+              if ($thank == $user_id){
                 $found = true;
                 break;
               }
@@ -371,14 +377,14 @@ class discuss {
             }
             else{
               $result[] = intval($user_id);
-              $result = implode("|",$result);
+              $finalstring = implode("|",$result);
               $query = "UPDATE ".DISCUSS_POSTS_SPECIAL_TABLE." SET thanks = :result WHERE post_id = :id";
               $sth = $this->dbc->prepare($query);
-              $result = $sth->execute(array(
-                ':result' => $result,
+              $bresult = $sth->execute(array(
+                ':result' => $finalstring,
                 ':id' => intval($post_id)
               ));
-              return $result;
+              return $bresult;
             }
           }
         }

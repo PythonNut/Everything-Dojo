@@ -1,13 +1,14 @@
 <?php 
-switch("thank"){
+error_reporting(E_ALL);
+session_start();
+include('../include.php');
+include('../discuss.php');
+switch($_POST['action']){
   case "thank":
-    $result = $discuss->thanks(intval($_POST['id']), intval($_POST['type']), intval($_SESSION['user_id']));
-    if ($result){
-      echo "true";
-    }
-    else{
-      echo "false";
-    }
+    $discuss = new discuss($dbc);
+    $discuss->thanks(intval($_POST['id']), intval($_POST['mode']), intval($_SESSION['user_id']));
+    echo "success";
+    break;
   default:
     echo "No action exists or defined. Try again.";
 }
