@@ -47,7 +47,8 @@
             <div style="display:inline-block; opacity: 0.6;">
               Posted by <?php echo $user['user_name'];?> on <?php echo date('D M d, Y g:i a', $post['time']);?></div>
             <?php if ($_SESSION['user_id'] > 0){ ?>
-            <div class="topic-reply-thanks">&uarr; &nbsp;&nbsp;<?php $thanks = $discuss->thanks($post['post_id'], $mode = 1, $user_id = $_SESSION['user_id']); echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div>
+            <?php $thanks = $discuss->thanks($post['post_id'], $mode = 1, $user_id = $_SESSION['user_id']); ?>
+            <div class="topic-reply-thanks <?php if (in_array($_SESSION['user_id'],$thanks)){ echo "topic-reply-thanked"; }?>">&uarr; &nbsp;&nbsp;<?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div>
             <?php }?>
             
           </div>
@@ -57,6 +58,7 @@
     <?php } ?>
   <?php } ?>
 </section>
+<br/>
 <a href="#topic-create-comment">+ Add a comment</a>
 <form id="topic-create-comment">
 
