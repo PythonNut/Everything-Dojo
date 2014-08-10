@@ -90,7 +90,7 @@
         include('include/discuss/index_body.php');
         break;
       case 'forum':
-        echo '&laquo; <a href="' . URL_DISCUSS. '">Back to Discuss Index</a>';
+        echo '<a href="' . URL_DISCUSS. '">&laquo; Back to Discuss Index</a>';
         include('include/discuss/forum_body.php');
         break;
       case 'topic':
