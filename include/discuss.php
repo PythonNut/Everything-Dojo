@@ -182,29 +182,13 @@ class discuss {
           ':id' => $topic_id
         ));
         $style = $sth->fetchAll(PDO::FETCH_ASSOC)[0];
-        //get patch
-        $query = "SELECT * FROM " . DISCUSS_TOPICS_TRACK_SPECIAL_TABLE . " WHERE `style_id` = :id";
-        $sth = $this->dbc->prepare($query);
-        $sth->execute(array(
-          ':id' => $topic_id
-        ));
-        $style_fix = $sth->fetchAll(PDO::FETCH_ASSOC)[0];
-        
-        //check if patch is empty, if so then replace with tmp
-        if (empty($style_fix)){
-          $style_fix = array(
-            'user_id' => intval($style['submitted_by_id']),
-            'time' => 1388534400,
-            'style_id' => intval($topic_id)
-          );
-        }
         //export result
         $result = array(
           'forum_id' => 1,
-          'user_id' => intval($style_fix['user_id']),
+          'user_id' => intval($style['id']),
           'title' => $style['name'],
-          'time' => intval($style_fix['time']),
-          'last_timestamp' => intval($style_fix['time']),
+          'time' => 1388534400,
+          'last_timestamp' => 1388534400,       //dojo what is this
           'text' => $style['description'],
           'topic_id' => intval($topic_id)
         );
