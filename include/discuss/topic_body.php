@@ -26,7 +26,7 @@
 <?php if (!empty($topic) and (!empty($topic['title']))){ ?>
 <a href="<?php echo URL_DISCUSS; ?>?view=forum&f=<?php echo intval($topic['forum_id']);?>">&laquo; Back to <?php echo $discuss->get_fora(intval($topic['forum_id']))['name'];?></a>
 <section id="topic">
-  <div id="discuss-topic-header">
+  <div id="discuss-topic-header" <?php if ($_GET['f'] == 1){echo 'style="background-image: url('.$topic['photo_attach'].');"';}?> >
     <h1 style="text-align:center;"><?php echo $topic['title'];?></h1>
   </div>
   <div id="topic-main">
@@ -49,7 +49,7 @@
             <div style="display:inline-block; opacity: 0.6;">
               Posted by <?php echo $user['user_name'];?> on <?php echo date('m/d/Y, H:i:s', $post['time']);?></div>
             <?php if ($_SESSION['user_id'] > 0){ ?>
-            <div class="topic-reply-thanks">&uarr; &nbsp;&nbsp;3 Thanks</div>
+            <div class="topic-reply-thanks">&uarr; &nbsp;&nbsp;<?php $thanks = $discuss->thanks($post['post_id'], $mode = 1, $user_id = $_SESSION['user_id']); echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div>
             <?php }?>
             
           </div>

@@ -207,3 +207,28 @@ td.small-col{
   border-radius: 5px;
   padding: 1em 1em;
 }
+#discuss-topic-header{
+  height: 6rem;
+  color: #000000;
+  line-height: 2em;
+  vertical-align: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  font-size: 1.5em;
+  margin-bottom: 1em;
+  border: 2px solid black;
+  background-position: center;
+  cursor: pointer;
+  -webkit-filter: grayscale(1);
+  filter: grayscale(1);
+  -webkit-transition: all 500ms ease;
+  transition: all 500ms ease;
+}
+#discuss-topic-header:hover{
+  background-size: 120% 120%;
+  -webkit-filter: grayscale(0);
+  filter: grayscale(0);
+  -webkit-transition: all 500ms ease;
+  transition: all 500ms ease;
+}
