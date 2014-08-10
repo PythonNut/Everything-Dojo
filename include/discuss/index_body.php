@@ -1,6 +1,6 @@
 <?php
   if (empty($_GET['id'])){
-    $fora = $discuss->get_fora('all', 0);
+    $fora = $discuss->get_fora('all', '0');
   }
   else{
     $fora = $discuss->get_fora('all', intval($_GET['id']));

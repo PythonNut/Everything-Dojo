@@ -7,11 +7,12 @@
     //check if special
     if ($_GET['f'] == 1){
       $topic = $discuss->get_topic(intval($_GET['t']), 1);
+      $posts = $discuss->get_posts(intval($_GET['t']), 'all', 1);
     }
     else{
       $topic = $discuss->get_topic(intval($_GET['t']))[0];
+      $posts = $discuss->get_posts(intval($_GET['t']), 'all', 0);
     }
-    //$posts = $discuss->get_posts(intval($_GET['t']));
   }
 ?>
 
@@ -26,7 +27,25 @@
       <p><?php echo $topic['text'];?></p>
     </div>
   </div>
-  
+  <?php if (!empty($posts)){ var_export($posts); ?>
+    <?php foreach ($posts as $post){?>
+      <div class="topic-reply">
+        <div class="topic-reply-text">
+          <?php $user = $discuss->get_user($post['user_id']);?>
+          <div class="topic-reply-top">
+            <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $post['title'];?></h2>
+            <div style="display:inline-block; opacity: 0.6;">
+              Posted by <?php echo $user['user_name'];?> on <?php echo date('m/d/Y, H:i:s', $post['time']);?></div>
+            <?php if ($_SESSION['user_id'] > 0){ ?>
+            <div class="topic-reply-thanks">&uarr; &nbsp;&nbsp;3 Thanks</div>
+            <?php }?>
+            
+          </div>
+          <p><?php echo $post['text'];?></p>
+        </div>
+      </div>
+    <?php } ?>
+  <?php } ?>
 </section>
 
 <?php } ?>
