@@ -52,7 +52,6 @@ class discuss {
 		
 		// special fora
 		if($type == 0){
-<<<<<<< HEAD
 			if($id == 1){
 					$query = "SELECT `id` AS `topic_id`, `name` AS `title`, `description` FROM `" . THEMEDB_TABLE . "`";
 					$sth = $this->dbc->prepare($query);
@@ -76,40 +75,8 @@ class discuss {
 			}
 			else{
 			}
-=======
-		  if($id == 1){       //theme db forum
-		    $query = "SELECT `name` AS `title`, `description` FROM `" . THEMEDB_TABLE . "`";
-		    $sth = $this->dbc->prepare($query);
-		    $sth->execute();			
-		    $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-		    foreach($result as $row){
-		      $query = "SELECT COUNT(*) FROM `" . DISCUSS_TOPICS_TRACK_SPECIAL_TABLE . "` WHERE `style_id` = :id AND `user_id` = :user_id";
-		      $sth = $this->dbc->prepare($query);
-		      $sth->execute(array(
-				':id' 		=> $row['id'],
-		        ':user_id'	=> $user_id
-		      ));						
-		      $count = $sth->fetchColumn();
-		      if($count == 0){
-		        $row['read'] = 0;
-		      }
-		      else{
-		        $row['read'] = 1;
-		      }
-		    }
-		  }
-		  else{
-		    $query = "SELECT * FROM " . DISCUSS_TOPIC_TABLE . " WHERE 'forum_id' = :id";
-            $sth = $this->dbc->prepare($query);
-		    $sth->execute(array(
-		      ':id' => $id,
-		    ));	
-            $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-          }
->>>>>>> FETCH_HEAD
 		}
 		else{
-          //idk
 		}
 		
 		return $result;
