@@ -27,7 +27,7 @@
           <td class="med-col">Author</td>
           <td class="small-col">Comments</td>
           <td class="small-col">Views</td>
-          <td class="med-col">Last View</td> 
+          <td class="med-col">Last Comment</td> 
         <tr>
       </thead>
       <tbody>
@@ -51,10 +51,10 @@
 				}
 			?>
         <tr style="cursor:pointer;" onclick="window.location.href='<?php echo URL_DISCUSS; ?>?view=topic&f=<?php echo intval($id); ?>&t=<?php echo $topic['topic_id']; ?>'">
-          <td><?php echo $topic['title'];?></td>
+          <td><?php echo $topic['title']; ?></td>
           <td><?php echo $username; ?></td>
           <td><?php echo $comments; ?></td>
-          <td></td>
+          <td><?php echo $topic['views']; ?></td>
           <td></td>
         </tr>
       <?php } ?>

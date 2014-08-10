@@ -68,7 +68,21 @@ class discuss {
 	}
 
 	// get views
-	function get_view(){
+	function get_views($id, $type){
+		if($type == 0){
+			$query = "SELECT `user_id` FROM `" . DISCUSS_TOPICS_TRACK_SPECIAL_TABLE . "` WHERE `style_id` = :id";
+		}
+		else{
+			$query = "SELECT `user_id` FROM `" . DISCUSS_TOPICS_TRACK_TABLE . "` WHERE `topic_id` = :id";
+		}
+		$sth = $this->dbc->prepare($query);
+		$sth->execute(array(
+			':id' => $id
+		));
+		$result = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+		$view_array = array_unique($result);
+		return count($view_array);
 	}
 
 	// get topics for view page
@@ -106,6 +120,9 @@ class discuss {
 							$result[$i]['read'] = 1;
 						}
 						
+						// find views
+						$result[$i]['views'] = $this->get_views($result[$i]['topic_id'], $type);
+						
 						// find comment count
 						$result[$i]['comment_count'] = $this->get_comment_count($result[$i]['topic_id'], $type);
 					}
@@ -138,8 +155,11 @@ class discuss {
 					$result[$i]['read'] = 1;
 				}				
 				
+				// find views
+				$result[$i]['views'] = $this->get_views($result[$i]['topic_id'], $type);
+				
 				// find comment count
-				$result[$i]['comment_count'] = $this->get_comment_count($row['id'], $type);
+				$result[$i]['comment_count'] = $this->get_comment_count($result[$i]['topic_id'], $type);
 			}
 		}
 		
