@@ -73,23 +73,55 @@ class discuss {
 						}
 					}
 			}
-			else{
-			}
 		}
 		else{
+          
 		}
 		
 		return $result;
 	}
     //get specific topic
-    function get_topic($topic_id){
-      $query = "SELECT * FROM " . DISCUSS_TOPIC_TABLE . " WHERE `id` = :id";
-      $sth = $this->dbc->prepare($query);
-      $sth->execute(array(
-		':id' => $topic_id
-      ));
-      $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-      return $result;
+    function get_topic($topic_id, $type = 0){
+      if ($type == 1){
+        $query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `id` = :id";
+        $sth = $this->dbc->prepare($query);
+        $sth->execute(array(
+          ':id' => $topic_id
+        ));
+        $style = $sth->fetchColumn();
+        $query = "SELECT * FROM " . DISCUSS_TOPICS_TRACK_SPECIAL_TABLE . " WHERE `style_id` = :id";
+        $sth = $this->dbc->prepare($query);
+        $sth->execute(array(
+          ':id' => $topic_id
+        ));
+        $style_fix = $sth->fetchColumn();
+        if (empty($style_fix)){
+          $style_fix = array(
+            'user_id' => intval($style['submitted_by_id']),
+            'time' => 1388534400,
+            'style_id' => intval($topic_id)
+          );
+        }
+        $result = array(
+          'forum_id' => 1,
+          'user_id' => intval($style_fix['user_id']),
+          'title' => $style['title'],
+          'time' => intval($style_fix['time']),
+          'last_timestamp' => intval($style_fix['time']),
+          'text' => $style['description'],
+          'topic_id' => intval($topic_id)
+        );
+        return $result;
+      }
+      else{
+        $query = "SELECT * FROM " . DISCUSS_TOPIC_TABLE . " WHERE `id` = :id";
+        $sth = $this->dbc->prepare($query);
+        $sth->execute(array(
+          ':id' => $topic_id
+        ));
+        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+      }
     }
     //get posts from topic with id ($topic_id) [optional: also gets posts from user with id ($user_id)]
     function get_posts($topic_id = 'all', $user_id = 'all'){

@@ -1,12 +1,17 @@
 <?php 
 //get topics
-  if (empty($_GET['id'])){
+  if (empty($_GET['f'])){
     exit("404 topic not found: we couldn't find your topic because it doesn't exist. Don't worry, though; Try going <a href='discuss.php'>back to Discuss home page</a> or try our other services!");
   }
   else{
-    $topic = $discuss->get_topic(intval($_GET['id']))[0];
-    $posts = $discuss->get_posts(intval($_GET['id']));
-    $discuss->view_topic(intval($_GET['id']));
+    //check if special
+    if ($_GET['t'] == 2){
+      $topic = $discuss->get_topic(intval($_GET['f']), 1)[0];
+    }
+    else{
+      $topic = $discuss->get_topic(intval($_GET['f']))[0];
+    }
+    $posts = $discuss->get_posts(intval($_GET['f']));
   }
 ?>
 
