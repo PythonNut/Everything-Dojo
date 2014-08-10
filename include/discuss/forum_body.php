@@ -22,7 +22,7 @@
         <tr>
           <td class="small-col">Title</td>
           <td class="med-col">Description</td>
-          <td class="small-col">Category</td>
+          <td class="med-col">Category</td>
           <td class="small-col">Posts</td>
         <tr>
       </thead>

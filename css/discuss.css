@@ -172,3 +172,34 @@ td.med-col{
 td.small-col{
   width: 15%;
 }
+.topic-reply-thanks{
+  display: inline-block;
+  margin: 1em;
+  height: 30px;
+  width: 30px;
+  border: 1px solid black;
+  text-align: center;
+  line-height: 30px;
+  vertical-align: middle;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 20px;
+  background-color: #FFFFFF;
+  color: #000000;
+  overflow: hidden;
+  transition: all 500ms ease;
+}
+.topic-reply-thanks:hover{
+  background-color: #51b835;
+  color: #FFFFFF;
+  width: 150px;
+  transition: all 500ms ease;
+}
+.topic-reply-thanked{
+  background-color: #51b835;
+  color: #FFFFFF;
+}
+.topic-reply-thanked:hover{
+  background-color: #51b835;
+  color: #FFFFFF;
+}

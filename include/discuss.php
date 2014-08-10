@@ -129,34 +129,43 @@ class discuss {
       }
     }
     //get posts from topic with id ($topic_id) [optional: also gets posts from user with id ($user_id)]
-    function get_posts($topic_id = 'all', $user_id = 'all'){
+    function get_posts($topic_id = 'all', $user_id = 'all', $type = 0){
       if ($topic_id != 'all'){
-        if ($topic_id == 1){    //special table
-          $query = "SELECT * FROM " . DISCUSS_POSTS_SPECIAL_TABLE . " WHERE `topic_id` = :id";
+        if ($type == 1){    //special table
+          $query = "SELECT * FROM " . DISCUSS_POSTS_SPECIAL_TABLE . " WHERE style_id = :id";
         }
         else{
-          $query = "SELECT * FROM " . DISCUSS_POSTS_TABLE . " WHERE `topic_id` = :id";
+          $query = "SELECT * FROM " . DISCUSS_POSTS_TABLE . " WHERE topic_id = :id";
         }
       }
       else{
-        $query = "SELECT * FROM " . DISCUSS_POSTS_SPECIAL_TABLE;
+        $query = "SELECT * FROM " . DISCUSS_POSTS_TABLE . ", " . DISCUSS_POSTS_SPECIAL_TABLE;
       }
       if ($user_id != 'all'){
-        $query = $query." AND user_id = :user";
-        $result = $this->dbc->prepare($query);
-        $result->execute(array(
-          ':id' => intval($topic_id),
-          ':user' => intval($user_id)
-        ));
-        $result = $result->fetchAll(PDO::FETCH_ASSOC);
+        if ($topic_id != 'all'){
+          $query = $query." AND user_id = :user";
+          $sth = $this->dbc->prepare($query);
+          $sth->execute(array(
+            ':id' => intval($topic_id),
+            ':user' => intval($user_id)
+          ));
+        }
+        else{
+          $query = $query." WHERE user_id = :user";
+          $sth = $this->dbc->prepare($query);
+          $sth->execute(array(
+            ':user' => intval($user_id)
+          ));
+        }
+        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
         return $result;
       }
       else{
-        $result = $this->dbc->prepare($query);
-        $result->execute(array(
+        $sth = $this->dbc->prepare($query);
+        $sth->execute(array(
           ':id' => intval($topic_id)
         ));
-        $result = $result->fetchAll(PDO::FETCH_ASSOC);
+        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
         return $result;
       }
     }
@@ -168,7 +177,119 @@ class discuss {
       $result = $sth->fetchAll(PDO::FETCH_ASSOC);
       return $result[0];
     }
-
+    //0 - get thanks from regular, 1 - get thanks from special, 2 - thank regular, 3 - thank special
+    function thanks($post_id, $mode = 0, $user_id = null){
+      if (empty($post_id)){
+        return false;
+      }
+      else{
+        if ($mode == 0){
+          $query = "SELECT thanks FROM ".DISCUSS_POSTS_TABLE." WHERE post_id = :id";
+          $sth = $this->dbc->prepare($query);
+          $sth->execute(array(
+            ':id' => intval($post_id)
+          ));
+          $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+          $result = explode(trim($result[0]['thanks']),"|");
+          if (empty($result[0])){
+            return array();
+          }
+          else{
+            return $result;
+          }
+        }
+        else if ($mode == 1){
+          $query = "SELECT * FROM ".DISCUSS_POSTS_SPECIAL_TABLE." WHERE post_id = :id";
+          $sth = $this->dbc->prepare($query);
+          $sth->execute(array(
+            ':id' => intval($post_id)
+          ));
+          $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+          $result = explode(trim($result[0]['thanks']),"|");
+          if (empty($result[0])){
+            return array();
+          }
+          else{
+            return $result;
+          }
+        }
+        else if ($mode == 2){
+          $query = "SELECT thanks FROM ".DISCUSS_POSTS_TABLE." WHERE post_id = :id";
+          $sth = $this->dbc->prepare($query);
+          $sth->execute(array(
+            ':id' => intval($post_id)
+          ));
+          $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+          $result = explode($result[0]['thanks'],"|");
+          if (!empty($user_id)){
+            return false;
+          }
+          else{
+            $username = $this->get_user($user_id)['user_name'];
+            $found = false;
+            foreach($result as $thank){
+              if ($thank == $username){
+                $found = true;
+                break;
+              }
+            }
+            if ($found){
+              return true;
+            }
+            else{
+              $result[] = intval($user_id);
+              $result = implode($result,"|");
+              $query = "UPDATE ".DISCUSS_POSTS_TABLE." SET thanks = :result WHERE post_id = :id";
+              $sth = $this->dbc->prepare($query);
+              $result = $sth->execute(array(
+                ':result' => $result,
+                ':id' => intval($post_id)
+              ));
+              return $result;
+            }
+          }
+        }
+        else if ($mode == 3){
+          $query = "SELECT thanks FROM ".DISCUSS_POSTS_SPECIAL_TABLE." WHERE post_id = :id";
+          $sth = $this->dbc->prepare($query);
+          $sth->execute(array(
+            ':id' => intval($post_id)
+          ));
+          $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+          $result = explode($result[0]['thanks'],"|");
+          if (!empty($user_id)){
+            return false;
+          }
+          else{
+            $username = $this->get_user($user_id)['user_name'];
+            $found = false;
+            foreach($result as $thank){
+              if ($thank == $username){
+                $found = true;
+                break;
+              }
+            }
+            if ($found){
+              return true;
+            }
+            else{
+              $result[] = intval($user_id);
+              $result = implode($result,"|");
+              $query = "UPDATE ".DISCUSS_POSTS_SPECIAL_TABLE." SET thanks = :result WHERE post_id = :id";
+              $sth = $this->dbc->prepare($query);
+              $result = $sth->execute(array(
+                ':result' => $result,
+                ':id' => intval($post_id)
+              ));
+              return $result;
+            }
+          }
+        }
+        else{
+          return false;
+        }
+      }
+    }
 }
 $discuss = new discuss($dbc);
 ?>
