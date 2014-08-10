@@ -48,9 +48,8 @@
               Posted by <?php echo $user['user_name'];?> on <?php echo date('D M d, Y g:i a', $post['time']);?></div>
             <?php if ($_SESSION['user_id'] > 0){ ?>
             <?php $thanks = $discuss->thanks($post['post_id'], $mode = 1, $user_id = $_SESSION['user_id']); ?>
-            <div class="topic-reply-thanks <?php if (in_array($_SESSION['user_id'],$thanks)){ echo "topic-reply-thanked"; }?>">&uarr; &nbsp;&nbsp;<?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div>
+            <div class="topic-reply-thanks<?php if (in_array($_SESSION['user_id'],$thanks)){ echo " topic-reply-thanked"; }?>">&uarr; &nbsp;&nbsp;<?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div>
             <?php }?>
-            
           </div>
           <p><?php echo $post['text'];?></p>
         </div>

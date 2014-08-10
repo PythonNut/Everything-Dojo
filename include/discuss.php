@@ -287,7 +287,7 @@ class discuss {
             ':id' => intval($post_id)
           ));
           $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-          $result = explode(trim($result[0]['thanks']),"|");
+          $result = explode("|",trim($result[0]['thanks']));
           if (empty($result[0])){
             return array();
           }
@@ -296,13 +296,13 @@ class discuss {
           }
         }
         else if ($mode == 1){
-          $query = "SELECT * FROM ".DISCUSS_POSTS_SPECIAL_TABLE." WHERE post_id = :id";
+          $query = "SELECT thanks FROM ".DISCUSS_POSTS_SPECIAL_TABLE." WHERE post_id = :id";
           $sth = $this->dbc->prepare($query);
           $sth->execute(array(
             ':id' => intval($post_id)
           ));
           $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-          $result = explode(trim($result[0]['thanks']),"|");
+          $result = explode("|",trim($result[0]['thanks']));
           if (empty($result[0])){
             return array();
           }
@@ -317,7 +317,7 @@ class discuss {
             ':id' => intval($post_id)
           ));
           $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-          $result = explode($result[0]['thanks'],"|");
+          $result = explode("|",$result[0]['thanks']);
           if (!empty($user_id)){
             return false;
           }
@@ -335,7 +335,7 @@ class discuss {
             }
             else{
               $result[] = intval($user_id);
-              $result = implode($result,"|");
+              $result = implode("|",$result);
               $query = "UPDATE ".DISCUSS_POSTS_TABLE." SET thanks = :result WHERE post_id = :id";
               $sth = $this->dbc->prepare($query);
               $result = $sth->execute(array(
@@ -353,7 +353,7 @@ class discuss {
             ':id' => intval($post_id)
           ));
           $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-          $result = explode($result[0]['thanks'],"|");
+          $result = explode("|",$result[0]['thanks']);
           if (!empty($user_id)){
             return false;
           }
@@ -371,7 +371,7 @@ class discuss {
             }
             else{
               $result[] = intval($user_id);
-              $result = implode($result,"|");
+              $result = implode("|",$result);
               $query = "UPDATE ".DISCUSS_POSTS_SPECIAL_TABLE." SET thanks = :result WHERE post_id = :id";
               $sth = $this->dbc->prepare($query);
               $result = $sth->execute(array(
