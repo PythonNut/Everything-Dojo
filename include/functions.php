@@ -22,6 +22,18 @@
     }
   }
 
+  function get_user($user_id){
+		global $dbc;
+		
+			$sth = $dbc->prepare("SELECT * FROM `users` WHERE `id` = :id");		
+			$sth->execute(array(
+				':id' => intval($user_id)
+			));
+			$name = $sth->fetch(PDO::FETCH_ASSOC);
+			$name = $name['user_name'];
+			return $name;
+  }
+
   function filter($data) {
     $data = trim(addslashes(htmlentities(strip_tags($data))));
 
