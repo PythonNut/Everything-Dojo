@@ -21,11 +21,6 @@
       exit();
     }
   }
-  function get_user($user_id){
-    $result = $dbc->prepare("SELECT * FROM users WHERE id = :id");
-    $result->execute(array(intval($user_id)));
-    return $result->fetchAll(PDO::FETCH_ASSOC)[0];
-  }
 
   function filter($data) {
     $data = trim(addslashes(htmlentities(strip_tags($data))));

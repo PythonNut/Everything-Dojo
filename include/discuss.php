@@ -142,7 +142,7 @@ class discuss {
         $query = "SELECT * FROM " . DISCUSS_POSTS_SPECIAL_TABLE;
       }
       if ($user_id != 'all'){
-        $query = $query." AND 'user_id' = :user";
+        $query = $query." AND user_id = :user";
         $result = $this->dbc->prepare($query);
         $result->execute(array(
           ':id' => intval($topic_id),
@@ -159,6 +159,14 @@ class discuss {
         $result = $result->fetchAll(PDO::FETCH_ASSOC);
         return $result;
       }
+    }
+    function get_user($user_id){
+      $query ="SELECT * FROM users WHERE id = :id";
+      $sth = $this->dbc->prepare($query);
+      $sth->execute(array(':id' => intval($user_id)));
+      
+      $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+      return $result[0];
     }
 
 }
