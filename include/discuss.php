@@ -317,9 +317,11 @@ class discuss {
             ':id' => intval($post_id)
           ));
           $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-          $result = explode("|",$result[0]['thanks']);
-          if (empty($result[0])){
+          if (empty($result[0]['thanks'])){
             $result = array();
+          }
+          else{
+            $result = explode("|",$result[0]['thanks']);
           }
           if (empty($user_id)){
             return false;
@@ -344,7 +346,7 @@ class discuss {
                 ':result' => $finalstring,
                 ':id' => intval($post_id)
               ));
-              return $bresult;
+              return count($result);
             }
           }
         }
@@ -384,7 +386,7 @@ class discuss {
                 ':result' => $finalstring,
                 ':id' => intval($post_id)
               ));
-              return $bresult;
+              return count($result);
             }
           }
         }

@@ -65,7 +65,9 @@
         else{
           $.post("include/discuss/topic_ajax.php", {action: "thank", mode: <?php if (intval($_GET['f']) == 1){echo "3";} else{echo "2";}?>, id: post_id}, function(data) {
             if (data == "success"){
-              $('#topic-reply-thanks-'+post_id).addClass('topic-reply-thanked');             
+              $('#topic-reply-thanks-'+post_id).html("&uArr; &nbsp;&nbsp;Thanked!");
+              $('#topic-reply-thanks-'+post_id).addClass('topic-reply-thanked');
+              
             }
             else{
               alert("We can't thank the post for some reason. Check your internet connection.");
