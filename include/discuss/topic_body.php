@@ -38,7 +38,7 @@
     </div>
   </div>
   <?php if (!empty($posts)){ ?>
-    <?php foreach ($posts as $post){?>
+    <?php $thankedposts = []; foreach ($posts as $post){?>
       <div class="topic-reply">
         <div class="topic-reply-text">
           <?php $user = $discuss->get_user($post['user_id']);?>
@@ -48,20 +48,47 @@
               Posted by <?php echo $user['user_name'];?> on <?php echo date('D M d, Y g:i a', $post['time']);?></div>
             <?php if ($_SESSION['user_id'] > 0){ ?>
             <?php $thanks = $discuss->thanks($post['post_id'], $mode = 1, $user_id = $_SESSION['user_id']); ?>
-            <div class="topic-reply-thanks<?php if (in_array($_SESSION['user_id'],$thanks)){ echo " topic-reply-thanked"; }?>">&uarr; &nbsp;&nbsp;<?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div>
+            <div class="topic-reply-thanks<?php if (in_array($_SESSION['user_id'],$thanks)){ echo " topic-reply-thanked"; $thankedposts[] = $post['post_id'];}?>" id="topic-reply-thanks-<?php echo $post['post_id'];?>" onclick="thankpost(<?php echo $post['post_id']?>)">&uArr; &nbsp;&nbsp;<?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div>
             <?php }?>
           </div>
           <p><?php echo $post['text'];?></p>
         </div>
       </div>
     <?php } ?>
+    <script>
+      var thankedPosts = [<?php echo implode(",", $thankedposts);?>];
+      function thankpost(post_id){
+        if ($.inArray(post_id, thankedPosts) >= 0){
+          alert("You already thanked this comment!");
+        }
+        else{
+          $.post("include/discuss/topic_ajax.php", {action: "thank", type: <?php if ($_GET['f'] == 1){echo "3";} else{echo "2";}?>, id: post_id}, function(data) {
+            alert(data);
+            if (data == "true"){
+              $('#topic-reply-thanks-'+post_id).addClass('topic-reply-thanked');                    
+            }
+            else{
+              alert("We can't thank the post for some reason. Check your internet connection.");
+            }
+          });
+        }
+      }
+    </script>
+    <div class="empty-script">
+      <?php include('include/discuss/topic_ajax.php'); ?>
+    </div>
   <?php } ?>
 </section>
 <br/>
+<?php if ($_SESSION['user_id'] > 0){ ?>
 <a href="#topic-create-comment">+ Add a comment</a>
 <form id="topic-create-comment">
 
 </form>
+<script>
+  
+</script>
+<?php } ?>
 <?php } else{
   echo "<h1 style='text-align:center;'>Topic Not Found</h1>";
   echo "<p style='text-align:center;'>The topic you were looking for is not found. Don't worry, though; Try going <a href='discuss.php'>back to Discuss home page</a> or try our other services!</p>";

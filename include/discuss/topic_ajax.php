@@ -1,12 +1,14 @@
 <?php 
-session_start();
-switch($_POST['action']){
+switch("thank"){
   case "thank":
-    $result = $discuss->thank(intval($_POST['id']), intval($_POST['type']), intval($_SESSION['user_id']));
+    $result = $discuss->thanks(intval($_POST['id']), intval($_POST['type']), intval($_SESSION['user_id']));
     if ($result){
-      echo "";
+      echo "true";
+    }
+    else{
+      echo "false";
     }
   default:
-    return "No action exists or defined. Try again.";
+    echo "No action exists or defined. Try again.";
 }
 ?>
