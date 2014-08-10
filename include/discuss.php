@@ -94,12 +94,33 @@ class discuss {
     //get posts from topic with id ($topic_id) [optional: also gets posts from user with id ($user_id)]
     function get_posts($topic_id = 'all', $user_id = 'all'){
       if ($topic_id != 'all'){
-        if ($topic_id == 1){
-          $query = "SELECT * FROM " . DISCUSS_TOPIC_TABLE . " WHERE `id` = 1";
+        if ($topic_id == 1){    //special table
+          $query = "SELECT * FROM " . DISCUSS_POSTS_SPECIAL_TABLE . " WHERE `topic_id` = :id";
+        }
+        else{
+          $query = "SELECT * FROM " . DISCUSS_POSTS_TABLE . " WHERE `topic_id` = :id";
         }
       }
+      else{
+        $query = "SELECT * FROM " . DISCUSS_POSTS_SPECIAL_TABLE;
+      }
       if ($user_id != 'all'){
-        
+        $query = $query." AND 'user_id' = :user";
+        $result = $this->dbc->prepare($query);
+        $result->execute(array(
+          ':id' => intval($topic_id),
+          ':user' => intval($user_id)
+        ));
+        $result = $result->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+      }
+      else{
+        $result = $this->dbc->prepare($query);
+        $result->execute(array(
+          ':id' => intval($topic_id)
+        ));
+        $result = $result->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
       }
     }
 
