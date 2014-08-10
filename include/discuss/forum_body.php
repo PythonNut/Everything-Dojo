@@ -28,7 +28,7 @@
       </thead>
       <tbody>
       <?php foreach($topics as $topic){ ?>
-        <tr style="cursor:pointer;" onclick="window.location.href='<?php echo URL_DISCUSS; ?>?view=topic&id=<?php echo $topic['topic_id']; ?>'">
+        <tr style="cursor:pointer;" onclick="window.location.href='<?php echo URL_DISCUSS; ?>?view=topic&f=<?php echo $id; ?>&t=<?php echo $topic['topic_id']; ?>'">
           <td><?php echo $topic['title'];?></td>
           <td><?php echo shorten_desc($topic['description'],0,100);?></td>
           <td><?php echo $topic['views'];?></td>

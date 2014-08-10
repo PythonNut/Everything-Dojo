@@ -33,7 +33,7 @@ class discuss {
 		// special fora
 		if($type == 0){
 			if($id == 1){
-					$query = "SELECT `name` AS `title`, `description` FROM `" . THEMEDB_TABLE . "`";
+					$query = "SELECT `id` AS `topic_id`, `name` AS `title`, `description` FROM `" . THEMEDB_TABLE . "`";
 					$sth = $this->dbc->prepare($query);
 					$sth->execute();			
 					$result = $sth->fetchAll(PDO::FETCH_ASSOC);
