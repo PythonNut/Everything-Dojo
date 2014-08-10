@@ -368,6 +368,6 @@ class discuss {
       }
     }
   }
-}
+
 $discuss = new discuss($dbc);
 ?>
