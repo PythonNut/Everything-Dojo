@@ -135,7 +135,7 @@ class discuss {
 						$query = "SELECT COUNT(*) FROM `" . DISCUSS_TOPICS_TRACK_SPECIAL_TABLE . "` WHERE `style_id` = :id AND `user_id` = :user_id";
 						$sth = $this->dbc->prepare($query);
 						$sth->execute(array(
-							':id' 			=> $row['id'],
+							':id' 			=> $i,
 							':user_id'	=> $user_id
 						));						
 						$count = $sth->fetchColumn();
@@ -332,26 +332,25 @@ class discuss {
           }
           else{
             $found = false;
-            foreach($result as $thank){
+            foreach($result as $key=>$thank){
               if ($thank == $user_id){
                 $found = true;
+                unset($result[$key]);
+                array_values($result);
                 break;
               }
             }
-            if ($found){
-              return true;
-            }
-            else{
+            if (!$found){
               $result[] = intval($user_id);
-              $finalstring = implode("|",$result);
-              $query = "UPDATE ".DISCUSS_POSTS_SPECIAL_TABLE." SET thanks = :result WHERE post_id = :id";
-              $sth = $this->dbc->prepare($query);
-              $bresult = $sth->execute(array(
-                ':result' => $finalstring,
-                ':id' => intval($post_id)
-              ));
-              return count($result);
             }
+            $finalstring = implode("|",$result);
+            $query = "UPDATE ".DISCUSS_POSTS_TABLE." SET thanks = :result WHERE post_id = :id";
+            $sth = $this->dbc->prepare($query);
+            $bresult = $sth->execute(array(
+              ':result' => $finalstring,
+              ':id' => intval($post_id)
+            ));
+            return count($result);
           }
         }
         else if ($mode == 3){
@@ -372,26 +371,25 @@ class discuss {
           }
           else{
             $found = false;
-            foreach($result as $thank){
+            foreach($result as $key=>$thank){
               if ($thank == $user_id){
                 $found = true;
+                unset($result[$key]);
+                array_values($result);
                 break;
               }
             }
-            if ($found){
-              return true;
-            }
-            else{
+            if (!$found){
               $result[] = intval($user_id);
-              $finalstring = implode("|",$result);
-              $query = "UPDATE ".DISCUSS_POSTS_SPECIAL_TABLE." SET thanks = :result WHERE post_id = :id";
-              $sth = $this->dbc->prepare($query);
-              $bresult = $sth->execute(array(
-                ':result' => $finalstring,
-                ':id' => intval($post_id)
-              ));
-              return count($result);
             }
+            $finalstring = implode("|",$result);
+            $query = "UPDATE ".DISCUSS_POSTS_SPECIAL_TABLE." SET thanks = :result WHERE post_id = :id";
+            $sth = $this->dbc->prepare($query);
+            $bresult = $sth->execute(array(
+              ':result' => $finalstring,
+              ':id' => intval($post_id)
+            ));
+            return count($result);
           }
         }
         else{

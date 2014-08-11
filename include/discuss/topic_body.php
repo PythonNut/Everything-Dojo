@@ -60,14 +60,23 @@
       var thankedPosts = [<?php echo implode(",", $thankedposts);?>];
       function thankpost(post_id){
         if ($.inArray(post_id, thankedPosts) >= 0){
-          alert("You already thanked this comment!");
+          $.post("include/discuss/topic_ajax.php", {action: "thank", mode: <?php if (intval($_GET['f']) == 1){echo "3";} else{echo "2";}?>, id: post_id}, function(data) {
+            if (data == "success"){
+              $('#topic-reply-thanks-'+post_id).html("&uArr; &nbsp;&nbsp;Thank");
+              $('#topic-reply-thanks-'+post_id).removeClass('topic-reply-thanked');
+              thankedPosts.pop($.inArray(post_id, thankedPosts));
+            }
+            else{
+              alert("We can't un-thank the post for some reason. Check your internet connection.");
+            }
+          });
         }
         else{
           $.post("include/discuss/topic_ajax.php", {action: "thank", mode: <?php if (intval($_GET['f']) == 1){echo "3";} else{echo "2";}?>, id: post_id}, function(data) {
             if (data == "success"){
               $('#topic-reply-thanks-'+post_id).html("&uArr; &nbsp;&nbsp;Thanked!");
               $('#topic-reply-thanks-'+post_id).addClass('topic-reply-thanked');
-              
+              thankedPosts.push(post_id);
             }
             else{
               alert("We can't thank the post for some reason. Check your internet connection.");
@@ -82,11 +91,11 @@
 <br/>
 <?php if ($_SESSION['user_id'] > 0){ ?>
 <a href="#topic-create-comment">+ Add a comment</a>
-<form id="topic-create-comment">
-
+<form id="topic-create-comment" action="<?php echo URL_DISCUSS?>">
+  <input name="title"/>
 </form>
 <script>
-  
+  $("#topic-create-comment").slideToggle(300);
 </script>
 <?php } ?>
 <?php } else{

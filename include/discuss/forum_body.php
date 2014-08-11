@@ -1,8 +1,11 @@
 <?php
   $id = $_GET['f'];
-  if($id == ''){
-    redirect(URL_DISCUSS);
+  if (empty($id)){
+    $id = 0;
   }
+  else if($id == ''){
+    redirect(URL_DISCUSS);
+  } 
   else{
     if(!isset($_SESSION['user_id'])){
       $user_id = 0;
