@@ -11,7 +11,7 @@
     }
     else{
       $topic = $discuss->get_topic(intval($_GET['t']));
-			$topic = $topic[0];
+      $topic = $topic[0];
       $posts = $discuss->get_posts(intval($_GET['t']), 'all', 0);
     }
   }
