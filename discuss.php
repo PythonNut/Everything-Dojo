@@ -61,6 +61,10 @@
           }
           announcement_options.now = announcement_options.start;
           $("#"+announcement_options.aidPrefix+announcement_options.now).show();
+          // check if there are multiple announcements
+          if (announcement_options.num < 2) {
+            $(".discuss-round").remove();
+          }
         });
 
         $("#discuss-round-left").click(function () {
