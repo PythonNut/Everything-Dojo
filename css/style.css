@@ -574,18 +574,18 @@ table a { color: #F99819; }
  */
 #notifications{
   position: absolute;
-	display: block;
-	/* position for index page */
-	right: 15vw;
-	top: 7.5vh;
+  display: block;
+  /* position for index page */
+  right: 15vw;
+  top: 7.5vh;
 }
 
 .notification-arrow-up{
   width: 0;
   height: 0;
   border-left: 2vh solid transparent;
-	border-right: 2vh solid transparent;
-	border-bottom: 2vh solid #212121;
+  border-right: 2vh solid transparent;
+  border-bottom: 2vh solid #212121;
   margin-left: 27vw;
 }
 
