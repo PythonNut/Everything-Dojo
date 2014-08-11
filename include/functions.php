@@ -23,15 +23,15 @@
   }
 
   function get_user($user_id){
-    global $dbc;
-
-      $sth = $dbc->prepare("SELECT * FROM `users` WHERE `id` = :id");
-      $sth->execute(array(
-        ':id' => intval($user_id)
-      ));
-      $name = $sth->fetch(PDO::FETCH_ASSOC);
-      $name = $name['user_name'];
-      return $name;
+		global $dbc;
+		
+			$sth = $dbc->prepare("SELECT * FROM `users` WHERE `id` = :id");		
+			$sth->execute(array(
+				':id' => intval($user_id)
+			));
+			$name = $sth->fetch(PDO::FETCH_ASSOC);
+			$name = $name['user_name'];
+			return $name;
   }
 
   function filter($data) {
@@ -234,7 +234,7 @@
   /*regular site functions*/
 
   function get_header($n=0, $notification_count = 0) {
-    $unread_notification_count = $notification_count;
+		$unread_notification_count = $notification_count;
     include(str_repeat('../', $n) . "include/header.php");
   }
 

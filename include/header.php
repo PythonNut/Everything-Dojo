@@ -61,13 +61,13 @@
         </section>
       </header>';
       } 
-      elseif ($title == "Discuss") {
-        echo '<header class="' . strtolower($title) . '">
+			elseif ($title == "Discuss") {
+				echo '<header class="' . strtolower($title) . '">
         <section id="headerwrap">
           <a href="' . URL_DISCUSS . '"><h1>' . $title . '</h1></a>
         </section>
       </header>';
-      } elseif ($title == "Try-It") {
+			} elseif ($title == "Try-It") {
       ?>
 
       <header class="tryit">

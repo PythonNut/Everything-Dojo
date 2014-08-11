@@ -5,12 +5,12 @@ if($edit == false && checkAdmin() == 0){
   redirect(URL_DATABASE);
 }
 else{
-  if(checkAdmin() == 0){
-    $style = $themedb->get_themes($id, false, $_SESSION['user_id']);
-  }
-  else{
-    $style = $themedb->get_themes($id, false, $_SESSION['user_id'], 1);
-  }
+	if(checkAdmin() == 0){
+  	$style = $themedb->get_themes($id, false, $_SESSION['user_id']);
+	}
+	else{
+		$style = $themedb->get_themes($id, false, $_SESSION['user_id'], 1);
+	}
   $style = $themedb->get_themes($id, $_SESSION['user_id']);
   $development_stages = array('[DEV]', '[ALPHA]', '[BETA]');
   $users = $themedb->get_popup_users();
