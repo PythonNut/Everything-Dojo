@@ -43,15 +43,17 @@ Please do not plagiarize
 
 html > body > #wrap > header > #headerwrap > h1,
 html > body > #wrap > header > #headerwrap > h1 > a,
-html > body > #wrap > header > #headerwrap > h1 > a:active {
+html > body > #wrap > header > #headerwrap > h1 > a:active,
+html > body > #wrap > header > #headerwrap > form > a,
+html > body > #wrap > header > #headerwrap > form > a:active {
   position: static !important;
   display: inline-block !important;
   background: none !important;
   color: white !important;
-  line-height: inherit !important;
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif !important;
   font-size: inherit !important;
   font-weight: 400 !important;
+  line-height: inherit !important;
   text-align: left !important;
   text-decoration: none !important;
   text-transform: uppercase !important;
@@ -64,8 +66,15 @@ html > body > #wrap > header > #headerwrap > h1 > a:active {
 html > body > #wrap > header > #headerwrap > h1 {
   position: absolute !important;
   padding: 0.1em 0 !important;
-  margin: 0.3em !important;
+  margin: 0.17em !important;
   height: 1.334em !important;
+}
+html > body > #wrap > header > #headerwrap > form > a,
+html > body > #wrap > header > #headerwrap > form > a:active {
+  color: black !important;
+  font-family: Amble, sans-serif !important;
+  font-size: 15px !important;
+  text-transform: none !important;
 }
 
 .small { font-size: 0.65em; }
@@ -90,5 +99,6 @@ header {
   width: 90%;
   height: 11.6vh;
   font-size: 2.82em;
+  line-height: 1.4em;
   text-align: left;
 }
