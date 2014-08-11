@@ -54,12 +54,12 @@
 		  }
       ?>
         <tr style="cursor:pointer;" onclick="window.location.href='<?php echo URL_DISCUSS; ?>?view=topic&f=<?php echo intval($id); ?>&t=<?php echo $topic['topic_id']; ?>'">
-          <td><?php echo $topic['title']; ?></td>
+          <td><?php echo htmlspecialchars($topic['title']); ?></td>
           <td><?php echo $username; ?></td>
           <td><?php echo $comments; ?></td>
           <td><?php echo $topic['views']; ?></td>
           <td><?php $lastpost = $discuss->get_posts(intval($topic['topic_id']), 'all', $typearg); if (empty($lastpost)){ echo "-";} else{ echo 
-"<b>".$discuss->get_user($lastpost[count($lastpost)-1]['user_id'])['user_name'].":</b> ".substr($lastpost[count($lastpost)-1]['text'],0,100)." (...)";} ?></td>
+"<b>".$discuss->get_user($lastpost[count($lastpost)-1]['user_id'])['user_name'].":</b> ".substr($discuss->parse_code($lastpost[count($lastpost)-1]['text']),0,100)." (...)";} ?></td>
         </tr>
       <?php }} ?>
       </tbody>

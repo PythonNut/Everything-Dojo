@@ -16,8 +16,8 @@
   	<div class="discuss-arrow-up"></div>
 		<div class="discuss-fora-text">
     	<div class="discuss-fora-text-inner">
-        <h3><?php echo $forum['name']; ?></h3>
-        <p><?php echo $forum['description']; ?></p>
+        <h3><?php echo $discuss->parse_code($forum['name']); ?></h3>
+        <p><?php echo $discuss->parse_code($forum['description']); ?></p>
     </div>
     </div>
 	</section>
