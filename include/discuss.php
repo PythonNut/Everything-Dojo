@@ -135,7 +135,7 @@ class discuss {
 						$query = "SELECT COUNT(*) FROM `" . DISCUSS_TOPICS_TRACK_SPECIAL_TABLE . "` WHERE `style_id` = :id AND `user_id` = :user_id";
 						$sth = $this->dbc->prepare($query);
 						$sth->execute(array(
-							':id' 			=> $i,
+							':id' 			=> $row['id'],
 							':user_id'	=> $user_id
 						));						
 						$count = $sth->fetchColumn();
@@ -151,6 +151,7 @@ class discuss {
 						
 						// find comment count
 						$result[$i]['comment_count'] = $this->get_comment_count($result[$i]['topic_id'], $type);
+            return $result;
 					}
 			}
 			else{
@@ -186,10 +187,11 @@ class discuss {
 				
 				// find comment count
 				$result[$i]['comment_count'] = $this->get_comment_count($result[$i]['topic_id'], $type);
+        return $result;
 			}
 		}
 		
-		return $result;
+		
 	}
     function parse_code($string){
       $search = array('\n', '\\n');

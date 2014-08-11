@@ -106,6 +106,9 @@
       case 'topic':
         include('include/discuss/topic_body.php');
         break;
+      case 'create':
+        include('include/discuss/create_body.php');
+        break;
       default:
         echo "<b>Something wrong happened!</b> Discuss can't handle this request because it doesn't know how to do it! Don't worry, though; Try going <a href='discuss.php'>back to Discuss home page</a> or try our other services!";
         break;

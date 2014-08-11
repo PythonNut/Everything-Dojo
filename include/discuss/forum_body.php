@@ -30,7 +30,7 @@
   <h3 style="text-align: center;"><?php echo $forum_data['name']; ?></h3>
   <p style="text-align: center;"><?php echo $forum_data['description']; ?></p>
   <?php 
-  if ($user_id > 0){
+  if ($user_id > 0 and intval($id) != 1){
     echo "<a href='".URL_DISCUSS."?view=create&c=topic'>+ Create New Topic</a>";
   }
   ?>
@@ -56,7 +56,7 @@
       <?php } else{ 
 		foreach($topics as $topic){ 
 		  $username = get_user($topic['user_id']);
-		  $comments = $topic['comment_count'];
+		  $comments = $discuss->get_comment_count($topic['topic_id'], 0);
 		  if($type == 1){
 		    $comments = $comments - 1;
 		  }
@@ -65,7 +65,7 @@
           <td><?php echo htmlspecialchars($topic['title']); ?></td>
           <td><?php echo $username; ?></td>
           <td><?php echo $comments; ?></td>
-          <td><?php echo $topic['views']; ?></td>
+          <td><?php echo $discuss->get_views($topic['topic_id'], 1 - $typearg); ?></td>
           <td><?php $lastpost = $discuss->get_posts(intval($topic['topic_id']), 'all', $typearg); if (empty($lastpost)){ echo "-";} else{ echo 
 "<b>".$discuss->get_user($lastpost[count($lastpost)-1]['user_id'])['user_name'].":</b> ".substr($discuss->parse_code($lastpost[count($lastpost)-1]['text']),0,50)." (...)";} ?></td>
         </tr>
