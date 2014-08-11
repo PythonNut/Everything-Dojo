@@ -20,7 +20,7 @@
 ?>
 <section id="content">
   <?php if (!empty($_SESSION['user_id'])){ ?>
-  <h3>Welcome, <?php echo $discuss->get_user($_SESSION['user_id'])['user_name'];?>!</h3>
+  <h3>Welcome, <?php echo get_user($_SESSION['user_id']);?>!</h3>
   <br/>
   <?php } else{ ?>
   <h3>Hello Guest. Please <a href="login.php">sign in</a>.</h3>

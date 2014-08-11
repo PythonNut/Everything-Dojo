@@ -228,14 +228,7 @@ class discuss {
       $replace = array('<br/>', '<br/>');
       return str_replace($search, $replace, htmlspecialchars($string));
     }
-    //this is used heavily in Discuss, so just keep this.
-    function get_user($user_id){
-      $query ="SELECT * FROM users WHERE id = :id";
-      $sth = $this->dbc->prepare($query);
-      $sth->execute(array(':id' => intval($user_id)));   
-      $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-      return $result[0];
-    }
+
     //get specific topic
     function get_topic($topic_id, $type = 0){
       if ($type == 1){
@@ -245,7 +238,7 @@ class discuss {
         $sth->execute(array(
           ':id' => $topic_id
         ));
-        $style = $sth->fetchAll(PDO::FETCH_ASSOC)[0];
+        $style = $sth->fetch(PDO::FETCH_ASSOC);
         //export result
         $result = array(
           'forum_id' => 1,
@@ -265,7 +258,7 @@ class discuss {
         $sth->execute(array(
           ':id' => $topic_id
         ));
-        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        $result = $sth->fetch(PDO::FETCH_ASSOC);
         return $result;
       }
     }
