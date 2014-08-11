@@ -209,13 +209,14 @@
               </select>
             </section>
             <section style="display:inline-block;">
-              <h1 style="margin:0px;padding:0px;height:15px;color:black;font-size:15px;font-family:Amble,sans-serif;display:inline-block">Development Mode: </h1>
+              <label style="margin:0px;padding:0px;height:15px;color:black;font-size:15px;font-family:Amble,sans-serif;display:inline-block">Development Mode:
               <?php if ($_GET['dev'] == "dev") {
                 echo '<input type="checkbox" value="dev" name="dev" onChange="this.form.submit();" style="display:inline-block;" checked/>';
               }
               else {
                 echo '<input type="checkbox" value="dev" name="dev" onChange="var confirm=window.confirm(\'Warning: Development mode means that you can try ALL the styles, including incomplete, in-development and/or buggy CSS. These styles are not recommended for your blog.\n\nDo you really wish to continue?\');if(confirm)this.form.submit();else this.checked=false;" style="display:inline-block;"/>';
               } ?>
+              </label>
             </section>
             <?php
             if (!empty($_GET['select'])){

@@ -44,8 +44,8 @@ Please do not plagiarize
 html > body > #wrap > header > #headerwrap > h1,
 html > body > #wrap > header > #headerwrap > h1 > a,
 html > body > #wrap > header > #headerwrap > h1 > a:active,
-html > body > #wrap > header > #headerwrap > form > a,
-html > body > #wrap > header > #headerwrap > form > a:active {
+html > body > #wrap > header > #headerwrap > form a,
+html > body > #wrap > header > #headerwrap > form label{
   position: static !important;
   display: inline-block !important;
   background: none !important;
@@ -69,8 +69,8 @@ html > body > #wrap > header > #headerwrap > h1 {
   margin: 0.13em !important;
   height: 1.334em !important;
 }
-html > body > #wrap > header > #headerwrap > form > a,
-html > body > #wrap > header > #headerwrap > form > a:active {
+html > body > #wrap > header > #headerwrap > form a,
+html > body > #wrap > header > #headerwrap > form label {
   color: black !important;
   font-family: Amble, sans-serif !important;
   font-size: 15px !important;
@@ -101,4 +101,42 @@ header {
   font-size: 2.82em;
   line-height: 1.4em;
   text-align: left;
+}
+
+/*--SLIDE BUTTONS--*/
+
+.slideButton {
+  position: absolute;
+  cursor: pointer;
+}
+
+#header-button {
+  height: 2vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #ff8e3e;
+  color: #aaa;
+  vertical-align: middle;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+.closed #header-button {
+  width: 5vw;
+  left: 47.5vw;
+  border-radius: 0 0 0.3em 0.3em;
+  background: #ff6c00;
+}
+
+#header-button.targeted {
+  left: 0;
+  width: 100%;
+  border-radius: 0;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+#blog-body {
+  position: relative;
+  margin-top: 13.6vh;
 }

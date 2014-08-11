@@ -44,23 +44,34 @@ Array.prototype.last = function(nth) {
     var classcolor = $("header").attr("class");
     var headerHeight = $("header").height();
     $("header").css("position", "absolute")
-               .append("<div id=\"headerButton\" class=\"slideButton down " + classcolor + "\">Close</div>");
+               .append('<div id="header-button" class="slideButton down ' + classcolor + '"></div>');
+
     var openHeader = true;
-    $("#headerButton").click(function () {
-      $("#headerwrap").slideToggle();
+    $("header").addClass("opened");
+
+    $("#header-button").click(function () {
       if (openHeader) {
-        $("#headerButton").animate({
-          top: 0
+        $("header").animate({
+          top: -headerHeight
         }, 400, function () {
-          $(this).text("Open");
+          $(this).removeClass("opened").addClass("closed");
         });
-        openHeader = false;
-      } else {
+
         $(this).animate({
           top: headerHeight
-        }, 400, function () {
-          $(this).text("Close");
-        });
+        }, 400);
+
+        openHeader = false;
+
+      } else {
+        $("header").removeClass("closed").addClass("opened").animate({
+          top: 0
+        }, 400);
+
+        $(this).animate({
+          top: headerHeight
+        }, 400);
+
         openHeader = true;
       }
     });
@@ -75,7 +86,7 @@ Array.prototype.last = function(nth) {
     var sideWidth = $("#sidebar").width();
 
     // add open/hide button
-    $("#sidebar").append("<div id=\"side-button\" class=\"slideButton right\">&laquo;</div>");
+    $("#sidebar").append('<div id="side-button" class="slideButton right">&laquo;</div>');
 
     // sidebar is opened at first
     var openSide = true;
@@ -389,6 +400,92 @@ function themizer () {
   // Reposition picker when user scrolls sidebar
   $("#sidebar-inner").bind("scroll", function () {
     $(".spectrum.color-picker").spectrum("reflow");
+  });
+
+  $(window).mousemove();
+}
+
+/**
+ * Try-It init
+ */
+
+function tryit () {
+  /*************
+   * VARIABLES *
+   *************/
+  // get viewport height
+  var vh = $(window).height()/100;
+
+  // find width of sidebar and of sideButton
+  var headerHeight = 11.6*vh,
+      headerButtonHeight =  2*vh;
+
+  // set whether user is active or not for later
+  var idleTimer = null,
+      idleState = true;
+
+  /*************
+   * FUNCTIONS *
+   *************/
+  // Set sidebar styles
+  $("header")        .css("font-size", 2.22*vh);
+  $("#headerwrap")   .height(headerHeight);
+  $("#header-button").css("top", headerHeight);
+
+  // Show/hide sideButton
+  // modify sideButton on click
+  $("#header-button").click(function () {
+    // fires when sidebar is to be closed
+    if ($("header").css("top") == "0px" && $("header").hasClass("opened")) {
+      $("#header-button").addClass("triggered");
+      $("#blog-body").animate({
+        marginTop: 0
+      }, 400);
+      idleState = true; // since user is active
+    } else {
+      $("#header-button").removeClass("targeted");
+      $("#blog-body").animate({
+        marginTop: 13.6*vh
+      });
+    }
+  });
+
+  // show sideButton on mousemove + scroll
+  // taken and modified from http://css-tricks.com/snippets/jquery/fire-event-when-user-is-idle/
+  $(window).bind('mousemove scroll', function (event) {
+    clearTimeout(idleTimer); // clear timeout if user acts
+
+    // user active
+    if (idleState == true) {
+      // Reactivated event
+      $(".closed #header-button").addClass("triggered").animate({
+        top: headerHeight
+      }, 100);
+    }
+
+    // user mouse in "targeted" zone
+    // We cannot use jQuery animations as they are too CPU-intensive
+    // Instead, we just add .targeted.
+    if (event.pageY < headerHeight) {
+      $(".closed #header-button").addClass("targeted");
+    } else {
+      $(".closed #header-button").removeClass("targeted");
+    }
+
+    idleState = false;
+
+    // user inactive
+    idleTimer = setTimeout(function () {
+      // Idle Event
+      // cursor outside target zone
+      $("#header-button").removeClass("triggered");
+      $(".closed #header-button:not(:hover):not(.targeted)").animate({
+        top: headerHeight - headerButtonHeight
+      }, 1500);
+      // cursor inside target zone
+      $("#header-button").removeClass("targeted");
+      idleState = true;
+    }, 4000);
   });
 
   $(window).mousemove();
