@@ -93,9 +93,10 @@
 <a href="#topic-create-comment" id="topic-a-comment">+ Add a comment</a>
 <fieldset id="topic-create-comment">
 <legend>Add new comment</legend>
-<form action="<?php echo URL_DISCUSS?>?view=create&c=post" method="post">
+<form action="<?php echo URL_DISCUSS?>?view=create&c=post&t=<?php echo $topic['topic_id'];?>" method="post">
   Title: <input type="text" name="title" value="RE: <?php echo $topic['title'];?>"/><br/>
-  Comment: <textarea placeholder="Write your comment here..." style="vertical-align:top; height:200px;"></textarea><br/>
+  Comment: <textarea name="desc" placeholder="Write your comment here..." style="vertical-align:top; height:200px;"></textarea><br/>
+  <input name="forum" value="<?php echo $topic['forum_id'];?>" hidden="hidden"/>
   <input type="submit" value="Comment"/>
 </form>
 </fieldset>
