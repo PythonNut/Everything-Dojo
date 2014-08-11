@@ -25,6 +25,7 @@
 
 <?php if (!empty($topic) and (!empty($topic['title']))){ ?>
 <a href="<?php echo URL_DISCUSS; ?>?view=forum&f=<?php echo intval($topic['forum_id']);?>">&laquo; Back to <?php echo $discuss->get_fora(intval($topic['forum_id']))['name'];?></a>
+<br/>
 <section id="topic">
   <div id="discuss-topic-header" <?php if ($_GET['f'] == 1){echo 'style="background-image: url('.$topic['photo_attach'].');"';}?> >
     <h1 style="text-align:center;"><?php echo $topic['title'];?></h1>
@@ -43,7 +44,7 @@
         <div class="topic-reply-text">
           <?php $user = $discuss->get_user($post['user_id']);?>
           <div class="topic-reply-top">
-            <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $post['title'];?></h2>
+            <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $discuss->parse_code($post['title']);?></h2>
             <div style="display:inline-block; opacity: 0.6;">
               Posted by <?php echo $user['user_name'];?> on <?php echo date('D M d, Y g:i a', $post['time']);?></div>
             <?php if ($_SESSION['user_id'] > 0){ ?>
@@ -51,7 +52,7 @@
             <div class="topic-reply-thanks<?php if (in_array($_SESSION['user_id'],$thanks)){ echo " topic-reply-thanked"; $thankedposts[] = $post['post_id'];}?>" id="topic-reply-thanks-<?php echo $post['post_id'];?>" onclick="thankpost(<?php echo $post['post_id']?>)">&uArr; &nbsp;&nbsp;<?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div>
             <?php }?>
           </div>
-          <p><?php echo $post['text'];?></p>
+          <p><?php echo $discuss->parse_code($post['text']);?></p>
         </div>
       </div>
     <?php } ?>

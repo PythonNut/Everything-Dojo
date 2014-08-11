@@ -191,7 +191,11 @@ class discuss {
 		
 		return $result;
 	}
-  
+    function parse_code($string){
+      $search = array('\n', '\\n');
+      $replace = array('<br/>', '<br/>');
+      return str_replace($search, $replace, htmlspecialchars($string));
+    }
     //this is used heavily in Discuss, so just keep this.
     function get_user($user_id){
       $query ="SELECT * FROM users WHERE id = :id";
