@@ -29,6 +29,11 @@
 <section id="discuss-topics" style="clear:left;">
   <h3 style="text-align: center;"><?php echo $forum_data['name']; ?></h3>
   <p style="text-align: center;"><?php echo $forum_data['description']; ?></p>
+  <?php 
+  if ($user_id > 0){
+    echo "<a href='".URL_DISCUSS."?view=create&c=topic'>+ Create New Topic</a>";
+  }
+  ?>
     <table class="discuss-table">
       <thead style="border-bottom: 1px black solid;">
         <tr>
