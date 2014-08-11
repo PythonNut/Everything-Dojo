@@ -90,12 +90,21 @@
 </section>
 <br/>
 <?php if ($_SESSION['user_id'] > 0){ ?>
-<a href="#topic-create-comment">+ Add a comment</a>
-<form id="topic-create-comment" action="<?php echo URL_DISCUSS?>">
-  <input name="title"/>
+<a href="#topic-create-comment" id="topic-a-comment">+ Add a comment</a>
+<fieldset id="topic-create-comment">
+<legend>Add new comment</legend>
+<form action="<?php echo URL_DISCUSS?>">
+  Title: <input type="text" name="title" value="RE: <?php echo $topic['title'];?>"/><br/>
+  Comment: <textarea placeholder="Write your comment here..." style="vertical-align:top;"></textarea>
 </form>
+</fieldset>
+
 <script>
-  $("#topic-create-comment").slideToggle(300);
+  $("#topic-create-comment").hide();
+  $("#topic-a-comment").click(function(){
+    $("#topic-a-comment").hide();
+    $("#topic-create-comment").slideToggle(300);
+  });
 </script>
 <?php } ?>
 <?php } else{
