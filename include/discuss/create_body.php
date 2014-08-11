@@ -5,7 +5,8 @@ if (empty($_GET['c'])){
 else{
   switch($_GET['c']){
     case "post":
-      if (empty($discuss->get_topic(intval($_GET['t']),1))){
+      $tmp = $discuss->get_topic(intval($_GET['t']),1);
+      if (empty($tmp)){
         echo "Topic does not exist! Don't worry, though; Try going <a href='discuss.php'>back to Discuss home page</a> or try our other services!";
         break;
       }
@@ -13,10 +14,10 @@ else{
         echo "Your title needs to have at least 5 characters (excluding spaces)!";
         echo "<fieldset id=\"topic-create-comment\">
         <legend>Add new comment</legend>
-        <form action=".URL_DISCUSS."?view=create&c=post&t=".intval($_GET['t'])." method=\"post\">
-          Title: <input type=\"text\" name=\"title\" value=".$_POST['title']."/><br/>
+        <form action=\"".URL_DISCUSS."?view=create&c=post&t=".intval($_GET['t'])."\" method=\"post\">
+          Title: <input type=\"text\" name=\"title\" value=\"".$_POST['title']."\"/><br/>
           Comment: <textarea name=\"desc\" placeholder=\"Write your comment here...\" style=\"vertical-align:top; height:200px;\">".$_POST['desc']."</textarea><br/>
-          <input name=\"forum\" value=".intval($_POST['forum'])." hidden=\"hidden\"/>
+          <input name=\"forum\" value=\"".intval($_POST['forum'])."\" hidden=\"hidden\"/>
           <input type=\"submit\" value=\"Comment\"/>
         </form>
         </fieldset>";
@@ -26,9 +27,9 @@ else{
         echo "<fieldset id=\"topic-create-comment\">
         <legend>Add new comment</legend>
         <form action=".URL_DISCUSS."?view=create&c=post&t=".intval($_GET['t'])." method=\"post\">
-          Title: <input type=\"text\" name=\"title\" value=".$_POST['title']."/><br/>
+          Title: <input type=\"text\" name=\"title\" value=\"".$_POST['title']."\"/><br/>
           Comment: <textarea name=\"desc\" placeholder=\"Write your comment here...\" style=\"vertical-align:top; height:200px;\">".$_POST['desc']."</textarea><br/>
-          <input name=\"forum\" value=".intval($_POST['forum'])." hidden=\"hidden\"/>
+          <input name=\"forum\" value=\"".intval($_POST['forum'])."\" hidden=\"hidden\"/>
           <input type=\"submit\" value=\"Comment\"/>
         </form>
         </fieldset>";

@@ -33,6 +33,7 @@ order allow,deny
 deny from all
 </Files>
 
+
 <FilesMatch "\.(eot|otf|woff|ttf)$">
 <IfModule mod_headers.c>
   Header set Access-Control-Allow-Origin "*"
