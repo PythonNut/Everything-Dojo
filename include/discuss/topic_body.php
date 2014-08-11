@@ -10,7 +10,8 @@
       $posts = $discuss->get_posts(intval($_GET['t']), 'all', 1);
     }
     else{
-      $topic = $discuss->get_topic(intval($_GET['t']))[0];
+      $topic = $discuss->get_topic(intval($_GET['t']));
+			$topic = $topic[0];
       $posts = $discuss->get_posts(intval($_GET['t']), 'all', 0);
     }
   }
@@ -23,8 +24,8 @@
   }
 ?>
 
-<?php if (!empty($topic) and (!empty($topic['title']))){ ?>
-<a href="<?php echo URL_DISCUSS; ?>?view=forum&f=<?php echo intval($topic['forum_id']);?>">&laquo; Back to <?php echo $discuss->get_fora(intval($topic['forum_id']))['name'];?></a>
+<?php if (!empty($topic) and (!empty($topic['title']))){ $name = $discuss->get_fora(intval($topic['forum_id'])); $name = $name['name'];?>
+<a href="<?php echo URL_DISCUSS; ?>?view=forum&f=<?php echo intval($topic['forum_id']);?>">&laquo; Back to <?php echo $name;?></a>
 <br/>
 <section id="topic">
   <div id="discuss-topic-header" <?php if ($_GET['f'] == 1){echo 'style="background-image: url('.$topic['photo_attach'].');"';}?> >
@@ -32,7 +33,7 @@
   </div>
   <div id="topic-main">
     <div id="topic-main-text">
-      <?php $user = $discuss->get_user(intval($topic['user_id']))['user_name'];?>
+      <?php $user = get_user(intval($topic['user_id']));?>
       <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $topic['title'];?></h2>
       <div style="display:inline-block; opacity: 0.6;">Posted by <?php echo $user;?> on <?php echo date('D M d, Y g:i a', $topic['time']);?></div>
       <p><?php echo $topic['text'];?></p>
@@ -42,7 +43,7 @@
     <?php $thankedposts = []; foreach ($posts as $post){?>
       <div class="topic-reply">
         <div class="topic-reply-text">
-          <?php $user = $discuss->get_user($post['user_id']);?>
+          <?php $user = get_user($post['user_id']);?>
           <div class="topic-reply-top">
             <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $discuss->parse_code($post['title']);?></h2>
             <div style="display:inline-block; opacity: 0.6;">
