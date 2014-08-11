@@ -65,11 +65,11 @@
       <header class="tryit">
         <section id="headerwrap">
 
-          <h1 style="text-align: left !important; cursor:pointer;" onclick="window.location.href='tryit.php';">Try-It</h1>
-          
-          <form method="get" id="select-theme" name="select-theme" style="margin-left:4em; font-family: 'Lato', sans-serif;">
-            <section class="option-wrap" style="display:inline-block;">
-              <select id="select" name="select" onchange="this.form.submit()">
+          <h1 style="text-align:left !important"><a href="tryit.php">Try-It</a></h1>
+
+          <form method="get" id="select-theme" name="select-theme" style="margin-left:4em;font-family:Amble,sans-serif">
+            <section class="option-wrap" style="display:inline-block">
+              <select id="select" name="select" onchange="this.form.submit()" style="color:black;font-family:Amble,sans-serif">
               <option value="" selected>======= SELECT ONE =======</option>
               <?php
                 include("db.php");
@@ -85,7 +85,7 @@
                     'rel' => array(),
                     'other' => array()
                   );
-                  
+
                   //get validated
                   foreach($data['validated']['name'] as $key=>$theme){
                     $tmp_theme = array(
@@ -209,7 +209,7 @@
               </select>
             </section>
             <section style="display:inline-block;">
-              <h1 style="margin:0px; padding:0px; height:15px; font-size:15px; display:inline-block;">Development Mode: </h1>
+              <h1 style="margin:0px;padding:0px;height:15px;color:black;font-size:15px;font-family:Amble,sans-serif;display:inline-block">Development Mode: </h1>
               <?php if ($_GET['dev'] == "dev") {
                 echo '<input type="checkbox" value="dev" name="dev" onChange="this.form.submit();" style="display:inline-block;" checked/>';
               }
@@ -219,7 +219,7 @@
             </section>
             <?php
             if (!empty($_GET['select'])){
-              echo '<a style="display:inline-block; font-size:15px; height:15px; margin-left:15px;" href="database.php?mode=view&view=style&id='.intval($_GET['select']).'">View style in Database</a>';
+              echo '<a style="display:inline-block;font-size:15px;height:15px;margin-left:15px;" href="database.php?mode=view&view=style&id='.intval($_GET['select']).'">View style in Database</a>';
             }
             ?>
           </form>
