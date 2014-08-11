@@ -210,15 +210,9 @@ td.small-col{
   padding: 1em 1em;
 }
 #discuss-topic-header{
-  height: 4em;
   color: #000000;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
   margin-bottom: 1em;
   border: 2px solid black;
-  background-position: center;
-  -webkit-transition: 500ms ease;
-  transition: 500ms ease;
 }
 .topic-reply{
   border: 1px solid black;

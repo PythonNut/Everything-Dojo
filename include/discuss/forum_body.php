@@ -31,7 +31,7 @@
   <p style="text-align: center;"><?php echo $forum_data['description']; ?></p>
   <?php 
   if ($user_id > 0 and intval($id) != 1){
-    echo "<a href='".URL_DISCUSS."?view=create&c=topic'>+ Create New Topic</a>";
+    echo "<a href='".URL_DISCUSS."?view=create&c=topic&f=".intval($id)."'>+ Create New Topic</a>";
   }
   ?>
     <table class="discuss-table">
