@@ -67,7 +67,7 @@
           <td><?php echo $comments; ?></td>
           <td><?php echo $topic['views']; ?></td>
           <td><?php $lastpost = $discuss->get_posts(intval($topic['topic_id']), 'all', $typearg); if (empty($lastpost)){ echo "-";} else{ echo 
-"<b>".$discuss->get_user($lastpost[count($lastpost)-1]['user_id'])['user_name'].":</b> ".substr($discuss->parse_code($lastpost[count($lastpost)-1]['text']),0,100)." (...)";} ?></td>
+"<b>".$discuss->get_user($lastpost[count($lastpost)-1]['user_id'])['user_name'].":</b> ".substr($discuss->parse_code($lastpost[count($lastpost)-1]['text']),0,50)." (...)";} ?></td>
         </tr>
       <?php }} ?>
       </tbody>
