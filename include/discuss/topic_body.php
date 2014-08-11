@@ -10,7 +10,7 @@
       $posts = $discuss->get_posts(intval($_GET['t']), 'all', 1);
     }
     else{
-      $topic = $discuss->get_topic(intval($_GET['t']))[0];
+      $topic = $discuss->get_topic(intval($_GET['t']));
       $posts = $discuss->get_posts(intval($_GET['t']), 'all', 0);
     }
   }
@@ -21,17 +21,18 @@
     }
     $discuss->view_topic(intval($_GET['t']), $type, intval($_SESSION['user_id']));
   }
+	$data = get_fora(intval($topic['forum_id']));
 ?>
 
 <?php if (!empty($topic) and (!empty($topic['title']))){ ?>
-<a href="<?php echo URL_DISCUSS; ?>?view=forum&f=<?php echo intval($topic['forum_id']);?>">&laquo; Back to <?php echo $discuss->get_fora(intval($topic['forum_id']))['name'];?></a>
+<a href="<?php echo URL_DISCUSS; ?>?view=forum&f=<?php echo intval($topic['forum_id']);?>">&laquo; Back to <?php echo $data['name'];?></a>
 <section id="topic" style="margin-top: 1em;">
   <div id="discuss-topic-header">
     <h1 style="text-align:center;"><?php echo $topic['title'];?></h1>
   </div>
   <div id="topic-main">
     <div id="topic-main-text">
-      <?php $user = $discuss->get_user(intval($topic['user_id']))['user_name'];?>
+      <?php $user = get_user(intval($topic['user_id']));?>
       <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $topic['title'];?></h2>
       <div style="display:inline-block; opacity: 0.6;">Posted by <?php echo $user;?> on <?php echo date('D M d, Y g:i a', $topic['time']);?></div>
       <p><?php echo $topic['text'];?></p>
