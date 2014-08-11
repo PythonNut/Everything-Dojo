@@ -578,6 +578,7 @@ table a { color: #F99819; }
   /* position for index page */
   right: 15vw;
   top: 7.5vh;
+	z-index: 1000000;
 }
 
 .notification-arrow-up{
