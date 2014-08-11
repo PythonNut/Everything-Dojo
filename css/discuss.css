@@ -30,8 +30,8 @@
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
-  -webkit-transition: all 500ms ease;
-  transition: all 500ms ease;
+  -webkit-transition: 500ms ease;
+  transition: 500ms ease;
   float: left;
   margin-left: 1vw;
   margin-right: 1vw;
@@ -39,8 +39,8 @@
 .discuss-fora:hover{
   background-color: #1b63c6;
   background-size: 150% 150%;
-  -webkit-transition: all 500ms ease;
-  transition: all 500ms ease;
+  -webkit-transition: 500ms ease;
+  transition: 500ms ease;
 }
 .discuss-arrow-up {
   width: 0; 
@@ -51,8 +51,8 @@
   margin-top: 14.5vw;
   margin-left: auto;
   margin-right: auto;
-  -webkit-transition: all 500ms ease;
-  transition: all 500ms ease;
+  -webkit-transition: 500ms ease;
+  transition: 500ms ease;
 }
 .discuss-fora-text{
   font-family: 'lato';
@@ -61,8 +61,8 @@
   background-color: #212121;
   color: #FFFFFF;
   overflow: hidden;
-  -webkit-transition: all 500ms ease;
-  transition: all 500ms ease;
+  -webkit-transition: 500ms ease;
+  transition: 500ms ease;
   border-top: .5vw solid black;
 }
 .discuss-fora:hover > .discuss-fora-text {
@@ -107,7 +107,7 @@
 .discuss-round span {
   position: absolute;
   top: 50%;
-  left: 43%; /* 43% to hide behind arrows for increased visual effect */
+  left: 42%; /* 42% to hide behind arrows for increased visual effect */
   height: 0;
   width: 0;
   background: #0a8efe;
@@ -129,7 +129,7 @@
   content: "";
   position: absolute;
   top: 25%;
-  left: 39%;
+  left: 40%;
   width: 15%;
   height: 27%;
   background: black;
@@ -186,13 +186,15 @@ td.small-col{
   background-color: #FFFFFF;
   color: #000000;
   overflow: hidden;
-  transition: all 500ms ease;
+  -webkit-transition: 500ms ease;
+  transition: 500ms ease;
 }
 .topic-reply-thanks:hover{
   background-color: #51b835;
   color: #FFFFFF;
   width: 150px;
-  transition: all 500ms ease;
+  -webkit-transition: 500ms ease;
+  transition: 500ms ease;
 }
 .topic-reply-thanked{
   background-color: #51b835;
@@ -215,8 +217,8 @@ td.small-col{
   margin-bottom: 1em;
   border: 2px solid black;
   background-position: center;
-  -webkit-transition: all 500ms ease;
-  transition: all 500ms ease;
+  -webkit-transition: 500ms ease;
+  transition: 500ms ease;
 }
 .topic-reply{
   border: 1px solid black;
