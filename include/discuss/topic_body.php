@@ -25,8 +25,7 @@
 
 <?php if (!empty($topic) and (!empty($topic['title']))){ ?>
 <a href="<?php echo URL_DISCUSS; ?>?view=forum&f=<?php echo intval($topic['forum_id']);?>">&laquo; Back to <?php echo $discuss->get_fora(intval($topic['forum_id']))['name'];?></a>
-<br/>
-<section id="topic">
+<section id="topic" style="margin-top: 1em;">
   <div id="discuss-topic-header" <?php if ($_GET['f'] == 1){echo 'style="background-image: url('.$topic['photo_attach'].');"';}?> >
     <h1 style="text-align:center;"><?php echo $topic['title'];?></h1>
   </div>
