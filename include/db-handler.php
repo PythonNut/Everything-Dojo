@@ -36,8 +36,8 @@ session_start();
       break;
     case 'validate':
       $data = $_POST;
-      $owner = $themedb->get_owner($_POST['id']);
-      $notification->insert_notification(2, $_POST['id'], $owner);
+      $owner = $themedb->get_owner($data['id']);
+      $notification->insert_notification(2, $data['id'], $owner);
       $themedb->validate_theme($_POST['id']);
 
       header('Location: ' . SITE_ROOT . 'include/db-success.php');
@@ -48,5 +48,18 @@ session_start();
 
       header('Location: ' . SITE_ROOT . 'include/db-success.php');
       break;
+		case 'reject':
+			$data = $_POST;
+			$owner = $themedb->get_owner($data['id']);
+			$type = $themedb->reject_theme($data['id']);
+			if($type == 'unapproved'){
+				$notification->insert_notification(3, $data['id'], $owner);
+			}
+			elseif($type == 'unvalidated'){
+				$notification->insert_notification(4, $data['id'], $owner);
+			}
+			
+			header('Location: ' . SITE_ROOT . 'include/db-success.php');
+			break;
   }
 ?>

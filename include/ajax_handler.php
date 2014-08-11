@@ -3,7 +3,7 @@ include('include.php');
 if(isset($_POST['action']) && !empty($_POST['action'])) {
     $action = $_POST['action'];
     switch($action) {
-        case 'mark_read': 
+        case 'mark_read':
           $notification->mark_read($_POST['notification_id']);
           break;
         case 'mark_all_read':
