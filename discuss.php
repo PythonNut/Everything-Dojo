@@ -11,7 +11,7 @@
   $extra_style = "<link rel=\"stylesheet\" href=\"css/discuss.css\" />";
   get_header();
   if (empty($_GET['view'])){
-    $view = 0;
+    $view = '';
   }
   else{
     $view = $_GET['view'];

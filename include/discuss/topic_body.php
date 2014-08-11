@@ -21,7 +21,7 @@
     }
     $discuss->view_topic(intval($_GET['t']), $type, intval($_SESSION['user_id']));
   }
-	$data = get_fora(intval($topic['forum_id']));
+	$data = $discuss->get_fora(intval($topic['forum_id']));
 ?>
 
 <?php if (!empty($topic) and (!empty($topic['title']))){ ?>
