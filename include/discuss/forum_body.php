@@ -38,7 +38,7 @@
       </thead>
       <tbody>
       <?php if(count($topics) == 0){ ?>
-      	<tr style="cursor:pointer;">
+        <tr style="cursor:pointer;">
           <td>No topics</td>
           <td>-</td>
           <td>-</td>
@@ -46,12 +46,12 @@
           <td>-</td>
         </tr>
       <?php } else{ 
-		foreach($topics as $topic){ 
-		  $username = get_user($topic['user_id']);
-		  $comments = $topic['comment_count'];
-		  if($type == 1){
-		    $comments = $comments - 1;
-		  }
+    foreach($topics as $topic){
+      $username = get_user($topic['user_id']);
+      $comments = $topic['comment_count'];
+      if($type == 1){
+        $comments = $comments - 1;
+      }
       ?>
         <tr style="cursor:pointer;" onclick="window.location.href='<?php echo URL_DISCUSS; ?>?view=topic&f=<?php echo intval($id); ?>&t=<?php echo $topic['topic_id']; ?>'">
           <td><?php echo htmlspecialchars($topic['title']); ?></td>
