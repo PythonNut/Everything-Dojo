@@ -10,7 +10,13 @@
   $_SESSION['HTTP_USER_AGENT'] = md5($_SERVER['HTTP_USER_AGENT']);*/
   $extra_style = "<link rel=\"stylesheet\" href=\"css/discuss.css\" />";
   get_header();
-  $view = $_GET['view'];
+  if (empty($_GET['view'])){
+    $view = 0;
+  }
+  else{
+    $view = $_GET['view'];
+  }
+  
 ?>
 <section id="content">
   <?php if (!empty($_SESSION['user_id'])){ ?>
