@@ -26,6 +26,9 @@ session_start();
     case 'delete':
       header('Refresh: 3; URL = ' . SITE_ROOT . URL_DATABASE . '?mode=manage');
       break;
+		case 'reject':
+      header('Refresh: 3; URL = ' . SITE_ROOT . URL_DATABASE . '?mode=mcp');
+      break;
   }
 
   $title = "Database";

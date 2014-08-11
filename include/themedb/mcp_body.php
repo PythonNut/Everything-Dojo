@@ -56,7 +56,7 @@ $data = $themedb->get_mcp_styles();
           <td onclick="document.location = '<?php echo URL_DATABASE; ?>?mode=view&view=style&id=<?php echo $data['unapproved'][$i]['id']; ?>'"><?php echo $data['unapproved'][$i]['author']; ?></td>
           <td onclick="document.location = '<?php echo URL_DATABASE; ?>?mode=view&view=style&id=<?php echo $data['unapproved'][$i]['id']; ?>'"><?php echo $data['unapproved'][$i]['version']; ?></td>
           <td onclick="document.location = '<?php echo URL_DATABASE; ?>?mode=view&view=style&id=<?php echo $data['unapproved'][$i]['id']; ?>'"><?php echo $data['unapproved'][$i]['stage']; ?></td>
-          <td><a href="javascript:;" class="view" onclick="popup_options('approve', <?php echo $data['unapproved'][$i]['id']; ?>);"><img src="../../images/check.png" class="img-edit" /></a></td>
+          <td><a href="javascript:;" class="view" onclick="popup_options('approve', <?php echo $data['unapproved'][$i]['id']; ?>);"><img src="../../images/check.png" class="img-edit" /></a> <a href="javascript:;" class="view" onclick="popup_options('reject', <?php echo $data['unapproved'][$i]['id']; ?>);"><img src="../../images/reject.png" class="img-edit" /></a></td>
         </tr>
       <?php
           }
@@ -67,7 +67,7 @@ $data = $themedb->get_mcp_styles();
     </div>
 </div>
 <div class="manage-item" id="manage-2">
-  <div class="option-title manage-header expanded" id="header-2">
+  <div class="option-title manage-header collapsed" id="header-2">
     <h4>Validate Requests (<?php echo count($data['validate_request']) ?>)</h4>
     <span class="collapsebutton"></span>
   </div>
@@ -104,7 +104,7 @@ $data = $themedb->get_mcp_styles();
           <td onclick="document.location = '<?php echo URL_DATABASE; ?>?mode=view&view=style&id=<?php echo $data['validate_request'][$i]['id']; ?>'"><?php echo $data['validate_request'][$i]['author']; ?></td>
           <td onclick="document.location = '<?php echo URL_DATABASE; ?>?mode=view&view=style&id=<?php echo $data['validate_request'][$i]['id']; ?>'"><?php echo $data['validate_request'][$i]['version']; ?></td>
           <td onclick="document.location = '<?php echo URL_DATABASE; ?>?mode=view&view=style&id=<?php echo $data['validate_request'][$i]['id']; ?>'"><?php echo $data['validate_request'][$i]['stage']; ?></td>
-          <td><a href="javascript:;" class="view" onclick="popup_options('validate', <?php echo $data['validate_request'][$i]['id']; ?>);"><img src="../../images/check.png" class="img-edit" /></a></td>
+          <td><a href="javascript:;" class="view" onclick="popup_options('validate', <?php echo $data['validate_request'][$i]['id']; ?>);"><img src="../../images/check.png" class="img-edit" /></a> <a href="javascript:;" class="view" onclick="popup_options('reject', <?php echo $data['validate_request'][$i]['id']; ?>);"><img src="../../images/reject.png" class="img-edit" /></a></td>
         </tr>
       <?php
           }

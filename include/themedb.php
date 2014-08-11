@@ -49,6 +49,34 @@ class themedb {
       ':id' => $id
     ));
   }
+	
+	/*
+	* reject_theme($id)
+	* Desc: Unapprove or unvalidate
+	*/
+	function reject_theme($id){
+		$query = "SELECT `approved`, `validate_request` FROM `" . THEMEDB_TABLE . "` WHERE `id` = :id";
+		$sth = $this->dbc->prepare($query);
+		
+		$sth->execute(array(
+			':id' => $id
+		));
+		
+		$result = $sth->fetch(PDO::FETCH_ASSOC);
+		if($result['approved'] == 0){
+			return 'unapproved';
+		}
+		else{
+			$query = "UPDATE `" . THEMEDB_TABLE . "` SET `validate_request` = 0 AND `validated` = 0 WHERE `id` = :id";
+			$sth = $this->dbc->prepare($query);
+			
+			$sth->execute(array(
+				':id' => $id
+			));
+			
+			return 'unvalidated';
+		}
+	}
 
   /*
   * edit_settings($data)
