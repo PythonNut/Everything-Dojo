@@ -310,21 +310,31 @@ class discuss {
 			else{
 				$query = "INSERT INTO ".DISCUSS_POSTS_TABLE." (user_id, style_id, time, title, text) VALUES (:user, :topic, :time, :title, :text)";
 			}
-      $sth = $this->dbc->prepare($query);
-      $result = $sth->execute(array(
-        ':user' => intval($user_id),
-        ':topic' => intval($data['t']),
-        ':time' => time(),
-        ':title' => htmlspecialchars($data['title']),
-        ':text' => htmlspecialchars($data['desc'])
-      ));
-					
-			$this->delete_views($data['t'], $user_id, 0);		
+			$error = array();
+			if(strlen(trim($data['title'])) < 5){
+				$error[] = 'Your title needs to have at least 5 characters (excluding spaces)!';
+			}
+			if(strlen(trim($data['desc'])) < 5){
+				$error[] = 'Your message needs to have at least 10 characters (excluding spaces)!';
+			}
+			if(empty($error)){
+				$sth = $this->dbc->prepare($query);
+				$result = $sth->execute(array(
+					':user' => intval($user_id),
+					':topic' => intval($data['t']),
+					':time' => time(),
+					':title' => htmlspecialchars($data['title']),
+					':text' => htmlspecialchars($data['desc'])
+				));
+						
+				$this->delete_views($data['t'], $user_id, 0);		
+			}
 			
 			unset($result);
 			$result = array(
 				'f' => $forum,
-				't' => $data['t']
+				't' => $data['t'],
+				'err' => $error
 			);
 			
 			return $result;

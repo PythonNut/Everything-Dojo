@@ -10,12 +10,18 @@ session_start();
   unset($_SESSION['t']);
   switch($mode){
     case 'post':
-      header('Refresh: 3; URL = ' . SITE_ROOT . URL_DISCUSS . '?view=topic&f=' . $f . '&t=' . $t);
+			if(empty($_SESSION['err'])){
+      	header('Refresh: 3; URL = ' . SITE_ROOT . URL_DISCUSS . '?view=topic&f=' . $f . '&t=' . $t);
+			}
+			else{
+				header('Location: ' . SITE_ROOT . URL_DISCUSS . '?view=topic&f=' . $f . '&t=' . $t);
+			}
       break;
   }
 
   $title = "Discuss";
   $extra_style = "<link rel=\"stylesheet\" href=\"../../css/discuss.css\" />";
+	$extra_js = "<script src=\"../../js/database.js\"></script>";
   if($_SESSION['user_id'] != NULL){
     $unread_count = $notification->count_unread($_SESSION['user_id']);
     $notification_data = $notification->get_notifications($_SESSION['user_id']);
@@ -67,7 +73,7 @@ session_start();
     </div>
   </div>
         <div id="navigation">
-          <nav class="db-nav">
+          <nav class="discuss-nav">
             <ul>
               <li><a href="/" id="nav-home">EvDo Home</a></li>
             <?php if(isset($_SESSION['user_id'])) { ?>

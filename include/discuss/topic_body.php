@@ -91,6 +91,16 @@
   <?php } ?>
 </section>
 <br/>
+	<?php
+	if(!empty($_SESSION['err'])){
+		echo '<div id="errors">';
+		foreach($_SESSION['err'] as $error){
+			echo '<p class="invalid">' . $error . '</p><br />';
+		}
+		echo '</div>';
+	}
+	unset($_SESSION['err']);
+	?>
 <?php if ($_SESSION['user_id'] > 0){ ?>
 <a href="#topic-create-comment" id="topic-a-comment">+ Add a comment</a>
 <fieldset id="topic-create-comment">

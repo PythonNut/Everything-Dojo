@@ -12,6 +12,7 @@ session_start();
       $result = $discuss->insert_post($_POST['forum'], $_SESSION['user_id'], $data);
 			$_SESSION['t'] = $result['t'];
 			$_SESSION['f'] = $result['f'];
+			$_SESSION['err'] = $result['err'];
 
       header('Location: ' . SITE_ROOT . 'include/discuss-success.php');
       break;
