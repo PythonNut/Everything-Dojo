@@ -92,23 +92,62 @@ class discuss {
         }
 		return count($view_array);
 	}
-    function view_topic($id, $type, $user_id){
-        if (empty($user_id)){
-          return false;
-        }
-		if($type == 1){
-			$query = "INSERT INTO ".DISCUSS_TOPICS_TRACK_SPECIAL_TABLE." (`user_id`, `style_id`, `timestamp`) VALUES (:user, :id, :time);";
+	
+	function delete_views($id, $user, $type){
+		if($type == 0){
+			$query = "DELETE FROM `" . DISCUSS_TOPICS_TRACK_SPECIAL_TABLE . "` WHERE `user_id` <> :user_id AND `style_id` = :id";
 		}
 		else{
-			$query = "INSERT INTO ".DISCUSS_TOPICS_TRACK_TABLE." (`user_id`, `style_id`, `timestamp`) VALUES (:user, :id, :time);";
+			$query = "DELETE FROM `" . DISCUSS_TOPICS_TRACK_TABLE . "` WHERE `user_id` <> :user_id AND `topic_id` = :id";
 		}
 		$sth = $this->dbc->prepare($query);
-		$result = $sth->execute(array(
-			':id' => intval($id),
-            ':user' => intval($user_id),
-            ':time' => intval(time())
+		$sth->execute(array(
+			':user_id' => $user,
+			':id' => $id
 		));
-		return $result;
+	}
+	
+    function view_topic($id, $type, $user_id){
+      if (empty($user_id)){
+        return false;
+      }
+			if($type == 1){
+				$query = "SELECT COUNT(*) FROM `" . DISCUSS_TOPICS_TRACK_SPECIAL_TABLE . "` WHERE `user_id` = :user_id AND `style_id` = :style";
+				$sth = $this->dbc->prepare($query);
+				$sth->execute(array(
+					':user_id' => $user_id,
+					':style' => $id
+				));
+				
+				$count = $sth->fetchColumn();
+				
+				$query = "INSERT INTO `" . DISCUSS_TOPICS_TRACK_SPECIAL_TABLE . "` (`user_id`, `style_id`, `timestamp`) VALUES (:user, :id, :time);";
+			}
+			else{
+				$query = "SELECT COUNT(*) FROM `" . DISCUSS_TOPICS_TRACK_TABLE . "` WHERE `user_id` = :user_id AND `topic_id` = :topic";
+				$sth = $this->dbc->prepare($query);
+				$sth->execute(array(
+					':user_id' => $user_id,
+					':topic' => $id
+				));
+				
+				$count = $sth->fetchColumn();
+				
+				$query = "INSERT INTO `" . DISCUSS_TOPICS_TRACK_TABLE . "` (`user_id`, `topic_id`, `timestamp`) VALUES (:user, :id, :time);";
+			}
+			
+			if($count == 0){
+				$sth = $this->dbc->prepare($query);
+				$result = $sth->execute(array(
+					':id' => intval($id),
+					':user' => intval($user_id),
+					':time' => intval(time())
+				));
+			}
+			else{
+				$result = false;
+			}
+			return $result;
 	}
 
 	// get topics for view page
@@ -126,7 +165,7 @@ class discuss {
 		// special fora
 		if($type == 0){
 			if($id == 1){
-					$query = "SELECT `id` AS `topic_id`, `submitted_by_id` AS `user_id`, `name` AS `title` FROM `" . THEMEDB_TABLE . "`";
+					$query = "SELECT `id` AS `topic_id`, `submitted_by_id` AS `user_id`, `name` AS `title`, `timestamp` AS `time` FROM `" . THEMEDB_TABLE . "`";
 					$sth = $this->dbc->prepare($query);
 					$sth->execute();			
 					$result = $sth->fetchAll(PDO::FETCH_ASSOC);
@@ -135,7 +174,7 @@ class discuss {
 						$query = "SELECT COUNT(*) FROM `" . DISCUSS_TOPICS_TRACK_SPECIAL_TABLE . "` WHERE `style_id` = :id AND `user_id` = :user_id";
 						$sth = $this->dbc->prepare($query);
 						$sth->execute(array(
-							':id' 			=> $row['id'],
+							':id' 			=> $result[$i]['topic_id'],
 							':user_id'	=> $user_id
 						));						
 						$count = $sth->fetchColumn();
@@ -150,9 +189,9 @@ class discuss {
 						$result[$i]['views'] = $this->get_views($result[$i]['topic_id'], $type);
 						
 						// find comment count
-						$result[$i]['comment_count'] = $this->get_comment_count($result[$i]['topic_id'], $type);
-            return $result;
+						$result[$i]['comment_count'] = $this->get_comment_count($result[$i]['topic_id'], $type);       
 					}
+					return $result;
 			}
 			else{
 				// other ids here
@@ -168,7 +207,7 @@ class discuss {
           $query = "SELECT COUNT(*) FROM `" . DISCUSS_TOPICS_TRACK_TABLE . "` WHERE `style_id` = :id AND `user_id` = :user_id";
           $sth = $this->dbc->prepare($query);
           $sth->execute(array(
-            ':id' 			=> $row['id'],
+            ':id' 			=> $result[$i]['topic_id'],
             ':user_id'	=> $user_id
           ));						
           $count = $sth->fetchColumn();
@@ -184,8 +223,8 @@ class discuss {
 
           // find comment count
           $result[$i]['comment_count'] = $this->get_comment_count($result[$i]['topic_id'], $type);
-          return $result;
         }
+				return $result;
 			}
 		}
 		else{
@@ -201,7 +240,7 @@ class discuss {
 				$query = "SELECT COUNT(*) FROM `" . DISCUSS_TOPICS_TRACK_TABLE . "` WHERE `style_id` = :id AND `user_id` = :user_id";
 				$sth = $this->dbc->prepare($query);
 				$sth->execute(array(
-					':id' 			=> $row['id'],
+					':id' 			=> $result[$i]['topic_id'],
 					':user_id'	=> $user_id
 				));						
 				$count = $sth->fetchColumn();
@@ -262,6 +301,35 @@ class discuss {
         return $result;
       }
     }
+		
+		// insert post
+		function insert_post($forum, $user_id, $data){
+			if($forum == 1){
+				$query = "INSERT INTO ".DISCUSS_POSTS_SPECIAL_TABLE." (user_id, style_id, time, title, text) VALUES (:user, :topic, :time, :title, :text)";
+			}
+			else{
+				$query = "INSERT INTO ".DISCUSS_POSTS_TABLE." (user_id, style_id, time, title, text) VALUES (:user, :topic, :time, :title, :text)";
+			}
+      $sth = $this->dbc->prepare($query);
+      $result = $sth->execute(array(
+        ':user' => intval($user_id),
+        ':topic' => intval($data['t']),
+        ':time' => time(),
+        ':title' => htmlspecialchars($data['title']),
+        ':text' => htmlspecialchars($data['desc'])
+      ));
+					
+			$this->delete_views($data['t'], $user_id, 0);		
+			
+			unset($result);
+			$result = array(
+				'f' => $forum,
+				't' => $data['t']
+			);
+			
+			return $result;
+		}
+		
     //get posts from topic with id ($topic_id) [optional: also gets posts from user with id ($user_id)]
     function get_posts($topic_id = 'all', $user_id = 'all', $type = 0){
       if ($topic_id != 'all'){

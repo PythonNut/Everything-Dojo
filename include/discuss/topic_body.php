@@ -38,15 +38,16 @@
       <p><?php echo $topic['text'];?></p>
     </div>
   </div>
-  <?php if (!empty($posts)){ ?>
-    <?php $thankedposts = []; foreach ($posts as $post){?>
+  <?php if (!empty($posts)){?>
+    <?php $thankedposts = []; 
+		foreach ($posts as $post){ ?>
       <div class="topic-reply">
         <div class="topic-reply-text">
-          <?php $user = $discuss->get_user($post['user_id']);?>
+          <?php $user = get_user($post['user_id']);?>
           <div class="topic-reply-top">
             <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $discuss->parse_code($post['title']);?></h2>
             <div style="display:inline-block; opacity: 0.6;">
-              Posted by <?php echo $user['user_name'];?> on <?php echo date('D M d, Y g:i a', $post['time']);?></div>
+              Posted by <?php echo $user;?> on <?php echo date('D M d, Y g:i a', $post['time']);?></div>
             <?php if ($_SESSION['user_id'] > 0){ ?>
             <?php $thanks = $discuss->thanks($post['post_id'], $mode = 1, $user_id = $_SESSION['user_id']); ?>
             <div class="topic-reply-thanks<?php if (in_array($_SESSION['user_id'],$thanks)){ echo " topic-reply-thanked"; $thankedposts[] = $post['post_id'];}?>" id="topic-reply-thanks-<?php echo $post['post_id'];?>" onclick="thankpost(<?php echo $post['post_id']?>)">&uArr; &nbsp;&nbsp;<?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div>
@@ -94,10 +95,12 @@
 <a href="#topic-create-comment" id="topic-a-comment">+ Add a comment</a>
 <fieldset id="topic-create-comment">
 <legend>Add new comment</legend>
-<form action="<?php echo URL_DISCUSS?>?view=create&c=post&t=<?php echo $topic['topic_id'];?>" method="post">
+<form action="include/discuss-handler.php" method="post">
   Title: <input type="text" name="title" value="RE: <?php echo $topic['title'];?>"/><br/>
-  Comment: <textarea name="desc" placeholder="Write your comment here..." style="vertical-align:top; height:200px;"></textarea><br/>
-  <input name="forum" value="<?php echo $topic['forum_id'];?>" hidden="hidden"/>
+  Comment: <br /><textarea name="desc" placeholder="Write your comment here..." style="vertical-align:top; height:200px;"></textarea><br/>
+  <input type="hidden" name="forum" value="<?php echo $topic['forum_id'];?>" />
+  <input type="hidden" name="mode" value="post">
+  <input type="hidden" name="t" value="<?php echo $topic['topic_id'];?>" />
   <input type="submit" value="Comment"/>
 </form>
 </fieldset>

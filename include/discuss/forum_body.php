@@ -37,21 +37,21 @@
     <table class="discuss-table">
       <thead style="border-bottom: 1px black solid;">
         <tr>
-          <td class="small-col">Topic</td>
-          <td class="med-col">Author</td>
-          <td class="small-col">Comments</td>
-          <td class="small-col">Views</td>
-          <td class="med-col">Last Comment</td> 
+          <td colspan="2">Topic</td>
+          <td class="med-col center">Author</td>
+          <td class="small-col center">Comments</td>
+          <td class="small-col center">Views</td>
+          <td class="med-col center">Last Post</td> 
         <tr>
       </thead>
       <tbody>
       <?php if(count($topics) == 0){ ?>
       	<tr style="cursor:pointer;">
-          <td>No topics</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
+          <td colspan="2">No topics</td>
+          <td class="center">-</td>
+          <td class="center">-</td>
+          <td class="center">-</td>
+          <td class="center">-</td>
         </tr>
       <?php } else{ 
 		foreach($topics as $topic){ 
@@ -62,14 +62,21 @@
 		  }
       ?>
         <tr style="cursor:pointer;" onclick="window.location.href='<?php echo URL_DISCUSS; ?>?view=topic&f=<?php echo intval($id); ?>&t=<?php echo $topic['topic_id']; ?>'">
+					<td class="tiny-col"><p class="topic-icon <?php if($topic['read'] == 1){ echo 'read-icon'; }else{ echo 'unread-icon'; }?>"></p></td>
           <td><?php echo htmlspecialchars($topic['title']); ?></td>
-          <td><?php echo $username; ?></td>
-          <td><?php echo $comments; ?></td>
-          <td><?php echo $discuss->get_views($topic['topic_id'], 1 - $typearg); ?></td>
-          <td><?php $lastpost = $discuss->get_posts(intval($topic['topic_id']), 'all', $typearg); if (empty($lastpost)){ echo "-";} else{ echo 
-"<b>".get_user($lastpost[count($lastpost)-1]['user_id']).":</b> ".substr($discuss->parse_code($lastpost[count($lastpost)-1]['text']),0,50)." (...)";} ?></td>
+          <td class="center"><?php echo $username; ?></td>
+          <td class="center"><?php echo $comments; ?></td>
+          <td class="center"><?php echo $discuss->get_views($topic['topic_id'], 1 - $typearg); ?></td>
+          <td class="center"><?php $lastpost = $discuss->get_posts(intval($topic['topic_id']), 'all', $typearg); 
+					if (empty($lastpost)){ 
+						echo date('M d, Y g:i a', $topic['time'])."<br /><b>".get_user($topic['user_id'])."</b>";
+					} 
+					else{ 
+						echo date('M d, Y g:i a', $lastpost[count($lastpost)-1]['time'])."<br /><b>".get_user($lastpost[count($lastpost)-1]['user_id'])."</b> "; 
+					} ?></td>
         </tr>
-      <?php }} ?>
+      <?php }
+			} ?>
       </tbody>
     </table>
 </section>

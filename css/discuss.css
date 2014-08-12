@@ -141,6 +141,24 @@
   -webkit-transform: skew(25deg);
   transform: skew(25deg);
 }
+#navigation {
+  position: absolute;
+  right: 0;
+  width: 40vw;
+  height: auto;
+}
+.discuss-nav {
+  padding: 0;
+  position: absolute;
+  height: auto;
+}
+.discuss-nav ul li a {
+  font-size: 1.2rem;
+}
+.discuss-nav ul li a {
+  line-height: normal;
+  padding-top: 0;
+}
 /* lazy hack to flip the next arrow */
 .discuss-round ~ .discuss-round {
   -webkit-transform: rotateY(180deg);
@@ -154,22 +172,33 @@
 .discuss-round:hover::after {
   top: 51%; /* same */
 }
-
-table.manage-table{
-  width: 100%;
-  margin: 1vh 0 0 0;
+table.discuss-table{
+  width: 90%;
+  margin: 1vh auto 0 auto;
 }
-
 tr.style:hover{
   cursor: pointer;
 }
-
 td.med-col{
   width: 20%;
 }
-
 td.small-col{
   width: 15%;
+}
+td.tiny-col{
+  width: 3%;
+}
+.topic-icon{
+	width: 1em;
+	height: 1em;
+	border-radius: 50%;
+	border: 1px black solid;
+}
+.read-icon{
+	background-color: #1b63c6;
+}
+.unread-icon{
+	background-color: #a82325;
 }
 .topic-reply-thanks{
   display: inline-block;
@@ -212,7 +241,6 @@ td.small-col{
 #discuss-topic-header{
   color: #000000;
   margin-bottom: 1em;
-  border: 2px solid black;
 }
 .topic-reply{
   border: 1px solid black;
@@ -227,4 +255,10 @@ td.small-col{
 .topic-reply p{
   padding: 0em 1.5em;
   padding-bottom: 1em;
+}
+/* notification placement for discuss page */
+#notifications {
+  top: 19vh;
+  right: 5vw;
+  width: 30vw;
 }

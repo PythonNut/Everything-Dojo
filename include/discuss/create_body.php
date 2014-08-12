@@ -45,6 +45,8 @@ else{
             ':title' => htmlspecialchars($_POST['title']),
             ':text' => htmlspecialchars($_POST['desc'])
           ));
+					
+					$discuss->delete_views($_GET['t'], $_SESSION['user_id'], 0);
           if ($result){
             echo "Topic created! Redirecting...";
             echo "<meta http-equiv=\"refresh\" content=\"1;URL='".URL_DISCUSS."?view=topic&f=".intval($_POST['forum'])."&t=".intval($_GET['t'])."'\" />";
@@ -63,6 +65,8 @@ else{
             ':title' => htmlspecialchars($_POST['title']),
             ':text' => htmlspecialchars($_POST['desc'])
           ));
+					
+					$discuss->delete_views($_GET['t'], $_SESSION['user_id'], 1);
           if ($result){
             echo "Topic created! Redirecting...";
             echo "<meta http-equiv=\"refresh\" content=\"1;URL='".URL_DISCUSS."?view=topic&f=".intval($_POST['forum'])."&t=".intval($_GET['t'])."'\" />";
