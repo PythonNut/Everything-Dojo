@@ -8,10 +8,12 @@
     if ($_GET['f'] == 1){
       $topic = $discuss->get_topic(intval($_GET['t']), 1);
       $posts = $discuss->get_posts(intval($_GET['t']), 'all', 1);
+      $typearg = 1;
     }
     else{
       $topic = $discuss->get_topic(intval($_GET['t']))[0];
       $posts = $discuss->get_posts(intval($_GET['t']), 'all', 0);
+      $typearg = 0;
     }
   }
   if (!empty($_SESSION['user_id'])){
@@ -31,7 +33,7 @@
   </div>
   <div id="topic-main">
     <div id="topic-main-text">
-      <?php $user = $discuss->get_user(intval($topic['user_id']))['user_name'];?>
+      <?php $user = get_user(intval($topic['user_id']));?>
       <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $topic['title'];?></h2>
       <div style="display:inline-block; opacity: 0.6;">Posted by <?php echo $user;?> on <?php echo date('D M d, Y g:i a', $topic['time']);?></div>
       <p><?php echo $topic['text'];?></p>
@@ -41,15 +43,18 @@
     <?php $thankedposts = []; foreach ($posts as $post){?>
       <div class="topic-reply">
         <div class="topic-reply-text">
-          <?php $user = $discuss->get_user($post['user_id']);?>
+          <?php $user = get_all_user($post['user_id']);?>
           <div class="topic-reply-top">
             <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $discuss->parse_code($post['title']);?></h2>
             <div style="display:inline-block; opacity: 0.6;">
               Posted by <?php echo $user['user_name'];?> on <?php echo date('D M d, Y g:i a', $post['time']);?></div>
-            <?php if ($_SESSION['user_id'] > 0){ ?>
-            <?php $thanks = $discuss->thanks($post['post_id'], $mode = 1, $user_id = $_SESSION['user_id']); ?>
+            <?php if (($_SESSION['user_id'] > 0) and ($_SESSION['user_id'] != $user['id'])){ ?>
+            <?php $thanks = $discuss->thanks($post['post_id'], $typearg, $_SESSION['user_id']); ?>
             <div class="topic-reply-thanks<?php if (in_array($_SESSION['user_id'],$thanks)){ echo " topic-reply-thanked"; $thankedposts[] = $post['post_id'];}?>" id="topic-reply-thanks-<?php echo $post['post_id'];?>" onclick="thankpost(<?php echo $post['post_id']?>)">&uArr; &nbsp;&nbsp;<?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div>
-            <?php }?>
+            <?php } else{ ?>
+            <?php $thanks = $discuss->thanks($post['post_id'], $typearg); ?>
+            <div style="opacity: 0.6; text-decoration: italics; display:inline-block; margin-left: 2em;"><?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div>
+            <?php } ?>
           </div>
           <p><?php echo $discuss->parse_code($post['text']);?></p>
         </div>
