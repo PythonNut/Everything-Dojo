@@ -3,11 +3,6 @@
   include("include/include.php");
   include("include/discuss.php");
   session_start();
-  /*
-  $_SESSION['user_id']= 7;
-  $_SESSION['user_name'] = 'encadyma';
-  $_SESSION['user_level'] = 5;
-  $_SESSION['HTTP_USER_AGENT'] = md5($_SERVER['HTTP_USER_AGENT']);*/
   $extra_style = "<link rel=\"stylesheet\" href=\"css/discuss.css\" />";
   get_header();
   if (empty($_GET['view'])){
@@ -20,7 +15,7 @@
 ?>
 <section id="content">
   <?php if (!empty($_SESSION['user_id'])){ ?>
-  <h3>Welcome, <?php echo $discuss->get_user($_SESSION['user_id'])['user_name'];?>!</h3>
+  <h3>Welcome, <?php echo get_user($_SESSION['user_id']);?>!</h3>
   <br/>
   <?php } else{ ?>
   <h3>Hello Guest. Please <a href="login.php">sign in</a>.</h3>
