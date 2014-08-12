@@ -11,7 +11,7 @@
       $typearg = 1;
     }
     else{
-      $topic = $discuss->get_topic(intval($_GET['t']))[0];
+      $topic = $discuss->get_topic(intval($_GET['t']));
       $posts = $discuss->get_posts(intval($_GET['t']), 'all', 0);
       $typearg = 0;
     }
@@ -23,10 +23,11 @@
     }
     $discuss->view_topic(intval($_GET['t']), $type, intval($_SESSION['user_id']));
   }
+	$data = $discuss->get_fora(intval($topic['forum_id']));
 ?>
 
 <?php if (!empty($topic) and (!empty($topic['title']))){ ?>
-<a href="<?php echo URL_DISCUSS; ?>?view=forum&f=<?php echo intval($topic['forum_id']);?>">&laquo; Back to <?php echo $discuss->get_fora(intval($topic['forum_id']))['name'];?></a>
+<a href="<?php echo URL_DISCUSS; ?>?view=forum&f=<?php echo intval($topic['forum_id']);?>">&laquo; Back to <?php echo $data['name'];?></a>
 <section id="topic" style="margin-top: 1em;">
   <div id="discuss-topic-header">
     <h1 style="text-align:center;"><?php echo $topic['title'];?></h1>
@@ -35,12 +36,14 @@
     <div id="topic-main-text">
       <?php $user = get_user(intval($topic['user_id']));?>
       <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $topic['title'];?></h2>
-      <div style="display:inline-block; opacity: 0.6;">Posted by <?php echo $user;?> on <?php echo date('D M d, Y g:i a', $topic['time']);?></div>
+      <div style="display:inline-block; opacity: 0.6;">Posted by <?php echo $user;?> on <?php echo date('M d, Y g:i a', $topic['time']);?></div>
       <p><?php echo $topic['text'];?></p>
+      <?php if($topic['edit_id'] != NULL){ ?><p class="small">Edited by <?php echo get_user($topic['edit_id']); ?> on <?php echo date('M d, Y g:i a', $topic['last_time']);?></p><?php } ?>  
     </div>
   </div>
-  <?php if (!empty($posts)){ ?>
-    <?php $thankedposts = []; foreach ($posts as $post){?>
+  <?php if (!empty($posts)){?>
+    <?php $thankedposts = []; 
+		foreach ($posts as $post){ ?>
       <div class="topic-reply">
         <div class="topic-reply-text">
           <?php $user = get_all_user($post['user_id']);?>
@@ -56,7 +59,7 @@
             <div style="opacity: 0.6; text-decoration: italics; display:inline-block; margin-left: 2em;"><?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div>
             <?php } ?>
           </div>
-          <p><?php echo $discuss->parse_code($post['text']);?></p>
+          <p><?php echo $discuss->parse_code($post['text']);?></p>       
         </div>
       </div>
     <?php } ?>
@@ -94,14 +97,26 @@
   <?php } ?>
 </section>
 <br/>
+	<?php
+	if(!empty($_SESSION['err'])){
+		echo '<div id="errors">';
+		foreach($_SESSION['err'] as $error){
+			echo '<p class="invalid">' . $error . '</p><br />';
+		}
+		echo '</div>';
+	}
+	unset($_SESSION['err']);
+	?>
 <?php if ($_SESSION['user_id'] > 0){ ?>
 <a href="#topic-create-comment" id="topic-a-comment">+ Add a comment</a>
 <fieldset id="topic-create-comment">
 <legend>Add new comment</legend>
-<form action="<?php echo URL_DISCUSS?>?view=create&c=post&t=<?php echo $topic['topic_id'];?>" method="post">
+<form action="include/discuss-handler.php" method="post">
   Title: <input type="text" name="title" value="RE: <?php echo $topic['title'];?>"/><br/>
-  Comment: <textarea name="desc" placeholder="Write your comment here..." style="vertical-align:top; height:200px;"></textarea><br/>
-  <input name="forum" value="<?php echo $topic['forum_id'];?>" hidden="hidden"/>
+  Comment: <br /><textarea name="desc" placeholder="Write your comment here..." style="vertical-align:top; height:200px;"></textarea><br/>
+  <input type="hidden" name="forum" value="<?php echo $topic['forum_id'];?>" />
+  <input type="hidden" name="mode" value="post">
+  <input type="hidden" name="t" value="<?php echo $topic['topic_id'];?>" />
   <input type="submit" value="Comment"/>
 </form>
 </fieldset>

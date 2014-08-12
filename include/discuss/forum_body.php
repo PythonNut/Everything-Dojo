@@ -31,27 +31,47 @@
   <p style="text-align: center;"><?php echo $forum_data['description']; ?></p>
   <?php 
   if ($user_id > 0 and intval($id) != 1){
-    echo "<a href='".URL_DISCUSS."?view=create&c=topic&f=".intval($id)."'>+ Create New Topic</a>";
+    echo "<a href=\"#topic-create-topic\" id=\"topic-a-topic\">+ Create New Topic</a>";
+	?>
+  <fieldset id="topic-create-topic">
+  <legend>Add new topic</legend>
+  <form action="include/discuss-handler.php" method="post">
+    Title: <input type="text" name="title" value=""/><br/>
+    Message: <br /><textarea name="desc" placeholder="Write your post here..." style="vertical-align:top; height:200px;"></textarea><br/>
+    <input type="hidden" name="forum" value="<?php echo $id;?>" />
+    <input type="hidden" name="mode" value="topic">
+    <input type="submit" value="Post"/>
+  </form>
+  </fieldset>
+  
+  <script>
+    $("#topic-create-topic").hide();
+    $("#topic-a-topic").click(function(){
+      $("#topic-a-topic").hide();
+      $("#topic-create-topic").slideToggle(300);
+    });
+  </script>
+  <?php
   }
   ?>
     <table class="discuss-table">
       <thead style="border-bottom: 1px black solid;">
         <tr>
-          <td class="small-col">Topic</td>
-          <td class="med-col">Author</td>
-          <td class="small-col">Comments</td>
-          <td class="small-col">Views</td>
-          <td class="med-col">Last Comment</td> 
+          <td colspan="2">Topic</td>
+          <td class="med-col center">Author</td>
+          <td class="small-col center">Comments</td>
+          <td class="small-col center">Views</td>
+          <td class="med-col center">Last Post</td> 
         <tr>
       </thead>
       <tbody>
       <?php if(count($topics) == 0){ ?>
       	<tr style="cursor:pointer;">
-          <td>No topics</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
+          <td colspan="2">No topics</td>
+          <td class="center">-</td>
+          <td class="center">-</td>
+          <td class="center">-</td>
+          <td class="center">-</td>
         </tr>
       <?php } else{ 
 		foreach($topics as $topic){ 
@@ -62,14 +82,21 @@
 		  }
       ?>
         <tr style="cursor:pointer;" onclick="window.location.href='<?php echo URL_DISCUSS; ?>?view=topic&f=<?php echo intval($id); ?>&t=<?php echo $topic['topic_id']; ?>'">
+					<td class="tiny-col"><p class="topic-icon <?php if($topic['read'] == 1){ echo 'read-icon'; }else{ echo 'unread-icon'; }?>"></p></td>
           <td><?php echo htmlspecialchars($topic['title']); ?></td>
-          <td><?php echo $username; ?></td>
-          <td><?php echo $comments; ?></td>
-          <td><?php echo $discuss->get_views($topic['topic_id'], 1 - $typearg); ?></td>
-          <td><?php $lastpost = $discuss->get_posts(intval($topic['topic_id']), 'all', $typearg); if (empty($lastpost)){ echo "-";} else{ echo 
-"<b>".$discuss->get_user($lastpost[count($lastpost)-1]['user_id'])['user_name'].":</b> ".substr($discuss->parse_code($lastpost[count($lastpost)-1]['text']),0,50)." (...)";} ?></td>
+          <td class="center"><?php echo $username; ?></td>
+          <td class="center"><?php echo $comments; ?></td>
+          <td class="center"><?php echo $discuss->get_views($topic['topic_id'], 1 - $typearg); ?></td>
+          <td class="center"><?php $lastpost = $discuss->get_posts(intval($topic['topic_id']), 'all', $typearg); 
+					if (empty($lastpost)){ 
+						echo date('M d, Y g:i a', $topic['time'])."<br /><b>".get_user($topic['user_id'])."</b>";
+					} 
+					else{ 
+						echo date('M d, Y g:i a', $lastpost[count($lastpost)-1]['time'])."<br /><b>".get_user($lastpost[count($lastpost)-1]['user_id'])."</b> "; 
+					} ?></td>
         </tr>
-      <?php }} ?>
+      <?php }
+			} ?>
       </tbody>
     </table>
 </section>
