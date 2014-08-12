@@ -466,10 +466,14 @@ function tryit () {
     // user mouse in "targeted" zone
     // We cannot use jQuery animations as they are too CPU-intensive
     // Instead, we just add .targeted.
-    if (event.pageY < headerHeight) {
-      $(".closed #header-button").addClass("targeted");
-    } else {
-      $(".closed #header-button").removeClass("targeted");
+    if ($("header").hasClass("closed")) {
+      if (event.pageY < headerHeight) {
+        $(".closed #header-button").addClass("targeted");
+        $("#blog-body").css("margin-top", 2*vh);
+      } else {
+        $(".closed #header-button").removeClass("targeted");
+        $("#blog-body").css("margin-top", 0);
+      }
     }
 
     idleState = false;

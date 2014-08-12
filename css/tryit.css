@@ -121,6 +121,7 @@ header {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+
 .closed #header-button {
   width: 5vw;
   left: 47.5vw;
@@ -136,7 +137,61 @@ header {
   transition: all 0.3s ease;
 }
 
+#header-button::before,
+#header-button::after {
+  content: "";
+  position: absolute;
+  top: 0.7vh;
+  left: 49.3vw;
+  width: 0.7vw;
+  height: 0.5vh;
+  background-color: white;
+  -webkit-transform: skewY(20deg);
+  transform: skewY(20deg);
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+
+#header-button::after {
+  left: 50vw;
+  -webkit-transform: skewY(-20deg);
+  transform: skewY(-20deg);
+}
+
+.closed #header-button::before,
+.closed #header-button::after {
+  left: 1.8vw;
+}
+
+.closed #header-button::after {
+  left: 2.5vw;
+}
+
+.closed #header-button.targeted::before,
+.closed #header-button.targeted::after {
+  left: 49.3vw;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
+.closed #header-button.targeted::after {
+  left: 50vw;
+}
+
+.closed #header-button::before {
+  -webkit-transform: skewY(-20deg);
+  transform: skewY(-20deg);
+}
+
+.closed #header-button::after {
+  -webkit-transform: skewY(20deg);
+  transform: skewY(20deg);
+}
+
 #blog-body {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   margin-top: 13.6vh;
 }
