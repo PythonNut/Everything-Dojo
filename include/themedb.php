@@ -83,7 +83,7 @@ class themedb {
   * $data: The data from the form
   */
   function edit_theme($data){
-    $query = "UPDATE `" . THEMEDB_TABLE . "` SET `name` = :name, `description` = :description, `code` = :code, `stage` = :stage, `author` = :author, `screenshot` = :screenshot, `version` = :version, `last_timestamp` = :last WHERE `id` = :id";
+    $query = "UPDATE `" . THEMEDB_TABLE . "` SET `name` = :name, `description` = :description, `code` = :code, `stage` = :stage, `author` = :author, `screenshot` = :screenshot, `version` = :version, `edit_id` = :edit_id, `last_timestamp` = :last WHERE `id` = :id";
     $sth = $this->dbc->prepare($query);
 
     $sth->execute(array(
@@ -95,6 +95,7 @@ class themedb {
       ':screenshot'        => strip_tags($data['screenshot']),
       ':version'          => strip_tags($data['version']),
       ':id'                => strip_tags($data['id']),
+			':edit_id'					=> $data['edit_id'],
 			':last'							=> time()
     ));
 

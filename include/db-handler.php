@@ -16,6 +16,7 @@ session_start();
       break;
     case 'edit-theme':
       $data = $_POST;
+			$data['edit_id'] = $_SESSION['user_id'];
       $_SESSION['id'] = $themedb->edit_theme($data);
 
       header('Location: ' . SITE_ROOT . 'include/db-success.php');

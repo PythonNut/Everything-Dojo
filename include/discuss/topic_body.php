@@ -34,8 +34,9 @@
     <div id="topic-main-text">
       <?php $user = get_user(intval($topic['user_id']));?>
       <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $topic['title'];?></h2>
-      <div style="display:inline-block; opacity: 0.6;">Posted by <?php echo $user;?> on <?php echo date('D M d, Y g:i a', $topic['time']);?></div>
+      <div style="display:inline-block; opacity: 0.6;">Posted by <?php echo $user;?> on <?php echo date('M d, Y g:i a', $topic['time']);?></div>
       <p><?php echo $topic['text'];?></p>
+      <?php if($topic['edit_id'] != NULL){ ?><p class="small">Edited by <?php echo get_user($topic['edit_id']); ?> on <?php echo date('M d, Y g:i a', $topic['last_time']);?></p><?php } ?>  
     </div>
   </div>
   <?php if (!empty($posts)){?>
@@ -53,7 +54,7 @@
             <div class="topic-reply-thanks<?php if (in_array($_SESSION['user_id'],$thanks)){ echo " topic-reply-thanked"; $thankedposts[] = $post['post_id'];}?>" id="topic-reply-thanks-<?php echo $post['post_id'];?>" onclick="thankpost(<?php echo $post['post_id']?>)">&uArr; &nbsp;&nbsp;<?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div>
             <?php }?>
           </div>
-          <p><?php echo $discuss->parse_code($post['text']);?></p>
+          <p><?php echo $discuss->parse_code($post['text']);?></p>       
         </div>
       </div>
     <?php } ?>

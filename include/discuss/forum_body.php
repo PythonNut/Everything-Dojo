@@ -31,7 +31,27 @@
   <p style="text-align: center;"><?php echo $forum_data['description']; ?></p>
   <?php 
   if ($user_id > 0 and intval($id) != 1){
-    echo "<a href='".URL_DISCUSS."?view=create&c=topic&f=".intval($id)."'>+ Create New Topic</a>";
+    echo "<a href=\"#topic-create-topic\" id=\"topic-a-topic\">+ Create New Topic</a>";
+	?>
+  <fieldset id="topic-create-topic">
+  <legend>Add new topic</legend>
+  <form action="include/discuss-handler.php" method="post">
+    Title: <input type="text" name="title" value=""/><br/>
+    Message: <br /><textarea name="desc" placeholder="Write your post here..." style="vertical-align:top; height:200px;"></textarea><br/>
+    <input type="hidden" name="forum" value="<?php echo $id;?>" />
+    <input type="hidden" name="mode" value="topic">
+    <input type="submit" value="Post"/>
+  </form>
+  </fieldset>
+  
+  <script>
+    $("#topic-create-topic").hide();
+    $("#topic-a-topic").click(function(){
+      $("#topic-a-topic").hide();
+      $("#topic-create-topic").slideToggle(300);
+    });
+  </script>
+  <?php
   }
   ?>
     <table class="discuss-table">
