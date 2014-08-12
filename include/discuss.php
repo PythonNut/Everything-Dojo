@@ -267,6 +267,10 @@ class discuss {
       $replace = array('<br/>', '<br/>');
       return str_replace($search, $replace, htmlspecialchars($string));
     }
+		
+		function insert_topic(){
+			$query = "INSERT INTO `";
+		}
 
     //get specific topic
     function get_topic($topic_id, $type = 0){
@@ -283,11 +287,11 @@ class discuss {
           'forum_id' => 1,
           'user_id' => intval($style['submitted_by_id']),
           'title' => $style['name'],
-          'time' => 1388534400,
-          'last_timestamp' => 1388534400,       //dojo what is this
+          'time' => $style['timestamp'],
+					'edit_id' => $style['edit_id'],
+          'last_time' => $style['last_timestamp'],
           'text' => $style['description'],
-          'topic_id' => intval($topic_id),
-          'photo_attach' => $style['screenshot']
+          'topic_id' => intval($topic_id)
         );
         return $result;
       }
