@@ -197,6 +197,10 @@ body { background: white; }
   min-height: 100%;
 }
 
+.center{
+	text-align: center;
+}
+
 
 /*--HEADER AND NAV--*/
 header {
