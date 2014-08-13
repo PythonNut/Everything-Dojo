@@ -172,16 +172,16 @@ Array.prototype.last = function(nth) {
         switch(prop) {
           // font-family
           case "font-family":
-            var font = thisVal;
-            if (font.indexOf(" ") !== -1) {
-              font = '"' + font + '"';
+            if (thisVal.indexOf(" ") !== -1) {
+              thisVal = '"' + thisVal + '"';
             }
-            font ? $(el).css("font-family", font + ", Calibri, Verdana, Arial, sans-serif") : $(el).css("font-family", "");
+            thisVal ? $(el).css("font-family", thisVal + ", Calibri, Verdana, Arial, sans-serif") : $(el).css("font-family", "");
             break;
 
           // background-image
           case "background-image":
-            $(el).css("background-image", "url(" + (thisVal.indexOf("http") === -1 ? "//" + thisVal : thisVal) + ")");
+            thisVal = "url('" + ((thisVal.indexOf("http") !== 0 && thisVal.indexOf("//") !== 0) ? "//" + thisVal : thisVal) + "')";
+            $(el).css("background-image", thisVal);
             break;
 
           // background-repeat
@@ -443,7 +443,7 @@ function themizer () {
 
   // Check inputs for validity
   $("[type='url']").keyup(function () {
-    $(this).val().match(/^(https?:\/\/)?[a-z0-9-\.]+\.[a-z]{2,4}\/([^\s<>%"\,\{\}\\|\\\^\[\]`]+)?\.(gif|jpg|jpeg|png|php|svg)(\?\w=\w)?(&\w=\w)*/) ? $(this).removeClass("invalid") : $(this).addClass("invalid");
+    $(this).val().match(/^(https?:\/\/|\/\/)?[a-z0-9-\.]+\.[a-z]{2,4}\/([^\s<>%"\,\{\}\\|\\\^\[\]`]+)?\.(gif|jpg|jpeg|png|php|svg)(\?\w=\w)?(&\w=\w)*/) ? $(this).removeClass("invalid") : $(this).addClass("invalid");
   });
 
   // Body
