@@ -431,10 +431,8 @@ function themizer () {
      * Lightbox
      */
     $("#lightbox-wrap pre").html(code);
-
-    // FIXME: only works on first click, further clicks will not have an effect.
+    $("#lightbox-wrap pre.prettyprinted").removeClass("prettyprinted"); // http://stackoverflow.com/a/15984048/3472393
     prettyPrint();
-
     $("#lightbox").show();
 
   });
