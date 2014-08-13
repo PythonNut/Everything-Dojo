@@ -1,8 +1,9 @@
 // js/jQ functions that are available to run on any page. requires jQuery.
 
+var baseTheme = "core";
+
 // Set object for styling
 var styles = {
-  "baseTheme"                       : "core",
   "body-backgroundColor"            : "white",
   "body-backgroundImage"            : "",
   "body-backgroundRepeat"           : "",
@@ -217,6 +218,39 @@ function optionToggle (id) {
   }
 };
 
+/* testing testing...to be perhaps modified later.
+http://stackoverflow.com/questions/754607/can-jquery-get-all-css-styles-associated-with-an-element
+function css(a) {
+    var sheets = document.styleSheets, o = {};
+    for (var i in sheets) {
+        var rules = sheets[i].rules || sheets[i].cssRules;
+        for (var r in rules) {
+            console.log(rules[r]);
+        }
+    }
+    return o;
+}
+
+function css2json(css) {
+    var s = {};
+    if (!css) return s;
+    if (css instanceof CSSStyleDeclaration) {
+        for (var i in css) {
+            if ((css[i]).toLowerCase) {
+                s[(css[i]).toLowerCase()] = (css[css[i]]);
+            }
+        }
+    } else if (typeof css == "string") {
+        css = css.split("; ");
+        for (var i in css) {
+            var l = css[i].split(": ");
+            s[l[0].toLowerCase()] = (l[1]);
+        }
+    }
+    return s;
+} */
+
+
 /**
  * Themizer init
  */
@@ -262,7 +296,7 @@ function themizer () {
   });
   $("[name='base']").change(function () {
     $("link[id='base-theme']").attr('href', "blog/css/" + $("[name='base'] :checked").val() + ".css");
-    styles.baseTheme = $("[name='base'] :checked").val();
+    baseTheme = $("[name='base'] :checked").val();
   });
 
   // resize sidebar
@@ -340,9 +374,49 @@ function themizer () {
       idleState = true;
     }, 4000);
   });
+
+  /* Get Code */
   $("#submit").click(function () {
-    for (var i in styles)
-      console.log(i + ":" + styles[i]); // debugging
+
+    var code = '';
+
+    $.ajax({
+      url: "/blog/css/" + baseTheme + ".css",
+      async: false,
+      success: function(cssContent) {
+        code += cssContent + "\n\n";
+      }
+    });
+
+    code += "/* --- CUSTOM THEMIZER STYLING --- */\n\n";
+
+    selectors = {};
+    for (var i in styles) {
+      cur = styles[i];
+      firsthalf = i.split('-')[0];
+      selector = firsthalf.replace("class_", ".").replace("id_", "#");
+      attribute = i.split('-')[1];
+      value = styles[i];
+      if (selectors.hasOwnProperty(selector) == false) {
+        selectors[selector] = {};
+      }
+      selectors[selector][attribute] = value;
+    }
+
+    for (var i in selectors) {
+      thiselement = '';
+      thiselement += i + " {\n";
+      for (var j in selectors[i]) {
+        thiselement += "    " + j + ": " + selectors[i][j] + ";\n";
+      }
+      thiselement += "}\n\n";
+      code += thiselement;
+    }
+
+    $("#lightbox-wrap").html("<pre class=\"prettyprint linenums\">" + code + "</pre>");
+    prettyPrint();
+    $("#lightbox").show();
+
   });
 
   /**
@@ -404,6 +478,12 @@ function themizer () {
 
   $(window).mousemove();
 }
+
+/* Lightbox Utility */
+$('#lightbox').click(function(){
+  console.log("heyheyhey");
+  $(this).hide();
+});
 
 /**
  * Try-It init
