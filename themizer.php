@@ -16,8 +16,17 @@
   $extra_js = "<script src=\"js/blog-fn.js\"></script>
   <script src=\"js/spectrum-1.3.4.min.js\" onload=\"$.fn.spectrum.load = false;\"></script>
   <script src=\"js/prettify.js\"></script>
+  <script src=\"js/ZeroClipboard.js\"></script>
   <script>
   $(function(){
+    /* Lightbox Utility */
+    $('#lightbox').click(function(){
+      $(this).hide();
+    });
+    $('#lightbox-wrap').click(function(e){
+        e.stopPropagation();
+    });
+
     $().sliderSidebar();
     themizer();
   });</script>";
@@ -177,7 +186,10 @@
   <div id="side-resizer"></div>
 
   <div id="lightbox">
-    <div id="lightbox-wrap"></div>
+    <div id="lightbox-wrap">
+      <pre id="generatedcode" class="prettyprint linenums"></pre>
+      <!--<span class="linkbutton" id="copycode" data-clipboard-target="#generatedcode">Copy Code to Clipboard</span>-->
+    </div>
   </div>
 
 </aside>

@@ -413,7 +413,10 @@ function themizer () {
       code += thiselement;
     }
 
-    $("#lightbox-wrap").html("<pre class=\"prettyprint linenums\">" + code + "</pre>");
+    /* ZeroClipboard */
+    //well, still trying to figure out how this works.
+
+    $("#lightbox-wrap pre").html(code);
     prettyPrint();
     $("#lightbox").show();
 
@@ -478,13 +481,6 @@ function themizer () {
 
   $(window).mousemove();
 }
-
-/* Lightbox Utility */
-$('#lightbox').click(function(){
-  console.log("heyheyhey");
-  $(this).hide();
-});
-
 /**
  * Try-It init
  */
