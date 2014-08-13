@@ -11,9 +11,11 @@
   session_start();
   $extra_style = "<link rel=\"stylesheet\" href=\"css/blog-style.css\">
   <link rel=\"stylesheet\" href=\"css/themizer.css\">
-  <link rel=\"stylesheet\" href=\"css/spectrum.min.css\">";
+  <link rel=\"stylesheet\" href=\"css/spectrum.min.css\">
+  <link href=\"css/prettify-desert.css\" rel=\"stylesheet\" />";
   $extra_js = "<script src=\"js/blog-fn.js\"></script>
   <script src=\"js/spectrum-1.3.4.min.js\" onload=\"$.fn.spectrum.load = false;\"></script>
+  <script src=\"js/prettify.js\"></script>
   <script>
   $(function(){
     $().sliderSidebar();
@@ -173,6 +175,11 @@
     </section>
   </section>
   <div id="side-resizer"></div>
+
+  <div id="lightbox">
+    <div id="lightbox-wrap"></div>
+  </div>
+
 </aside>
 
 <div id="blog-body"></div>
