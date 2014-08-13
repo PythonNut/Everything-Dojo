@@ -16,5 +16,14 @@ session_start();
 
       header('Location: ' . SITE_ROOT . 'include/discuss-success.php');
       break;
+		case 'topic':
+			$data = $_POST;
+      $result = $discuss->insert_topic($_POST['forum'], $_SESSION['user_id'], $data);
+			$_SESSION['t'] = $result['t'];
+			$_SESSION['f'] = $result['f'];
+			$_SESSION['err'] = $result['err'];		
+			
+			header('Location: ' . SITE_ROOT . 'include/discuss-success.php');	
+			break;
   }
 ?>

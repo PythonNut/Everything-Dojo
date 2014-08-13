@@ -18,7 +18,6 @@
   else{
     $view = $_GET['view'];
   }
-  
 ?>
 <section id="content">
   <div id="notifications">

@@ -268,10 +268,6 @@ class discuss {
       return str_replace($search, $replace, htmlspecialchars($string));
     }
 		
-		function insert_topic(){
-			$query = "INSERT INTO `";
-		}
-
     //get specific topic
     function get_topic($topic_id, $type = 0){
       if ($type == 1){
@@ -335,6 +331,37 @@ class discuss {
 			}
 			
 			unset($result);
+			$result = array(
+				'f' => $forum,
+				't' => $data['t'],
+				'err' => $error
+			);
+			
+			return $result;
+		}
+		
+		// insert topic
+		function insert_topic($forum, $user_id, $data){
+			if(strlen(trim($data['title'])) < 5){
+				$error[] = 'Your title needs to have at least 5 characters (excluding spaces)!';
+			}
+			if(strlen(trim($data['desc'])) < 5){
+				$error[] = 'Your message needs to have at least 10 characters (excluding spaces)!';
+			}
+			
+			if(empty($error)){
+				$query = "INSERT INTO `" . DISCUSS_TOPIC_TABLE . "` (`topic_id`, `forum_id`, `user_id`, `title`, `time`) VALUES (NULL, :forum, :user, :title, :time) ";
+					
+				$sth = $this->dbc->prepare($query);
+				$sth->execute(array(
+					':forum' => $forum,
+					':user' => $user_id,
+					':title' => $data['title'],
+					':time' => time()
+				));
+				
+				unset($result);
+			}
 			$result = array(
 				'f' => $forum,
 				't' => $data['t'],
