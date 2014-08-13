@@ -390,34 +390,51 @@ function themizer () {
 
     code += "/* --- CUSTOM THEMIZER STYLING --- */\n\n";
 
-    selectors = {};
+    var selectors = {};
     for (var i in styles) {
-      cur = styles[i];
-      firsthalf = i.split('-')[0];
-      selector = firsthalf.replace("class_", ".").replace("id_", "#");
-      attribute = i.split('-')[1];
-      value = styles[i];
+      var cur = styles[i],
+          split = i.split('-'),
+          selector = split[0].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("class_", ".").replace("id_", "#"),
+          attribute = split[1].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase(),
+          value = styles[i];
       if (selectors.hasOwnProperty(selector) == false) {
         selectors[selector] = {};
       }
       selectors[selector][attribute] = value;
     }
 
-    for (var i in selectors) {
+    var thiselement;
+    for (var j in selectors) {
       thiselement = '';
-      thiselement += i + " {\n";
-      for (var j in selectors[i]) {
-        thiselement += "    " + j + ": " + selectors[i][j] + ";\n";
+      thiselement += j + " {\n";
+      for (var k in selectors[j]) {
+        if (selectors[j][k] || !selectors[j][k] === '') {
+          thiselement += "    " + k + ": " + selectors[j][k] + ";\n";
+        }
       }
       thiselement += "}\n\n";
       code += thiselement;
     }
 
-    /* ZeroClipboard */
-    //well, still trying to figure out how this works.
+    /**
+     * ZeroClipboard
+     */
+    var client = new ZeroClipboard($("#copycode"));
 
+    client.on("ready", function (readyEvent) {
+      client.on("aftercopy", function (event) {
+        event.target.innerHTML= "Copied";
+      });
+    });
+
+    /**
+     * Lightbox
+     */
     $("#lightbox-wrap pre").html(code);
+
+    // FIXME: only works on first click, further clicks will not have an effect.
     prettyPrint();
+
     $("#lightbox").show();
 
   });
@@ -481,6 +498,7 @@ function themizer () {
 
   $(window).mousemove();
 }
+
 /**
  * Try-It init
  */
