@@ -32,7 +32,15 @@
   <?php 
   if ($user_id > 0 and intval($id) != 1){
     echo "<a href=\"#topic-create-topic\" id=\"topic-a-topic\">+ Create New Topic</a>";
-	?>
+		if(!empty($_SESSION['err'])){
+			echo '<div id="errors">';
+			foreach($_SESSION['err'] as $error){
+				echo '<p class="invalid">' . $error . '</p><br />';
+			}
+			echo '</div>';
+		}
+		unset($_SESSION['err']);
+	?>  
   <fieldset id="topic-create-topic">
   <legend>Add new topic</legend>
   <form action="include/discuss-handler.php" method="post">

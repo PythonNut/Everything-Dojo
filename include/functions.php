@@ -245,8 +245,7 @@
   /****************************END OF LOGIN SCRIPT FUNCTIONS*********************************/
   /*regular site functions*/
 
-  function get_header($n=0, $notification_count = 0) {
-		$unread_notification_count = $notification_count;
+  function get_header($n=0) {
     include(str_repeat('../', $n) . "include/header.php");
   }
 
