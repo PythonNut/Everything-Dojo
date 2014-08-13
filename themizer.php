@@ -177,18 +177,19 @@
           </section>
         </section>
       </section>
-
-      <!-- `span` and not `a` to avoid accidental styling in Firefox  -->
-      <span href="#" class="linkbutton" id="submit">Get Code</span>
-
     </section>
+
+    <!-- `span` and not `a` to avoid accidental styling in Firefox  -->
+    <span href="#" class="linkbutton" id="submit">Get Code</span>
+
   </section>
   <div id="side-resizer"></div>
 
   <div id="lightbox">
     <div id="lightbox-wrap">
-      <pre id="generatedcode" class="prettyprint linenums"></pre>
-      <!--<span class="linkbutton" id="copycode" data-clipboard-target="#generatedcode">Copy Code to Clipboard</span>-->
+      <pre id="generatedcode" style="display:none"></pre>
+      <pre id="generatedcode-shown" class="prettyprint linenums"></pre>
+      <span class="linkbutton" id="copycode" data-clipboard-target="#generatedcode">Copy Code to Clipboard</span>
     </div>
   </div>
 

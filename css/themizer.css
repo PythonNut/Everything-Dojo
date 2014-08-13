@@ -31,6 +31,7 @@
   box-sizing: border-box;
   background: #101010;
   padding-top: 4.32em;
+  padding-bottom: 4.2em;
 }
 
 #sidebar-inner-scrollable {
@@ -77,7 +78,7 @@
 .linkbutton {
   display: block;
   color: #48a730;
-  background: #101010;
+  background: transparent;
   -moz-appearance: none;
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
   font-size: 1.7em;
@@ -85,12 +86,13 @@
   text-align: center;
   padding: 0.3em;
   border: 1px solid #5dc350;
-  margin: 10px;
+  margin: 0.3em;
   cursor: pointer;
   -webkit-transition: 0.5s ease;
   transition: 0.5s ease;
 }
-.linkbutton:hover {
+.linkbutton:hover,
+.linkbutton.zeroclipboard-is-hover {
   background-color: #41962c;
   border-color: #40902a;
   color: #fafafa;
@@ -157,7 +159,7 @@
   background: #ddd;
   width: 65%;
   height: 70%;
-  margin: 2em auto;
+  margin: 5em auto;
   box-shadow: 0 0 25px #111;
   padding: 2em;
 }
@@ -167,6 +169,17 @@
   height: 70%;
   padding: 1.5em;
   box-shadow: 0 0 1.3em #000 inset;
+}
+/* override every-fifth-line numbering of code */
+#lightbox-wrap pre li.L0,
+#lightbox-wrap pre li.L1,
+#lightbox-wrap pre li.L2,
+#lightbox-wrap pre li.L3,
+#lightbox-wrap pre li.L5,
+#lightbox-wrap pre li.L6,
+#lightbox-wrap pre li.L7,
+#lightbox-wrap pre li.L8 {
+  list-style-type: decimal;
 }
 
 /*--SLIDE BUTTONS--*/
