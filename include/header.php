@@ -260,7 +260,7 @@
         </section>
       </header>
 
-      <?php } elseif ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)") { ?>
+      <?php } elseif ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)") { global $notification_unread_count;  ?>
 
       <header>
         <section id="headerwrap">
@@ -275,7 +275,7 @@
             <?php if(isset($_SESSION['user_id'])) { ?>
               <li><a href="/myaccount.php" id="menu-myaccount">My Account</a></li>
               <li><a href="/mysettings.php" id="menu-mysettings">My Settings</a></li>
-              <li><a href="javascript:;" onClick="show_notifications()" class="notification-link">Notifications (<?php echo $unread_notification_count; ?>)</a></li>
+              <li><a href="javascript:;" onClick="show_notifications()" class="notification-link">Notifications (<?php echo $notification_unread_count; ?>)</a></li>
               <li><a href="/logout.php" id="menu-logout">Logout</a></li>
             <?php } ?>
             <?php if(!isset($_SESSION['user_id'])) { ?>
