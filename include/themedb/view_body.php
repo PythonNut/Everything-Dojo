@@ -26,7 +26,7 @@
     case 'complete';
 ?>
     <h2>Completed Themes</h2>
-    
+
     <table class="database-table">
       <thead style="border-bottom: 1px black solid;">
         <tr>
@@ -55,9 +55,9 @@
 <?php
       break;
     case 'development':
-?>    
+?>
     <h2>Themes in Development</h2>
-    
+
     <table class="database-table">
       <thead style="border-bottom: 1px black solid;">
         <tr>
@@ -128,10 +128,11 @@
       <?php echo $style['description']; ?><br />
       <b>Screenshot:</b><br />
       <img src="<?php echo $style['screenshot']; ?>" style="max-width: 65vw" /><br />
+      <a href="<?php echo '/tryit.php?select=' . $_GET['id'] . (in_array($style['stage'], array('[ALPHA]','[BETA]','[DEV]')) ? '&dev=dev' : '')?>">View this style in the Try-It!</a><br />
       <b>Code:</b><br />
       <div class="code">
         <pre>
-<code class="language-css"><?php echo nl2br($style['code']); ?></code>
+          <code class="language-css"><?php echo nl2br($style['code']); ?></code>
         </pre>
       </div>
 <?php
