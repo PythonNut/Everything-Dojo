@@ -50,7 +50,7 @@
           <div class="topic-reply-top">
             <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $discuss->parse_code($post['title']);?></h2>
             <div style="display:inline-block; opacity: 0.6;">
-              Posted by <?php echo $user['user_name'];?> on <?php echo date('D M d, Y g:i a', $post['time']);?></div>
+              Posted by <?php echo $user['user_name'];?> on <?php echo date('M d, Y g:i a', $post['time']);?></div>
             <?php if (($_SESSION['user_id'] > 0) and ($_SESSION['user_id'] != $user['id'])){ ?>
             <?php $thanks = $discuss->thanks($post['post_id'], $typearg, $_SESSION['user_id']); ?>
             <div class="topic-reply-thanks<?php if (in_array($_SESSION['user_id'],$thanks)){ echo " topic-reply-thanked"; $thankedposts[] = $post['post_id'];}?>" id="topic-reply-thanks-<?php echo $post['post_id'];?>" onclick="thankpost(<?php echo $post['post_id']?>)">&uArr; &nbsp;&nbsp;<?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div>
