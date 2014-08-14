@@ -194,6 +194,9 @@ td.tiny-col{
 	border-radius: 50%;
 	border: 1px black solid;
 }
+.unread-forum{
+	border: 5px #b00 solid;
+}
 .read-icon{
 	background-color: #1b63c6;
 }
