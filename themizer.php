@@ -13,8 +13,8 @@
   <link rel=\"stylesheet\" href=\"css/themizer.css\">
   <link rel=\"stylesheet\" href=\"css/spectrum.min.css\">
   <link href=\"css/prettify-desert.css\" rel=\"stylesheet\" />";
-  $extra_js = "<script src=\"js/blog-fn.js\"></script>
-  <script src=\"js/spectrum-1.3.4.min.js\" onload=\"$.fn.spectrum.load = false;\"></script>
+  $extra_js = "<script src=\"js/blog-fn.js\"></script>" .
+  ($_GET["mode"] == "regular" ? "<script src=\"js/spectrum-1.3.4.min.js\" onload=\"$.fn.spectrum.load = false;\"></script>
   <script src=\"js/prettify.js\"></script>
   <script src=\"js/ZeroClipboard.js\"></script>
   <script>
@@ -29,7 +29,9 @@
 
     $().sliderSidebar();
     themizer();
-  });</script>";
+    themizerRegular();
+  });</script>" : "<script>
+  $(function(){\$().sliderSidebar();themizer();themizerDev();});</script>");
 
   get_header();
 ?>
@@ -187,6 +189,7 @@
           <span class="collapsebutton"></span>
         </section>
         <section class="option-wrap">
+          <textarea id="editor" style="font-family:Monaco,Consolas,'Courier New',monospace"></textarea>
           <!-- add codemirror -->
           <!--------------------!
            ! ADD-ONS:           !

@@ -374,7 +374,12 @@ function themizer () {
       idleState = true;
     }, 4000);
   });
+}
 
+/**
+ * Themizer (Regular mode)
+ */
+function themizerRegular () {
   /* Get Code */
   $("#submit").click(function () {
 
@@ -505,6 +510,16 @@ function themizer () {
   $(window).mousemove();
 }
 
+/**
+ * Themizer (Developer mode)
+ */
+function themizerDev () {
+  $("head").append('<style id="dev-style"></style>');
+
+  $("#editor").bind("keyup", function () {
+    $("#dev-style").text($(this).val());
+  });
+}
 /**
  * Try-It init
  */
