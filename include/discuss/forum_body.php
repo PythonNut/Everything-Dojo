@@ -68,7 +68,7 @@
           <td colspan="2">Topic</td>
           <td class="med-col center">Author</td>
           <td class="small-col center">Comments</td>
-          <td class="small-col center">Views</td>
+          <td class="small-col center">Viewed By</td>
           <td class="med-col center">Last Post</td> 
         <tr>
       </thead>

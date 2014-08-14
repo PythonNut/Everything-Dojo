@@ -37,7 +37,7 @@
       <?php $user = get_user(intval($topic['user_id']));?>
       <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $topic['title'];?></h2>
       <div style="display:inline-block; opacity: 0.6;">Posted by <?php echo $user;?> on <?php echo date('M d, Y g:i a', $topic['time']);?></div>
-      <p><?php echo $topic['text'];?></p>
+      <p><?php echo $discuss->parse_code($topic['text']);?></p>
       <?php if($topic['edit_id'] != NULL){ ?><p class="small">Edited by <?php echo get_user($topic['edit_id']); ?> on <?php echo date('M d, Y g:i a', $topic['last_time']);?></p><?php } ?>  
     </div>
   </div>
@@ -48,7 +48,7 @@
         <div class="topic-reply-text">
           <?php $user = get_all_user($post['user_id']);?>
           <div class="topic-reply-top">
-            <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $discuss->parse_code($post['title']);?></h2>
+            <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $post['title'];?></h2>
             <div style="display:inline-block; opacity: 0.6;">
               Posted by <?php echo $user['user_name'];?> on <?php echo date('M d, Y g:i a', $post['time']);?></div>
             <?php if (($_SESSION['user_id'] > 0) and ($_SESSION['user_id'] != $user['id'])){ ?>
