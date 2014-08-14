@@ -92,7 +92,7 @@
   transition: 0.5s ease;
 }
 .linkbutton:hover,
-.linkbutton.zeroclipboard-is-hover {
+.linkbutton[class*='hover'] {
   background-color: #41962c;
   border-color: #40902a;
   color: #fafafa;

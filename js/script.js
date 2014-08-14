@@ -424,14 +424,22 @@ function themizer () {
     client.on("ready", function (readyEvent) {
       client.on("aftercopy", function (event) {
         event.target.innerHTML= "Copied";
+        event.target.classList.add("hover");
       });
     });
 
     /**
      * Lightbox
      */
+    // Add code to the pre
     $("#lightbox-wrap pre").html(code);
-    $("#lightbox-wrap pre.prettyprinted").removeClass("prettyprinted"); // http://stackoverflow.com/a/15984048/3472393
+
+    // Reset #copybutton to pre-copied state
+    $("#copycode.hover").text("Copy code to clipboard").removeClass("hover");
+
+    // Google-Code-Prettify won't do its job if the pre has class `prettyprinted`
+    // http://stackoverflow.com/a/15984048/3472393
+    $("#lightbox-wrap pre.prettyprinted").removeClass("prettyprinted");
     prettyPrint();
     $("#lightbox").show();
 
