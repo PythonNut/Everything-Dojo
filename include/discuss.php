@@ -9,7 +9,7 @@ class discuss {
     $this->dbc = $dbc;
   }
 	
-	function get_fora($forum_id = 'all', $parent_id = 'all'){
+	function get_fora($forum_id = 'all', $parent_id = 'all', $user_id = 0){
       if ($forum_id != 'all'){
         $query = "SELECT * FROM " . DISCUSS_FORUM_TABLE . " WHERE `id` = :id";
         $sth = $this->dbc->prepare($query);
@@ -21,7 +21,7 @@ class discuss {
 		
 				return $result;
       }
-      else if ($parent_id != 'all'){
+      elseif ($parent_id != 'all'){
         $query = "SELECT * FROM " . DISCUSS_FORUM_TABLE . " WHERE `parent` = :id";
         $sth = $this->dbc->prepare($query);
 				$sth->execute(array(
