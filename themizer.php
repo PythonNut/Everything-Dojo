@@ -33,7 +33,6 @@
 
   get_header();
 ?>
-<?php if ($_GET["mode"] == "regular") { ?>
 <aside id="sidebar">
   <h2 id="sideheadbar" class="themizer">Themizer</h2>
   <section id="sidebar-inner">
@@ -53,6 +52,8 @@
           </select>
         </section>
       </section>
+
+      <?php if ($_GET["mode"] == "regular"): ?>
 
       <section class="option" id="option-base">
         <section class="option-title">
@@ -177,6 +178,30 @@
           </section>
         </section>
       </section>
+
+      <?php elseif ($_GET["mode"] == "development"): ?>
+
+      <section class="option" id="option-editor">
+        <section class="option-title expanded">
+          <h5>Editor</h5>
+          <span class="collapsebutton"></span>
+        </section>
+        <section class="option-wrap">
+          <!-- add codemirror -->
+          <!--------------------!
+           ! ADD-ONS:           !
+           ! active-line.js     !
+           ! closebrackets.js   !
+           ! css-hint.js        !
+           ! lint.js            !
+           ! matchbrackets.js   !
+           ! runmode.js         !
+           !--------------------!-->
+        </section>
+      </section>
+
+      <?php endif; ?>
+
     </section>
 
     <!-- `span` and not `a` to avoid accidental styling in Firefox  -->
@@ -196,12 +221,6 @@
 </aside>
 
 <div id="blog-body"></div>
-
-<?php } elseif ($_GET["mode"] == "development") { ?>
-
-<?php include("unavailable.php"); ?>
-
-<?php } ?>
 
 </body>
 </html>
