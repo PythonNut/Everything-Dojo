@@ -214,7 +214,7 @@
     <div id="lightbox-wrap">
       <pre id="generatedcode" style="display:none"></pre>
       <pre id="generatedcode-shown" class="prettyprint linenums"></pre>
-      <span class="linkbutton" id="copycode" data-clipboard-target="#generatedcode">Copy Code to Clipboard</span>
+      <span class="linkbutton" id="copycode" data-clipboard-target="generatedcode">Copy Code to Clipboard</span>
     </div>
   </div>
 
