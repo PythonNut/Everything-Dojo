@@ -291,13 +291,25 @@ class discuss {
         );
         return $result;
       }
-      else{
-        $query = "SELECT * FROM " . DISCUSS_TOPIC_TABLE . " WHERE `id` = :id";
-        $sth = $this->dbc->prepare($query);
-        $sth->execute(array(
-          ':id' => $topic_id
-        ));
-        $result = $sth->fetch(PDO::FETCH_ASSOC);
+      else{	
+				$query = "SELECT * FROM `" . DISCUSS_POSTS_TABLE . "` WHERE `topic_id` = :id";
+				$sth = $this->dbc->prepare($query);
+				$sth->execute(array(
+					':id' => $topic_id
+				));
+				
+				$result = $sth->fetch(PDO::FETCH_ASSOC);
+				
+				$query = "SELECT `forum_id` FROM `" . DISCUSS_TOPIC_TABLE . "` WHERE `topic_id` = :id";
+				$sth = $this->dbc->prepare($query);
+				$sth->execute(array(
+					':id' => $topic_id
+				));
+				
+				$forum = $sth->fetch(PDO::FETCH_ASSOC);
+				
+				$result['forum_id'] = $forum['forum_id'];
+				
         return $result;
       }
     }
@@ -308,7 +320,7 @@ class discuss {
 				$query = "INSERT INTO ".DISCUSS_POSTS_SPECIAL_TABLE." (user_id, style_id, time, title, text) VALUES (:user, :topic, :time, :title, :text)";
 			}
 			else{
-				$query = "INSERT INTO ".DISCUSS_POSTS_TABLE." (user_id, style_id, time, title, text) VALUES (:user, :topic, :time, :title, :text)";
+				$query = "INSERT INTO ".DISCUSS_POSTS_TABLE." (user_id, topic_id, time, title, text) VALUES (:user, :topic, :time, :title, :text)";
 			}
 			$error = array();
 			if(strlen(trim($data['title'])) < 5){
@@ -356,15 +368,26 @@ class discuss {
 				$sth->execute(array(
 					':forum' => $forum,
 					':user' => $user_id,
-					':title' => $data['title'],
+					':title' => htmlspecialchars($data['title']) ,
 					':time' => time()
 				));
 				
-				unset($result);
+				$topic_id = $this->dbc->lastInsertId();
+				
+				$query = "INSERT INTO `" . DISCUSS_POSTS_TABLE . "` (user_id, topic_id, time, title, text) VALUES (:user, :topic, :time, :title, :text)";
+				$sth = $this->dbc->prepare($query);
+				
+				$result = $sth->execute(array(
+					':user' => intval($user_id),
+					':topic' => intval($topic_id),
+					':time' => time(),
+					':title' => htmlspecialchars($data['title']),
+					':text' => htmlspecialchars($data['desc'])
+				));		
 			}
 			$result = array(
 				'f' => $forum,
-				't' => $data['t'],
+				't' => $topic_id,
 				'err' => $error
 			);
 			
@@ -409,6 +432,9 @@ class discuss {
           ':id' => intval($topic_id)
         ));
         $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+				if($type != 1){
+					unset($result[0]);
+				}
         return $result;
       }
     }
