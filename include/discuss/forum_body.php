@@ -84,7 +84,7 @@
       <?php } else{ 
 		foreach($topics as $topic){ 
 		  $username = get_user($topic['user_id']);
-		  $comments = $discuss->get_comment_count($topic['topic_id'], 0);
+		  $comments = $discuss->get_comment_count($topic['topic_id'], $type);
 		  if($type == 1){
 		    $comments = $comments - 1;
 		  }

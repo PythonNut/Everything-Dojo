@@ -1,9 +1,9 @@
 <?php
   if (empty($_GET['id'])){
-    $fora = $discuss->get_fora('all', '0');
+    $fora = $discuss->get_fora('all', '0', $_SESSION['user_id']);
   }
   else{
-    $fora = $discuss->get_fora('all', intval($_GET['id']));
+    $fora = $discuss->get_fora('all', intval($_GET['id']), $_SESSION['user_id']);
   }
 ?>
 <h2 style="text-align: center;">EverythingDojo Discussion Forum</h2>
