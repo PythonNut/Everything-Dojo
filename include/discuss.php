@@ -237,7 +237,7 @@ class discuss {
 			
 			for($i=0;$i<count($result);$i++){
 				// check if user viewed
-				$query = "SELECT COUNT(*) FROM `" . DISCUSS_TOPICS_TRACK_TABLE . "` WHERE `style_id` = :id AND `user_id` = :user_id";
+				$query = "SELECT COUNT(*) FROM `" . DISCUSS_TOPICS_TRACK_TABLE . "` WHERE `topic_id` = :id AND `user_id` = :user_id";
 				$sth = $this->dbc->prepare($query);
 				$sth->execute(array(
 					':id' 			=> $result[$i]['topic_id'],
