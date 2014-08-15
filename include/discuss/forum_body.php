@@ -61,6 +61,11 @@
   </script>
   <?php
   }
+	if($_SESSION['user_id'] != 0){
+	?>
+  <a href="javascript:;" onClick="mark_all_read(<?php echo $id . ', ' . $_SESSION['user_id']; ?>)" style="left: 5%; position: relative;">Mark All Read</a>
+  <?php
+	}
   ?>
     <table class="discuss-table">
       <thead style="border-bottom: 1px black solid;">

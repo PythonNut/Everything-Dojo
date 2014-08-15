@@ -53,7 +53,7 @@ class discuss {
 							$query = "SELECT COUNT(*) FROM `" . DISCUSS_TOPICS_TRACK_SPECIAL_TABLE . "` WHERE `style_id` = :topic AND `user_id` = :user";
 							$sth = $this->dbc->prepare($query);
 							$sth->execute(array(
-								':topic' => $topic['topic_id'],
+								':topic' => $topic['id'],
 								':user' => $user_id
 							));
 							
@@ -185,7 +185,7 @@ class discuss {
       if (empty($user_id)){
         return false;
       }
-			if($type == 1){
+			if($type == 0){
 				$query = "SELECT COUNT(*) FROM `" . DISCUSS_TOPICS_TRACK_SPECIAL_TABLE . "` WHERE `user_id` = :user_id AND `style_id` = :style";
 				$sth = $this->dbc->prepare($query);
 				$sth->execute(array(
@@ -222,6 +222,20 @@ class discuss {
 				$result = false;
 			}
 			return $result;
+	}
+	
+	// mark all read
+	function mark_all_read($id, $user_id){
+		$topics = $this->get_topics($id, $user_id);
+
+		$forum = $this->get_fora($id);
+		$type = $forum['type'];
+
+		foreach($topics as $topic){
+			$this->view_topic($topic['topic_id'], $type, $user_id);
+		}
+		
+		return;
 	}
 
 	// get topics for view page
