@@ -31,7 +31,7 @@
   <p style="text-align: center;"><?php echo $forum_data['description']; ?></p>
   <?php 
   if ($user_id > 0 and intval($id) != 1){
-    echo "<a href=\"#topic-create-topic\" id=\"topic-a-topic\">+ Create New Topic</a>";
+    echo "<a href=\"#topic-create-topic\" id=\"topic-a-topic\" style=\"left: 5%; position: relative;\">+ Create New Topic</a><br />";
 		if(!empty($_SESSION['err'])){
 			echo '<div id="errors">';
 			foreach($_SESSION['err'] as $error){
@@ -112,4 +112,11 @@
 			} ?>
       </tbody>
     </table>
+    <?php
+			if($_SESSION['user_id'] != 0){
+		?>
+		<a href="javascript:;" onClick="mark_all_read(<?php echo $id . ', ' . $_SESSION['user_id']; ?>)" style="left: 5%; position: relative;">Mark All Read</a>
+		<?php
+		}
+		?>
 </section>
