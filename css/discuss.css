@@ -191,10 +191,10 @@ td.tiny-col{
   border: 1px black solid;
 }
 .unread-forum{
-  background-color: #d00;
+  background-color: #b00;
 }
 .unread-forum:hover {
-  background-color: #a00;
+  background-color: #900;
 }
 .read-icon{
   background-color: #1b63c6;

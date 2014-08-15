@@ -17,10 +17,12 @@
     }
   }
   if (!empty($_SESSION['user_id'])){
-    $type = 0;
     if ($_GET['f'] == 1){
-      $type = 1;
+      $type = 0;
     }
+		else{
+			$type = 1;
+		}
     $discuss->view_topic(intval($_GET['t']), $type, intval($_SESSION['user_id']));
   }
 	$data = $discuss->get_fora(intval($topic['forum_id']));

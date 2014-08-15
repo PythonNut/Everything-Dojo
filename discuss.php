@@ -4,7 +4,7 @@
   include("include/discuss.php");
   session_start();
   $extra_style = "<link rel=\"stylesheet\" href=\"css/discuss.css\" />";
-	$extra_js = "<script src=\"js/database.js\"></script>";
+	$extra_js = "<script src=\"js/discuss.js\"></script>";
   get_header();
 
   if($_SESSION['user_id'] != NULL){
