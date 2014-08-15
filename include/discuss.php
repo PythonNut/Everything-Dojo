@@ -281,39 +281,6 @@ class discuss {
 					}
 					return $result;
 			}
-			else{
-				// other ids here
-        $query = "SELECT * FROM `" . DISCUSS_TOPIC_TABLE . "` WHERE `forum_id` = :id";
-        $sth = $this->dbc->prepare($query);
-        $sth->execute(array(
-          ':id' => $id
-        ));      
-        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-
-        for($i=0;$i<count($result);$i++){
-          // check if user viewed
-          $query = "SELECT COUNT(*) FROM `" . DISCUSS_TOPICS_TRACK_TABLE . "` WHERE `style_id` = :id AND `user_id` = :user_id";
-          $sth = $this->dbc->prepare($query);
-          $sth->execute(array(
-            ':id' 			=> $result[$i]['topic_id'],
-            ':user_id'	=> $user_id
-          ));						
-          $count = $sth->fetchColumn();
-          if($count == 0){
-            $result[$i]['read'] = 0;
-          }
-          else{
-            $result[$i]['read'] = 1;
-          }				
-
-          // find views
-          $result[$i]['views'] = $this->get_views($result[$i]['topic_id'], $type);
-
-          // find comment count
-          $result[$i]['comment_count'] = $this->get_comment_count($result[$i]['topic_id'], $type);
-        }
-				return $result;
-			}
 		}
 		else{
     	$query = "SELECT * FROM `" . DISCUSS_TOPIC_TABLE . "` WHERE `forum_id` = :id";
@@ -344,8 +311,9 @@ class discuss {
 				
 				// find comment count
 				$result[$i]['comment_count'] = $this->get_comment_count($result[$i]['topic_id'], $type);
-        return $result;
 			}
+			
+			return $result;
 		}
 		
 		
