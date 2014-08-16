@@ -316,325 +316,325 @@ class discuss {
       return $result;
     }
   }
-}
+  //get specific topic
+  function get_topic($topic_id, $type = 0){
+    if ($type == 1){
+      //get style alone
+      $query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `id` = :id";
+      $sth = $this->dbc->prepare($query);
+      $sth->execute(array(
+        ':id' => $topic_id
+      ));
+      $style = $sth->fetch(PDO::FETCH_ASSOC);
+      //export result
+      $result = array(
+        'forum_id' => 1,
+        'user_id' => intval($style['submitted_by_id']),
+        'title' => $style['name'],
+        'time' => $style['timestamp'],
+        'edit_id' => $style['edit_id'],
+        'last_time' => $style['last_timestamp'],
+        'text' => $style['description'],
+        'topic_id' => intval($topic_id)
+      );
+      return $result;
+    }
+    else{
+      $query = "SELECT * FROM `" . DISCUSS_POSTS_TABLE . "` WHERE `topic_id` = :id";
+      $sth = $this->dbc->prepare($query);
+      $sth->execute(array(
+        ':id' => $topic_id
+      ));
 
-function parse_code($string){
-  // $search = array('\n', '\\n');
-  // $replace = array('<br/>', '<br/>');
-  return nl2br(htmlspecialchars($string));
-}
+      $result = $sth->fetch(PDO::FETCH_ASSOC);
 
-//get specific topic
-function get_topic($topic_id, $type = 0){
-  if ($type == 1){
-    //get style alone
-    $query = "SELECT * FROM " . THEMEDB_TABLE . " WHERE `id` = :id";
-    $sth = $this->dbc->prepare($query);
-    $sth->execute(array(
-      ':id' => $topic_id
-    ));
-    $style = $sth->fetch(PDO::FETCH_ASSOC);
-    //export result
+      $query = "SELECT `forum_id` FROM `" . DISCUSS_TOPIC_TABLE . "` WHERE `topic_id` = :id";
+      $sth = $this->dbc->prepare($query);
+      $sth->execute(array(
+        ':id' => $topic_id
+      ));
+
+      $forum = $sth->fetch(PDO::FETCH_ASSOC);
+
+      $result['forum_id'] = $forum['forum_id'];
+
+      return $result;
+    }
+  }
+
+  // insert post
+  function insert_post($forum, $user_id, $data){
+    if($forum == 1){
+      $query = "INSERT INTO ".DISCUSS_POSTS_SPECIAL_TABLE." (user_id, style_id, time, title, text) VALUES (:user, :topic, :time, :title, :text)";
+    }
+    else{
+      $query = "INSERT INTO ".DISCUSS_POSTS_TABLE." (user_id, topic_id, time, title, text) VALUES (:user, :topic, :time, :title, :text)";
+    }
+    $error = array();
+    if(strlen(trim($data['title'])) < 5){
+      $error[] = 'Your title needs to have at least 5 characters (excluding spaces)!';
+    }
+    if(strlen(trim($data['desc'])) < 5){
+      $error[] = 'Your message needs to have at least 10 characters (excluding spaces)!';
+    }
+    if(empty($error)){
+      $sth = $this->dbc->prepare($query);
+      $result = $sth->execute(array(
+        ':user' => intval($user_id),
+        ':topic' => intval($data['t']),
+        ':time' => time(),
+        ':title' => htmlspecialchars($data['title']),
+        ':text' => htmlspecialchars($this->filter_swear_words($data['desc']))
+      ));
+
+      $this->delete_views($data['t'], $user_id, 0);
+    }
+
+    unset($result);
     $result = array(
-      'forum_id' => 1,
-      'user_id' => intval($style['submitted_by_id']),
-      'title' => $style['name'],
-      'time' => $style['timestamp'],
-      'edit_id' => $style['edit_id'],
-      'last_time' => $style['last_timestamp'],
-      'text' => $style['description'],
-      'topic_id' => intval($topic_id)
+      'f' => $forum,
+      't' => $data['t'],
+      'err' => $error
     );
-    return $result;
-  }
-  else{
-    $query = "SELECT * FROM `" . DISCUSS_POSTS_TABLE . "` WHERE `topic_id` = :id";
-    $sth = $this->dbc->prepare($query);
-    $sth->execute(array(
-      ':id' => $topic_id
-    ));
-
-    $result = $sth->fetch(PDO::FETCH_ASSOC);
-
-    $query = "SELECT `forum_id` FROM `" . DISCUSS_TOPIC_TABLE . "` WHERE `topic_id` = :id";
-    $sth = $this->dbc->prepare($query);
-    $sth->execute(array(
-      ':id' => $topic_id
-    ));
-
-    $forum = $sth->fetch(PDO::FETCH_ASSOC);
-
-    $result['forum_id'] = $forum['forum_id'];
 
     return $result;
   }
-}
 
-// insert post
-function insert_post($forum, $user_id, $data){
-  if($forum == 1){
-    $query = "INSERT INTO ".DISCUSS_POSTS_SPECIAL_TABLE." (user_id, style_id, time, title, text) VALUES (:user, :topic, :time, :title, :text)";
-  }
-  else{
-    $query = "INSERT INTO ".DISCUSS_POSTS_TABLE." (user_id, topic_id, time, title, text) VALUES (:user, :topic, :time, :title, :text)";
-  }
-  $error = array();
-  if(strlen(trim($data['title'])) < 5){
-    $error[] = 'Your title needs to have at least 5 characters (excluding spaces)!';
-  }
-  if(strlen(trim($data['desc'])) < 5){
-    $error[] = 'Your message needs to have at least 10 characters (excluding spaces)!';
-  }
-  if(empty($error)){
-    $sth = $this->dbc->prepare($query);
-    $result = $sth->execute(array(
-      ':user' => intval($user_id),
-      ':topic' => intval($data['t']),
-      ':time' => time(),
-      ':title' => htmlspecialchars($data['title']),
-      ':text' => htmlspecialchars(filter_swear_words($data['desc']))
-    ));
-
-    $this->delete_views($data['t'], $user_id, 0);
-  }
-
-  unset($result);
-  $result = array(
-    'f' => $forum,
-    't' => $data['t'],
-    'err' => $error
-  );
-
-  return $result;
-}
-
-// insert topic
-function insert_topic($forum, $user_id, $data){
-  if(strlen(trim($data['title'])) < 5){
-    $error[] = 'Your title needs to have at least 5 characters (excluding spaces)!';
-  }
-  if(strlen(trim($data['desc'])) < 5){
-    $error[] = 'Your message needs to have at least 10 characters (excluding spaces)!';
-  }
-
-  if(empty($error)){
-    $query = "INSERT INTO `" . DISCUSS_TOPIC_TABLE . "` (`topic_id`, `forum_id`, `user_id`, `title`, `time`) VALUES (NULL, :forum, :user, :title, :time) ";
-
-    $sth = $this->dbc->prepare($query);
-    $sth->execute(array(
-      ':forum' => $forum,
-      ':user' => $user_id,
-      ':title' => htmlspecialchars($data['title']) ,
-      ':time' => time()
-    ));
-
-    $topic_id = $this->dbc->lastInsertId();
-
-    $query = "INSERT INTO `" . DISCUSS_POSTS_TABLE . "` (user_id, topic_id, time, title, text) VALUES (:user, :topic, :time, :title, :text)";
-    $sth = $this->dbc->prepare($query);
-
-    $result = $sth->execute(array(
-      ':user' => intval($user_id),
-      ':topic' => intval($topic_id),
-      ':time' => time(),
-      ':title' => htmlspecialchars($data['title']),
-      ':text' => htmlspecialchars(filter_swear_words($data['desc']))
-    ));
-  }
-  $result = array(
-    'f' => $forum,
-    't' => $topic_id,
-    'err' => $error
-  );
-
-  return $result;
-}
-
-//get posts from topic with id ($topic_id) [optional: also gets posts from user with id ($user_id)]
-function get_posts($topic_id = 'all', $user_id = 'all', $type = 0){
-  if ($topic_id != 'all'){
-    if ($type == 1){    //special table
-      $query = "SELECT * FROM " . DISCUSS_POSTS_SPECIAL_TABLE . " WHERE style_id = :id";
+  // insert topic
+  function insert_topic($forum, $user_id, $data){
+    if(strlen(trim($data['title'])) < 5){
+      $error[] = 'Your title needs to have at least 5 characters (excluding spaces)!';
     }
-    else{
-      $query = "SELECT * FROM " . DISCUSS_POSTS_TABLE . " WHERE topic_id = :id";
+    if(strlen(trim($data['desc'])) < 5){
+      $error[] = 'Your message needs to have at least 10 characters (excluding spaces)!';
     }
+
+    if(empty($error)){
+      $query = "INSERT INTO `" . DISCUSS_TOPIC_TABLE . "` (`topic_id`, `forum_id`, `user_id`, `title`, `time`) VALUES (NULL, :forum, :user, :title, :time) ";
+
+      $sth = $this->dbc->prepare($query);
+      $sth->execute(array(
+        ':forum' => $forum,
+        ':user' => $user_id,
+        ':title' => htmlspecialchars($data['title']) ,
+        ':time' => time()
+      ));
+
+      $topic_id = $this->dbc->lastInsertId();
+
+      $query = "INSERT INTO `" . DISCUSS_POSTS_TABLE . "` (user_id, topic_id, time, title, text) VALUES (:user, :topic, :time, :title, :text)";
+      $sth = $this->dbc->prepare($query);
+
+      $result = $sth->execute(array(
+        ':user' => intval($user_id),
+        ':topic' => intval($topic_id),
+        ':time' => time(),
+        ':title' => htmlspecialchars($data['title']),
+        ':text' => htmlspecialchars($this->filter_swear_words($data['desc']))
+      ));
+    }
+    $result = array(
+      'f' => $forum,
+      't' => $topic_id,
+      'err' => $error
+    );
+
+    return $result;
   }
-  else{
-    $query = "SELECT * FROM " . DISCUSS_POSTS_TABLE . ", " . DISCUSS_POSTS_SPECIAL_TABLE;
-  }
-  if ($user_id != 'all'){
+
+  //get posts from topic with id ($topic_id) [optional: also gets posts from user with id ($user_id)]
+  function get_posts($topic_id = 'all', $user_id = 'all', $type = 0){
     if ($topic_id != 'all'){
-      $query = $query." AND user_id = :user";
-      $sth = $this->dbc->prepare($query);
-      $sth->execute(array(
-        ':id' => intval($topic_id),
-        ':user' => intval($user_id)
-      ));
-    }
-    else{
-      $query = $query." WHERE user_id = :user";
-      $sth = $this->dbc->prepare($query);
-      $sth->execute(array(
-        ':user' => intval($user_id)
-      ));
-    }
-    $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-    return $result;
-  }
-  else{
-    $sth = $this->dbc->prepare($query);
-    $sth->execute(array(
-      ':id' => intval($topic_id)
-    ));
-    $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-    if($type != 1){
-      unset($result[0]);
-    }
-    return $result;
-  }
-}
-//0 - get thanks from regular, 1 - get thanks from special, 2 - thank regular, 3 - thank special
-function thanks($post_id, $mode = 0, $user_id = null){
-  if (empty($post_id)){
-    return false;
-  }
-  else{
-    if ($mode == 0){
-      $query = "SELECT thanks FROM ".DISCUSS_POSTS_TABLE." WHERE post_id = :id";
-      $sth = $this->dbc->prepare($query);
-      $sth->execute(array(
-        ':id' => intval($post_id)
-      ));
-      $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-      $result = explode("|",trim($result[0]['thanks']));
-      if (empty($result[0])){
-        return array();
+      if ($type == 1){    //special table
+        $query = "SELECT * FROM " . DISCUSS_POSTS_SPECIAL_TABLE . " WHERE style_id = :id";
       }
       else{
-        return $result;
-      }
-    }
-    else if ($mode == 1){
-      $query = "SELECT thanks FROM ".DISCUSS_POSTS_SPECIAL_TABLE." WHERE post_id = :id";
-      $sth = $this->dbc->prepare($query);
-      $sth->execute(array(
-        ':id' => intval($post_id)
-      ));
-      $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-      $result = explode("|",trim($result[0]['thanks']));
-      if (empty($result[0])){
-        return array();
-      }
-      else{
-        return $result;
-      }
-    }
-    else if ($mode == 2){
-      $query = "SELECT thanks FROM ".DISCUSS_POSTS_SPECIAL_TABLE." WHERE post_id = :id";
-      $sth = $this->dbc->prepare($query);
-      $sth->execute(array(
-        ':id' => intval($post_id)
-      ));
-      $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-      if (empty($result[0]['thanks'])){
-        $result = array();
-      }
-      else{
-        $result = explode("|",$result[0]['thanks']);
-      }
-      if (empty($user_id)){
-        return false;
-      }
-      else{
-        $found = false;
-        foreach($result as $key=>$thank){
-          if ($thank == $user_id){
-            $found = true;
-            unset($result[$key]);
-            array_values($result);
-            break;
-          }
-        }
-        if (!$found){
-          $result[] = intval($user_id);
-        }
-        $finalstring = implode("|",$result);
-        $query = "UPDATE ".DISCUSS_POSTS_TABLE." SET thanks = :result WHERE post_id = :id";
-        $sth = $this->dbc->prepare($query);
-        $bresult = $sth->execute(array(
-          ':result' => $finalstring,
-          ':id' => intval($post_id)
-        ));
-        return count($result);
-      }
-    }
-    else if ($mode == 3){
-      $query = "SELECT thanks FROM ".DISCUSS_POSTS_SPECIAL_TABLE." WHERE post_id = :id";
-      $sth = $this->dbc->prepare($query);
-      $sth->execute(array(
-        ':id' => intval($post_id)
-      ));
-      $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-      if (empty($result[0]['thanks'])){
-        $result = array();
-      }
-      else{
-        $result = explode("|",$result[0]['thanks']);
-      }
-      if (empty($user_id)){
-        return false;
-      }
-      else{
-        $found = false;
-        foreach($result as $key=>$thank){
-          if ($thank == $user_id){
-            $found = true;
-            unset($result[$key]);
-            array_values($result);
-            break;
-          }
-        }
-        if (!$found){
-          $result[] = intval($user_id);
-        }
-        $finalstring = implode("|",$result);
-        $query = "UPDATE ".DISCUSS_POSTS_SPECIAL_TABLE." SET thanks = :result WHERE post_id = :id";
-        $sth = $this->dbc->prepare($query);
-        $bresult = $sth->execute(array(
-          ':result' => $finalstring,
-          ':id' => intval($post_id)
-        ));
-        return count($result);
+        $query = "SELECT * FROM " . DISCUSS_POSTS_TABLE . " WHERE topic_id = :id";
       }
     }
     else{
+      $query = "SELECT * FROM " . DISCUSS_POSTS_TABLE . ", " . DISCUSS_POSTS_SPECIAL_TABLE;
+    }
+    if ($user_id != 'all'){
+      if ($topic_id != 'all'){
+        $query = $query." AND user_id = :user";
+        $sth = $this->dbc->prepare($query);
+        $sth->execute(array(
+          ':id' => intval($topic_id),
+          ':user' => intval($user_id)
+        ));
+      }
+      else{
+        $query = $query." WHERE user_id = :user";
+        $sth = $this->dbc->prepare($query);
+        $sth->execute(array(
+          ':user' => intval($user_id)
+        ));
+      }
+      $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+      return $result;
+    }
+    else{
+      $sth = $this->dbc->prepare($query);
+      $sth->execute(array(
+        ':id' => intval($topic_id)
+      ));
+      $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+      if($type != 1){
+        unset($result[0]);
+      }
+      return $result;
+    }
+  }
+  function parse_code($string){
+    // $search = array('\n', '\\n');
+    // $replace = array('<br/>', '<br/>');
+    return nl2br(htmlspecialchars($string));
+  }
+
+  //0 - get thanks from regular, 1 - get thanks from special, 2 - thank regular, 3 - thank special
+  function thanks($post_id, $mode = 0, $user_id = null){
+    if (empty($post_id)){
       return false;
     }
+    else{
+      if ($mode == 0){
+        $query = "SELECT thanks FROM ".DISCUSS_POSTS_TABLE." WHERE post_id = :id";
+        $sth = $this->dbc->prepare($query);
+        $sth->execute(array(
+          ':id' => intval($post_id)
+        ));
+        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        $result = explode("|",trim($result[0]['thanks']));
+        if (empty($result[0])){
+          return array();
+        }
+        else{
+          return $result;
+        }
+      }
+      else if ($mode == 1){
+        $query = "SELECT thanks FROM ".DISCUSS_POSTS_SPECIAL_TABLE." WHERE post_id = :id";
+        $sth = $this->dbc->prepare($query);
+        $sth->execute(array(
+          ':id' => intval($post_id)
+        ));
+        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        $result = explode("|",trim($result[0]['thanks']));
+        if (empty($result[0])){
+          return array();
+        }
+        else{
+          return $result;
+        }
+      }
+      else if ($mode == 2){
+        $query = "SELECT thanks FROM ".DISCUSS_POSTS_SPECIAL_TABLE." WHERE post_id = :id";
+        $sth = $this->dbc->prepare($query);
+        $sth->execute(array(
+          ':id' => intval($post_id)
+        ));
+        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        if (empty($result[0]['thanks'])){
+          $result = array();
+        }
+        else{
+          $result = explode("|",$result[0]['thanks']);
+        }
+        if (empty($user_id)){
+          return false;
+        }
+        else{
+          $found = false;
+          foreach($result as $key=>$thank){
+            if ($thank == $user_id){
+              $found = true;
+              unset($result[$key]);
+              array_values($result);
+              break;
+            }
+          }
+          if (!$found){
+            $result[] = intval($user_id);
+          }
+          $finalstring = implode("|",$result);
+          $query = "UPDATE ".DISCUSS_POSTS_TABLE." SET thanks = :result WHERE post_id = :id";
+          $sth = $this->dbc->prepare($query);
+          $bresult = $sth->execute(array(
+            ':result' => $finalstring,
+            ':id' => intval($post_id)
+          ));
+          return count($result);
+        }
+      }
+      else if ($mode == 3){
+        $query = "SELECT thanks FROM ".DISCUSS_POSTS_SPECIAL_TABLE." WHERE post_id = :id";
+        $sth = $this->dbc->prepare($query);
+        $sth->execute(array(
+          ':id' => intval($post_id)
+        ));
+        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        if (empty($result[0]['thanks'])){
+          $result = array();
+        }
+        else{
+          $result = explode("|",$result[0]['thanks']);
+        }
+        if (empty($user_id)){
+          return false;
+        }
+        else{
+          $found = false;
+          foreach($result as $key=>$thank){
+            if ($thank == $user_id){
+              $found = true;
+              unset($result[$key]);
+              array_values($result);
+              break;
+            }
+          }
+          if (!$found){
+            $result[] = intval($user_id);
+          }
+          $finalstring = implode("|",$result);
+          $query = "UPDATE ".DISCUSS_POSTS_SPECIAL_TABLE." SET thanks = :result WHERE post_id = :id";
+          $sth = $this->dbc->prepare($query);
+          $bresult = $sth->execute(array(
+            ':result' => $finalstring,
+            ':id' => intval($post_id)
+          ));
+          return count($result);
+        }
+      }
+      else{
+        return false;
+      }
+    }
   }
-}
 
-// filter swear words
-// WARNING: DUE TO INCOMPLETE REGEX, MAY END UP REPLACING PERFECTLY FINE WORDS, SUCH AS 'bass'
+  // filter swear words
+  // WARNING: DUE TO INCOMPLETE REGEX, MAY END UP REPLACING PERFECTLY FINE WORDS, SUCH AS 'bass'
 
-function filter_swear_words($contaminated) {
-  $swears = array(
-    "freaking" => "ZnVja2luZw==", // f******
-    "screw"    => "ZnVjaw==",     // f***
-    "shodd"    => "c2hpdHQ=",     // plural form of below
-    "shod"     => "c2hpdA==",     // s***
-    "bastard"  => "Yml0Y2g=",     // b****
-    "****"     => "Y3VudA==",     // c***, too offensive to replace
-    "butt"     => "YXNz",         // a**
-    "darn"     => "ZGFtbg=="      // d***
-  );
-  $cleaned = $contaminated;
+  function filter_swear_words($contaminated) {
+    $swears = array(
+      "freaking" => "ZnVja2luZw==", // f******
+      "screw"    => "ZnVjaw==",     // f***
+      "shodd"    => "c2hpdHQ=",     // plural form of below
+      "shod"     => "c2hpdA==",     // s***
+      "bastard"  => "Yml0Y2g=",     // b****
+      "****"     => "Y3VudA==",     // c***, too offensive to replace
+      "butt"     => "YXNz",         // a**
+      "darn"     => "ZGFtbg=="      // d***
+    );
+    $cleaned = $contaminated;
 
-  foreach ($swears as $minced=>$swear) {
-    $regex = "/" . base64_decode($swear) . "/";
-    $cleaned = preg_replace($regex, $minced, $cleaned);
+    foreach ($swears as $minced=>$swear) {
+      $regex = "/" . base64_decode($swear) . "/";
+      $cleaned = preg_replace($regex, $minced, $cleaned);
+    }
+    return $cleaned;
   }
-  return $cleaned;
+
 }
 
 $discuss = new discuss($dbc);
