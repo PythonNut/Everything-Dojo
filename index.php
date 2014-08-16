@@ -17,7 +17,7 @@
     <div id="notification-body">
       <div id="notification-header">
         <b>Notifications:</b>
-          <a href="javascript:;" style="float: right; margin-right: 2vw;" onClick="mark_all_read(<?php echo $_SESSION['user_id']; ?>)">Mark all read</a>
+        <a href="javascript:;" style="float: right; margin-right: 2vw;" onClick="mark_all_read(<?php echo $_SESSION['user_id']; ?>)">Mark all read</a>
       </div>
       <?php
       if(count($notification_data) == 0) {
