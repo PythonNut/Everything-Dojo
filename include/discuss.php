@@ -10,111 +10,111 @@ class discuss {
   }
 
   function get_fora($forum_id = 'all', $parent_id = 0, $user_id = 0){
-      if ($forum_id != 'all'){
-        $query = "SELECT * FROM " . DISCUSS_FORUM_TABLE . " WHERE `id` = :id";
-        $sth = $this->dbc->prepare($query);
-        $sth->execute(array(
-          ':id' => $forum_id
-        ));
+    if ($forum_id != 'all'){
+      $query = "SELECT * FROM " . DISCUSS_FORUM_TABLE . " WHERE `id` = :id";
+      $sth = $this->dbc->prepare($query);
+      $sth->execute(array(
+        ':id' => $forum_id
+      ));
 
-        $result = $sth->fetch(PDO::FETCH_ASSOC);
+      $result = $sth->fetch(PDO::FETCH_ASSOC);
 
-        return $result;
-      }
-      elseif ($parent_id != 0){
-        $query = "SELECT * FROM " . DISCUSS_FORUM_TABLE . " WHERE `parent` = :id";
-        $sth = $this->dbc->prepare($query);
-        $sth->execute(array(
-          ':id' => $forum_id
-        ));
+      return $result;
+    }
+    elseif ($parent_id != 0){
+      $query = "SELECT * FROM " . DISCUSS_FORUM_TABLE . " WHERE `parent` = :id";
+      $sth = $this->dbc->prepare($query);
+      $sth->execute(array(
+        ':id' => $forum_id
+      ));
 
-        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+      $result = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-        return $result;
-      }
-      else{
-        $query = "SELECT * FROM `" . DISCUSS_FORUM_TABLE . "`";
-        $sth = $this->dbc->prepare($query);
-        $sth->execute();
+      return $result;
+    }
+    else{
+      $query = "SELECT * FROM `" . DISCUSS_FORUM_TABLE . "`";
+      $sth = $this->dbc->prepare($query);
+      $sth->execute();
 
-        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+      $result = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-        for($i=0;$i<count($result);$i++){
-          if($result[$i]['id'] == 1){
-            $query = "SELECT `id` FROM `" . THEMEDB_TABLE . "`";
-            $sth = $this->dbc->prepare($query);
-            $sth->execute();
+      for($i=0;$i<count($result);$i++){
+        if($result[$i]['id'] == 1){
+          $query = "SELECT `id` FROM `" . THEMEDB_TABLE . "`";
+          $sth = $this->dbc->prepare($query);
+          $sth->execute();
 
-            $topics = $sth->fetchAll(PDO::FETCH_ASSOC);
-            $total = count($topics);
+          $topics = $sth->fetchAll(PDO::FETCH_ASSOC);
+          $total = count($topics);
 
-            $read_count = 0;
-            foreach($topics as $topic){
-              $query = "SELECT COUNT(*) FROM `" . DISCUSS_TOPICS_TRACK_SPECIAL_TABLE . "` WHERE `style_id` = :topic AND `user_id` = :user";
-              $sth = $this->dbc->prepare($query);
-              $sth->execute(array(
-                ':topic' => $topic['topic_id'],
-                ':user' => $user_id
-              ));
-
-              $count = $sth->fetchColumn();
-
-              if($count > 0){
-                $read_count++;
-              }
-            }
-
-            if($user_id == 0){
-              $read_count = $total;
-            }
-
-            if($total > $read_count){
-              $result[$i]['read'] = 0;
-            }
-            else{
-              $result[$i]['read'] = 1;
-            }
-          }
-          else{
-            $query = "SELECT `topic_id` FROM `" . DISCUSS_TOPIC_TABLE . "` WHERE `forum_id` = :id";
+          $read_count = 0;
+          foreach($topics as $topic){
+            $query = "SELECT COUNT(*) FROM `" . DISCUSS_TOPICS_TRACK_SPECIAL_TABLE . "` WHERE `style_id` = :topic AND `user_id` = :user";
             $sth = $this->dbc->prepare($query);
             $sth->execute(array(
-              ':id' => $result[$i]['id']
+              ':topic' => $topic['id'],
+              ':user' => $user_id
             ));
 
-            $topics = $sth->fetchAll(PDO::FETCH_ASSOC);
-            $total = count($topics);
+            $count = $sth->fetchColumn();
 
-            $read_count = 0;
-            foreach($topics as $topic){
-              $query = "SELECT COUNT(*) FROM `" . DISCUSS_TOPICS_TRACK_TABLE . "` WHERE `user_id` = :user AND `topic_id` = :topic";
-              $sth = $this->dbc->prepare($query);
-              $sth->execute(array(
-                ':user' => $user_id,
-                ':topic' => $topic['topic_id']
-              ));
-
-              $count = $sth->fetchColumn();
-
-              if($count > 0){
-                $read_count++;
-              }
-            }
-            if($user_id == 0){
-              $read_count = $total;
-            }
-
-            if($total > $read_count){
-              $result[$i]['read'] = 0;
-            }
-            else{
-              $result[$i]['read'] = 1;
+            if($count > 0){
+              $read_count++;
             }
           }
-        }
 
-        return $result;
+          if($user_id == 0){
+            $read_count = $total;
+          }
+
+          if($total > $read_count){
+            $result[$i]['read'] = 0;
+          }
+          else{
+            $result[$i]['read'] = 1;
+          }
+        }
+        else{
+          $query = "SELECT `topic_id` FROM `" . DISCUSS_TOPIC_TABLE . "` WHERE `forum_id` = :id";
+          $sth = $this->dbc->prepare($query);
+          $sth->execute(array(
+            ':id' => $result[$i]['id']
+          ));
+
+          $topics = $sth->fetchAll(PDO::FETCH_ASSOC);
+          $total = count($topics);
+
+          $read_count = 0;
+          foreach($topics as $topic){
+            $query = "SELECT COUNT(*) FROM `" . DISCUSS_TOPICS_TRACK_TABLE . "` WHERE `user_id` = :user AND `topic_id` = :topic";
+            $sth = $this->dbc->prepare($query);
+            $sth->execute(array(
+              ':user' => $user_id,
+              ':topic' => $topic['topic_id']
+            ));
+
+            $count = $sth->fetchColumn();
+
+            if($count > 0){
+              $read_count++;
+            }
+          }
+          if($user_id == 0){
+            $read_count = $total;
+          }
+
+          if($total > $read_count){
+            $result[$i]['read'] = 0;
+          }
+          else{
+            $result[$i]['read'] = 1;
+          }
+        }
       }
+
+      return $result;
+    }
   }
 
   // get count of all posts in topic
@@ -224,6 +224,20 @@ class discuss {
     return $result;
   }
 
+  // mark all read
+  function mark_all_read($id, $user_id){
+    $topics = $this->get_topics($id, $user_id);
+
+    $forum = $this->get_fora($id);
+    $type = $forum['type'];
+
+    foreach($topics as $topic){
+      $this->view_topic($topic['topic_id'], $type, $user_id);
+    }
+
+    return;
+  }
+
   // get topics for view page
   function get_topics($id, $user_id){
     // make sure the type is not special
@@ -246,39 +260,6 @@ class discuss {
         for($i=0;$i<count($result);$i++){
           // check if user viewed
           $query = "SELECT COUNT(*) FROM `" . DISCUSS_TOPICS_TRACK_SPECIAL_TABLE . "` WHERE `style_id` = :id AND `user_id` = :user_id";
-          $sth = $this->dbc->prepare($query);
-          $sth->execute(array(
-            ':id'       => $result[$i]['topic_id'],
-            ':user_id'  => $user_id
-          ));
-          $count = $sth->fetchColumn();
-          if($count == 0){
-            $result[$i]['read'] = 0;
-          }
-          else{
-            $result[$i]['read'] = 1;
-          }
-
-          // find views
-          $result[$i]['views'] = $this->get_views($result[$i]['topic_id'], $type);
-
-          // find comment count
-          $result[$i]['comment_count'] = $this->get_comment_count($result[$i]['topic_id'], $type);
-        }
-        return $result;
-      }
-      else{
-        // other ids here
-        $query = "SELECT * FROM `" . DISCUSS_TOPIC_TABLE . "` WHERE `forum_id` = :id";
-        $sth = $this->dbc->prepare($query);
-        $sth->execute(array(
-          ':id' => $id
-        ));
-        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
-
-        for($i=0;$i<count($result);$i++){
-          // check if user viewed
-          $query = "SELECT COUNT(*) FROM `" . DISCUSS_TOPICS_TRACK_TABLE . "` WHERE `style_id` = :id AND `user_id` = :user_id";
           $sth = $this->dbc->prepare($query);
           $sth->execute(array(
             ':id'       => $result[$i]['topic_id'],
@@ -330,8 +311,9 @@ class discuss {
 
         // find comment count
         $result[$i]['comment_count'] = $this->get_comment_count($result[$i]['topic_id'], $type);
-        return $result;
       }
+
+      return $result;
     }
   }
 }
@@ -633,7 +615,7 @@ function thanks($post_id, $mode = 0, $user_id = null){
 }
 
 // filter swear words
-// WARNING: DUE TO INCOMPLETE REGEX, MAY END UP REPLACING PERFECTLY FINE WORDS
+// WARNING: DUE TO INCOMPLETE REGEX, MAY END UP REPLACING PERFECTLY FINE WORDS, SUCH AS 'bass'
 
 function filter_swear_words($contaminated) {
   $swears = array(

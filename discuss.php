@@ -4,14 +4,14 @@
   include("include/discuss.php");
   session_start();
   $extra_style = "<link rel=\"stylesheet\" href=\"css/discuss.css\" />";
-	$extra_js = "<script src=\"js/database.js\"></script>";
+  $extra_js = "<script src=\"js/discuss.js\"></script>";
   get_header();
 
   if($_SESSION['user_id'] != NULL){
     $unread_count = $notification->count_unread($_SESSION['user_id']);
     $notification_data = $notification->get_notifications($_SESSION['user_id']);
-  }	
-	
+  }
+
   if (empty($_GET['view'])){
     $view = '';
   }
@@ -79,7 +79,7 @@
   <h3>Hello Guest. Please <a href="login.php">sign in</a>.</h3>
   <br/>
   <?php } ?>
-  <?php 
+  <?php
     $result = $dbc->prepare("SELECT data FROM data WHERE fetchname = 'announcements'");
     $result->execute();
     $result = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -91,7 +91,7 @@
     <h3>Announcements: </h3>
     <div class="discuss-round" id="discuss-round-left"><span class="discuss-round"></span></div>
     <div id="discuss-announcements">
-    <?php 
+    <?php
       $key = 1;
       foreach($announcements as $announce) {
         echo "<div class=\"discuss-announcement\" id=\"discuss-announcement-".$key."\" style=\"display: block;\">".$announce."</div>";
@@ -143,7 +143,7 @@
           }
           announcement_options.updateView();
         });
-      </script>        
+      </script>
     </section>
     <?php } ?>
     <br/>
