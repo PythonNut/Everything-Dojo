@@ -28,8 +28,8 @@ if (isset($_POST['doLogin'])) {
 
   // protect against brute forcing
   if (intval(explode("|", $logins_attempted)[0]) >= 5 && (time() - $last_attempted_login < 600)) {
-    $err[] = "Sorry, but you have exceeded the brute force limit. Please wait " . (10 - ceil((time() - $last_attempted_login)/60)) . " minute(s) before logging in again. Thank you."; // temporary until a more user-friendly solution is found
-  } elseif (time() - $last_attempted_login >= 600) { // time limit expired || user was not brute-forced
+    $err[] = "Sorry, but you have exceeded the brute force limit. Please wait " . (10 - floor((time() - $last_attempted_login)/60)) . " minute(s) before logging in again. Thank you."; // temporary until a more user-friendly solution is found
+  } elseif (intval(explode("|", $logins_attempted)[0]) < 5 || (time() - $last_attempted_login >= 600)) { // time limit expired || user was not brute-forced
     // Match row found with more than 1 results  - the user is authenticated.
     if ($username_match > 0) {
       if(!$user_array['approved']) {
