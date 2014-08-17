@@ -578,6 +578,7 @@ table a { color: #F99819; }
   /* position for index page */
   right: 15vw;
   top: 7.5vh;
+  z-index: 100;
 }
 
 .notification-arrow-up{
@@ -610,13 +611,10 @@ table a { color: #F99819; }
   margin-left: 3vh;
 }
 
-.notification{
+.notification-item {
   height: 8vh;
+  padding-top: 0.5em;
   border-bottom: 1px #bbb solid;
-}
-
-.notification:before{
-  border: 0;
 }
 
 .unread{
@@ -632,7 +630,7 @@ table a { color: #F99819; }
 }
 
 .notification-color{
-  float: left;
+  position: absolute;
   width: 6vh;
   height: 6vh;
   line-height: 6vh;
@@ -646,17 +644,16 @@ table a { color: #F99819; }
 }
 
 .notification-text{
-  height: 4vh;
-  float: left;
-  margin-top: 1vh;
-  margin-left: 1vw;
+  height: auto;
+  margin: 1vh 6vh 1vh 8vh;
 }
 
 .time{
-  float: right;
   height: 1vh;
   color: #333;
   font-size: .7em;
+  text-align: right;
+  padding-bottom: 2vh;
   margin-right: 1vw;
 }
 
