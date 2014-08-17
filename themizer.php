@@ -10,28 +10,25 @@
   include("include/include.php");
   session_start();
   $extra_style = "<link rel=\"stylesheet\" href=\"css/blog-style.css\">
-  <link rel=\"stylesheet\" href=\"css/themizer.css\">
-  <link rel=\"stylesheet\" href=\"css/spectrum.min.css\">
-  <link href=\"css/prettify-desert.css\" rel=\"stylesheet\" />";
+  <link rel=\"stylesheet\" href=\"css/themizer.css\">" .
+  ($_GET["mode"] == "regular"
+  ?
+  "<link rel=\"stylesheet\" href=\"css/spectrum.min.css\">
+  <link href=\"css/prettify-desert.css\" rel=\"stylesheet\" />"
+  :
+  "<link rel=\"stylesheet\" href=\"css/codemirror.min.css\" />");
   $extra_js = "<script src=\"js/blog-fn.js\"></script>" .
-  ($_GET["mode"] == "regular" ? "<script src=\"js/spectrum-1.3.4.min.js\" onload=\"$.fn.spectrum.load = false;\"></script>
+  ($_GET["mode"] == "regular"
+  ?
+  "<script src=\"js/spectrum-1.3.4.min.js\" onload=\"$.fn.spectrum.load = false;\"></script>
   <script src=\"js/prettify.js\"></script>
   <script src=\"js/ZeroClipboard.js\"></script>
   <script>
-  $(function(){
-    /* Lightbox Utility */
-    $('#lightbox').click(function(){
-      $(this).hide();
-    });
-    $('#lightbox-wrap').click(function(e){
-        e.stopPropagation();
-    });
-
-    $().sliderSidebar();
-    themizer();
-    themizerRegular();
-  });</script>" : "<script>
-  $(function(){\$().sliderSidebar();themizer();themizerDev();});</script>");
+  $(function(){\$('#lightbox').click(function(){\$(this).hide();});$('#lightbox-wrap').click(function(e){e.stopPropagation();});$().sliderSidebar();themizerRegular();
+  });</script>"
+  :
+  "<script src=\"js/codemirror-4.4.min.js\"></script>
+  <script>$(function(){\$().sliderSidebar();themizerDev();});</script>");
 
   get_header();
 ?>
@@ -191,17 +188,25 @@
         <section class="option-wrap">
           <textarea id="editor" style="font-family:Monaco,Consolas,'Courier New',monospace"></textarea>
           <!-- add codemirror -->
-          <!--------------------!
-           ! ADD-ONS:           !
-           ! active-line.js     !
-           ! closebrackets.js   !
-           ! css-hint.js        !
-           ! lint.js            !
-           ! matchbrackets.js   !
-           ! runmode.js         !
-           !--------------------!-->
         </section>
       </section>
+
+      <script>$(function () {
+        // TODO: Add linting
+        var codemirror = CodeMirror.fromTextArea(document.getElementById("editor"), {
+          mode: "css",
+          theme: "ambiance",
+          lineNumbers: true,
+          matchBrackets: true,
+          autoCloseBrackets: true,
+          styleActiveLine: true,
+        });
+
+        codemirror.on("change", function (codemirror, change) {
+          $("#dev-style").html(codemirror.getValue());
+        });
+      });
+      </script>
 
       <?php endif; ?>
 
@@ -225,5 +230,6 @@
 
 <div id="blog-body"></div>
 
+</main>
 </body>
 </html>

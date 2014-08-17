@@ -380,6 +380,7 @@ function themizer () {
  * Themizer (Regular mode)
  */
 function themizerRegular () {
+  themizer();
   /* Get Code */
   $("#submit").click(function () {
 
@@ -514,11 +515,11 @@ function themizerRegular () {
  * Themizer (Developer mode)
  */
 function themizerDev () {
+  themizer();
   $("head").append('<style id="dev-style"></style>');
 
-  $("#editor").bind("keyup", function () {
-    $("#dev-style").text($(this).val());
-  });
+  // remove submit button
+  $("#submit").remove();
 }
 /**
  * Try-It init
