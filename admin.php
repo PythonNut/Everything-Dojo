@@ -58,7 +58,7 @@ list($active) = $rs_active;
       if(count($notification_data) == 0) {
       ?>
       <a href="javascript:;">
-      <div id="notification-0" class="notification read">
+      <div id="notification-0" class="notification-item read">
         <div class="notification-color" style="background-color: #ccc"></div>
         <div class="notification-text">No notifications</div>
       </div>
@@ -69,7 +69,7 @@ list($active) = $rs_active;
           $notif_data = $notification->get_notif_obj($notif['notification_type'], $notif['item_id']);
       ?>
       <a href="<?php echo $notif_data['url']; ?>" class="notification-item-link" onClick="mark_read(<?php echo $notif['id']; ?>)">
-        <div id="notification-<?php echo $notif['id']; ?>" class="notification <?php if($notif['read'] == 0){ echo 'unread'; }else{ echo 'read'; } ?> ">
+        <div id="notification-<?php echo $notif['id']; ?>" class="notification-item <?php if($notif['read'] == 0){ echo 'unread'; }else{ echo 'read'; } ?> ">
           <div class="notification-color" style="background-color: #<?php echo $notif_data['data']['color']; ?>"><?php echo substr($notif_data['data']['location'], 0, 1); ?></div>
           <div class="notification-text">
             <?php echo $notif_data['data']['subject']; ?>
