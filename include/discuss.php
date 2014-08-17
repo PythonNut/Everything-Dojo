@@ -185,7 +185,7 @@ class discuss {
     if (empty($user_id)){
       return false;
     }
-    if($type == 1){
+    if($type == 0){
       $query = "SELECT COUNT(*) FROM `" . DISCUSS_TOPICS_TRACK_SPECIAL_TABLE . "` WHERE `user_id` = :user_id AND `style_id` = :style";
       $sth = $this->dbc->prepare($query);
       $sth->execute(array(
