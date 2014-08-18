@@ -7,7 +7,6 @@
 /*--LAYOUT--*/
 #sidebar {
   position: fixed;
-  z-index: 100;
   top: 0;
   left: 0;
   height: 100%;
@@ -16,6 +15,7 @@
   text-align: left;
   text-rendering: optimizeLegibility;
   overflow-x: visible;
+  z-index: 2147483647;
   /* Prevent accidental selection of content in sidebar when resizing */
   cursor: auto;
   -webkit-user-select: none;
