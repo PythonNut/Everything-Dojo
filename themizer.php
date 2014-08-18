@@ -203,7 +203,10 @@
         });
 
         codemirror.on("change", function (codemirror, change) {
-          $("#dev-style").html(codemirror.getValue());
+          var input = codemirror.getValue();
+          input = input.replace(/([^\r\n,{}]+)(,(?=[^}]*{)|\s*{)/g, "#blog-body $1$2"); // https://stackoverflow.com/a/12578281/3472393
+          input = input.replace(/#blog-body (html|body)/g, "$1"); // restore body/html selectors
+          $("#dev-style").html(input);
         });
       });
       </script>
