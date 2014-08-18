@@ -278,7 +278,6 @@ function themizer () {
   $("#side-button").css("left", sideWidth);
 
   $("#blog-body").load("blog/blog-index.html");
-  $("head").append("<link href='blog/css/core.css' type='text/css' rel='stylesheet' id='base-theme'>");
 
   // option slides sliding init
   $(".option").each(function () {
@@ -381,6 +380,9 @@ function themizer () {
  */
 function themizerRegular () {
   themizer();
+  // Base style
+  $("head").append("<link href='blog/css/core.css' type='text/css' rel='stylesheet' id='base-theme'>");
+
   /* Get Code */
   $("#submit").click(function () {
 
