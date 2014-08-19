@@ -664,3 +664,48 @@ table a { color: #F99819; }
   vertical-align: middle;
 }
 
+/*--CREDITS--*/
+#credits {
+  position: fixed;
+  top: 200%;/*Get it out of the viewport*/
+  left: 30%;
+  width: 40%;
+  height: 90%;
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #7DCFE2),color-stop(1, #A3F9FF));
+  background-image: -o-linear-gradient(bottom, #7DCFE2 0%, #A3F9FF 100%);
+  background-image: -moz-linear-gradient(bottom, #7DCFE2 0%, #A3F9FF 100%);
+  background-image: -webkit-linear-gradient(bottom, #7DCFE2 0%, #A3F9FF 100%);
+  background-image: -ms-linear-gradient(bottom, #7DCFE2 0%, #A3F9FF 100%);
+  background-image: linear-gradient(to bottom, #7DCFE2 0%, #A3F9FF 100%);
+  z-index: 60;
+  padding: 2%;
+  border-radius: 15px;
+  font-family: 'lato';
+  text-align: center;
+  overflow: scroll;
+  transition-property: top;
+  transition-duration: 1s;
+  transition-timing-function: ease-in-out;
+}
+
+#credits h1 {
+  font-size: 300%;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#credits ul {
+  list-style: none;
+  font-size: 150%;
+}
+
+#credits li {
+  line-height: 240%;
+}
+
+#credits li img {
+  width: 7%;
+  height: 7%;
+  padding-right: 2%;
+}
+
