@@ -59,6 +59,13 @@
           <a href="' . constant("URL_" . strtoupper($title)) . '"><h1>' . $title . '</h1></a>
         </section>
       </header>';
+      } elseif ($title == "Database") {
+        global $mode; // mode only matters if the DB is open
+
+        if ($mode == "view") { ?>
+          <script src="/js/db-search.js"></script>
+          <input class="search" type="text" placeholder="Search...">
+        <?php }
       } elseif ($title == "Try-It") {
       ?>
 
