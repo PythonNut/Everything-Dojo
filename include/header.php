@@ -24,6 +24,8 @@
     <link href='css/blog-style.css' rel='stylesheet' type='text/css'>
     <link href='css/tryit.css' rel='stylesheet' type='text/css'>
     <?php } ?>
+    
+    <script src="/js/popup.js"></script>
 
     <?php global $extra_js; print $extra_js; ?>
 
