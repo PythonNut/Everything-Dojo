@@ -1,6 +1,6 @@
 # added by NeoMathematicalKid (@tyxchen)
 # on 2014-06-01T14:54:38-04:00
-# last edited 2014-07-05T19:29:14-04:00
+# last edited 2014-07-29T18:38:14-04:00
 
 # temporary files added by text editors
 
@@ -28,7 +28,6 @@
 # server configuration files
 # we probably don't want these public
 
-.htaccess
 .htpasswd
 .htusers
 
@@ -43,3 +42,4 @@ error_log
 # can't randomly view on GitHub
 
 include/db.php
+include/creds.php

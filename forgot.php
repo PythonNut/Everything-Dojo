@@ -1,4 +1,4 @@
-<?php 
+<?php
 include("include/include.php");
 
 $table = TB_NAME;
@@ -11,16 +11,14 @@ if (isset($_POST['doReset'])) {
   }
 
   if(!isEmail($data['user_email'])) {
-    $err[] = "Please enter a valid email"; 
+    $err[] = "Please enter a valid email";
   }
 
   $user_email = $data['user_email'];
   //check if activ code and user is valid as precaution
-  //$rs_check = mysql_query("SELECT id FROM $table where user_email='$user_email'") or die (mysql_error()); 
-  //$num = mysql_num_rows($rs_check);
   $rs_check = $dbc->prepare("SELECT id FROM $table WHERE user_email=?");
   $rs_check->execute(array($user_email));
-  $num = count($rs_check->fetchAll(PDO::FETCH_ASSOC));
+  $num = $rs_check->rowCount();
   if ( $num <= 0 ) {
     $err[] = "Sorry, no such account exists.";
   }
@@ -29,7 +27,6 @@ if (isset($_POST['doReset'])) {
 
     $new_pwd = GenPwd();
     $pwd_reset = PwdHash($new_pwd);
-    //$sha1_new = sha1($new); 
     //set update sha1 of new password + salt
     $rs_activ = $dbc->prepare("UPDATE $table SET pwd=? WHERE user_email='?'");
     $rs_activ->execute(array($pwd_reset, $user_email));
@@ -60,6 +57,7 @@ This is an automated response. Do not reply to this email.";
   session_start();
   get_header();
 ?>
+<section id="content">
   <?php //spit out all errors
   if(!empty($err))  {
     echo "<p id=\"errors\">";
@@ -73,12 +71,15 @@ This is an automated response. Do not reply to this email.";
     echo "<div class=\"msg\">" . $msg[0] . "</div>";
   } else {
   ?>
+<section id="content">
   <p>If you have forgot your password, you can reset it and a new password will be sent to your email address.</p>
 
   <form action="forgot.php" method="post" name="actForm" id="actForm">
     <label>Your Email</label>
-    <input name="user_email" type="text" class="required email" size="25"></td>
+    <input name="user_email" type="text" class="required email" size="25">
     <input name="doReset" type="submit" value="Reset">
   </form>
   <?php } //end else (that there's no messages) ?>
+</section>
+
 <?php get_footer(); ?>

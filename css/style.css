@@ -8,6 +8,7 @@ Please do not plagiarize
 /*--FONT IMPORT--*/
 @import url('fonts.css');
 
+
 /*--UNIVERSAL RESET--*/
 * { margin: 0; padding: 0; }
 
@@ -21,6 +22,18 @@ a {
 
 a:hover { color: #658800; }
 
+/*--IMAGES--*/
+
+/*
+ * (1) Fix bug in IE where images can't be resized
+ * (2) Make resized images look nicer in IE
+ */
+
+img {
+  width: inherit; /* (1) */
+  height: inherit; /* (1) */
+  -ms-interpolation-mode: bicubic; /* (2) */
+}
 
 /*--LISTS--*/
 ul {
@@ -55,9 +68,20 @@ input[type="submit"].inline, input[type="button"].inline, input[type="reset"].in
   display: inline; /* because of precedence rules + jquery (preventing use of !important) */
 }
 
+.linkbutton {
+  background: transparent;
+  display: table;
+  padding: 10px 15px;
+  border-radius: 0.3em;
+  border: 1px solid #7CAB00;
+  font-size: 2em;
+  margin: 0.7em auto;
+}
+
 
 /*--INPUTS AND TEXTAREAS--*/
-input {
+input,
+textarea {
   background: #fff;
   border: 1px solid #222;
   border-radius: 0.18rem;
@@ -67,11 +91,6 @@ input {
 }
 
 textarea {
-  background: #fff;
-  border: 1px solid #222;
-  border-radius: 0.18rem;
-  padding: 0.3rem;
-  margin-bottom: 0.3rem;
   resize: none;
   font-family: Arial;
   width: 34.773vw;
@@ -82,6 +101,16 @@ input:focus, textarea:focus { outline: none; }
 
 label { display: block; }
 
+
+/*--SELECTION--*/
+::-moz-selection {
+  background: rgba(130, 211, 214, .44);
+  color: currentColor;
+}
+::selection {
+  background: rgba(130, 211, 214, .44);
+  color: currentColor;
+}
 
 /*--SCROLLBARS--*/
 /* credits to PythonNut of AoPS! Modified by me, of course. */
@@ -113,7 +142,7 @@ label { display: block; }
 /*--TYPESETTING--*/
 #headerwrap h1 {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   color: white;
   display: inline-block; /* prevent body from being pushed down by sticky footer */
   text-transform: uppercase;
@@ -123,6 +152,10 @@ label { display: block; }
   margin: 0.6rem;
   height: 1.334em;
   position: absolute;
+}
+
+#headerwrap h1 a {
+  color: white;
 }
 
 h2, h4 {
@@ -150,6 +183,7 @@ code { font-family: Monaco, "Courier New", Courier, monospace; }
   font-family: Amble, HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 2.22vh;
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 body { background: white; }
@@ -158,10 +192,9 @@ body { background: white; }
 
 #content {
   display: block;
-  overflow: auto;
+  overflow-y: hidden; /* safari */
   margin: 2.604vh auto;
   min-height: 100%;
-  width: 70vw;
 }
 
 
@@ -181,12 +214,52 @@ header {
   height: 11.6vh;
 }
 
-#logo { position: absolute; top: 0; left: 0; margin: 1.302vh; }
-#logo img { margin-bottom: -0.52083vh; height: 8.33333vh; }
+#logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 1.302vh;
+}
+#logo img {
+  margin-bottom: -0.52083vh;
+  /* fix IE not resizing images correctly */
+  max-width: 3.75rem;
+  max-height: 3.75rem;
+}
+
+.breadcrumbs {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.breadcrumbs #logo {
+  margin-right: -4%;
+  margin-left: -4%;
+}
+
+.breadcrumbs #logo img {
+  /* fix IE not resizing images correctly */
+  max-width: 2.5rem;
+  max-height: 2.5rem;
+}
+
+#headerwrap > .breadcrumbs > h1 {
+  color: black;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 4rem;
+  padding: 0;
+  margin: 0 0.4rem;
+}
+
+#headerwrap .breadcrumbs a {
+  color: #666;
+}
 
 nav {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
   position: absolute;
+  top: 0;
   right: 0;
   margin: 1.302083vh;
   height: 8.33333vh;
@@ -200,7 +273,7 @@ nav ul {
 nav ul li { display: inline-block; }
 
 nav ul a {
-  color: #000000;
+  color: black;
   float: left;
   font-size: 1.412rem;
   line-height: 2.5em;
@@ -245,9 +318,19 @@ footer, .push {
 
 .inline { display: inline; }
 
+.uppercase { text-transform: uppercase; }
+
 #errors { color: red; }
 
 .field { position: relative; }
+
+.wait {
+  display: none;
+  position: absolute;
+  top: 0.2rem;
+  left: 11rem;
+  height: 1.5rem;
+}
 .invalid {
   border-color: #b00;
   background-color: #ffeded;
@@ -283,7 +366,7 @@ footer, .push {
 .notification::before {
   content: "";
   position: absolute;
-  left: -0.7rem;
+  left: -7px;
   bottom: .4rem;
   width: 0;
   height: 0;
@@ -301,26 +384,25 @@ footer, .push {
 }
 
 .msg {
+  position: absolute;
+  top: 5.5rem;
+  left: 30%;
+  width: 40%;
   background: rgba(124, 171, 0, 0.4);
-  border: 1px solid #222;
-  padding: 0.6rem;
-  margin-bottom: 0.6rem;
-  font-weight: bold;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.9em;
+  font-weight: 400;
+  text-align: center;
+  padding: 0.6em;
+  border: 1px solid rgba(124, 171, 0, 0.7);
+  border-radius: 1em;
+}
+
+.msg + * {
+  margin-top: 3rem;
 }
 
 .textcenter { display: block; text-align: center; margin: 0; }
-
-.slideButton {
-  width: 3.5rem;
-  height: 1.75rem;
-  position: absolute;
-  top: 10.94vh;
-  left: 50%;
-  margin-left: -1.75rem;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-}
-
 
 /*--TABLES--*/
 /*table design from smashingmagazine.com, thank you*/
@@ -329,7 +411,6 @@ table {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
   font-size: 0.7rem;
   text-align: left;
-  border-collapse: collapse;
   border: 1px solid #222;
   margin: 1.2rem;
   background: #fff;
@@ -344,7 +425,10 @@ th {
   padding: 0.7em 1em;
 }
 
-td { padding: 0.5em 1.2em; }
+td {
+  font-weight: bold;
+  padding: 0.5em 1.2em;
+}
 
 tbody tr:hover td {
   color: #555;
@@ -353,6 +437,39 @@ tbody tr:hover td {
 
 table a { color: #F99819; }
 
+/**
+ * Collapse option button styling
+ */
+
+.collapsebutton {
+  position: relative;
+  float: right;
+}
+.collapsebutton::before,
+.collapsebutton::after {
+  content: "";
+  position: absolute;
+  top: 1em;
+  right: 0.9em;
+  width: 0.43em;
+  height: 0.2em;
+  background: #fafafa;
+  -webkit-transition: -webkit-transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out;
+}
+.collapsebutton::after {
+   right: 0.5em;
+}
+.expanded .collapsebutton::before,
+.collapsed .collapsebutton::after {
+  -webkit-transform: skewY(-20deg);
+  transform: skewY(-20deg);
+}
+.expanded .collapsebutton::after,
+.collapsed .collapsebutton::before {
+  -webkit-transform: skewY(20deg);
+  transform: skewY(20deg);
+}
 
 /*--USER ANNOUNCEMENTS--*/
 #announcements {
@@ -363,9 +480,7 @@ table a { color: #F99819; }
 
 #announcements ul li { margin-left: 1.5rem; }
 
-/**
- * Errors
- */
+/*--ERRORS--*/
 
 .error-img {
   display: block;
@@ -395,7 +510,7 @@ table a { color: #F99819; }
 
 .index-title {
   font-size: 2.5rem;
-  font-weight: 300;
+  font-weight: 400;
   text-transform: uppercase;
 }
 
@@ -453,3 +568,99 @@ table a { color: #F99819; }
 
 #index-discuss        { float: right; }
 #index-discuss:hover  { background: #448ae9; }
+
+/**
+ * Notifications
+ */
+#notifications{
+  position: absolute;
+  display: block;
+  /* position for index page */
+  right: 15vw;
+  top: 7.5vh;
+  z-index: 100;
+}
+
+.notification-arrow-up{
+  width: 0;
+  height: 0;
+  border-left: 2vh solid transparent;
+  border-right: 2vh solid transparent;
+  border-bottom: 2vh solid #212121;
+  margin-left: 27vw;
+}
+
+#notification-body{
+  width: 30vw;
+  background-color: white;
+  border: 1px #212121 solid;
+}
+
+#notification-header{
+  width: 30vw;
+  height: 5vh;
+  font-family: 'Lato', sans-serif;
+  line-height: 5vh;
+  background-color: #212121;
+  color: white;
+  vertical-align: middle;
+  border-bottom: 1px #bbb solid;
+}
+
+#notification-header b{
+  margin-left: 3vh;
+}
+
+.notification-item {
+  height: 8vh;
+  padding-top: 0.5em;
+  border-bottom: 1px #bbb solid;
+}
+
+.unread{
+  background-color: #edffc1;
+}
+
+.unread:hover{
+  background-color: #e0ffbe;
+}
+
+.read:hover{
+  background-color: #edffc1;
+}
+
+.notification-color{
+  position: absolute;
+  width: 6vh;
+  height: 6vh;
+  line-height: 6vh;
+  color: white;
+  font-family: 'lato';
+  font-size: 4vh;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 1vh;
+  margin-left: 1vh;
+}
+
+.notification-text{
+  height: auto;
+  margin: 1vh 6vh 1vh 8vh;
+}
+
+.time{
+  height: 1vh;
+  color: #333;
+  font-size: .7em;
+  text-align: right;
+  padding-bottom: 2vh;
+  margin-right: 1vw;
+}
+
+#notification-footer{
+  height: 5vh;
+  line-height: 5vh;
+  text-align: center;
+  vertical-align: middle;
+}
+
