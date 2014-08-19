@@ -1,45 +1,117 @@
-/* Themizer CSS
-
-Everything in here is prefixed with #sidebar so that we can load this after blog-style and have it overrule everything else but not affect anything else
-As is such, everything that is not the blog-*.html files should be contained within the #sidebar*/
+/* Themizer CSS */
 
 @import url('fonts.css');
+
 .themizer { background: #51b835; }
 
 /*--LAYOUT--*/
 #sidebar {
-  position: absolute;
-  z-index: 100;
+  position: fixed;
   top: 0;
   left: 0;
   height: 100%;
-  background: #101010;
-  color: white;
-  font-size: 2.22vh;
+  color: #fafafa;
   font-family: Amble, HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-align: left;
   text-rendering: optimizeLegibility;
+  overflow-x: visible;
+  z-index: 2147483646;
+  /* Prevent accidental selection of content in sidebar when resizing */
+  cursor: auto;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 #sidebar-inner {
   position: relative;
   width: 35vh;
+  height: 100%;
+  box-sizing: border-box;
   background: #101010;
+  padding-top: 4.32em;
+  padding-bottom: 4.2em;
 }
 
-body { overflow: hidden; }
+#sidebar-inner-scrollable {
+  height: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+  padding-top: 1em;
+}
 
+/*--GENERAL--*/
+#sidebar input,
+#sidebar select,
+#sidebar option {
+  width: 100%;
+  background-color: #212121;
+  color: #aaa;
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  outline: none;
+}
 
-/*--TYPESETTING--*/
-#sideheadbar {
+.text {
+  height: 1.7em;
+  padding: 0.1em 0.2em;
+}
+
+.title {
+  font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+  font-weight: 400;
+  white-space: pre;
+}
+
+.label {
+  color: #ccc;
+  font-size: 0.9em;
+}
+
+.optional::after {
+  content: " (Optional)";
+  font-size: 0.62em;
+}
+
+.linkbutton {
   display: block;
-  height: 10vh;
-  line-height: 10vh;
-  color: white;
+  color: #48a730;
+  background: transparent;
+  -moz-appearance: none;
+  font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+  font-size: 1.7em;
   text-transform: uppercase;
   text-align: center;
-  font-size: 2.7em;
+  padding: 0.3em;
+  border: 1px solid #5dc350;
+  margin: 0.3em;
+  cursor: pointer;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+.linkbutton:hover,
+.linkbutton[class*='hover'] {
+  background-color: #41962c;
+  border-color: #40902a;
+  color: #fafafa;
+}
+
+/*--HEADER--*/
+#sideheadbar {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 1.6em;
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+  font-size: 2.7em;
+  line-height: 1.6em;
+  color: #fafafa;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 0.5em;
+  z-index: 100;
 }
 
 #sideheadbar::after {
@@ -47,32 +119,68 @@ body { overflow: hidden; }
   position: absolute;
   top: 0;
   width: 2vh;
-  height: 10vh;
+  height: 1.6em;
   background: #57c639;
   pointer-events: none;
   z-index: 100;
 }
 
-.opened #sideheadbar::after {
-  left: 35vh;
+.opened #sideheadbar::after { right: -2vh; }
+.closed #sideheadbar::after { left: 0; }
+
+/*--RESIZER--*/
+#side-resizer {
+  position: absolute;
+  top: 0;
+  right: -5vh;
+  width: 3vh;
+  height: 100vh;
+  cursor: e-resize;
+  pointer-events: all;
 }
-.closed #sideheadbar::after {
+
+.closed #side-resizer { pointer-events: none; }
+
+/*--LIGHTBOX--*/
+#lightbox {
+  position: fixed; /* keeps the lightbox window in the current viewport */
+  top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  text-align: left;
+  font-size: 16px;
+  z-index: 200; /* to beat the #sidebar! */
 }
 
-#sidebar p { margin-bottom: 0.6rem; }
+#lightbox-wrap {
+  background: #ddd;
+  width: 65%;
+  height: 70%;
+  margin: 5em auto;
+  box-shadow: 0 0 25px #111;
+  padding: 2em;
+}
 
-#sidebar i, #sidebar .i { font-family: AmbleItalic, sans-serif; }
-
-#sidebar code { font-family: Monaco, "Courier New", Courier, monospace; }
-
-#sidebar .small { font-size: 0.65em; }
-
-
-/*--MISCELLANEOUS CLASSES--*/
-#sidebar .clear { clear: both; }
-
-#sidebar .inline { display: inline; }
+#lightbox-wrap pre {
+  overflow: auto;
+  height: 70%;
+  padding: 1.5em;
+  box-shadow: 0 0 1.3em #000 inset;
+}
+/* override every-fifth-line numbering of code */
+#lightbox-wrap pre li.L0,
+#lightbox-wrap pre li.L1,
+#lightbox-wrap pre li.L2,
+#lightbox-wrap pre li.L3,
+#lightbox-wrap pre li.L5,
+#lightbox-wrap pre li.L6,
+#lightbox-wrap pre li.L7,
+#lightbox-wrap pre li.L8 {
+  list-style-type: decimal;
+}
 
 /*--SLIDE BUTTONS--*/
 .slideButton {
@@ -80,31 +188,23 @@ body { overflow: hidden; }
   cursor: pointer;
 }
 
-/* commented out because we aren't sliding the header in/out in any way
-#headerButton {
-  width: 3.5rem;
-  height: 1.75rem;
-  top: 11.6vh;
-  left: 50%;
-  margin-left: -1.75rem;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-}
-*/
-
-#sideButton {
+#side-button {
   width: 2vh;
   height: 100%;
-  left: 35vh;
   top: 0;
   background: #212121;
+  color: #aaa;
+  line-height: 100vh;
+  text-indent: 0.1em;
+  vertical-align: middle;
+  -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
-
-.closed #sideButton {
+.closed #side-button {
   height: 5vh;
   top: 47.5vh;
-  border-radius: 0 4px 4px 0;
+  line-height: 5vh;
+  border-radius: 0 0.3em 0.3em 0;
   background: #101010;
 }
 
@@ -113,7 +213,7 @@ body { overflow: hidden; }
  * should probably change later
  * in conjunction with planned mousemove() event
  */
-.closed #sideButton::after {
+.closed #side-button::after {
   content: "";
   position: absolute;
   top: -47.5vh;
@@ -121,39 +221,51 @@ body { overflow: hidden; }
   width: 2vh;
 }
 
-#sideButton.targeted {
+#side-button.targeted {
   top: 0;
   height: 100vh;
   width: 4vh;
+  line-height: 100vh;
+  text-indent: 0.5em;
   border-radius: 0;
+  -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 
 /*--OPTION SLIDES--*/
-.option { margin: 10px; border: 3px solid rgba(100, 100, 100, 0.9); }
-.option-wrap { padding: 10px 14px; margin: 0; }
-
+.option {
+  border: 3px solid #444;
+  margin: 0 10px;
+}
+.option-wrap {
+  padding: 10px 14px;
+  margin: 0;
+  display: none; /* as a default so there's not loading delay */
+}
 .option-title {
-  display: block;
-  padding: 0.2em 0.5em;
-  background: rgba(100, 100, 100, 0.9);
   position: relative;
+  display: block;
+  background: #444;
+  padding: 0.2em 0.5em;
+  border-bottom: 1px solid #101010;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
-
 .option-title h5 {
   position: relative;
   display: inline-block;
   margin: 0;
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   height: 1.5em;
   line-height: 1.5em;
   font-size: 1.5em;
+}
+.option:last-of-type .option-title {
+  border-bottom: none;
 }
 
 /**
@@ -164,39 +276,176 @@ body { overflow: hidden; }
   position: relative;
   float: right;
 }
-
 .collapsebutton::before,
 .collapsebutton::after {
   content: "";
   position: absolute;
   top: 1em;
   right: 0.9em;
-  width: 0.5em;
+  width: 0.43em;
   height: 0.2em;
-  background: #fff;
-  -webkit-transition: transform 0.5s ease-in-out;
+  background: #fafafa;
+  -webkit-transition: -webkit-transform 0.5s ease-in-out;
   transition: transform 0.5s ease-in-out;
 }
-
-.collapsebutton::after { right: 0.5em; }
-
+.collapsebutton::after {
+   right: 0.5em;
+}
 .expanded .collapsebutton::before,
 .collapsed .collapsebutton::after {
+  -webkit-transform: skewY(-20deg);
+  transform: skewY(-20deg);
+}
+.expanded .collapsebutton::after,
+.collapsed .collapsebutton::before {
   -webkit-transform: skewY(20deg);
   transform: skewY(20deg);
 }
 
-.expanded .collapsebutton::after,
-.collapsed .collapsebutton::before {
-  -webkit-transform: skewY(-20deg);
-  transform: skewY(-20deg);
-}
-
-
 /*--INPUTS--*/
 .radio,
 .checkbox {
-  display: inline-block;
-  height: 13px;
-  margin-left: 5px;
+  position: absolute;
+  right: 0;
+  opacity: 0;
+  margin: 0;
+  z-index: 10;
+}
+.radio + .input-button,
+.checkbox + .input-button {
+  position: absolute;
+  right: 0;
+  width: 0.5em;
+  height: 0.5em;
+  background: #ccc;
+  border: 0.3em solid #ccc;
+}
+.radio:checked + .input-button,
+.checkbox:checked + .input-button {
+  background: #337cff;
+}
+.radio + .input-button {
+   border-radius: 50%;
+}
+
+/**
+ * Styling for Spectrum components
+ *
+ * .spectrum              - Text inputs that bind with Spectrum
+ *
+ * .sp-replacer           - The Spectrum replacer
+ *   .sp-preview          - Acts as a mask for the Spectrum colour swatch
+ *     .sp-preview-inner  - The Spectrum colour swatch
+ *   .sp-dd               - The cute little arrow in the replacer.
+ *
+ * .sp-container          - Contains the Spectrum colour picker
+ *   .sp-picker-container - Contains the Spectrum colour sliders
+ *     .sp-alpha          - Acts as a mask for the Spectrum alpha slider
+ *       .sp-alpha-inner  - The Spectrum alpha slider
+ *     .sp-thumb-el       - The Spectrum initial colour swatch
+ */
+
+.spectrum {
+  padding-right: 1.9em;
+  box-sizing: border-box;
+}
+
+.sp-replacer,
+.sp-preview,
+.sp-container {
+  padding: 0 !important;
+  border: 0 !important;
+  margin: 0 !important;
+}
+
+.sp-preview,
+.sp-alpha,
+.sp-thumb-el {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gcZAggl+4iZ2wAAACRJREFUGNNjnDlzJgMq2LNnD5oIEwMRYDAqYsH0i4uLy3DxHQBdFQcZw8RJyQAAAABJRU5ErkJggg==') !important;
+}
+
+.sp-replacer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #101010 !important;
+  width: 1.7em;
+  height: 1.7em;
+  box-sizing: border-box;
+  vertical-align: top !important;
+  margin-left: -2% !important;
+}
+
+.sp-preview {
+  width: 100% !important;
+  height: 1.7em !important;
+}
+
+.sp-dd {
+   display: none;
+}
+
+.sp-container {
+  position: fixed !important;
+  background: #222 !important;
+  box-shadow: 0 0 3px 2px #222;
+  z-index: 2147483647 !important;
+}
+
+.sp-picker-container {
+   border-left: none !important;
+}
+
+.sp-alpha {
+   background-size: contain;
+}
+
+.sp-alpha-inner {
+  background-image: -webkit-linear-gradient(left, transparent, black) !important;
+  background-image: linear-gradient(to right, transparent, black) !important;
+}
+
+/*--MISCELLANEOUS CLASSES--*/
+#sidebar p,
+#sidebar section[data-name] {
+  position: relative;
+  margin-top: 0.3em;
+  margin-bottom: 0.6em;
+}
+
+#sidebar i,
+#sidebar .i {
+  font-family: AmbleItalic, sans-serif;
+}
+
+#sidebar code { font-family: Monaco, "Courier New", Courier, monospace; }
+
+#sidebar .small { font-size: 0.65em; }
+
+#sidebar .clear { clear: both; }
+
+#sidebar .inline { display: inline; }
+
+/* Validate inputs */
+
+#sidebar .invalid,
+#sidebar :invalid {
+  box-shadow: none; /* Prevent Firefox from automatically applying box-shadow to invalid inputs */
+}
+
+#sidebar .invalid { background: #b00 !important; }
+
+/*--SCROLLBARS--*/
+#sidebar ::-webkit-scrollbar {
+  width: 0.4em;
+  height: 0.5em;
+}
+#sidebar ::-webkit-scrollbar-track {
+  background: #222;
+  box-shadow: inset 0 0 0.6em #111;
+}
+#sidebar ::-webkit-scrollbar-thumb {
+  background: #222;
+  box-shadow: inset 0 0 0.4em #444;
+  border-radius: 1em;
 }

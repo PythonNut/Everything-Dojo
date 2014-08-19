@@ -1,4 +1,4 @@
-<?php 
+<?php
   include("include/include.php");
 page_protect();
 
@@ -20,25 +20,75 @@ if(isset($_POST['announcementsSubmit'])) {
     }
   }
   $implode = substr($implode, 1);
-  $sql = "UPDATE data
-      SET data=\"".$implode."\"
-      WHERE fetchname=\"announcements\"";
-  mysql_query($sql, $link) or die("Update Failed:" . mysql_error());
+  $query = "UPDATE data SET data = ? WHERE fetchname = 'announcements'";
+  $sth = $dbc->prepare($query);
+  $sth->execute(array("$implode"));
 }
 
-$rs_all = mysql_query("SELECT count(*) AS total_all FROM $table") or die(mysql_error());
-$rs_active = mysql_query("SELECT count(*) AS total_active FROM $table WHERE approved = 1") or die(mysql_error());
-$rs_total_pending = mysql_query("SELECT count(*) AS total_pending FROM $table WHERE approved = 0");
+$rs_all = $dbc->query("SELECT count(*) AS total_all FROM $table")->fetchColumn();
+$rs_active = $dbc->query("SELECT count(*) AS total_active FROM $table WHERE approved = 1")->fetchColumn();
+$rs_total_pending = $dbc->query("SELECT count(*) AS total_pending FROM $table WHERE approved = 0")->fetchColumn();
 
-list($total_pending) = mysql_fetch_row($rs_total_pending);
-list($all) = mysql_fetch_row($rs_all);
-list($active) = mysql_fetch_row($rs_active);
+list($total_pending) = $rs_total_pending;
+list($all) = $rs_all;
+list($active) = $rs_active;
 ?>
 <?php
   $title = "Admin CP";
+  $extra_js = "<script src=\"js/index.js\"></script>";
   //dbc already included
-  get_header();
+  page_protect();
+
+  if($_SESSION['user_id'] != NULL) {
+    $unread_count = $notification->count_unread($_SESSION['user_id']);
+    $notification_data = $notification->get_notifications($_SESSION['user_id']);
+  }
+
+  get_header(0, $unread_count);
 ?>
+<section id="content">
+  <div id="notifications">
+    <div class="notification-arrow-up"></div>
+    <div id="notification-body">
+      <div id="notification-header">
+        <b>Notifications:</b>
+        <a href="javascript:;" style="float: right; margin-right: 2vw;" onClick="mark_all_read(<?php echo $_SESSION['user_id']; ?>)">Mark all read</a>
+      </div>
+      <?php
+      if(count($notification_data) == 0) {
+      ?>
+      <a href="javascript:;">
+      <div id="notification-0" class="notification-item read">
+        <div class="notification-color" style="background-color: #ccc"></div>
+        <div class="notification-text">No notifications</div>
+      </div>
+      </a>
+      <?php
+      } else {
+        foreach($notification_data as $notif) {
+          $notif_data = $notification->get_notif_obj($notif['notification_type'], $notif['item_id']);
+      ?>
+      <a href="<?php echo $notif_data['url']; ?>" class="notification-item-link" onClick="mark_read(<?php echo $notif['id']; ?>)">
+        <div id="notification-<?php echo $notif['id']; ?>" class="notification-item <?php if($notif['read'] == 0){ echo 'unread'; }else{ echo 'read'; } ?> ">
+          <div class="notification-color" style="background-color: #<?php echo $notif_data['data']['color']; ?>"><?php echo substr($notif_data['data']['location'], 0, 1); ?></div>
+          <div class="notification-text">
+            <?php echo $notif_data['data']['subject']; ?>
+          </div>
+          <p class="time">
+             <?php echo date('D M d, Y g:i a', $notif['timestamp']); ?>
+          </p>
+        </div>
+      </a>
+      <?php
+        }
+      }
+      ?>
+      <div id="notification-footer">
+        <a href="notifications.php">See All</a>
+      </div>
+    </div>
+  </div>
+
   <h2>Admin CP</h2>
   <p>Total users: <?php echo $all;?><br />
   Active users: <?php echo $active; ?><br />
@@ -59,13 +109,17 @@ list($active) = mysql_fetch_row($rs_active);
   if (isset($_GET['doSearch'])) {
     $open = TRUE;
     $sql = "SELECT * FROM $table";
-    $rs_total = mysql_query($sql) or die(mysql_error());
-    $total = mysql_num_rows($rs_total);
+    $total = $dbc->prepare($sql);
+    $total->execute();
+    $total = $total->fetchAll(PDO::FETCH_ASSOC);
+    $total = count($total);
 
     if (!isset($_GET['page'])) { $start = 0; }
     else { $start = ($_GET['page'] - 1) * $page_limit; }
 
-    $rs_results = mysql_query($sql." LIMIT $start, $page_limit") or die(mysql_error());
+    $rs_results = $dbc->prepare($sql . " LIMIT $start, $page_limit");
+    $rs_results->execute();
+    $rs_results = $rs_results->fetchAll(PDO::FETCH_ASSOC);
     $total_pages = ceil($total / $page_limit);
     if ($total > $page_limit) {
       echo "<div>Pages:";
@@ -88,7 +142,7 @@ list($active) = mysql_fetch_row($rs_active);
       <th>Approval</th>
     </tr>
     <?php
-    while ($rrows = mysql_fetch_array($rs_results)) {
+    foreach($rs_results as $rrows){
       list($year, $month, $day) = explode("-", $rrows['date']);
       $timestamp = mktime(0, 0, 0, $month, 10);
       $monthName = date("F", $timestamp);
@@ -106,8 +160,13 @@ list($active) = mysql_fetch_row($rs_active);
   </table>
   <?php } ?>
   <?php
-  $result = mysql_query("SELECT data FROM data WHERE fetchname='announcements' limit 1") or die(); 
-  $announcements = explode("~", mysql_result($result, 0));
+
+  $result = $dbc->prepare("SELECT data FROM data WHERE fetchname='announcements' limit 1");
+  $result->execute();
+  $result = $result->fetchAll(PDO::FETCH_ASSOC);
+
+  $announcements = explode("~", $result[0]['data']);
+
   if (count($announcements) == 0) {
     $counter = 2;
   } else {
@@ -125,13 +184,13 @@ list($active) = mysql_fetch_row($rs_active);
 
     $("#addButton").click(function() {
       if(counter == 11){
-        return false; 
+        return false;
       }
       if(counter == 2) {
         $("#removeButton").show();
       }
       var newTextBoxDiv = $(document.createElement("div")).attr("id", "textboxdiv" + counter);
-      newTextBoxDiv.after().html("<label class=\"inline\">"+counter+" </label>" +
+      newTextBoxDiv.after().html("<label class=\"inline\">" + counter + " </label>" +
       "<input type=\"text\" name=\"announcements[]\" id=\"textbox" + counter + "\" autocomplete=\"off\" size=\"100\" />");
       newTextBoxDiv.appendTo("#textboxgroup");
       counter++;
@@ -179,4 +238,6 @@ list($active) = mysql_fetch_row($rs_active);
     <input type="button" value="Remove Text Box" id="removeButton" class="inline" />
     <input name="announcementsSubmit" type="submit" value="Update" />
   </form>
+</section>
+
 <?php get_footer(); ?>

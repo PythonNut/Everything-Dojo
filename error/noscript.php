@@ -3,7 +3,7 @@
     <div class="noscript wrapper">
       <div class="noscript content">
         <div class="noscript image content">
-          <img class="noscript image" src="images/noscript.png">
+          <img class="noscript image" src="images/noscript.png" alt="Y U NO ENABLE JAVASCRIPT">
         </div>
         <h3 class="noscript header">
           Sorry, but <?php $title !== NULL ? print $title : print "this page"; ?> requires JavaScript.

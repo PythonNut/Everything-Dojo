@@ -1,9 +1,12 @@
 <?php
   /*constants*/
   define("THEMEDB_TABLE", "theme_database");
+  define("SITE_ROOT", "http://rebuild.everythingdojo.com/");
+  define("USERS_TABLE", "users");
+
   define("URL_DATABASE", "database.php");
   define("URL_DISCUSS", "discuss.php");
-  define("URL_THEMIZER", "themizer.php");
+  define("URL_THEMIZER", "themizerindex.php");
   define("URL_TRYIT", "tryit.php");
 
   define("VERSION_DATABASE", "2.0");

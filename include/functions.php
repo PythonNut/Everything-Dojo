@@ -28,8 +28,6 @@
     if (get_magic_quotes_gpc())
       $data = stripslashes($data);
 
-    $data = mysql_real_escape_string($data);
-    // Please replace with mysqli and setup a fake link
     return $data;
   }
 
@@ -128,16 +126,13 @@
   }
 
   function logout() {
-    global $db;
+    global $dbc;
     session_start();
 
     $table = TB_NAME;
     if(isset($_SESSION['user_id'])) {
-    $result = $dbc->prepare("UPDATE $table SET ckey = '', ctime = '' WHERE id = ?");
-    $result->execute(array($_SESSION[user_id]));
-    /*mysql_query("UPDATE $table
-             SET ckey = '', ctime = ''
-             WHERE id = $_SESSION[user_id]") or die(mysql_error());*/
+      $result = $dbc->prepare("UPDATE $table SET ckey = '', ctime = '' WHERE id = ?");
+      $result->execute(array($_SESSION['user_id']));
     }
 
     /************ Delete the sessions****************/
@@ -148,12 +143,12 @@
     session_unset();
     session_destroy();
 
-    header("Location: logoutdone.php");
+    header("Location: index.php?msg=You have been successfully logged out.");
   }
 
   // Password and salt generation
-  function PwdHash($pwd, $salt = null) {
-    if ($salt === null) {
+  function PwdHash($pwd, $salt = NULL) {
+    if ($salt === NULL) {
       $salt = substr(md5(uniqid(rand(), true)), 0, SALT_LENGTH);
     } else {
       $salt = substr($salt, 0, SALT_LENGTH);
@@ -195,14 +190,43 @@
     return $implode;
   }
 
+  function br2nl($string)
+  {
+    return preg_replace('/\<br(\s*)?\/?\>/i', "\n", $string);
+  }
+
+  function shorten_desc($description){
+    $description = br2nl($description);
+    $count = str_word_count($description);
+    $description = implode(' ', array_slice(explode(' ', $description), 0, 10));
+    if(strlen($description) > 80){
+      $description = substr($description, 0, 80);
+    }
+    if($count > 10){
+      $description .= ' (...)';
+    }
+
+    return $description;
+  }
+
+  function redirect($url)
+  {
+    $string = '<script type="text/javascript">';
+    $string .= 'window.location = "' . $url . '"';
+    $string .= '</script>';
+
+    echo $string;
+  }
+
   /****************************END OF LOGIN SCRIPT FUNCTIONS*********************************/
   /*regular site functions*/
 
-  function get_header() {
-    include("include/header.php");
+  function get_header($n=0, $notification_count = 0) {
+    $unread_notification_count = $notification_count;
+    include(str_repeat('../', $n) . "include/header.php");
   }
 
-  function get_footer() {
-    include("include/footer.php");
+  function get_footer($n=0) {
+    include(str_repeat('../', $n) . "include/footer.php");
   }
 ?>

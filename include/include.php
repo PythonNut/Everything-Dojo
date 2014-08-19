@@ -7,4 +7,6 @@ include("recaptcha.php");
 include("functions.php");
 // constants
 include("constants.php");
+// notification class
+include("notification.php");
 ?>

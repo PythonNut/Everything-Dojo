@@ -1,0 +1,197 @@
+/*
+Everything Dojo CSS
+(c)2014 Everything Dojo (original skin by Red)
+Please do not plagiarize
+*/
+
+
+/*--FONT IMPORT--*/
+@import url('fonts.css');
+
+/*--BUTTONS--*/
+/* Based heavily on Quizlet buttons, thank you! */
+.tryit-button {
+  display: block;
+  background: #85B900;
+  border: none;
+  border-radius: 0.17em;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+  font-size: 0.7rem;
+  height: 2em;
+  margin: 0.42em 0;
+  padding: 0 0.6rem;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+  width: auto;
+}
+
+.tryit-button:hover {
+  background: #739F02;
+  box-shadow: 0 0 0.36rem rgba(0, 0, 0, 0.3) inset;
+}
+
+/*--COLORS--*/
+.tryit    { background: #ff6c00; }
+
+/**
+ * TYPESETTING
+ *
+ * The highly specific selectors and `!important`s are to reset any
+ * styling that may have been applied by blog styles
+ */
+
+html > body > #wrap > header > #headerwrap > h1,
+html > body > #wrap > header > #headerwrap > h1 > a,
+html > body > #wrap > header > #headerwrap > h1 > a:active,
+html > body > #wrap > header > #headerwrap > form a,
+html > body > #wrap > header > #headerwrap > form label{
+  position: static !important;
+  display: inline-block !important;
+  background: none !important;
+  color: white !important;
+  font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif !important;
+  font-size: inherit !important;
+  font-weight: 400 !important;
+  line-height: inherit !important;
+  text-align: left !important;
+  text-decoration: none !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+}
+html > body > #wrap > header > #headerwrap > h1 {
+  position: absolute !important;
+  padding: 0.1em 0 !important;
+  margin: 0.13em !important;
+  height: 1.334em !important;
+}
+html > body > #wrap > header > #headerwrap > form a,
+html > body > #wrap > header > #headerwrap > form label {
+  color: black !important;
+  font-family: Amble, sans-serif !important;
+  font-size: 15px !important;
+  text-transform: none !important;
+}
+
+.small { font-size: 0.65em; }
+
+
+body { background: white; }
+
+/*--HEADER AND NAV--*/
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  font-size: 2.22vh;
+  z-index: 2147483647; /* CSS values are stored as 32-bit signed integers, hence this number */
+}
+
+#headerwrap {
+  margin-left: 5.55%;
+  position: relative;
+  width: 90%;
+  height: 11.6vh;
+  font-size: 2.82em;
+  line-height: 1.4em;
+  text-align: left;
+}
+
+/*--SLIDE BUTTONS--*/
+
+.slideButton {
+  position: absolute;
+  cursor: pointer;
+}
+
+#header-button {
+  height: 2vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #ff8e3e;
+  color: #aaa;
+  vertical-align: middle;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.closed #header-button {
+  width: 5vw;
+  left: 47.5vw;
+  border-radius: 0 0 0.3em 0.3em;
+  background: #ff6c00;
+}
+
+#header-button.targeted {
+  left: 0;
+  width: 100%;
+  border-radius: 0;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+#header-button::before,
+#header-button::after {
+  content: "";
+  position: absolute;
+  top: 0.7vh;
+  left: 49.3vw;
+  width: 0.7vw;
+  height: 0.5vh;
+  background-color: white;
+  -webkit-transform: skewY(20deg);
+  transform: skewY(20deg);
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+
+#header-button::after {
+  left: 50vw;
+  -webkit-transform: skewY(-20deg);
+  transform: skewY(-20deg);
+}
+
+.closed #header-button::before,
+.closed #header-button::after {
+  left: 1.8vw;
+}
+
+.closed #header-button::after {
+  left: 2.5vw;
+}
+
+.closed #header-button.targeted::before,
+.closed #header-button.targeted::after {
+  left: 49.3vw;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
+.closed #header-button.targeted::after {
+  left: 50vw;
+}
+
+.closed #header-button::before {
+  -webkit-transform: skewY(-20deg);
+  transform: skewY(-20deg);
+}
+
+.closed #header-button::after {
+  -webkit-transform: skewY(20deg);
+  transform: skewY(20deg);
+}
+
+#blog-body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-top: 13.6vh;
+}
