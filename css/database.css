@@ -244,3 +244,10 @@ div.code {
   right: 5vw;
   width: 30vw;
 }
+
+/* Search box */
+.search {
+  float: right;
+  position: relative;
+  top: 1.715rem;
+}
