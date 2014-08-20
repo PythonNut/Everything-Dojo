@@ -52,22 +52,32 @@
 
     <main id="wrap">
 
-      <?php
-      if (in_array($title, array("Database", "Discuss"))) {
-        echo '<header class="' . strtolower($title) . '">
+      <?php if ($title == "Database") { ?>
+      
+      <header class="database">
         <section id="headerwrap">
-          <a href="' . constant("URL_" . strtoupper($title)) . '"><h1>' . $title . '</h1></a>
-        </section>
-      </header>';
-      } elseif ($title == "Database") {
-        global $mode; // mode only matters if the DB is open
+          <a href="<?php echo URL_DATABASE; ?>"><h1>Database</h1></a>
 
-        if ($mode == "view") { ?>
-          <script src="/js/db-search.js"></script>
-          <input class="search" type="text" placeholder="Search...">
-        <?php }
-      } elseif ($title == "Try-It") {
-      ?>
+          <?php
+          global $mode;
+
+          if ($mode == "view") { ?>
+            <script src="/js/db-search.js"></script>
+            <input class="search" type="text" placeholder="Search...">
+          <?php } ?>
+
+        </section>
+      </header>
+
+      <?php } elseif ($title == "Discuss") { ?>
+      
+      <header class="discuss">
+        <section id="headerwrap">
+          <a href="<?php echo URL_DISCUSS; ?>"><h1>Discuss</h1></a>
+        </section>
+      </header>
+
+      <?php } elseif ($title == "Try-It") { ?>
 
       <header class="tryit">
         <section id="headerwrap">
