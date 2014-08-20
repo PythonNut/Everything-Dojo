@@ -15,7 +15,7 @@
   text-align: left;
   text-rendering: optimizeLegibility;
   overflow-x: visible;
-  z-index: 2147483646;
+  z-index: 1000;
   /* Prevent accidental selection of content in sidebar when resizing */
   cursor: auto;
   -webkit-user-select: none;
@@ -171,14 +171,7 @@
   box-shadow: 0 0 1.3em #000 inset;
 }
 /* override every-fifth-line numbering of code */
-#lightbox-wrap pre li.L0,
-#lightbox-wrap pre li.L1,
-#lightbox-wrap pre li.L2,
-#lightbox-wrap pre li.L3,
-#lightbox-wrap pre li.L5,
-#lightbox-wrap pre li.L6,
-#lightbox-wrap pre li.L7,
-#lightbox-wrap pre li.L8 {
+#lightbox-wrap pre li {
   list-style-type: decimal;
 }
 
@@ -389,7 +382,6 @@
   position: fixed !important;
   background: #222 !important;
   box-shadow: 0 0 3px 2px #222;
-  z-index: 2147483647 !important;
 }
 
 .sp-picker-container {
