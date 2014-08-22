@@ -21,6 +21,7 @@
   ($_GET["mode"] == "regular"
   ?
   "<script src=\"js/spectrum-1.3.4.min.js\" onload=\"$.fn.spectrum.load = false;\"></script>
+  <script src=\"js/randomColor.js\"></script>
   <script src=\"js/prettify.js\"></script>
   <script src=\"js/ZeroClipboard.js\"></script>
   <script>
@@ -77,6 +78,7 @@
             <span class="title">Background Color</span>
             <p>
               <input type="text" class="spectrum text" id="text-body-backgroundColor" value="white" spellcheck="false">
+              <span class="random-color" onclick="$(this).styleRandomColor();" title="Style with random color"></span>
               <input type="color" class="spectrum color-picker" id="spectrum-body-backgroundColor" value="#FFFFFF">
             </p>
           </section>
@@ -130,6 +132,7 @@
             <span class="title">Background Color</span>
             <p>
               <input type="text" class="spectrum text" id="text-id_wrapper-backgroundColor" value="#EDEDEA" spellcheck="false">
+              <span class="random-color" onclick="$(this).styleRandomColor();" title="Style with random color"></span>
               <input type="color" class="spectrum color-picker" id="spectrum-id_wrapper-backgroundColor" value="#EDEDEA">
             </p>
           </section>
@@ -146,11 +149,13 @@
             <span class="title">Background Color <span class="small">(Entries)</span></span>
             <p>
               <input type="text" class="spectrum text" id="text-class_entry-backgroundColor" value="#EDEDEA" spellcheck="false">
+              <span class="random-color" onclick="$(this).styleRandomColor();" title="Style with random color"></span>
               <input type="color" class="spectrum color-picker" id="spectrum-class_entry-backgroundColor" value="#EDEDEA">
             </p>
             <span class="title">Background Color <span class="small">(Entrywrap)</span></span>
             <p>
               <input type="text" class="spectrum text" id="text-class_entrywrap-backgroundColor" value="#EDEDEA" spellcheck="false">
+              <span class="random-color" onclick="$(this).styleRandomColor();" title="Style with random color"></span>
               <input type="color" class="spectrum color-picker" id="spectrum-class_entrywrap-backgroundColor" value="#EDEDEA">
             </p>
           </section>
@@ -167,11 +172,13 @@
             <span class="title">Background Color <span class="small">(Odd-numbered)</span></span>
             <p>
               <input type="text" class="spectrum text" id="text-class_row1-backgroundColor" value="#EDEDEA" spellcheck="false">
+              <span class="random-color" onclick="$(this).styleRandomColor();" title="Style with random color"></span>
               <input type="color" class="spectrum color-picker" id="spectrum-class_row1-backgroundColor" value="#EDEDEA">
             </p>
             <span class="title">Background Color <span class="small">(Even-numbered)</span></span>
             <p>
               <input type="text" class="spectrum text" id="text-class_row2-backgroundColor" value="#EDEDEA" spellcheck="false">
+              <span class="random-color" onclick="$(this).styleRandomColor();" title="Style with random color"></span>
               <input type="color" class="spectrum color-picker" id="spectrum-class_row2-backgroundColor" value="#EDEDEA">
             </p>
           </section>
