@@ -211,8 +211,9 @@
 
         codemirror.on("change", function (codemirror, change) {
           var input = codemirror.getValue();
-          input = input.replace(/([^\r\n,{}]+)(,(?=[^}]*{)|\s*{)/g, "#blog-body $1$2"); // https://stackoverflow.com/a/12578281/3472393
-          input = input.replace(/#blog-body (html|body)/g, "$1"); // restore body/html selectors
+          input = input.replace(/([^\r\n,{}]+)(,(?=[^}\/]*{)|\s*{)/g, "#blog-body $1$2"); // https://stackoverflow.com/a/12578281/3472393
+          input = input.replace(/#blog-body\s+(html|body)/g, "$1"); // restore body/html selectors
+          input = input.replace(/#blog-body\s+(@(-.+-)?keyframes|to|from)/g, "$1"); // restore @keyframe rules
           $("#dev-style").html(input);
         });
       });
