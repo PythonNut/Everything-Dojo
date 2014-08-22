@@ -485,7 +485,7 @@ function themizerRegular () {
             var id   = $(this).attr("id").split(/-/),
                 el   = id[1].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("class_", ".").replace("id_", "#"),
                 prop = id[2].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase();
-            $(this).prev().val(color);
+            $(this).prev(".text").val(color);
             $(el).css(prop, color);
 
             // update styles
@@ -495,7 +495,7 @@ function themizerRegular () {
   // Set color picker to corresponding text input's value when user types
   $(".spectrum.text").keyup(function () {
     var color  = $(this).val(),
-        picker = $(this).next(),
+        picker = $(this).next(".color-picker"),
         id     = $(this).attr("id").split(/-/),
         el     = id[1].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("class_", ".").replace("id_", "#"),
         prop   = id[2].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase();
@@ -615,11 +615,13 @@ function tryit () {
 
 /**
  * Generate random colour
- *
- * May or may not use http://llllll.li/randomColor/ in the future
  */
 
-//var randomColour = function() { return '#'+Math.floor(Math.random()*16777215).toString(16); };
+$.fn.styleRandomColor = function () {
+  var colour = randomColor();
+  this.prev(".text").val(colour).trigger("keyup");
+  this.next(".color-picker").spectrum("set", colour);
+};
 
 /*laquo «
 &#187; and it will looks like »*/
