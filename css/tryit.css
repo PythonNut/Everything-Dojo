@@ -146,16 +146,16 @@ header {
   width: 0.7vw;
   height: 0.5vh;
   background-color: white;
-  -webkit-transform: skewY(20deg);
-  transform: skewY(20deg);
+  -webkit-transform: skewY(-20deg);
+  transform: skewY(-20deg);
   -webkit-transition: 0.5s ease;
   transition: 0.5s ease;
 }
 
 #header-button::after {
   left: 50vw;
-  -webkit-transform: skewY(-20deg);
-  transform: skewY(-20deg);
+  -webkit-transform: skewY(20deg);
+  transform: skewY(20deg);
 }
 
 .closed #header-button::before,
@@ -179,13 +179,13 @@ header {
 }
 
 .closed #header-button::before {
-  -webkit-transform: skewY(-20deg);
-  transform: skewY(-20deg);
+  -webkit-transform: skewY(20deg);
+  transform: skewY(20deg);
 }
 
 .closed #header-button::after {
-  -webkit-transform: skewY(20deg);
-  transform: skewY(20deg);
+  -webkit-transform: skewY(-20deg);
+  transform: skewY(-20deg);
 }
 
 #blog-body {

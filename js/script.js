@@ -36,96 +36,6 @@ Array.prototype.last = function(nth) {
 
 (function ($) {
   /**
-   * makes the header an absolutely positioned element with a slide
-   * in/out button for pages which can't have elements affecting
-   * viewport size (themizer, try-it)
-   */
-
-  $.fn.sliderHeader = function () {
-    var classcolor = $("header").attr("class");
-    var headerHeight = $("header").height();
-    $("header").css("position", "absolute")
-               .append('<div id="header-button" class="slideButton down ' + classcolor + '"></div>');
-
-    var openHeader = true;
-    $("header").addClass("opened");
-
-    $("#header-button").click(function () {
-      if (openHeader) {
-        $("header").animate({
-          top: -headerHeight
-        }, 400, function () {
-          $(this).removeClass("opened").addClass("closed");
-        });
-
-        $(this).animate({
-          top: headerHeight
-        }, 400);
-
-        openHeader = false;
-
-      } else {
-        $("header").removeClass("closed").addClass("opened").animate({
-          top: 0
-        }, 400);
-
-        $(this).animate({
-          top: headerHeight
-        }, 400);
-
-        openHeader = true;
-      }
-    });
-  };
-
-  /**
-   * slide sidebar in/out
-   */
-
-  $.fn.sliderSidebar = function () {
-    // figure out width of sidebar for positioning when hidden/shown
-    var sideWidth = $("#sidebar").width();
-
-    // add open/hide button
-    $("#sidebar").append('<div id="side-button" class="slideButton right">&laquo;</div>');
-
-    // sidebar is opened at first
-    var openSide = true;
-    $("#sidebar").addClass("opened");
-
-    // main sliding function
-    $("#side-button").click(function () {
-      sideWidth = $("#sidebar").width(); // in case sidebar has been resized
-      if (openSide) {
-        $("#sidebar").animate({
-          left: -sideWidth
-        }, 400, function () {
-          $(this).removeClass("opened").addClass("closed");
-        });
-
-        $(this).html("&raquo;")
-               .animate({
-          left: sideWidth
-        }, 400);
-
-        openSide = false;
-
-      } else {
-        $("#sidebar").removeClass("closed").addClass("opened").animate({
-          left: 0
-        }, 400);
-
-        $(this).html("&laquo;")
-               .animate({
-          left: sideWidth
-        }, 400);
-
-        openSide = true;
-      }
-    });
-  };
-
-  /**
    * Scroll to an element.
    * Based on https://stackoverflow.com/a/6677069
    *
@@ -143,6 +53,33 @@ Array.prototype.last = function(nth) {
   };
 
   /**
+   * Toggle options
+   *
+   * Used to be jQuery plugin, but due to weird bugs was moved back to being a standalone function
+   */
+  $.fn.optionToggle = function () {
+    $(this).next().slideToggle();
+    var content = $(this);
+
+    if (content.hasClass("collapsed")) {
+      content.removeClass("collapsed").addClass("expanded");
+    } else {
+      content.removeClass("expanded").addClass("collapsed");
+    }
+  };
+
+  /**
+   * Generate random colour
+   * Uses randomColor.js
+   */
+
+  $.fn.styleRandomColor = function () {
+    var colour = randomColor();
+    this.prev(".text").val(colour).trigger("keyup");
+    this.next(".color-picker").spectrum("set", colour);
+  };
+
+  /**
    * Style an element with a CSS property and a valid value, with the
    * former two being derived from `<selector>` and the latter being
    * derived from `<selector>`'s value.
@@ -156,13 +93,11 @@ Array.prototype.last = function(nth) {
         id       = useName === true ? "[name='" + this.attr("name") + "']" : "#" + this.attr("id"),
         // Create a temp variable from which we decompose the selector and property
         cssId    = useName === true ? this.attr("name") : this.attr("id"),
-        // Split cssId into array so we can decompose it
         cssArray = cssId.split("-"),
         // Get selector for elements
         el       = cssArray[0].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("class_", ".").replace("id_", "#"),
         // Get CSS property
         prop     = cssArray[1].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase(),
-        // Value of `this`
         thisVal;
 
     this.change(function () {
@@ -180,7 +115,9 @@ Array.prototype.last = function(nth) {
 
           // background-image
           case "background-image":
-            thisVal = "url('" + ((thisVal.indexOf("http") !== 0 && thisVal.indexOf("//") !== 0) ? "//" + thisVal : thisVal) + "')";
+            if (thisVal) {
+              thisVal = "url('" + ((thisVal.indexOf("http") !== 0 && thisVal.indexOf("//") !== 0) ? "//" + thisVal : thisVal) + "')";
+            }
             $(el).css("background-image", thisVal);
             break;
 
@@ -203,53 +140,94 @@ Array.prototype.last = function(nth) {
 }(jQuery));
 
 /**
- * Toggle options
- *
- * Used to be jQuery plugin, but due to weird bugs was moved back to being a standalone function
+ * makes the header an absolutely positioned element with a slide
+ * in/out button for pages which can't have elements affecting
+ * viewport size (themizer, try-it)
  */
-function optionToggle (id) {
-  $("#" + id + " .option-wrap").slideToggle();
-  var content = $("#" + id + " .option-title");
 
-  if (content.hasClass("collapsed")) {
-    content.removeClass("collapsed").addClass("expanded");
-  } else {
-    content.removeClass("expanded").addClass("collapsed");
-  }
-};
+function sliderHeader () {
+  var classcolor = $("header").attr("class");
+  var headerHeight = $("header").height();
+  $("header").css("position", "absolute")
+             .append('<div id="header-button" class="slideButton down ' + classcolor + '"></div>');
 
-/* testing testing...to be perhaps modified later.
-http://stackoverflow.com/questions/754607/can-jquery-get-all-css-styles-associated-with-an-element
-function css(a) {
-    var sheets = document.styleSheets, o = {};
-    for (var i in sheets) {
-        var rules = sheets[i].rules || sheets[i].cssRules;
-        for (var r in rules) {
-            console.log(rules[r]);
-        }
+  var openHeader = true;
+  $("header").addClass("opened");
+
+  $("#header-button").click(function () {
+    if (openHeader) {
+      $("header").animate({
+        top: -headerHeight
+      }, 400, function () {
+        $(this).removeClass("opened").addClass("closed");
+      });
+
+      $(this).animate({
+        top: headerHeight
+      }, 400);
+
+      openHeader = false;
+
+    } else {
+      $("header").removeClass("closed").addClass("opened").animate({
+        top: 0
+      }, 400);
+
+      $(this).animate({
+        top: headerHeight
+      }, 400);
+
+      openHeader = true;
     }
-    return o;
+  });
 }
 
-function css2json(css) {
-    var s = {};
-    if (!css) return s;
-    if (css instanceof CSSStyleDeclaration) {
-        for (var i in css) {
-            if ((css[i]).toLowerCase) {
-                s[(css[i]).toLowerCase()] = (css[css[i]]);
-            }
-        }
-    } else if (typeof css == "string") {
-        css = css.split("; ");
-        for (var i in css) {
-            var l = css[i].split(": ");
-            s[l[0].toLowerCase()] = (l[1]);
-        }
-    }
-    return s;
-} */
+/**
+ * slide sidebar in/out
+ */
 
+function sliderSidebar () {
+  // figure out width of sidebar for positioning when hidden/shown
+  var sideWidth = $("#sidebar").width();
+
+  // add open/hide button
+  $("#sidebar").append('<div id="side-button" class="slideButton right">&laquo;</div>');
+
+  // sidebar is opened at first
+  var openSide = true;
+  $("#sidebar").addClass("opened");
+
+  // main sliding function
+  $("#side-button").click(function () {
+    sideWidth = $("#sidebar").width(); // in case sidebar has been resized
+    if (openSide) {
+      $("#sidebar").animate({
+        left: -sideWidth
+      }, 400, function () {
+        $(this).removeClass("opened").addClass("closed");
+      });
+
+      $(this).html("&raquo;")
+             .animate({
+        left: sideWidth
+      }, 400);
+
+      openSide = false;
+
+    } else {
+      $("#sidebar").removeClass("closed").addClass("opened").animate({
+        left: 0
+      }, 400);
+
+      $(this).html("&laquo;")
+             .animate({
+        left: sideWidth
+      }, 400);
+
+      openSide = true;
+    }
+  });
+}
 
 /**
  * Themizer init
@@ -272,6 +250,9 @@ function themizer () {
   /*************
    * FUNCTIONS *
    *************/
+  // sidebar sliding init
+  sliderSidebar();
+
   // Set sidebar styles
   $("#sidebar")      .css("font-size", 2*vh);
   $("#sidebar-inner").width(sideWidth);
@@ -282,12 +263,12 @@ function themizer () {
   // option slides sliding init
   $(".option").each(function () {
     var id = $(this).attr('id');
-    $("#" + id + " .option-title").attr("onclick", "optionToggle('" + id + "')").addClass("collapsed");
+    $("#" + id + " .option-title").attr("onclick", "$(this).optionToggle()").addClass("collapsed");
   });
 
   // set all options with class `expanded` to be open
   $(".expanded").removeClass("collapsed");
-  $(".expanded").next().slideDown(0);
+  $(".expanded").next().slideDown();
 
   // view mode radios
   $("[name='view']").change(function () {
@@ -459,7 +440,13 @@ function themizerRegular () {
 
   // Check inputs for validity
   $("[type='url']").keyup(function () {
-    $(this).val().match(/^(https?:\/\/|\/\/)?[a-z0-9-\.]+\.[a-z]{2,4}\/([^\s<>%"\,\{\}\\|\\\^\[\]`]+)?\.(gif|jpg|jpeg|png|php|svg)(\?\w=\w)?(&\w=\w)*/) ? $(this).removeClass("invalid") : $(this).addClass("invalid");
+    if ($(this).val().match(/^(https?:\/\/|\/\/)?[a-z0-9-\.]+\.[a-z]{2,4}\/([^\s<>%"\,\{\}\\|\\\^\[\]`]+)?\.(gif|jpg|jpeg|png|php|svg)(\?\w=\w)?(&\w=\w)*/) || !$(this).val()) {
+      $(this).prev(".invalid-msg").remove();
+      $(this).removeClass("invalid");
+    } else if (!$(this).hasClass("invalid")) {
+      $("<p class=\"invalid-msg\">This URL is invalid!</p>").insertBefore(this);
+      $(this).addClass("invalid");
+    }
   });
 
   // Body
@@ -520,8 +507,9 @@ function themizerDev () {
   themizer();
   $("head").append('<style id="dev-style"></style>');
 
-  // remove submit button
+  // remove submit button and make sidebar-inner full height
   $("#submit").remove();
+  $("#sidebar-inner").css("padding-bottom", "0");
 }
 /**
  * Try-It init
@@ -534,7 +522,7 @@ function tryit () {
   // get viewport height
   var vh = $(window).height()/100;
 
-  // find width of sidebar and of sideButton
+  // find width of header and of headerButton
   var headerHeight = 11.6*vh,
       headerButtonHeight =  2*vh;
 
@@ -545,15 +533,18 @@ function tryit () {
   /*************
    * FUNCTIONS *
    *************/
-  // Set sidebar styles
+  // header sliding init
+  sliderHeader();
+
+  // Set header styles
   $("header")        .css("font-size", 2.22*vh);
   $("#headerwrap")   .height(headerHeight);
   $("#header-button").css("top", headerHeight);
 
-  // Show/hide sideButton
-  // modify sideButton on click
+  // Show/hide headerButton
+  // modify headerButton on click
   $("#header-button").click(function () {
-    // fires when sidebar is to be closed
+    // fires when header is to be closed
     if ($("header").css("top") == "0px" && $("header").hasClass("opened")) {
       $("#header-button").addClass("triggered");
       $("#blog-body").animate({
@@ -568,7 +559,7 @@ function tryit () {
     }
   });
 
-  // show sideButton on mousemove + scroll
+  // show headerButton on mousemove + scroll
   // taken and modified from http://css-tricks.com/snippets/jquery/fire-event-when-user-is-idle/
   $(window).bind('mousemove scroll', function (event) {
     clearTimeout(idleTimer); // clear timeout if user acts
@@ -612,16 +603,3 @@ function tryit () {
 
   $(window).mousemove();
 }
-
-/**
- * Generate random colour
- */
-
-$.fn.styleRandomColor = function () {
-  var colour = randomColor();
-  this.prev(".text").val(colour).trigger("keyup");
-  this.next(".color-picker").spectrum("set", colour);
-};
-
-/*laquo «
-&#187; and it will looks like »*/

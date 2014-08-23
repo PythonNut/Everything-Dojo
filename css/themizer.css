@@ -201,19 +201,6 @@
   background: #101010;
 }
 
-/**
- * ugly pseudo-element hack for increased usability
- * should probably change later
- * in conjunction with planned mousemove() event
- */
-.closed #side-button::after {
-  content: "";
-  position: absolute;
-  top: -47.5vh;
-  height: 100vh;
-  width: 2vh;
-}
-
 #side-button.targeted {
   top: 0;
   height: 100vh;
@@ -442,7 +429,14 @@
   box-shadow: none; /* Prevent Firefox from automatically applying box-shadow to invalid inputs */
 }
 
-#sidebar .invalid { background: #b00 !important; }
+#sidebar .invalid { background: #a00 !important; }
+
+#sidebar .invalid-msg {
+  color: #c00;
+  font-size: 0.8em;
+  margin-top: -0.3em;
+  margin-bottom: 0.3em;
+}
 
 /*--SCROLLBARS--*/
 #sidebar ::-webkit-scrollbar {
