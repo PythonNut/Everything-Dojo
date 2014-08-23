@@ -366,8 +366,7 @@ footer, .push {
 }
 
 .error::before,
-.valid::before,
-.notification::before {
+.valid::before{
   content: "";
   position: absolute;
   left: -7px;

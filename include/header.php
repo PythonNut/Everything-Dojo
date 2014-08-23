@@ -8,8 +8,8 @@
     <meta charset="utf-8">
     <link href="/images/favicon.ico" rel="shortcut icon">
     <?php if ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)" && $title != "Try-It") { ?>
-    <link href="css/normalize.css" type="text/css" rel="stylesheet">
-    <link href="css/style.css" type="text/css" rel="stylesheet">
+    <link href="/css/normalize.css" type="text/css" rel="stylesheet">
+    <link href="/css/style.css" type="text/css" rel="stylesheet">
     <?php } ?>
     <?php global $extra_style; print $extra_style; ?>
 
@@ -35,8 +35,7 @@
 
   <body>
 
-    <?php 
-    if (!in_array($title, array(
+    <?php if (!in_array($title, array(
         "Home",
         "About",
         "Account Activation",
@@ -53,31 +52,45 @@
 
     <main id="wrap">
 
-      <?php
-      if ($title == "Database") {
-        echo '<header class="' . strtolower($title) . '">
+      <?php if ($title == "Database") { ?>
+      
+      <header class="database">
         <section id="headerwrap">
-          <a href="' . URL_DATABASE . '"><h1>' . $title . '</h1></a>
+          <a href="<?php echo URL_DATABASE; ?>"><h1>Database</h1></a>
+
+          <?php
+          global $mode;
+
+          if ($mode == "view") { ?>
+            <div class="search-container">
+              <script src="/js/db-search.js"></script>
+              <input class="search" type="text" placeholder="Search...">
+              <div class="icon-box">
+                <span class="search-icon"></span>
+              </div>
+          <?php } ?>
+
         </section>
-      </header>';
-      } 
-			elseif ($title == "Discuss") {
-				echo '<header class="' . strtolower($title) . '">
+      </header>
+
+      <?php } elseif ($title == "Discuss") { ?>
+      
+      <header class="discuss">
         <section id="headerwrap">
-          <a href="' . URL_DISCUSS . '"><h1>' . $title . '</h1></a>
+          <a href="<?php echo URL_DISCUSS; ?>"><h1>Discuss</h1></a>
         </section>
-      </header>';
-			} elseif ($title == "Try-It") {
-      ?>
+      </header>
+
+      <?php } elseif ($title == "Try-It") { ?>
 
       <header class="tryit">
         <section id="headerwrap">
 
-          <h1 style="text-align: left !important; cursor:pointer;" onclick="window.location.href='tryit.php';">Try-It</h1>
-          
-          <form method="get" id="select-theme" name="select-theme" style="margin-left:4em; font-family: 'Lato', sans-serif;">
-            <section class="option-wrap" style="display:inline-block;">
-              <select id="select" name="select" onchange="this.form.submit()">
+          <h1 style="text-align:left !important"><a href="tryit.php">Try-It</a></h1>
+
+          <form method="get" id="select-theme" name="select-theme" style="margin-left:4em;font-family:Amble,sans-serif">
+            <section class="option-wrap" style="display:inline-block">
+              <select id="select" name="select" onchange="this.form.submit()" style="color:black;font-family:Amble,sans-serif">
               <option value="" selected>======= SELECT ONE =======</option>
               <?php
                 include("db.php");
@@ -93,7 +106,7 @@
                     'rel' => array(),
                     'other' => array()
                   );
-                  
+
                   //get validated
                   foreach($data['validated']['name'] as $key=>$theme){
                     $tmp_theme = array(
@@ -217,17 +230,18 @@
               </select>
             </section>
             <section style="display:inline-block;">
-              <h1 style="margin:0px; padding:0px; height:15px; font-size:15px; display:inline-block;">Development Mode: </h1>
-              <?php if ($_GET['dev'] == "dev") { 
+              <label style="margin:0px;padding:0px;height:15px;color:black;font-size:15px;font-family:Amble,sans-serif;display:inline-block">Development Mode:
+              <?php if ($_GET['dev'] == "dev") {
                 echo '<input type="checkbox" value="dev" name="dev" onChange="this.form.submit();" style="display:inline-block;" checked/>';
               }
-              else { 
-                echo '<input type="checkbox" value="dev" name="dev" onChange="alert(\'Warning: Development mode means that you can try ALL the styles, including incomplete, in-development and/or buggy CSS. These styles are not recommended for your blog. PROCEED WITH CAUTION.\'); this.form.submit();" style="display:inline-block;"/>';
+              else {
+                echo '<input type="checkbox" value="dev" name="dev" onChange="var confirm=window.confirm(\'Warning: Development mode means that you can try ALL the styles, including incomplete, in-development and/or buggy CSS. These styles are not recommended for your blog.\n\nDo you really wish to continue?\');if(confirm)this.form.submit();else this.checked=false;" style="display:inline-block;"/>';
               } ?>
+              </label>
             </section>
             <?php
             if (!empty($_GET['select'])){
-              echo '<a style="display:inline-block; font-size:15px; height:15px; margin-left:15px;" href="database.php?mode=view&view=style&id='.intval($_GET['select']).'">View style in Database</a>';
+              echo '<a style="display:inline-block;font-size:15px;height:15px;margin-left:15px;" href="database.php?mode=view&view=style&id='.intval($_GET['select']).'">View style in Database</a>';
             }
             ?>
           </form>
@@ -260,7 +274,11 @@
         </section>
       </header>
 
-      <?php } elseif ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)") { global $notification_unread_count;  ?>
+      <?php } elseif ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)") { ?>
+
+			<?php
+				global $notification_unread_count;
+			?>
 
       <header>
         <section id="headerwrap">
