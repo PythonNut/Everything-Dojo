@@ -25,11 +25,11 @@
   <script src=\"js/prettify.js\"></script>
   <script src=\"js/ZeroClipboard.js\"></script>
   <script>
-  $(function(){\$('#lightbox').click(function(){\$(this).hide();});$('#lightbox-wrap').click(function(e){e.stopPropagation();});$().sliderSidebar();themizerRegular();
+  $(function(){\$('#lightbox').click(function(){\$(this).hide();});$('#lightbox-wrap').click(function(e){e.stopPropagation();});themizerRegular();
   });</script>"
   :
   "<script src=\"js/codemirror-4.4.min.js\"></script>
-  <script>$(function(){\$().sliderSidebar();themizerDev();});</script>");
+  <script>$(function(){themizerDev();});</script>");
 
   get_header();
 ?>
@@ -92,7 +92,7 @@
             <span class="title">Background Repeat</span>
             <p>
               <label class="label">repeat-all
-                <input type="radio" class="radio" id="body-backgroundRepeat-repeatAll" name="body-backgroundRepeat" value="repeat" checked>
+                <input type="radio" class="radio" id="body-backgroundRepeat-repeatAll" name="body-backgroundRepeat" value="" checked>
                 <span class="input-button"></span>
               </label>
             </p>

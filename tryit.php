@@ -4,7 +4,6 @@
   session_start();
   $extra_js = "<script>
   $(function () {
-    $().sliderHeader();
     tryit();
   });</script>";
 
