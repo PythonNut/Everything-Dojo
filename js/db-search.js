@@ -1,10 +1,12 @@
-function contains(str, substr) {
-  return str.indexOf(substr) > 1;
+function contains(needle, haystack) {
+  return haystack.indexOf(needle) > -1;
 }
 
-function containsAny(str, substr) {
-  for (var i = substr.split().length - 1; i >= 0; i--) {
-    if (contains(str, substr.split()[i])) {
+function containsAny(needle, haystack) {
+  var words = needle.split(" ");
+
+  for (var i = 0; i < words.length; i ++) {
+    if (contains(words[i], haystack)) {
       return true;
     }
   }
@@ -12,10 +14,20 @@ function containsAny(str, substr) {
   return false;
 }
 
-$(".search").keypress(function () {
-  $(".database-table").find("tr").children().each(function () {
-    if (! (containsAny($(this).text(), $(".search").text()) || containsAny($(this).children("b").text(), $(".search").text()))) {
+$(".search").on("propertychange keyup input paste", function () {
+  $(".style").each(function () {
+    var mainText = $(this).children().first().text().toLowerCase();
+    var author = $(this).children().first().next().text().toLowerCase();
+    var version = $(this).children().last().prev().text().toLowerCase();
+    var stage = $(this).children().last().text().toLowerCase();
+
+    var query = $(".search").val().toLowerCase();
+
+    if (! (containsAny(query, mainText))) {
       $(this).css("display", "none");
+    }
+    else {
+      $(this).removeAttr("style");
     }
   });
 });
