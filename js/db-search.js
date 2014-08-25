@@ -24,10 +24,10 @@ $(".search").on("propertychange keyup input paste", function () {
     var query = $(".search").val().toLowerCase();
 
     if (! (containsAny(query, mainText))) {
-      $(this).css("display", "none");
+      $(this).fadeOut();
     }
     else {
-      $(this).removeAttr("style");
+      $(this).fadeIn();
     }
   });
 });
