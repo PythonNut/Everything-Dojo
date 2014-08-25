@@ -62,8 +62,12 @@
           global $mode;
 
           if ($mode == "view") { ?>
-            <script src="/js/db-search.js"></script>
-            <input class="search" type="text" placeholder="Search...">
+            <div class="search-container">
+              <script src="/js/db-search.js"></script>
+              <input class="search" type="text" placeholder="Search...">
+              <div class="icon-box">
+                <span class="search-icon"></span>
+              </div>
           <?php } ?>
 
         </section>
