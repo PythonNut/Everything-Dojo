@@ -24,7 +24,7 @@ if(isset($get['user']) && !empty($get['activ_code']) && !empty($get['user']) && 
 
   if(empty($err)) {
   // set the approved field to 1 to activate the account
-    $rs_activ = $dbc->prepare("UPDATE ".$table." SET approved='1' WHERE md5_id=? AND activation_code = ? ");
+    $rs_activ = $dbc->prepare("UPDATE ".$table." SET approved='1', logins_attempted=0 WHERE md5_id=? AND activation_code = ? ");
     $rs_activ->execute(array($user, $activ));
 
     $msg[] = "Thank you. Your account has been activated. You can now <a href=\"login.php\">login</a>.";
@@ -49,7 +49,7 @@ if (isset($_POST['doActivate'])) {
   }
   //set approved field to 1 to activate the user
   if(empty($err)) {
-    $rs_activ = $dbc->prepare("UPDATE ".$table." SET approved='1' WHERE user_email=? AND activation_code = ?");
+    $rs_activ = $dbc->prepare("UPDATE ".$table." SET approved='1', logins_attempted=0 WHERE user_email=? AND activation_code = ?");
     $rs_activ->execute(array($user_email,$activ));
 
     $msg[] = "Thank you. Your account has been activated. You can now <a href=\"login.php\">login</a>.";

@@ -24,6 +24,8 @@
     <link href='css/blog-style.css' rel='stylesheet' type='text/css'>
     <link href='css/tryit.css' rel='stylesheet' type='text/css'>
     <?php } ?>
+    
+    <script src="/js/popup.js"></script>
 
     <?php global $extra_js; print $extra_js; ?>
 
@@ -229,7 +231,7 @@
               </select>
             </section>
             <section style="display:inline-block;">
-              <h1 style="margin:0px;padding:0px;height:15px;color:black;font-size:15px;font-family:Amble,sans-serif;display:inline-block">Development Mode: </h1>
+              <label style="margin:0px;padding:0px;height:15px;color:black;font-size:15px;font-family:Amble,sans-serif;display:inline-block">Development Mode:
               <?php if ($_GET['dev'] == "dev") {
                 echo '<input type="checkbox" value="dev" name="dev" onChange="this.form.submit();" style="display:inline-block;" checked/>';
               }
