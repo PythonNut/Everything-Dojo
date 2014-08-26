@@ -17,46 +17,90 @@ if (isset($_POST['doLogin'])) {
   $user_email = $data['username'];
   $pass = $data['pwd'];
 
-  $result = $dbc->prepare("SELECT id, pwd, user_name, approved, user_level FROM $table WHERE user_name = ?");
+  $result = $dbc->prepare("SELECT id, pwd, user_name, user_email, approved, user_level, logins_attempted FROM $table WHERE user_name = ?");
   $result->execute(array($user_email));
   $user_array = $result->fetchAll(PDO::FETCH_ASSOC);
   $username_match = count($user_array);
   $user_array = $user_array[0];
+  $logins_attempted = $user_array['logins_attempted'];
+  $last_attempted_login = (int)intval(explode("|", $logins_attempted)[1]);
   $pwd = $user_array['pwd'];
 
-  // Match row found with more than 1 results  - the user is authenticated.
-  if ($username_match > 0) {
-    if(!$user_array['approved']) {
-      $err[] = "Account not activated. Please contact the administrator to activate.";
-    }
-
-    //check against salt
-    if ($pwd === PwdHash($pass, substr($pwd, 0, 9))) {
-      if(empty($err)) {
-        // this sets session and logs user in
-        session_start();
-        session_regenerate_id(TRUE); //prevent against session fixation attacks.
-        // this sets variables in the session
-        $_SESSION['user_id']= $user_array['id'];
-        $_SESSION['user_name'] = $user_array['user_name'];
-        $_SESSION['user_level'] = $user_array['user_level'];
-        $_SESSION['HTTP_USER_AGENT'] = md5($_SERVER['HTTP_USER_AGENT']);
-
-        //update the timestamp and key for cookie
-        $stamp = time();
-        $ckey = GenKey();
-        $result = $dbc->prepare("UPDATE $table SET ctime = ?, ckey = ? WHERE id = ?");
-        $result->execute(array($stamp,$ckey,$user_array['id']));
-
-        header("Location: myaccount.php");
+  // protect against brute forcing
+  if ((intval(explode("|", $logins_attempted)[0]) < 10 && intval(explode("|", $logins_attempted)[0]) >= 5) && (time() - $last_attempted_login < 600)) {
+    $err[] = "Sorry, but you have exceeded the brute force limit. Please wait " . (10 - floor((time() - $last_attempted_login)/60)) . " minute(s) before logging in again. Thank you."; // temporary until a more user-friendly solution is found
+    $notification->insert_notification(6, $user_array['id'], $user_array['id']);
+  } elseif (intval(explode("|", $logins_attempted)[0]) < 5 || (time() - $last_attempted_login >= 600)) { // time limit expired || user was not brute-forced
+    // Match row found with more than 1 results  - the user is authenticated.
+    if ($username_match > 0) {
+      if(!$user_array['approved']) {
+        $err[] = "Account not activated. Please contact the administrator to activate.";
       }
-    } else {
-      $err[] = "Invalid Login. Please check your username and/or password spelling and try again.";
-    } //else if the password is bad
 
-  } else {
-    $err[] = "Invalid login. Please check your username and/or password spelling and try again.";
-  } //else if the username wasn't found
+      //check against salt
+      if ($pwd === PwdHash($pass, substr($pwd, 0, 9))) {
+        if(empty($err)) {
+          // this sets session and logs user in
+          session_start();
+          session_regenerate_id(TRUE); //prevent against session fixation attacks.
+          // this sets variables in the session
+          $_SESSION['user_id']= $user_array['id'];
+          $_SESSION['user_name'] = $user_array['user_name'];
+          $_SESSION['user_level'] = $user_array['user_level'];
+          $_SESSION['HTTP_USER_AGENT'] = md5($_SERVER['HTTP_USER_AGENT']);
+
+          //update the timestamp and key for cookie
+          $stamp = time();
+          $ckey = GenKey();
+          $result = $dbc->prepare("UPDATE $table SET ctime = ?, ckey = ?, logins_attempted = 0 WHERE id = ?");
+          $result->execute(array($stamp,$ckey,$user_array['id']));
+
+          header("Location: myaccount.php");
+        }
+      } else {
+        $err[] = "Invalid Login. Please check your username and/or password spelling and try again.";
+        $attempts = intval(explode("|", $logins_attempted)[0]);
+        $attempts++;
+        $attempts = $attempts . "|" . time();
+        $update_attempts = $dbc->prepare("UPDATE $table SET logins_attempted = :attempt WHERE user_name = :username");
+        $update_attempts->execute(array(
+          ":attempt" => $attempts,
+          ":username" => $user_array['user_name']
+        ));
+      } //else if the password is bad
+
+    } else {
+      $err[] = "Invalid login. Please check your username and/or password spelling and try again.";
+    } //else if the username wasn't found
+  } elseif (intval(explode("|", $logins_attempted)[0]) >= 10) {
+    $notification->insert_notification(6, $user_array['id'], $user_array['id']);
+
+    $host = $_SERVER['HTTP_HOST'];
+    $md5_id = md5($user_array['id'] . time());
+    $activ_code = rand(1000, 9999);
+    $deactivate = $dbc->prepare("UPDATE $table SET md5_id = :md5_id, activation_code = :activ_code, approved = 0 WHERE id = :id");
+    $deactivate->execute(array(
+      ":md5_id"     => $md5_id,
+      ":activ_code" => $activ_code,
+      ":id"         => $user_array['id']
+    ));
+    $message = "Hello,
+
+Someone appears to have recently tried to hack into your account. As a result, we have deactivated your account for the time being.
+
+To reactivate your account, please visit http://$host/activate.php and enter your email in the last field to receive an email containing your activation code.
+
+We apologize for the inconvenience.
+
+Administrator @Login Site
+__________________________________________________________
+This is an automated response. Do not reply to this email.";
+
+    mail($user_array['user_email'], "Your account on http://$host may have been hacked", $message, "From: \"Login Site Forgotbot\" <auto-reply@$host>\r\n");
+    header("Location: index.php?msg=This account has been disabled");
+
+    exit();
+  }
 
 } //if the page is logging in
 ?>

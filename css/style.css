@@ -581,7 +581,7 @@ table a { color: #F99819; }
   /* position for index page */
   right: 15vw;
   top: 7.5vh;
-	z-index: 1000000;
+  z-index: 100;
 }
 
 .notification-arrow-up{
@@ -614,13 +614,10 @@ table a { color: #F99819; }
   margin-left: 3vh;
 }
 
-.notification{
+.notification-item {
   height: 8vh;
+  padding-top: 0.5em;
   border-bottom: 1px #bbb solid;
-}
-
-.notification:before{
-  border: 0;
 }
 
 .unread{
@@ -636,7 +633,7 @@ table a { color: #F99819; }
 }
 
 .notification-color{
-  float: left;
+  position: absolute;
   width: 6vh;
   height: 6vh;
   line-height: 6vh;
@@ -650,17 +647,16 @@ table a { color: #F99819; }
 }
 
 .notification-text{
-  height: 4vh;
-  float: left;
-  margin-top: 1vh;
-  margin-left: 1vw;
+  height: auto;
+  margin: 1vh 6vh 1vh 8vh;
 }
 
 .time{
-  float: right;
   height: 1vh;
   color: #333;
   font-size: .7em;
+  text-align: right;
+  padding-bottom: 2vh;
   margin-right: 1vw;
 }
 
@@ -669,5 +665,50 @@ table a { color: #F99819; }
   line-height: 5vh;
   text-align: center;
   vertical-align: middle;
+}
+
+/*--CREDITS--*/
+#credits {
+  position: fixed;
+  top: 200%;/*Get it out of the viewport*/
+  left: 30%;
+  width: 40%;
+  height: 90%;
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #7DCFE2),color-stop(1, #A3F9FF));
+  background-image: -o-linear-gradient(bottom, #7DCFE2 0%, #A3F9FF 100%);
+  background-image: -moz-linear-gradient(bottom, #7DCFE2 0%, #A3F9FF 100%);
+  background-image: -webkit-linear-gradient(bottom, #7DCFE2 0%, #A3F9FF 100%);
+  background-image: -ms-linear-gradient(bottom, #7DCFE2 0%, #A3F9FF 100%);
+  background-image: linear-gradient(to bottom, #7DCFE2 0%, #A3F9FF 100%);
+  z-index: 60;
+  padding: 2%;
+  border-radius: 15px;
+  font-family: 'lato';
+  text-align: center;
+  overflow: scroll;
+  transition-property: top;
+  transition-duration: 1s;
+  transition-timing-function: ease-in-out;
+}
+
+#credits h1 {
+  font-size: 300%;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#credits ul {
+  list-style: none;
+  font-size: 150%;
+}
+
+#credits li {
+  line-height: 240%;
+}
+
+#credits li img {
+  width: 7%;
+  height: 7%;
+  padding-right: 2%;
 }
 
