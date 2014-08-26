@@ -19,7 +19,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
   </div>
 </div>
 <div class="manage-item">
-  <div class="manage-header" id="header-1" style="background-image: url('../../images/up-arrow.png');"><h4>Unapproved Themes (<?php echo count($data['unapproved']) ?>)</h4></div>
+  <div class="manage-header" id="header-1"><h4>Unapproved Themes (<?php echo count($data['unapproved']) ?>)</h4></div>
   <div id="manage-1">
     <table class="manage-table">
       <thead style="border-bottom: 1px black solid;">
