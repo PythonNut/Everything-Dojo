@@ -382,9 +382,6 @@ footer, .push {
 .valid::before {
   border-color: transparent #bcffbc;
 }
-.notification::before {
-  border-color: transparent #bcbcff;
-}
 
 .msg {
   position: absolute;

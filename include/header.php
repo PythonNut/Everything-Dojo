@@ -58,7 +58,7 @@
       
       <header class="database">
         <section id="headerwrap">
-          <a href="' . constant("URL_" . strtoupper($title)) . '"><h1>' . $title . '</h1></a>
+          <a href="' . constant("URL_" . strtoupper($title)) . '"><h1><?php echo $title ?></h1></a>
           <?php
           global $mode;
 
