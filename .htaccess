@@ -32,6 +32,10 @@ RewriteRule ^(.*)$ index.php [F,L]
 order allow,deny
 deny from all
 </Files>
+<Files "error_log">
+order allow,deny
+deny from all
+</Files>
 
 <FilesMatch "\.(eot|otf|woff|ttf)$">
 <IfModule mod_headers.c>

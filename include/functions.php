@@ -22,6 +22,30 @@
     }
   }
 
+  function get_user($user_id){
+		global $dbc;
+		
+			$sth = $dbc->prepare("SELECT * FROM `users` WHERE `id` = :id");		
+			$sth->execute(array(
+				':id' => intval($user_id)
+			));
+			$name = $sth->fetch(PDO::FETCH_ASSOC);
+			$name = $name['user_name'];
+			return $name;
+  }
+
+  function get_all_user($user_id){
+      global $dbc;
+		
+			$sth = $dbc->prepare("SELECT * FROM `users` WHERE `id` = :id");		
+			$sth->execute(array(
+				':id' => intval($user_id)
+			));
+			$user = $sth->fetchAll(PDO::FETCH_ASSOC);
+			return $user[0];
+  }
+
+
   function filter($data) {
     $data = trim(addslashes(htmlentities(strip_tags($data))));
 
@@ -221,8 +245,7 @@
   /****************************END OF LOGIN SCRIPT FUNCTIONS*********************************/
   /*regular site functions*/
 
-  function get_header($n=0, $notification_count = 0) {
-    $unread_notification_count = $notification_count;
+  function get_header($n=0) {
     include(str_repeat('../', $n) . "include/header.php");
   }
 
