@@ -247,17 +247,30 @@ div.code {
 
 /* Search box */
 .search-container {
-  float: right;
   position: relative;
   top: 1.5rem;
+  width: 100%;
 }
 
 .search {
+  position: absolute;
+  right: 2rem;
   height: 2rem;
   padding: 0 0 0 7px;
+  
   border-right: none;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+  
+  -webkit-transition: all 0.75s ease;
+          transition: all 0.75s ease;
+          
+  color: #aaa;
+}
+
+.search:focus {
+  width: 50%;
+  color: #000;
 }
 
 /* Search icon (stolen from Nicholas Gallagher) */
