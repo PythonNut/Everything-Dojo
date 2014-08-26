@@ -52,15 +52,35 @@
 
     <main id="wrap">
 
-      <?php
-      if (in_array($title, array("Database", "Discuss"))) {
-        echo '<header class="' . strtolower($title) . '">
+      <?php if ($title == "Database") { ?>
+      
+      <header class="database">
         <section id="headerwrap">
           <a href="' . constant("URL_" . strtoupper($title)) . '"><h1>' . $title . '</h1></a>
+          <?php
+          global $mode;
+
+          if ($mode == "view") { ?>
+            <div class="search-container">
+              <script src="/js/db-search.js"></script>
+              <input class="search" type="text" placeholder="Search...">
+              <div class="icon-box">
+                <span class="search-icon"></span>
+              </div>
+          <?php } ?>
+
         </section>
-      </header>';
-      } elseif ($title == "Try-It") {
-      ?>
+      </header>
+
+      <?php } elseif ($title == "Discuss") { ?>
+      
+      <header class="discuss">
+        <section id="headerwrap">
+          <a href="<?php echo URL_DISCUSS; ?>"><h1>Discuss</h1></a>
+        </section>
+      </header>
+
+      <?php } elseif ($title == "Try-It") { ?>
 
       <header class="tryit">
         <section id="headerwrap">
@@ -216,6 +236,7 @@
               else {
                 echo '<input type="checkbox" value="dev" name="dev" onChange="var confirm=window.confirm(\'Warning: Development mode means that you can try ALL the styles, including incomplete, in-development and/or buggy CSS. These styles are not recommended for your blog.\n\nDo you really wish to continue?\');if(confirm)this.form.submit();else this.checked=false;" style="display:inline-block;"/>';
               } ?>
+              </label>
             </section>
             <?php
             if (!empty($_GET['select'])){
@@ -254,6 +275,10 @@
 
       <?php } elseif ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)") { ?>
 
+			<?php
+				global $notification_unread_count;
+			?>
+
       <header>
         <section id="headerwrap">
           
@@ -267,7 +292,7 @@
             <?php if(isset($_SESSION['user_id'])) { ?>
               <li><a href="/myaccount.php" id="menu-myaccount">My Account</a></li>
               <li><a href="/mysettings.php" id="menu-mysettings">My Settings</a></li>
-              <li><a href="javascript:;" onClick="show_notifications()" class="notification-link">Notifications (<?php echo $unread_notification_count; ?>)</a></li>
+              <li><a href="javascript:;" onClick="show_notifications()" class="notification-link">Notifications (<?php echo $notification_unread_count; ?>)</a></li>
               <li><a href="/logout.php" id="menu-logout">Logout</a></li>
             <?php } ?>
             <?php if(!isset($_SESSION['user_id'])) { ?>

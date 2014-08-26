@@ -1,41 +1,35 @@
 <?php
 include('include.php');
-include('themedb.php');
+include('discuss.php');
 session_start();
 
   $mode = $_SESSION['mode'];
-  $id = $_SESSION['id'];
+  $t = $_SESSION['t'];
+	$f = $_SESSION['f'];
   unset($_SESSION['mode']);
-  unset($_SESSION['id']);
+  unset($_SESSION['t']);
   switch($mode){
-    case 'submit-theme':
-      header('Refresh: 3; URL = ' . SITE_ROOT . URL_DATABASE . '?mode=view&view=style&id=' . $id);
+    case 'post':
+			if(empty($_SESSION['err'])){
+      	header('Refresh: 3; URL = ' . SITE_ROOT . URL_DISCUSS . '?view=topic&f=' . $f . '&t=' . $t);
+			}
+			else{
+				header('Location: ' . SITE_ROOT . URL_DISCUSS . '?view=topic&f=' . $f . '&t=' . $t);
+			}
       break;
-    case 'edit-theme':
-      header('Refresh: 3; URL = ' . SITE_ROOT . URL_DATABASE . '?mode=view&view=style&id=' . $id);
-      break;
-    case 'settings':
-      header('Refresh: 3; URL = ' . SITE_ROOT . URL_DATABASE . '?mode=view&view=style&id=' . $id);
-      break;
-    case 'approve':
-      header('Refresh: 3; URL = ' . SITE_ROOT . URL_DATABASE . '?mode=mcp');
-      break;
-    case 'validate':
-      header('Refresh: 3; URL = ' . SITE_ROOT . URL_DATABASE . '?mode=mcp');
-      break;
-    case 'delete':
-      header('Refresh: 3; URL = ' . SITE_ROOT . URL_DATABASE . '?mode=manage');
-      break;
-		case 'reject':
-      header('Refresh: 3; URL = ' . SITE_ROOT . URL_DATABASE . '?mode=mcp');
+		case 'topic':
+			if(empty($_SESSION['err'])){
+      	header('Refresh: 3; URL = ' . SITE_ROOT . URL_DISCUSS . '?view=topic&f=' . $f . '&t=' . $t);
+			}
+			else{
+				header('Location: ' . SITE_ROOT . URL_DISCUSS . '?view=forum&f=' . $f);
+			}
       break;
   }
 
-  $title = "Database";
-  $extra_style = "<link rel=\"stylesheet\" href=\"../../css/prism.css\" />
-  <link rel=\"stylesheet\" href=\"../../css/database.css\" />";
-  $extra_js = "<script src=\"../../js/prism.js\"></script>
-  <script src=\"../../js/database.js\"></script>";
+  $title = "Discuss";
+  $extra_style = "<link rel=\"stylesheet\" href=\"../../css/discuss.css\" />";
+	$extra_js = "<script src=\"../../js/database.js\"></script>";
   if($_SESSION['user_id'] != NULL){
     $unread_count = $notification->count_unread($_SESSION['user_id']);
     $notification_data = $notification->get_notifications($_SESSION['user_id']);
@@ -87,7 +81,7 @@ session_start();
     </div>
   </div>
         <div id="navigation">
-          <nav class="db-nav">
+          <nav class="discuss-nav">
             <ul>
               <li><a href="/" id="nav-home">EvDo Home</a></li>
             <?php if(isset($_SESSION['user_id'])) { ?>

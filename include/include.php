@@ -9,4 +9,5 @@ include("functions.php");
 include("constants.php");
 // notification class
 include("notification.php");
+date_default_timezone_set("America/Los_Angeles");
 ?>
