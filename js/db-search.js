@@ -14,20 +14,22 @@ function containsAny(needle, haystack) {
   return false;
 }
 
-$(".search").on("propertychange keyup input paste", function () {
-  $(".style").each(function () {
-    var mainText = $(this).children().first().text().toLowerCase();
-    var author = $(this).children().first().next().text().toLowerCase();
-    var version = $(this).children().last().prev().text().toLowerCase();
-    var stage = $(this).children().last().text().toLowerCase();
+$(document).ready(function () {
+  $(".search").on("propertychange keyup input paste", function () {
+    $(".style").each(function () {
+      var mainText = $(this).children().first().text().toLowerCase();
+      var author = $(this).children().first().next().text().toLowerCase();
+      var version = $(this).children().last().prev().text().toLowerCase();
+      var stage = $(this).children().last().text().toLowerCase();
 
-    var query = $(".search").val().toLowerCase();
+      var query = $(".search").val().toLowerCase();
 
-    if (! (containsAny(query, mainText))) {
-      $(this).fadeOut();
-    }
-    else {
-      $(this).fadeIn();
-    }
+      if (! (containsAny(query, mainText))) {
+        $(this).fadeOut();
+      }
+      else {
+        $(this).fadeIn();
+      }
+    });
   });
 });
