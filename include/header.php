@@ -68,6 +68,7 @@
               <div class="icon-box">
                 <span class="search-icon"></span>
               </div>
+            </div>
           <?php } ?>
 
         </section>
