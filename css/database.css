@@ -284,6 +284,7 @@ div.code {
   border-top-right-radius: 0.18rem;
   border-bottom-right-radius: 0.18rem;
   position: relative;
+  cursor: pointer;
 }
 
 .search-icon::before,
