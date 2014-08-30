@@ -46,6 +46,9 @@ $(document).ready(function () {
       var author = $(this).children().first().next().text().toLowerCase();
       var qAuthor = query.match(/@[a-zA-Z0-9_]*/i);
 
+      $(this).children().first().unhighlight({"element": "mark"}); // Unhighlight any leftover matches from last time around as they mess up the highlighting method
+      $(this).children().first().highlight(query.split(" "), {"element": "mark"}); // Highlight matches
+
       if (qAuthor !== null) {
         qAuthor = qAuthor[0].trimLeft("@"); // JS doesn't have lookbehind so the @ needs to be trimmed.
       }
