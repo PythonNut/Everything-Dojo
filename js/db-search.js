@@ -36,19 +36,25 @@ String.prototype.trim = function(charlist) {
 };
 
 $(document).ready(function () {
-  $(".search").on("propertychange keyup input paste", function () {
+  var search = $(".search");
+
+  search.on("propertychange keyup input paste", function () {
     $(".style").each(function () {
       var mainText = $(this).children().first().text().toLowerCase();
       var stage = $(this).children().last().text().toLowerCase();
-
-      var query = $(".search").val().toLowerCase();
-
       var author = $(this).children().first().next().text().toLowerCase();
-      var qAuthor = query.match(/@[a-zA-Z0-9_]*/i);
+
+      var query = search.val().toLowerCase();
+
+      authorRegex = /[^\\]@[a-zA-Z0-9_]+\b/i;
+      releaseRegex = /[^\\]#\[?(release|beta|dev)\]?\b/i;
+      requiredRegex = /[^\\]\+\w+\b/i;
+      forbiddenRegex = /[^\\]-\w+\b/i;
 
       $(this).children().first().unhighlight({"element": "mark"}); // Unhighlight any leftover matches from last time around as they mess up the highlighting method
       $(this).children().first().highlight(query.split(" "), {"element": "mark"}); // Highlight matches
 
+      // 
       if (qAuthor !== null) {
         qAuthor = qAuthor[0].trimLeft("@"); // JS doesn't have lookbehind so the @ needs to be trimmed.
       }
