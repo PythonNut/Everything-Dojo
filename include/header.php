@@ -19,12 +19,12 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="/js/script.js"></script>
     <?php } ?>
-    <?php 
+    <?php
     if ($title == "Try-It") { ?>
     <link href='css/blog-style.css' rel='stylesheet' type='text/css'>
     <link href='css/tryit.css' rel='stylesheet' type='text/css'>
     <?php } ?>
-    
+
     <script src="/js/popup.js"></script>
 
     <?php global $extra_js; print $extra_js; ?>
@@ -55,10 +55,10 @@
     <main id="wrap">
 
       <?php if ($title == "Database") { ?>
-      
+
       <header class="database">
         <section id="headerwrap">
-          <a href="' . constant("URL_" . strtoupper($title)) . '"><h1><?php echo $title ?></h1></a>
+          <a href="' . constant('URL_' . strtoupper($title)) . '"><h1><?php echo $title ?></h1></a>
           <?php
           global $mode;
 
@@ -75,7 +75,7 @@
       </header>
 
       <?php } elseif ($title == "Discuss") { ?>
-      
+
       <header class="discuss">
         <section id="headerwrap">
           <a href="<?php echo URL_DISCUSS; ?>"><h1>Discuss</h1></a>
@@ -123,7 +123,7 @@
                         $allthemes['other'][] = $tmp_theme;
                     }
                   }
-                  
+
                   //get unvalidated
                   foreach($data['unvalidated']['name'] as $key=>$theme){
                     $tmp_theme = array(
@@ -145,7 +145,7 @@
                         $allthemes['other'][] = $tmp_theme;
                     }
                   }
-                  
+
                   //echo out all themes in form of optgroup
                   if (!empty($allthemes['rel'])){
                     echo "<optgroup label='[RELEASE] stage (safe and working)'>";
@@ -159,7 +159,7 @@
                     }
                     echo "</optgroup>";
                   }
-                  
+
                   if (!empty($allthemes['beta'])){
                     echo "<optgroup label='[BETA] stage (almost finished)'>";
                     foreach($allthemes['beta'] as $key=>$theme){
@@ -172,7 +172,7 @@
                     }
                     echo "</optgroup>";
                   }
-                  
+
                   if (!empty($allthemes['alpha'])){
                     echo "<optgroup label='[ALPHA] stage (buggy/glitchy)'>";
                     foreach($allthemes['alpha'] as $key=>$theme){
@@ -185,7 +185,7 @@
                     }
                     echo "</optgroup>";
                   }
-                  
+
                   if (!empty($allthemes['dev'])){
                     echo "<optgroup label='[DEV] stage (NOT RECOMMENDED)'>";
                     foreach($allthemes['dev'] as $key=>$theme){
@@ -198,7 +198,7 @@
                     }
                     echo "</optgroup>";
                   }
-                  
+
                   if (!empty($allthemes['other'])){
                     echo "<optgroup label='[OTHER] stage (unknown, try at your own risk)'>";
                     foreach($allthemes['other'] as $key=>$theme){
@@ -211,7 +211,7 @@
                     }
                     echo "</optgroup>";
                   }
-                  
+
                 }
                 else{
                   $ids = $data['validated']['id'];
@@ -226,7 +226,7 @@
                     }
                   }
                 }
-                
+
               ?>
               </select>
             </section>
@@ -246,7 +246,7 @@
             }
             ?>
           </form>
-          
+
         </section>
       </header>
 
@@ -277,13 +277,13 @@
 
       <?php } elseif ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)") { ?>
 
-			<?php
-				global $notification_unread_count;
-			?>
+        <?php
+          global $notification_unread_count;
+        ?>
 
       <header>
         <section id="headerwrap">
-          
+
           <div id="logo">
             <a href="/"><img src="/images/logo.svg" alt="Logo" /></a>
           </div>
