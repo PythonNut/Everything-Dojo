@@ -23,26 +23,26 @@
   }
 
   function get_user($user_id){
-		global $dbc;
-		
-			$sth = $dbc->prepare("SELECT * FROM `users` WHERE `id` = :id");		
-			$sth->execute(array(
-				':id' => intval($user_id)
-			));
-			$name = $sth->fetch(PDO::FETCH_ASSOC);
-			$name = $name['user_name'];
-			return $name;
+    global $dbc;
+
+      $sth = $dbc->prepare("SELECT * FROM `users` WHERE `id` = :id");
+      $sth->execute(array(
+        ':id' => intval($user_id)
+      ));
+      $name = $sth->fetch(PDO::FETCH_ASSOC);
+      $name = $name['user_name'];
+      return $name;
   }
 
   function get_all_user($user_id){
       global $dbc;
-		
-			$sth = $dbc->prepare("SELECT * FROM `users` WHERE `id` = :id");		
-			$sth->execute(array(
-				':id' => intval($user_id)
-			));
-			$user = $sth->fetchAll(PDO::FETCH_ASSOC);
-			return $user[0];
+
+      $sth = $dbc->prepare("SELECT * FROM `users` WHERE `id` = :id");
+      $sth->execute(array(
+        ':id' => intval($user_id)
+      ));
+      $user = $sth->fetchAll(PDO::FETCH_ASSOC);
+      return $user[0];
   }
 
 
@@ -98,7 +98,7 @@
 
   function checkPwd($x, $y) {
     if(empty($x) || empty($y) ) { return false; }
-    if (strlen($x) < 4 || strlen($y) < 4) { return false; }
+    if (strlen($x) < 6 || strlen($y) < 6) { return false; }
 
     if (strcmp($x, $y) != 0) {
       return false;
