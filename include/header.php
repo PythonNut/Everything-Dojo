@@ -63,6 +63,7 @@
 
           if ($mode == "view") { ?>
             <div class="search-container">
+              <script src="/js/highlight.js"></script>
               <script src="/js/db-search.js"></script>
               <input class="search" type="text" placeholder="Search...">
               <div class="icon-box">
