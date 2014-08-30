@@ -10,7 +10,7 @@
   get_header();
 
   echo '<div id="blog-body">';
-  include("blog-blog.html");
+  include("blog/blog-blog.html");
 
   if (!empty($_GET['select'])) {
     $themedb = new themedb($dbc);
