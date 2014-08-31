@@ -21,7 +21,7 @@
     </div>
 
     <footer>
-      <p><a href="/">Home</a> &bull; <a href="/about.php">About</a> &bull; <a href="javascript:;" onclick="popUp('credits')">Credits</a> <?php
+      <p><a href="/">Home</a> &bull; <a href="/about.php">About</a> &bull; <a href="javascript:;" onclick="popUp('credits', '1%')">Credits</a> <?php
               // will not work if dbc is not included on page
               if (checkAdmin()) {
               ?>
