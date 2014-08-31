@@ -48,8 +48,8 @@ $(document).ready(function () {
 
       var authorRegex = /[^\\]@[a-zA-Z0-9_]+\b/iy;
       var releaseRegex = /[^\\]#\[?(release|beta|dev)\]?\b/iy;
-      var requiredRegex = /[^\\]\+\w+\b/iy;
-      var forbiddenRegex = /[^\\]-\w+\b/iy;
+      var requiredRegex = /[^\\]\+\w+(?=\s)/iy;
+      var forbiddenRegex = /[^\\]-\w+(?=\s)/iy;
 
       $(this).children().first().unhighlight({"element": "mark"}); // Unhighlight any leftover matches from last time around as they mess up the highlighting method
       $(this).children().first().highlight(query.split(" "), {"element": "mark"}); // Highlight matches
