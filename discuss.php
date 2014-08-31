@@ -101,47 +101,76 @@
     </div>
     <div class="discuss-round" id="discuss-round-right"><span class="discuss-round"></span></div>
       <script>
-        var announcement_options = {
+        var interval,
+            announcementOptions = {
           num: <?php echo count($announcements);?>,
           start: 1,
           now: 1,
           aidPrefix: "discuss-announcement-",
           updateView: function () {
-            for (ji = announcement_options.start; ji <= announcement_options.num; ji++) {
-              $("#"+announcement_options.aidPrefix+ji).fadeOut(100);
+            for (ji = announcementOptions.start; ji <= announcementOptions.num; ji++) {
+              $("#"+announcementOptions.aidPrefix+ji).fadeOut(300);
             }
-            $("#"+announcement_options.aidPrefix+announcement_options.now).delay(200).fadeIn(100);
+            $("#"+announcementOptions.aidPrefix+announcementOptions.now).delay(500).fadeIn(400);
           }
-        }
+        };
+
         $(document).ready(function () {
           //start up
-          for (ji = announcement_options.start; ji <= announcement_options.num; ji++) {
-            $("#"+announcement_options.aidPrefix+ji).hide();
+          for (ji = announcementOptions.start; ji <= announcementOptions.num; ji++) {
+            $("#"+announcementOptions.aidPrefix+ji).hide();
           }
-          announcement_options.now = announcement_options.start;
-          $("#"+announcement_options.aidPrefix+announcement_options.now).show();
+          announcementOptions.now = announcementOptions.start;
+          $("#"+announcementOptions.aidPrefix+announcementOptions.now).show();
           // check if there are multiple announcements
-          if (announcement_options.num < 2) {
+          if (announcementOptions.num < 2) {
             $(".discuss-round").remove();
           }
+
+          interval = setInterval(function () {
+            if (announcementOptions.now == announcementOptions.num) {
+              announcementOptions.now = announcementOptions.start;
+            } else {
+              announcementOptions.now += 1;
+            }
+            announcementOptions.updateView();
+          }, 5000);
+        });
+
+        $("#discuss-announcements").hover(function () {
+          clearInterval(interval);
+        });
+
+        $("#announcements").mouseout(function () {
+          clearInterval(interval);
+          interval = setInterval(function () {
+            if (announcementOptions.now == announcementOptions.num) {
+              announcementOptions.now = announcementOptions.start;
+            } else {
+              announcementOptions.now += 1;
+            }
+            announcementOptions.updateView();
+          }, 5000);
         });
 
         $("#discuss-round-left").click(function () {
-          if (announcement_options.now == announcement_options.start) {
-            announcement_options.now = announcement_options.num;
+          clearInterval(interval);
+          if (announcementOptions.now == announcementOptions.start) {
+            announcementOptions.now = announcementOptions.num;
           } else {
-            announcement_options.now -= 1;
+            announcementOptions.now -= 1;
           }
-          announcement_options.updateView();
+          announcementOptions.updateView();
         });
 
         $("#discuss-round-right").click(function () {
-          if (announcement_options.now == announcement_options.num) {
-            announcement_options.now = announcement_options.start;
+          clearInterval(interval);
+          if (announcementOptions.now == announcementOptions.num) {
+            announcementOptions.now = announcementOptions.start;
           } else {
-            announcement_options.now += 1;
+            announcementOptions.now += 1;
           }
-          announcement_options.updateView();
+          announcementOptions.updateView();
         });
       </script>
     </section>

@@ -8,6 +8,17 @@ $(document).ready(function() {
       $("#notifications").hide("fast", "swing");
     }
   });
+
+  // add title attribute to announcements
+  // uses .each as otherwise `this` would refer to window
+  $(".discuss-announcement").each(function () {
+    $(this).attr("title", $(this).text());
+  });
+
+  // make forum links undraggable
+  $("#fora > a").mousedown(function (e) {
+    e.preventDefault();
+  });
 });
 function show_notifications() {
   $("#notifications").toggle(350);
@@ -17,7 +28,7 @@ function mark_all_read(forum_id, user_id) {
     url: '/include/ajax_handler.php',
     data: {
       action: 'discuss_mark_read',
-			forum_id: forum_id,
+      forum_id: forum_id,
       user_id: user_id
     },
     type: 'post',
