@@ -198,7 +198,7 @@ body { background: white; }
 }
 
 .center{
-	text-align: center;
+  text-align: center;
 }
 
 
@@ -473,8 +473,9 @@ table a { color: #F99819; }
 
 /*--USER ANNOUNCEMENTS--*/
 #announcements {
-  border: 1px solid #222;
+  position: relative;
   padding: 0.6rem;
+  border: 1px solid #222;
   margin-bottom: 0.6rem;
 }
 
@@ -671,11 +672,7 @@ table a { color: #F99819; }
   left: 30%;
   width: 40%;
   height: 90%;
-  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #7DCFE2),color-stop(1, #A3F9FF));
-  background-image: -o-linear-gradient(bottom, #7DCFE2 0%, #A3F9FF 100%);
-  background-image: -moz-linear-gradient(bottom, #7DCFE2 0%, #A3F9FF 100%);
-  background-image: -webkit-linear-gradient(bottom, #7DCFE2 0%, #A3F9FF 100%);
-  background-image: -ms-linear-gradient(bottom, #7DCFE2 0%, #A3F9FF 100%);
+  background-image: -webkit-linear-gradient(top, #7DCFE2 0%, #A3F9FF 100%);
   background-image: linear-gradient(to bottom, #7DCFE2 0%, #A3F9FF 100%);
   z-index: 60;
   padding: 2%;
@@ -683,9 +680,8 @@ table a { color: #F99819; }
   font-family: 'lato';
   text-align: center;
   overflow: scroll;
-  transition-property: top;
-  transition-duration: 1s;
-  transition-timing-function: ease-in-out;
+  -webkit-transition: top 1s ease-in-out;
+  transition: top 1s ease-in-out;
 }
 
 #credits h1 {

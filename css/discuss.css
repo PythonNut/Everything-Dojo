@@ -1,97 +1,40 @@
 @charset "UTF-8";
 /* CSS Document */
-#announcements h3{
+
+/**
+ * Announcements
+ */
+
+#announcements h3 {
   text-align: center;
 }
-#discuss-announcements{
-  display: inline-block;
-  vertical-align: top;
-}
-#fora{
-  width: 81vw;
-  margin-top: 3vh;
-  margin-left: auto;
-  margin-right: auto;
-}
-.discuss-fora{
-  width: 18vw;
-  height: 18vw;
-  overflow: hidden;
+#discuss-announcements {
+  position: absolute;
+  top: 2.3em;
+  left: 5%;
+  width: 90%;
   text-align: center;
-  border: 1px solid black;
-  border-radius: 0.5vw;
-  cursor: pointer;
-  background-color: #509aff;
-  display: inline-block;
-  vertical-align: top;
-  background-size: 100% 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  -webkit-transition: 500ms ease;
-  transition: 500ms ease;
-  margin-left: 1vw;
-  margin-right: 1vw;
 }
-.discuss-fora:hover{
-  background-color: #1b63c6;
-  background-size: 150% 150%;
-  -webkit-transition: 500ms ease;
-  transition: 500ms ease;
-}
-.discuss-arrow-up {
-  width: 0;
-  height: 0;
-  border-left: 1.5vw solid transparent;
-  border-right: 1.5vw solid transparent;
-  border-bottom: 1.5vw solid black;
-  margin-top: 14.5vw;
-  margin-left: auto;
-  margin-right: auto;
-  -webkit-transition: 500ms ease;
-  transition: 500ms ease;
-}
-.discuss-fora-text{
-  font-family: 'lato';
-  vertical-align: bottom;
-  height: 11vw;
-  background-color: #212121;
-  color: #FFFFFF;
+.discuss-announcement {
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   overflow: hidden;
-  -webkit-transition: 500ms ease;
-  transition: 500ms ease;
-  border-top: .5vw solid black;
-}
-.discuss-fora:hover > .discuss-fora-text {
-  overflow-y: auto;
-}
-.discuss-fora-text-inner{
-  height: 9.5vw;
-  width: 16.6vw;
-  margin-top: 1.5vw;
-  margin-left: auto;
-  margin-right: auto;
-}
-.discuss-fora:hover > .discuss-arrow-up{
-  margin-top: 5.1vw;
-  -webkit-transition: 500ms ease;
-  transition: 500ms ease;
 }
 .discuss-round {
   position: relative;
-  height: 31px;
-  width: 31px;
+  height: 1.6em;
+  width: 1.6em;
   text-align: center;
-  line-height: 31px;
   border: 1px solid black;
-  border-radius: 20px;
+  border-radius: 100%;
   cursor: pointer;
-  font-size: 20px;
   display: inline-block;
   color: black;
   -webkit-transition: 300ms ease;
   transition: 300ms ease;
 }
-.discuss-round:hover{
+.discuss-round:hover {
   color: white;
   border-color: #0a8efe;
 }
@@ -137,17 +80,6 @@
   -webkit-transform: skew(25deg);
   transform: skew(25deg);
 }
-#navigation {
-  position: absolute;
-  right: 0;
-  width: 40vw;
-  height: auto;
-}
-.discuss-nav {
-  padding: 0;
-  position: absolute;
-  height: auto;
-}
 .discuss-nav ul li a {
   font-size: 1.2rem;
 }
@@ -168,41 +100,130 @@
 .discuss-round:hover::after {
   top: 51%; /* same */
 }
-table.discuss-table{
+
+/**
+ * Forum layout
+ */
+
+#fora {
+  position: absolute;
+  left: 20vw;
+  width: 80vw;
+  margin-top: 3vh;
+}
+.discuss-fora {
+  width: 18vw;
+  height: 18vw;
+  overflow: hidden;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 0.5vw;
+  cursor: pointer;
+  background-color: #509aff;
+  display: inline-block;
+  vertical-align: top;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-transition: 500ms ease;
+  transition: 500ms ease;
+  margin-left: 1vw;
+  margin-right: 1vw;
+}
+.discuss-fora:hover {
+  background-color: #1b63c6;
+  background-size: 150% 150%;
+  -webkit-transition: 500ms ease;
+  transition: 500ms ease;
+}
+.discuss-arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 1.5vw solid transparent;
+  border-right: 1.5vw solid transparent;
+  border-bottom: 1.5vw solid black;
+  margin-top: 14.5vw;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-transition: 500ms ease;
+  transition: 500ms ease;
+}
+.discuss-fora:hover > .discuss-arrow-up {
+  margin-top: 5.1vw;
+  -webkit-transition: 500ms ease;
+  transition: 500ms ease;
+}
+.discuss-fora-text {
+  font-family: 'lato';
+  vertical-align: bottom;
+  height: 11vw;
+  background-color: #212121;
+  color: #FFFFFF;
+  overflow: hidden;
+  -webkit-transition: 500ms ease;
+  transition: 500ms ease;
+  border-top: .5vw solid black;
+}
+.discuss-fora:hover > .discuss-fora-text {
+  overflow-y: auto;
+}
+.discuss-fora-text-inner {
+  height: 9.5vw;
+  width: 16.6vw;
+  margin-top: 1.5vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/**
+ * Forums
+ */
+#navigation {
+  position: absolute;
+  right: 0;
+  width: 40vw;
+  height: auto;
+}
+.discuss-nav {
+  padding: 0;
+  position: absolute;
+  height: auto;
+}
+table.discuss-table {
   width: 90%;
   margin: 1vh auto 0 auto;
 }
-tr.style:hover{
+tr.style:hover {
   cursor: pointer;
 }
-td.med-col{
+td.med-col {
   width: 20%;
 }
-td.small-col{
+td.small-col {
   width: 15%;
 }
-td.tiny-col{
+td.tiny-col {
   width: 3%;
 }
-.topic-icon{
+.topic-icon {
   width: 1em;
   height: 1em;
   border-radius: 50%;
   border: 1px black solid;
 }
-.unread-forum{
+.unread-forum {
   background-color: #b00;
 }
 .unread-forum:hover {
   background-color: #900;
 }
-.read-icon{
+.read-icon {
   background-color: #1b63c6;
 }
-.unread-icon{
+.unread-icon {
   background-color: #a82325;
 }
-.topic-reply-thanks{
+.topic-reply-thanks {
   display: inline-block;
   height: 30px;
   margin-left: 1em;
@@ -220,41 +241,41 @@ td.tiny-col{
   -webkit-transition: 500ms ease;
   transition: 500ms ease;
 }
-.topic-reply-thanks:hover{
+.topic-reply-thanks:hover {
   background-color: #51b835;
   color: #FFFFFF;
   width: 150px;
   -webkit-transition: 500ms ease;
   transition: 500ms ease;
 }
-.topic-reply-thanked{
+.topic-reply-thanked {
   background-color: #51b835;
   color: #FFFFFF;
 }
-.topic-reply-thanked:hover{
+.topic-reply-thanked:hover {
   background-color: #51b835;
   color: #FFFFFF;
 }
-#topic-main{
+#topic-main {
   border: 1px solid black;
   border-radius: 5px 0 0 5px;
   padding: 1em 1em;
 }
-#discuss-topic-header{
+#discuss-topic-header {
   color: #000000;
   margin-bottom: 1em;
 }
-.topic-reply{
+.topic-reply {
   border: 1px solid black;
   border-radius: 0;
   margin-left: 2em;
   border-left: 5px solid #0000FF;
   border-top: 0 solid white;
 }
-.topic-reply-top{
+.topic-reply-top {
   padding: 1em 1em;
 }
-.topic-reply p{
+.topic-reply p {
   padding: 0 1.5em;
   padding-bottom: 1em;
 }
