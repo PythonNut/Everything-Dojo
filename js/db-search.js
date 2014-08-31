@@ -51,25 +51,44 @@ $(document).ready(function () {
       var requiredRegex = /[^\\]\+\w+(?=\s)/iy;
       var forbiddenRegex = /[^\\]-\w+(?=\s)/iy;
 
-      $(this).children().first().unhighlight({"element": "mark"}); // Unhighlight any leftover matches from last time around as they mess up the highlighting method
-      $(this).children().first().highlight(query.split(" "), {"element": "mark"}); // Highlight matches
+      // Author filter
+      var authors = [];
+      while (true) {
+        nextMatch = authorRegex.exec("query")[0];
+        
+        if (nextMatch === null) {
+          break;
+        }
 
-      // 
-      if (qAuthor !== null) {
-        qAuthor = qAuthor[0].trimLeft("@"); // JS doesn't have lookbehind so the @ needs to be trimmed.
+        nextMatch = nextMatch.slice(2); // Remove the non-search characters.
+
+        authors.append(nextMatch);
+      }
+
+      var authorMatch = false;
+
+      if (authors.length !== 0) {
+        authors.foreach(function (a) {
+          if (a == author) {
+            authorMatch = true;
+          }
+        });
       }
 
       else {
-        qAuthor = "";
+        authorMatch = true;
       }
 
-      if (! (containsAny(query, mainText) && contains(qAuthor, author))) {
+      if (! (containsAny(query, mainText) && authorMatch)) {
         $(this).fadeOut();
       }
 
       else {
         $(this).fadeIn();
       }
+
+      $(this).children().first().unhighlight({"element": "mark"}); // Unhighlight any leftover matches from last time around as they mess up the highlighting method
+      $(this).children().first().highlight(query.split(" "), {"element": "mark"}); // Highlight matches
     });
   });
 
