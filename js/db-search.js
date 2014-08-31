@@ -46,38 +46,33 @@ $(document).ready(function () {
 
       var query = search.val().toLowerCase();
 
-      var authorRegex = /[^\\]@[a-zA-Z0-9_]+\b/iy;
-      var releaseRegex = /[^\\]#\[?(release|beta|dev)\]?\b/iy;
-      var requiredRegex = /[^\\]\+\w+(?=\s)/iy;
-      var forbiddenRegex = /[^\\]-\w+(?=\s)/iy;
+      var authorRegex = /[^\\]@[a-zA-Z0-9_]+\b/ig;
+      var releaseRegex = /[^\\]#\[?(release|beta|dev)\]?\b/ig;
+      var requiredRegex = /[^\\]\+\w+(?=\s)/ig;
+      var forbiddenRegex = /[^\\]-\w+(?=\s)/ig;
 
       // Author filter
-      var authors = [];
-      while (true) {
-        nextMatch = authorRegex.exec(query);
-        
-        if (nextMatch === null) {
-          break;
-        }
-
-        nextMatch = nextMatch[0].slice(2); // Remove the non-search characters.
-
-        authors.append(nextMatch);
-      }
-
+      var authors = query.match(authorRegex);
+      
       var authorMatch = false;
 
-      if (authors.length !== 0) {
-        authors.foreach(function (a) {
-          if (a == author) {
+      if (authors !== null) {
+        authors.some(function (a) {
+          a = a.slice(2);
+
+          if (contains(a, author)) {
             authorMatch = true;
+            return false;
           }
+
+          return authorMatch; // authorMatch is true if a match has been found, and Array.prototype.some() stops if the callback returns true
         });
       }
 
       else {
         authorMatch = true;
       }
+
 
       if (! (containsAny(query, mainText) && authorMatch)) {
         $(this).fadeOut();
