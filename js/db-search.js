@@ -47,7 +47,7 @@ $(document).ready(function () {
       var query = search.val().toLowerCase();
 
       var authorRegex = /[^\\]@[a-zA-Z0-9_]+\b/ig;
-      var releaseRegex = /[^\\]#\[?(release|beta|dev)\]?\b/ig;
+      var releaseRegex = /[^\\]#\[?(release|beta|alpha|dev)\]?\b/ig;
       var requiredRegex = /[^\\]\+\w+(?=\s)/ig;
       var forbiddenRegex = /[^\\]-\w+(?=\s)/ig;
 
@@ -73,8 +73,30 @@ $(document).ready(function () {
         authorMatch = true;
       }
 
+      // Release stage filter
+      var releases = query.match(releaseRegex);
+      
+      var releaseMatch = false;
 
-      if (! (containsAny(query, mainText) && authorMatch)) {
+      if (releases !== null) {
+        releases.some(function (r) {
+          r = r.slice(2);
+
+          if (contains(r, stage)) {
+            releaseMatch = true;
+            return false;
+          }
+
+          return releaseMatch; // releaseMatch is true if a match has been found, and Array.prototype.some() stops if the callback returns true
+        });
+      }
+
+      else {
+        releaseMatch = true;
+      }
+
+
+      if (! (containsAny(query, mainText) && authorMatch && releaseMatch)) {
         $(this).fadeOut();
       }
 
