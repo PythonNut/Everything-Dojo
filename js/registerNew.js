@@ -83,7 +83,7 @@ Message.prototype.show = function (fn) {
 Message.prototype.replace = function (fn) {
   var msgWrap = this.el.nextElementSibling;
   if (msgWrap) {
-    msgWrap.className = msgWrap.className.replace(/(^|\s)(error|valid|notification)($|\s)/, this.type);
+    msgWrap.className = msgWrap.className.replace(/(error|valid|notification)/, this.type);
     msgWrap.innerHTML = this.msg;
   }
 
