@@ -603,3 +603,18 @@ function tryit () {
 
   $(window).mousemove();
 }
+
+/*Popup function, mainly for #credits but can be used in other places*/
+function popUp(id, top) {
+  var w = document.getElementById(id);
+  var itop = w.style.top;
+  w.style.top = top;
+  var main = document.getElementById("wrap");
+  main.style.opacity = 0.05;
+  
+  //Exit popup
+  main.onclick = function() {
+    w.style.top = itop;
+    main.style.opacity = 1;
+  };
+}
