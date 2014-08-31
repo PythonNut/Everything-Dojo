@@ -54,13 +54,13 @@ $(document).ready(function () {
       // Author filter
       var authors = [];
       while (true) {
-        nextMatch = authorRegex.exec("query")[0];
+        nextMatch = authorRegex.exec(query);
         
         if (nextMatch === null) {
           break;
         }
 
-        nextMatch = nextMatch.slice(2); // Remove the non-search characters.
+        nextMatch = nextMatch[0].slice(2); // Remove the non-search characters.
 
         authors.append(nextMatch);
       }
