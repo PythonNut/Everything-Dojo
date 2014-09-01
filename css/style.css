@@ -151,6 +151,7 @@ label { display: block; }
   padding: 0.24rem 0.6rem;
   margin: 0.6rem;
   height: 1.334em;
+  border-bottom: none;
   position: absolute;
 }
 
@@ -266,7 +267,6 @@ header {
   font-weight: 400;
   line-height: 4rem;
   padding: 0;
-  border: none;
   margin: 0 0.4rem;
 }
 
