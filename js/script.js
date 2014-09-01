@@ -175,12 +175,18 @@ var styles = {
     var that = this,
         itop = that.css("top");
     this.css("top", top);
-    $("#wrap").css("opacity", 0.5);
+    $(".overlay-wrapper").css({
+      "pointer-events"  : "all",
+      "background-color": "rgba(255, 255, 255, 0.5)"
+    });
 
     //Exit popup
-    $("#wrap").click(function() {
+    $(".overlay-wrapper").click(function() {
       that.css("top", itop);
-      $("#wrap").css("opacity", "");
+      $(".overlay-wrapper").css({
+        "pointer-events"  : "",
+        "background-color": ""
+      });
     });
   };
 
