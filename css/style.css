@@ -158,9 +158,17 @@ label { display: block; }
   color: white;
 }
 
-h2, h4 {
+h1, h2, h3, h4, h5, h6 {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
-  margin-bottom: 0.3rem;
+}
+
+h1 {
+  border-bottom: 1px solid #ccc;
+}
+
+h2, h4 {
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
 }
 
 p { margin-bottom: 0.6rem; }
@@ -188,9 +196,10 @@ code { font-family: Monaco, "Courier New", Courier, monospace; }
 
 body { background: white; }
 
-#wrap { 
+#wrap {
   width: 90%;
   margin: 0 auto;
+  -webkit-transition: all 1s;
   transition: all 1s; /*for popUp()*/
 }
 
@@ -257,6 +266,7 @@ header {
   font-weight: 400;
   line-height: 4rem;
   padding: 0;
+  border: none;
   margin: 0 0.4rem;
 }
 
