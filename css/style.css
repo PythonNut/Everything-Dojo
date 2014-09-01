@@ -666,7 +666,7 @@ table a { color: #F99819; }
 }
 
 /*--CREDITS--*/
-#credits {
+.overlay {
   position: fixed;
   top: 200%;/*Get it out of the viewport*/
   left: 30%;
@@ -684,7 +684,7 @@ table a { color: #F99819; }
   transition: top 1s ease-in-out;
 }
 
-#credits h1 {
+.overlay h1 {
   font-size: 300%;
   margin-top: 0;
   margin-bottom: 0;
