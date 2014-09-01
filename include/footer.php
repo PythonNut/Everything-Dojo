@@ -2,7 +2,7 @@
 
     </main><?php //end wrap ?>
 
-    <div id="credits">
+    <div id="credits" class="overlay">
       <h1>Thanks</h1><h2>to all the following AoPS users who worked on Everything Dojo:</h2>
       <ul>
         <li><img src="http://www.artofproblemsolving.com/Forum/download/file.php?avatar=109994_1383427115.png"><a target="_blank" href="http://www.artofproblemsolving.com/Forum/memberlist.php?mode=viewprofile&u=109994">csmath</a></li>
