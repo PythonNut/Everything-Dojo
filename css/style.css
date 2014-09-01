@@ -188,7 +188,11 @@ code { font-family: Monaco, "Courier New", Courier, monospace; }
 
 body { background: white; }
 
-#wrap { width: 90%; margin: 0 auto; }
+#wrap { 
+  width: 90%;
+  margin: 0 auto;
+  transition: all 1s; /*for popUp()*/
+}
 
 #content {
   display: block;
