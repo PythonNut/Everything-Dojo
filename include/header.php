@@ -25,8 +25,6 @@
     <link href='css/tryit.css' rel='stylesheet' type='text/css'>
     <?php } ?>
 
-    <script src="/js/popup.js"></script>
-
     <?php global $extra_js; print $extra_js; ?>
 
     <noscript>

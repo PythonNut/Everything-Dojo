@@ -1,3 +1,147 @@
+/* jshint browser:true, jquery:true, -W098 */
+/* global ZeroClipboard:false, prettyPrint:false, randomColor:false */
+
+/*******************
+ * ARRAY FUNCTIONS *
+ *******************/
+
+/**
+ * Returns the `nth` last element of an array. If `nth` is not
+ * specified or `nth > Array.length`, returns the last element instead.
+ *
+ * @param {Integer} [nth] If specified, the nth last element of the array
+ */
+Array.prototype.last = function(nth) {
+  return this[this.length - (1 <= nth && nth < this.length ? nth : 1)];
+};
+
+/**********************************************************************
+ *                                                                    *
+ *                   Adds messages next to elements                   *
+ *        Originially designed for register.php, now site-wide        *
+ *                                                                    *
+ **********************************************************************/
+
+/**
+ * Base class for adding messages.
+ *
+ * TODO: Add support for multiple elements
+ *
+ * @class Message
+ * @constructor
+ */
+function Message (selector)
+{
+  this.el = document.querySelector(selector);
+  if (this.el.length < 2) {
+    this.el = this.el[0];
+  } else {
+    this.multiple = true;
+  }
+}
+
+/**
+ * Assigns text and type to an element's message. Alias for <el>.msg = msg and <el>.type = type
+ *
+ * @method assign
+ * @param {String} msg The message.
+ * @param {String} type The type.
+ * @chainable
+ */
+Message.prototype.assign = function (msg, type) {
+  this.msg = msg;
+  this.type = type;
+  return this;
+};
+
+/**
+ * Shows an element's message
+ *
+ * @method show
+ * @param {Function} [fn] A function to be fired when the event is complete
+ * @chainable
+ */
+Message.prototype.show = function (fn) {
+  var type = {
+    "error"       : " invalid",
+    "valid"       : " good",
+    "notification": ""
+  };
+
+  var el = this.el;
+
+  // Get elClass
+  var elClass  = type[this.type];
+
+  el.className += (el.className.indexOf(elClass) == -1) ? elClass : "";
+
+  // insert message in DOM right after element
+  if (!el.nextElementSibling || !el.nextElementSibling.className.match(/(^|\s)(error|valid|notification)($|\s)/)) {
+    var insertEl = "<div class='note " + this.type + "'>" + this.msg + "</div>";
+    el.insertAdjacentHTML("afterend", insertEl);
+  }
+
+  if (typeof fn === "function") {
+    fn();
+  }
+
+  return this;
+};
+
+/**
+ * Replaces an element's message
+ *
+ * @method replace
+ * @param {Function} [fn] A function to be fired when the event is complete
+ * @chainable
+ */
+Message.prototype.replace = function (fn) {
+  var msgWrap = this.el.nextElementSibling;
+  if (msgWrap) {
+    msgWrap.className = msgWrap.className.replace(/(error|valid|notification)/, this.type);
+    msgWrap.innerHTML = this.msg;
+  }
+
+  if (typeof fn === "function") {
+    fn();
+  }
+
+  return this;
+};
+
+/**
+ * Hides an element's message, but keeps the corresponding class
+ *
+ * @method hide
+ * @param {Function} [fn] A function to be fired when the event is complete
+ */
+Message.prototype.hide = function (fn) {
+  var msgWrap = this.el.nextElementSibling;
+  if (msgWrap && msgWrap.className.match(/(^|\s)(error|valid|notification)($|\s)/)) {
+    this.el.parentNode.removeChild(msgWrap);
+  }
+
+  if (typeof fn === "function") {
+    fn();
+  }
+};
+
+/**
+ * Completely removes all traces of an element's message
+ *
+ * @method purge
+ * @param {Function} [fn] A function to be fired when the event is complete
+ */
+Message.prototype.purge = function (fn) {
+  this.hide();
+
+  this.el.className = this.el.className.replace(/(^|\s)(invalid|good)($|\s)/, "");
+
+  if (typeof fn === "function") {
+    fn();
+  }
+};
+
 // js/jQ functions that are available to run on any page. requires jQuery.
 
 var baseTheme = "core";
@@ -16,25 +160,30 @@ var styles = {
 };
 
 
-/*******************
- * ARRAY FUNCTIONS *
- *******************/
-
-/**
- * Returns the `nth` last element of an array. If `nth` is not
- * specified or `nth > Array.length`, returns the last element instead.
- *
- * @param {Integer} [nth] If specified, the nth last element of the array
- */
-Array.prototype.last = function(nth) {
-  return this[this.length - (1 <= nth && nth < this.length ? nth : 1)];
-};
-
 /******************
  * jQuery PLUGINS *
  ******************/
 
 (function ($) {
+  /**
+   * Popup function
+   * Mainly for #credits, but can be used in other places
+   *
+   * @param {String} top How far the popup should be from the top of the window
+   */
+  $.fn.popUp = function(top) {
+    var that = this,
+        itop = that.css("top");
+    this.css("top", top);
+    $("#wrap").css("opacity", 0.5);
+
+    //Exit popup
+    $("#wrap").click(function() {
+      that.css("top", itop);
+      $("#wrap").css("opacity", "");
+    });
+  };
+
   /**
    * Scroll to an element.
    * Based on https://stackoverflow.com/a/6677069
@@ -54,8 +203,6 @@ Array.prototype.last = function(nth) {
 
   /**
    * Toggle options
-   *
-   * Used to be jQuery plugin, but due to weird bugs was moved back to being a standalone function
    */
   $.fn.optionToggle = function () {
     $(this).next().slideToggle();
@@ -110,7 +257,7 @@ Array.prototype.last = function(nth) {
             if (thisVal.indexOf(" ") !== -1) {
               thisVal = '"' + thisVal + '"';
             }
-            thisVal ? $(el).css("font-family", thisVal + ", Calibri, Verdana, Arial, sans-serif") : $(el).css("font-family", "");
+            $(el).css("font-family", thisVal ? (thisVal + ", Calibri, Verdana, Arial, sans-serif") : "");
             break;
 
           // background-image
@@ -319,7 +466,7 @@ function themizer () {
     clearTimeout(idleTimer); // clear timeout if user acts
 
     // user active
-    if (idleState == true) {
+    if (idleState === true) {
       // Reactivated event
       $(".closed #side-button").addClass("triggered").animate({
         left: sideWidth
@@ -381,12 +528,11 @@ function themizerRegular () {
 
     var selectors = {};
     for (var i in styles) {
-      var cur = styles[i],
-          split = i.split('-'),
+      var split = i.split('-'),
           selector = split[0].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("class_", ".").replace("id_", "#"),
           attribute = split[1].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase(),
           value = styles[i];
-      if (selectors.hasOwnProperty(selector) == false) {
+      if (selectors.hasOwnProperty(selector) === false) {
         selectors[selector] = {};
       }
       selectors[selector][attribute] = value;
@@ -397,7 +543,7 @@ function themizerRegular () {
       thiselement = '';
       thiselement += j + " {\n";
       for (var k in selectors[j]) {
-        if (selectors[j][k] || !selectors[j][k] === '') {
+        if (selectors[j][k] || selectors[j][k] !== '') {
           thiselement += "    " + k + ": " + selectors[j][k] + ";\n";
         }
       }
@@ -565,7 +711,7 @@ function tryit () {
     clearTimeout(idleTimer); // clear timeout if user acts
 
     // user active
-    if (idleState == true) {
+    if (idleState === true) {
       // Reactivated event
       $(".closed #header-button").addClass("triggered").animate({
         top: headerHeight
@@ -602,19 +748,4 @@ function tryit () {
   });
 
   $(window).mousemove();
-}
-
-/*Popup function, mainly for #credits but can be used in other places*/
-function popUp(id, top) {
-  var w = document.getElementById(id);
-  var itop = w.style.top;
-  w.style.top = top;
-  var main = document.getElementById("wrap");
-  main.style.opacity = 0.05;
-  
-  //Exit popup
-  main.onclick = function() {
-    w.style.top = itop;
-    main.style.opacity = 1;
-  };
 }
