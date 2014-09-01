@@ -46,10 +46,10 @@ $(document).ready(function () {
 
       var query = search.val().toLowerCase();
 
-      var authorRegex = /[^\\]@[a-zA-Z0-9_]+\b/ig;
-      var releaseRegex = /[^\\]#\[?(release|beta|alpha|dev)\]?\b/ig;
-      var requiredRegex = /[^\\]\+\S+(?=\s)/ig;
-      var forbiddenRegex = /[^\\]-\S+(?=\s)/ig;
+      var authorRegex = /(^|[^\\])@[a-zA-Z0-9_]+(\b|$)/ig;
+      var releaseRegex = /(^|[^\\])#\[?(release|beta|alpha|dev)\]?(\b|$)/ig;
+      var requiredRegex = /(^|[^\\])\+\S+(?=(\s|$))/ig;
+      var forbiddenRegex = /(^|[^\\])-\S+(?=(\s|$))/ig;
 
       // Author filter
       var authors = query.match(authorRegex);
