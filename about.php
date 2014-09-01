@@ -32,7 +32,7 @@
   The original version of this site was written by an AoPS user named Dojo. It contained all the same main sections as the current website, but looked a lot different. On May 27, 2014, Dojo announced that he was looking for help rebuilding the site. That rebuild resulted in the site you are looking at now.</p>
 
   <h1>Who are we?</h1>
-  This website was written and is maintained by a collection of volunteer AoPS users. The team is led by Dojo, and consits of:
+  This website was written and is maintained by a collection of volunteer AoPS users. The team is led by Dojo, and consists of:
   <ul>
     <li>Dojo</li>
     <li>knittingfrenzy18</li>
