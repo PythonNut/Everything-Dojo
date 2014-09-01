@@ -680,9 +680,10 @@ table a { color: #F99819; }
 }
 
 /*--CREDITS--*/
-.overlay {
+.overlay,
+.overlay-wrapper {
   position: fixed;
-  top: 200%;/*Get it out of the viewport*/
+  top: 150%;/*Get it out of the viewport*/
   left: 30%;
   width: 40%;
   height: 90%;
@@ -693,9 +694,18 @@ table a { color: #F99819; }
   border-radius: 15px;
   font-family: 'lato';
   text-align: center;
-  overflow: scroll;
-  -webkit-transition: top 1s ease-in-out;
-  transition: top 1s ease-in-out;
+  overflow: auto;
+  -webkit-transition: top 0.85s ease-out;
+  transition: top 0.85s ease-out;
+}
+
+.overlay-wrapper {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: none;
+  pointer-events: none;
 }
 
 .overlay h1 {
