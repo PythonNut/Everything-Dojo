@@ -48,8 +48,8 @@ $(document).ready(function () {
 
       var authorRegex = /[^\\]@[a-zA-Z0-9_]+\b/ig;
       var releaseRegex = /[^\\]#\[?(release|beta|alpha|dev)\]?\b/ig;
-      var requiredRegex = /[^\\]\+\w+(?=\s)/ig;
-      var forbiddenRegex = /[^\\]-\w+(?=\s)/ig;
+      var requiredRegex = /[^\\]\+\S+(?=\s)/ig;
+      var forbiddenRegex = /[^\\]-\S+(?=\s)/ig;
 
       // Author filter
       var authors = query.match(authorRegex);
@@ -95,8 +95,42 @@ $(document).ready(function () {
         releaseMatch = true;
       }
 
+      // Required word filter
+      var requireds = query.match(requiredRegex);
+      
+      var requiredMatch = true;
 
-      if (! (containsAny(query, mainText) && authorMatch && releaseMatch)) {
+      if (requireds !== null) {
+        requireds.every(function (r) {
+          r = r.slice(2);
+
+          if (! contains(r, mainText)) {
+            requiredMatch = false;
+          }
+
+          return requiredMatch; // requiredMatch is false if a required word has not been found, and Array.prototype.every() stops if the callback returns false
+        });
+      }
+
+      // Forbidden word filter
+      var forbiddens = query.match(forbiddenRegex);
+      
+      var forbiddenMatch = true;
+
+      if (forbiddens !== null) {
+        forbiddens.every(function (f) {
+          f = f.slice(2);
+
+          if (contains(f, mainText)) {
+            forbiddenMatch = false;
+          }
+
+          return forbiddenMatch; // forbiddenMatch is false if a forbidden word has been found, and Array.prototype.every() stops if the callback returns false
+        });
+      }
+
+
+      if (! (containsAny(query, mainText) && authorMatch && releaseMatch && requiredMatch && forbiddenMatch)) {
         $(this).fadeOut();
       }
 
