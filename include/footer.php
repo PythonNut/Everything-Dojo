@@ -28,6 +28,9 @@
               &bull; <a href="/admin.php" id="menu-admin">Admin CP</a>
               <?php } //end admin ?></p>
       <p>&copy;2014 Everything Dojo. The source code of this website is available on <a href="https://github.com/Deeg-Kim/Everything-Dojo">GitHub</a> and is licensed under the terms of the <a href="/LICENSE.txt">GNU General Public License version 3</a>. Individual styles are copyright their creators.</p>
+      <?php if ($_GET['unicorns']): ?>
+      <p>This website has unicorn powers.</p>
+      <?php endif; ?>
       <p>Server Time: <?php echo date("m/d/y G:i T"); ?></p>
     </footer>
 

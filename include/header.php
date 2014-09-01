@@ -254,7 +254,7 @@
         <section id="headerwrap">
           <nav class="breadcrumbs">
             <div id="logo">
-              <a href="/"><img src="/images/logo.svg" alt="Logo" /></a>
+              <a href="/"><?php print $_GET['unicorns'] ? '<img src="/images/unicorns.png" alt="Unicorns" style="margin-top:1rem" />' : '<img src="/images/logo.svg" alt="Logo" />'; ?></a>
             </div>
             <h1 class="big">
               > <a class="uppercase" href="">Themizer</a>
@@ -283,7 +283,7 @@
         <section id="headerwrap">
 
           <div id="logo">
-            <a href="/"><img src="/images/logo.svg" alt="Logo" /></a>
+            <a href="/"><?php print $_GET['unicorns'] ? '<img src="/images/unicorns.png" alt="Unicorns" style="max-width:10rem;max-height:5rem;margin-top:.5rem" />' : '<img src="/images/logo.svg" alt="Logo" />'; ?></a>
           </div>
 
           <nav>
