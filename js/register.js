@@ -32,7 +32,7 @@ document.onready = function () {
     var user = userName.el.value,
         keycode = ('which' in e) ? e.which : e.keyCode; // key validation
 
-    if ((keycode > 47 && keycode < 58) || (keycode > 64 && keycode < 91) || (keycode > 95 && keycode < 112) || keycode == 173 || keycode == 8 || keycode == 46) {
+    if ((keycode > 47 && keycode < 58) || (keycode > 64 && keycode < 91) || (keycode > 95 && keycode < 112) || (keycode > 185 && keycode < 193) || (keycode > 218 && keycode < 223) || keycode == 32 || keycode == 8 || keycode == 13 || keycode == 46) {
       if (!user.match(/^[a-z\d_]{3,20}$/i)) {
         clearTimeout(window.userTimeout);
         ajaxName.abort(); // abort ajax request if already sent
@@ -72,7 +72,7 @@ document.onready = function () {
     var email = userEmail.el.value,
         keycode = ('which' in e) ? e.which : e.keyCode; // key validation
 
-    if ((keycode > 47 && keycode < 58) || (keycode > 64 && keycode < 91) || (keycode > 95 && keycode < 112) || keycode == 173 || keycode == 8 || keycode == 46) {
+    if ((keycode > 47 && keycode < 58) || (keycode > 64 && keycode < 91) || (keycode > 95 && keycode < 112) || (keycode > 185 && keycode < 193) || (keycode > 218 && keycode < 223) || keycode == 32 || keycode == 8 || keycode == 13 || keycode == 46) {
       if (!email.match(/^\S+@(localhost|([\w\d-]{2,}\.){1,2}[\w]{2,6})$/i)) {
         clearTimeout(window.emailTimeout);
         ajaxEmail.abort();
