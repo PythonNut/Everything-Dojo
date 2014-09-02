@@ -353,12 +353,12 @@ footer, .push {
   border-color: #b00;
   background-color: #ffeded;
 }
-.good {
+.valid {
   border-color: #0b0;
   background-color: #edffed;
 }
 .error,
-.valid{
+.correct {
   position: absolute;
   left: 12rem;
   bottom: 0.2rem;
@@ -374,13 +374,13 @@ footer, .push {
   background: #ffe7e7;
   border: 1px solid #ffbcbc;
 }
-.valid {
+.correct {
   background: #e7ffe7;
   border: 1px solid #bcffbc;
 }
 
 .error::before,
-.valid::before{
+.correct::before{
   content: "";
   position: absolute;
   left: -7px;
@@ -393,7 +393,7 @@ footer, .push {
 .error::before{
   border-color: transparent #ffbcbc;
 }
-.valid::before {
+.correct::before {
   border-color: transparent #bcffbc;
 }
 
