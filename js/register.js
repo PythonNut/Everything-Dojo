@@ -23,6 +23,9 @@ document.onready = function () {
   var ajaxName  = new XMLHttpRequest(),
       ajaxEmail = new XMLHttpRequest();
 
+  // Submit button
+  var submit = document.getElementById("doRegister");
+
   /**
    * Validation
    */
@@ -38,6 +41,7 @@ document.onready = function () {
         ajaxName.abort(); // abort ajax request if already sent
         userName.assign("Invalid username. Usernames must be 3-20 characters long and can only contain alphanumeric characters and underscores.", "error").show();
         userName.el.parentNode.lastElementChild.style.display = "none"; // hide loading gif
+        submit.setAttribute("disabled", true);
       } else {
         clearTimeout(window.userTimeout);
         ajaxEmail.abort();
@@ -48,10 +52,13 @@ document.onready = function () {
           if (ajaxName.readyState == 4 ) {
             if (ajaxName.status == 200) {
               userName.assign("Username is valid.", "correct").show();
+              submit.removeAttribute("disabled");
             } else if (ajaxName.status == 400) {
               userName.assign("Username already exists! Please choose a new one.", "error").show();
+              submit.setAttribute("disabled", true);
             } else {
               userName.assign("A " + ajaxName.status + " error occurred. Please try again.", "error").show();
+              submit.setAttribute("disabled", true);
             }
             userName.el.parentNode.lastElementChild.style.display = "none"; // hide loading gif
           }
@@ -78,6 +85,7 @@ document.onready = function () {
         ajaxEmail.abort();
         userEmail.assign("Email entered is not a valid email.", "error").show();
         userEmail.el.parentNode.lastElementChild.style.display = "none"; // hide loading gif
+        submit.setAttribute("disabled", true);
       } else {
         clearTimeout(window.emailTimeout);
         ajaxEmail.abort();
@@ -88,10 +96,13 @@ document.onready = function () {
           if (ajaxEmail.readyState == 4 ) {
             if (ajaxEmail.status == 200) {
               userEmail.assign("Email is valid.", "correct").show();
+              submit.removeAttribute("disabled");
             } else if (ajaxEmail.status == 400) {
               userEmail.assign("Email address already exists in our database! Please do not create multis.", "error").show();
+              submit.setAttribute("disabled", true);
             } else {
               userEmail.assign("A " + ajaxEmail.status + " error occurred. Please try again.", "error").show();
+              submit.setAttribute("disabled", true);
             }
             userEmail.el.parentNode.lastElementChild.style.display = "none"; // hide loading gif
           }
@@ -111,8 +122,10 @@ document.onready = function () {
     var pwd = userPwd.el.value;
     if (pwd.length < 6) {
       userPwd.assign("Passwords must be at least 6 characters long.", "error").show();
+      submit.setAttribute("disabled", true);
     } else {
       userPwd.purge();
+      submit.removeAttribute("disabled");
     }
   };
 
@@ -122,8 +135,10 @@ document.onready = function () {
         verify   = userPwdVal.el.value;
     if (original != verify) {
       userPwdVal.assign("Passwords do not match.", "error").show();
+      submit.setAttribute("disabled", true);
     } else {
       userPwdVal.purge();
+      submit.removeAttribute("disabled");
     }
   };
 
