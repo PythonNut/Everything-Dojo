@@ -140,23 +140,23 @@ This is an automated response. Do not reply to this email.";
     <label>Username</label>
     <label class="small i">Only letters, numbers, and underscores, from 3-20 characters long.</label>
     <div class="field">
-      <input name="user_name" type="text" class="required username" onkeyup="validate(this.name)" onblur="err(this.name, 'remove')">
+      <input name="user_name" type="text" class="required username">
       <img class="wait" src="images/loading.gif" alt="Please wait...">
     </div>
     <label>Email</label>
     <label class="small i">Must be valid. We'll use it to send you confirmation information and other important things like that. We'll keep it completely hush-hush, promise.</label>
     <div class="field">
-      <input name="usr_email" type="text" class="required email" onkeyup="validate(this.name)" onblur="err(this.name, 'remove')">
+      <input name="usr_email" type="text" class="required email">
       <img class="wait" src="images/loading.gif" alt="Please wait...">
     </div>
     <label>Password</label>
     <label class="small i">Must be at least 6 characters long.</label>
     <div class="field">
-      <input name="pwd" type="password" class="required password" onkeyup="validate(this.name)" onblur="err(this.name, 'remove')">
+      <input name="pwd" type="password" class="required password">
     </div>
     <label>Retype Password</label>
     <div class="field">
-      <input name="pwd2" type="password" class="required password" id="pwd2" onkeyup="validate(this.name)" onblur="err(this.name, 'remove')">
+      <input name="pwd2" type="password" class="required password">
     </div>
     <label>Image Verification</label>
     <div class="field">

@@ -33,11 +33,12 @@ Array.prototype.last = function(nth) {
 function Message (selector)
 {
   this.el = document.querySelector(selector);
-  if (this.el.length < 2) {
-    this.el = this.el[0];
-  } else {
-    this.multiple = true;
-  }
+//  if (this.el.length < 2) {
+//    this.el = this.el[0];
+//  console.log(this.el);
+//  } else {
+//    this.multiple = true;
+//  }
 }
 
 /**
@@ -45,12 +46,16 @@ function Message (selector)
  *
  * @method assign
  * @param {String} msg The message.
- * @param {String} type The type.
+ * @param {String} [type] The type.
  * @chainable
  */
 Message.prototype.assign = function (msg, type) {
   this.msg = msg;
-  this.type = type;
+  if (type || this.type) {
+    this.type = type || this.type;
+  } else {
+    console.error("Type is undefined");
+  }
   return this;
 };
 
@@ -62,23 +67,25 @@ Message.prototype.assign = function (msg, type) {
  * @chainable
  */
 Message.prototype.show = function (fn) {
-  var type = {
+  var tmpType = {
     "error"       : " invalid",
-    "valid"       : " good",
+    "correct"     : " valid",
     "notification": ""
   };
 
   var el = this.el;
 
   // Get elClass
-  var elClass  = type[this.type];
+  this.elType = tmpType[this.type] || this.type;
 
-  el.className += (el.className.indexOf(elClass) == -1) ? elClass : "";
+  el.className = !el.className.match(/(invalid|valid)/) ? el.className + this.elType : el.className.replace(/(invalid|valid)/, this.elType);
 
   // insert message in DOM right after element
-  if (!el.nextElementSibling || !el.nextElementSibling.className.match(/(^|\s)(error|valid|notification)($|\s)/)) {
+  if (!el.nextElementSibling || !el.nextElementSibling.className.match(/(error|correct|notification)/)) {
     var insertEl = "<div class='note " + this.type + "'>" + this.msg + "</div>";
     el.insertAdjacentHTML("afterend", insertEl);
+  } else if (el.nextElementSibling.className.match(/(error|correct|notification)/)) {
+    this.replace();
   }
 
   if (typeof fn === "function") {
@@ -98,8 +105,9 @@ Message.prototype.show = function (fn) {
 Message.prototype.replace = function (fn) {
   var msgWrap = this.el.nextElementSibling;
   if (msgWrap) {
-    msgWrap.className = msgWrap.className.replace(/(error|valid|notification)/, this.type);
+    msgWrap.className = msgWrap.className.replace(/(error|correct|notification)/, this.type);
     msgWrap.innerHTML = this.msg;
+    this.el.className = this.el.className.replace(/(invalid|valid)/, this.elType);
   }
 
   if (typeof fn === "function") {
@@ -117,13 +125,15 @@ Message.prototype.replace = function (fn) {
  */
 Message.prototype.hide = function (fn) {
   var msgWrap = this.el.nextElementSibling;
-  if (msgWrap && msgWrap.className.match(/(^|\s)(error|valid|notification)($|\s)/)) {
+  if (msgWrap && msgWrap.className.match(/(^|\s)(error|correct|notification)($|\s)/)) {
     this.el.parentNode.removeChild(msgWrap);
   }
 
   if (typeof fn === "function") {
     fn();
   }
+
+  return this;
 };
 
 /**
@@ -135,11 +145,12 @@ Message.prototype.hide = function (fn) {
 Message.prototype.purge = function (fn) {
   this.hide();
 
-  this.el.className = this.el.className.replace(/(^|\s)(invalid|good)($|\s)/, "");
+  this.el.className = this.el.className.replace(/(^|\s)(invalid|valid)($|\s)/, "$3");
 
   if (typeof fn === "function") {
     fn();
   }
+  return this;
 };
 
 // js/jQ functions that are available to run on any page. requires jQuery.
