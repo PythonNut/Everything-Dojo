@@ -342,6 +342,13 @@ footer, .push {
 
 .field { position: relative; }
 
+button[disabled],
+input[disabled],
+button[disabled]:hover,
+input[disabled]:hover {
+  background-color: #bbb;
+}
+
 .wait {
   display: none;
   position: absolute;
