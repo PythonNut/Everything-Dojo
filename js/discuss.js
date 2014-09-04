@@ -1,3 +1,5 @@
+/* jshint browser:true, jquery:true, -W098 */
+
 // JavaScript Document
 $(document).ready(function() {
   $("#notifications").hide();
@@ -19,6 +21,13 @@ $(document).ready(function() {
   $("#fora > a").mousedown(function (e) {
     e.preventDefault();
   });
+
+  // make form submit on ctrl+enter/cmd+enter
+  $("[name='desc']").keydown(function (e) {
+    if ((e.keyCode == 10 || e.keyCode == 13) && (e.ctrlKey || e.keyCode == 224 || e.keyCode == 17 || e.keyCode == 91)) {
+      $(this).parent().submit();
+    }
+  });
 });
 function show_notifications() {
   $("#notifications").toggle(350);
@@ -38,3 +47,5 @@ function mark_all_read(forum_id, user_id) {
   });
 }
 
+$(function () {
+});
