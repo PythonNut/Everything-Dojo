@@ -3,10 +3,13 @@
 * Discuss Version 1.0
 * Methods
 */
+include("Parsedown.php"); // Parsedown
+
 class discuss {
 
   function __construct($dbc){
     $this->dbc = $dbc;
+    $this->parsedown = new Parsedown();
   }
 
   function get_fora($forum_id = 'all', $parent_id = 0, $user_id = 0){
@@ -384,7 +387,7 @@ class discuss {
         ':topic' => intval($data['t']),
         ':time' => time(),
         ':title' => htmlspecialchars($data['title']),
-        ':text' => htmlspecialchars($this->filter_swear_words($data['desc']))
+        ':text' => $this->parsedown->text($this->filter_swear_words($data['desc']))
       ));
 
       $this->delete_views($data['t'], $user_id, 0);
@@ -430,7 +433,7 @@ class discuss {
         ':topic' => intval($topic_id),
         ':time' => time(),
         ':title' => htmlspecialchars($data['title']),
-        ':text' => htmlspecialchars($this->filter_swear_words($data['desc']))
+        ':text' => $this->parsedown->text($this->filter_swear_words($data['desc']))
       ));
     }
     $result = array(
