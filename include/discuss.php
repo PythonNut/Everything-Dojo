@@ -387,7 +387,7 @@ class discuss {
         ':topic' => intval($data['t']),
         ':time' => time(),
         ':title' => htmlspecialchars($data['title']),
-        ':text' => $this->parsedown->text($this->filter_swear_words($data['desc']))
+        ':text' => $this->parsedown->text(htmlentities($this->filter_swear_words($data['desc']), ENT_QUOTES, 'UTF-8'))
       ));
 
       $this->delete_views($data['t'], $user_id, 0);
@@ -433,7 +433,7 @@ class discuss {
         ':topic' => intval($topic_id),
         ':time' => time(),
         ':title' => htmlspecialchars($data['title']),
-        ':text' => $this->parsedown->text($this->filter_swear_words($data['desc']))
+        ':text' => $this->parsedown->text(htmlentities($this->filter_swear_words($data['desc']), ENT_QUOTES, 'UTF-8'))
       ));
     }
     $result = array(
@@ -492,7 +492,7 @@ class discuss {
   function parse_code($string){
     // $search = array('\n', '\\n');
     // $replace = array('<br/>', '<br/>');
-    return nl2br(htmlspecialchars($string));
+    return htmlspecialchars($string);
   }
 
   //0 - get thanks from regular, 1 - get thanks from special, 2 - thank regular, 3 - thank special
