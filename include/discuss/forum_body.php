@@ -31,7 +31,7 @@
   <p style="text-align: center;"><?php echo $forum_data['description']; ?></p>
   <?php
   if ($user_id > 0 and intval($id) != 1){
-    echo "<a href=\"#topic-create-topic\" id=\"topic-a-topic\" style=\"left: 5%; position: relative;\">+ Create New Topic</a><br />";
+    echo "<a id=\"topic-a-topic\" style=\"left:5%;position:relative\">+ Create New Topic</a><br />";
     if(!empty($_SESSION['err'])){
       echo '<div id="errors">';
       foreach($_SESSION['err'] as $error){
@@ -43,13 +43,19 @@
   ?>
   <fieldset id="topic-create-topic">
   <legend>Add new topic</legend>
-  <form action="include/discuss-handler.php" method="post">
-    Title: <input type="text" name="title" value=""/><br/>
-    Message: <br /><textarea name="desc" placeholder="Write your post here..." style="vertical-align:top; height:200px;"></textarea><br/>
+  <form action="include/discuss-handler.php" method="post" id="form">
+    <div class="field">
+      Title: <input type="text" name="title" value="" /><br/>
+    </div>
+    <div class="field">
+      Message: <a href="https://help.github.com/articles/github-flavored-markdown" title="Github Flavored Markdown" style="color:#777;font-size:.8em;line-height:2em" target="_blank" tabindex="1">(Parsed with Github Flavored Markdown)</a>
+      <br />
+      <textarea name="desc" placeholder="Write your post here..." style="vertical-align:top; height:200px;"></textarea>
+    </div>
     <input type="hidden" name="forum" value="<?php echo $id;?>" />
     <input type="hidden" name="mode" value="topic">
     <input type="button" value="Cancel" class="danger" id="cancel" />
-    <input type="submit" value="Post" id="post" />
+    <input type="submit" value="Post" id="post" disabled />
   </form>
   </fieldset>
 

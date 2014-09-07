@@ -110,17 +110,23 @@
   unset($_SESSION['err']);
   ?>
 <?php if ($_SESSION['user_id'] > 0){ ?>
-<a href="#topic-create-comment" id="topic-a-comment">+ Add a comment</a>
+<a id="topic-a-comment">+ Add a comment</a>
 <fieldset id="topic-create-comment">
 <legend>Add new comment</legend>
-<form action="include/discuss-handler.php" method="post">
-  Title: <input type="text" name="title" value="RE: <?php echo $topic['title'];?>"/><br/>
-  Comment: <br /><textarea name="desc" placeholder="Write your comment here..." style="vertical-align:top; height:200px;"></textarea><br/>
+<form action="include/discuss-handler.php" method="post" id="form">
+  <div class="field" style="display:none">
+    Title: <input type="text" name="title" value="RE: <?php echo $topic['title'];?>" /><br/>
+  </div>
+  <div class="field">
+    Comment: <a href="https://help.github.com/articles/github-flavored-markdown" title="Github Flavored Markdown" style="color:#777;font-size:.8em;line-height:2em" target="_blank">(Parsed with Github Flavored Markdown)</a>
+    <br />
+    <textarea name="desc" placeholder="Write your comment here..." style="vertical-align:top; height:200px;"></textarea>
+  </div>
   <input type="hidden" name="forum" value="<?php echo $topic['forum_id'];?>" />
   <input type="hidden" name="mode" value="post">
   <input type="hidden" name="t" value="<?php echo $topic['topic_id'];?>" />
   <input type="button" value="Cancel" class="danger" id="cancel" />
-  <input type="submit" value="Comment" id="post" />
+  <input type="submit" value="Comment" id="post" disabled />
 </form>
 </fieldset>
 
