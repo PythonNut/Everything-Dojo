@@ -39,7 +39,7 @@
       <?php $user = get_user(intval($topic['user_id']));?>
       <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $topic['title'];?></h2>
       <div style="display:inline-block; opacity: 0.6;">Posted by <?php echo $user;?> on <?php echo date('M d, Y g:i a', $topic['time']);?></div>
-      <?php echo $topic['text'];?>
+      <p><?php echo $topic['text'];?></p>
       <?php if($topic['edit_id'] != NULL){ ?><p class="small">Edited by <?php echo get_user($topic['edit_id']); ?> on <?php echo date('M d, Y g:i a', $topic['last_time']);?></p><?php } ?>
     </div>
   </div>
@@ -61,7 +61,7 @@
             <div style="opacity: 0.6; text-decoration: italics; display:inline-block; margin-left: 2em;"><?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div>
             <?php } ?>
           </div>
-          <?php echo $post['text'];?>
+          <p><?php echo $post['text'];?></p>
         </div>
       </div>
     <?php } ?>
@@ -119,8 +119,7 @@
   <input type="hidden" name="forum" value="<?php echo $topic['forum_id'];?>" />
   <input type="hidden" name="mode" value="post">
   <input type="hidden" name="t" value="<?php echo $topic['topic_id'];?>" />
-  <input type="button" value="Cancel" class="danger" id="cancel" />
-  <input type="submit" value="Comment" id="post" />
+  <input type="submit" value="Comment"/>
 </form>
 </fieldset>
 
@@ -129,10 +128,6 @@
   $("#topic-a-comment").click(function(){
     $("#topic-a-comment").hide();
     $("#topic-create-comment").slideToggle(300);
-  });
-  $("#cancel").click(function () {
-    $("#topic-create-comment").slideToggle(300);
-    $("#topic-a-comment").show();
   });
 </script>
 <?php } ?>
