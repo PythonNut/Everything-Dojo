@@ -127,7 +127,7 @@ i, em { font-style: italic }
 
 .step {
     position: relative;
-    width: 900px;
+    width: 1500px;
     height: 900px;
 
     padding: 40px;
@@ -168,8 +168,6 @@ i, em { font-style: italic }
 .slide {
     display: block;
 
-    width: 900px;
-    height: 700px;
     padding: 40px 60px;
 
     background-color: white;
@@ -179,6 +177,10 @@ i, em { font-style: italic }
 
     font-family: 'Lato', Arial, sans-serif;
     letter-spacing: -1px;
+}
+
+.svg-box {
+    position: relative;
 }
 
 .slide.tan {
@@ -196,6 +198,7 @@ i, em { font-style: italic }
 
 .big {
     font-size: 144px;
+    text-transform: uppercase;
 }
 
 .evdo-link {
@@ -204,7 +207,14 @@ i, em { font-style: italic }
 
 .done {
     background-color: #443C4D;
-    text-decoration: underline;
+}
+
+.done .title {
+    color: #D2DE31;
+}
+
+#questions {
+    font-size: 24px;
 }
 
 #questions .row1 {
