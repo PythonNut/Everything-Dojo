@@ -1,20 +1,6 @@
 @charset "UTF-8";
 /* CSS Document */
 
-[type="text"],
-textarea {
-  resize: vertical;
-  width: 100%;
-}
-
-#cancel {
-  float: left;
-}
-
-#post {
-  float: right;
-}
-
 /**
  * Announcements
  */
