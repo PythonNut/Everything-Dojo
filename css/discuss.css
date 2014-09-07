@@ -15,6 +15,11 @@ textarea {
   float: right;
 }
 
+.note {
+  left: auto;
+  right: -0.5rem;
+}
+
 /**
  * Announcements
  */

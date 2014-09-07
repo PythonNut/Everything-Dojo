@@ -32,7 +32,15 @@ Array.prototype.last = function(nth) {
  */
 function Message (selector)
 {
-  this.el = document.querySelector(selector);
+  if (typeof selector === "string") {
+    this.el = document.querySelector(selector);
+  } else if (selector instanceof jQuery) {
+    this.el = selector.context;
+  } else if (selector instanceof Element) {
+    this.el = selector;
+  } else {
+    throw new Error("selector does not refer to an element.");
+  }
 //  if (this.el.length < 2) {
 //    this.el = this.el[0];
 //  console.log(this.el);
