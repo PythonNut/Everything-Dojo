@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html><head>
+
+    <title>Everything Dojo &bull; Themizer (Development Mode)</title>
+
+    <meta charset="utf-8">
+    <link href="/images/favicon.ico" rel="shortcut icon">
+        <link rel="stylesheet" href="/css/blog-style.css">
+  <link rel="stylesheet" href="/css/themizer.css"><link rel="stylesheet" href="/css/codemirror.min.css">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="/js/script.js"></script>
+
+    <script src="/js/blog-fn.js"></script><script src="/js/codemirror-4.4.min.js"></script>
+  <script>$(function(){themizerDev();});</script>
+    <noscript>
+      <link href="/css/noscript.css" type="text/css" rel="stylesheet">
+    </noscript>
+  <body>
+
+    <noscript>
+  <div class="noscript background">
+    <div class="noscript wrapper">
+      <div class="noscript content">
+        <div class="noscript image content">
+          <img class="noscript image" src="images/noscript.png" alt="Y U NO ENABLE JAVASCRIPT">
+        </div>
+        <h3 class="noscript header">
+          Sorry, but Themizer (Development Mode) requires JavaScript.
+        </h3>
+        <p class="noscript text">
+          Please enable it in your settings.
+        </p>
+      </div>
+    </div>
+  </div>
+</noscript>
+
+    <main id="wrap">
+
+      <aside class="opened" id="sidebar">
+  <h2 id="sideheadbar" class="themizer">Themizer</h2>
+  <section id="sidebar-inner">
+    <section id="sidebar-inner-scrollable">
+
+      <section class="option" id="option-view">
+        <section class="option-title collapsed">
+          <h5>Blog Page</h5>
+          <span class="collapsebutton"></span>
+        </section>
+        <section class="option-wrap">
+          <select name="view">
+            <option value="index">Index</option>
+            <option value="blog">Post</option>
+            <option value="post">Post New Entry</option>
+            <option value="comment">Post New Comment</option>
+          </select>
+        </section>
+      </section>
+
+
+      <section class="option" id="option-editor">
+        <section class="option-title expanded">
+          <h5>Editor</h5>
+          <span class="collapsebutton"></span>
+        </section>
+        <section style="display: block;" class="option-wrap">
+          <textarea id="editor" style="font-family: Monaco,Consolas,'Courier New',monospace; display: none;"></textarea>
+          <!-- add codemirror -->
+        </section>
+      </section>
+
+      <script>$(function () {
+        // TODO: Add linting
+        var codemirror = CodeMirror.fromTextArea(document.getElementById("editor"), {
+          mode: "css",
+          theme: "ambiance",
+          lineNumbers: true,
+          matchBrackets: true,
+          autoCloseBrackets: true,
+          styleActiveLine: true,
+        });
+
+        codemirror.on("change", function (codemirror, change) {
+          var input = codemirror.getValue();
+          input = input.replace(/([^\r\n,{}]+)(,(?=[^}\/]*{)|\s*{)/g, "#blog-body $1$2"); // https://stackoverflow.com/a/12578281/3472393
+          input = input.replace(/#blog-body\s+(html|body)/g, "$1"); // restore body/html selectors
+          input = input.replace(/#blog-body\s+(@(-.+-)?keyframes|to|from)/g, "$1"); // restore @keyframe rules
+          $("#dev-style").html(input);
+        });
+      });
+      </script>
+
+
+    </section>
+
+    <!-- `span` and not `a` to avoid accidental styling in Firefox  -->
+
+
+  </section>
+
+  <div id="side-resizer"></div>
+
+  <div id="lightbox">
+    <div id="lightbox-wrap">
+      <pre id="generatedcode" style="display:none"></pre>
+      <pre id="generatedcode-shown" class="prettyprint linenums"></pre>
+      <span class="linkbutton" id="copycode" data-clipboard-target="generatedcode">Copy Code to Clipboard</span>
+    </div>
+  </div>
+</aside>
+
+<div id="blog-body"><div id="navigation_box">
+	<div id="left_navigation_box">
+		<a href="#">Community</a> » <a href="#">Blogs</a> » <a href="#">Your Blog</a>
+
+	</div>
+	<div id="right_navigation_box">
+		<a href="#">Blog Control Panel</a>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="wrapper">
+
+	<div id="header">
+		<h1>Your Blog</h1>
+	</div>
+	<div id="content">
+		<div id="main">
+
+				<p id="post-new-entry-p"><img id="post-new-entry-img" src="images/bs_edit.gif"><a href="#" id="post-new-entry">Post New Entry</a></p>
+
+				<div id="b47545" class="">
+					<div class="entry">
+
+						<h1><a href="#">Entry Title</a></h1>
+						<h2><a href="#"><img src="images/icon_post_target.gif" alt="Permanent Link"></a>by <strong><a href="#">Username</a></strong>, Yesterday, 12:48 am </h2>
+						<div class="entrywrap">
+							<div class="message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eu nunc arcu. Pellentesque id ligula lectus. Suspendisse id orci odio. Phasellus mauris lacus, dignissim ac hendrerit vel, rutrum vel mi. Aliquam erat volutpat. Maecenas porttitor mi sollicitudin metus elementum in ultricies lorem dictum. Vestibulum eu nulla nulla, at eleifend mauris. Aenean gravida, dui sed ultricies elementum, nulla enim tincidunt ante, eu suscipit tortor tellus eget nisi. Nulla consectetur mauris in nulla varius vel aliquet lorem vehicula. Ut justo nisl, tincidunt condimentum imperdiet in, vulputate ac mi. Nullam in nisi augue, vel rhoncus ligula. </div>
+
+							<div class="efooter">
+								<div class="actions">
+
+									<ul>
+										<li><a class="post-replies">4 comments</a></li>
+										<li><a class="post-comment">Click to comment</a></li>
+									</ul>
+								</div>
+								<div class="modactions">
+									<ul>
+										<li><a title="Delete post"><span>Delete post</span></a></li>
+
+									</ul>
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<div id="b47484" class="">
+					<div class="entry">
+						<h1><a href="#">Entry 2</a></h1>
+
+						<h2><a href="#"><img src="images/icon_post_target.gif" alt="Permanent Link"></a>by <strong><a href="#">Username</a></strong>, February 3, 2014, 11:28 pm </h2>
+						<div class="entrywrap">
+							<div class="message">Message 2.</div>
+
+							<div class="efooter">
+								<div class="actions">
+									<ul>
+										<li><a class="post-replies">No comments</a></li>
+
+										<li><a class="post-comment">Click to comment</a></li>
+									</ul>
+								</div>
+								<div class="modactions">
+									<ul>
+										<li><a title="Edit post"><span>Edit post</span></a></li><li><a title="Delete post"><span>Delete post</span></a></li>
+									</ul>
+
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				1337 blog entries  • Page <strong>1</strong> of <strong>42</strong> • <span><strong>1</strong><span class="page-sep">, </span><a href="#">2</a><span class="page-sep">, </span><a href="#">3</a><span class="page-sep">, </span><a href="#">4</a><span class="page-sep">, </span><a href="#">5</a> ... <a href="#">42</a></span>
+
+		</div>
+
+		<div id="side">
+
+
+<div id="user-menu-widget" class="block user_menu">
+	<div style="text-align:center">
+		<p>Blog Description</p>
+
+		<p class="avatar"><img src="images/avatar-blank.jpg" alt="USER_AVATAR" height="80" width="80"></p>
+
+		<strong><a href="#">Username</a></strong>
+	</div>
+</div>
+
+
+
+
+<script type="text/javascript">
+// <![CDATA[
+function toggle_month(month)
+{
+	thisMonth = document.getElementById('month_' + month);
+	thisImg = document.getElementById('month_image_' + month);
+
+	if (thisMonth && thisImg)
+	{
+		if (thisMonth.style.display == "none")
+		{
+			thisMonth.style.display = "block";
+			thisImg.src = "http://www.artofproblemsolving.com/Forum/blog/styles/hyperion/images/minus.gif";
+			thisImg.alt = '-';
+		}
+		else
+		{
+			thisMonth.style.display = "none";
+			thisImg.src = "http://www.artofproblemsolving.com/Forum/blog/styles/hyperion/images/plus.gif";
+			thisImg.alt = '+';
+		}
+	}
+}
+// ]]>
+</script>
+
+
+
+<div id="archive-widget" class="widget">
+<div class="widget-header">
+
+	<div class="widget-collapse"></div>
+	<div class="widget-config"></div>
+	<div class="widget-title">Archives</div>
+</div>
+<div class="widget-settings"></div>
+<div class="widget-conent widget-content">
+
+		<span onclick="toggle_month(0);" style="cursor: pointer;"><strong><img id="month_image_0" src="http://www.artofproblemsolving.com/Forum/blog/styles/hyperion/images/minus.gif" alt="-"> February 2011</strong></span>
+
+		<div id="month_0">
+
+				<div class="archive-row">
+					<a href="#">Entry Title</a>
+				</div>
+
+				<div class="archive-row">
+					<a href="#">Entry 2</a>
+				</div>
+
+		</div>
+		<br>
+
+		<span onclick="toggle_month(1);" style="cursor: pointer;"><strong><img id="month_image_1" src="http://www.artofproblemsolving.com/Forum/blog/styles/hyperion/images/plus.gif" alt="+"> January 2011</strong></span>
+
+		<div id="month_1" style="display: none;">
+
+				<div class="archive-row">
+					<a href="#">Another Entry</a>
+				</div>
+
+		</div>
+		<br>
+
+</div>
+
+<div class="widget-footer">
+</div>
+</div>
+
+<div id="shouts-widget" class="widget">
+<div class="widget-header">
+	<div class="widget-collapse"></div>
+	<div class="widget-config"></div>
+	<div class="widget-title">Shouts</div>
+</div>
+
+<div class="widget-settings"></div>
+<div class="widget-conent widget-content">
+	<form id="shout_post" name="shout_post">
+
+		<fieldset>
+			<ul>
+
+				<li class="row1">
+					<p>Shout!</p>
+					<p class="shout_footer">
+
+
+						<input id="del_shout_31794" value="31794" name="shouts_ids[]" type="checkbox">
+						<label for="del_shout_31794">
+
+						By <a href="#">Username</a>, Today, 8:55 pm
+
+						</label>
+
+					</p>
+				</li>
+
+				<li class="row2">
+					<p>Shout!</p>
+
+					<p class="shout_footer">
+
+						<input id="del_shout_31704" value="31704" name="shouts_ids[]" type="checkbox">
+						<label for="del_shout_31704">
+
+						By <a href="#">Username</a>, Feb 15, 2011, 5:02 pm
+
+						</label>
+
+					</p>
+				</li>
+
+				<li class="row1">
+
+					<p>Shout!</p>
+					<p class="shout_footer">
+
+						<input id="del_shout_31616" value="31616" name="shouts_ids[]" type="checkbox">
+						<label for="del_shout_31616">
+
+						By <a href="#">Username</a>, Feb 11, 2011, 11:11 pm
+
+						</label>
+
+					</p>
+				</li>
+
+
+				<li class="row2">
+					<p>Shout!</p>
+					<p class="shout_footer">
+
+						<input id="del_shout_31595" value="31595" name="shouts_ids[]" type="checkbox">
+						<label for="del_shout_31595">
+
+						By <a href="#">Username</a>, Feb 11, 2011, 8:50 am
+
+						</label>
+
+					</p>
+
+				</li>
+
+				<li class="row1">
+					<p>Shout!</p>
+					<p class="shout_footer">
+
+						<input id="del_shout_30860" value="30860" name="shouts_ids[]" type="checkbox">
+						<label for="del_shout_30860">
+
+						By <a href="#">Username</a>, Jan 11, 2011, 9:01 am
+
+						</label>
+
+
+					</p>
+				</li>
+
+				<li class="row2">
+					<p>Shout!</p>
+					<p class="shout_footer">
+
+						<input id="del_shout_30656" value="30656" name="shouts_ids[]" type="checkbox">
+						<label for="del_shout_30656">
+
+						By <a href="#">Username</a>, Jan 03, 2011, 9:58 pm
+
+						</label>
+
+
+					</p>
+				</li>
+
+				<li class="row1">
+					<p>Shout!</p>
+					<p class="shout_footer">
+
+						<input id="del_shout_30640" value="30640" name="shouts_ids[]" type="checkbox">
+						<label for="del_shout_30640">
+
+						By <a href="#">Username</a>, Jan 03, 2011, 5:50 pm
+
+						</label>
+
+
+					</p>
+				</li>
+
+			</ul>
+		</fieldset>
+
+		1337 Shouts
+		<fieldset>
+			<div style="text-align:center;">
+				Go to page<br>
+				<strong>1</strong><span class="page-sep">, </span><a href="#">2</a><span class="page-sep">, </span><a href="#">3</a><span class="page-sep">, </span><a href="#">4</a><span class="page-sep">, </span><a href="#">5</a> ... <a href="#">42</a>
+
+			</div>
+		</fieldset>
+
+		Delete
+		<fieldset style="text-align:center">
+			<input id="delete_selected_shouts" class="button2" name="delete_selected_shouts" value="Selected shouts" type="submit">
+			<input id="delete_all_shouts" name="delete_all_shouts" value="All shouts" onclick="return confirm('Click OK to delete all shouts. This can not be undone!');" type="submit">
+		</fieldset>
+
+			Shout
+			<fieldset class="fields1">
+
+
+						<a href="#" onclick="insert_text(':D', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/icon_mrgreen.gif" alt=":D" title="Mr. Green" height="19" width="19"></a>
+
+						<a href="#" onclick="insert_text(':lol:', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/biggrin.gif" alt=":lol:" title="Very Happy" height="20" width="20"></a>
+
+						<a href="#" onclick="insert_text(':blush:', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/redface_anim.gif" alt=":blush:" title="Blush" height="19" width="19"></a>
+
+						<a href="#" onclick="insert_text(':maybe:', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/unsure.gif" alt=":maybe:" title="maybe" height="20" width="20"></a>
+
+						<a href="#" onclick="insert_text(':)', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/smile.gif" alt=":)" title="Smile" height="20" width="20"></a>
+
+						<a href="#" onclick="insert_text(':(', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/sad.gif" alt=":(" title="Sad" height="20" width="20"></a>
+
+						<a href="#" onclick="insert_text(':o', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/ohmy.gif" alt=":o" title="Shocked" height="20" width="20"></a>
+
+						<a href="#" onclick="insert_text(':mad:', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/mad.gif" alt=":mad:" title="Mad" height="20" width="20"></a>
+
+						<a href="#" onclick="insert_text(':P', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/tongue.gif" alt=":P" title="Razz" height="20" width="20"></a>
+
+
+						<a href="#" onclick="insert_text(':oops:', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/blush.gif" alt=":oops:" title="Embarassed" height="20" width="20"></a>
+
+						<a href="#" onclick="insert_text(':roll:', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/rolleyes.gif" alt=":roll:" title="Rolling Eyes" height="20" width="20"></a>
+
+						<a href="#" onclick="insert_text(':wink:', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/wink.gif" alt=":wink:" title="Wink" height="20" width="20"></a>
+
+						<a href="#" onclick="insert_text(':!:', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/exclaim.gif" alt=":!:" title="Exclamation" height="19" width="19"></a>
+
+
+				<div id="message-box">
+					<textarea id="message" class="inputbox" onkeydown="textarea_limit(this, 256, '#explain');" onkeyup="storeCaret(this);" onclick="storeCaret(this);" onselect="storeCaret(this)" cols="10" rows="6" name="message"></textarea>
+					<div id="explain"></div>
+				</div>
+
+			</fieldset>
+			<fieldset class="submit-buttons">
+				<input id="shoutbox_submit" name="submit_shout" value="Submit" type="submit">
+				<input id="shoutbox_reset" name="reset_shout" value="Reset" type="reset">
+			</fieldset>
+
+		</form>
+</div>
+<div class="widget-footer">
+</div>
+
+</div><div id="contrib-widget" class="widget">
+<div class="widget-header">
+	<div class="widget-collapse"></div>
+	<div class="widget-config"></div>
+	<div class="widget-title">Contributors</div>
+</div>
+<div class="widget-settings"></div>
+<div class="widget-conent widget-content">
+
+		<a href="#">Contrib 1</a> •
+		<a href="#">Contrib 2</a> •
+		<a href="#">Contrib 42</a>
+</div>
+<div class="widget-footer">
+</div>
+</div><div id="categories-widget" class="widget">
+<div class="widget-header">
+	<div class="widget-collapse"></div>
+
+	<div class="widget-config"></div>
+	<div class="widget-title">Categories</div>
+</div>
+<div class="widget-settings"></div>
+<div class="widget-conent widget-content">
+	<ul class="cats">
+
+		<li id="li_cat_391">
+			<a href="#">Category 1</a>
+
+
+			[ 8 ]
+
+		</li>
+
+		<li id="li_cat_563">
+			<a href="#">Category 2</a>
+
+			[ 8 ]
+
+		</li>
+
+	</ul>
+</div>
+<div class="widget-footer">
+</div>
+</div><div id="tags-widget" class="widget">
+<div class="widget-header">
+	<div class="widget-collapse"></div>
+	<div class="widget-config"></div>
+	<div class="widget-title">Tags</div>
+
+</div>
+<div class="widget-settings"></div>
+<div class="widget-conent widget-content">
+
+		<a style="font-size: 9px;">Tag 1</a> •
+		<a style="font-size: 9px;">Tag 2</a>
+
+</div>
+
+<div class="widget-footer">
+</div>
+</div>
+
+<div id="custom-block-widget" class="block widget">
+	<div class="widget-header">
+		<div class="widget-collapse"></div>
+		<div class="widget-config"></div>
+		<div class="widget-title">What is this blog?</div>
+
+	</div>
+	<div class="widget-settings"></div>
+	<div class="widget-content">
+		<div id="custom_block_cb37836">
+		<!-- CUSTOM -->This blog will be used mainly for testing of my blog styles, and to post useless content that nobody will read. In fact, you are probably one of the few who will read this custom block.
+		</div>
+	</div>
+	<div class="widget-footer">
+	</div>
+
+</div>
+
+
+
+<div id="about-owner-widget" class="block widget">
+<div class="widget-header">
+	<div class="widget-collapse"></div>
+	<div class="widget-config"></div>
+	<div class="widget-title">About Owner</div>
+</div>
+
+<div class="widget-settings"></div>
+<div class="widget-content">
+	<ul style="padding-bottom:0;margin-bottom:0;">
+		<li style="padding-bottom:3px;"><strong>Posts:</strong> 1337</li><li style="padding-bottom:3px;"><strong>Joined:</strong> Apr 20, 1337, 10:21 pm</li><li style="padding-bottom:3px;"><strong>Location:</strong> Somewhere</li>
+
+	</ul>
+</div>
+<div class="widget-footer">
+</div>
+</div>
+
+
+
+
+<div id="stats-widget" class="block widget">
+	<div class="widget-header">
+		<div class="widget-collapse"></div>
+		<div class="widget-config"></div>
+
+		<div class="widget-title">Blog Stats</div>
+	</div>
+	<div class="widget-settings"></div>
+	<div class="widget-content">
+		<ul style="padding-bottom:0;margin-bottom:0;">
+
+				<li style="padding-bottom: 3px;">
+					<strong>Blog created</strong>: 01 Jan 1337
+				</li>
+
+
+				<li style="padding-bottom: 3px;">
+					<strong>Total entries</strong>: 1337
+				</li>
+
+				<li style="padding-bottom: 3px;">
+					<strong>Total visits</strong>: 9999999
+				</li>
+
+				<li style="padding-bottom: 3px;">
+					<strong>Total comments</strong>: 4200
+				</li>
+
+
+		</ul>
+	</div>
+	<div class="widget-footer">
+	</div>
+</div>
+
+<div class="block widget">
+	<div class="widget-header">
+		<div class="widget-collapse"></div>
+
+		<div class="widget-config"></div>
+		<div class="widget-title">Search Blogs</div>
+	</div>
+	<div class="widget-settings"></div>
+	<div class="widget-content">
+		<form id="blog_searchform">
+			<fieldset>
+				<input name="keywords" id="blog_keywords" maxlength="128" title="Search for keywords" class="inputbox search" value="Search" type="text">
+
+				<div style="text-align:right;margin-top:3px"><input class="button2" value="Search" type="submit"></div>
+
+			</fieldset>
+		</form>
+		<div style="padding: 2px;"><a title="View the advanced search options">Advanced search</a></div>
+	</div>
+	<div class="widget-footer">
+	</div>
+</div>
+
+<div id="feed-widget" class="block widget">
+	<div class="widget-header">
+		<div class="widget-collapse"></div>
+		<div class="widget-config"></div>
+		<div class="widget-title">RSS Feed</div>
+	</div>
+	<div class="widget-settings"></div>
+	<div class="widget-content">
+
+		<a class="subscribe"><img src="http://www.artofproblemsolving.com/Forum/blog/styles/hyperion/images//rss.gif" alt="Feed"></a>
+	</div>
+	<div class="widget-footer">
+	</div>
+</div>
+
+
+
+
+		</div>
+		<div class="clear"></div>
+
+	</div>
+
+
+	<div id="footer">
+	</div>
+</div>
+</div>
+
+</main>
+
+
+</body></html>
