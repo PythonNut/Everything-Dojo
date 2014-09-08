@@ -643,7 +643,7 @@ function themizerRegular () {
             var id   = $(this).attr("id").split(/-/),
                 el   = id[1].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("class_", ".").replace("id_", "#"),
                 prop = id[2].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase();
-            $(this).prev(".text").val(color);
+            $(this).prevAll(".text").val(color);
             $(el).css(prop, color);
 
             // update styles
@@ -653,12 +653,11 @@ function themizerRegular () {
   // Set color picker to corresponding text input's value when user types
   $(".spectrum.text").keyup(function () {
     var color  = $(this).val(),
-        picker = $(this).next(".color-picker"),
         id     = $(this).attr("id").split(/-/),
         el     = id[1].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("class_", ".").replace("id_", "#"),
         prop   = id[2].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase();
     $(el).css(prop, color);
-    $(picker).spectrum("set", color);
+    $(this).nextAll(".color-picker").spectrum("set", color);
 
     // update styles
     styles[id[1] + "-" + id[2]] = color;

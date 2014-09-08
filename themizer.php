@@ -38,35 +38,34 @@
   <section id="sidebar-inner">
     <section id="sidebar-inner-scrollable">
 
-      <section class="option" id="option-view">
+      <section class="option" id="option-options">
         <section class="option-title">
-          <h5>Blog Page</h5>
+          <h5>Options</h5>
           <span class="collapsebutton"></span>
         </section>
         <section class="option-wrap">
-          <select name="view">
-            <option value="index">Index</option>
-            <option value="blog">Post</option>
-            <option value="post">Post New Entry</option>
-            <option value="comment">Post New Comment</option>
-          </select>
+          <span class="title">Blog page</span>
+          <p>
+            <select name="view">
+              <option value="index">Index</option>
+              <option value="blog">Post</option>
+              <option value="post">Post New Entry</option>
+              <option value="comment">Post New Comment</option>
+            </select>
+          </p>
+          <?php if ($_GET["mode"] == "regular"): ?>
+          <span class="title">Base theme</span>
+          <p>
+            <select name="base">
+              <option value="core">Core by Dojo</option>
+              <option value="calm">Calm by Red</option>
+            </select>
+          </p>
+          <?php endif; ?>
         </section>
       </section>
 
       <?php if ($_GET["mode"] == "regular"): ?>
-
-      <section class="option" id="option-base">
-        <section class="option-title">
-          <h5>Base Theme</h5>
-          <span class="collapsebutton"></span>
-        </section>
-        <section class="option-wrap">
-          <select name="base">
-            <option value="core">Core by Dojo</option>
-            <option value="calm">Calm by Red</option>
-          </select>
-        </section>
-      </section>
 
       <section class="option" id="option-body">
         <section class="option-title expanded">
