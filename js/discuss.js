@@ -75,7 +75,7 @@ $(document).ready(function() {
 
   // make form submit on ctrl+enter/cmd+enter
   $("[name='desc']").keydown(function (e) {
-    if ((e.keyCode == 10 || e.keyCode == 13) && (e.ctrlKey || e.keyCode == 224 || e.keyCode == 17 || e.keyCode == 91)) {
+    if ((e.keyCode == 10 || e.keyCode == 13) && (e.ctrlKey || e.keyCode == 224 || e.keyCode == 17 || e.keyCode == 91) && !$("#post").is("[disabled]")) {
       $(this).parents("#form").trigger("submit");
     }
   });
