@@ -165,7 +165,7 @@ This is an automated response. Do not reply to this email.";
       echo recaptcha_get_html($publickey);
     ?>
     </div>
-    <input name="doRegister" type="submit" id="doRegister" value="Register">
+    <input name="doRegister" type="submit" id="doRegister" value="Register" disabled>
   </form>
   <?php } //end not done ?>
 </section>
