@@ -16,8 +16,8 @@ class notification{
     return $count;
   }
 
-  function get_notifications($user_id){
-    $query = "SELECT * FROM `notifications` WHERE `user_id` = :user_id ORDER BY `timestamp` DESC LIMIT 5";
+  function get_notifications($user_id, $limit=5){
+    $query = "SELECT * FROM `notifications` WHERE `user_id` = :user_id ORDER BY `timestamp` DESC LIMIT $limit";
     $sth = $this->dbc->prepare($query);
     $sth->execute(array(
       ':user_id'  => $user_id
