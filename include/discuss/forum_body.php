@@ -43,7 +43,7 @@
   ?>
   <fieldset id="topic-create-topic">
   <legend>Add new topic</legend>
-  <form action="include/discuss-handler.php" method="post" id="form">
+  <form action="discuss.php" method="post" id="form">
     <div class="field">
       Title: <input type="text" name="title" value="" /><br/>
     </div>

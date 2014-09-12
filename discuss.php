@@ -21,6 +21,37 @@
   else{
     $view = $_GET['view'];
   }
+
+  $mode = $_POST['mode'];
+  $_SESSION['mode'] = $mode;
+  switch($mode){
+    case 'post':
+      $data = $_POST;
+      $data['t'] = $_POST['t'];
+      $result = $discuss->insert_post($_POST['forum'], $_SESSION['user_id'], $data);
+      $f = $result['f'];
+      $t = $result['t'];
+
+      if (empty($result['err'])) {
+        header('Location: ' . SITE_ROOT . URL_DISCUSS . '?view=topic&f=' . $f . '&t=' . $t . '#last');
+      } else {
+        header('Location: ' . SITE_ROOT . URL_DISCUSS . '?view=topic&f=' . $f . '&t=' . $t . '#form');
+      }
+      break;
+    case 'topic':
+      $data = $_POST;
+      $result = $discuss->insert_topic($_POST['forum'], $_SESSION['user_id'], $data);
+      $f = $result['f'];
+      $t = $result['t'];
+      $_SESSION['err'] = $result['err'];
+
+      if (empty($result['err'])) {
+        header('Location: ' . SITE_ROOT . URL_DISCUSS . '?view=topic&f=' . $f . '&t=' . $t);
+      } else {
+        header('Location: ' . SITE_ROOT . URL_DISCUSS . '?view=topic&f=' . $f . '#form');
+      }
+      break;
+  }
 ?>
 <section id="content">
   <div id="notifications">
@@ -65,16 +96,16 @@
       </div>
     </div>
   </div>
-        <div id="navigation">
-          <nav class="discuss-nav">
-            <ul>
-              <li><a href="/" id="nav-home">EvDo Home</a></li>
-            <?php if(isset($_SESSION['user_id'])) { ?>
-              <li><a href="javascript:;" class="notification-link" onClick="show_notifications()">Notifications (<?php echo $unread_count; ?>)</a></li>
-            <?php } ?>
-            </ul>
-          </nav>
-        </div>
+  <div id="navigation">
+    <nav class="discuss-nav">
+      <ul>
+        <li><a href="/" id="nav-home">EvDo Home</a></li>
+      <?php if(isset($_SESSION['user_id'])) { ?>
+        <li><a href="javascript:;" class="notification-link" onClick="show_notifications()">Notifications (<?php echo $unread_count; ?>)</a></li>
+      <?php } ?>
+      </ul>
+    </nav>
+  </div>
   <?php if (!empty($_SESSION['user_id'])){ ?>
   <h3>Welcome, <?php echo get_user($_SESSION['user_id']);?>!</h3>
   <br/>
