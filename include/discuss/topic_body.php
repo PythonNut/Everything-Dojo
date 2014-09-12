@@ -46,7 +46,7 @@
   <?php if (!empty($posts)){?>
     <?php $thankedposts = [];
     foreach ($posts as $post){ ?>
-      <div class="topic-reply">
+      <div class="topic-reply" id="<?php print $post == end($posts) ? 'last' : $post['post_id']; ?>">
         <div class="topic-reply-text">
           <?php $user = get_all_user($post['user_id']);?>
           <div class="topic-reply-top">
@@ -113,7 +113,7 @@
 <a id="topic-a-comment">+ Add a comment</a>
 <fieldset id="topic-create-comment">
 <legend>Add new comment</legend>
-<form action="include/discuss-handler.php" method="post" id="form">
+<form action="discuss.php" method="post" id="form">
   <div class="field" style="display:none">
     Title: <input type="text" name="title" value="RE: <?php echo $topic['title'];?>" /><br/>
   </div>
@@ -145,4 +145,7 @@
 <?php } else{
   echo "<h1 style='text-align:center;'>Topic Not Found</h1>";
   echo "<p style='text-align:center;'>The topic you were looking for is not found. Don't worry, though; Try going <a href='discuss.php'>back to Discuss home page</a> or try our other services!</p>";
-}?>
+}
+
+//unset($_SESSION['mode']);
+?>
