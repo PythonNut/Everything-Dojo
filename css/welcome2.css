@@ -201,6 +201,12 @@ i, em { font-style: italic }
   text-transform: uppercase;
 }
 
+.huge {
+  font-size: 200px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
 .evdo-link {
   color: #551A8B;
 }
@@ -225,13 +231,15 @@ i, em { font-style: italic }
   color: #2A9BD9;
 }
 
-/* The overview shows the EvDo logo with everything behind it blurred. */
+/* The overview shows the EvDo logo */
 #overview img {
+  display: none;
   opacity: 0;
   transition: opacity 1s ease 2s;
 }
 
 #overview.active img {
+  display: block;
   opacity: 1;
 }
 
