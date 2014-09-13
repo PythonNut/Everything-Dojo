@@ -1,28 +1,21 @@
 @charset "UTF-8";
-/* CSS Document */
 
-[type="text"],
-textarea {
+[type="text"], textarea {
   resize: vertical;
   width: 100%;
 }
-
 #cancel {
   float: left;
 }
-
 #post {
   float: right;
 }
-
 .note {
   left: auto;
   right: -0.5rem;
 }
 
-/**
- * Announcements
- */
+/*--ANNOUNCEMENTS--*/
 
 #announcements h3 {
   text-align: center;
@@ -61,7 +54,6 @@ textarea {
 .discuss-round ~ .discuss-round {
   float: right;
 }
-
 .discuss-round span {
   position: absolute;
   top: 50%;
@@ -120,9 +112,7 @@ textarea {
   top: 51%; /* same */
 }
 
-/**
- * Forum layout
- */
+/*--FORUM LAYOUT--*/
 
 #fora {
   position: absolute;
@@ -194,9 +184,8 @@ textarea {
   margin-right: auto;
 }
 
-/**
- * Forums
- */
+/*--FORUMS--*/
+
 #navigation {
   position: absolute;
   right: 0;
@@ -298,13 +287,11 @@ td.tiny-col {
   padding: 0 1.5em;
   padding-bottom: 1em;
 }
-
 .topic-reply-text > pre[class*="language-"] {
   width: 90%;
   padding: 1em;
   margin: 0.5em auto;
 }
-
 .topic-reply-text > pre,
 .topic-reply-text > p code{
   background-color: #272822;
@@ -315,7 +302,6 @@ td.tiny-col {
   margin: 0.5em auto;
   border-radius: 0.3em;
 }
-
 .topic-reply-text > p code {
   width: auto;
   padding: 0.2em 0.2em 0.1em !important;
