@@ -23,7 +23,6 @@
   -ms-user-select: none;
   user-select: none;
 }
-
 #sidebar-inner {
   position: relative;
   width: 35vh;
@@ -33,7 +32,6 @@
   padding-top: 4.32em;
   padding-bottom: 4.2em;
 }
-
 #sidebar-inner-scrollable {
   height: 100%;
   box-sizing: border-box;
@@ -42,6 +40,7 @@
 }
 
 /*--GENERAL--*/
+
 #sidebar input,
 #sidebar select,
 #sidebar option {
@@ -53,28 +52,23 @@
   border: none;
   outline: none;
 }
-
 .text {
   height: 1.7em;
   padding: 0.1em 0.2em;
 }
-
 .title {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
   font-weight: 400;
   white-space: pre;
 }
-
 .label {
   color: #ccc;
   font-size: 0.9em;
 }
-
 .optional::after {
   content: " (Optional)";
   font-size: 0.62em;
 }
-
 .linkbutton {
   display: block;
   color: #48a730;
@@ -99,6 +93,7 @@
 }
 
 /*--HEADER--*/
+
 #sideheadbar {
   position: absolute;
   display: block;
@@ -113,7 +108,6 @@
   margin-bottom: 0.5em;
   z-index: 100;
 }
-
 #sideheadbar::after {
   content: "";
   position: absolute;
@@ -124,11 +118,11 @@
   pointer-events: none;
   z-index: 100;
 }
-
 .opened #sideheadbar::after { right: -2vh; }
 .closed #sideheadbar::after { left: 0; }
 
 /*--RESIZER--*/
+
 #side-resizer {
   position: absolute;
   top: 0;
@@ -138,10 +132,10 @@
   cursor: e-resize;
   pointer-events: all;
 }
-
 .closed #side-resizer { pointer-events: none; }
 
 /*--LIGHTBOX--*/
+
 #lightbox {
   position: fixed; /* keeps the lightbox window in the current viewport */
   top: 0;
@@ -154,7 +148,6 @@
   font-size: 16px;
   z-index: 200; /* to beat the #sidebar! */
 }
-
 #lightbox-wrap {
   background: #ddd;
   width: 65%;
@@ -163,7 +156,6 @@
   box-shadow: 0 0 25px #111;
   padding: 2em;
 }
-
 #lightbox-wrap pre {
   overflow: auto;
   height: 70%;
@@ -176,11 +168,11 @@
 }
 
 /*--SLIDE BUTTONS--*/
+
 .slideButton {
   position: absolute;
   cursor: pointer;
 }
-
 #side-button {
   width: 2vh;
   height: 100%;
@@ -200,7 +192,6 @@
   border-radius: 0 0.3em 0.3em 0;
   background: #101010;
 }
-
 #side-button.targeted {
   top: 0;
   height: 100vh;
@@ -213,6 +204,7 @@
 }
 
 /*--OPTION SLIDES--*/
+
 .option {
   border: 3px solid #444;
   margin: 0 10px;
@@ -283,6 +275,7 @@
 }
 
 /*--INPUTS--*/
+
 .radio,
 .checkbox {
   position: absolute;
@@ -331,7 +324,6 @@
   padding-right: 3.6em;
   box-sizing: border-box;
 }
-
 .random-color {
   position: absolute;
   top: 0.1em;
@@ -346,7 +338,6 @@
   background-position: center;
   cursor: pointer;
 }
-
 .sp-replacer,
 .sp-preview,
 .sp-container {
@@ -354,13 +345,11 @@
   border: 0 !important;
   margin: 0 !important;
 }
-
 .sp-preview,
 .sp-alpha,
 .sp-thumb-el {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gcZAggl+4iZ2wAAACRJREFUGNNjnDlzJgMq2LNnD5oIEwMRYDAqYsH0i4uLy3DxHQBdFQcZw8RJyQAAAABJRU5ErkJggg==') !important;
 }
-
 .sp-replacer {
   position: absolute;
   top: 0;
@@ -372,54 +361,44 @@
   vertical-align: top !important;
   margin-left: -2% !important;
 }
-
 .sp-preview {
   width: 100% !important;
   height: 1.7em !important;
 }
-
 .sp-dd {
    display: none;
 }
-
 .sp-container {
   position: fixed !important;
   background: #222 !important;
   box-shadow: 0 0 3px 2px #222;
 }
-
 .sp-picker-container {
    border-left: none !important;
 }
-
 .sp-alpha {
    background-size: contain;
 }
-
 .sp-alpha-inner {
   background-image: -webkit-linear-gradient(left, transparent, black) !important;
   background-image: linear-gradient(to right, transparent, black) !important;
 }
 
 /*--MISCELLANEOUS CLASSES--*/
+
 #sidebar p,
 #sidebar section[data-name] {
   position: relative;
   margin-top: 0.3em;
   margin-bottom: 0.6em;
 }
-
 #sidebar i,
 #sidebar .i {
   font-family: AmbleItalic, sans-serif;
 }
-
 #sidebar code { font-family: Monaco, "Courier New", Courier, monospace; }
-
 #sidebar .small { font-size: 0.65em; }
-
 #sidebar .clear { clear: both; }
-
 #sidebar .inline { display: inline; }
 
 /* Validate inputs */
@@ -428,9 +407,7 @@
 #sidebar :invalid {
   box-shadow: none; /* Prevent Firefox from automatically applying box-shadow to invalid inputs */
 }
-
 #sidebar .invalid { background: #a00 !important; }
-
 #sidebar .invalid-msg {
   color: #c00;
   font-size: 0.8em;
@@ -439,6 +416,7 @@
 }
 
 /*--SCROLLBARS--*/
+
 #sidebar ::-webkit-scrollbar {
   width: 0.4em;
   height: 0.5em;
