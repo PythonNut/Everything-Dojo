@@ -1,10 +1,8 @@
 @charset "utf-8";
-/* CSS Document */
 
 h2.view-header {
   margin-top: 3vh;
 }
-
 #tile-container {
   height: 34vh;
   width: 64vw;
@@ -12,11 +10,9 @@ h2.view-header {
   margin-left: auto;
   margin-right: auto;
 }
-
 a.database-link {
   color: white;
 }
-
 div.mcp-link {
   margin-left: auto;
   margin-right: auto;
@@ -29,29 +25,24 @@ a.mcp-link:link {
   font-family: 'lato';
   font-size: 1.5rem;
 }
-
 #navigation {
   position: absolute;
   right: 0;
   width: 40vw;
   height: auto;
 }
-
 .db-nav {
   padding: 0;
   position: absolute;
   height: auto;
 }
-
 .db-nav ul li a {
   font-size: 1.2rem;
 }
-
 .db-nav ul li a {
   line-height: normal;
   padding-top: 0;
 }
-
 .db-tile {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
   float: left;
@@ -61,66 +52,44 @@ a.mcp-link:link {
   color: white;
   vertical-align: middle;
 }
-
 .db-tile-large {
   width: 31vw;
 }
-
 .db-tile:hover {
   background-color: #8c1883;
 }
-
 .db-tile-title {
   text-transform: uppercase;
   font-size: 2.5em;
 }
-
 .db-tile-inner {
   margin-top: 5.5vh;
   margin-left: 3%;
   margin-right: 3%;
 }
-
 .col {
   width: 18vw;
   float: left;
 }
-
-#col2,
-#col3 {
-  margin-left: 2vw;
-}
-
-#col3 {
-  clear: right;
-}
-
-#fields {
-  float: left;
-}
-
+#col2, #col3 { margin-left: 2vw; }
+#col3 { clear: right; }
+#fields { float: left; }
 [type="radio"],
 [type="checkbox"] {
   width: auto;
   margin-right: 3px;
 }
-
-label {
-  display: inline;
-}
-
+label { display: inline; }
 textarea#description {
   width: 65vw;
   height: 10vh;
   font-family: Amble, HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-
 textarea#css {
   width: 65vw;
   height: 30vh;
   font-family: "Courier New", Courier, monospace;
 }
-
 #popup-box {
   background-color: #a91c9e;
   width: 50vw;
@@ -133,11 +102,7 @@ textarea#css {
   padding: 2vh 2vw;
   box-shadow: 0px 0px 10px #333;
 }
-
-#popup-box h2 {
-  color: white;
-}
-
+#popup-box h2 { color: white; }
 #popup-wrapper {
   background-color: white;
   height: 40vh;
@@ -149,67 +114,54 @@ textarea#css {
   overflow-x: hidden;
   padding: 0;
 }
-
 #popup-inner {
   background-color: white;
   width: 100%;
   margin: 0;
 }
-
 #popup-form {
   margin: 15vh auto auto auto;
   text-align: center;
 }
-
 #popup-form [type=submit] {
   margin-left: auto;
   margin-right: auto;
 }
-
 div.code {
   font-size: 12px;
   height: 45vh;
   overflow: auto;
 }
-
 .img-edit {
   height: 15px;
   width: 15px;
 }
-
 .manage-table {
   width: 100%;
   margin: 1vh 0 0 0;
 }
-
 .style:hover {
   cursor: pointer;
 }
-
 .med-col {
   width: 20%;
 }
-
 .small-col {
   width: 15%;
 }
-
 #request,
 #view {
   margin-left: 2vw;
 }
-
 #development {
   float: right;
 }
-
 .manage-item {
   width: 90%;
   margin-bottom: 1vh;
   margin-left: auto;
   margin-right: auto;
 }
-
 .manage-header {
   background-color: #a91c9e;
   height: 2.5vh;
@@ -220,24 +172,19 @@ div.code {
   padding: 1vh 0.5vw 0.9vh;
   border-bottom: 3px #d553cb solid;
 }
-
 .manage-header:hover {
   cursor: pointer;
 }
-
 .manage-header h4 {
   color: white;
   margin-left: 1vw;
 }
-
 .option-wrap {
   display: none; /* eliminate loading delay */
 }
-
 .collapsebutton::before,
-.collapsebutton::after {
-  top: -0.9em;
-}
+.collapsebutton::after { top: -0.9em; }
+
 /* notification placement for database page */
 #notifications {
   top: 19vh;
