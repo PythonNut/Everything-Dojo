@@ -35,3 +35,13 @@
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+    font-family: 'Aller';
+    src: url(../fonts/aller_rg-webfont.eot);
+    src: url(../fonts/aller_rg-webfont.eot?#iefix) format('embedded-opentype'),
+         url(../fonts/aller_rg-webfont.woff) format('woff'),
+         url(../fonts/aller_rg-webfont.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
