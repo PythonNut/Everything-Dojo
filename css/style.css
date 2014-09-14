@@ -70,6 +70,12 @@ input[type="submit"].inline, input[type="button"].inline, input[type="reset"].in
   display: inline; /* because of precedence rules + jquery (preventing use of !important) */
 }
 
+input.danger {
+  background-color: #800;
+
+input.danger:hover {
+  background-color: #600;
+}
 .linkbutton {
   background: transparent;
   display: table;
@@ -94,7 +100,6 @@ textarea {
 
 textarea {
   resize: none;
-  font-family: Arial;
   width: 34.773vw;
   box-sizing: content-box;
 }

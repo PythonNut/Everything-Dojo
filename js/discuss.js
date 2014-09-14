@@ -105,5 +105,3 @@ function mark_all_read(forum_id, user_id) {
   });
 }
 
-$(function () {
-});

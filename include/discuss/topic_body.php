@@ -61,7 +61,7 @@
             <div style="opacity: 0.6; text-decoration: italics; display:inline-block; margin-left: 2em;"><?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div>
             <?php } ?>
           </div>
-          <p><?php echo $post['text'];?></p>
+          <?php echo $post['text'];?>
         </div>
       </div>
     <?php } ?>
@@ -125,12 +125,8 @@
   <input type="hidden" name="forum" value="<?php echo $topic['forum_id'];?>" />
   <input type="hidden" name="mode" value="post">
   <input type="hidden" name="t" value="<?php echo $topic['topic_id'];?>" />
-<<<<<<< HEAD
-  <input type="submit" value="Comment"/>
-=======
   <input type="button" value="Cancel" class="danger" id="cancel" />
   <input type="submit" value="Comment" id="post" disabled />
->>>>>>> 3e96a638080224d9fbef713a467a1d94ae7c601f
 </form>
 </fieldset>
 
@@ -140,12 +136,14 @@
     $("#topic-a-comment").hide();
     $("#topic-create-comment").slideToggle(300);
   });
+  $("#cancel").click(function () {
+    $("#topic-a-comment").show();
+    $("#topic-create-comment").slideToggle(300);
+  });
 </script>
 <?php } ?>
 <?php } else{
   echo "<h1 style='text-align:center;'>Topic Not Found</h1>";
   echo "<p style='text-align:center;'>The topic you were looking for is not found. Don't worry, though; Try going <a href='discuss.php'>back to Discuss home page</a> or try our other services!</p>";
 }
-
-//unset($_SESSION['mode']);
 ?>
