@@ -5,7 +5,7 @@
   }
   else if($id == ''){
     redirect(URL_DISCUSS);
-  } 
+  }
   else{
     if(!isset($_SESSION['user_id'])){
       $user_id = 0;
@@ -15,7 +15,7 @@
     }
     $topics = $discuss->get_topics(intval($id), $user_id);
   }
-  
+
   if ($id == 1){
     $typearg = 1;
   }
@@ -29,7 +29,7 @@
 <section id="discuss-topics" style="clear:left;">
   <h3 style="text-align: center;"><?php echo $forum_data['name']; ?></h3>
   <p style="text-align: center;"><?php echo $forum_data['description']; ?></p>
-  <?php 
+  <?php
   if ($user_id > 0 and intval($id) != 1){
     echo "<a id=\"topic-a-topic\" style=\"left:5%;position:relative\">+ Create New Topic</a><br />";
     if(!empty($_SESSION['err'])){
@@ -58,7 +58,7 @@
     <input type="submit" value="Post" id="post" disabled />
   </form>
   </fieldset>
-  
+
   <script>
     $("#topic-create-topic").hide();
     $("#topic-a-topic").click(function(){
@@ -66,8 +66,8 @@
       $("#topic-create-topic").slideToggle(300);
     });
     $("#cancel").click(function () {
-      $("#topic-a-comment").show();
-      $("#topic-create-comment").slideToggle(300);
+      $("#topic-a-topic").show();
+      $("#topic-create-topic").slideToggle(300);
     });
   </script>
   <?php
@@ -85,7 +85,7 @@
           <td class="med-col center">Author</td>
           <td class="small-col center">Comments</td>
           <td class="small-col center">Viewed By</td>
-          <td class="med-col center">Last Post</td> 
+          <td class="med-col center">Last Post</td>
         <tr>
       </thead>
       <tbody>
@@ -97,8 +97,8 @@
           <td class="center">-</td>
           <td class="center">-</td>
         </tr>
-      <?php } else{ 
-    foreach($topics as $topic){ 
+      <?php } else{
+    foreach($topics as $topic){
       $username = get_user($topic['user_id']);
       $comments = $discuss->get_comment_count($topic['topic_id'], $type);
       if($type == 1){
@@ -111,12 +111,12 @@
           <td class="center"><?php echo $username; ?></td>
           <td class="center"><?php echo $comments; ?></td>
           <td class="center"><?php echo $discuss->get_views($topic['topic_id'], 1 - $typearg); ?></td>
-          <td class="center"><?php $lastpost = $discuss->get_posts(intval($topic['topic_id']), 'all', $typearg); 
-          if (empty($lastpost)){ 
+          <td class="center"><?php $lastpost = $discuss->get_posts(intval($topic['topic_id']), 'all', $typearg);
+          if (empty($lastpost)){
             echo date('M d, Y g:i a', $topic['time'])."<br /><b>".get_user($topic['user_id'])."</b>";
-          } 
-          else{ 
-            echo date('M d, Y g:i a', $lastpost[count($lastpost)-1]['time'])."<br /><b>".get_user($lastpost[count($lastpost)-1]['user_id'])."</b> "; 
+          }
+          else{
+            echo date('M d, Y g:i a', $lastpost[count($lastpost)-1]['time'])."<br /><b>".get_user($lastpost[count($lastpost)-1]['user_id'])."</b> ";
           } ?></td>
         </tr>
       <?php }
