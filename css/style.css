@@ -72,6 +72,7 @@ input[type="submit"].inline, input[type="button"].inline, input[type="reset"].in
 
 input.danger {
   background-color: #800;
+}
 
 input.danger:hover {
   background-color: #600;
