@@ -31,14 +31,14 @@ $(document).ready(function() {
     if ((keycode > 47 && keycode < 58) || (keycode > 64 && keycode < 91) || (keycode > 95 && keycode < 112) || (keycode > 185 && keycode < 193) || (keycode > 218 && keycode < 223) || keycode == 32 || keycode == 8 || keycode == 13 || keycode == 46) {
       if ($(this).val().match(/\S/g) === null || $(this).val().match(/\S/g).length < 5) {
         title.assign("The title must have at least 5 characters (excluding whitespace)", "error").show();
-        $("#post").attr("disabled", "");
+        $("#post").prop("disabled", "disabled");
       } else if ($(this).val().length > 64) {
         title.assign("The title cannot have more than 64 characters", "error").show();
-        $("#post").attr("disabled", "");
+        $("#post").prop("disabled", "disabled");
       } else {
         title.purge();
         if ($("[name='desc']").val().match(/\S/g) !== null && $("[name='desc']").val().match(/\S/g).length >= 10) {
-          $("#post").removeAttr("disabled");
+          $("#post").prop("disabled", "");
         }
       }
     }
@@ -55,7 +55,7 @@ $(document).ready(function() {
             bottom: 'auto'
           });
         });
-        $("#post").attr("disabled", "");
+        $("#post").prop("disabled", "disabled");
       } else if ($(this).val().length > 40000) {
         message.assign("The message cannot have more than 40000 characters", "error").show(function () {
           $("[name='desc']").next().css({
@@ -63,11 +63,11 @@ $(document).ready(function() {
             bottom: 'auto'
           });
         });
-        $("#post").attr("disabled", "");
+        $("#post").prop("disabled", "disabled");
       } else {
         message.purge();
         if ($("[name='title']").val().match(/\S/g) !== null && $("[name='title']").val().match(/\S/g).length >= 5) {
-          $("#post").removeAttr("disabled");
+          $("#post").prop("disabled", "");
         }
       }
     }
