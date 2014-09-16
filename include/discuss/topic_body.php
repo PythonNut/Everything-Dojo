@@ -46,8 +46,8 @@
   <?php if (!empty($posts)){?>
     <?php $thankedposts = [];
     foreach ($posts as $post){ ?>
-      <div class="topic-reply" id="<?php print $post == end($posts) ? 'last' : $post['post_id']; ?>">
-        <div class="topic-reply-text">
+      <div class="topic-reply" id="<?php echo $post['post_id']; ?>">
+        <div class="topic-reply-text" <?php if($post == end($posts)) echo 'id="last"'; ?>>
           <?php $user = get_all_user($post['user_id']);?>
           <div class="topic-reply-top">
             <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $post['title'];?></h2>
