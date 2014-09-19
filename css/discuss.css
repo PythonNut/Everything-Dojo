@@ -1,12 +1,7 @@
 @charset "UTF-8";
+/* Discuss CSS */
 
-/*******************
- * CSS for Discuss *
- *******************/
-
-/**
- * Keyframes
- */
+/*--KEYFRAMES--*/
 
 @-webkit-keyframes targetPost {
   from {
@@ -24,9 +19,8 @@
   }
 }
 
-/**
- * Navigations
- */
+
+/*--NAVIGATION--*/
 #navigation {
   position: absolute;
   right: 0;
@@ -46,21 +40,18 @@
   padding-top: 0;
 }
 
-/**
- * Notifications
- */
+
+/*--NOTIFICATIONS--*/
 #notifications {
   top: 19vh;
   right: 5vw;
   width: 30vw;
 }
 
-/**
- * Announcements
- */
-#announcements h3 {
-  text-align: center;
-}
+
+/*--ANNOUNCEMENTS--*/
+#announcements h3 { text-align: center; }
+
 #discuss-announcements {
   position: absolute;
   top: 2.3em;
@@ -68,12 +59,14 @@
   width: 90%;
   text-align: center;
 }
+
 .discuss-announcement {
   width: 100%;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
+
 .discuss-round {
   position: relative;
   height: 1.6em;
@@ -87,14 +80,15 @@
   -webkit-transition: 300ms ease;
   transition: 300ms ease;
 }
+
 .discuss-round:hover {
   color: white;
   border-color: #0a8efe;
 }
+
 /* the next arrow, aka the one that faces right */
-.discuss-round ~ .discuss-round {
-  float: right;
-}
+.discuss-round ~ .discuss-round { float: right; }
+
 .discuss-round span {
   position: absolute;
   top: 50%;
@@ -105,18 +99,16 @@
   z-index: -1;
   border: 0;
 }
+
 .discuss-round:hover span {
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
 }
-.discuss-round span::before,
-.discuss-round span::after {
-  content: none;
-}
-.discuss-round::before,
-.discuss-round::after {
+
+.discuss-round span::before, .discuss-round span::after { content: none; }
+.discuss-round::before, .discuss-round::after {
   content: "";
   position: absolute;
   top: 25%;
@@ -127,34 +119,35 @@
   -webkit-transform: skew(-25deg);
   transform: skew(-25deg);
 }
+
 .discuss-round::after {
   top: 50%;
   -webkit-transform: skew(25deg);
   transform: skew(25deg);
 }
+
 /* lazy hack to flip the next arrow */
 .discuss-round ~ .discuss-round {
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
-.discuss-round:hover::before,
-.discuss-round:hover::after {
+
+.discuss-round:hover::before, .discuss-round:hover::after {
   background: white;
   top: 26%; /* counteract perception that arrow moved up by moving it 1% down */
 }
-.discuss-round:hover::after {
-  top: 51%; /* same */
-}
 
-/**
- * Index
- */
+.discuss-round:hover::after { top: 51%; /* same */ }
+
+
+/*--DISCUSS INDEX--*/
 #fora {
   position: absolute;
   left: 20vw;
   width: 80vw;
   margin-top: 3vh;
 }
+
 .discuss-fora {
   width: 18vw;
   height: 18vw;
@@ -171,32 +164,33 @@
   background-repeat: no-repeat;
   -webkit-transition: 500ms ease;
   transition: 500ms ease;
-  margin-left: 1vw;
-  margin-right: 1vw;
+  margin: 0 1vw;
 }
+
 .discuss-fora:hover {
   background-color: #1b63c6;
   background-size: 150% 150%;
   -webkit-transition: 500ms ease;
   transition: 500ms ease;
 }
+
 .discuss-arrow-up {
   width: 0;
   height: 0;
   border-left: 1.5vw solid transparent;
   border-right: 1.5vw solid transparent;
   border-bottom: 1.5vw solid black;
-  margin-top: 14.5vw;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 14.5vw auto 0;
   -webkit-transition: 500ms ease;
   transition: 500ms ease;
 }
+
 .discuss-fora:hover > .discuss-arrow-up {
   margin-top: 5.1vw;
   -webkit-transition: 500ms ease;
   transition: 500ms ease;
 }
+
 .discuss-fora-text {
   font-family: 'lato';
   vertical-align: bottom;
@@ -208,9 +202,9 @@
   transition: 500ms ease;
   border-top: .5vw solid black;
 }
-.discuss-fora:hover > .discuss-fora-text {
-  overflow-y: auto;
-}
+
+.discuss-fora:hover > .discuss-fora-text { overflow-y: auto; }
+
 .discuss-fora-text-inner {
   height: 9.5vw;
   width: 16.6vw;
@@ -218,57 +212,44 @@
   margin-left: auto;
   margin-right: auto;
 }
-.unread-forum {
-  background-color: #b00;
-}
-.unread-forum:hover {
-  background-color: #900;
-}
 
-/**
- * Forums
- */
+.unread-forum { background-color: #b00; }
+.unread-forum:hover { background-color: #900; }
+
+/*--FORUMS--*/
 table.discuss-table {
   width: 90%;
   margin: 1vh auto 0 auto;
 }
-tr.style:hover {
-  cursor: pointer;
-}
-td.med-col {
-  width: 20%;
-}
-td.small-col {
-  width: 15%;
-}
-td.tiny-col {
-  width: 3%;
-}
+
+tr.style:hover { cursor: pointer; }
+
+td.med-col { width: 20%; }
+td.small-col { width: 15%; }
+td.tiny-col { width: 3%; }
+
 .topic-icon {
   width: 1em;
   height: 1em;
   border-radius: 50%;
   border: 1px black solid;
 }
-.read-icon {
-  background-color: #1b63c6;
-}
-.unread-icon {
-  background-color: #a82325;
-}
 
-/**
- * Topics
- */
+.read-icon { background-color: #1b63c6; }
+.unread-icon { background-color: #a82325; }
+
+/*--TOPICS--*/
 #topic-main {
   border: 1px solid black;
   border-radius: 5px 0 0 5px;
   padding: 1em 1em;
 }
+
 #discuss-topic-header {
   color: #000000;
   margin-bottom: 1em;
 }
+
 .topic-reply-thanks {
   display: inline-block;
   height: 30px;
@@ -287,6 +268,7 @@ td.tiny-col {
   -webkit-transition: 500ms ease;
   transition: 500ms ease;
 }
+
 .topic-reply-thanks:hover {
   background-color: #51b835;
   color: #FFFFFF;
@@ -294,14 +276,18 @@ td.tiny-col {
   -webkit-transition: 500ms ease;
   transition: 500ms ease;
 }
+
 .topic-reply-thanked {
   background-color: #51b835;
   color: #FFFFFF;
 }
+
+/* next person who reads this code and agrees it's useless delete it
 .topic-reply-thanked:hover {
   background-color: #51b835;
   color: #FFFFFF;
-}
+} */
+
 .topic-reply {
   position: relative;
   border: 1px solid black;
@@ -310,6 +296,7 @@ td.tiny-col {
   border-left: none;
   border-top: 0 solid white;
 }
+
 .topic-reply::before {
   content: "";
   position: absolute;
@@ -319,20 +306,21 @@ td.tiny-col {
   width: 5px;
   background: #3589fb;
 }
-.topic-reply-top {
-  padding: 1em 1em;
-}
+
+.topic-reply-top { padding: 1em 1em; }
+
 .topic-reply-text > *:not(.topic-reply-top) {
   padding: 0 1.5em;
   padding-bottom: 1em;
 }
+
 .topic-text > pre[class*="language-"] {
   width: 90%;
   padding: 1em;
   margin: 0.5em auto;
 }
-.topic-text > pre,
-.topic-text > p code {
+
+.topic-text > pre, .topic-text > p code {
   background-color: #272822;
   color: #f8f8f2;
   text-shadow: 0px 1px rgba(0, 0, 0, 0.3);
@@ -341,32 +329,27 @@ td.tiny-col {
   margin: 0.5em auto;
   border-radius: 0.3em;
 }
+
 .topic-text > p code {
   width: auto;
   padding: 0.2em 0.2em 0.1em !important;
   margin: 0;
 }
+
 .topic-reply:target,
 .topic-reply-text:target {
   -webkit-animation: targetPost 2.3s linear;
   animation: targetPost 2.3s linear;
 }
 
-/**
- * Posting
- */
-[type="text"],
-textarea {
+/*--POSTING--*/
+[type="text"], textarea {
   resize: vertical;
   width: 100%;
   box-sizing: border-box;
 }
-.split {
-  width: 50%;
-}
-.split.left {
 
-}
+.split { width: 50%; }
 .split.right {
   position: absolute;
   top: 1.6em;
@@ -383,13 +366,8 @@ textarea {
   overflow: auto;
   box-sizing: border-box;
 }
-#cancel {
-  float: left;
-}
-#post {
-  float: right;
-}
-.note {
-  left: auto;
-  right: -0.5rem;
-}
+
+#cancel { float: left; }
+#post { float: right; }
+
+.note { left: auto; right: -0.5rem; }

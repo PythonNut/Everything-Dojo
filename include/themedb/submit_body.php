@@ -15,9 +15,9 @@
   </div>
   <div class="col" id="col3">
     <label>Theme stage:</label>
-    <input type="radio" name="stage" value="[DEV]" id="[DEV]" checked="yes" /><label for="[DEV]">[DEV]</label><br />
-    <input type="radio" name="stage" value="[ALPHA]" id="[ALPHA]" /><label for="[ALPHA]">[ALPHA]</label><br />
-    <input type="radio" name="stage" value="[BETA]" id="[BETA]" /><label for="[BETA]">[BETA] </label>
+    <input type="radio" name="stage" value="[DEV]" id="[DEV]" checked="yes" /><label for="[DEV]" class="inline">[DEV]</label><br />
+    <input type="radio" name="stage" value="[ALPHA]" id="[ALPHA]" /><label for="[ALPHA]" class="inline">[ALPHA]</label><br />
+    <input type="radio" name="stage" value="[BETA]" id="[BETA]" /><label for="[BETA]" class="inline">[BETA]</label>
   </div>
   <div id="fields">
     <label>Theme Description (optional):</label>

@@ -28,24 +28,23 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section { /*HTML5 display-role reset for older browsers*/
   display: block;
 }
-body {
-  line-height: 1;
-}
-ol, ul {
-  list-style: none;
-}
-blockquote, q {
-  quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
+
+body { line-height: 1; }
+
+ol, ul { list-style: none; }
+
+blockquote, q { quotes: none; }
+
+blockquote:before, blockquote:after, q:before, q:after {
   content: '';
   content: none;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
 
 /*--BODY--*/
 body {
@@ -54,25 +53,23 @@ body {
   background: #28656F;
 }
 
-/*--UNSUPORTED BROWSERS*/
+
+/*--UNSUPORTED BROWSERS--*/
 .fallback-message {
   font-family: sans-serif;
   line-height: 1.3;
-
   width: 780px;
   padding: 10px 10px 0;
   margin: 20px auto;
-
   border: 1px solid #E4C652;
   border-radius: 10px;
   background: #EEDC94;
 }
-.fallback-message p {
-  margin-bottom: 10px;
-}
-.impress-supported .fallback-message {
-  display: none;
-}
+
+.fallback-message p { margin-bottom: 10px; }
+
+.impress-supported .fallback-message { display: none; }
+
 
 /*--STEPS--*/
 .step {
@@ -106,6 +103,7 @@ body {
   -o-transition:    opacity 1s;
   transition:     opacity 1s;
 }
+
 .impress-enabled .step.active { opacity: 1 }
 
 .color { /*Slides that need a clear boundary*/
@@ -122,15 +120,18 @@ body {
   cursor: pointer;
 }
 
+
 /*--COLORS--*/
 .slide.tan {
   background-color: #D1B377;
 }
+
 .slide.dark {
   background-color: #222222;
 }
 
-/*--Text Styling--*/
+
+/*--TYPESETTING--*/
 h1 {
   font-family: "Aller", sans-serif;
   font-size: 150%;
@@ -138,11 +139,13 @@ h1 {
   width: 90%;
   left: 5%;
 }
+
 h1.top {
   top: 5%;
   position: absolute;
   color: #333;
 }
+
 h1.end {
   color: rgba(251,48,12,0.6);
   font-size: 200%;
@@ -150,6 +153,7 @@ h1.end {
   position: absolute;
   bottom: 5%;
 }
+
 h2 {
   font-family: "Lato", sans-serif;
   font-weight: 600;
@@ -157,20 +161,25 @@ h2 {
   height: 10%;
   margin-top: 35%;
 }
+
 ul {
   /*CENTER*/
   display: table-cell;
   vertical-align: middle;
   font-size: 60%;
 }
-/*List styling*/
+
+
+/*--LIST STYLING--*/
 li:nth-child(2n+1) {
   color: #56A351;
 }
 li:nth-child(2n) {
   color: #2A9BD9;
 }
-/*Source Link*/
+
+
+/*--SOURCE LINK--*/
 .source {
   position: absolute;
   height: 5%;
@@ -178,6 +187,7 @@ li:nth-child(2n) {
   left: 10%;
   top: 60%;
 }
+
 
 /*--IMAGES--*/
 img {
@@ -188,6 +198,8 @@ img {
   height: 50%;
   width: 50%;
 }
+
+
 /*--IFRAMES--*/
 iframe {
   margin-left: auto;
