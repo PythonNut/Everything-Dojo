@@ -169,6 +169,7 @@ label { display: block; }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+  font-weight: normal; /* fix iOS double rendering bug; see http://bit.ly/1u5gNTg */
 }
 
 h1 {
