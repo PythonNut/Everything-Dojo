@@ -5,7 +5,7 @@
   <script>$(function(){\$('.notification-link').hide()})</script>";
   session_start();
 
-  if($_SESSION['user_id'] != NULL){
+  if (isset($_SESSION['user_id'])) {
     $notification_unread_count = $notification->count_unread($_SESSION['user_id']);
     $notification_data = $notification->get_notifications($_SESSION['user_id'], 1000);
   }
@@ -19,9 +19,7 @@
         <b>notifications:</b>
         <a href="javascript:;" style="float: right; margin-right: 2vw;" onclick="mark_all_read(<?php echo $_session['user_id']; ?>)">mark all read</a>
       </div>
-      <?php
-      if(count($notification_data) == 0) {
-      ?>
+      <?php if (count($notification_data) == 0) { ?>
       <a href="javascript:;">
       <div id="notification-0" class="notification-item read">
         <div class="notification-color" style="background-color: #ccc"></div>
@@ -30,11 +28,11 @@
       </a>
       <?php
       } else {
-        foreach($notification_data as $notif) {
+        foreach ($notification_data as $notif) {
           $notif_data = $notification->get_notif_obj($notif['notification_type'], $notif['item_id']);
       ?>
       <a href="<?php echo $notif_data['url']; ?>" class="notification-item-link" onclick="mark_read(<?php echo $notif['id']; ?>)">
-        <div id="notification-<?php echo $notif['id']; ?>" class="notification-item <?php if($notif['read'] == 0){ echo 'unread'; }else{ echo 'read'; } ?>" style="border-bottom:none">
+        <div id="notification-<?php echo $notif['id']; ?>" class="notification-item <?php if ($notif['read'] == 0) { echo 'unread'; } else { echo 'read'; } ?>" style="border-bottom:none">
           <div class="notification-color" style="background-color: #<?php echo $notif_data['data']['color']; ?>"><?php echo substr($notif_data['data']['location'], 0, 1); ?></div>
           <div class="notification-text">
             <?php echo $notif_data['data']['subject']; ?>

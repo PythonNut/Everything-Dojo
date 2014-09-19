@@ -45,7 +45,7 @@ if(isset($_POST['doRegister']))  {
   $resp = recaptcha_check_answer($privatekey, $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"], $_POST["recaptcha_response_field"]);
 
   if (!$resp->is_valid) {
-    $err[] = "Image Verification failed! Go back and try again.";
+    $err[] = "Image verification failed! Go back and try again.";
   }
 
   // Validate User Name
@@ -78,8 +78,7 @@ if(isset($_POST['doRegister']))  {
     $err[] = "The username/email already exists. Please try again with different username and email.";
   }
 
-  if(empty($err)) {
-
+  if (empty($err)) {
     $sql_insert = $dbc->prepare("INSERT INTO $table (user_email, pwd, date, users_ip, activation_code, user_name) VALUES (?,?,NOW(),?,?,?)");
     $sql_insert->execute(array($usr_email,$sha1pass,$user_ip,$activ_code,$user_name));
     $user_id = $dbc->lastInsertId();
@@ -100,11 +99,11 @@ Activation Code: $activ_code
 
 $a_link
 
-Administrator @Everything Dojo
+Administrator @ Everything Dojo
 ______________________________________________________
 This is an automated response. Do not reply to this email.";
 
-    mail($usr_email, "Thank you for registering with Everything Dojo", $message, "From: \"Everything Dojo Registration\" <auto-reply@$host>\r\n");
+    mail($usr_email, "Thank you for registering with Everything Dojo", $message, "From: \"Everything Dojo Registration\" <no-reply@$host>\r\n");
 
     header("Location: register.php?done=yes");
     exit();
@@ -128,7 +127,7 @@ This is an automated response. Do not reply to this email.";
 
   <p id="errors">
     <?php //spit out all errors
-    if(!empty($err))  {
+    if (!empty($err))  {
       foreach ($err as $e) {
         echo "ERROR - ".$e."<br />";
       }

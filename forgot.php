@@ -6,11 +6,11 @@ $table = TB_NAME;
 if (isset($_POST['doReset'])) {
   $err = array();
   $msg = array();
-  foreach($_POST as $key => $value) {
+  foreach ($_POST as $key => $value) {
     $data[$key] = filter($value);
   }
 
-  if(!isEmail($data['user_email'])) {
+  if (!isEmail($data['user_email'])) {
     $err[] = "Please enter a valid email";
   }
 
@@ -19,11 +19,11 @@ if (isset($_POST['doReset'])) {
   $rs_check = $dbc->prepare("SELECT id FROM $table WHERE user_email=?");
   $rs_check->execute(array($user_email));
   $num = $rs_check->rowCount();
-  if ( $num <= 0 ) {
+  if ($num <= 0) {
     $err[] = "Sorry, no such account exists.";
   }
 
-  if(empty($err)) {
+  if (empty($err)) {
 
     $new_pwd = GenPwd();
     $pwd_reset = PwdHash($new_pwd);
@@ -33,7 +33,7 @@ if (isset($_POST['doReset'])) {
     $host = $_SERVER['HTTP_HOST'];
 
     //send email
-$message =
+    $message =
 "Hello,
 
 You are receiving this email since you reset your password recently. Here are your new password details:
@@ -42,11 +42,11 @@ Password: $new_pwd
 
 You can now login with this password and change it to something you'll remember, via My Settings.
 
-Administrator @Login Site
+Administrator @ Everything Dojo
 ______________________________________________________
 This is an automated response. Do not reply to this email.";
 
-    mail($user_email, "Login Site Password Reset", $message, "From: \"Login Site Forgotbot\" <auto-reply@$host>\r\n");
+    mail($user_email, "EvDo Password Reset", $message, "From: \"Everything Dojo Forgotbot\" <no-reply@$host>\r\n");
     $msg[] = "Your account password has been reset and a new password has been sent to your email address.";
   }
 }

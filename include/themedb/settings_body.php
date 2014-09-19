@@ -1,14 +1,12 @@
 <?php
 $id = $_GET['id'];
 $edit = $themedb->check_owner($id, $_SESSION['user_id']);
-if($edit == false && checkAdmin() == 0){
+if ($edit == false && checkAdmin() == 0) {
   redirect(URL_DATABASE);
-}
-else{
-  if(checkAdmin() == 0){
+} else {
+  if(checkAdmin() == 0) {
     $style = $themedb->get_themes($id, false, $_SESSION['user_id']);
-  }
-  else{
+  } else {
     $style = $themedb->get_themes($id, false, $_SESSION['user_id'], 1);
   }
   $style = $themedb->get_themes($id, $_SESSION['user_id']);
@@ -17,18 +15,18 @@ else{
 ?>
 
  >>
-<?php if ($style['validated'] == 1) {?>
+<?php if ($style['validated'] == 1) { ?>
 <a href="<?php echo URL_DATABASE; ?>?mode=view&view=complete">Completed Themes</a>
 <?php } else {?>
 <a href="<?php echo URL_DATABASE; ?>?mode=view&view=development">Development Themes</a>
 <?php } ?>
- >> <a href="<?php echo URL_DATABASE;?>?mode=view&view=style&id=<?php echo $id; ?>">View Theme</a>
+ >> <a href="<?php echo URL_DATABASE; ?>?mode=view&view=style&id=<?php echo $id; ?>">View Theme</a>
 
 <h2>Manage Theme Settings</h2>
 <form method="post" action="include/db-handler.php">
   <div>
     <?php
-      if (in_array($style['stage'], $development_stages) == true) {
+      if (in_array($style['stage'], $development_stages)) {
         if ($style['validate_request'] == 0) {
     ?>
     <input type="checkbox" name="request" value="1" /> Request Validation<br />
@@ -57,15 +55,13 @@ else{
           </thead>
           <tbody>
           <?php
-          for ($i=0;$i<count($users);$i++) {
+          for ($i = 0; $i < count($users); $i++) {
           ?>
           <tr class="style" onclick="idFill(<?php echo $users[$i]['id']; ?>)">
             <td><?php echo $users[$i]['id']; ?></td>
             <td><?php echo $users[$i]['user_name']; ?></td>
           </tr>
-          <?php
-          }
-          ?>
+          <?php } ?>
           </tbody>
         </table>
        </div>

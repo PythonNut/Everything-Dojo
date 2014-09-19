@@ -9,12 +9,12 @@
   <script src=\"js/database.js\"></script>";
   get_header();
 
-  if($_SESSION['user_id'] != NULL){
+  if ($_SESSION['user_id'] != NULL) {
     $unread_count = $notification->count_unread($_SESSION['user_id']);
     $notification_data = $notification->get_notifications($_SESSION['user_id']);
   }
 
-  if(isset($_GET['mode'])) {
+  if (isset($_GET['mode'])) {
     $mode = $_GET['mode'];
   } else {
     $mode = 'index';
@@ -28,9 +28,7 @@
         <b>Notifications:</b>
           <a href="javascript:;" style="float: right; margin-right: 2vw;" onClick="mark_all_read(<?php echo $_SESSION['user_id']; ?>)">Mark all read</a>
       </div>
-      <?php
-      if(count($notification_data) == 0){
-      ?>
+      <?php if (count($notification_data) == 0) { ?>
       <a href="javascript:;">
       <div id="notification-0" class="notification-item read">
         <div class="notification-color" style="background-color: #ccc"></div>
@@ -38,9 +36,8 @@
       </div>
       </a>
       <?php
-      }
-      else{
-        foreach($notification_data as $notif){
+      } else {
+        foreach($notification_data as $notif) {
           $notif_data = $notification->get_notif_obj($notif['notification_type'], $notif['item_id']);
       ?>
       <a href="<?php echo $notif_data['url']; ?>" class="notification-item-link" onClick="mark_read(<?php echo $notif['id']; ?>)">
@@ -73,68 +70,63 @@
             </ul>
           </nav>
         </div>
-<?php
-  if(!isset($_SESSION['user_id'])) {
+  <?php
+  if (!isset($_SESSION['user_id'])) {
     include('include/themedb/view_body.php');
     // end guest case
-  }
-  else {
-    switch($mode) {
+  } else {
+    switch ($mode) {
       case 'index':
         include('include/themedb/index_body.php');
-  if($_SESSION['user_level'] == 5){
-?>
+  if ($_SESSION['user_level'] == 5) { ?>
   <div class="mcp-link"><a href="<?php echo URL_DATABASE; ?>?mode=mcp" class="mcp-link">ThemeDB Moderator CP</a></div>
-<?php
-  }
+  <?php }
         break;
       case 'submit':
-?>
+  ?>
         <a href="<?php echo URL_DATABASE; ?>">Back to Database Index</a>
-<?php
+  <?php
         include('include/themedb/submit_body.php');
         break;
       case 'manage':
-?>
+  ?>
         <a href="<?php echo URL_DATABASE; ?>">Back to Database Index</a>
-<?php
+  <?php
         include('include/themedb/manage_body.php');
         break;
       case 'view':
-?>
+  ?>
         <?php if($_GET['view'] != ''){ ?><a href="<?php echo URL_DATABASE; ?>">Database Index</a> >> <a href="<?php echo URL_DATABASE; ?>?mode=view">View Options</a><?php } ?>
-<?php
+  <?php
         include('include/themedb/view_body.php');
         break;
       case 'mcp':
-        if($_SESSION['user_level'] == 5){
-?>
+        if ($_SESSION['user_level'] == 5) {
+  ?>
         <a href="<?php echo URL_DATABASE; ?>">Back to Database Index</a>
-<?php
+  <?php
           include('include/themedb/mcp_body.php');
-        }
-        else{
-?>
+        } else {
+  ?>
         <?php if($_GET['view'] != ''){ ?><a href="<?php echo URL_DATABASE; ?>">Database Index</a> >> <a href="<?php echo URL_DATABASE; ?>?mode=view">View Options</a><?php } ?>
-<?php
+  <?php
           include('include/themedb/view_body.php');
         }
         break;
       case 'edit':
-?>
+  ?>
         <a href="<?php echo URL_DATABASE; ?>">Database Index</a> >> <a href="<?php echo URL_DATABASE; ?>?mode=view">View Options</a>
-<?php
+  <?php
         include('include/themedb/edit_body.php');
         break;
       case 'settings':
-?>
+  ?>
         <a href="<?php echo URL_DATABASE; ?>">Database Index</a> >> <a href="<?php echo URL_DATABASE; ?>?mode=view">View Options</a>
-<?php
+  <?php
         include('include/themedb/settings_body.php');
         break;
     // end user mode
     }
-  }
-  ?>
+  } ?>
 </section>
 <?php get_footer(); ?>

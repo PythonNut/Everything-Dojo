@@ -30,8 +30,7 @@ Array.prototype.last = function(nth) {
  * @class Message
  * @constructor
  */
-function Message (selector)
-{
+function Message (selector) {
   if (typeof selector === "string") {
     this.el = document.querySelector(selector);
   } else if (selector instanceof jQuery) {
@@ -206,6 +205,9 @@ var styles = {
         "pointer-events"  : "",
         "background-color": ""
       });
+    });
+    $('#credits').click(function(e){
+        e.stopPropagation(); //clicking on the box doesn't work, but only OUTSIDE of the box closes.
     });
   };
 
@@ -428,7 +430,7 @@ function themizer () {
   // Set sidebar styles
   $("#sidebar")      .css("font-size", 2*vh);
   $("#sidebar-inner").width(sideWidth);
-  $("#side-button").css("left", sideWidth);
+  $("#side-button")  .css("left", sideWidth);
 
   $("#blog-body").load("blog/blog-index.html");
 
