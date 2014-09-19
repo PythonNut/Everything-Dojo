@@ -42,4 +42,3 @@ error_log
 # can't randomly view on GitHub
 
 include/db.php
-include/creds.php

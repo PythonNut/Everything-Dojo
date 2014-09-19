@@ -1,10 +1,10 @@
 <?php
-class notification{
-  function __construct($dbc){
+class notification {
+  function __construct($dbc) {
     $this->dbc = $dbc;
   }
 
-  function count_unread($user_id){
+  function count_unread($user_id) {
     $query = "SELECT COUNT(*) FROM `notifications` WHERE `user_id` = :user_id AND `read` = 0";
     $sth = $this->dbc->prepare($query);
     $sth->execute(array(
@@ -16,7 +16,7 @@ class notification{
     return $count;
   }
 
-  function get_notifications($user_id, $limit=5){
+  function get_notifications($user_id, $limit = 5) {
     $query = "SELECT * FROM `notifications` WHERE `user_id` = :user_id ORDER BY `timestamp` DESC LIMIT $limit";
     $sth = $this->dbc->prepare($query);
     $sth->execute(array(
@@ -27,7 +27,7 @@ class notification{
     return $result;
   }
 
-  function get_notif_obj($id, $item_id){
+  function get_notif_obj($id, $item_id) {
     $query = "SELECT `name` FROM `notification_types` WHERE `id` = :id";
     $sth = $this->dbc->prepare($query);
     $sth->execute(array(
@@ -50,7 +50,7 @@ class notification{
     return $data;
   }
 
-  function insert_notification($type_id, $item_id, $user_id){
+  function insert_notification($type_id, $item_id, $user_id) {
     echo $type_id . '~' . $item_id . '~' . $user_id;
     $query = "INSERT INTO `notifications` (`notification_type`, `item_id`, `user_id`, `timestamp`) VALUES (:type, :item, :user, :time)";
     $sth = $this->dbc->prepare($query);
@@ -62,7 +62,7 @@ class notification{
     ));
   }
 
-  function mark_read($id){
+  function mark_read($id) {
     $query = "UPDATE `notifications` SET `read` = 1 WHERE `id` = :id";
     $sth = $this->dbc->prepare($query);
     $sth->execute(array(
@@ -70,7 +70,7 @@ class notification{
     ));
   }
 
-  function mark_all_read($user_id){
+  function mark_all_read($user_id) {
     $query = "UPDATE `notifications` SET `read` = 1 WHERE `user_id` = :user_id";
     $sth = $this->dbc->prepare($query);
     $sth->execute(array(
@@ -78,5 +78,6 @@ class notification{
     ));
   }
 }
+
 $notification = new notification($dbc);
 ?>

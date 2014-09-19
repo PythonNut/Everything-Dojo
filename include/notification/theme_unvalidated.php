@@ -1,12 +1,12 @@
 <?php
-class theme_unvalidated{
+class theme_unvalidated {
   public $id;
 
-  function __construct($item_id){
+  function __construct($item_id) {
     $this->id = $item_id;
   }
 
-  function get_data(){
+  function get_data() {
     $data = array(
       'subject'  => 'Sorry, your theme was not validated.',
       'color'    => 'D553CB',
@@ -15,7 +15,7 @@ class theme_unvalidated{
     return $data;
   }
 
-  function get_url(){
+  function get_url() {
     $url = SITE_ROOT . URL_DATABASE . "?mode=view&view=style&id=" . $this->id;
     return $url;
   }
