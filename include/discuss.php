@@ -3,13 +3,11 @@
 * Discuss Version 1.0
 * Methods
 */
-include("Parsedown.php"); // Parsedown
 
 class discuss {
 
   function __construct($dbc){
     $this->dbc = $dbc;
-    $this->parsedown = new Parsedown();
   }
 
   function get_fora($forum_id = 'all', $parent_id = 0, $user_id = 0){
@@ -371,7 +369,7 @@ class discuss {
       $query = "INSERT INTO ".DISCUSS_POSTS_SPECIAL_TABLE." (user_id, style_id, time, title, text) VALUES (:user, :topic, :time, :title, :text)";
     }
     else{
-      $query = "INSERT INTO ".DISCUSS_POSTS_TABLE." (user_id, topic_id, time, title, text) VALUES (:user, :topic, :time, :title, :text)";
+      $query = "INSERT INTO ".DISCUSS_POSTS_TABLE." (user_id, topic_id, time, title, text, source) VALUES (:user, :topic, :time, :title, :text, :source)";
     }
     $error = array();
     if(strlen(trim($data['title'])) < 5){
@@ -387,7 +385,8 @@ class discuss {
         ':topic' => intval($data['t']),
         ':time' => time(),
         ':title' => htmlspecialchars($data['title']),
-        ':text' => $this->parsedown->text(htmlentities($this->filter_swear_words($data['desc']), ENT_QUOTES, 'UTF-8'))
+        ':text' => $this->filter_swear_words($data['desc']),
+        ':source' => $this->filter_swear_words($data['desc-source'])
       ));
 
       $this->delete_views($data['t'], $user_id, 0);
@@ -425,7 +424,7 @@ class discuss {
 
       $topic_id = $this->dbc->lastInsertId();
 
-      $query = "INSERT INTO `" . DISCUSS_POSTS_TABLE . "` (user_id, topic_id, time, title, text) VALUES (:user, :topic, :time, :title, :text)";
+      $query = "INSERT INTO `" . DISCUSS_POSTS_TABLE . "` (user_id, topic_id, time, title, text, source) VALUES (:user, :topic, :time, :title, :text, :source)";
       $sth = $this->dbc->prepare($query);
 
       $result = $sth->execute(array(
@@ -433,7 +432,8 @@ class discuss {
         ':topic' => intval($topic_id),
         ':time' => time(),
         ':title' => htmlspecialchars($data['title']),
-        ':text' => $this->parsedown->text(htmlentities($this->filter_swear_words($data['desc']), ENT_QUOTES, 'UTF-8'))
+        ':text' => $this->filter_swear_words($data['desc']),
+        ':source' => $this->filter_swear_words($data['desc-source'])
       ));
     }
     $result = array(
@@ -616,7 +616,6 @@ class discuss {
   }
 
   // filter swear words
-  // WARNING: DUE TO INCOMPLETE REGEX, MAY END UP REPLACING PERFECTLY FINE WORDS, SUCH AS 'bass'
 
   function filter_swear_words($contaminated) {
     $swears = array(
@@ -629,11 +628,11 @@ class discuss {
       "butt"     => "YXNz",         // a**
       "darn"     => "ZGFtbg=="      // d***
     );
-    $cleaned = $contaminated;
+    $cleaned = ' ' . $contaminated . ' ';
 
     foreach ($swears as $minced=>$swear) {
-      $regex = "/" . base64_decode($swear) . "/";
-      $cleaned = preg_replace($regex, $minced, $cleaned);
+      $regex_prefix = "/(\s)" . base64_decode($swear) . "(\s)/";
+      $cleaned = preg_replace($regex_prefix, '\1' . $minced . '\2', $cleaned);
     }
     return $cleaned;
   }

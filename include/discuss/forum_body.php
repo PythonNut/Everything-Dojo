@@ -48,14 +48,21 @@
       Title: <input type="text" name="title" value="" /><br/>
     </div>
     <div class="field">
-      Message: <a href="https://help.github.com/articles/github-flavored-markdown" title="Github Flavored Markdown" style="color:#777;font-size:.8em;line-height:2em" target="_blank" tabindex="1">(Parsed with Github Flavored Markdown)</a>
-      <br />
-      <textarea name="desc" placeholder="Write your post here..." style="vertical-align:top; height:200px;"></textarea>
+      <div class="field split left">
+        Message: <a href="https://help.github.com/articles/github-flavored-markdown" title="Github Flavored Markdown" style="color:#777;font-size:.8em;line-height:2em" target="_blank" tabindex="1">(Parsed with Github Flavored Markdown)</a>
+        <br />
+        <textarea name="desc-source" placeholder="Write your post here..." style="vertical-align:top; height:200px;"></textarea>
+        <input type="hidden" name="desc" />
+      </div>
+      <div class="field split right">
+        <div class="topic-text" name="preview"></div>
+      </div>
     </div>
     <input type="hidden" name="forum" value="<?php echo $id;?>" />
     <input type="hidden" name="mode" value="topic">
     <input type="button" value="Cancel" class="danger" id="cancel" />
-    <input type="submit" value="Post" id="post" disabled />
+    <input type="button" value="Post" id="post" disabled />
+    <input type="submit" style="display:none" />
   </form>
   </fieldset>
 
@@ -69,6 +76,10 @@
       $("#topic-a-topic").show();
       $("#topic-create-topic").slideToggle(300);
     });
+    $("#post").click(function () {
+      $("[name='desc']").val($("[name='preview']").html());
+      $("#form").submit();
+    })
   </script>
   <?php
   }
