@@ -1,15 +1,8 @@
-/*
-Everything Dojo CSS
-(c)2014 Everything Dojo (original skin by Red)
-Please do not plagiarize
-*/
-
-
 /*--FONT IMPORT--*/
 @import url('fonts.css');
 
 /*--COLORS--*/
-.tryit    { background: #ff6c00; }
+.tryit { background: #ff6c00; }
 
 /**
  * TYPESETTING
@@ -40,12 +33,14 @@ html > body > #wrap > header > #headerwrap > form label{
   box-shadow: none !important;
   margin: 0 !important;
 }
+
 html > body > #wrap > header > #headerwrap > h1 {
   position: absolute !important;
   padding: 0.1em 0 !important;
   margin: 0.13em !important;
   height: 1.334em !important;
 }
+
 html > body > #wrap > header > #headerwrap > form a,
 html > body > #wrap > header > #headerwrap > form label {
   color: black !important;
@@ -53,11 +48,13 @@ html > body > #wrap > header > #headerwrap > form label {
   font-size: 15px !important;
   text-transform: none !important;
 }
+
 .small { font-size: 0.65em; }
+
 body { background: white; }
 
-/*--HEADER AND NAV--*/
 
+/*--HEADER AND NAV--*/
 header {
   position: absolute;
   top: 0;
@@ -67,6 +64,7 @@ header {
   font-size: 2.22vh;
   z-index: 2147483647; /* CSS values are stored as 32-bit signed integers, hence this number */
 }
+
 #headerwrap {
   margin-left: 5.55%;
   position: relative;
@@ -77,12 +75,13 @@ header {
   text-align: left;
 }
 
-/*--SLIDE BUTTONS--*/
 
+/*--SLIDE BUTTONS--*/
 .slideButton {
   position: absolute;
   cursor: pointer;
 }
+
 #header-button {
   height: 2vh;
   width: 100%;
@@ -94,12 +93,14 @@ header {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+
 .closed #header-button {
   width: 5vw;
   left: 47.5vw;
   border-radius: 0 0 0.3em 0.3em;
   background: #ff6c00;
 }
+
 #header-button.targeted {
   left: 0;
   width: 100%;
@@ -107,8 +108,8 @@ header {
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
-#header-button::before,
-#header-button::after {
+
+#header-button::before, #header-button::after {
   content: "";
   position: absolute;
   top: 0.7vh;
@@ -121,35 +122,35 @@ header {
   -webkit-transition: 0.5s ease;
   transition: 0.5s ease;
 }
+
 #header-button::after {
   left: 50vw;
   -webkit-transform: skewY(20deg);
   transform: skewY(20deg);
 }
-.closed #header-button::before,
-.closed #header-button::after {
-  left: 1.8vw;
-}
-.closed #header-button::after {
-  left: 2.5vw;
-}
-.closed #header-button.targeted::before,
-.closed #header-button.targeted::after {
+
+.closed #header-button::before, .closed #header-button::after { left: 1.8vw; }
+
+.closed #header-button::after { left: 2.5vw; }
+
+.closed #header-button.targeted::before, .closed #header-button.targeted::after {
   left: 49.3vw;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
 }
-.closed #header-button.targeted::after {
-  left: 50vw;
-}
+
+.closed #header-button.targeted::after { left: 50vw; }
+
 .closed #header-button::before {
   -webkit-transform: skewY(20deg);
   transform: skewY(20deg);
 }
+
 .closed #header-button::after {
   -webkit-transform: skewY(-20deg);
   transform: skewY(-20deg);
 }
+
 #blog-body {
   position: absolute;
   top: 0;

@@ -29,11 +29,11 @@ if ($edit == false && checkAdmin() == 0) {
   <div class="col" id="col3">
     <label>Theme stage:</label>
     <?php if (in_array($style['stage'], $development_stages)) { ?>
-    <input type="radio" name="stage" value="[DEV]" id="[DEV]" <?php if($style['stage'] == '[DEV]'){ ?>checked="yes"<?php } ?> /><label for="[DEV]">[DEV]</label><br />
-    <input type="radio" name="stage" value="[ALPHA]" id="[ALPHA]" <?php if($style['stage'] == '[ALPHA]'){ ?>checked="yes"<?php } ?> /><label for="[ALPHA]">[ALPHA]</label><br />
-    <input type="radio" name="stage" value="[BETA]" id="[BETA]" <?php if($style['stage'] == '[BETA]'){ ?>checked="yes"<?php } ?> /><label for="[BETA]">[BETA] </label>
+    <input type="radio" name="stage" value="[DEV]" id="[DEV]" <?php if($style['stage'] == '[DEV]'){ ?>checked="yes"<?php } ?> /><label for="[DEV]" class="inline">[DEV]</label><br />
+    <input type="radio" name="stage" value="[ALPHA]" id="[ALPHA]" <?php if($style['stage'] == '[ALPHA]'){ ?>checked="yes"<?php } ?> /><label for="[ALPHA]" class="inline">[ALPHA]</label><br />
+    <input type="radio" name="stage" value="[BETA]" id="[BETA]" <?php if($style['stage'] == '[BETA]'){ ?>checked="yes"<?php } ?> /><label for="[BETA]" class="inline">[BETA]</label>
     <?php } else { ?>
-    <input type="radio" name="stage" value="[RELEASE]" id="[RELEASE]" checked="yes" /><label for="[RELEASE]">[RELEASE] </label>
+    <input type="radio" name="stage" value="[RELEASE]" id="[RELEASE]" checked="yes" /><label for="[RELEASE]" class="inline">[RELEASE]</label>
     <?php } ?>
   </div>
   <div id="fields">

@@ -37,14 +37,13 @@ img {
 }
 
 /*--LISTS--*/
-ul,
-ol {
+ul, ol {
   padding-left: 1em;
   margin-left: 1em;
 }
 
 /*--BUTTONS--*/
-/* Based heavily on Quizlet buttons, thank you! */
+/* Based heavily on Quizlet buttons */
 input[type="submit"], input[type="button"], input[type="reset"], button {
   display: block;
   background: #85B900;
@@ -70,13 +69,9 @@ input[type="submit"].inline, input[type="button"].inline, input[type="reset"].in
   display: inline; /* because of precedence rules + jquery (preventing use of !important) */
 }
 
-input.danger {
-  background-color: #800;
-}
+input.danger       { background-color: #800; }
+input.danger:hover { background-color: #600; }
 
-input.danger:hover {
-  background-color: #600;
-}
 .linkbutton {
   background: transparent;
   display: table;
@@ -89,8 +84,7 @@ input.danger:hover {
 
 
 /*--INPUTS AND TEXTAREAS--*/
-input,
-textarea {
+input, textarea {
   background: #fff;
   border: 1px solid #222;
   border-radius: 0.18rem;
@@ -115,13 +109,14 @@ label { display: block; }
   background: rgba(130, 211, 214, .44);
   color: currentColor;
 }
+
 ::selection {
   background: rgba(130, 211, 214, .44);
   color: currentColor;
 }
 
 /*--SCROLLBARS--*/
-/* credits to PythonNut of AoPS! Modified by me, of course. */
+/* credits to PythonNut of AoPS! Modified, of course. */
 ::-webkit-scrollbar {
   width: 12px;
   height: 12px;
@@ -163,18 +158,14 @@ label { display: block; }
   position: absolute;
 }
 
-#headerwrap h1 a {
-  color: white;
-}
+#headerwrap h1 a { color: white; }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
   font-weight: normal; /* fix iOS double rendering bug; see http://bit.ly/1u5gNTg */
 }
 
-h1 {
-  border-bottom: 1px solid #ccc;
-}
+h1 { border-bottom: 1px solid #ccc; }
 
 h2, h4 {
   margin-top: 0.3rem;
@@ -220,9 +211,7 @@ body { background: white; }
   min-height: 100%;
 }
 
-.center{
-  text-align: center;
-}
+.center { text-align: center; }
 
 
 /*--HEADER AND NAV--*/
@@ -247,6 +236,7 @@ header {
   left: 0;
   margin: 1.302vh;
 }
+
 #logo img {
   margin-bottom: -0.52083vh;
   /* fix IE not resizing images correctly */
@@ -259,6 +249,7 @@ header {
   top: 0;
   left: 0;
 }
+
 .breadcrumbs #logo {
   margin-right: -4%;
   margin-left: -4%;
@@ -279,9 +270,7 @@ header {
   margin: 0 0.4rem;
 }
 
-#headerwrap .breadcrumbs a {
-  color: #666;
-}
+#headerwrap .breadcrumbs a { color: #666; }
 
 nav {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
@@ -308,9 +297,7 @@ nav ul a {
   text-decoration: none;
 }
 
-nav ul a:hover {
-  color: #666;
-}
+nav ul a:hover { color: #666; }
 
 
 /*--FOOTER--*/
@@ -321,7 +308,7 @@ footer {
   color: #bbb;
 }
 
-footer a { color: #bbb; }
+footer a       { color: #bbb; }
 footer a:hover { color: #999; }
 
 /**
@@ -351,12 +338,7 @@ footer, .push {
 
 .field { position: relative; }
 
-button[disabled],
-input[disabled],
-button[disabled]:hover,
-input[disabled]:hover {
-  background-color: #bbb;
-}
+button[disabled], input[disabled], button[disabled]:hover, input[disabled]:hover { background-color: #bbb; }
 
 .wait {
   display: none;
@@ -365,16 +347,18 @@ input[disabled]:hover {
   left: 11rem;
   height: 1.5rem;
 }
+
 .invalid {
   border-color: #b00;
   background-color: #ffeded;
 }
+
 .valid {
   border-color: #0b0;
   background-color: #edffed;
 }
-.error,
-.correct {
+
+.error, .correct {
   position: absolute;
   left: 12rem;
   bottom: 0.2rem;
@@ -386,17 +370,18 @@ input[disabled]:hover {
   padding: 0.5rem;
   opacity: 0.95;
 }
+
 .error {
   background: #ffe7e7;
   border: 1px solid #ffbcbc;
 }
+
 .correct {
   background: #e7ffe7;
   border: 1px solid #bcffbc;
 }
 
-.error::before,
-.correct::before{
+.error::before, .correct::before {
   content: "";
   position: absolute;
   left: -7px;
@@ -406,12 +391,9 @@ input[disabled]:hover {
   border-style: solid;
   border-width: 7px 7px 7px 0;
 }
-.error::before{
-  border-color: transparent #ffbcbc;
-}
-.correct::before {
-  border-color: transparent #bcffbc;
-}
+
+.error::before { border-color: transparent #ffbcbc; }
+.correct::before { border-color: transparent #bcffbc; }
 
 .msg {
   position: absolute;
@@ -428,11 +410,15 @@ input[disabled]:hover {
   border-radius: 1em;
 }
 
-.msg + * {
-  margin-top: 3rem;
-}
+.msg + * { margin-top: 3rem; }
 
 .textcenter { display: block; text-align: center; margin: 0; }
+
+.email::after {
+  content: " \2709"; /* Adds an envelope after emails */
+  font-size: 1em;
+}
+
 
 /*--TABLES--*/
 /*table design from smashingmagazine.com, thank you*/
@@ -475,6 +461,7 @@ table a { color: #F99819; }
   position: relative;
   float: right;
 }
+
 .collapsebutton::before,
 .collapsebutton::after {
   content: "";
@@ -487,16 +474,15 @@ table a { color: #F99819; }
   -webkit-transition: -webkit-transform 0.5s ease-in-out;
   transition: transform 0.5s ease-in-out;
 }
-.collapsebutton::after {
-   right: 0.5em;
-}
-.expanded .collapsebutton::before,
-.collapsed .collapsebutton::after {
+
+.collapsebutton::after { right: 0.5em; }
+
+.expanded .collapsebutton::before, .collapsed .collapsebutton::after {
   -webkit-transform: skewY(-20deg);
   transform: skewY(-20deg);
 }
-.expanded .collapsebutton::after,
-.collapsed .collapsebutton::before {
+
+.expanded .collapsebutton::after, .collapsed .collapsebutton::before {
   -webkit-transform: skewY(20deg);
   transform: skewY(20deg);
 }
@@ -512,17 +498,12 @@ table a { color: #F99819; }
 #announcements ul li { margin-left: 1.5rem; }
 
 /*--ERRORS--*/
-
 .error-img {
   display: block;
   margin: 0 auto; /* Centers the image */
   width: 60vh;
 }
 
-.email::after {
-  content: " \2709"; /* Adds an envelope after emails */
-  font-size: 1em;
-}
 
 /*--INDEX PAGE TILES--*/
 /*
@@ -531,8 +512,7 @@ table a { color: #F99819; }
  *    so that there isn't space between .index-title and .index-text
  */
 
-.index-title,
-.index-text {
+.index-title, .index-text {
   font-size: inherit; /* 1 */
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
   color: #fff;
@@ -600,10 +580,9 @@ table a { color: #F99819; }
 #index-discuss        { float: right; }
 #index-discuss:hover  { background: #448ae9; }
 
-/**
- * Notifications
- */
-#notifications{
+
+/*--NOTIFICATION--*/
+#notifications {
   position: absolute;
   display: block;
   /* position for index page */
@@ -612,7 +591,7 @@ table a { color: #F99819; }
   z-index: 100;
 }
 
-.notification-arrow-up{
+.notification-arrow-up {
   width: 0;
   height: 0;
   border-left: 2vh solid transparent;
@@ -621,13 +600,13 @@ table a { color: #F99819; }
   margin-left: 27vw;
 }
 
-#notification-body{
+#notification-body {
   width: 30vw;
   background-color: white;
   border: 1px #212121 solid;
 }
 
-#notification-header{
+#notification-header {
   width: 30vw;
   height: 5vh;
   font-family: 'Lato', sans-serif;
@@ -638,9 +617,7 @@ table a { color: #F99819; }
   border-bottom: 1px #bbb solid;
 }
 
-#notification-header b{
-  margin-left: 3vh;
-}
+#notification-header b { margin-left: 3vh; }
 
 .notification-item {
   height: 8vh;
@@ -648,19 +625,12 @@ table a { color: #F99819; }
   border-bottom: 1px #bbb solid;
 }
 
-.unread{
-  background-color: #edffc1;
-}
+.unread { background-color: #edffc1; }
+.unread:hover { background-color: #e0ffbe; }
 
-.unread:hover{
-  background-color: #e0ffbe;
-}
+.read:hover { background-color: #edffc1; }
 
-.read:hover{
-  background-color: #edffc1;
-}
-
-.notification-color{
+.notification-color {
   position: absolute;
   width: 6vh;
   height: 6vh;
@@ -674,12 +644,12 @@ table a { color: #F99819; }
   margin-left: 1vh;
 }
 
-.notification-text{
+.notification-text {
   height: auto;
   margin: 1vh 6vh 1vh 8vh;
 }
 
-.time{
+.time {
   height: 1vh;
   color: #333;
   font-size: .7em;
@@ -688,18 +658,18 @@ table a { color: #F99819; }
   margin-right: 1vw;
 }
 
-#notification-footer{
+#notification-footer {
   height: 5vh;
   line-height: 5vh;
   text-align: center;
   vertical-align: middle;
 }
 
+
 /*--CREDITS--*/
-.overlay,
-.overlay-wrapper {
+.overlay, .overlay-wrapper {
   position: fixed;
-  top: 150%;/*Get it out of the viewport*/
+  top: 150%; /*get it out of the viewport*/
   left: 30%;
   width: 40%;
   height: 90%;
@@ -735,13 +705,10 @@ table a { color: #F99819; }
   font-size: 150%;
 }
 
-#credits li {
-  line-height: 240%;
-}
+#credits li { line-height: 240%; }
 
 #credits li img {
   width: 7%;
   height: 7%;
   padding-right: 2%;
 }
-
