@@ -35,7 +35,7 @@
     <h1 style="text-align:center;"><?php echo $topic['title'];?></h1>
   </div>
   <div id="topic-main">
-    <div id="topic-main-text">
+    <div class="topic-text" id="topic-main-text">
       <?php $user = get_user(intval($topic['user_id']));?>
       <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $topic['title'];?></h2>
       <div style="display:inline-block; opacity: 0.6;">Posted by <?php echo $user;?> on <?php echo date('M d, Y g:i a', $topic['time']);?></div>
@@ -47,7 +47,7 @@
     <?php $thankedposts = [];
     foreach ($posts as $post){ ?>
       <div class="topic-reply" id="<?php echo $post['post_id']; ?>">
-        <div class="topic-reply-text" <?php if($post == end($posts)) echo 'id="last"'; ?>>
+        <div class="topic-text topic-reply-text" <?php if($post == end($posts)) echo 'id="last"'; ?>>
           <?php $user = get_all_user($post['user_id']);?>
           <div class="topic-reply-top">
             <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $post['title'];?></h2>
@@ -63,6 +63,27 @@
           </div>
           <?php echo $post['text'];?>
         </div>
+<!--        <form action="discuss.php" method="post" id="edit" style="display:none">
+          <textarea name="edit"></textarea>
+          <div class="field" style="display:none">
+            Title: <input type="text" name="title" value="RE: <?php echo $topic['title'];?>" /><br/>
+          </div>
+          <div class="field">
+            <div class="field split left">
+              Edit: <a href="https://help.github.com/articles/github-flavored-markdown" title="Github Flavored Markdown" style="color:#777;font-size:.8em;line-height:2em" target="_blank" tabindex="1">(Parsed with Github Flavored Markdown)</a>
+              <br />
+              <textarea name="desc-source" style="vertical-align:top; height:200px;"><?php echo $post['source']; ?></textarea>
+              <input type="hidden" name="desc" />
+            </div>
+            <div class="field split right">
+              <div class="topic-text" name="preview"><?php echo $post['text'] ?></div>
+            </div>
+          </div>
+          <input type="hidden" name="mode" value="edit" />
+          <input type="button" value="Cancel" class="danger" id="cancel_edit" />
+          <input type="button" value="Edit" id="edit" disabled />
+          <input type="submit" style="display:none" />
+        </form>-->
       </div>
     <?php } ?>
     <?php if ($_SESSION['user_id']){ ?>
@@ -118,15 +139,22 @@
     Title: <input type="text" name="title" value="RE: <?php echo $topic['title'];?>" /><br/>
   </div>
   <div class="field">
-    Comment: <a href="https://help.github.com/articles/github-flavored-markdown" title="Github Flavored Markdown" style="color:#777;font-size:.8em;line-height:2em" target="_blank">(Parsed with Github Flavored Markdown)</a>
-    <br />
-    <textarea name="desc" placeholder="Write your comment here..." style="vertical-align:top; height:200px;"></textarea>
+    <div class="field split left">
+      Comment: <a href="https://help.github.com/articles/github-flavored-markdown" title="Github Flavored Markdown" style="color:#777;font-size:.8em;line-height:2em" target="_blank" tabindex="1">(Parsed with Github Flavored Markdown)</a>
+      <br />
+      <textarea name="desc-source" placeholder="Write your comment here..." style="vertical-align:top; height:200px;"></textarea>
+      <input type="hidden" name="desc" />
+    </div>
+    <div class="field split right">
+      <div class="topic-text" name="preview"></div>
+    </div>
   </div>
   <input type="hidden" name="forum" value="<?php echo $topic['forum_id'];?>" />
   <input type="hidden" name="mode" value="post">
   <input type="hidden" name="t" value="<?php echo $topic['topic_id'];?>" />
   <input type="button" value="Cancel" class="danger" id="cancel" />
-  <input type="submit" value="Comment" id="post" disabled />
+  <input type="button" value="Comment" id="post" disabled />
+  <input type="submit" style="display:none" />
 </form>
 </fieldset>
 
@@ -140,6 +168,10 @@
     $("#topic-a-comment").show();
     $("#topic-create-comment").slideToggle(300);
   });
+  $("#post").click(function () {
+    $("[name='desc']").val($("[name='preview']").html());
+    $("#form").submit();
+  })
 </script>
 <?php } ?>
 <?php } else{
