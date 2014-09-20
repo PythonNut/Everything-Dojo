@@ -1,13 +1,15 @@
-/*--FONT IMPORT--*/
+/**FONT IMPORTS**/
+/*@import url(http://fonts.googleapis.com/css?family=Cuprum:700); - is this the old import link? Can we delete it?*/
+
 @import url(http://fonts.googleapis.com/css?family=Lato:100);
 
 @font-face {
   font-family: 'Amble';
   src: url(../fonts/Amble-Regular-webfont.eot);
   src: url(../fonts/Amble-Regular-webfont.eot?#iefix) format('embedded-opentype'),
-       url(../fonts/Amble-Regular-webfont.woff) format('woff'),
-       url(../fonts/Amble-Regular-webfont.ttf) format('truetype'),
-       url(../fonts/Amble-Regular-webfont.svg#ambleregular) format('svg');
+         url(../fonts/Amble-Regular-webfont.woff) format('woff'),
+         url(../fonts/Amble-Regular-webfont.ttf) format('truetype'),
+         url(../fonts/Amble-Regular-webfont.svg#ambleregular) format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -16,9 +18,9 @@
   font-family: 'AmbleItalic';
   src: url(../fonts/Amble-Italic-webfont.eot);
   src: url(../fonts/Amble-Italic-webfont.eot?#iefix) format('embedded-opentype'),
-       url(../fonts/Amble-Italic-webfont.woff) format('woff'),
-       url(../fonts/Amble-Italic-webfont.ttf) format('truetype'),
-       url(../fonts/Amble-Italic-webfont.svg#ambleitalic) format('svg');
+         url(../fonts/Amble-Italic-webfont.woff) format('woff'),
+         url(../fonts/Amble-Italic-webfont.ttf) format('truetype'),
+         url(../fonts/Amble-Italic-webfont.svg#ambleitalic) format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -27,19 +29,9 @@
   font-family: 'Lato';
   src: url(../fonts/lato-lig-webfont.eot);
   src: url(../fonts/lato-lig-webfont.eot?#iefix) format('embedded-opentype'),
-       url(../fonts/lato-lig-webfont.woff) format('woff'),
-       url(../fonts/lato-lig-webfont.ttf) format('truetype'),
-       url(../fonts/lato-lig-webfont.svg#latolight) format('svg');
+         url(../fonts/lato-lig-webfont.woff) format('woff'),
+         url(../fonts/lato-lig-webfont.ttf) format('truetype'),
+         url(../fonts/lato-lig-webfont.svg#latolight) format('svg');
   font-weight: normal;
   font-style: normal;
-}
-
-@font-face {
-    font-family: 'Aller';
-    src: url(../fonts/aller_rg-webfont.eot);
-    src: url(../fonts/aller_rg-webfont.eot?#iefix) format('embedded-opentype'),
-         url(../fonts/aller_rg-webfont.woff) format('woff'),
-         url(../fonts/aller_rg-webfont.ttf) format('truetype');
-    font-weight: normal;
-    font-style: normal;
 }
