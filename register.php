@@ -6,32 +6,34 @@ $table = TB_NAME;
 $err = array();
 
 // Checks if usernames are free
-if (isset($_GET['username'])) {
-  $username = $_GET['username'];
-  $query = "SELECT count(*) AS total FROM $table WHERE user_name=?";
-  $rs_duplicate = $dbc->prepare($query);
-  $rs_duplicate->execute(array($username));
-  list($total) = $rs_duplicate->fetchColumn();
+if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+  if (isset($_GET['username'])) {
+    $username = $_GET['username'];
+    $query = "SELECT count(*) AS total FROM $table WHERE user_name=?";
+    $rs_duplicate = $dbc->prepare($query);
+    $rs_duplicate->execute(array($username));
+    list($total) = $rs_duplicate->fetchColumn();
 
-  if ($total > 0) {
-    http_response_code(400);
-  } else {
-    http_response_code(200);
+    if ($total > 0) {
+      exit("error");
+    } else {
+      exit("success");
+    }
   }
-}
 
-// Checks if emails exist in database
-if (isset($_GET['email'])) {
-  $email = $_GET['email'];
-  $query = "SELECT count(*) AS total FROM $table WHERE user_email=?";
-  $rs_duplicate = $dbc->prepare($query);
-  $rs_duplicate->execute(array($email));
-  list($total) = $rs_duplicate->fetchColumn();
+  // Checks if emails exist in database
+  if (isset($_GET['email'])) {
+    $email = $_GET['email'];
+    $query = "SELECT count(*) AS total FROM $table WHERE user_email=?";
+    $rs_duplicate = $dbc->prepare($query);
+    $rs_duplicate->execute(array($email));
+    list($total) = $rs_duplicate->fetchColumn();
 
-  if ($total > 0) {
-    http_response_code(400);
-  } else {
-    http_response_code(200);
+    if ($total > 0) {
+      exit("error");
+    } else {
+      exit("success");
+    }
   }
 }
 

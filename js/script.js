@@ -85,7 +85,7 @@ Message.prototype.show = function (fn) {
   // Get elClass
   this.elType = tmpType[this.type] || this.type;
 
-  el.className = !el.className.match(/(invalid|valid)/) ? el.className + this.elType : el.className.replace(/(invalid|valid)/, this.elType);
+  el.className = !el.className.match(/(invalid|valid)/) ? el.className + this.elType : el.className.replace(/ (invalid|valid)/, this.elType);
 
   // insert message in DOM right after element
   if (!el.nextElementSibling || !el.nextElementSibling.className.match(/(error|correct|notification)/)) {
@@ -114,7 +114,7 @@ Message.prototype.replace = function (fn) {
   if (msgWrap) {
     msgWrap.className = msgWrap.className.replace(/(error|correct|notification)/, this.type);
     msgWrap.innerHTML = this.msg;
-    this.el.className = this.el.className.replace(/(invalid|valid)/, this.elType);
+    this.el.className = this.el.className.replace(/ (invalid|valid)/, this.elType);
   }
 
   if (typeof fn === "function") {
