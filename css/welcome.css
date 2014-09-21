@@ -79,9 +79,6 @@ body {
   padding: 40px;
   margin-top: 20px;
   margin-bottom: 20px;
-
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing:  border-box;
   -ms-box-sizing:   border-box;
   -o-box-sizing:    border-box;
   box-sizing:     border-box;
@@ -98,9 +95,6 @@ body {
   opacity: 0.3;
 
   -webkit-transition: opacity 1s;
-  -moz-transition:  opacity 1s;
-  -ms-transition:   opacity 1s;
-  -o-transition:    opacity 1s;
   transition:     opacity 1s;
 }
 
@@ -108,8 +102,6 @@ body {
 
 .color { /*Slides that need a clear boundary*/
   background-color: #17A3A5;
-  -webkit-box-shadow: 0px 7px 30px -1px rgba(0, 0, 0, 0.91);
-  -moz-box-shadow:    0px 7px 30px -1px rgba(0, 0, 0, 0.91);
   box-shadow:         0px 7px 30px -1px rgba(0, 0, 0, 0.91);
 }
 
@@ -242,9 +234,6 @@ iframe {
     ... and position it below the bottom of the screen (relative to it's fixed position)
   */
   -webkit-transform: translateY(400px);
-  -moz-transform:  translateY(400px);
-  -ms-transform:   translateY(400px);
-  -o-transform:    translateY(400px);
   transform:     translateY(400px);
 
   /*
@@ -258,9 +247,6 @@ iframe {
     This way user will not see the hint moving down.
   */
   -webkit-transition: opacity 1s, -webkit-transform 0.5s 1s;
-  -moz-transition:  opacity 1s,  -moz-transform 0.5s 1s;
-  -ms-transition:   opacity 1s,   -ms-transform 0.5s 1s;
-  -o-transition:    opacity 1s,    -o-transform 0.5s 1s;
   transition:     opacity 1s,     transform 0.5s 1s;
 }
 
@@ -280,9 +266,6 @@ iframe {
   opacity: 1;
 
   -webkit-transform: translateY(0px);
-  -moz-transform:  translateY(0px);
-  -ms-transform:   translateY(0px);
-  -o-transform:    translateY(0px);
   transform:     translateY(0px);
 
   /*
@@ -294,9 +277,6 @@ iframe {
     transition.
   */
   -webkit-transition: opacity 1s 5s, -webkit-transform 0.5s 4.5s;
-  -moz-transition:  opacity 1s 5s,  -moz-transform 0.5s 4.5s;
-  -ms-transition:   opacity 1s 5s,   -ms-transform 0.5s 4.5s;
-  -o-transition:    opacity 1s 5s,    -o-transform 0.5s 4.5s;
   transition:     opacity 1s 5s,     transform 0.5s 4.5s;
 }
 
