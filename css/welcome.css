@@ -193,9 +193,11 @@ img {
 
 /* Modern design thingamy */
 .md {
-  font: 100px Lato;
+  font: 800 200px Helvetica;
   color: white;
-  text-shadow: #7CD9F0 0 0 10px;
+  text-shadow: #7CD9F0 0 0 20px;
+
+  margin-top: 25%;
 }
 
 
@@ -265,7 +267,7 @@ iframe {
 /*
   ... and we will show it when the first step (with id 'bored') is active.
 */
-.impress-on-bored .hint {
+.impress-on-step-1 .hint {
   /*
     We remove the transparency and position the hint in its default fixed
     position.
