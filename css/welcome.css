@@ -191,6 +191,13 @@ img {
   width: 50%;
 }
 
+/* Modern design thingamy */
+.md {
+  font: 100px Lato;
+  color: white;
+  text-shadow: #7CD9F0 0 0 10px;
+}
+
 
 /*--IFRAMES--*/
 iframe {
