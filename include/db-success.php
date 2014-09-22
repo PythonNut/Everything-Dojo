@@ -104,4 +104,4 @@
   setInterval(function(){ countdown(); },1000);
   </script>
 </section>
-<?php include('footer.php'); ?>
+<?php get_footer(); ?>
