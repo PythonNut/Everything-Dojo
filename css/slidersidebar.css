@@ -88,7 +88,6 @@
   background: transparent;
   -moz-appearance: none;
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
-  font-size: 1.7em;
   text-transform: uppercase;
   text-align: center;
   padding: 0.3em;
@@ -105,6 +104,9 @@
   border-color: #40902a;
   color: #fafafa;
 }
+
+.reg.linkbutton { font-size: 1.7em; padding: 0.3em; }
+.dev.linkbutton { font-size: 1.2em; padding: 0.6em 0.3em; }
 
 
 /*--HEADER--*/

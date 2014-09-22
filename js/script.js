@@ -586,7 +586,7 @@ function themizerRegular () {
     // Add code to the pre
     $("#lightbox-wrap pre").html(code);
     // Reset #copybutton to pre-copied state
-    $("#copycode.hover").text("Copy code to clipboard").removeClass("hover");
+    $("#copycode.hover").text("Copy Code to Clipboard").removeClass("hover");
     // Google-Code-Prettify won't do its job if the pre has class `prettyprinted` (http://stackoverflow.com/a/15984048/3472393)
     $("#lightbox-wrap pre.prettyprinted").removeClass("prettyprinted");
     prettyPrint();
@@ -666,9 +666,26 @@ function themizerDev () {
   sliderSidebar();
   $("head").append('<style id="dev-style"></style>');
 
-  // remove submit button and make sidebar-inner full height
-  $("#submit").remove();
-  $("#sidebar-inner").css("padding-bottom", "0");
+  // make sidebar-inner full height
+  // $("#sidebar-inner").css("padding-bottom", "0");
+
+  /**
+   * ZeroClipboard
+   */
+  var client = new ZeroClipboard($("#copycode"));
+
+  client.on("ready", function (readyEvent) {
+    client.on("aftercopy", function (event) {
+      event.target.innerHTML= "Copied";
+      event.target.classList.add("hover");
+      setTimeout(function () {
+        event.target.innerHTML= "Copy Code to Clipboard";
+        event.target.classList.remove("hover");
+      }, 1100);
+    });
+  });
+
+  $(window).mousemove();
 }
 
 

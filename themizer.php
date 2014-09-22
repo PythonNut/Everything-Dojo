@@ -17,13 +17,13 @@
   <link href=\"css/prettify-desert.css\" rel=\"stylesheet\" />"
   :
   "<link rel=\"stylesheet\" href=\"css/codemirror.min.css\" />");
-  $extra_js = "<script src=\"js/blog-fn.js\"></script>" .
+  $extra_js = "<script src=\"js/blog-fn.js\"></script>
+  <script src=\"js/ZeroClipboard.js\"></script>" .
   ($_GET["mode"] == "regular"
   ?
   "<script src=\"js/spectrum-1.3.4.min.js\" onload=\"$.fn.spectrum.load = false;\"></script>
   <script src=\"js/randomColor.js\"></script>
   <script src=\"js/prettify.js\"></script>
-  <script src=\"js/ZeroClipboard.js\"></script>
   <script>
     $(function () {
       \$('#lightbox').click(function () {
@@ -201,7 +201,6 @@
         </section>
         <section class="option-wrap">
           <textarea id="editor" style="font-family:Monaco,Consolas,'Courier New',monospace"></textarea>
-          <!-- add codemirror -->
         </section>
       </section>
 
@@ -230,8 +229,12 @@
 
     </section>
 
+    <?php if ($_GET["mode"] == "regular"): ?>
     <!-- `span` and not `a` to avoid accidental styling in Firefox  -->
-    <span href="#" class="linkbutton" id="submit">Get Code</span>
+    <span href="#" class="reg linkbutton" id="submit">Get Code</span>
+    <?php elseif ($_GET["mode"] == "development"): ?>
+    <span class="dev linkbutton" id="copycode" data-clipboard-target="dev-style">Copy Code to Clipboard</span>
+    <?php endif; ?>
 
   </section>
   <div id="side-resizer"></div>
