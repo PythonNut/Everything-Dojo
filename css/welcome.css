@@ -126,26 +126,23 @@ body {
 
 /*--TYPESETTING--*/
 h1 {
-  font-family: "Aller", sans-serif;
+  font-family: "PT Sans", sans-serif;
   font-size: 150%;
   text-align: center;
   width: 90%;
-  height: 15%;
+  height: 10%;
   left: 5%;
+  position: absolute;
 }
 
-h1.top {
-  top: 5%;
-  position: absolute;
+.step h1:first-child {
+  top: 10%;
   color: #333;
 }
 
-h1.end {
-  color: rgba(251,48,12,0.6);
-  font-size: 200%;
+.step h1:last-child {
   color: #56a351;
-  position: absolute;
-  bottom: 5%;
+  bottom: 10%;
 }
 
 h2 {
