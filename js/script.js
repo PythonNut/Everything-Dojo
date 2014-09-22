@@ -1,5 +1,7 @@
 /* jshint browser:true, jquery:true, -W098 */
 /* global ZeroClipboard:false, prettyPrint:false, randomColor:false */
+//This document requires jQuery to be loaded in order to properly run.
+
 
 /*******************
  * ARRAY FUNCTIONS *
@@ -160,23 +162,6 @@ Message.prototype.purge = function (fn) {
   return this;
 };
 
-// js/jQ functions that are available to run on any page. requires jQuery.
-
-var baseTheme = "core";
-
-// Set object for styling
-var styles = {
-  "body-backgroundColor"            : "white",
-  "body-backgroundImage"            : "",
-  "body-backgroundRepeat"           : "",
-  "body-fontFamily"                 : "",
-  "id_wrapper-backgroundColor"      : "#EDEDEA",
-  "class_entry-backgroundColor"     : "#EDEDEA",
-  "class_entrywrap-backgroundColor" : "#EDEDEA",
-  "class_row1-backgroundColor"      : "#EDEDEA",
-  "class_row2-backgroundColor"      : "#EDEDEA"
-};
-
 
 /******************
  * jQuery PLUGINS *
@@ -317,6 +302,7 @@ var styles = {
  * makes the header an absolutely positioned element with a slide
  * in/out button for pages which can't have elements affecting
  * viewport size (themizer, try-it)
+ * NOT IN USE
  */
 
 function sliderHeader () {
@@ -357,13 +343,24 @@ function sliderHeader () {
 }
 
 /**
- * slide sidebar in/out
+ * sliding sidebar in and out with responsive sizing and ultra cool open close button functionality
  */
+function sliderSidebar () { //referring to the exact and non-general (for lack of a better word) functionality of the sidebar in Themizer and Try-It
+  /*** VARIABLES ***/
+  // get viewport height
+  var vh = $(window).height()/100;
 
-function sliderSidebar () {
+  // find width of sidebar and of sideButton
+  var sideWidth = $("#sidebar").width(); //32 * vh used to be here but it was being overwritten by this later declaration w/ CSS
+      sideButtonWidth =  2*vh;
+
+  // set whether user is active or not for later
+  var idleTimer = null,
+      idleState = true;
+
   // figure out width of sidebar for positioning when hidden/shown
-  var sideWidth = $("#sidebar").width();
 
+  /*** FUNCTIONS ***/
   // add open/hide button
   $("#sidebar").append('<div id="side-button" class="slideButton right">&laquo;</div>');
 
@@ -401,31 +398,6 @@ function sliderSidebar () {
       openSide = true;
     }
   });
-}
-
-/**
- * Themizer init
- */
-function themizer () {
-  /*************
-   * VARIABLES *
-   *************/
-  // get viewport height
-  var vh = $(window).height()/100;
-
-  // find width of sidebar and of sideButton
-  var sideWidth       = 32*vh,
-      sideButtonWidth =  2*vh;
-
-  // set whether user is active or not for later
-  var idleTimer = null,
-      idleState = true;
-
-  /*************
-   * FUNCTIONS *
-   *************/
-  // sidebar sliding init
-  sliderSidebar();
 
   // Set sidebar styles
   $("#sidebar")      .css("font-size", 2*vh);
@@ -444,7 +416,7 @@ function themizer () {
   $(".expanded").removeClass("collapsed");
   $(".expanded").next().slideDown();
 
-  // view mode radios
+  // view mode radios; these appear in both themizer & try-it
   $("[name='view']").change(function () {
     $("#blog-body").load("blog/blog-" + $("[name='view'] :checked").val() + ".html");
   });
@@ -503,7 +475,7 @@ function themizer () {
     // user mouse in "targeted" zone
     // We cannot use jQuery animations as they are too CPU-intensive
     // Instead, we just add .targeted.
-    if (event.pageX < sideWidth*2/3) {
+    if (event.pageX < sideWidth * 2/3) {
       $(".closed #side-button").addClass("targeted");
     } else {
       $(".closed #side-button").removeClass("targeted");
@@ -530,11 +502,29 @@ function themizer () {
   });
 }
 
+/*******************
+ *   THEMIZER JS   *
+ *******************/
+var baseTheme = "core";
+
+// Set object for styling
+var styles = {
+  "body-backgroundColor"            : "white",
+  "body-backgroundImage"            : "",
+  "body-backgroundRepeat"           : "",
+  "body-fontFamily"                 : "",
+  "id_wrapper-backgroundColor"      : "#EDEDEA",
+  "class_entry-backgroundColor"     : "#EDEDEA",
+  "class_entrywrap-backgroundColor" : "#EDEDEA",
+  "class_row1-backgroundColor"      : "#EDEDEA",
+  "class_row2-backgroundColor"      : "#EDEDEA"
+};
+
 /**
- * Themizer (Regular mode)
+ * Themizer (Regular mode) Init
  */
 function themizerRegular () {
-  themizer();
+  sliderSidebar();
   // Base style
   $("head").append("<link href='blog/css/core.css' type='text/css' rel='stylesheet' id='base-theme'>");
 
@@ -571,7 +561,7 @@ function themizerRegular () {
       thiselement += j + " {\n";
       for (var k in selectors[j]) {
         if (selectors[j][k] || selectors[j][k] !== '') {
-          thiselement += "    " + k + ": " + selectors[j][k] + ";\n";
+          thiselement += "  " + k + ": " + selectors[j][k] + ";\n";
         }
       }
       thiselement += "}\n\n";
@@ -595,12 +585,9 @@ function themizerRegular () {
      */
     // Add code to the pre
     $("#lightbox-wrap pre").html(code);
-
     // Reset #copybutton to pre-copied state
     $("#copycode.hover").text("Copy code to clipboard").removeClass("hover");
-
-    // Google-Code-Prettify won't do its job if the pre has class `prettyprinted`
-    // http://stackoverflow.com/a/15984048/3472393
+    // Google-Code-Prettify won't do its job if the pre has class `prettyprinted` (http://stackoverflow.com/a/15984048/3472393)
     $("#lightbox-wrap pre.prettyprinted").removeClass("prettyprinted");
     prettyPrint();
     $("#lightbox").show();
@@ -673,105 +660,70 @@ function themizerRegular () {
 }
 
 /**
- * Themizer (Developer mode)
+ * Themizer (Developer mode) Init
  */
 function themizerDev () {
-  themizer();
+  sliderSidebar();
   $("head").append('<style id="dev-style"></style>');
 
   // remove submit button and make sidebar-inner full height
   $("#submit").remove();
   $("#sidebar-inner").css("padding-bottom", "0");
 }
+
+
+
+/*******************
+ *    TRY-IT JS    *
+ *******************/
 /**
  * Try-It init
  */
-
 function tryit () {
-  /*************
-   * VARIABLES *
-   *************/
-  // get viewport height
-  var vh = $(window).height()/100;
-
-  // find width of header and of headerButton
-  var headerHeight = 11.6*vh,
-      headerButtonHeight =  2*vh;
-
-  // set whether user is active or not for later
-  var idleTimer = null,
-      idleState = true;
-
-  /*************
-   * FUNCTIONS *
-   *************/
-  // header sliding init
-  sliderHeader();
-
-  // Set header styles
-  $("header")        .css("font-size", 2.22*vh);
-  $("#headerwrap")   .height(headerHeight);
-  $("#header-button").css("top", headerHeight);
-
-  // Show/hide headerButton
-  // modify headerButton on click
-  $("#header-button").click(function () {
-    // fires when header is to be closed
-    if ($("header").css("top") == "0px" && $("header").hasClass("opened")) {
-      $("#header-button").addClass("triggered");
-      $("#blog-body").animate({
-        marginTop: 0
-      }, 400);
-      idleState = true; // since user is active
-    } else {
-      $("#header-button").removeClass("targeted");
-      $("#blog-body").animate({
-        marginTop: 13.6*vh
-      });
-    }
-  });
-
-  // show headerButton on mousemove + scroll
-  // taken and modified from http://css-tricks.com/snippets/jquery/fire-event-when-user-is-idle/
-  $(window).bind('mousemove scroll', function (event) {
-    clearTimeout(idleTimer); // clear timeout if user acts
-
-    // user active
-    if (idleState === true) {
-      // Reactivated event
-      $(".closed #header-button").addClass("triggered").animate({
-        top: headerHeight
-      }, 100);
-    }
-
-    // user mouse in "targeted" zone
-    // We cannot use jQuery animations as they are too CPU-intensive
-    // Instead, we just add .targeted.
-    if ($("header").hasClass("closed")) {
-      if (event.pageY < headerHeight) {
-        $(".closed #header-button").addClass("targeted");
-        $("#blog-body").css("margin-top", 2*vh);
-      } else {
-        $(".closed #header-button").removeClass("targeted");
-        $("#blog-body").css("margin-top", 0);
-      }
-    }
-
-    idleState = false;
-
-    // user inactive
-    idleTimer = setTimeout(function () {
-      // Idle Event
-      // cursor outside target zone
-      $("#header-button").removeClass("triggered");
-      $(".closed #header-button:not(:hover):not(.targeted)").animate({
-        top: headerHeight - headerButtonHeight
-      }, 1500);
-      // cursor inside target zone
-      $("#header-button").removeClass("targeted");
-      idleState = true;
-    }, 4000);
-  });
-
+  sliderSidebar();
   $(window).mousemove();
+}
+
+
+/*******************
+ *  NOTIFICATIONS  *
+ *******************/
+$(function () {
+  $("#notifications").hide();
+
+  $('body').click(function (e) {
+    if($(e.target).closest('.notification-link, #notifications').length === 0) {
+      $("#notifications").hide("fast", "swing");
+    }
+  });
+});
+
+function show_notifications() {
+  $("#notifications").toggle(350);
+}
+
+function mark_read(id) {
+  $.ajax({
+    url: '/include/ajax_handler.php',
+    data: {
+      action: 'mark_read',
+      notification_id: id
+    },
+    type: 'post',
+    success: function() {}
+  });
+}
+
+function mark_all_read(user_id) {
+  $.ajax({
+    url: '/include/ajax_handler.php',
+    data: {
+      action: 'mark_all_read',
+      user_id: user_id
+    },
+    type: 'post',
+    success: function() {
+      location.reload();
+    }
+  });
 }

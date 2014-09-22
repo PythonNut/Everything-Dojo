@@ -10,7 +10,7 @@
   include("include/include.php");
   session_start();
   $extra_style = "<link rel=\"stylesheet\" href=\"css/blog-style.css\">
-  <link rel=\"stylesheet\" href=\"css/themizer.css\">" .
+  <link rel=\"stylesheet\" href=\"css/slidersidebar.css\">" .
   ($_GET["mode"] == "regular"
   ?
   "<link rel=\"stylesheet\" href=\"css/spectrum.min.css\">
@@ -25,11 +25,19 @@
   <script src=\"js/prettify.js\"></script>
   <script src=\"js/ZeroClipboard.js\"></script>
   <script>
-  $(function(){\$('#lightbox').click(function(){\$(this).hide();});$('#lightbox-wrap').click(function(e){e.stopPropagation();});themizerRegular();
-  });</script>"
+    $(function () {
+      \$('#lightbox').click(function () {
+        \$(this).hide();
+      });
+      $('#lightbox-wrap').click(function (e) {
+        e.stopPropagation();
+      });
+      themizerRegular();
+    });
+  </script>"
   :
   "<script src=\"js/codemirror-4.4.min.js\"></script>
-  <script>$(function(){themizerDev();});</script>");
+  <script>$(function () { themizerDev(); });</script>");
 
   get_header();
 ?>
