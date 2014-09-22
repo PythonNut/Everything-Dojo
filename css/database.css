@@ -77,7 +77,8 @@ a.mcp-link:link {
 
 #fields { float: left; }
 
-[type="radio"], [type="checkbox"] {
+[type="radio"],
+[type="checkbox"] {
   width: auto;
   margin-right: 3px;
 }

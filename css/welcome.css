@@ -166,6 +166,7 @@ ul {
 li:nth-child(2n+1) {
   color: #56A351;
 }
+
 li:nth-child(2n) {
   color: #2A9BD9;
 }
@@ -211,40 +212,22 @@ iframe {
 }
 
 .hint {
-  /*
-    We hide the hint until presentation is started and from browsers not supporting
-    impress.js, as they will have a linear scrollable view ...
-  */
+  /* hide hint until presentation is started, from browser not supporting impress.js */
   display: none;
-
-  /*
-    ... and give it some fixed position and nice styles.
-  */
   position: fixed;
   left: 0;
   right: 0;
   bottom: 200px;
-
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   color: #EEE;
   text-align: center;
-
   font-size: 50px;
   padding: 20px;
-
   z-index: 100;
-
-  /*
-    By default we don't want the hint to be visible, so we make it transparent ...
-  */
-  opacity: 0;
-
-  /*
-    ... and position it below the bottom of the screen (relative to it's fixed position)
-  */
+  opacity: 0; /* default invisible */
+  /* position below the bottom of the screen (relative to its fixed position) */
   -webkit-transform: translateY(400px);
   transform:     translateY(400px);
-
   /*
     Now let's imagine that the hint is visible and we want to fade it out and move out
     of the screen.
@@ -259,24 +242,15 @@ iframe {
   transition:     opacity 1s,     transform 0.5s 1s;
 }
 
-/*
-  Now we 'enable' the hint when presentation is initialized ...
-*/
+/* Now we 'enable' the hint when presentation is initialized ... */
 .impress-enabled .hint { display: block }
 
-/*
-  ... and we will show it when the first step (with id 'bored') is active.
-*/
+/* ... and we will show it when the first step (with id 'bored') is active. */
 .impress-on-step-1 .hint {
-  /*
-    We remove the transparency and position the hint in its default fixed
-    position.
-  */
+  /* remove the transparency and position the hint in its default fixed position. */
   opacity: 1;
-
   -webkit-transform: translateY(0px);
   transform:     translateY(0px);
-
   /*
     Now for fade in transition we have the oposite situation from the one
     above.
@@ -310,5 +284,5 @@ iframe {
 
   So use it wisely ... or don't use at all.
 */
-.impress-enabled      { pointer-events: none }
+.impress-enabled          { pointer-events: none }
 .impress-enabled #impress { pointer-events: auto }
