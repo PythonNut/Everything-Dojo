@@ -1,8 +1,13 @@
-/* Themizer CSS */
+/* sliderSidebar CSS */
 
 @import url('fonts.css');
 
+
+/*--COLORS--*/
+.database { background: #d553cb; }
 .themizer { background: #51b835; }
+.tryit    { background: #ff6c00; }
+.discuss  { background: #509aff; }
 
 
 /*--LAYOUT--*/
@@ -145,40 +150,6 @@
 }
 
 .closed #side-resizer { pointer-events: none; }
-
-
-/*--LIGHTBOX--*/
-#lightbox {
-  position: fixed; /* keeps the lightbox window in the current viewport */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  display: none;
-  text-align: left;
-  font-size: 16px;
-  z-index: 200; /* to beat the #sidebar! */
-}
-
-#lightbox-wrap {
-  background: #ddd;
-  width: 65%;
-  height: 70%;
-  margin: 5em auto;
-  box-shadow: 0 0 25px #111;
-  padding: 2em;
-}
-
-#lightbox-wrap pre {
-  overflow: auto;
-  height: 70%;
-  padding: 1.5em;
-  box-shadow: 0 0 1.3em #000 inset;
-}
-
-/* override every-fifth-line numbering of code */
-#lightbox-wrap pre li { list-style-type: decimal; }
 
 
 /*--SLIDE BUTTONS--*/
@@ -453,3 +424,38 @@
   box-shadow: inset 0 0 0.4em #444;
   border-radius: 1em;
 }
+
+
+/*--LIGHTBOX--*/
+/* Only used in Themizer (Reg) */
+#lightbox {
+  position: fixed; /* keeps the lightbox window in the current viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  text-align: left;
+  font-size: 16px;
+  z-index: 200; /* to beat the #sidebar! */
+}
+
+#lightbox-wrap {
+  background: #ddd;
+  width: 65%;
+  height: 70%;
+  margin: 5em auto;
+  box-shadow: 0 0 25px #111;
+  padding: 2em;
+}
+
+#lightbox-wrap pre {
+  overflow: auto;
+  height: 70%;
+  padding: 1.5em;
+  box-shadow: 0 0 1.3em #000 inset;
+}
+
+/* override every-fifth-line numbering of code */
+#lightbox-wrap pre li { list-style-type: decimal; }
