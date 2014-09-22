@@ -9,8 +9,8 @@
     <link href="/images/favicon.ico" rel="shortcut icon">
     <link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon.png">
     <?php if ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)" && $title != "Try-It") { ?>
-    <link href="/css/normalize.css" type="text/css" rel="stylesheet">
-    <link href="/css/style.css" type="text/css" rel="stylesheet">
+    <link href="/css/normalize.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
     <?php } ?>
     <?php global $extra_style; print $extra_style; ?>
 
@@ -20,7 +20,7 @@
     <?php global $extra_js; print $extra_js; ?>
 
     <noscript>
-      <link href="/css/noscript.css" type="text/css" rel="stylesheet">
+      <link href="/css/noscript.css" rel="stylesheet">
     </noscript>
 
   </head>
