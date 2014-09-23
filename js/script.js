@@ -419,6 +419,7 @@ function sliderSidebar () { //referring to the exact and non-general (for lack o
   // view mode radios; these appear in both themizer & try-it
   $("[name='view']").change(function () {
     $("#blog-body").load("blog/blog-" + $("[name='view'] :checked").val() + ".html");
+    $(".text").trigger("keyup");
   });
   $("[name='base']").change(function () {
     $("link[id='base-theme']").attr('href', "blog/css/" + $("[name='base'] :checked").val() + ".css");
