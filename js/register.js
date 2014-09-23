@@ -78,7 +78,7 @@ document.onready = function () {
             ajaxName.setRequestHeader("X-Requested-With", "XMLHttpRequest");
             ajaxName.send();
           } catch (error) {
-            throw new Error("An AJAX error occured:" + error);
+            throw new Error("An AJAX error occured: " + error);
           }
         }, 300);
       }
@@ -91,7 +91,7 @@ document.onready = function () {
         keycode = ('which' in e) ? e.which : e.keyCode; // key validation
 
     if ((keycode > 47 && keycode < 60) || (keycode > 64 && keycode < 91) || (keycode > 95 && keycode < 112) || (keycode > 185 && keycode < 193) || (keycode > 218 && keycode < 223) || keycode == 32 || keycode == 8 || keycode == 13 || keycode == 46) {
-      if (!/^\S+@(localhost|([\w\d-]{2,}\.){1,2}[\w]{2,6})$/i.test(email)) {
+      if (!/^\S+@(localhost|([\w\d-]{2,}\.){1,2}[a-z]{2,6})$/i.test(email)) {
         clearTimeout(emailTimeout);
         ajaxEmail.abort();
         userEmail.assign("Email entered is not a valid email.", "error").show();
@@ -128,7 +128,7 @@ document.onready = function () {
             ajaxEmail.setRequestHeader("X-Requested-With", "XMLHttpRequest");
             ajaxEmail.send();
           } catch (error) {
-            throw new Error("An AJAX error occured:" + error);
+            throw new Error("An AJAX error occured: " + error);
           }
         }, 300);
       }
@@ -206,5 +206,82 @@ document.onready = function () {
       submit.removeAttribute("disabled");
     }
   }
+
+  /**
+   * Submit form over AJAX
+   *
+   * Uses jQuery
+   */
+
+  /* global jQuery:true, Recaptcha:true */
+
+  (function ($) {
+    // Elements
+    var $form   = $("[name='regForm']"),
+        $submit = $("[name='doRegister']");
+
+    // ReCAPTCHA error message init
+    var recaptchaMsg = new Message("#message");
+
+    // Prep form for AJAX submission
+    $form.attr("onsubmit", "return false;").removeAttr("action");
+    $("[name='ajax']").val(true);
+    $submit.attr("type", "button");
+
+    $submit.click(function () {
+      $.ajax({
+        type: "POST",
+        url: "register.php",
+        data: $("[name='regForm']").serialize(),
+        beforeSend: function () {
+          submit.setAttribute("disabled", true);
+          recaptchaMsg.purge();
+          $submit.next().css({
+            display : "inline",
+            left    : "4rem",
+            top     : "0"
+          });
+        },
+        success: function (msg) {
+          setTimeout(function () {
+            switch (msg) {
+              case "recaptcha":
+                recaptchaMsg.assign("Recaptcha failed! Please try again.", "error").show(function () {
+                  recaptchaMsg.el.nextElementSibling.style.bottom = "1em";
+                  recaptchaMsg.el.nextElementSibling.style.left = "325px";
+                });
+                submit.removeAttribute("disabled");
+                break;
+              case "username":
+                userName.assign("Username is not a valid username.", "error").show();
+                break;
+              case "useremail exists":
+                userName.assign("Username/email already exists in database.", "error").show();
+                userEmail.assign("Username/email already exists in database.", "error").show();
+                break;
+              case "email":
+                userEmail.assign("Email is not a valid email.", "error").show();
+                break;
+              case "password":
+                userPwd.assign("Passwords did not meet the requirements or did not match.", "error").show();
+                userPwdVal.assign("Passwords did not meet the requirements or did not match.", "error").show();
+                break;
+              case "success":
+                $("#content").animate({
+                  opacity: 0
+                }, 500, function () {
+                  $(this).css("opacity", 1).html("<p>Thank you; your registration is now complete. After activation, you can login <a href='login.php'>here</a>.</p>");
+                });
+                break;
+              default:
+                window.alert("Unknown response received");
+            }
+            $submit.next().css("display", "");
+            Recaptcha.reload(); // automatically reload reCAPTCHA
+          }, 3000);
+        }
+      });
+    });
+  })(jQuery);
 
 };

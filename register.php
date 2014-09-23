@@ -5,8 +5,10 @@ $table = TB_NAME;
 
 $err = array();
 
+$ajax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+
 // Checks if usernames are free
-if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+if ($ajax) {
   if (isset($_GET['username'])) {
     $username = $_GET['username'];
     $query = "SELECT count(*) AS total FROM $table WHERE user_name=?";
@@ -37,7 +39,27 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
   }
 }
 
-if(isset($_POST['doRegister']))  {
+if((isset($_POST['ajax']) && $_POST['ajax'] === "true") && $ajax) {
+  foreach($_POST as $key => $value) {
+    $data[$key] = filter($value);
+  }
+
+  require_once('recaptchalib.php');
+
+  $resp = recaptcha_check_answer($privatekey, $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"], $_POST["recaptcha_response_field"]);
+
+  // Check/validate fields
+  if (!$resp->is_valid) {
+    exit("recaptcha");
+  } elseif (!isUserID($data['user_name'])) {
+    exit("username");
+  } elseif (!isEmail($data['usr_email'])) {
+    exit("email");
+  } elseif (!checkPwd($data['pwd'], $data['pwd2'])) {
+    exit("password");
+  }
+
+} elseif (isset($_POST['doRegister'])) {
   foreach($_POST as $key => $value) {
     $data[$key] = filter($value);
   }
@@ -63,7 +85,9 @@ if(isset($_POST['doRegister']))  {
   if (!checkPwd($data['pwd'], $data['pwd2'])) {
     $err[] = "Invalid password or mismatch! Passwords must be at least 4 characters long and both fields must match.";
   }
+}
 
+if (!empty($_POST)) {
   $user_ip = $_SERVER['REMOTE_ADDR'];
   $sha1pass = PwdHash($data['pwd']);
   $host = $_SERVER['HTTP_HOST'];
@@ -77,7 +101,11 @@ if(isset($_POST['doRegister']))  {
   list($total) = $rs_duplicate->fetchColumn();
 
   if ($total > 0) {
-    $err[] = "The username/email already exists. Please try again with different username and email.";
+    if ($ajax) {
+      exit("username or email exists");
+    } else {
+      $err[] = "The username/email already exists. Please try again with different username and email." ;
+    }
   }
 
   if (empty($err)) {
@@ -86,29 +114,31 @@ if(isset($_POST['doRegister']))  {
     $user_id = $dbc->lastInsertId();
     $md5_id = md5($user_id);
     $dbc->prepare("UPDATE $table SET md5_id=? WHERE id=?")->execute(array($md5_id,$user_id));
-    $pwdcensored = substr($data['pwd'], 0, 3).str_repeat("*", strlen($data['pwd']) - 3);
 
     $a_link = "You can activate your account at this link:\nhttp://$host/activate.php?user=$md5_id&activ_code=$activ_code";
 
-    $message =
-"Hello,
+    $message = <<<EOT
+Hello,
 
 Thank you for registering with us. Here are your login details:
 
 User ID: $user_name
-Password: $pwdcensored
 Activation Code: $activ_code
 
 $a_link
 
 Administrator @ Everything Dojo
-______________________________________________________
-This is an automated response. Do not reply to this email.";
+__________________________________________________________
+This is an automated response. Do not reply to this email.
+
+EOT;
 
     mail($usr_email, "Thank you for registering with Everything Dojo", $message, "From: \"Everything Dojo Registration\" <no-reply@$host>\r\n");
 
-    header("Location: register.php?done=yes");
-    exit();
+    if (!$ajax) {
+      header("Location: register.php?done=yes");
+    }
+    exit("success");
   }
 }
 
@@ -129,7 +159,7 @@ This is an automated response. Do not reply to this email.";
 
   <p id="errors">
     <?php //spit out all errors
-    if (!empty($err))  {
+    if (!empty($err)) {
       foreach ($err as $e) {
         echo "ERROR - ".$e."<br />";
       }
@@ -161,12 +191,17 @@ This is an automated response. Do not reply to this email.";
     </div>
     <label>Image Verification</label>
     <div class="field">
-    <?php
-      require_once('recaptchalib.php');
-      echo recaptcha_get_html($publickey);
-    ?>
+      <?php
+        require_once('recaptchalib.php');
+        echo recaptcha_get_html($publickey);
+      ?>
+      <div id="message"></div>
     </div>
-    <input name="doRegister" type="submit" id="doRegister" value="Register" disabled>
+    <input type="hidden" name="ajax" value="false">
+    <div class="field">
+      <input name="doRegister" type="submit" id="doRegister" value="Register" disabled>
+      <img class="wait" src="images/loading.gif" alt="Please wait...">
+    </div>
   </form>
   <?php } //end not done ?>
 </section>

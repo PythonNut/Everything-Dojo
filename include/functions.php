@@ -77,7 +77,7 @@
   }
 
   function isEmail($email) {
-    return preg_match('/^\S+@[\w\d.-]{2,}\.[\w]{2,6}$/iU', $email) ? TRUE : FALSE;
+    return preg_match('/^\S+@[\w\d.-]{2,}\.[a-z]{2,6}$/iU', $email) ? TRUE : FALSE;
   }
 
   function isUserID($username) {
