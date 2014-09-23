@@ -127,7 +127,7 @@
   z-index: 100;
 }
 
-#sideheadebar::after {
+#sideheadbar::after {
   content: "";
   position: absolute;
   top: 0;
@@ -138,8 +138,8 @@
   z-index: 100;
 }
 
-#sideheadebar.themizer::after { background: #57c639; }
-#sideheadebar.tryit::after    { background: #F16500; }
+#sideheadbar.themizer::after { background: #57c639; }
+#sideheadbar.tryit::after    { background: #F16500; }
 
 .opened #sideheadbar::after { right: -2vh; }
 .closed #sideheadbar::after { left: 0; }
