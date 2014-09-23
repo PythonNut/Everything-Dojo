@@ -14,27 +14,6 @@ function containsAny(needle, haystack) {
   return false;
 }
 
-// Override the default string trimming methods to be more useful
-String.prototype.trimLeft = function(charlist) {
-  if (charlist === undefined) {
-    charlist = "\\s";
-  }
-
-  return this.replace(new RegExp("^[" + charlist + "]+"), "");
-};
-
-String.prototype.trimLeft = function(charlist) {
-  if (charlist === undefined) {
-    charlist = "\\s";
-  }
-
-  return this.replace(new RegExp("[" + charlist + "]+$"), "");
-};
-
-String.prototype.trim = function(charlist) {
-  return this.trimLeft(charlist).trimRight(charlist);
-};
-
 $(document).ready(function () {
   var search = $(".search");
 
@@ -42,7 +21,7 @@ $(document).ready(function () {
     $(".style").each(function () {
       var mainText = $(this).children().first().text().toLowerCase();
 
-      var query = search.val().toLowerCase();
+      var query = search.val().toLowerCase().trim(); // Leading and trailing whitespace makes all themes visible, so remove it
 
       // FIXME filters are super buggy, save them for the next update.
       /*
