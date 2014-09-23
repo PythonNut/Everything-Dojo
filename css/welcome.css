@@ -1,7 +1,49 @@
 /*--Some of the CSS was taken from impress-demo.css--*/
 
 @import url("fonts.css"); /*Import fonts*/
-@import url("normalize.css");
+
+/*--INITAL RESET--*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section { /*HTML5 display-role reset for older browsers*/
+  display: block;
+}
+
+body { line-height: 1; }
+
+ol, ul { list-style: none; }
+
+blockquote, q { quotes: none; }
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
 
 
 /*--BODY--*/
@@ -63,17 +105,15 @@ body {
   box-shadow:         0px 7px 30px -1px rgba(0, 0, 0, 0.91);
 }
 
-#overview { display: none }
-
 .impress-on-overview .step {
   opacity: 1;
-  cursor: pointer;
 }
 
 
 /*--COLORS--*/
 .slide.tan {
-  background-color: #D1B377;
+  /*background-color: #D1B377;*/
+  background-color: #f0a93e;
 }
 
 .slide.dark {
@@ -83,25 +123,23 @@ body {
 
 /*--TYPESETTING--*/
 h1 {
-  font-family: "Aller", sans-serif;
+  font-family: "PT Sans", sans-serif;
   font-size: 150%;
   text-align: center;
   width: 90%;
+  height: 10%;
   left: 5%;
+  position: absolute;
 }
 
-h1.top {
-  top: 5%;
-  position: absolute;
+.step h1:first-child {
+  top: 10%;
   color: #333;
 }
 
-h1.end {
-  color: rgba(251,48,12,0.6);
-  font-size: 200%;
+.step h1:last-child {
   color: #56a351;
-  position: absolute;
-  bottom: 5%;
+  bottom: 10%;
 }
 
 h2 {
@@ -124,7 +162,6 @@ ul {
 li:nth-child(2n+1) {
   color: #56A351;
 }
-
 li:nth-child(2n) {
   color: #2A9BD9;
 }
@@ -150,8 +187,8 @@ img {
   width: 50%;
 }
 
-/* Modern design thingamy */
-.md {
+/*--MODERN DESIGN--*/
+#md {
   font: 800 200px Helvetica;
   color: white;
   text-shadow: #7CD9F0 0 0 20px;
@@ -159,6 +196,16 @@ img {
   margin-top: 25%;
 }
 
+/* Overview */
+#overview {
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 100px 100px rgba(0, 0, 0, 0.3);
+}
+
+#overview img {
+  width: 75%;
+  margin-top: 5%;
+}
 
 /*--IFRAMES--*/
 iframe {

@@ -351,7 +351,7 @@ function sliderSidebar () { //referring to the exact and non-general (for lack o
   var vh = $(window).height()/100;
 
   // find width of sidebar and of sideButton
-  var sideWidth = $("#sidebar").width(); //32 * vh used to be here but it was being overwritten by this later declaration w/ CSS
+  var sideWidth = $("#sidebar").width(), //32 * vh used to be here but it was being overwritten by this later declaration w/ CSS
       sideButtonWidth =  2*vh;
 
   // set whether user is active or not for later
@@ -419,6 +419,7 @@ function sliderSidebar () { //referring to the exact and non-general (for lack o
   // view mode radios; these appear in both themizer & try-it
   $("[name='view']").change(function () {
     $("#blog-body").load("blog/blog-" + $("[name='view'] :checked").val() + ".html");
+    $(".text").trigger("keyup");
   });
   $("[name='base']").change(function () {
     $("link[id='base-theme']").attr('href', "blog/css/" + $("[name='base'] :checked").val() + ".css");
