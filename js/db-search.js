@@ -41,11 +41,13 @@ $(document).ready(function () {
   search.on("propertychange keyup input paste", function () {
     $(".style").each(function () {
       var mainText = $(this).children().first().text().toLowerCase();
-      var stage = $(this).children().last().text().toLowerCase();
-      var author = $(this).children().first().next().text().toLowerCase();
 
       var query = search.val().toLowerCase();
 
+      // FIXME filters are super buggy, save them for the next update.
+      /*
+      var stage = $(this).children().last().text().toLowerCase();
+      var author = $(this).children().first().next().text().toLowerCase();
       var authorRegex = /(^|[^\\])@[a-zA-Z0-9_]+(\b|$)/ig;
       var releaseRegex = /(^|[^\\])#\[?(release|beta|alpha|dev)\]?(\b|$)/ig;
       var requiredRegex = /(^|[^\\])\+\S+(?=(\s|$))/ig;
@@ -127,10 +129,10 @@ $(document).ready(function () {
 
           return forbiddenMatch; // forbiddenMatch is false if a forbidden word has been found, and Array.prototype.every() stops if the callback returns false
         });
-      }
+      }*/
 
 
-      if (! (containsAny(query, mainText) && authorMatch && releaseMatch && requiredMatch && forbiddenMatch)) {
+      if (! (containsAny(query, mainText) /*&& authorMatch && releaseMatch && requiredMatch && forbiddenMatch*/)) {
         $(this).fadeOut();
       }
 
