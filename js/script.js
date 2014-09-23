@@ -678,7 +678,7 @@ function themizerDev () {
     client.on("aftercopy", function (event) {
       event.target.innerHTML= "Copied";
       event.target.classList.add("hover");
-      setTimeout(function () {
+      setTimeout(function () { //after a while, go back to non-copied state
         event.target.innerHTML= "Copy Code to Clipboard";
         event.target.classList.remove("hover");
       }, 1100);

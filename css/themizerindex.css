@@ -52,7 +52,6 @@ h6 {
   border-bottom: 1px solid #bbb;
 }
 
-#headerwrap { width: 93%; }
 #headerwrap a { cursor: pointer; }
 
 #themizer-bar {
@@ -61,13 +60,14 @@ h6 {
   box-shadow: inset 0 0 1em 0 #222;
   color: white;
   margin: .5em auto;
-  width: 100vw;
+  width: 102vw;
   position: relative;
   left: -12.5%;
   padding: 2em;
   font-family: 'Lato Hairline', 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', sans-serif;
   font-weight: 100; /* epiphany aka safari for linux doesn't do it right without this */
 }
+
 #themizer-bar .note {
   text-align: center;
   font-size: 1.1em;
