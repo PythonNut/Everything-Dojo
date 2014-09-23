@@ -1,60 +1,55 @@
-input,select,textarea
-{
+input,
+select,
+textarea {
   border: 1px solid #d0d0d0;
-  font-family: Verdana,Arial,Helvetica,sans-serif;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 13px;
 }
 
-button,input[type=reset],input[type=button],input[type=submit]
-{
+button,
+input[type=reset],
+input[type=button],
+input[type=submit] {
   text-align: center;
   white-space: pre;
   padding: 0 6px;
 }
 
-.deleted
-{
+.deleted {
   background-color: #A19CA6;
 }
 
-.foe
-{
+.foe {
   background-color: #F60;
 }
 
-.num_replies
-{
+.num_replies {
   float: right;
 }
 
-.no_blogs
-{
+.no_blogs {
   text-align: center;
   font-size: 1.3em;
   font-weight: 700;
 }
 
-#replies
-{
+#replies {
   text-align: center;
   margin-top: 15px;
 }
 
-#left_menu
-{
+#left_menu {
   width: 240px;
   vertical-align: top;
 }
 
-#blog_searchform
-{
+#blog_searchform {
   color: #FFF;
   margin-top: 5px;
   white-space: nowrap;
 }
 
-body
-{
+body {
   font-size: 8pt;
   font-family: Arial;
   text-align: center;
@@ -63,37 +58,31 @@ body
   padding: 0;
 }
 
-textarea
-{
+textarea {
   line-height: 1.4em;
   padding: 5px;
 }
 
-.inputbox
-{
+.inputbox {
   width: 100%;
 }
 
-a: hover
-{
+a: hover {
   color: #f60;
   text-decoration: underline;
 }
 
-a: visited
-{
+a: visited {
   color: #06c;
   text-decoration: none;
 }
 
-a: link
-{
+a: link {
   color: #2188e0;
   text-decoration: none;
 }
 
-h1
-{
+h1 {
   display: block;
   font-weight: 400;
   letter-spacing: 1px;
@@ -101,22 +90,19 @@ h1
   margin: 0;
 }
 
-h2
-{
+h2 {
   color: #06c;
   font-size: 10pt;
   font-weight: 400;
   margin: 0;
 }
 
-img
-{
+img {
   border: 0 none;
 }
 
-#wrapper
-{
-  background: #FFF url(/Forum/blog/styles/hyperion/images/bg.png) repeat-y scroll right center;
+#wrapper {
+  background: #FFF url(/blog/images/bg.png) repeat-y scroll right center;
   border-bottom: 1px solid #bcbcbc;
   border-left: 1px solid #bcbcbc;
   border-right: 1px solid #bcbcbc;
@@ -127,8 +113,7 @@ img
   padding: 0 2px 2px;
 }
 
-#header
-{
+#header {
   background: #efefef none repeat scroll 0 0;
   clear: both;
   font-family: Tahoma;
@@ -141,33 +126,29 @@ img
   border-bottom: 5px solid #ccc;
 }
 
-#main
-{
+#main {
   width: 530px;
   float: left;
   padding: 5px;
 }
 
-#content
-{
+#content {
   text-align: left;
 }
 
-div.entry
-{
+div.entry {
   border-bottom: 1px dashed #ccc;
   margin-top: 1em;
   overflow: hidden;
   padding-bottom: 1em;
 }
 
-div.entry h1
-{
+div.entry h1 {
   padding: .1em;
 }
 
-div .entrywrap,div .entrywrap-hover
-{
+div .entrywrap,
+div .entrywrap-hover {
   background-color: #dedede;
   border: 1px solid #000;
   overflow: auto;
@@ -176,34 +157,29 @@ div .entrywrap,div .entrywrap-hover
   padding: .5em;
 }
 
-#navigation_box
-{
+#navigation_box {
   background-color: #069;
   border-bottom: 1px dashed #fff;
   padding: 2px 2px 3px;
 }
 
-#navigation_box a
-{
+#navigation_box a {
   color: #fff;
 }
 
-#left_navigation_box
-{
+#left_navigation_box {
   float: left;
   text-align: left;
   width: auto;
 }
 
-#right_navigation_box
-{
+#right_navigation_box {
   float: right;
   text-align: right;
   width: auto;
 }
 
-div.comment
-{
+div.comment {
   clear: both;
   border-bottom: 1px solid #ccc;
   margin-top: 1em;
@@ -211,29 +187,26 @@ div.comment
   padding-bottom: 1em;
 }
 
-div.actions
-{
+div.actions {
   float: left;
   font-size: 10px;
   text-align: left;
   padding: .5em;
 }
 
-div.modactions
-{
+div.modactions {
   float: right;
   font-size: 10px;
   text-align: right;
   padding: .5em 0 0;
 }
 
-div.cfooter div.actions
-{
+div.cfooter div.actions {
   padding: 0;
 }
 
-div.modactions ul,div.actions ul
-{
+div.modactions ul,
+div.actions ul {
   border: medium none;
   display: inline;
   list-style-image: none;
@@ -243,8 +216,8 @@ div.modactions ul,div.actions ul
   padding-left: 0;
 }
 
-div.modactions ul li,div.actions ul li
-{
+div.modactions ul li,
+div.actions ul li {
   border: medium none;
   display: inline;
   margin-left: 0;
@@ -252,14 +225,13 @@ div.modactions ul li,div.actions ul li
   padding: .2em .5em 0;
 }
 
-div.modactions ul li a,div.actions ul li a
-{
+div.modactions ul li a,
+div.actions ul li a {
   display: inline;
   text-decoration: underline;
 }
 
-div.commentwrap
-{
+div.commentwrap {
   height: auto;
   overflow: auto;
   width: 97%;
@@ -267,18 +239,15 @@ div.commentwrap
   padding: .5em;
 }
 
-input.helpline
-{
+input.helpline {
   display: none;
 }
 
-.clear
-{
+.clear {
   clear: both;
 }
 
-fieldset.admin dt
-{
+fieldset.admin dt {
   border-right: 1px solid #ccc;
   float: left;
   padding-top: 3px;
@@ -286,16 +255,14 @@ fieldset.admin dt
   width: 45%;
 }
 
-fieldset.admin dd
-{
+fieldset.admin dd {
   border: none;
   vertical-align: top;
   margin: 0 0 0 45%;
   padding: 0 0 0 5px;
 }
 
-#side
-{
+#side {
   float: right;
   line-height: 1.4em;
   width: 250px;
@@ -303,34 +270,29 @@ fieldset.admin dd
   padding: 5px;
 }
 
-#side .block
-{
+#side .block {
   clear: both;
   padding: 1em 0;
 }
 
-#side .widget
-{
+#side .widget {
   margin-bottom: 2em;
 }
 
-.widget-title
-{
+.widget-title {
   font-size: 13px;
   font-weight: 700;
   padding-bottom: 2px;
 }
 
-fieldset
-{
+fieldset {
   border: 2px groove threedface;
   display: block;
   margin: 0 2px;
   padding: .35em .625em .75em;
 }
 
-fieldset ul
-{
+fieldset ul {
   list-style-image: none;
   list-style-position: outside;
   list-style-type: none;
@@ -338,80 +300,70 @@ fieldset ul
   padding: 0;
 }
 
-.row1
-{
+.row1 {
   background-color: #f9f9f9;
 }
 
-.row2
-{
+.row2 {
   background-color: #f0f0f0;
 }
 
-div.quotetitle,div.quotecontent
-{
+div.quotetitle,
+div.quotecontent {
   background-color: #ebeadd;
   border-right: 1px solid #dbdbce;
   border-left: 1px solid #dbdbce;
 }
 
-div.quotecontent
-{
+div.quotecontent {
   border-bottom: 1px solid #dbdbce;
 }
 
-div.quotetitle
-{
+div.quotetitle {
   border-top: 1px solid #dbdbce;
   font-weight: 700;
 }
 
-ul.cats li
-{
+ul.cats li {
   font-size: 8pt;
   line-height: 24px;
 }
 
-.archive-row
-{
+.archive-row {
   padding-left: 15px;
   padding-bottom: 2px;
 }
 
-img.latexcenter
-{
+img.latexcenter {
   display: block;
   text-align: center;
   margin: auto;
 }
 
-.hidden-label
-{
+.hidden-label {
   color: blue;
   text-decoration: underline;
   cursor: pointer;
 }
 
-#blog-errors
-{
+#blog-errors {
   border: 2px solid #800;
   background-color: #eee;
   font-size: 16px;
   margin: 1em;
 }
 
-div.post-tags
-{
+div.post-tags {
   font-weight: 700;
   margin: 5px 0;
 }
 
-a: link.post-tag,a: visited.post-tag
-{
+a: link.post-tag,
+a: visited.post-tag {
   font-weight: 400;
 }
 
-div#header h1,fieldset.submit-buttons
-{
+div#header h1,
+fieldset.submit-buttons {
   text-align: center;
 }

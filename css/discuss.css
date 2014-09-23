@@ -27,15 +27,15 @@
   width: 40vw;
   height: auto;
 }
+
 .discuss-nav {
   padding: 0;
   position: absolute;
   height: auto;
 }
+
 .discuss-nav ul li a {
   font-size: 1.2rem;
-}
-.discuss-nav ul li a {
   line-height: normal;
   padding-top: 0;
 }
@@ -108,7 +108,9 @@
 }
 
 .discuss-round span::before, .discuss-round span::after { content: none; }
-.discuss-round::before, .discuss-round::after {
+
+.discuss-round::before,
+.discuss-round::after {
   content: "";
   position: absolute;
   top: 25%;
@@ -132,7 +134,8 @@
   transform: rotateY(180deg);
 }
 
-.discuss-round:hover::before, .discuss-round:hover::after {
+.discuss-round:hover::before,
+.discuss-round:hover::after {
   background: white;
   top: 26%; /* counteract perception that arrow moved up by moving it 1% down */
 }
@@ -320,7 +323,8 @@ td.tiny-col { width: 3%; }
   margin: 0.5em auto;
 }
 
-.topic-text > pre, .topic-text > p code {
+.topic-text > pre,
+.topic-text > p code {
   background-color: #272822;
   color: #f8f8f2;
   text-shadow: 0px 1px rgba(0, 0, 0, 0.3);
@@ -343,7 +347,8 @@ td.tiny-col { width: 3%; }
 }
 
 /*--POSTING--*/
-[type="text"], textarea {
+[type="text"],
+textarea {
   resize: vertical;
   width: 100%;
   box-sizing: border-box;
