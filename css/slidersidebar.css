@@ -1,8 +1,13 @@
-/* Themizer CSS */
+/* sliderSidebar CSS */
 
 @import url('fonts.css');
 
+
+/*--COLORS--*/
+.database { background: #d553cb; }
 .themizer { background: #51b835; }
+.tryit    { background: #ff6c00; }
+.discuss  { background: #509aff; }
 
 
 /*--LAYOUT--*/
@@ -44,7 +49,9 @@
 
 
 /*--GENERAL--*/
-#sidebar input, #sidebar select, #sidebar option {
+#sidebar input,
+#sidebar select,
+#sidebar option {
   width: 100%;
   background-color: #212121;
   color: #aaa;
@@ -81,7 +88,6 @@
   background: transparent;
   -moz-appearance: none;
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
-  font-size: 1.7em;
   text-transform: uppercase;
   text-align: center;
   padding: 0.3em;
@@ -92,11 +98,15 @@
   transition: 0.5s ease;
 }
 
-.linkbutton:hover, .linkbutton[class*='hover'] {
+.linkbutton:hover,
+.linkbutton[class*='hover'] {
   background-color: #41962c;
   border-color: #40902a;
   color: #fafafa;
 }
+
+.reg.linkbutton { font-size: 1.7em; padding: 0.3em; }
+.dev.linkbutton { font-size: 1.2em; padding: 0.6em 0.3em; }
 
 
 /*--HEADER--*/
@@ -142,40 +152,6 @@
 }
 
 .closed #side-resizer { pointer-events: none; }
-
-
-/*--LIGHTBOX--*/
-#lightbox {
-  position: fixed; /* keeps the lightbox window in the current viewport */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  display: none;
-  text-align: left;
-  font-size: 16px;
-  z-index: 200; /* to beat the #sidebar! */
-}
-
-#lightbox-wrap {
-  background: #ddd;
-  width: 65%;
-  height: 70%;
-  margin: 5em auto;
-  box-shadow: 0 0 25px #111;
-  padding: 2em;
-}
-
-#lightbox-wrap pre {
-  overflow: auto;
-  height: 70%;
-  padding: 1.5em;
-  box-shadow: 0 0 1.3em #000 inset;
-}
-
-/* override every-fifth-line numbering of code */
-#lightbox-wrap pre li { list-style-type: decimal; }
 
 
 /*--SLIDE BUTTONS--*/
@@ -292,7 +268,8 @@
 
 
 /*--INPUTS--*/
-.radio, .checkbox {
+.radio,
+.checkbox {
   position: absolute;
   right: 0;
   opacity: 0;
@@ -300,7 +277,8 @@
   z-index: 10;
 }
 
-.radio + .input-button, .checkbox + .input-button {
+.radio + .input-button,
+.checkbox + .input-button {
   position: absolute;
   right: 0;
   width: 0.5em;
@@ -349,13 +327,17 @@
   cursor: pointer;
 }
 
-.sp-replacer, .sp-preview, .sp-container {
+.sp-replacer,
+.sp-preview,
+.sp-container {
   padding: 0 !important;
   border: 0 !important;
   margin: 0 !important;
 }
 
-.sp-preview, .sp-alpha, .sp-thumb-el {
+.sp-preview,
+.sp-alpha,
+.sp-thumb-el {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gcZAggl+4iZ2wAAACRJREFUGNNjnDlzJgMq2LNnD5oIEwMRYDAqYsH0i4uLy3DxHQBdFQcZw8RJyQAAAABJRU5ErkJggg==') !important;
 }
 
@@ -395,7 +377,8 @@
 
 
 /*--MISCELLANEOUS CLASSES--*/
-#sidebar p, #sidebar section[data-name] {
+#sidebar p,
+#sidebar section[data-name] {
   position: relative;
   margin-top: 0.3em;
   margin-bottom: 0.6em;
@@ -412,7 +395,8 @@
 #sidebar .inline { display: inline; }
 
 /* Validate inputs */
-#sidebar .invalid, #sidebar :invalid {
+#sidebar .invalid,
+#sidebar :invalid {
   box-shadow: none; /* Prevent Firefox from automatically applying box-shadow to invalid inputs */
 }
 
@@ -442,3 +426,38 @@
   box-shadow: inset 0 0 0.4em #444;
   border-radius: 1em;
 }
+
+
+/*--LIGHTBOX--*/
+/* Only used in Themizer (Reg) */
+#lightbox {
+  position: fixed; /* keeps the lightbox window in the current viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  text-align: left;
+  font-size: 16px;
+  z-index: 200; /* to beat the #sidebar! */
+}
+
+#lightbox-wrap {
+  background: #ddd;
+  width: 65%;
+  height: 70%;
+  margin: 5em auto;
+  box-shadow: 0 0 25px #111;
+  padding: 2em;
+}
+
+#lightbox-wrap pre {
+  overflow: auto;
+  height: 70%;
+  padding: 1.5em;
+  box-shadow: 0 0 1.3em #000 inset;
+}
+
+/* override every-fifth-line numbering of code */
+#lightbox-wrap pre li { list-style-type: decimal; }

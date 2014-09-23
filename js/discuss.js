@@ -1,17 +1,7 @@
 /* jshint browser:true, jquery:true, -W098 */
 /* global Message:false, marked:false */
 
-// JavaScript Document
-$(document).ready(function() {
-  $("#notifications").hide();
-
-  // For closing the users popup on body click
-  $('body').click(function(e) {
-    if($(e.target).closest('.notification-link, #notifications').length === 0){
-      $("#notifications").hide("fast", "swing");
-    }
-  });
-
+$(function () {
   // add title attribute to announcements
   // uses .each as otherwise `this` would refer to window
   $(".discuss-announcement").each(function () {
@@ -43,6 +33,7 @@ $(document).ready(function() {
       }
     }
   });
+
   $("[name='desc-source']").keyup(function (e) {
     var message = new Message($(this)),
         keycode = ('which' in e) ? e.which : e.keyCode; // key validation
@@ -92,9 +83,7 @@ $(document).ready(function() {
     }
   });
 });
-function show_notifications() {
-  $("#notifications").toggle(350);
-}
+
 function mark_all_read(forum_id, user_id) {
   $.ajax({
     url: '/include/ajax_handler.php',
@@ -109,4 +98,3 @@ function mark_all_read(forum_id, user_id) {
     }
   });
 }
-

@@ -1,6 +1,6 @@
 /*
 Everything Dojo CSS
-(c)2014 Everything Dojo (original skin by Red)
+(c)2014 Everything Dojo (heavily modified from skin originally by Red)
 Please do not plagiarize
 */
 
@@ -37,14 +37,18 @@ img {
 }
 
 /*--LISTS--*/
-ul, ol {
+ul,
+ol {
   padding-left: 1em;
   margin-left: 1em;
 }
 
 /*--BUTTONS--*/
 /* Based heavily on Quizlet buttons */
-input[type="submit"], input[type="button"], input[type="reset"], button {
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+button {
   display: block;
   background: #85B900;
   border: none;
@@ -60,12 +64,18 @@ input[type="submit"], input[type="button"], input[type="reset"], button {
   width: auto;
 }
 
-input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hover, button:hover {
+input[type="submit"]:hover,
+input[type="button"]:hover,
+input[type="reset"]:hover,
+button:hover {
   background: #739F02;
   box-shadow: 0 0 0.36rem rgba(0, 0, 0, 0.3) inset;
 }
 
-input[type="submit"].inline, input[type="button"].inline, input[type="reset"].inline, button.inline {
+input[type="submit"].inline,
+input[type="button"].inline,
+input[type="reset"].inline,
+button.inline {
   display: inline; /* because of precedence rules + jquery (preventing use of !important) */
 }
 
@@ -84,7 +94,8 @@ input.danger:hover { background-color: #600; }
 
 
 /*--INPUTS AND TEXTAREAS--*/
-input, textarea {
+input,
+textarea {
   background: #fff;
   border: 1px solid #222;
   border-radius: 0.18rem;
@@ -160,14 +171,20 @@ label { display: block; }
 
 #headerwrap h1 a { color: white; }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
   font-weight: normal; /* fix iOS double rendering bug; see http://bit.ly/1u5gNTg */
 }
 
 h1 { border-bottom: 1px solid #ccc; }
 
-h2, h4 {
+h2,
+h4 {
   margin-top: 0.3rem;
   margin-bottom: 0.5rem;
 }
@@ -184,9 +201,7 @@ code { font-family: Monaco, "Courier New", Courier, monospace; }
 
 
 /*--LAYOUT--*/
-:root:not(svg), body {
-  height: 100%;
-}
+:root:not(svg), body { height: 100%; }
 
 :root:not(svg) {
   font-family: Amble, HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -316,15 +331,13 @@ footer a:hover { color: #999; }
  * based on http://ryanfait.com/html5-sticky-footer/ with a few modifications
  */
 
-footer, .push {
+footer,
+.push {
   height: 16.0156vh; /* '.push' must be the same height as 'footer' */
   box-sizing: border-box;
 }
 
-#wrap {
-  min-height: 100%;
-  margin: 0 auto -17.0156vh;
-}
+#wrap { min-height: 100%; margin: 0 auto -17.0156vh; }
 
 
 /*--MISCELLANEOUS CLASSES AND IDS--*/
@@ -348,17 +361,11 @@ button[disabled], input[disabled], button[disabled]:hover, input[disabled]:hover
   height: 1.5rem;
 }
 
-.invalid {
-  border-color: #b00;
-  background-color: #ffeded;
-}
+.invalid { border-color: #b00; background-color: #ffeded; }
+.valid   { border-color: #0b0; background-color: #edffed; }
 
-.valid {
-  border-color: #0b0;
-  background-color: #edffed;
-}
-
-.error, .correct {
+.error,
+.correct {
   position: absolute;
   left: 12rem;
   bottom: 0.2rem;
@@ -371,17 +378,11 @@ button[disabled], input[disabled], button[disabled]:hover, input[disabled]:hover
   opacity: 0.95;
 }
 
-.error {
-  background: #ffe7e7;
-  border: 1px solid #ffbcbc;
-}
+.error   { background: #ffe7e7; border: 1px solid #ffbcbc; }
+.correct { background: #e7ffe7; border: 1px solid #bcffbc; }
 
-.correct {
-  background: #e7ffe7;
-  border: 1px solid #bcffbc;
-}
-
-.error::before, .correct::before {
+.error::before,
+.correct::before {
   content: "";
   position: absolute;
   left: -7px;
@@ -392,7 +393,7 @@ button[disabled], input[disabled], button[disabled]:hover, input[disabled]:hover
   border-width: 7px 7px 7px 0;
 }
 
-.error::before { border-color: transparent #ffbcbc; }
+.error::before   { border-color: transparent #ffbcbc; }
 .correct::before { border-color: transparent #bcffbc; }
 
 .msg {
@@ -421,7 +422,7 @@ button[disabled], input[disabled], button[disabled]:hover, input[disabled]:hover
 
 
 /*--TABLES--*/
-/*table design from smashingmagazine.com, thank you*/
+/*original table design from smashingmagazine.com, thank you*/
 table {
   width: 90%;
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
@@ -477,12 +478,14 @@ table a { color: #F99819; }
 
 .collapsebutton::after { right: 0.5em; }
 
-.expanded .collapsebutton::before, .collapsed .collapsebutton::after {
+.expanded .collapsebutton::before,
+.collapsed .collapsebutton::after {
   -webkit-transform: skewY(-20deg);
   transform: skewY(-20deg);
 }
 
-.expanded .collapsebutton::after, .collapsed .collapsebutton::before {
+.expanded .collapsebutton::after,
+.collapsed .collapsebutton::before {
   -webkit-transform: skewY(20deg);
   transform: skewY(20deg);
 }
@@ -512,7 +515,8 @@ table a { color: #F99819; }
  *    so that there isn't space between .index-title and .index-text
  */
 
-.index-title, .index-text {
+.index-title,
+.index-text {
   font-size: inherit; /* 1 */
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
   color: #fff;
@@ -625,7 +629,7 @@ table a { color: #F99819; }
   border-bottom: 1px #bbb solid;
 }
 
-.unread { background-color: #edffc1; }
+.unread       { background-color: #edffc1; }
 .unread:hover { background-color: #e0ffbe; }
 
 .read:hover { background-color: #edffc1; }
@@ -667,7 +671,8 @@ table a { color: #F99819; }
 
 
 /*--CREDITS--*/
-.overlay, .overlay-wrapper {
+.overlay,
+.overlay-wrapper {
   position: fixed;
   top: 150%; /*get it out of the viewport*/
   left: 30%;
