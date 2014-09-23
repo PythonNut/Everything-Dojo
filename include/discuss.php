@@ -363,7 +363,7 @@ class discuss {
     } else {
       $query = "INSERT INTO ".DISCUSS_POSTS_TABLE." (user_id, topic_id, time, title, text, source) VALUES (:user, :topic, :time, :title, :text, :source)";
     }
-    
+
     $error = array();
     if (strlen(trim($data['title'])) < 5) {
       $error[] = 'Your title needs to have at least 5 characters (excluding spaces)!';
@@ -632,10 +632,10 @@ class discuss {
     $cleaned = ' ' . $contaminated . ' ';
 
     foreach ($swears as $minced => $swear) {
-      $regex_prefix = "/(\s)" . base64_decode($swear) . "(\s)/";
-      $cleaned = preg_replace($regex_prefix, '\1' . $minced . '\2', $cleaned);
+      $regex_prefix = "/([\s\.;\-\'\"\(])" . base64_decode($swear) . "([\s\.;\-\'\"\)])/";
+      $cleaned = preg_replace($regex_prefix, '$1' . $minced . '$2', $cleaned);
     }
-    
+
     return $cleaned;
   }
 
