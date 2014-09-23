@@ -351,7 +351,7 @@ function sliderSidebar () { //referring to the exact and non-general (for lack o
   var vh = $(window).height()/100;
 
   // find width of sidebar and of sideButton
-  var sideWidth = $("#sidebar").width(); //32 * vh used to be here but it was being overwritten by this later declaration w/ CSS
+  var sideWidth = $("#sidebar").width(), //32 * vh used to be here but it was being overwritten by this later declaration w/ CSS
       sideButtonWidth =  2*vh;
 
   // set whether user is active or not for later
