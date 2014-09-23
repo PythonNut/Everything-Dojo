@@ -1,7 +1,6 @@
 <?php
   $title = "Home";
   include("include/include.php");
-  $extra_js = "<script src=\"js/index.js\"></script>";
   session_start();
 
   if (isset($_SESSION['user_id'])) {

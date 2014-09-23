@@ -233,7 +233,7 @@
     <!-- `span` and not `a` to avoid accidental styling in Firefox  -->
     <span href="#" class="reg linkbutton" id="submit">Get Code</span>
     <?php elseif ($_GET["mode"] == "development"): ?>
-    <span class="dev linkbutton" id="copycode" data-clipboard-target="dev-style">Copy Code to Clipboard</span>
+    <span class="long linkbutton" id="copycode" data-clipboard-target="dev-style">Copy Code to Clipboard</span>
     <?php endif; ?>
 
   </section>

@@ -72,58 +72,45 @@
         </section>
       </header>
 
-      <?php } elseif ($title == "Themizer Index") { ?>
+      <?php } elseif ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)" && $title !== "Try-It") { ?>
 
-      <header id="top">
+      <?php global $notification_unread_count; ?>
+      
+      <header>
         <section id="headerwrap">
+
           <nav class="breadcrumbs">
             <div id="logo">
               <a href="/"><?php print isset($_GET['unicorns']) ? '<img src="/images/unicorns.png" alt="Unicorns" style="margin-top:1rem" />' : '<img src="/images/logo.svg" alt="Logo" />'; ?></a>
             </div>
-            <h1 class="big">
-              > <a class="uppercase" href="">Themizer</a>
-            </h1>
+            <h1 class="big">> <?php echo $title; ?></h1>
           </nav>
 
+          <?php if ($title == "Themizer Index") { ?>
           <nav>
             <ul>
-              <li><a onclick="$('#top').scrollTo()">Home</a></li>
               <li><a onclick="$('#features').scrollTo()">Features</a></li>
               <li><a onclick="$('#changelog').scrollTo()">Changelog</a></li>
               <li><a onclick="$('#roadmap').scrollTo()">Roadmap</a></li>
             </ul>
           </nav>
-
-        </section>
-      </header>
-
-      <?php } elseif ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)" && $title !== "Try-It") { ?>
-
-        <?php
-          global $notification_unread_count;
-        ?>
-
-      <header>
-        <section id="headerwrap">
-
-          <div id="logo">
-            <a href="/"><?php print isset($_GET['unicorns']) ? '<img src="/images/unicorns.png" alt="Unicorns" style="max-width:10rem;max-height:5rem;margin-top:.5rem" />' : '<img src="/images/logo.svg" alt="Logo" />'; ?></a>
-          </div>
-
+          <?php } else { ?>
           <nav>
             <ul>
               <li><a href="/" id="nav-home">Home</a></li>
-            <?php if(isset($_SESSION['user_id'])) { ?>
+              <?php if(isset($_SESSION['user_id'])) { ?>
               <li><a href="/myaccount.php" id="menu-myaccount">My Account</a></li>
               <li><a href="/mysettings.php" id="menu-mysettings">My Settings</a></li>
               <li><a href="javascript:;" onClick="show_notifications()" class="notification-link">Notifications <?php if (isset($notification_unread_count)) { echo "(".$notification_unread_count.")"; } ?>)</a></li>
               <li><a href="/logout.php" id="menu-logout">Logout</a></li>
-            <?php } else { ?>
+              <?php } else { ?>
               <li><a href="/login.php" id="menu-login">Login</a></li>
               <li><a href="/register.php" id="menu-register">Register</a></li>
-            <?php } ?>
+              <?php } ?>
             </ul>
           </nav>
+          <?php } ?>
+
         </section>
       </header>
 

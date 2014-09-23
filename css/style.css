@@ -23,8 +23,8 @@ a {
 
 a:hover { color: #658800; }
 
-/*--IMAGES--*/
 
+/*--IMAGES--*/
 /*
  * (1) Fix bug in IE where images can't be resized
  * (2) Make resized images look nicer in IE
@@ -36,12 +36,14 @@ img {
   -ms-interpolation-mode: bicubic; /* (2) */
 }
 
+
 /*--LISTS--*/
 ul,
 ol {
   padding-left: 1em;
   margin-left: 1em;
 }
+
 
 /*--BUTTONS--*/
 /* Based heavily on Quizlet buttons */
@@ -126,6 +128,7 @@ label { display: block; }
   color: currentColor;
 }
 
+
 /*--SCROLLBARS--*/
 /* credits to PythonNut of AoPS! Modified, of course. */
 ::-webkit-scrollbar {
@@ -156,20 +159,20 @@ label { display: block; }
 /*--TYPESETTING--*/
 #headerwrap h1 {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+  font-size: 1.5rem;
   font-weight: 400;
-  color: white;
   display: inline-block; /* prevent body from being pushed down by sticky footer */
   text-transform: uppercase;
-  font-size: 2.82rem;
-  line-height: 1.25em;
-  padding: 0.24rem 0.6rem;
-  margin: 0.6rem;
   height: 1.334em;
   border-bottom: none;
   position: absolute;
+  color: black;
+  line-height: 4rem;
+  padding: 0;
+  margin: 0 0.4rem;
 }
 
-#headerwrap h1 a { color: white; }
+#headerwrap .breadcrumbs a { color: #666; }
 
 h1,
 h2,
@@ -241,7 +244,7 @@ header {
 #headerwrap {
   margin-left: 5.55%;
   position: relative;
-  width: 90%;
+  width: 93%;
   height: 11.6vh;
 }
 
@@ -249,43 +252,23 @@ header {
   position: absolute;
   top: 0;
   left: 0;
-  margin: 1.302vh;
+  margin: 1.302vh -3.70%;
 }
 
 #logo img {
   margin-bottom: -0.52083vh;
   /* fix IE not resizing images correctly */
-  max-width: 3.75rem;
-  max-height: 3.75rem;
+  max-width: 2.75rem;
+  max-height: 2.75rem;
 }
 
 .breadcrumbs {
   position: absolute;
   top: 0;
   left: 0;
+  margin: 1.302083vh;
+  height: 8.33333vh;
 }
-
-.breadcrumbs #logo {
-  margin-right: -4%;
-  margin-left: -4%;
-}
-
-.breadcrumbs #logo img {
-  /* fix IE not resizing images correctly */
-  max-width: 2.5rem;
-  max-height: 2.5rem;
-}
-
-#headerwrap > .breadcrumbs > h1 {
-  color: black;
-  font-size: 1.5rem;
-  font-weight: 400;
-  line-height: 4rem;
-  padding: 0;
-  margin: 0 0.4rem;
-}
-
-#headerwrap .breadcrumbs a { color: #666; }
 
 nav {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;

@@ -98,15 +98,17 @@
   transition: 0.5s ease;
 }
 
-.linkbutton:hover,
-.linkbutton[class*='hover'] {
+.linkbutton.disabled { color: #444; border: 1px solid #444; cursor: default; }
+
+.linkbutton:not(.disabled):hover,
+.linkbutton.hover {
   background-color: #41962c;
   border-color: #40902a;
   color: #fafafa;
 }
 
-.reg.linkbutton { font-size: 1.7em; padding: 0.3em; }
-.dev.linkbutton { font-size: 1.2em; padding: 0.6em 0.3em; }
+.reg.linkbutton  { font-size: 1.7em; padding: 0.3em; }
+.long.linkbutton { font-size: 1.2em; padding: 0.6em 0.3em; }
 
 
 /*--HEADER--*/
@@ -125,16 +127,19 @@
   z-index: 100;
 }
 
-#sideheadbar::after {
+#sideheadebar::after {
   content: "";
   position: absolute;
   top: 0;
   width: 2vh;
   height: 1.6em;
-  background: #57c639;
+  /* needs to be removed once below works background: #57c639; */
   pointer-events: none;
   z-index: 100;
 }
+
+#sideheadebar.themizer::after { background: #57c639; }
+#sideheadebar.tryit::after    { background: #F16500; }
 
 .opened #sideheadbar::after { right: -2vh; }
 .closed #sideheadbar::after { left: 0; }
