@@ -105,11 +105,8 @@ body {
   box-shadow:         0px 7px 30px -1px rgba(0, 0, 0, 0.91);
 }
 
-#overview { display: none }
-
 .impress-on-overview .step {
   opacity: 1;
-  cursor: pointer;
 }
 
 
@@ -199,6 +196,16 @@ img {
   margin-top: 25%;
 }
 
+/* Overview */
+#overview {
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 100px 100px rgba(0, 0, 0, 0.3);
+}
+
+#overview img {
+  width: 75%;
+  margin-top: 5%;
+}
 
 /*--IFRAMES--*/
 iframe {
