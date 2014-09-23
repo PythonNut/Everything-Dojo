@@ -101,7 +101,7 @@
               <?php if(isset($_SESSION['user_id'])) { ?>
               <li><a href="/myaccount.php" id="menu-myaccount">My Account</a></li>
               <li><a href="/mysettings.php" id="menu-mysettings">My Settings</a></li>
-              <li><a href="javascript:;" onClick="show_notifications()" class="notification-link">Notifications <?php if (isset($notification_unread_count)) { echo "(".$notification_unread_count.")"; } ?>)</a></li>
+              <li><a href="javascript:;" onClick="show_notifications()" class="notification-link">Notifications <?php if (isset($notification_unread_count)) { echo "(".$notification_unread_count.")"; } ?></a></li>
               <li><a href="/logout.php" id="menu-logout">Logout</a></li>
               <?php } else { ?>
               <li><a href="/login.php" id="menu-login">Login</a></li>
