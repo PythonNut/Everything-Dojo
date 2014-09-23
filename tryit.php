@@ -3,22 +3,21 @@
   include("include/include.php");
   include("include/themedb.php");
   session_start();
-  $extra_style = "<link rel=\"stylesheet\" href=\"css/blog-style.css\">
-  <link rel=\"stylesheet\" href=\"css/slidersidebar.css\">";
+  $extra_style = "<link rel=\"stylesheet\" href=\"css/blog-style.css\">\n";
+  if (!empty($_GET['select'])) {
+    $themedb = new themedb($dbc);
+    $style = $themedb->get_themes(intval($_GET['select']), TRUE);
+    $extra_style .= "<style>";
+    $extra_style .= htmlspecialchars_decode($style['code']);
+    $extra_style .= "</style>\n";
+  }
+  $extra_style .= "<link rel=\"stylesheet\" href=\"css/slidersidebar.css\">";
   $extra_js = "<script>
   $(function () {
     tryit();
   });</script>";
 
   get_header();
-
-  if (!empty($_GET['select'])) {
-    $themedb = new themedb($dbc);
-    $style = $themedb->get_themes(intval($_GET['select']), TRUE);
-    echo "<style>";
-    echo htmlspecialchars_decode($style['code']);
-    echo "</style>";
-  }
 ?>
 
 <aside id="sidebar">
