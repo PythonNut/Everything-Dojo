@@ -124,13 +124,44 @@ $(document).ready(function () {
     });
   });
 
-  $(".search").keypress(function (key) {
+  // Search box focusing/defocusing
+  search.keypress(function (key) {
     if (key.which == 13) {
       $(this).blur();
     }
   });
 
-  $(".search-box .icon-box").click(function () {
-    $(".search").blur();
+  /* jQuery handler toggle. Stolen from the jquery-migrate source (https://github.com/jquery/jquery-migrate/blob/792408c201833b8a8b62405980938262b09876dc/src/event.js). */
+  jQuery.fn.toggleHandler = function( fn, fn2 ) {
+    // Don't mess with animation or css toggles
+    if ( !jQuery.isFunction( fn ) || !jQuery.isFunction( fn2 ) ) {
+      return oldToggle.apply( this, arguments );
+    }
+
+    // Save reference to arguments for access in closure
+    var args = arguments,
+    guid = fn.guid || jQuery.guid++,
+    i = 0,
+    toggler = function( event ) {
+      // Figure out which function to execute
+      var lastToggle = ( jQuery._data( this, "lastToggle" + fn.guid ) || 0 ) % i;
+      jQuery._data( this, "lastToggle" + fn.guid, lastToggle + 1 );
+      // Make sure that clicks stop
+      event.preventDefault();
+      // and execute the function
+      return args[ lastToggle ].apply( this, arguments ) || false;
+    };
+    // link all the functions, so any of them can unbind this click handler
+    toggler.guid = guid;
+    while ( i < args.length ) {
+      args[ i++ ].guid = guid;
+    }
+    return this.click( toggler );
+  };
+
+  $(".icon-box").toggleHandler(function () {
+    $(search).focus();
+  }, function () {
+    $(search).blur();
   });
 });
