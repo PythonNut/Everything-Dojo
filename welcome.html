@@ -10,7 +10,7 @@
 <div id="impress">
   <section class="step slide color tan" data-x="1610" data-y="1382" data-scale="3">
     <h1>Tired of all AoPS Blogs</h1>
-    <h2>Looking the same?</h2>
+    <span class="emp"><h2>Looking the same?</h2></span>
     <h1>We are too.</h1>
   </section>
 
@@ -112,7 +112,8 @@ $(document).ready(function() {
   $(".emp").delay(750).animate({
     zoom: 1
   });
-  $("h1").bigtext();
+  $("h1").wrap("<div class='scale'></div>"); //Wrap all headers in a <div> so bigtext() can do its magic
+  $(".scale").bigtext({maxfontsize: 200});
 });
 </script>
 </body>
