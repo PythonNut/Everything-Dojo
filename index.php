@@ -4,12 +4,12 @@
 	$extra_js = "<script src=\"js/index.js\"></script>";
   session_start();
   
-	if($_SESSION['user_id'] != NULL){
-		$unread_count = $notification->count_unread($_SESSION['user_id']);
+	if(!empty($_SESSION['user_id'])){
+		$notification_unread_count = $notification->count_unread($_SESSION['user_id']);
 		$notification_data = $notification->get_notifications($_SESSION['user_id']);
 	}
 	
-	get_header(0, $unread_count);
+	get_header(0);
 ?>
 <section id="content">
   <?php if(!empty($_GET['msg']))  {

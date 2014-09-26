@@ -4,10 +4,10 @@
   include("include/discuss.php");
   session_start();
   $extra_style = "<link rel=\"stylesheet\" href=\"css/discuss.css\" />";
-	$extra_js = "<script src=\"js/database.js\"></script>";
+	$extra_js = "<script src=\"js/discuss.js\"></script>";
   get_header();
 
-  if($_SESSION['user_id'] != NULL){
+  if(!empty($_SESSION['user_id'])){
     $unread_count = $notification->count_unread($_SESSION['user_id']);
     $notification_data = $notification->get_notifications($_SESSION['user_id']);
   }	
@@ -18,7 +18,6 @@
   else{
     $view = $_GET['view'];
   }
-  
 ?>
 <section id="content">
   <div id="notifications">

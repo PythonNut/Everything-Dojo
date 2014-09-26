@@ -1,6 +1,4 @@
-<?php
-$data = $themedb->get_mcp_styles();
-?>
+<?php $data = $themedb->get_mcp_styles(); ?>
 <h2>Theme Moderator Control Panel</h2>
 <div id="popup-box">
   <h2 id="popup-header"></h2>
@@ -18,9 +16,12 @@ $data = $themedb->get_mcp_styles();
     </div>
   </div>
 </div>
-<div class="manage-item">
-  <div class="manage-header" id="header-1" style="background-image: url('../../images/up-arrow.png');"><h4>Unapproved Themes (<?php echo count($data['unapproved']) ?>)</h4></div>
-  <div id="manage-1">
+<div class="manage-item" id="manage-1">
+  <div class="option-title manage-header expanded" id="header-1">
+    <h4>Unapproved Themes (<?php echo count($data['unapproved']); ?>)</h4>
+    <span class="collapsebutton"></span>
+  </div>
+  <div class="option-wrap">
     <table class="manage-table">
       <thead style="border-bottom: 1px black solid;">
         <tr>
@@ -32,9 +33,7 @@ $data = $themedb->get_mcp_styles();
         </tr>
       </thead>
        <tbody>
-      <?php 
-        if(count($data['unapproved']) == 0){
-      ?>
+      <?php if (count($data['unapproved']) == 0) { ?>
         <tr>
           <td><b>No unapproved themes</b></td>
           <td>-</td>
@@ -45,7 +44,7 @@ $data = $themedb->get_mcp_styles();
       <?php
         }
         else{
-          for($i=0;$i<count($data['unapproved']);$i++){
+          for ($i = 0; $i < count($data['unapproved']); $i++) {
             $description = shorten_desc($data['unapproved'][$i]['description']);
       ?>
         <tr class="style">
@@ -53,7 +52,7 @@ $data = $themedb->get_mcp_styles();
           <td onclick="document.location = '<?php echo URL_DATABASE; ?>?mode=view&view=style&id=<?php echo $data['unapproved'][$i]['id']; ?>'"><?php echo $data['unapproved'][$i]['author']; ?></td>
           <td onclick="document.location = '<?php echo URL_DATABASE; ?>?mode=view&view=style&id=<?php echo $data['unapproved'][$i]['id']; ?>'"><?php echo $data['unapproved'][$i]['version']; ?></td>
           <td onclick="document.location = '<?php echo URL_DATABASE; ?>?mode=view&view=style&id=<?php echo $data['unapproved'][$i]['id']; ?>'"><?php echo $data['unapproved'][$i]['stage']; ?></td>
-          <td><a href="javascript:;" class="view" onclick="popup_options('approve', <?php echo $data['unapproved'][$i]['id']; ?>);"><img src="../../images/check.png" class="img-edit" /></a></td>
+          <td><a href="javascript:;" class="view" onclick="popup_options('approve', <?php echo $data['unapproved'][$i]['id']; ?>);"><img src="../../images/check.png" class="img-edit" /></a> <a href="javascript:;" class="view" onclick="popup_options('reject', <?php echo $data['unapproved'][$i]['id']; ?>);"><img src="../../images/reject.png" class="img-edit" /></a></td>
         </tr>
       <?php
           }
@@ -63,9 +62,12 @@ $data = $themedb->get_mcp_styles();
     </table>
     </div>
 </div>
-<div class="manage-item">
-  <div class="manage-header" id="header-2" style="background-image: url('../../images/up-arrow.png');"><h4>Validate Requests (<?php echo count($data['validate_request']) ?>)</h4></div>
-  <div id="manage-2">
+<div class="manage-item" id="manage-2">
+  <div class="option-title manage-header collapsed" id="header-2">
+    <h4>Validate Requests (<?php echo count($data['validate_request']); ?>)</h4>
+    <span class="collapsebutton"></span>
+  </div>
+  <div class="option-wrap">
     <table class="manage-table">
       <thead style="border-bottom: 1px black solid;">
         <tr>
@@ -77,9 +79,7 @@ $data = $themedb->get_mcp_styles();
         </tr>
       </thead>
        <tbody>
-      <?php 
-        if(count($data['validate_request']) == 0){
-      ?>
+      <?php if (count($data['validate_request']) == 0) { ?>
         <tr>
           <td><b>No unapproved themes</b></td>
           <td>-</td>
@@ -88,9 +88,8 @@ $data = $themedb->get_mcp_styles();
           <td>-</td>
         </tr>
       <?php
-        }
-        else{
-          for($i=0;$i<count($data['validate_request']);$i++){
+        } else {
+          for ($i = 0; $i < count($data['validate_request']); $i++) {
             $description = shorten_desc($data['validate_request'][$i]['validate_request']);
       ?>
         <tr class="style">
@@ -98,7 +97,7 @@ $data = $themedb->get_mcp_styles();
           <td onclick="document.location = '<?php echo URL_DATABASE; ?>?mode=view&view=style&id=<?php echo $data['validate_request'][$i]['id']; ?>'"><?php echo $data['validate_request'][$i]['author']; ?></td>
           <td onclick="document.location = '<?php echo URL_DATABASE; ?>?mode=view&view=style&id=<?php echo $data['validate_request'][$i]['id']; ?>'"><?php echo $data['validate_request'][$i]['version']; ?></td>
           <td onclick="document.location = '<?php echo URL_DATABASE; ?>?mode=view&view=style&id=<?php echo $data['validate_request'][$i]['id']; ?>'"><?php echo $data['validate_request'][$i]['stage']; ?></td>
-          <td><a href="javascript:;" class="view" onclick="popup_options('validate', <?php echo $data['validate_request'][$i]['id']; ?>);"><img src="../../images/check.png" class="img-edit" /></a></td>
+          <td><a href="javascript:;" class="view" onclick="popup_options('validate', <?php echo $data['validate_request'][$i]['id']; ?>);"><img src="../../images/check.png" class="img-edit" /></a> <a href="javascript:;" class="view" onclick="popup_options('reject', <?php echo $data['validate_request'][$i]['id']; ?>);"><img src="../../images/reject.png" class="img-edit" /></a></td>
         </tr>
       <?php
           }

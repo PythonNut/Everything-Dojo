@@ -2,12 +2,9 @@
 
 @import url('fonts.css');
 
-.themizer {
-   background: #51b835;
-}
+.themizer { background: #51b835; }
 
 /*--LAYOUT--*/
-
 #sidebar {
   position: fixed;
   z-index: 100;
@@ -34,6 +31,7 @@
   box-sizing: border-box;
   background: #101010;
   padding-top: 4.32em;
+  padding-bottom: 4.2em;
 }
 
 #sidebar-inner-scrollable {
@@ -44,7 +42,6 @@
 }
 
 /*--GENERAL--*/
-
 #sidebar input,
 #sidebar select,
 #sidebar option {
@@ -81,7 +78,7 @@
 .linkbutton {
   display: block;
   color: #48a730;
-  background: #101010;
+  background: transparent;
   -moz-appearance: none;
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
   font-size: 1.7em;
@@ -89,12 +86,19 @@
   text-align: center;
   padding: 0.3em;
   border: 1px solid #5dc350;
-  margin: 10px;
+  margin: 0.3em;
   cursor: pointer;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+.linkbutton:hover,
+.linkbutton[class*='hover'] {
+  background-color: #41962c;
+  border-color: #40902a;
+  color: #fafafa;
 }
 
 /*--HEADER--*/
-
 #sideheadbar {
   position: absolute;
   display: block;
@@ -103,12 +107,13 @@
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
   font-size: 2.7em;
   line-height: 1.6em;
-  color: white;
+  color: #fafafa;
   text-transform: uppercase;
   text-align: center;
   margin-bottom: 0.5em;
   z-index: 100;
 }
+
 #sideheadbar::after {
   content: "";
   position: absolute;
@@ -119,15 +124,11 @@
   pointer-events: none;
   z-index: 100;
 }
-.opened #sideheadbar::after {
-   right: -2vh;
-}
-.closed #sideheadbar::after {
-   left: 0;
-}
+
+.opened #sideheadbar::after { right: -2vh; }
+.closed #sideheadbar::after { left: 0; }
 
 /*--RESIZER--*/
-
 #side-resizer {
   position: absolute;
   top: 0;
@@ -137,12 +138,51 @@
   cursor: e-resize;
   pointer-events: all;
 }
-.closed #side-resizer {
-   pointer-events: none;
+
+.closed #side-resizer { pointer-events: none; }
+
+/*--LIGHTBOX--*/
+#lightbox {
+  position: fixed; /* keeps the lightbox window in the current viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  text-align: left;
+  font-size: 16px;
+  z-index: 200; /* to beat the #sidebar! */
+}
+
+#lightbox-wrap {
+  background: #ddd;
+  width: 65%;
+  height: 70%;
+  margin: 5em auto;
+  box-shadow: 0 0 25px #111;
+  padding: 2em;
+}
+
+#lightbox-wrap pre {
+  overflow: auto;
+  height: 70%;
+  padding: 1.5em;
+  box-shadow: 0 0 1.3em #000 inset;
+}
+/* override every-fifth-line numbering of code */
+#lightbox-wrap pre li.L0,
+#lightbox-wrap pre li.L1,
+#lightbox-wrap pre li.L2,
+#lightbox-wrap pre li.L3,
+#lightbox-wrap pre li.L5,
+#lightbox-wrap pre li.L6,
+#lightbox-wrap pre li.L7,
+#lightbox-wrap pre li.L8 {
+  list-style-type: decimal;
 }
 
 /*--SLIDE BUTTONS--*/
-
 .slideButton {
   position: absolute;
   cursor: pointer;
@@ -193,7 +233,6 @@
 }
 
 /*--OPTION SLIDES--*/
-
 .option {
   border: 3px solid #444;
   margin: 0 10px;
@@ -264,7 +303,6 @@
 }
 
 /*--INPUTS--*/
-
 .radio,
 .checkbox {
   position: absolute;
@@ -367,29 +405,25 @@
 }
 
 /*--MISCELLANEOUS CLASSES--*/
-
 #sidebar p,
 #sidebar section[data-name] {
   position: relative;
   margin-top: 0.3em;
   margin-bottom: 0.6em;
 }
+
 #sidebar i,
 #sidebar .i {
   font-family: AmbleItalic, sans-serif;
 }
-#sidebar code {
-  font-family: Monaco, "Courier New", Courier, monospace;
-}
-#sidebar .small {
-  font-size: 0.65em;
-}
-#sidebar .clear {
-  clear: both;
-}
-#sidebar .inline {
-  display: inline;
-}
+
+#sidebar code { font-family: Monaco, "Courier New", Courier, monospace; }
+
+#sidebar .small { font-size: 0.65em; }
+
+#sidebar .clear { clear: both; }
+
+#sidebar .inline { display: inline; }
 
 /* Validate inputs */
 
@@ -397,12 +431,10 @@
 #sidebar :invalid {
   box-shadow: none; /* Prevent Firefox from automatically applying box-shadow to invalid inputs */
 }
-#sidebar .invalid {
-  background: #b00 !important;
-}
+
+#sidebar .invalid { background: #b00 !important; }
 
 /*--SCROLLBARS--*/
-
 #sidebar ::-webkit-scrollbar {
   width: 0.4em;
   height: 0.5em;
@@ -416,4 +448,3 @@
   box-shadow: inset 0 0 0.4em #444;
   border-radius: 1em;
 }
-

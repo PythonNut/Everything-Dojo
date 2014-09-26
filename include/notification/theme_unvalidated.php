@@ -1,5 +1,5 @@
 <?php
-class theme_validated {
+class theme_unvalidated {
   public $id;
 
   function __construct($item_id) {
@@ -8,9 +8,9 @@ class theme_validated {
 
   function get_data() {
     $data = array(
-      'subject'      => 'Your theme was validated!',
-      'color'        => 'D553CB',
-      'location'    => 'Database'
+      'subject'  => 'Sorry, your theme was not validated.',
+      'color'    => 'D553CB',
+      'location' => 'Database'
     );
     return $data;
   }

@@ -11,18 +11,28 @@
   session_start();
   $extra_style = "<link rel=\"stylesheet\" href=\"css/blog-style.css\">
   <link rel=\"stylesheet\" href=\"css/themizer.css\">
-  <link rel=\"stylesheet\" href=\"css/spectrum.min.css\">";
+  <link rel=\"stylesheet\" href=\"css/spectrum.min.css\">
+  <link href=\"css/prettify-desert.css\" rel=\"stylesheet\" />";
   $extra_js = "<script src=\"js/blog-fn.js\"></script>
   <script src=\"js/spectrum-1.3.4.min.js\" onload=\"$.fn.spectrum.load = false;\"></script>
+  <script src=\"js/prettify.js\"></script>
+  <script src=\"js/ZeroClipboard.js\"></script>
   <script>
   $(function(){
+    /* Lightbox Utility */
+    $('#lightbox').click(function(){
+      $(this).hide();
+    });
+    $('#lightbox-wrap').click(function(e){
+        e.stopPropagation();
+    });
+
     $().sliderSidebar();
     themizer();
   });</script>";
 
   get_header();
 ?>
-<?php if ($_GET["mode"] == "regular") { ?>
 <aside id="sidebar">
   <h2 id="sideheadbar" class="themizer">Themizer</h2>
   <section id="sidebar-inner">
@@ -30,7 +40,7 @@
 
       <section class="option" id="option-view">
         <section class="option-title">
-          <h5>Blog View</h5>
+          <h5>Blog Page</h5>
           <span class="collapsebutton"></span>
         </section>
         <section class="option-wrap">
@@ -42,6 +52,8 @@
           </select>
         </section>
       </section>
+
+      <?php if ($_GET["mode"] == "regular"): ?>
 
       <section class="option" id="option-base">
         <section class="option-title">
@@ -57,7 +69,7 @@
       </section>
 
       <section class="option" id="option-body">
-        <section class="option-title">
+        <section class="option-title expanded">
           <h5>Body</h5>
           <span class="collapsebutton"></span>
         </section>
@@ -167,21 +179,48 @@
         </section>
       </section>
 
-      <!-- `span` and not `a` to avoid accidental styling in Firefox  -->
-      <span href="#" class="linkbutton" id="submit">Get Code</span>
+      <?php elseif ($_GET["mode"] == "development"): ?>
+
+      <section class="option" id="option-editor">
+        <section class="option-title expanded">
+          <h5>Editor</h5>
+          <span class="collapsebutton"></span>
+        </section>
+        <section class="option-wrap">
+          <!-- add codemirror -->
+          <!--------------------!
+           ! ADD-ONS:           !
+           ! active-line.js     !
+           ! closebrackets.js   !
+           ! css-hint.js        !
+           ! lint.js            !
+           ! matchbrackets.js   !
+           ! runmode.js         !
+           !--------------------!-->
+        </section>
+      </section>
+
+      <?php endif; ?>
 
     </section>
+
+    <!-- `span` and not `a` to avoid accidental styling in Firefox  -->
+    <span href="#" class="linkbutton" id="submit">Get Code</span>
+
   </section>
   <div id="side-resizer"></div>
+
+  <div id="lightbox">
+    <div id="lightbox-wrap">
+      <pre id="generatedcode" style="display:none"></pre>
+      <pre id="generatedcode-shown" class="prettyprint linenums"></pre>
+      <span class="linkbutton" id="copycode" data-clipboard-target="generatedcode">Copy Code to Clipboard</span>
+    </div>
+  </div>
+
 </aside>
 
 <div id="blog-body"></div>
-
-<?php } elseif ($_GET["mode"] == "development") { ?>
-
-<?php include("unavailable.php"); ?>
-
-<?php } ?>
 
 </body>
 </html>

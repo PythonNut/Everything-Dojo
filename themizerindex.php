@@ -132,8 +132,8 @@
   <section id="themizer-inner-wrap">
     <section id="left-wrap">
       <p class="heading">Style your blog, the easy way.</p>
-      <a href="themizer.php" class="linkbutton uppercase">Get Started</a>
-      <p class="note">Are you a developer? <a href="themizer.php?mode=development">Click Here</a> to go to development mode.</p>
+      <a href="themizer.php" class="linkbutton uppercase" target="_blank">Get Started</a>
+      <p class="note">Are you a developer? <a href="themizer.php?mode=development" target="_blank">Click Here</a> to go to development mode.</p>
     </section>
     <section id="right-wrap">
       <img src="images/themizer-open.png"/>

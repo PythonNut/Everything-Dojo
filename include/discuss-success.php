@@ -17,6 +17,14 @@ session_start();
 				header('Location: ' . SITE_ROOT . URL_DISCUSS . '?view=topic&f=' . $f . '&t=' . $t);
 			}
       break;
+		case 'topic':
+			if(empty($_SESSION['err'])){
+      	header('Refresh: 3; URL = ' . SITE_ROOT . URL_DISCUSS . '?view=topic&f=' . $f . '&t=' . $t);
+			}
+			else{
+				header('Location: ' . SITE_ROOT . URL_DISCUSS . '?view=forum&f=' . $f);
+			}
+      break;
   }
 
   $title = "Discuss";
