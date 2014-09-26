@@ -49,7 +49,7 @@
 
 
 /*--GENERAL--*/
-#sidebar input,
+#sidebar input:not([type='checkbox']),
 #sidebar select,
 #sidebar option {
   width: 100%;
@@ -60,6 +60,8 @@
   border: none;
   outline: none;
 }
+
+#sidebar input[type='checkbox'] { position: relative; top: 2.5px; }
 
 .text {
   height: 1.7em;
