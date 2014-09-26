@@ -3,6 +3,7 @@
   include("include/include.php");
   include("include/discuss.php");
   session_start();
+<<<<<<< HEAD
   $extra_style = "<link rel=\"stylesheet\" href=\"css/discuss.css\" />
   <link rel=\"stylesheet\" href=\"css/prism.css\" />";
   $extra_js = "<script src=\"js/discuss.js\"></script>
@@ -12,6 +13,13 @@
   get_header();
 
   if ($_SESSION['user_id'] != NULL) {
+=======
+  $extra_style = "<link rel=\"stylesheet\" href=\"css/discuss.css\" />";
+	$extra_js = "<script src=\"js/discuss.js\"></script>";
+  get_header();
+
+  if(!empty($_SESSION['user_id'])){
+>>>>>>> FETCH_HEAD
     $unread_count = $notification->count_unread($_SESSION['user_id']);
     $notification_data = $notification->get_notifications($_SESSION['user_id']);
   }
@@ -21,6 +29,7 @@
   } else {
     $view = $_GET['view'];
   }
+<<<<<<< HEAD
 
   $mode = $_POST['mode'];
   $_SESSION['mode'] = $mode;
@@ -52,6 +61,8 @@
       }
       break;
   }
+=======
+>>>>>>> FETCH_HEAD
 ?>
 <section id="content">
   <div id="notifications">
