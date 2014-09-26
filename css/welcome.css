@@ -111,7 +111,7 @@ body {
 
 
 /*--COLORS--*/
-.slide.tan {
+.slide.orange {
   /*background-color: #D1B377;*/
   background-color: #f0a93e;
 }
@@ -124,30 +124,34 @@ body {
 /*--TYPESETTING--*/
 h1 {
   font-family: "PT Sans", sans-serif;
-  font-size: 150%;
-  text-align: center;
-  width: 90%;
-  height: 10%;
-  left: 5%;
+}
+
+.scale {
   position: absolute;
+  height: 20%;
+  width: 90%;
+  left: 5%;
 }
 
-.step h1:first-child {
-  top: 10%;
+.step .scale:first-child {
   color: #333;
+  top: 2%;
 }
 
-.step h1:last-child {
+.step .scale:last-child {
   color: #56a351;
-  bottom: 10%;
+  bottom: 2%;
 }
 
 h2 {
   font-family: "Lato", sans-serif;
   font-weight: 600;
   font-size: 130%;
+  position: absolute;
   height: 10%;
-  margin-top: 35%;
+  width: 90%;
+  left: 5%;
+  top: 45%;
 }
 
 ul {

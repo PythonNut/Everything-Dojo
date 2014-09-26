@@ -194,6 +194,8 @@ Message.prototype.purge = function (fn) {
     $('#credits').click(function(e){
         e.stopPropagation(); //clicking on the box doesn't work, but only OUTSIDE of the box closes.
     });
+
+    return this;
   };
 
   /**
@@ -225,6 +227,8 @@ Message.prototype.purge = function (fn) {
     } else {
       content.removeClass("expanded").addClass("collapsed");
     }
+
+    return this;
   };
 
   /**
@@ -236,6 +240,8 @@ Message.prototype.purge = function (fn) {
     var colour = randomColor();
     this.prev(".text").val(colour).trigger("keyup");
     this.next(".color-picker").spectrum("set", colour);
+
+    return this;
   };
 
   /**
@@ -294,6 +300,8 @@ Message.prototype.purge = function (fn) {
         styles[cssId] = thisVal;
       }
     });
+
+    return this;
   };
 
 }(jQuery));

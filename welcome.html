@@ -8,9 +8,9 @@
 
 <body>
 <div id="impress">
-  <section class="step slide color tan" data-x="1610" data-y="1382" data-scale="3">
+  <section class="step slide color orange" data-x="1610" data-y="1382" data-scale="3">
     <h1>Tired of all AoPS Blogs</h1>
-    <h2>Looking the same?</h2>
+    <span class="emp"><h2>Looking the same?</h2></span>
     <h1>We are too.</h1>
   </section>
 
@@ -20,7 +20,7 @@
     <h1>A while ago.</h1>
   </section>
 
-  <section class="step slide color tan" data-x="5570" data-y="1400" data-rotate-x="40" data-rotate-y="35" data-rotate-z="35" data-scale="3">
+  <section class="step slide color orange" data-x="5570" data-y="1400" data-rotate-x="40" data-rotate-y="35" data-rotate-z="35" data-scale="3">
     <h1>But</h1>
     <h2>It's now outdated by 2 years</h2>
     <h1>So what should be done?</h1>
@@ -46,7 +46,7 @@
 
   <section class="step slide color dark" data-x="9202" data-y="6543" data-rotate-z="-51" data-scale="2">
     <h1>HTML5?</h1>
-    <img src="images/HTML5Logo.png"/>
+    <img src="images/HTML5Logo.svg"/>
     <h1>Check.</h1>
   </section>
 
@@ -80,7 +80,7 @@
     <h1 style="font-size:110%">What else did you expect?</h1>
   </section>
 
-  <section class="step slide color tan" data-x="21818" data-y="4132" data-scale="10">
+  <section class="step slide color orange" data-x="21818" data-y="4132" data-scale="10">
     <h1>Are you itching to try it out right now?</h1>
     <h2 class="bold">Good.</h2>
     <a href="http://everythingdojo.com" class="source">everythingdojo.com</a>
@@ -93,7 +93,7 @@
     </a>
   </section>
 
-  <section class="step slide color tan" data-x="22010" data-y="9830" data-rotate-x="-14" data-rotate-y="-55" data-rotate-z="-12" data-scale="0.1">
+  <section class="step slide color orange" data-x="22010" data-y="9830" data-rotate-x="-14" data-rotate-y="-55" data-rotate-z="-12" data-scale="0.1">
     <h1>(No need for applause)</h1>
     <img src="images/unicorn.svg"/>
     <h1 style="font-size:90%;text-align:left">*To please NMK ;D</h1>
@@ -112,7 +112,8 @@ $(document).ready(function() {
   $(".emp").delay(750).animate({
     zoom: 1
   });
-  $("h1").bigtext();
+  $("h1").wrap("<div class='scale'></div>"); //Wrap all headers in a <div> so bigtext() can do its magic
+  $(".scale").bigtext({maxfontsize: 200});
 });
 </script>
 </body>
