@@ -1,375 +1,369 @@
-input, select, textarea {
-	border				: 1px solid #d0d0d0;
-    font-family         : Verdana,Arial,Helvetica,sans-serif;
-    font-size           : 13px;
+input,
+select,
+textarea {
+  border: 1px solid #d0d0d0;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 13px;
 }
 
-button, input[type="reset"], input[type="button"], input[type="submit"] {
-	padding				: 0 6px;
-	text-align			: center;
-	white-space			: pre;
+button,
+input[type=reset],
+input[type=button],
+input[type=submit] {
+  text-align: center;
+  white-space: pre;
+  padding: 0 6px;
 }
+
 .deleted {
-	background-color: #A19CA6;
+  background-color: #A19CA6;
 }
 
 .foe {
-	background-color: #FF6600;
+  background-color: #F60;
 }
 
 .num_replies {
-	float: right;
+  float: right;
 }
 
 .no_blogs {
-	text-align: center;
-	font-size: 1.3em;
-	font-weight: bold;
+  text-align: center;
+  font-size: 1.3em;
+  font-weight: 700;
 }
 
 #replies {
-	text-align: center;
-	margin-top: 15px;
+  text-align: center;
+  margin-top: 15px;
 }
 
-/**
-* Left menu
-*/
 #left_menu {
-	width: 240px;
-	vertical-align: top;
+  width: 240px;
+  vertical-align: top;
 }
-
 
 #blog_searchform {
-	color: #FFFFFF;
-	margin-top: 5px;
-	white-space: nowrap;
+  color: #FFF;
+  margin-top: 5px;
+  white-space: nowrap;
 }
 
-/**
- * Standard CSS
- */
-
 body {
-	font-size			: 8pt;
-	font-family			: Arial;
-	text-align			: center;
-	margin				: 0;
-	padding				: 0;
-	display				: block;
+  font-size: 8pt;
+  font-family: Arial;
+  text-align: center;
+  display: block;
+  margin: 0;
+  padding: 0;
 }
 
 textarea {
-    padding             : 5px;
-    line-height         : 1.4em;
+  line-height: 1.4em;
+  padding: 5px;
 }
 
 .inputbox {
-	width				: 100%;
+  width: 100%;
 }
 
-a:hover {
-	color				: #ff6600;
-	text-decoration		: underline;
+a: hover {
+  color: #f60;
+  text-decoration: underline;
 }
 
-a:visited {
-	color				: #0066cc;
-	text-decoration		: none;
+a: visited {
+  color: #06c;
+  text-decoration: none;
 }
 
-a:link {
-	color				: #2188e0;
-	text-decoration		: none;
+a: link {
+  color: #2188e0;
+  text-decoration: none;
 }
 
 h1 {
-	display				: block;
-	font-weight			: normal;
-	letter-spacing		: 1px;
-	margin				: 0;
-	font-size			: 16pt;
+  display: block;
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-size: 16pt;
+  margin: 0;
 }
 
 h2 {
-	color				: #0066cc;
-	font-size			: 10pt;
-	font-weight			: normal;
-	margin				: 0;
+  color: #06c;
+  font-size: 10pt;
+  font-weight: 400;
+  margin: 0;
 }
 
 img {
-	border				: 0 none;
+  border: 0 none;
 }
 
-
 #wrapper {
-	background			: white url(/Forum/blog/styles/hyperion/images/bg.png) repeat-y scroll right center;
-	border-bottom		: 1px solid #bcbcbc;
-	border-left			: 1px solid #bcbcbc;
-	border-right		: 1px solid #bcbcbc;
-	margin-left			: auto;
-	margin-right	    : auto;
-	padding				: 0 2px 2px;
-	text-align			: center;
-	width				: 800px;
+  background: #FFF url(/blog/images/bg.png) repeat-y scroll right center;
+  border-bottom: 1px solid #bcbcbc;
+  border-left: 1px solid #bcbcbc;
+  border-right: 1px solid #bcbcbc;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 800px;
+  padding: 0 2px 2px;
 }
 
 #header {
-	background			: #efefef none repeat scroll 0 0;
-	clear				: both;
-	font-family			: Tahoma;
-	font-size			: 5em;
-	line-height			: 1.5em;
-	overflow			: auto;
-	vertical-align		: middle;
-	white-space			: nowrap;
-	border-top			: 5px solid #cccccc;
-	border-bottom		: 5px solid #cccccc;
+  background: #efefef none repeat scroll 0 0;
+  clear: both;
+  font-family: Tahoma;
+  font-size: 5em;
+  line-height: 1.5em;
+  overflow: auto;
+  vertical-align: middle;
+  white-space: nowrap;
+  border-top: 5px solid #ccc;
+  border-bottom: 5px solid #ccc;
 }
 
 #main {
-	width				: 530px;
-	padding				: 5px;
-	float				: left;
-}
-
-div#header h1 {
-	text-align			: center;
+  width: 530px;
+  float: left;
+  padding: 5px;
 }
 
 #content {
-	text-align			: left;
+  text-align: left;
 }
 
-
 div.entry {
-	border-bottom		: 1px dashed #cccccc;
-	margin-top			: 1em;
-	overflow			: hidden;
-	padding-bottom		: 1em;
+  border-bottom: 1px dashed #ccc;
+  margin-top: 1em;
+  overflow: hidden;
+  padding-bottom: 1em;
 }
 
 div.entry h1 {
-	padding				: 0.1em;
+  padding: .1em;
 }
 
-div .entrywrap, div .entrywrap-hover {
-	background-color	: #dedede;
-	border				: 1px solid black;
-	margin				: 0.5em;
-	overflow			: auto;
-	padding				: 0.5em;
-	*height				: 99%;
+div .entrywrap,
+div .entrywrap-hover {
+  background-color: #dedede;
+  border: 1px solid #000;
+  overflow: auto;
+  height: 99%;
+  margin: .5em;
+  padding: .5em;
 }
 
 #navigation_box {
-	background-color	: #006699;
-	border-bottom		: 1px dashed #fff;
-	padding				: 2px 2px 3px;
+  background-color: #069;
+  border-bottom: 1px dashed #fff;
+  padding: 2px 2px 3px;
 }
 
 #navigation_box a {
-	color				: #fff;
+  color: #fff;
 }
 
 #left_navigation_box {
-	float				: left;
-	text-align			: left;
-	width				: auto;
+  float: left;
+  text-align: left;
+  width: auto;
 }
 
 #right_navigation_box {
-	float				: right;
-	text-align			: right;
-	width				: auto;
+  float: right;
+  text-align: right;
+  width: auto;
 }
 
 div.comment {
-	clear				: both;
+  clear: both;
+  border-bottom: 1px solid #ccc;
+  margin-top: 1em;
+  overflow: auto;
+  padding-bottom: 1em;
 }
 
 div.actions {
-	float				: left;
-	font-size			: 10px;
-	padding				: .5em;
-	text-align			: left;
+  float: left;
+  font-size: 10px;
+  text-align: left;
+  padding: .5em;
 }
 
 div.modactions {
-	float				: right;
-	font-size			: 10px;
-	padding				: 0.5em 0 0;
-	text-align			: right;
+  float: right;
+  font-size: 10px;
+  text-align: right;
+  padding: .5em 0 0;
 }
 
 div.cfooter div.actions {
-	padding				: 0;
+  padding: 0;
 }
 
 div.modactions ul,
 div.actions ul {
-	border				: medium none;
-	display				: inline;
-	list-style-image	: none;
-	list-style-position	: outside;
-	list-style-type		: square;
-	margin-left			: 0;
-	padding-left		: 0;
+  border: medium none;
+  display: inline;
+  list-style-image: none;
+  list-style-position: outside;
+  list-style-type: square;
+  margin-left: 0;
+  padding-left: 0;
 }
 
 div.modactions ul li,
 div.actions ul li {
-	border				: medium none;
-	display				: inline;
-	margin-left			: 0;
-	margin-top			: 0.2em;
-	padding				: 0.2em 0.5em 0;
+  border: medium none;
+  display: inline;
+  margin-left: 0;
+  margin-top: .2em;
+  padding: .2em .5em 0;
 }
 
 div.modactions ul li a,
 div.actions ul li a {
-	display				: inline;
-	text-decoration		: underline;
-}
-
-div.comment {
-	border-bottom		: 1px solid #ccc;
-	margin-top			: 1em;
-	overflow			: auto;
-	padding-bottom		: 1em;
+  display: inline;
+  text-decoration: underline;
 }
 
 div.commentwrap {
-	height				: auto;
-	overflow			: auto;
-	padding				: 0.5em;
-	width				: 97%;
-	margin				: 0 auto 10px auto;
+  height: auto;
+  overflow: auto;
+  width: 97%;
+  margin: 0 auto 10px;
+  padding: .5em;
 }
 
 input.helpline {
-	display				: none;
+  display: none;
 }
 
 .clear {
-	clear				: both;
+  clear: both;
 }
 
 fieldset.admin dt {
-	border-right		: 1px solid #ccc;
-	float				: left;
-	padding-top			: 3px;
-	text-align			: left;
-	width				: 45%;
-
+  border-right: 1px solid #ccc;
+  float: left;
+  padding-top: 3px;
+  text-align: left;
+  width: 45%;
 }
 
 fieldset.admin dd {
-	border				: none;
-	margin				: 0 0 0 45%;
-	padding				: 0 0 0 5px;
-	vertical-align		: top;
+  border: none;
+  vertical-align: top;
+  margin: 0 0 0 45%;
+  padding: 0 0 0 5px;
 }
 
 #side {
-	float				: right;
-	line-height			: 1.4em;
-	margin				: 0;
-	padding				: 5px;
-	width				: 250px;
+  float: right;
+  line-height: 1.4em;
+  width: 250px;
+  margin: 0;
+  padding: 5px;
 }
 
 #side .block {
-	clear				: both;
-	padding				: 1em 0;
+  clear: both;
+  padding: 1em 0;
 }
 
 #side .widget {
-	margin-bottom		: 2em;
+  margin-bottom: 2em;
 }
 
 .widget-title {
-	font-size			: 13px;
-	font-weight			: bold;
-	padding-bottom		: 2px;
+  font-size: 13px;
+  font-weight: 700;
+  padding-bottom: 2px;
 }
 
 fieldset {
-	border				: 2px groove threedface;
-	display				: block;
-	margin				: 0 2px;
-	padding				: 0.35em 0.625em 0.75em;
+  border: 2px groove threedface;
+  display: block;
+  margin: 0 2px;
+  padding: .35em .625em .75em;
 }
 
 fieldset ul {
-	list-style-image	: none;
-	list-style-position	: outside;
-	list-style-type		: none;
-	margin				: 0;
-	padding				: 0;
+  list-style-image: none;
+  list-style-position: outside;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 .row1 {
-	background-color	: #f9f9f9;
+  background-color: #f9f9f9;
 }
 
 .row2 {
-	background-color	: #f0f0f0;
+  background-color: #f0f0f0;
 }
 
-fieldset.submit-buttons {
-	text-align			: center;
-}
-
-div.quotetitle, div.quotecontent {
-	background-color	: #ebeadd;
-	border-right 		: 1px solid #dbdbce;
-	border-left  		: 1px solid #dbdbce;
+div.quotetitle,
+div.quotecontent {
+  background-color: #ebeadd;
+  border-right: 1px solid #dbdbce;
+  border-left: 1px solid #dbdbce;
 }
 
 div.quotecontent {
-	border-bottom		: 1px solid #dbdbce;
+  border-bottom: 1px solid #dbdbce;
 }
 
 div.quotetitle {
-	border-top			: 1px solid #dbdbce;
-	font-weight			: bold;
+  border-top: 1px solid #dbdbce;
+  font-weight: 700;
 }
 
 ul.cats li {
-	font-size			: 8pt;
-	line-height			: 24px;
+  font-size: 8pt;
+  line-height: 24px;
 }
 
 .archive-row {
-    padding-left        : 15px;
-    padding-bottom      : 2px;
+  padding-left: 15px;
+  padding-bottom: 2px;
 }
-img.latexcenter {
-	display				: block;
-	margin				: auto;
-	text-align			: center;
-}
-.hidden-label {
-    color               : blue;
-    text-decoration     : underline;
-    cursor              : pointer;
-}
-#blog-errors {
-	margin : 1em;
-	border: 2px solid #800;
-	background-color: #eee;
-	font-size			: 16px;
 
+img.latexcenter {
+  display: block;
+  text-align: center;
+  margin: auto;
+}
+
+.hidden-label {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#blog-errors {
+  border: 2px solid #800;
+  background-color: #eee;
+  font-size: 16px;
+  margin: 1em;
 }
 
 div.post-tags {
-	margin: 5px 0;
-	font-weight: bold;
+  font-weight: 700;
+  margin: 5px 0;
 }
 
-a:link.post-tag, a:visited.post-tag {
-	font-weight: normal;
+a: link.post-tag,
+a: visited.post-tag {
+  font-weight: 400;
+}
+
+div#header h1,
+fieldset.submit-buttons {
+  text-align: center;
 }

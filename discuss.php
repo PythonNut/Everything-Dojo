@@ -3,22 +3,55 @@
   include("include/include.php");
   include("include/discuss.php");
   session_start();
-  $extra_style = "<link rel=\"stylesheet\" href=\"css/discuss.css\" />";
-	$extra_js = "<script src=\"js/database.js\"></script>";
+  $extra_style = "<link rel=\"stylesheet\" href=\"css/discuss.css\" />
+  <link rel=\"stylesheet\" href=\"css/prism.css\" />";
+  $extra_js = "<script src=\"js/discuss.js\"></script>
+  <script src=\"js/prism.js\"></script>
+  <script src=\"js/marked.min.js\"></script>
+  <script>$(function(){\$('pre code').each(function(){var h=$(this).html();h=h.replace(/&amp;quot;/g,'\"').replace(/&amp;#039;/g,'\'');$(this).html(h)})})</script>";
   get_header();
 
-  if($_SESSION['user_id'] != NULL){
+  if ($_SESSION['user_id'] != NULL) {
     $unread_count = $notification->count_unread($_SESSION['user_id']);
     $notification_data = $notification->get_notifications($_SESSION['user_id']);
-  }	
-	
-  if (empty($_GET['view'])){
-    $view = '';
   }
-  else{
+
+  if (empty($_GET['view'])) {
+    $view = '';
+  } else {
     $view = $_GET['view'];
   }
-  
+
+  $mode = $_POST['mode'];
+  $_SESSION['mode'] = $mode;
+  switch ($mode) {
+    case 'post':
+      $data = $_POST;
+      $data['t'] = $_POST['t'];
+      $result = $discuss->insert_post($_POST['forum'], $_SESSION['user_id'], $data);
+      $f = $result['f'];
+      $t = $result['t'];
+
+      if (empty($result['err'])) {
+        header('Location: ' . SITE_ROOT . URL_DISCUSS . '?view=topic&f=' . $f . '&t=' . $t . '#last');
+      } else {
+        header('Location: ' . SITE_ROOT . URL_DISCUSS . '?view=topic&f=' . $f . '&t=' . $t . '#form');
+      }
+      break;
+    case 'topic':
+      $data = $_POST;
+      $result = $discuss->insert_topic($_POST['forum'], $_SESSION['user_id'], $data);
+      $f = $result['f'];
+      $t = $result['t'];
+      $_SESSION['err'] = $result['err'];
+
+      if (empty($result['err'])) {
+        header('Location: ' . SITE_ROOT . URL_DISCUSS . '?view=topic&f=' . $f . '&t=' . $t);
+      } else {
+        header('Location: ' . SITE_ROOT . URL_DISCUSS . '?view=topic&f=' . $f . '#form');
+      }
+      break;
+  }
 ?>
 <section id="content">
   <div id="notifications">
@@ -29,7 +62,7 @@
           <a href="javascript:;" style="float: right; margin-right: 2vw;" onClick="mark_all_read(<?php echo $_SESSION['user_id']; ?>)">Mark all read</a>
       </div>
       <?php
-      if(count($notification_data) == 0){
+      if (count($notification_data) == 0) {
       ?>
       <a href="javascript:;">
       <div id="notification-0" class="notification read">
@@ -38,9 +71,8 @@
       </div>
       </a>
       <?php
-      }
-      else{
-        foreach($notification_data as $notif){
+      } else {
+        foreach ($notification_data as $notif) {
           $notif_data = $notification->get_notif_obj($notif['notification_type'], $notif['item_id']);
       ?>
       <a href="<?php echo $notif_data['url']; ?>" onClick="mark_read(<?php echo $notif['id']; ?>)">
@@ -63,24 +95,24 @@
       </div>
     </div>
   </div>
-        <div id="navigation">
-          <nav class="discuss-nav">
-            <ul>
-              <li><a href="/" id="nav-home">EvDo Home</a></li>
-            <?php if(isset($_SESSION['user_id'])) { ?>
-              <li><a href="javascript:;" class="notification-link" onClick="show_notifications()">Notifications (<?php echo $unread_count; ?>)</a></li>
-            <?php } ?>
-            </ul>
-          </nav>
-        </div>
-  <?php if (!empty($_SESSION['user_id'])){ ?>
+  <div id="navigation">
+    <nav class="discuss-nav">
+      <ul>
+        <li><a href="/" id="nav-home">EvDo Home</a></li>
+      <?php if (isset($_SESSION['user_id'])) { ?>
+        <li><a href="javascript:;" class="notification-link" onClick="show_notifications()">Notifications (<?php echo $unread_count; ?>)</a></li>
+      <?php } ?>
+      </ul>
+    </nav>
+  </div>
+  <?php if (!empty($_SESSION['user_id'])) { ?>
   <h3>Welcome, <?php echo get_user($_SESSION['user_id']);?>!</h3>
   <br/>
-  <?php } else{ ?>
+  <?php } else { ?>
   <h3>Hello Guest. Please <a href="login.php">sign in</a>.</h3>
   <br/>
   <?php } ?>
-  <?php 
+  <?php
     $result = $dbc->prepare("SELECT data FROM data WHERE fetchname = 'announcements'");
     $result->execute();
     $result = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -92,9 +124,9 @@
     <h3>Announcements: </h3>
     <div class="discuss-round" id="discuss-round-left"><span class="discuss-round"></span></div>
     <div id="discuss-announcements">
-    <?php 
+    <?php
       $key = 1;
-      foreach($announcements as $announce) {
+      foreach ($announcements as $announce) {
         echo "<div class=\"discuss-announcement\" id=\"discuss-announcement-".$key."\" style=\"display: block;\">".$announce."</div>";
         $key += 1;
       }
@@ -102,54 +134,83 @@
     </div>
     <div class="discuss-round" id="discuss-round-right"><span class="discuss-round"></span></div>
       <script>
-        var announcement_options = {
+        var interval,
+            announcementOptions = {
           num: <?php echo count($announcements);?>,
           start: 1,
           now: 1,
           aidPrefix: "discuss-announcement-",
           updateView: function () {
-            for (ji = announcement_options.start; ji <= announcement_options.num; ji++) {
-              $("#"+announcement_options.aidPrefix+ji).fadeOut(100);
+            for (ji = announcementOptions.start; ji <= announcementOptions.num; ji++) {
+              $("#"+announcementOptions.aidPrefix+ji).fadeOut(300);
             }
-            $("#"+announcement_options.aidPrefix+announcement_options.now).delay(200).fadeIn(100);
+            $("#"+announcementOptions.aidPrefix+announcementOptions.now).delay(500).fadeIn(400);
           }
-        }
+        };
+
         $(document).ready(function () {
           //start up
-          for (ji = announcement_options.start; ji <= announcement_options.num; ji++) {
-            $("#"+announcement_options.aidPrefix+ji).hide();
+          for (ji = announcementOptions.start; ji <= announcementOptions.num; ji++) {
+            $("#"+announcementOptions.aidPrefix+ji).hide();
           }
-          announcement_options.now = announcement_options.start;
-          $("#"+announcement_options.aidPrefix+announcement_options.now).show();
+          announcementOptions.now = announcementOptions.start;
+          $("#"+announcementOptions.aidPrefix+announcementOptions.now).show();
           // check if there are multiple announcements
-          if (announcement_options.num < 2) {
+          if (announcementOptions.num < 2) {
             $(".discuss-round").remove();
           }
+
+          interval = setInterval(function () {
+            if (announcementOptions.now == announcementOptions.num) {
+              announcementOptions.now = announcementOptions.start;
+            } else {
+              announcementOptions.now += 1;
+            }
+            announcementOptions.updateView();
+          }, 5000);
+        });
+
+        $("#discuss-announcements").hover(function () {
+          clearInterval(interval);
+        });
+
+        $("#announcements").mouseout(function () {
+          clearInterval(interval);
+          interval = setInterval(function () {
+            if (announcementOptions.now == announcementOptions.num) {
+              announcementOptions.now = announcementOptions.start;
+            } else {
+              announcementOptions.now += 1;
+            }
+            announcementOptions.updateView();
+          }, 5000);
         });
 
         $("#discuss-round-left").click(function () {
-          if (announcement_options.now == announcement_options.start) {
-            announcement_options.now = announcement_options.num;
+          clearInterval(interval);
+          if (announcementOptions.now == announcementOptions.start) {
+            announcementOptions.now = announcementOptions.num;
           } else {
-            announcement_options.now -= 1;
+            announcementOptions.now -= 1;
           }
-          announcement_options.updateView();
+          announcementOptions.updateView();
         });
 
         $("#discuss-round-right").click(function () {
-          if (announcement_options.now == announcement_options.num) {
-            announcement_options.now = announcement_options.start;
+          clearInterval(interval);
+          if (announcementOptions.now == announcementOptions.num) {
+            announcementOptions.now = announcementOptions.start;
           } else {
-            announcement_options.now += 1;
+            announcementOptions.now += 1;
           }
-          announcement_options.updateView();
+          announcementOptions.updateView();
         });
-      </script>        
+      </script>
     </section>
     <?php } ?>
     <br/>
     <?php
-    switch($view){
+    switch ($view) {
       case '':
         include('include/discuss/index_body.php');
         break;
@@ -163,8 +224,7 @@
       default:
         echo "<b>Something wrong happened!</b> Discuss can't handle this request because it doesn't know how to do it! Don't worry, though; Try going <a href='discuss.php'>back to Discuss home page</a> or try our other services!";
         break;
-    }
-    ?>
+    } ?>
 </section>
 
 <?php get_footer(); ?>

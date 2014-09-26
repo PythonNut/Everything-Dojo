@@ -8,11 +8,20 @@ session_start();
   switch($mode){
     case 'post':
       $data = $_POST;
-			$data['t'] = $_POST['t'];
+      $data['t'] = $_POST['t'];
       $result = $discuss->insert_post($_POST['forum'], $_SESSION['user_id'], $data);
-			$_SESSION['t'] = $result['t'];
-			$_SESSION['f'] = $result['f'];
-			$_SESSION['err'] = $result['err'];
+      $_SESSION['t'] = $result['t'];
+      $_SESSION['f'] = $result['f'];
+      $_SESSION['err'] = $result['err'];
+
+      header('Location: ' . SITE_ROOT . 'include/discuss-success.php');
+      break;
+    case 'topic':
+      $data = $_POST;
+      $result = $discuss->insert_topic($_POST['forum'], $_SESSION['user_id'], $data);
+      $_SESSION['t'] = $result['t'];
+      $_SESSION['f'] = $result['f'];
+      $_SESSION['err'] = $result['err'];
 
       header('Location: ' . SITE_ROOT . 'include/discuss-success.php');
       break;
