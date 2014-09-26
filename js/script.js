@@ -1,18 +1,6 @@
-// js/jQ functions that are available to run on any page. requires jQuery.
-
-// Set object for styling
-var styles = {
-  "baseTheme"                       : "core",
-  "body-backgroundColor"            : "white",
-  "body-backgroundImage"            : "",
-  "body-backgroundRepeat"           : "",
-  "body-fontFamily"                 : "",
-  "id_wrapper-backgroundColor"      : "#EDEDEA",
-  "class_entry-backgroundColor"     : "#EDEDEA",
-  "class_entrywrap-backgroundColor" : "#EDEDEA",
-  "class_row1-backgroundColor"      : "#EDEDEA",
-  "class_row2-backgroundColor"      : "#EDEDEA"
-};
+/* jshint browser:true, jquery:true, -W098 */
+/* global ZeroClipboard:false, prettyPrint:false, randomColor:false */
+//This document requires jQuery to be loaded in order to properly run.
 
 
 /*******************
@@ -29,86 +17,185 @@ Array.prototype.last = function(nth) {
   return this[this.length - (1 <= nth && nth < this.length ? nth : 1)];
 };
 
+/**********************************************************************
+ *                                                                    *
+ *                   Adds messages next to elements                   *
+ *        Originially designed for register.php, now site-wide        *
+ *                                                                    *
+ **********************************************************************/
+
+/**
+ * Base class for adding messages.
+ *
+ * TODO: Add support for multiple elements
+ *
+ * @class Message
+ * @constructor
+ */
+function Message (selector) {
+  if (typeof selector === "string") {
+    this.el = document.querySelector(selector);
+  } else if (selector instanceof jQuery) {
+    this.el = selector.context;
+  } else if (selector instanceof Element) {
+    this.el = selector;
+  } else {
+    throw new Error("selector does not refer to an element.");
+  }
+//  if (this.el.length < 2) {
+//    this.el = this.el[0];
+//  console.log(this.el);
+//  } else {
+//    this.multiple = true;
+//  }
+}
+
+/**
+ * Assigns text and type to an element's message. Alias for <el>.msg = msg and <el>.type = type
+ *
+ * @method assign
+ * @param {String} msg The message.
+ * @param {String} [type] The type.
+ * @chainable
+ */
+Message.prototype.assign = function (msg, type) {
+  this.msg = msg;
+  if (type || this.type) {
+    this.type = type || this.type;
+  } else {
+    console.error("Type is undefined");
+  }
+  return this;
+};
+
+/**
+ * Shows an element's message
+ *
+ * @method show
+ * @param {Function} [fn] A function to be fired when the event is complete
+ * @chainable
+ */
+Message.prototype.show = function (fn) {
+  var tmpType = {
+    "error"       : " invalid",
+    "correct"     : " valid",
+    "notification": ""
+  };
+
+  var el = this.el;
+
+  // Get elClass
+  this.elType = tmpType[this.type] || this.type;
+
+  el.className = !el.className.match(/(invalid|valid)/) ? el.className + this.elType : el.className.replace(/ (invalid|valid)/, this.elType);
+
+  // insert message in DOM right after element
+  if (!el.nextElementSibling || !el.nextElementSibling.className.match(/(error|correct|notification)/)) {
+    var insertEl = "<div class='note " + this.type + "'>" + this.msg + "</div>";
+    el.insertAdjacentHTML("afterend", insertEl);
+  } else if (el.nextElementSibling.className.match(/(error|correct|notification)/)) {
+    this.replace();
+  }
+
+  if (typeof fn === "function") {
+    fn();
+  }
+
+  return this;
+};
+
+/**
+ * Replaces an element's message
+ *
+ * @method replace
+ * @param {Function} [fn] A function to be fired when the event is complete
+ * @chainable
+ */
+Message.prototype.replace = function (fn) {
+  var msgWrap = this.el.nextElementSibling;
+  if (msgWrap) {
+    msgWrap.className = msgWrap.className.replace(/(error|correct|notification)/, this.type);
+    msgWrap.innerHTML = this.msg;
+    this.el.className = this.el.className.replace(/ (invalid|valid)/, this.elType);
+  }
+
+  if (typeof fn === "function") {
+    fn();
+  }
+
+  return this;
+};
+
+/**
+ * Hides an element's message, but keeps the corresponding class
+ *
+ * @method hide
+ * @param {Function} [fn] A function to be fired when the event is complete
+ */
+Message.prototype.hide = function (fn) {
+  var msgWrap = this.el.nextElementSibling;
+  if (msgWrap && msgWrap.className.match(/(^|\s)(error|correct|notification)($|\s)/)) {
+    this.el.parentNode.removeChild(msgWrap);
+  }
+
+  if (typeof fn === "function") {
+    fn();
+  }
+
+  return this;
+};
+
+/**
+ * Completely removes all traces of an element's message
+ *
+ * @method purge
+ * @param {Function} [fn] A function to be fired when the event is complete
+ */
+Message.prototype.purge = function (fn) {
+  this.hide();
+
+  this.el.className = this.el.className.replace(/(^|\s)(invalid|valid)($|\s)/, "$3");
+
+  if (typeof fn === "function") {
+    fn();
+  }
+  return this;
+};
+
+
 /******************
  * jQuery PLUGINS *
  ******************/
 
 (function ($) {
   /**
-   * makes the header an absolutely positioned element with a slide
-   * in/out button for pages which can't have elements affecting
-   * viewport size (themizer, try-it)
+   * Popup function
+   * Mainly for #credits, but can be used in other places
+   *
+   * @param {String} top How far the popup should be from the top of the window
    */
-
-  $.fn.sliderHeader = function () {
-    var classcolor = $("header").attr("class");
-    var headerHeight = $("header").height();
-    $("header").css("position", "absolute")
-               .append("<div id=\"headerButton\" class=\"slideButton down " + classcolor + "\">Close</div>");
-    var openHeader = true;
-    $("#headerButton").click(function () {
-      $("#headerwrap").slideToggle();
-      if (openHeader) {
-        $("#headerButton").animate({
-          top: 0
-        }, 400, function () {
-          $(this).text("Open");
-        });
-        openHeader = false;
-      } else {
-        $(this).animate({
-          top: headerHeight
-        }, 400, function () {
-          $(this).text("Close");
-        });
-        openHeader = true;
-      }
+  $.fn.popUp = function(top) {
+    var that = this,
+        itop = that.css("top");
+    this.css("top", top);
+    $(".overlay-wrapper").css({
+      "pointer-events"  : "all",
+      "background-color": "rgba(255, 255, 255, 0.5)"
     });
-  };
 
-  /**
-   * slide sidebar in/out
-   */
-
-  $.fn.sliderSidebar = function () {
-    // figure out width of sidebar for positioning when hidden/shown
-    var sideWidth = $("#sidebar").width();
-
-    // add open/hide button
-    $("#sidebar").append("<div id=\"side-button\" class=\"slideButton right\"></div>");
-
-    // sidebar is opened at first
-    var openSide = true;
-    $("#sidebar").addClass("opened");
-
-    // main sliding function
-    $("#side-button").click(function () {
-      sideWidth = $("#sidebar").width(); // in case sidebar has been resized
-      if (openSide) {
-        $("#sidebar").animate({
-          left: -sideWidth
-        }, 400, function () {
-          $(this).removeClass("opened").addClass("closed");
-        });
-
-        $(this).animate({
-          left: sideWidth
-        }, 400);
-
-        openSide = false;
-
-      } else {
-        $("#sidebar").removeClass("closed").addClass("opened").animate({
-          left: 0
-        }, 400);
-
-        $(this).animate({
-          left: sideWidth
-        }, 400);
-
-        openSide = true;
-      }
+    //Exit popup
+    $(".overlay-wrapper").click(function() {
+      that.css("top", itop);
+      $(".overlay-wrapper").css({
+        "pointer-events"  : "",
+        "background-color": ""
+      });
     });
+    $('#credits').click(function(e){
+        e.stopPropagation(); //clicking on the box doesn't work, but only OUTSIDE of the box closes.
+    });
+
+    return this;
   };
 
   /**
@@ -129,6 +216,35 @@ Array.prototype.last = function(nth) {
   };
 
   /**
+   * Toggle options
+   */
+  $.fn.optionToggle = function () {
+    $(this).next().slideToggle();
+    var content = $(this);
+
+    if (content.hasClass("collapsed")) {
+      content.removeClass("collapsed").addClass("expanded");
+    } else {
+      content.removeClass("expanded").addClass("collapsed");
+    }
+
+    return this;
+  };
+
+  /**
+   * Generate random colour
+   * Uses randomColor.js
+   */
+
+  $.fn.styleRandomColor = function () {
+    var colour = randomColor();
+    this.prev(".text").val(colour).trigger("keyup");
+    this.next(".color-picker").spectrum("set", colour);
+
+    return this;
+  };
+
+  /**
    * Style an element with a CSS property and a valid value, with the
    * former two being derived from `<selector>` and the latter being
    * derived from `<selector>`'s value.
@@ -142,13 +258,11 @@ Array.prototype.last = function(nth) {
         id       = useName === true ? "[name='" + this.attr("name") + "']" : "#" + this.attr("id"),
         // Create a temp variable from which we decompose the selector and property
         cssId    = useName === true ? this.attr("name") : this.attr("id"),
-        // Split cssId into array so we can decompose it
         cssArray = cssId.split("-"),
         // Get selector for elements
         el       = cssArray[0].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("class_", ".").replace("id_", "#"),
         // Get CSS property
         prop     = cssArray[1].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase(),
-        // Value of `this`
         thisVal;
 
     this.change(function () {
@@ -158,16 +272,18 @@ Array.prototype.last = function(nth) {
         switch(prop) {
           // font-family
           case "font-family":
-            var font = thisVal;
-            if (font.indexOf(" ") !== -1) {
-              font = '"' + font + '"';
+            if (thisVal.indexOf(" ") !== -1) {
+              thisVal = '"' + thisVal + '"';
             }
-            font ? $(el).css("font-family", font + ", Calibri, Verdana, Arial, sans-serif") : $(el).css("font-family", "");
+            $(el).css("font-family", thisVal ? (thisVal + ", Calibri, Verdana, Arial, sans-serif") : "");
             break;
 
           // background-image
           case "background-image":
-            $(el).css("background-image", "url(" + (thisVal.indexOf("http") === -1 ? "//" + thisVal : thisVal) + ")");
+            if (thisVal) {
+              thisVal = "url('" + ((thisVal.indexOf("http") !== 0 && thisVal.indexOf("//") !== 0) ? "//" + thisVal : thisVal) + "')";
+            }
+            $(el).css("background-image", thisVal);
             break;
 
           // background-repeat
@@ -184,73 +300,141 @@ Array.prototype.last = function(nth) {
         styles[cssId] = thisVal;
       }
     });
+
+    return this;
   };
 
 }(jQuery));
 
 /**
- * Toggle options
- *
- * Used to be jQuery plugin, but due to weird bugs was moved back to being a standalone function
+ * makes the header an absolutely positioned element with a slide
+ * in/out button for pages which can't have elements affecting
+ * viewport size (themizer, try-it)
+ * NOT IN USE
  */
-function optionToggle (id) {
-  $("#" + id + " .option-wrap").slideToggle();
-  var content = $("#" + id + " .option-title");
 
-  if (content.hasClass("collapsed")) {
-    content.removeClass("collapsed").addClass("expanded");
-  } else {
-    content.removeClass("expanded").addClass("collapsed");
-  }
-};
+function sliderHeader () {
+  var classcolor = $("header").attr("class");
+  var headerHeight = $("header").height();
+  $("header").css("position", "absolute")
+             .append('<div id="header-button" class="slideButton down ' + classcolor + '"></div>');
+
+  var openHeader = true;
+  $("header").addClass("opened");
+
+  $("#header-button").click(function () {
+    if (openHeader) {
+      $("header").animate({
+        top: -headerHeight
+      }, 400, function () {
+        $(this).removeClass("opened").addClass("closed");
+      });
+
+      $(this).animate({
+        top: headerHeight
+      }, 400);
+
+      openHeader = false;
+
+    } else {
+      $("header").removeClass("closed").addClass("opened").animate({
+        top: 0
+      }, 400);
+
+      $(this).animate({
+        top: headerHeight
+      }, 400);
+
+      openHeader = true;
+    }
+  });
+}
 
 /**
- * Themizer init
+ * sliding sidebar in and out with responsive sizing and ultra cool open close button functionality
  */
-function themizer () {
-  /*************
-   * VARIABLES *
-   *************/
+function sliderSidebar () { //referring to the exact and non-general (for lack of a better word) functionality of the sidebar in Themizer and Try-It
+  /*** VARIABLES ***/
   // get viewport height
   var vh = $(window).height()/100;
 
   // find width of sidebar and of sideButton
-  var sideWidth       = 35*vh,
+  var sideWidth = $("#sidebar").width(), //32 * vh used to be here but it was being overwritten by this later declaration w/ CSS
       sideButtonWidth =  2*vh;
 
   // set whether user is active or not for later
   var idleTimer = null,
       idleState = true;
 
-  /*************
-   * FUNCTIONS *
-   *************/
+  // figure out width of sidebar for positioning when hidden/shown
+
+  /*** FUNCTIONS ***/
+  // add open/hide button
+  $("#sidebar").append('<div id="side-button" class="slideButton right">&laquo;</div>');
+
+  // sidebar is opened at first
+  var openSide = true;
+  $("#sidebar").addClass("opened");
+
+  // main sliding function
+  $("#side-button").click(function () {
+    sideWidth = $("#sidebar").width(); // in case sidebar has been resized
+    if (openSide) {
+      $("#sidebar").animate({
+        left: -sideWidth
+      }, 400, function () {
+        $(this).removeClass("opened").addClass("closed");
+      });
+
+      $(this).html("&raquo;")
+             .animate({
+        left: sideWidth
+      }, 400);
+
+      openSide = false;
+
+    } else {
+      $("#sidebar").removeClass("closed").addClass("opened").animate({
+        left: 0
+      }, 400);
+
+      $(this).html("&laquo;")
+             .animate({
+        left: sideWidth
+      }, 400);
+
+      openSide = true;
+    }
+  });
+
   // Set sidebar styles
-  $("#sidebar")      .css("font-size", 2.22*vh);
+  $("#sidebar")      .css("font-size", 2*vh);
   $("#sidebar-inner").width(sideWidth);
-  $("#side-button").css("left", sideWidth);
+  $("#side-button")  .css("left", sideWidth);
 
   $("#blog-body").load("blog/blog-index.html");
-  $("head").append("<link href='blog/css/core.css' type='text/css' rel='stylesheet' id='base-theme'>");
 
   // option slides sliding init
   $(".option").each(function () {
     var id = $(this).attr('id');
-    $("#" + id + " .option-title").attr("onclick", "optionToggle('" + id + "')").addClass("collapsed");
+    $("#" + id + " .option-title").attr("onclick", "$(this).optionToggle()").addClass("collapsed");
   });
 
-  // set first option to be open
-  var firstop = $(".option:first-of-type").attr('id');
-  $("#" + firstop + " .option-title").removeClass("collapsed").addClass("expanded");
-  $("#" + firstop + " .option-wrap").slideDown(0);
+  // set all options with class `expanded` to be open
+  $(".expanded").removeClass("collapsed");
+  $(".expanded").next().slideDown();
 
-  // view mode radios
+  // view mode radios; these appear in both themizer & try-it
   $("[name='view']").change(function () {
-    $("#blog-body").load("blog/blog-" + $("[name='view'] :checked").val() + ".html");
+    $("#blog-body").load("blog/blog-" + $("[name='view'] :checked").val() + ".html", function () {
+      $(".text").trigger("keyup");
+    });
   });
   $("[name='base']").change(function () {
-    $("link[id='base-theme']").attr('href', "blog/css/" + $("[name='base'] :checked").val() + ".css");
-    styles.baseTheme = $("[name='base'] :checked").val();
+    $("link[id='base-theme']").attr('href', "blog/css/" + $("[name='base'] :checked").val() + ".css", function () {
+      $(".text").trigger("keyup");
+    });
+    baseTheme = $("[name='base'] :checked").val();
   });
 
   // resize sidebar
@@ -258,7 +442,7 @@ function themizer () {
   $("#side-resizer").mousedown(function () {
     $(document).mousemove(function (event) { // use document to avoid conflict with sideButton
       var mousePosX = event.pageX;
-      sideWidth = mousePosX > 35*vh ? mousePosX : sideWidth; // set original width as minimum
+      sideWidth = mousePosX > 32*vh ? mousePosX : sideWidth; // set original width as minimum
       $("#sidebar-inner").width(sideWidth);
       // move sideButton and remove transitions as they screw the former up
       $("#side-button").css({
@@ -293,7 +477,7 @@ function themizer () {
     clearTimeout(idleTimer); // clear timeout if user acts
 
     // user active
-    if (idleState == true) {
+    if (idleState === true) {
       // Reactivated event
       $(".closed #side-button").addClass("triggered").animate({
         left: sideWidth
@@ -303,7 +487,7 @@ function themizer () {
     // user mouse in "targeted" zone
     // We cannot use jQuery animations as they are too CPU-intensive
     // Instead, we just add .targeted.
-    if (event.pageX < sideWidth*2/3) {
+    if (event.pageX < sideWidth * 2/3) {
       $(".closed #side-button").addClass("targeted");
     } else {
       $(".closed #side-button").removeClass("targeted");
@@ -328,9 +512,98 @@ function themizer () {
       idleState = true;
     }, 4000);
   });
+}
+
+/*******************
+ *   THEMIZER JS   *
+ *******************/
+var baseTheme = "core";
+
+// Set object for styling
+var styles = {
+  "body-backgroundColor"            : "white",
+  "body-backgroundImage"            : "",
+  "body-backgroundRepeat"           : "",
+  "body-fontFamily"                 : "",
+  "id_wrapper-backgroundColor"      : "#EDEDEA",
+  "class_entry-backgroundColor"     : "#EDEDEA",
+  "class_entrywrap-backgroundColor" : "#EDEDEA",
+  "class_row1-backgroundColor"      : "#EDEDEA",
+  "class_row2-backgroundColor"      : "#EDEDEA"
+};
+
+/**
+ * Themizer (Regular mode) Init
+ */
+function themizerRegular () {
+  sliderSidebar();
+  // Base style
+  $("head").append("<link href='blog/css/core.css' type='text/css' rel='stylesheet' id='base-theme'>");
+
+  /* Get Code */
   $("#submit").click(function () {
-    for (var i in styles)
-      console.log(i + ":" + styles[i]); // debugging
+
+    var code = '';
+
+    $.ajax({
+      url: "/blog/css/" + baseTheme + ".css",
+      async: false,
+      success: function(cssContent) {
+        code += cssContent + "\n\n";
+      }
+    });
+
+    code += "/* --- CUSTOM THEMIZER STYLING --- */\n\n";
+
+    var selectors = {};
+    for (var i in styles) {
+      var split = i.split('-'),
+          selector = split[0].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("class_", ".").replace("id_", "#"),
+          attribute = split[1].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase(),
+          value = styles[i];
+      if (selectors.hasOwnProperty(selector) === false) {
+        selectors[selector] = {};
+      }
+      selectors[selector][attribute] = value;
+    }
+
+    var thiselement;
+    for (var j in selectors) {
+      thiselement = '';
+      thiselement += j + " {\n";
+      for (var k in selectors[j]) {
+        if (selectors[j][k] || selectors[j][k] !== '') {
+          thiselement += "  " + k + ": " + selectors[j][k] + ";\n";
+        }
+      }
+      thiselement += "}\n\n";
+      code += thiselement;
+    }
+
+    /**
+     * ZeroClipboard
+     */
+    var client = new ZeroClipboard($("#copycode"));
+
+    client.on("ready", function (readyEvent) {
+      client.on("aftercopy", function (event) {
+        event.target.innerHTML= "Copied";
+        event.target.classList.add("hover");
+      });
+    });
+
+    /**
+     * Lightbox
+     */
+    // Add code to the pre
+    $("#lightbox-wrap pre").html(code);
+    // Reset #copybutton to pre-copied state
+    $("#copycode.hover").text("Copy Code to Clipboard").removeClass("hover");
+    // Google-Code-Prettify won't do its job if the pre has class `prettyprinted` (http://stackoverflow.com/a/15984048/3472393)
+    $("#lightbox-wrap pre.prettyprinted").removeClass("prettyprinted");
+    prettyPrint();
+    $("#lightbox").show();
+
   });
 
   /**
@@ -339,7 +612,13 @@ function themizer () {
 
   // Check inputs for validity
   $("[type='url']").keyup(function () {
-    $(this).val().match(/^(https?:\/\/)?[a-z0-9-\.]+\.[a-z]{2,4}\/([^\s<>%"\,\{\}\\|\\\^\[\]`]+)?\.(gif|jpg|jpeg|png|php|svg)(\?\w=\w)?(&\w=\w)*/) ? $(this).removeClass("invalid") : $(this).addClass("invalid");
+    if ($(this).val().match(/^(https?:\/\/|\/\/)?[a-z0-9-\.]+\.[a-z]{2,4}\/([^\s<>%"\,\{\}\\|\\\^\[\]`]+)?\.(gif|jpg|jpeg|png|php|svg)(\?\w=\w)?(&\w=\w)*/) || !$(this).val()) {
+      $(this).prev(".invalid-msg").remove();
+      $(this).removeClass("invalid");
+    } else if (!$(this).hasClass("invalid")) {
+      $("<p class=\"invalid-msg\">This URL is invalid!</p>").insertBefore(this);
+      $(this).addClass("invalid");
+    }
   });
 
   // Body
@@ -365,7 +644,7 @@ function themizer () {
             var id   = $(this).attr("id").split(/-/),
                 el   = id[1].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("class_", ".").replace("id_", "#"),
                 prop = id[2].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase();
-            $(this).prev().val(color);
+            $(this).prevAll(".text").val(color);
             $(el).css(prop, color);
 
             // update styles
@@ -375,12 +654,11 @@ function themizer () {
   // Set color picker to corresponding text input's value when user types
   $(".spectrum.text").keyup(function () {
     var color  = $(this).val(),
-        picker = $(this).next(),
         id     = $(this).attr("id").split(/-/),
         el     = id[1].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("class_", ".").replace("id_", "#"),
         prop   = id[2].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase();
     $(el).css(prop, color);
-    $(picker.spectrum("set", color));
+    $(this).nextAll(".color-picker").spectrum("set", color);
 
     // update styles
     styles[id[1] + "-" + id[2]] = color;
@@ -394,12 +672,87 @@ function themizer () {
 }
 
 /**
- * Generate random colour
- *
- * May or may not use http://llllll.li/randomColor/ in the future
+ * Themizer (Developer mode) Init
  */
+function themizerDev () {
+  sliderSidebar();
+  $("head").append('<style id="dev-style"></style>');
 
-//var randomColour = function() { return '#'+Math.floor(Math.random()*16777215).toString(16); };
+  // make sidebar-inner full height
+  // $("#sidebar-inner").css("padding-bottom", "0");
 
-/*laquo «
-&#187; and it will looks like »*/
+  /**
+   * ZeroClipboard
+   */
+  var client = new ZeroClipboard($("#copycode"));
+
+  client.on("ready", function (readyEvent) {
+    client.on("aftercopy", function (event) {
+      event.target.innerHTML= "Copied";
+      event.target.classList.add("hover");
+      setTimeout(function () { //after a while, go back to non-copied state
+        event.target.innerHTML= "Copy Code to Clipboard";
+        event.target.classList.remove("hover");
+      }, 1100);
+    });
+  });
+
+  $(window).mousemove();
+}
+
+
+
+/*******************
+ *    TRY-IT JS    *
+ *******************/
+/**
+ * Try-It init
+ */
+function tryit () {
+  sliderSidebar();
+  $(window).mousemove();
+}
+
+
+/*******************
+ *  NOTIFICATIONS  *
+ *******************/
+$(function () {
+  $("#notifications").hide();
+
+  $('body').click(function (e) {
+    if($(e.target).closest('.notification-link, #notifications').length === 0) {
+      $("#notifications").hide("fast", "swing");
+    }
+  });
+});
+
+function show_notifications() {
+  $("#notifications").toggle(350);
+}
+
+function mark_read(id) {
+  $.ajax({
+    url: '/include/ajax_handler.php',
+    data: {
+      action: 'mark_read',
+      notification_id: id
+    },
+    type: 'post',
+    success: function() {}
+  });
+}
+
+function mark_all_read(user_id) {
+  $.ajax({
+    url: '/include/ajax_handler.php',
+    data: {
+      action: 'mark_all_read',
+      user_id: user_id
+    },
+    type: 'post',
+    success: function() {
+      location.reload();
+    }
+  });
+}
