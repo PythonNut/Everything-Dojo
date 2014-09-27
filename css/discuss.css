@@ -253,36 +253,61 @@ td.tiny-col { width: 3%; }
   margin-bottom: 1em;
 }
 
-.topic-reply-thanks {
+.topic-reply-panel{
+  padding: 0;
   display: inline-block;
-  height: 30px;
+  border: 1px solid #000000;
+  border-radius: 0.5em;
+  overflow: hidden;
   margin-left: 1em;
-  width: 30px;
-  border: 1px solid black;
+  margin-bottom: -0.5em;
+}
+
+.topic-reply-panel>div {
+  display: inline-block;
+  height: 1.5em;
+  width: 1.5em;
   text-align: center;
-  line-height: 30px;
+  line-height: 1.5em;
   vertical-align: middle;
-  border-radius: 30px;
   cursor: pointer;
   font-size: 20px;
   background-color: #FFFFFF;
   color: #000000;
   overflow: hidden;
-  -webkit-transition: 500ms ease;
-  transition: 500ms ease;
+  -webkit-transition: all 500ms ease;
+  transition: all 500ms ease;
+  border-right: 1px solid #000000;
+}
+.topic-reply-panel>div:last-child {
+  border-right: 0px solid #000000;
 }
 
-.topic-reply-thanks:hover {
-  background-color: #51b835;
+.topic-reply-panel>div:hover{
+  background-color: #509aff;
   color: #FFFFFF;
   width: 150px;
-  -webkit-transition: 500ms ease;
-  transition: 500ms ease;
+  -webkit-transition: all 500ms ease;
+  transition: all 500ms ease;
+}
+
+.topic-reply-disabled{
+  background-color: #d8d8d8 !important;
+  color: #000000 !important;
+  opacity: 0.6 !important;
+}
+.topic-reply-disabled:hover{
+  background-color: #bababa !important;
+  opacity: 0.8 !important;
+}
+
+.topic-reply-thanks {
+  /*later..*/
 }
 
 .topic-reply-thanked {
-  background-color: #51b835;
-  color: #FFFFFF;
+  background-color: #51b835 !important;
+  color: #FFFFFF !important;
 }
 
 .topic-reply {

@@ -382,7 +382,6 @@ class discuss {
         ':text' => $this->filter_swear_words($data['desc']),
         ':source' => $this->filter_swear_words($data['desc-source'])
       ));
-
       $this->delete_views($data['t'], $user_id, 0);
     }
 
