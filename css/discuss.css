@@ -279,6 +279,7 @@ td.tiny-col { width: 3%; }
   transition: all 500ms ease;
   border-right: 1px solid #000000;
 }
+
 .topic-reply-panel>div:last-child {
   border-right: 0px solid #000000;
 }
