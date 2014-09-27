@@ -22,10 +22,6 @@ h6 {
   -webkit-transition: 0.5s ease;
   transition: 0.5s ease;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 .linkbutton:hover {
   background-color: #41962c;
   border-color: #40902a;
@@ -43,29 +39,17 @@ h6 {
   width: 46%;
   padding: 2%;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> master
 .tile:first-child {
   float: left;
   border-right: 1px solid #bbb;
   margin-right: -1px;
 }
-<<<<<<< HEAD
-.tile:last-child {
-  float: right;
-}
 
-.index-row:first-of-type .tile {
-  border-bottom: 1px solid #bbb;
-}
-=======
 
 .tile:last-child { float: right; }
 
 .index-row:first-of-type .tile { border-bottom: 1px solid #bbb; }
->>>>>>> master
 
 #headerwrap a { cursor: pointer; }
 
@@ -88,10 +72,7 @@ h6 {
   font-size: 1.1em;
   margin-top: 5vh;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> master
 #themizer-bar .note a { color: #5dc350; }
 
 #themizer-inner-wrap { margin-left: 12.5%; list-style: none; }
@@ -104,10 +85,7 @@ h6 {
   box-sizing: border-box;
   padding-left: 8vw;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> master
 #left-wrap .heading { width: 7em; }
 
 #right-wrap {
@@ -115,10 +93,7 @@ h6 {
   right: -5em;
   width: 50%;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> master
 #right-wrap img {
   height: 50vh;
   width: 89vh; /* img { height: inherit; width: inherit; } */

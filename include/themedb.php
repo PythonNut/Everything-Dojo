@@ -235,7 +235,7 @@ class themedb {
         $stage[]       = $row["stage"];
         $author[]      = $row["author"];
         $version[]     = $row["version"];
-        $submit_id[]   = $row["submited_by_id"];
+        $submit_id[]   = $row["submitted_by_id"];
         $owner_id[]    = $row["owner_id"];
       }
 
@@ -274,7 +274,7 @@ class themedb {
         $stage[]       = $row["stage"];
         $author[]      = $row["author"];
         $version[]     = $row["version"];
-        $submit_id[]   = $row["submited_by_id"];
+        $submit_id[]   = $row["submitted_by_id"];
         $owner_id[]    = $row["owner_id"];
       }
 

@@ -2,15 +2,6 @@
   $title = "Home";
   include("include/include.php");
   session_start();
-<<<<<<< HEAD
-  
-	if(!empty($_SESSION['user_id'])){
-		$notification_unread_count = $notification->count_unread($_SESSION['user_id']);
-		$notification_data = $notification->get_notifications($_SESSION['user_id']);
-	}
-	
-	get_header(0);
-=======
 
   if (isset($_SESSION['user_id'])) {
     $notification_unread_count = $notification->count_unread($_SESSION['user_id']);
@@ -18,7 +9,7 @@
   }
 
   get_header(0);
->>>>>>> master
+
 ?>
 <section id="content">
   <div id="notifications">
