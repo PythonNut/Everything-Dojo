@@ -285,12 +285,6 @@ td.tiny-col { width: 3%; }
   color: #FFFFFF;
 }
 
-/* next person who reads this code and agrees it's useless delete it
-.topic-reply-thanked:hover {
-  background-color: #51b835;
-  color: #FFFFFF;
-} */
-
 .topic-reply {
   position: relative;
   border: 1px solid black;

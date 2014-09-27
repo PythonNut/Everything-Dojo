@@ -114,7 +114,7 @@
           <td class="center"><?php echo $username; ?></td>
           <td class="center"><?php echo $comments; ?></td>
           <td class="center"><?php echo $discuss->get_views($topic['topic_id'], 1 - $typearg); ?></td>
-          <td class="center"><?php $lastpost = $discuss->get_posts(intval($topic['topic_id']), 'all', $typearg);
+          <td class="center"><?php $lastpost = array_values($discuss->get_posts(intval($topic['topic_id']), 'all', $typearg));
           if (empty($lastpost)) {
             echo date('M d, Y g:i a', $topic['time'])."<br /><b>".get_user($topic['user_id'])."</b>";
           } else {
