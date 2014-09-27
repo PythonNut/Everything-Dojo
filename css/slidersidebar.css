@@ -2,6 +2,10 @@
 
 @import url('fonts.css');
 
+<<<<<<< HEAD:css/themizer.css
+.themizer { background: #51b835; }
+
+=======
 
 /*--COLORS--*/
 .database { background: #d553cb; }
@@ -10,6 +14,7 @@
 .discuss  { background: #509aff; }
 
 
+>>>>>>> master:css/slidersidebar.css
 /*--LAYOUT--*/
 #sidebar {
   position: fixed;
@@ -21,7 +26,11 @@
   text-align: left;
   text-rendering: optimizeLegibility;
   overflow-x: visible;
+<<<<<<< HEAD:css/themizer.css
+  z-index: 2147483646;
+=======
   z-index: 1000;
+>>>>>>> master:css/slidersidebar.css
   /* Prevent accidental selection of content in sidebar when resizing */
   cursor: auto;
   -webkit-user-select: none;
@@ -47,9 +56,14 @@
   padding-top: 1em;
 }
 
-
+<<<<<<< HEAD:css/themizer.css
 /*--GENERAL--*/
 #sidebar input,
+=======
+
+/*--GENERAL--*/
+#sidebar input:not([type='checkbox']),
+>>>>>>> master:css/slidersidebar.css
 #sidebar select,
 #sidebar option {
   width: 100%;
@@ -60,6 +74,8 @@
   border: none;
   outline: none;
 }
+
+#sidebar input[type='checkbox'] { position: relative; top: 2.5px; }
 
 .text {
   height: 1.7em;
@@ -96,6 +112,16 @@
   cursor: pointer;
   -webkit-transition: 0.5s ease;
   transition: 0.5s ease;
+<<<<<<< HEAD:css/themizer.css
+}
+.linkbutton:hover,
+.linkbutton[class*='hover'] {
+  background-color: #41962c;
+  border-color: #40902a;
+  color: #fafafa;
+}
+
+=======
 }
 
 .linkbutton.disabled { color: #444; border: 1px solid #444; cursor: default; }
@@ -111,6 +137,7 @@
 .long.linkbutton { font-size: 1.2em; padding: 0.6em 0.3em; }
 
 
+>>>>>>> master:css/slidersidebar.css
 /*--HEADER--*/
 #sideheadbar {
   position: absolute;
@@ -138,6 +165,11 @@
   z-index: 100;
 }
 
+<<<<<<< HEAD:css/themizer.css
+.opened #sideheadbar::after { right: -2vh; }
+.closed #sideheadbar::after { left: 0; }
+
+=======
 #sideheadbar.themizer::after { background: #57c639; }
 #sideheadbar.tryit::after    { background: #F16500; }
 
@@ -145,6 +177,7 @@
 .closed #sideheadbar::after { left: 0; }
 
 
+>>>>>>> master:css/slidersidebar.css
 /*--RESIZER--*/
 #side-resizer {
   position: absolute;
@@ -155,9 +188,55 @@
   cursor: e-resize;
   pointer-events: all;
 }
+<<<<<<< HEAD:css/themizer.css
 
 .closed #side-resizer { pointer-events: none; }
 
+/*--LIGHTBOX--*/
+#lightbox {
+  position: fixed; /* keeps the lightbox window in the current viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  text-align: left;
+  font-size: 16px;
+  z-index: 200; /* to beat the #sidebar! */
+}
+
+#lightbox-wrap {
+  background: #ddd;
+  width: 65%;
+  height: 70%;
+  margin: 5em auto;
+  box-shadow: 0 0 25px #111;
+  padding: 2em;
+}
+
+#lightbox-wrap pre {
+  overflow: auto;
+  height: 70%;
+  padding: 1.5em;
+  box-shadow: 0 0 1.3em #000 inset;
+}
+/* override every-fifth-line numbering of code */
+#lightbox-wrap pre li.L0,
+#lightbox-wrap pre li.L1,
+#lightbox-wrap pre li.L2,
+#lightbox-wrap pre li.L3,
+#lightbox-wrap pre li.L5,
+#lightbox-wrap pre li.L6,
+#lightbox-wrap pre li.L7,
+#lightbox-wrap pre li.L8 {
+  list-style-type: decimal;
+}
+=======
+
+.closed #side-resizer { pointer-events: none; }
+
+>>>>>>> master:css/slidersidebar.css
 
 /*--SLIDE BUTTONS--*/
 .slideButton {
@@ -197,7 +276,10 @@
   transition: all 0.3s ease;
 }
 
+<<<<<<< HEAD:css/themizer.css
+=======
 
+>>>>>>> master:css/slidersidebar.css
 /*--OPTION SLIDES--*/
 .option {
   border: 3px solid #444;
@@ -271,7 +353,10 @@
   transform: skewY(20deg);
 }
 
+<<<<<<< HEAD:css/themizer.css
+=======
 
+>>>>>>> master:css/slidersidebar.css
 /*--INPUTS--*/
 .radio,
 .checkbox {
@@ -369,6 +454,7 @@
   position: fixed !important;
   background: #222 !important;
   box-shadow: 0 0 3px 2px #222;
+  z-index: 2147483647 !important;
 }
 
 .sp-picker-container { border-left: none !important; }
@@ -380,7 +466,10 @@
   background-image: linear-gradient(to right, transparent, black) !important;
 }
 
+<<<<<<< HEAD:css/themizer.css
+=======
 
+>>>>>>> master:css/slidersidebar.css
 /*--MISCELLANEOUS CLASSES--*/
 #sidebar p,
 #sidebar section[data-name] {
@@ -388,6 +477,22 @@
   margin-top: 0.3em;
   margin-bottom: 0.6em;
 }
+<<<<<<< HEAD:css/themizer.css
+
+#sidebar i,
+#sidebar .i {
+  font-family: AmbleItalic, sans-serif;
+}
+
+#sidebar code { font-family: Monaco, "Courier New", Courier, monospace; }
+
+#sidebar .small { font-size: 0.65em; }
+
+#sidebar .clear { clear: both; }
+
+#sidebar .inline { display: inline; }
+=======
+>>>>>>> master:css/slidersidebar.css
 
 #sidebar i, #sidebar .i { font-family: AmbleItalic, sans-serif; }
 
@@ -404,6 +509,10 @@
 #sidebar :invalid {
   box-shadow: none; /* Prevent Firefox from automatically applying box-shadow to invalid inputs */
 }
+<<<<<<< HEAD:css/themizer.css
+
+#sidebar .invalid { background: #b00 !important; }
+=======
 
 #sidebar .invalid { background: #a00 !important; }
 
@@ -414,6 +523,7 @@
   margin-bottom: 0.3em;
 }
 
+>>>>>>> master:css/slidersidebar.css
 
 /*--SCROLLBARS--*/
 #sidebar ::-webkit-scrollbar {
@@ -431,6 +541,8 @@
   box-shadow: inset 0 0 0.4em #444;
   border-radius: 1em;
 }
+<<<<<<< HEAD:css/themizer.css
+=======
 
 
 /*--LIGHTBOX--*/
@@ -466,3 +578,4 @@
 
 /* override every-fifth-line numbering of code */
 #lightbox-wrap pre li { list-style-type: decimal; }
+>>>>>>> master:css/slidersidebar.css

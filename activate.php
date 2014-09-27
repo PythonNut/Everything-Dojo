@@ -8,7 +8,7 @@ foreach ($_GET as $key => $value) {
 }
 
 /******** EMAIL ACTIVATION LINK**********************/
-if(isset($get['user']) && !empty($get['activ_code']) && !empty($get['user']) && is_numeric($get['activ_code']) ) {
+if (isset($get['user']) && !empty($get['activ_code']) && !empty($get['user']) && is_numeric($get['activ_code'])) {
   $err = array();
   $msg = array();
   $user = $get['user'];
@@ -22,9 +22,9 @@ if(isset($get['user']) && !empty($get['activ_code']) && !empty($get['user']) && 
     $err[] = "Sorry, no such account exists or the activation code is invalid.";
   }
 
-  if(empty($err)) {
+  if (empty($err)) {
   // set the approved field to 1 to activate the account
-    $rs_activ = $dbc->prepare("UPDATE ".$table." SET approved='1' WHERE md5_id=? AND activation_code = ? ");
+    $rs_activ = $dbc->prepare("UPDATE ".$table." SET approved='1', logins_attempted=0 WHERE md5_id=? AND activation_code = ? ");
     $rs_activ->execute(array($user, $activ));
 
     $msg[] = "Thank you. Your account has been activated. You can now <a href=\"login.php\">login</a>.";
@@ -42,14 +42,13 @@ if (isset($_POST['doActivate'])) {
   $rs_check->fetchAll(PDO::FETCH_ASSOC);
   $num = $rs_check->rowCount();
 
-
   // Match row found with more than 1 results  - the user is authenticated.
   if ($num <= 0) {
     $err[] = "Sorry, no such account exists or the activation code is invalid.";
   }
   //set approved field to 1 to activate the user
-  if(empty($err)) {
-    $rs_activ = $dbc->prepare("UPDATE ".$table." SET approved='1' WHERE user_email=? AND activation_code = ?");
+  if (empty($err)) {
+    $rs_activ = $dbc->prepare("UPDATE ".$table." SET approved='1', logins_attempted=0 WHERE user_email=? AND activation_code = ?");
     $rs_activ->execute(array($user_email,$activ));
 
     $msg[] = "Thank you. Your account has been activated. You can now <a href=\"login.php\">login</a>.";
@@ -59,8 +58,6 @@ if (isset($_POST['doActivate'])) {
 if(isset($_POST['doResend'])) {
   $err = array();
   $msg = array();
-
-
 
   $user_email = $_POST['user_email']; //no escaping needed because of PDO
   $rs_check = $dbc->prepare("SELECT md5_id, approved, activation_code FROM ".$table." WHERE user_email = ?");
@@ -76,7 +73,7 @@ if(isset($_POST['doResend'])) {
 
   if (empty($err)) {
     $host = $_SERVER['HTTP_HOST'];
-$message = "Hello,
+    $message = "Hello,
 
 You have recently requested for your activation code to be resent to you. Here it is:
 
@@ -84,11 +81,11 @@ Activation Code: ".$row[0]['activation_code']."
 
 You can now visit http://$host/activate.php to activate your account, or, alternately, http://$host/activate.php?user=" . $row[0]['md5_id'] . "&activ_code=" . $row[0]['activation_code'] . ".
 
-Administrator @Login Site
+Administrator @ Everything Dojo
 ______________________________________________________
 This is an automated response. Do not reply to this email.";
 
-    mail($user_email, "Login Site Activation Code", $message, "From: \"Login Site Forgotbot\" <auto-reply@$host>\r\n");
+    mail($user_email, "EvDo Activation Code", $message, "From: \"Everything Dojo Forgotbot\" <no-reply@$host>\r\n");
 
     header("Location: activate.php?done=yes");
     exit();
@@ -103,7 +100,7 @@ This is an automated response. Do not reply to this email.";
 ?>
 <section id="content">
   <?php //spit out all errors
-  if(!empty($err))  {
+  if (!empty($err))  {
     echo "<p id=\"errors\">";
     foreach ($err as $e) {
       echo "ERROR - ".$e."<br />";

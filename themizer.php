@@ -10,6 +10,7 @@
   include("include/include.php");
   session_start();
   $extra_style = "<link rel=\"stylesheet\" href=\"css/blog-style.css\">
+<<<<<<< HEAD
   <link rel=\"stylesheet\" href=\"css/themizer.css\">
   <link rel=\"stylesheet\" href=\"css/spectrum.min.css\">
   <link href=\"css/prettify-desert.css\" rel=\"stylesheet\" />";
@@ -30,6 +31,36 @@
     $().sliderSidebar();
     themizer();
   });</script>";
+=======
+  <link rel=\"stylesheet\" href=\"css/slidersidebar.css\">" .
+  ($_GET["mode"] == "regular"
+  ?
+  "<link rel=\"stylesheet\" href=\"css/spectrum.min.css\">
+  <link href=\"css/prettify-desert.css\" rel=\"stylesheet\" />"
+  :
+  "<link rel=\"stylesheet\" href=\"css/codemirror.min.css\" />");
+  $extra_js = "<script src=\"js/blog-fn.js\"></script>
+  <script src=\"js/ZeroClipboard.js\"></script>" .
+  ($_GET["mode"] == "regular"
+  ?
+  "<script src=\"js/spectrum-1.3.4.min.js\" onload=\"$.fn.spectrum.load = false;\"></script>
+  <script src=\"js/randomColor.js\"></script>
+  <script src=\"js/prettify.js\"></script>
+  <script>
+    $(function () {
+      \$('#lightbox').click(function () {
+        \$(this).hide();
+      });
+      $('#lightbox-wrap').click(function (e) {
+        e.stopPropagation();
+      });
+      themizerRegular();
+    });
+  </script>"
+  :
+  "<script src=\"js/codemirror-4.4.min.js\"></script>
+  <script>$(function () { themizerDev(); });</script>");
+>>>>>>> master
 
   get_header();
 ?>
@@ -38,22 +69,39 @@
   <section id="sidebar-inner">
     <section id="sidebar-inner-scrollable">
 
-      <section class="option" id="option-view">
+      <section class="option" id="option-options">
         <section class="option-title">
+<<<<<<< HEAD
           <h5>Blog Page</h5>
+=======
+          <h5>Options</h5>
+>>>>>>> master
           <span class="collapsebutton"></span>
         </section>
         <section class="option-wrap">
-          <select name="view">
-            <option value="index">Index</option>
-            <option value="blog">Post</option>
-            <option value="post">Post New Entry</option>
-            <option value="comment">Post New Comment</option>
-          </select>
+          <span class="title">Blog page</span>
+          <p>
+            <select name="view">
+              <option value="index">Index</option>
+              <option value="blog">Post</option>
+              <option value="post">Post New Entry</option>
+              <option value="comment">Post New Comment</option>
+            </select>
+          </p>
+          <?php if ($_GET["mode"] == "regular"): ?>
+          <span class="title">Base theme</span>
+          <p>
+            <select name="base">
+              <option value="core">Core by Dojo</option>
+              <option value="calm">Calm by Red</option>
+            </select>
+          </p>
+          <?php endif; ?>
         </section>
       </section>
 
       <?php if ($_GET["mode"] == "regular"): ?>
+<<<<<<< HEAD
 
       <section class="option" id="option-base">
         <section class="option-title">
@@ -67,6 +115,8 @@
           </select>
         </section>
       </section>
+=======
+>>>>>>> master
 
       <section class="option" id="option-body">
         <section class="option-title expanded">
@@ -78,6 +128,7 @@
             <span class="title">Background Color</span>
             <p>
               <input type="text" class="spectrum text" id="text-body-backgroundColor" value="white" spellcheck="false">
+              <span class="random-color" onclick="$(this).styleRandomColor();" title="Style with random color"></span>
               <input type="color" class="spectrum color-picker" id="spectrum-body-backgroundColor" value="#FFFFFF">
             </p>
           </section>
@@ -91,7 +142,7 @@
             <span class="title">Background Repeat</span>
             <p>
               <label class="label">repeat-all
-                <input type="radio" class="radio" id="body-backgroundRepeat-repeatAll" name="body-backgroundRepeat" value="repeat" checked>
+                <input type="radio" class="radio" id="body-backgroundRepeat-repeatAll" name="body-backgroundRepeat" value="" checked>
                 <span class="input-button"></span>
               </label>
             </p>
@@ -131,6 +182,7 @@
             <span class="title">Background Color</span>
             <p>
               <input type="text" class="spectrum text" id="text-id_wrapper-backgroundColor" value="#EDEDEA" spellcheck="false">
+              <span class="random-color" onclick="$(this).styleRandomColor();" title="Style with random color"></span>
               <input type="color" class="spectrum color-picker" id="spectrum-id_wrapper-backgroundColor" value="#EDEDEA">
             </p>
           </section>
@@ -147,11 +199,13 @@
             <span class="title">Background Color <span class="small">(Entries)</span></span>
             <p>
               <input type="text" class="spectrum text" id="text-class_entry-backgroundColor" value="#EDEDEA" spellcheck="false">
+              <span class="random-color" onclick="$(this).styleRandomColor();" title="Style with random color"></span>
               <input type="color" class="spectrum color-picker" id="spectrum-class_entry-backgroundColor" value="#EDEDEA">
             </p>
             <span class="title">Background Color <span class="small">(Entrywrap)</span></span>
             <p>
               <input type="text" class="spectrum text" id="text-class_entrywrap-backgroundColor" value="#EDEDEA" spellcheck="false">
+              <span class="random-color" onclick="$(this).styleRandomColor();" title="Style with random color"></span>
               <input type="color" class="spectrum color-picker" id="spectrum-class_entrywrap-backgroundColor" value="#EDEDEA">
             </p>
           </section>
@@ -168,11 +222,13 @@
             <span class="title">Background Color <span class="small">(Odd-numbered)</span></span>
             <p>
               <input type="text" class="spectrum text" id="text-class_row1-backgroundColor" value="#EDEDEA" spellcheck="false">
+              <span class="random-color" onclick="$(this).styleRandomColor();" title="Style with random color"></span>
               <input type="color" class="spectrum color-picker" id="spectrum-class_row1-backgroundColor" value="#EDEDEA">
             </p>
             <span class="title">Background Color <span class="small">(Even-numbered)</span></span>
             <p>
               <input type="text" class="spectrum text" id="text-class_row2-backgroundColor" value="#EDEDEA" spellcheck="false">
+              <span class="random-color" onclick="$(this).styleRandomColor();" title="Style with random color"></span>
               <input type="color" class="spectrum color-picker" id="spectrum-class_row2-backgroundColor" value="#EDEDEA">
             </p>
           </section>
@@ -187,6 +243,7 @@
           <span class="collapsebutton"></span>
         </section>
         <section class="option-wrap">
+<<<<<<< HEAD
           <!-- add codemirror -->
           <!--------------------!
            ! ADD-ONS:           !
@@ -200,12 +257,48 @@
         </section>
       </section>
 
+=======
+          <textarea id="editor" style="font-family:Monaco,Consolas,'Courier New',monospace"></textarea>
+        </section>
+      </section>
+
+      <script>$(function () {
+        // TODO: Add linting
+        var codemirror = CodeMirror.fromTextArea(document.getElementById("editor"), {
+          mode: "css",
+          theme: "ambiance",
+          lineNumbers: true,
+          matchBrackets: true,
+          autoCloseBrackets: true,
+          styleActiveLine: true,
+        });
+
+        codemirror.on("change", function (codemirror, change) {
+          var input = codemirror.getValue();
+          input = input.replace(/([^\r\n,{}]+)(,(?=[^}\/]*{)|\s*{)/g, "#blog-body $1$2"); // https://stackoverflow.com/a/12578281/3472393
+          input = input.replace(/#blog-body\s+(html|body)/g, "$1"); // restore body/html selectors
+          input = input.replace(/#blog-body\s+(@(-.+-)?keyframes|to|from)/g, "$1"); // restore @keyframe rules
+          $("#dev-style").html(input);
+        });
+      });
+      </script>
+
+>>>>>>> master
       <?php endif; ?>
 
     </section>
 
+<<<<<<< HEAD
     <!-- `span` and not `a` to avoid accidental styling in Firefox  -->
     <span href="#" class="linkbutton" id="submit">Get Code</span>
+=======
+    <?php if ($_GET["mode"] == "regular"): ?>
+    <!-- `span` and not `a` to avoid accidental styling in Firefox  -->
+    <span href="#" class="reg linkbutton" id="submit">Get Code</span>
+    <?php elseif ($_GET["mode"] == "development"): ?>
+    <span class="long linkbutton" id="copycode" data-clipboard-target="dev-style">Copy Code to Clipboard</span>
+    <?php endif; ?>
+>>>>>>> master
 
   </section>
   <div id="side-resizer"></div>
@@ -222,5 +315,6 @@
 
 <div id="blog-body"></div>
 
+</main>
 </body>
 </html>

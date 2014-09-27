@@ -7,7 +7,7 @@ page_protect();
 $err = array();
 $msg = array();
 
-if(isset($_POST['doUpdate'])) {
+if (isset($_POST['doUpdate'])) {
 
   $rs_pwd = $dbc->prepare("SELECT pwd FROM $table WHERE id=?");
   $rs_pwd->execute(array($_SESSION['user_id']));
@@ -16,8 +16,8 @@ if(isset($_POST['doUpdate'])) {
   $old_salt = substr($old['pwd'], 0, 9);
 
   //check for old password in md5 format
-  if($old['pwd'] === PwdHash($_POST['pwd_old'], $old_salt)) {
-    if(checkPwd($_POST['pwd_new'], $_POST['pwd_again'])) {
+  if ($old['pwd'] === PwdHash($_POST['pwd_old'], $old_salt)) {
+    if (checkPwd($_POST['pwd_new'], $_POST['pwd_again'])) {
       $newsha1 = PwdHash($_POST['pwd_new']);
       $result = $dbc->prepare("UPDATE $table SET pwd = ? WHERE id = ?");
       $result->execute(array($newsha1,$_SESSION['user_id']));
@@ -53,11 +53,58 @@ $rs_settings->execute(array($_SESSION['user_id']));
 ?>
 <?php
   $title = "My Settings";
+  $extra_js = "<script src=\"js/index.js\"></script>";
   //dbc already included
   page_protect();
-  get_header();
+
+  if (isset($_SESSION['user_id'])) {
+    $notification_unread_count = $notification->count_unread($_SESSION['user_id']);
+    $notification_data = $notification->get_notifications($_SESSION['user_id']);
+  }
+
+  get_header(0, $notification_unread_count);
 ?>
 <section id="content">
+  <div id="notifications">
+    <div class="notification-arrow-up"></div>
+    <div id="notification-body">
+      <div id="notification-header">
+        <b>Notifications:</b>
+        <a href="javascript:;" style="float: right; margin-right: 2vw;" onClick="mark_all_read(<?php echo $_SESSION['user_id']; ?>)">Mark all read</a>
+      </div>
+      <?php if (count($notification_data) == 0) { ?>
+      <a href="javascript:;">
+      <div id="notification-0" class="notification-item read">
+        <div class="notification-color" style="background-color: #ccc"></div>
+        <div class="notification-text">No notifications</div>
+      </div>
+      </a>
+      <?php
+      } else {
+        foreach ($notification_data as $notif) {
+          $notif_data = $notification->get_notif_obj($notif['notification_type'], $notif['item_id']);
+      ?>
+      <a href="<?php echo $notif_data['url']; ?>" class="notification-item-link" onClick="mark_read(<?php echo $notif['id']; ?>)">
+        <div id="notification-<?php echo $notif['id']; ?>" class="notification-item <?php if ($notif['read'] == 0) { echo 'unread'; } else { echo 'read'; } ?> ">
+          <div class="notification-color" style="background-color: #<?php echo $notif_data['data']['color']; ?>"><?php echo substr($notif_data['data']['location'], 0, 1); ?></div>
+          <div class="notification-text">
+            <?php echo $notif_data['data']['subject']; ?>
+          </div>
+          <p class="time">
+             <?php echo date('D M d, Y g:i a', $notif['timestamp']); ?>
+          </p>
+        </div>
+      </a>
+      <?php
+        }
+      }
+      ?>
+      <div id="notification-footer">
+        <a href="notifications.php">See All</a>
+      </div>
+    </div>
+  </div>
+
   <?php
   if (!empty($err)) {
     echo "<p id=\"errors\">";

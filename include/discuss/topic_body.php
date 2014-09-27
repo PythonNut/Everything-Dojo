@@ -57,7 +57,7 @@
             </div>
             <?php } else { ?>
             <?php $thanks = $discuss->thanks($post['post_id'], $typearg); ?>
-            <div style="opacity: 0.6; text-decoration: italics; display:inline-block; margin-left: 2em;"><?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div>
+            <div style="opacity: 0.6; text-decoration: italic; display:inline-block; margin-left: 2em;"><?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div>
             <?php } ?>
           </div>
           <?php echo $post['text']; ?>

@@ -1,8 +1,14 @@
-/* Themizer CSS */
+/* sliderSidebar CSS */
 
 @import url('fonts.css');
 
+
+/*--COLORS--*/
+.database { background: #d553cb; }
 .themizer { background: #51b835; }
+.tryit    { background: #ff6c00; }
+.discuss  { background: #509aff; }
+
 
 /*--LAYOUT--*/
 #sidebar {
@@ -15,7 +21,7 @@
   text-align: left;
   text-rendering: optimizeLegibility;
   overflow-x: visible;
-  z-index: 2147483646;
+  z-index: 1000;
   /* Prevent accidental selection of content in sidebar when resizing */
   cursor: auto;
   -webkit-user-select: none;
@@ -40,6 +46,7 @@
   overflow-y: auto;
   padding-top: 1em;
 }
+
 
 /*--GENERAL--*/
 #sidebar input,
@@ -81,7 +88,6 @@
   background: transparent;
   -moz-appearance: none;
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
-  font-size: 1.7em;
   text-transform: uppercase;
   text-align: center;
   padding: 0.3em;
@@ -91,12 +97,19 @@
   -webkit-transition: 0.5s ease;
   transition: 0.5s ease;
 }
-.linkbutton:hover,
-.linkbutton[class*='hover'] {
+
+.linkbutton.disabled { color: #444; border: 1px solid #444; cursor: default; }
+
+.linkbutton:not(.disabled):hover,
+.linkbutton.hover {
   background-color: #41962c;
   border-color: #40902a;
   color: #fafafa;
 }
+
+.reg.linkbutton  { font-size: 1.7em; padding: 0.3em; }
+.long.linkbutton { font-size: 1.2em; padding: 0.6em 0.3em; }
+
 
 /*--HEADER--*/
 #sideheadbar {
@@ -120,13 +133,17 @@
   top: 0;
   width: 2vh;
   height: 1.6em;
-  background: #57c639;
+  /* needs to be removed once below works background: #57c639; */
   pointer-events: none;
   z-index: 100;
 }
 
+#sideheadbar.themizer::after { background: #57c639; }
+#sideheadbar.tryit::after    { background: #F16500; }
+
 .opened #sideheadbar::after { right: -2vh; }
 .closed #sideheadbar::after { left: 0; }
+
 
 /*--RESIZER--*/
 #side-resizer {
@@ -141,46 +158,6 @@
 
 .closed #side-resizer { pointer-events: none; }
 
-/*--LIGHTBOX--*/
-#lightbox {
-  position: fixed; /* keeps the lightbox window in the current viewport */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  display: none;
-  text-align: left;
-  font-size: 16px;
-  z-index: 200; /* to beat the #sidebar! */
-}
-
-#lightbox-wrap {
-  background: #ddd;
-  width: 65%;
-  height: 70%;
-  margin: 5em auto;
-  box-shadow: 0 0 25px #111;
-  padding: 2em;
-}
-
-#lightbox-wrap pre {
-  overflow: auto;
-  height: 70%;
-  padding: 1.5em;
-  box-shadow: 0 0 1.3em #000 inset;
-}
-/* override every-fifth-line numbering of code */
-#lightbox-wrap pre li.L0,
-#lightbox-wrap pre li.L1,
-#lightbox-wrap pre li.L2,
-#lightbox-wrap pre li.L3,
-#lightbox-wrap pre li.L5,
-#lightbox-wrap pre li.L6,
-#lightbox-wrap pre li.L7,
-#lightbox-wrap pre li.L8 {
-  list-style-type: decimal;
-}
 
 /*--SLIDE BUTTONS--*/
 .slideButton {
@@ -200,25 +177,13 @@
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+
 .closed #side-button {
   height: 5vh;
   top: 47.5vh;
   line-height: 5vh;
   border-radius: 0 0.3em 0.3em 0;
   background: #101010;
-}
-
-/**
- * ugly pseudo-element hack for increased usability
- * should probably change later
- * in conjunction with planned mousemove() event
- */
-.closed #side-button::after {
-  content: "";
-  position: absolute;
-  top: -47.5vh;
-  height: 100vh;
-  width: 2vh;
 }
 
 #side-button.targeted {
@@ -232,16 +197,19 @@
   transition: all 0.3s ease;
 }
 
+
 /*--OPTION SLIDES--*/
 .option {
   border: 3px solid #444;
   margin: 0 10px;
 }
+
 .option-wrap {
   padding: 10px 14px;
   margin: 0;
   display: none; /* as a default so there's not loading delay */
 }
+
 .option-title {
   position: relative;
   display: block;
@@ -254,6 +222,7 @@
   -ms-user-select: none;
   user-select: none;
 }
+
 .option-title h5 {
   position: relative;
   display: inline-block;
@@ -264,18 +233,17 @@
   line-height: 1.5em;
   font-size: 1.5em;
 }
-.option:last-of-type .option-title {
-  border-bottom: none;
-}
+
+.option:last-of-type .option-title { border-bottom: none; }
 
 /**
  * Collapse option button styling
  */
-
 .collapsebutton {
   position: relative;
   float: right;
 }
+
 .collapsebutton::before,
 .collapsebutton::after {
   content: "";
@@ -288,19 +256,21 @@
   -webkit-transition: -webkit-transform 0.5s ease-in-out;
   transition: transform 0.5s ease-in-out;
 }
-.collapsebutton::after {
-   right: 0.5em;
-}
+
+.collapsebutton::after { right: 0.5em; }
+
 .expanded .collapsebutton::before,
 .collapsed .collapsebutton::after {
   -webkit-transform: skewY(-20deg);
   transform: skewY(-20deg);
 }
+
 .expanded .collapsebutton::after,
 .collapsed .collapsebutton::before {
   -webkit-transform: skewY(20deg);
   transform: skewY(20deg);
 }
+
 
 /*--INPUTS--*/
 .radio,
@@ -311,6 +281,7 @@
   margin: 0;
   z-index: 10;
 }
+
 .radio + .input-button,
 .checkbox + .input-button {
   position: absolute;
@@ -320,18 +291,17 @@
   background: #ccc;
   border: 0.3em solid #ccc;
 }
-.radio:checked + .input-button,
-.checkbox:checked + .input-button {
-  background: #337cff;
-}
-.radio + .input-button {
-   border-radius: 50%;
-}
+
+.radio:checked + .input-button, .checkbox:checked + .input-button { background: #337cff; }
+
+.radio + .input-button { border-radius: 50%; }
 
 /**
  * Styling for Spectrum components
  *
  * .spectrum              - Text inputs that bind with Spectrum
+ *
+ * .random-color          - Random colour button
  *
  * .sp-replacer           - The Spectrum replacer
  *   .sp-preview          - Acts as a mask for the Spectrum colour swatch
@@ -345,9 +315,21 @@
  *     .sp-thumb-el       - The Spectrum initial colour swatch
  */
 
-.spectrum {
-  padding-right: 1.9em;
-  box-sizing: border-box;
+.spectrum { padding-right: 3.6em; box-sizing: border-box; }
+
+.random-color {
+  position: absolute;
+  top: 0.1em;
+  right: 1.8em;
+  width: 1.6em;
+  height: 1.5em;
+  right: 1.8em;
+  z-index: 1;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAeCAYAAABqpJ3BAAAEZUlEQVRYhc1YTUsrZxQe+0WXlV66EZL3OTPmA43cIghKwO8adWWqizYJkUIFLUWjNCk2oBeCmkRJrwtJYwMKLsRGK2JgTFbtoptCSxeF9he0tItCd/3ydFEnTJzRfBh7PfCskvc5zzMz7znnfSXpAQURuQAwgC+sVuvrz1pPzaEzwAD+EULs2Gy2R89aV9WhGWhtbWUi0oz8BuC9vr6+F0wXAZipFkT0FhENtbS0vHoXoRaLpVmW5QEAkwDe1fE/AcBut5uz2Sx7PB7NBBPR90KIPjMDXAcuAXwnhJi3WCzN1YgGYAeQBPDD1fob+d1uNxeLRS4Wi5xIJLirq0tv5ESWZcVgIBgMVsTU1BQPDw+z3W7XJ/wFQOAW4VYiOtELdDgcPDQ0xF6vlwOBgCHP/Px8yUCxWGRVVTkUCunz/gFgUwjxSsmAfkElqKrKqVSKBwcH9UZ2Ozs7X9SLF0JMA/gdACuKwoFAgDOZDF9cXNSUT0Mul2O/36/fH7/WZUBDoVDgaDTKra2tGuGpJEnPS5LUREQbGrfX6+XDw8O6cpghlUqxoigMgO9kQEM6nWaXy6WZ+FQTrygKR6PRhgnP5/OGT6lkYHZ2tiIWFhZ4bW2Nz87ODOQ+n69sIyqKwtvb26ZCTk5OOBaLcTgcNs0TiUQMa9bW1rizs9O4meupQi6Xizc2NkrkW1tb+u+SiYhjsZhBxNHREfv9fpZl+VZ+fRW6Xk4BfFNWToUQkRqwDuArTWQ4HOZcLscdHR1lAkKhkEF8IpFgp9Op/edPABcAngL4SOMnopRmwGzDEtE7kiQ9V03Zvi2aALwP4JKIuLu7u0z86OgoFwqFMvHxeLz01InocyKymBFrndjpdLLD4TCWzEYGEX1o9mnlcrky8Ts7O6WKQURPJElquoVTPwsZm1ajA0BGnzCZTJaJPz4+5sePH2tiPq7EpzPwrenY0Oiw2WyPrl4xB4NBQ48YGxvTzP3U1tb2UpUGvhRCvHzv4iVJkgB8AoB7eno4n8+XGYhEItery1Ylvv/1DRDRLP4bfS/39vbKxO/v77PNZjMrkTHpAeyBJgAfAPgbgKHTqqrKvb29ZcLHx8f1G7mxVYiINmoBgK+1PrC4uGio93Nzc2Xiu7u7+fz8nJPJ5PU+UADwVM8thMjW3Aca0Yk1rK+vl3VkRVE4m83ebyfWflhaWqoKN81CmUzm+jmBfT6f6Sx0enrK8Xicw+GwaY7V1dXaZ6G7TIm7u7vc3t6uke8TURwAy7LMy8vLhs58L9NoPYSFQoFXVlb0Feczrd4LISK4Ojp6PB4+ODhoiIlisQHnAVVVeXNzkwcGBkqvVAixc71ZEdGbAH4GwDabjaenpzmdTt/PiWxycrIqjIyMGM7ERPT2TTXXYrE0X40cf2lr7HY79/f388TEhGmOmZkZwwOreCauEfXcSlgBJAD8WIm/1luJqRrxxl3vhWRZfo2I3FardeIa95JmoOp7oYcUdd3MPaSo5270Xxe2MMwztryBAAAAAElFTkSuQmCC');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
 }
 
 .sp-replacer,
@@ -381,29 +363,23 @@
   height: 1.7em !important;
 }
 
-.sp-dd {
-   display: none;
-}
+.sp-dd { display: none; }
 
 .sp-container {
   position: fixed !important;
   background: #222 !important;
   box-shadow: 0 0 3px 2px #222;
-  z-index: 2147483647 !important;
 }
 
-.sp-picker-container {
-   border-left: none !important;
-}
+.sp-picker-container { border-left: none !important; }
 
-.sp-alpha {
-   background-size: contain;
-}
+.sp-alpha { background-size: contain; }
 
 .sp-alpha-inner {
   background-image: -webkit-linear-gradient(left, transparent, black) !important;
   background-image: linear-gradient(to right, transparent, black) !important;
 }
+
 
 /*--MISCELLANEOUS CLASSES--*/
 #sidebar p,
@@ -413,10 +389,7 @@
   margin-bottom: 0.6em;
 }
 
-#sidebar i,
-#sidebar .i {
-  font-family: AmbleItalic, sans-serif;
-}
+#sidebar i, #sidebar .i { font-family: AmbleItalic, sans-serif; }
 
 #sidebar code { font-family: Monaco, "Courier New", Courier, monospace; }
 
@@ -427,25 +400,69 @@
 #sidebar .inline { display: inline; }
 
 /* Validate inputs */
-
 #sidebar .invalid,
 #sidebar :invalid {
   box-shadow: none; /* Prevent Firefox from automatically applying box-shadow to invalid inputs */
 }
 
-#sidebar .invalid { background: #b00 !important; }
+#sidebar .invalid { background: #a00 !important; }
+
+#sidebar .invalid-msg {
+  color: #c00;
+  font-size: 0.8em;
+  margin-top: -0.3em;
+  margin-bottom: 0.3em;
+}
+
 
 /*--SCROLLBARS--*/
 #sidebar ::-webkit-scrollbar {
   width: 0.4em;
   height: 0.5em;
 }
+
 #sidebar ::-webkit-scrollbar-track {
   background: #222;
   box-shadow: inset 0 0 0.6em #111;
 }
+
 #sidebar ::-webkit-scrollbar-thumb {
   background: #222;
   box-shadow: inset 0 0 0.4em #444;
   border-radius: 1em;
 }
+
+
+/*--LIGHTBOX--*/
+/* Only used in Themizer (Reg) */
+#lightbox {
+  position: fixed; /* keeps the lightbox window in the current viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  text-align: left;
+  font-size: 16px;
+  z-index: 200; /* to beat the #sidebar! */
+}
+
+#lightbox-wrap {
+  background: #ddd;
+  width: 65%;
+  height: 70%;
+  margin: 5em auto;
+  box-shadow: 0 0 25px #111;
+  padding: 2em;
+}
+
+#lightbox-wrap pre {
+  overflow: auto;
+  height: 70%;
+  padding: 1.5em;
+  box-shadow: 0 0 1.3em #000 inset;
+}
+
+/* override every-fifth-line numbering of code */
+#lightbox-wrap pre li { list-style-type: decimal; }
