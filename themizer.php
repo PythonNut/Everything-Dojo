@@ -14,16 +14,17 @@
   ($_GET["mode"] == "regular"
   ?
   "<link rel=\"stylesheet\" href=\"css/spectrum.min.css\">
-  <link href=\"css/prettify-desert.css\" rel=\"stylesheet\" />"
+  <link href=\"css/prism.min.css\" rel=\"stylesheet\" />"
   :
   "<link rel=\"stylesheet\" href=\"css/codemirror.min.css\" />");
-  $extra_js = "<script src=\"js/blog-fn.js\"></script>
-  <script src=\"js/ZeroClipboard.js\"></script>" .
+  $extra_js = "<script src=\"js/themizer.js\"></script>
+  <script src=\"js/blog-fn.js\"></script>
+  <script src=\"js/ZeroClipboard.min.js\"></script>" .
   ($_GET["mode"] == "regular"
   ?
   "<script src=\"js/spectrum-1.3.4.min.js\" onload=\"$.fn.spectrum.load = false;\"></script>
-  <script src=\"js/randomColor.js\"></script>
-  <script src=\"js/prettify.js\"></script>
+  <script src=\"js/randomColor.min.js\"></script>
+  <script src=\"js/prism.min.js\"></script>
   <script>
     $(function () {
       \$('#lightbox').click(function () {
@@ -41,7 +42,7 @@
 
   get_header();
 ?>
-<aside id="sidebar">
+<aside id="sidebar" class="<?php echo $_GET['mode']; ?>">
   <h2 id="sideheadbar" class="themizer">Themizer</h2>
   <section id="sidebar-inner">
     <section id="sidebar-inner-scrollable">
@@ -201,6 +202,7 @@
         </section>
         <section class="option-wrap">
           <textarea id="editor" style="font-family:Monaco,Consolas,'Courier New',monospace"></textarea>
+          <div id="editor-raw" style="display:none"></div>
         </section>
       </section>
 
@@ -217,6 +219,7 @@
 
         codemirror.on("change", function (codemirror, change) {
           var input = codemirror.getValue();
+          $("#editor-raw").html(input); // copy raw code to div for copying
           input = input.replace(/([^\r\n,{}]+)(,(?=[^}\/]*{)|\s*{)/g, "#blog-body $1$2"); // https://stackoverflow.com/a/12578281/3472393
           input = input.replace(/#blog-body\s+(html|body)/g, "$1"); // restore body/html selectors
           input = input.replace(/#blog-body\s+(@(-.+-)?keyframes|to|from)/g, "$1"); // restore @keyframe rules
@@ -233,7 +236,7 @@
     <!-- `span` and not `a` to avoid accidental styling in Firefox  -->
     <span href="#" class="reg linkbutton" id="submit">Get Code</span>
     <?php elseif ($_GET["mode"] == "development"): ?>
-    <span class="long linkbutton" id="copycode" data-clipboard-target="dev-style">Copy Code to Clipboard</span>
+    <span class="long linkbutton" id="copycode" data-clipboard-target="editor-raw">Copy Code to Clipboard</span>
     <?php endif; ?>
 
   </section>
@@ -242,7 +245,7 @@
   <div id="lightbox">
     <div id="lightbox-wrap">
       <pre id="generatedcode" style="display:none"></pre>
-      <pre id="generatedcode-shown" class="prettyprint linenums"></pre>
+      <pre id="generatedcode-shown" class="lang-css"></pre>
       <span class="linkbutton" id="copycode" data-clipboard-target="generatedcode">Copy Code to Clipboard</span>
     </div>
   </div>
