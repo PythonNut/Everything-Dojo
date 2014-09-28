@@ -23,7 +23,7 @@ if (isset($_POST['doLogin'])) {
   $username_match = count($user_array);
   $user_array = $user_array[0];
   $logins_attempted = $user_array['logins_attempted'];
-  $last_attempted_login = (int)intval(explode("|", $logins_attempted)[1]);
+  $last_attempted_login = intval(explode("|", $logins_attempted)[count(explode("|", $logins_attempted))-1]);
   $pwd = $user_array['pwd'];
 
   // protect against brute forcing

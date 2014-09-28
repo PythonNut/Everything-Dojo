@@ -287,7 +287,7 @@ td.tiny-col { width: 3%; }
 .topic-reply-panel>div:hover{
   background-color: #509aff;
   color: #FFFFFF;
-  width: 150px;
+  min-width: 160px;
   -webkit-transition: all 500ms ease;
   transition: all 500ms ease;
 }
@@ -300,10 +300,6 @@ td.tiny-col { width: 3%; }
 .topic-reply-disabled:hover{
   background-color: #bababa !important;
   opacity: 0.8 !important;
-}
-
-.topic-reply-thanks {
-  /*later..*/
 }
 
 .topic-reply-thanked {
