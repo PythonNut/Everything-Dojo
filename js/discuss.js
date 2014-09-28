@@ -1,5 +1,5 @@
 /* jshint browser:true, jquery:true, -W098 */
-/* global Message:false, marked:false */
+/* global Message:false, marked:false, Prism:false */
 
 $(function () {
   // add title attribute to announcements
@@ -61,7 +61,7 @@ $(function () {
           sanitize: true,
           breaks: true
         }));
-        Prism.highlightAll();
+        Prism.highlightAll(document.querySelector("[name='preview'] pre"));
         if ($("[name='title']").val().match(/\S/g) !== null && $("[name='title']").val().match(/\S/g).length >= 5) {
           $("#post").prop("disabled", "");
         }
