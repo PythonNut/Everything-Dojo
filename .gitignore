@@ -42,3 +42,7 @@ error_log
 # can't randomly view on GitHub
 
 include/db.php
+
+# Node.js plugins
+
+node_modules/
