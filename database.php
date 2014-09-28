@@ -5,7 +5,7 @@
   session_start();
   $extra_style = "<link rel=\"stylesheet\" href=\"css/prism.css\" />
   <link rel=\"stylesheet\" href=\"css/database.css\" />";
-  $extra_js = "<script src=\"js/prism.js\"></script>
+  $extra_js = "<script src=\"js/prism.min.js\"></script>
   <script src=\"js/database.js\"></script>";
   get_header();
 
