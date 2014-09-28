@@ -27,7 +27,7 @@
     case 'delete':
       header('Refresh: 3; URL = ' . SITE_ROOT . URL_DATABASE . '?mode=manage');
       break;
-		case 'reject':
+    case 'reject':
       header('Refresh: 3; URL = ' . SITE_ROOT . URL_DATABASE . '?mode=mcp');
       break;
   }
@@ -35,7 +35,7 @@
   $title = "Database";
   $extra_style = "<link rel=\"stylesheet\" href=\"../../css/prism.css\" />
   <link rel=\"stylesheet\" href=\"../../css/database.css\" />";
-  $extra_js = "<script src=\"../../js/prism.js\"></script>
+  $extra_js = "<script src=\"../../js/prism.min.js\"></script>
   <script src=\"../../js/database.js\"></script>";
   if ($_SESSION['user_id'] != NULL) {
     $unread_count = $notification->count_unread($_SESSION['user_id']);
