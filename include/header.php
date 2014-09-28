@@ -9,7 +9,7 @@
     <link href="/images/favicon.ico" rel="shortcut icon">
     <link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon.png">
     <?php if ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)" && $title != "Try-It") { ?>
-    <link href="/css/normalize.css" rel="stylesheet">
+    <link href="/css/normalize.min.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <?php } ?>
     <?php global $extra_style; print $extra_style; ?>
@@ -75,7 +75,7 @@
       <?php } elseif ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)" && $title !== "Try-It") { ?>
 
       <?php global $notification_unread_count; ?>
-      
+
       <header>
         <section id="headerwrap">
 
