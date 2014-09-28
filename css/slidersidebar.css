@@ -135,7 +135,6 @@
   top: 0;
   width: 2vh;
   height: 1.6em;
-  /* needs to be removed once below works background: #57c639; */
   pointer-events: none;
   z-index: 100;
 }
