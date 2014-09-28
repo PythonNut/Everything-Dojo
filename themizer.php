@@ -14,16 +14,16 @@
   ($_GET["mode"] == "regular"
   ?
   "<link rel=\"stylesheet\" href=\"css/spectrum.min.css\">
-  <link href=\"css/prettify-desert.css\" rel=\"stylesheet\" />"
+  <link href=\"css/prism.min.css\" rel=\"stylesheet\" />"
   :
   "<link rel=\"stylesheet\" href=\"css/codemirror.min.css\" />");
   $extra_js = "<script src=\"js/blog-fn.js\"></script>
-  <script src=\"js/ZeroClipboard.js\"></script>" .
+  <script src=\"js/ZeroClipboard.min.js\"></script>" .
   ($_GET["mode"] == "regular"
   ?
   "<script src=\"js/spectrum-1.3.4.min.js\" onload=\"$.fn.spectrum.load = false;\"></script>
-  <script src=\"js/randomColor.js\"></script>
-  <script src=\"js/prettify.js\"></script>
+  <script src=\"js/randomColor.min.js\"></script>
+  <script src=\"js/prism.min.js\"></script>
   <script>
     $(function () {
       \$('#lightbox').click(function () {
@@ -242,7 +242,7 @@
   <div id="lightbox">
     <div id="lightbox-wrap">
       <pre id="generatedcode" style="display:none"></pre>
-      <pre id="generatedcode-shown" class="prettyprint linenums"></pre>
+      <pre id="generatedcode-shown" class="lang-css"></pre>
       <span class="linkbutton" id="copycode" data-clipboard-target="generatedcode">Copy Code to Clipboard</span>
     </div>
   </div>

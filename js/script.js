@@ -1,5 +1,5 @@
-/* jshint browser:true, jquery:true, -W098 */
-/* global ZeroClipboard:false, prettyPrint:false, randomColor:false */
+/* global ZeroClipboard:false, Prism:false, randomColor:false */
+
 //This document requires jQuery to be loaded in order to properly run.
 
 
@@ -442,11 +442,11 @@ function sliderSidebar () { //referring to the exact and non-general (for lack o
   $("#side-resizer").mousedown(function () {
     $(document).mousemove(function (event) { // use document to avoid conflict with sideButton
       var mousePosX = event.pageX;
-      sideWidth = mousePosX > 32*vh ? mousePosX : sideWidth; // set original width as minimum
-      $("#sidebar-inner").width(sideWidth);
+      sideWidth = mousePosX > 34*vh ? mousePosX : sideWidth; // set original width as minimum
+      $("#sidebar-inner").width(sideWidth - 2*vh);
       // move sideButton and remove transitions as they screw the former up
       $("#side-button").css({
-        "left": sideWidth,
+        "left": sideWidth - 2*vh,
         "transition": "0s linear"
       });
     });
@@ -599,9 +599,7 @@ function themizerRegular () {
     $("#lightbox-wrap pre").html(code);
     // Reset #copybutton to pre-copied state
     $("#copycode.hover").text("Copy Code to Clipboard").removeClass("hover");
-    // Google-Code-Prettify won't do its job if the pre has class `prettyprinted` (http://stackoverflow.com/a/15984048/3472393)
-    $("#lightbox-wrap pre.prettyprinted").removeClass("prettyprinted");
-    prettyPrint();
+    Prism.highlightElement(document.getElementById("generatedcode-shown"));
     $("#lightbox").show();
 
   });
