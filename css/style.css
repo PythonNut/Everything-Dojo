@@ -159,19 +159,32 @@ label { display: block; }
 /*--TYPESETTING--*/
 #headerwrap h1 {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
-  font-size: 1.5rem;
   font-weight: 400;
   display: inline-block; /* prevent body from being pushed down by sticky footer */
   text-transform: uppercase;
   height: 1.334em;
   border-bottom: none;
   position: absolute;
+}
+
+.database #headerwrap h1,
+.discuss #headerwrap h1 {
+  color: white;
+  font-size: 2.82rem;
+  line-height: 1.25em;
+  padding: 0.24rem 0.6rem;
+  margin: 0.6rem;
+}
+
+#headerwrap .breadcrumbs h1 {
   color: black;
+  font-size: 1.5rem;
   line-height: 4rem;
   padding: 0;
   margin: 0 0.4rem;
 }
 
+#headerwrap h1 a { color: white; }
 #headerwrap .breadcrumbs a { color: #666; }
 
 h1,
