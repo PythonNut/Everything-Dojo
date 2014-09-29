@@ -62,7 +62,7 @@
       <h2>2.0.0</h2>
       <ul>
         <li>Completely redesigned interface</li>
-        <li>No more annoying floting jQuery UI boxes &mdash; introducing a fully collapsible sidebar</li>
+        <li>No more annoying floating jQuery UI boxes &mdash; introducing a fully collapsible sidebar</li>
         <li>Introducing spectrum.js, for an amazing, lightweight color picker</li>
         <li>Random color generator</li>
         <li>Copy code to clipboard with one click</li>
