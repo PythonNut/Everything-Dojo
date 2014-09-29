@@ -203,11 +203,11 @@
 /*--OPTION SLIDES--*/
 .option {
   border: 3px solid #444;
-  margin: 0 10px;
+  margin: 0 0.8em;
 }
 
 .option-wrap {
-  padding: 10px 14px;
+  padding: 0.6em 0.8em;
   margin: 0;
   display: none; /* as a default so there's not loading delay */
 }
@@ -449,6 +449,7 @@
 }
 
 #lightbox-wrap {
+  position: relative;
   background: #ddd;
   width: 65%;
   height: 70%;
@@ -462,6 +463,22 @@
   height: 70%;
   padding: 1.5em;
   box-shadow: 0 0 1.3em #000 inset;
+}
+
+#close-button {
+  position: absolute;
+  top: 0.2em;
+  right: 0.3em;
+  width: 1em;
+  color: #000;
+  font-family: Lato, sans-serif;
+  font-size: 1.7em;
+  line-height: 1em;
+  text-align: center;
+  cursor: pointer;
+}
+#close-button:hover {
+  color: #444;
 }
 
 /* Themizer (Dev) */

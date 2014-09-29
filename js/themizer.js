@@ -1,21 +1,7 @@
-/* globals sliderSidebar:false, Prism:false, ZeroClipboard:false */
+/* globals sliderSidebar:false, Prism:false, ZeroClipboard:false, baseTheme:false, styles:false */
 /*******************
  *   THEMIZER JS   *
  *******************/
-var baseTheme = "core";
-
-// Set object for styling
-var styles = {
-  "body-backgroundColor"            : "white",
-  "body-backgroundImage"            : "",
-  "body-backgroundRepeat"           : "",
-  "body-fontFamily"                 : "",
-  "id_wrapper-backgroundColor"      : "#EDEDEA",
-  "class_entry-backgroundColor"     : "#EDEDEA",
-  "class_entrywrap-backgroundColor" : "#EDEDEA",
-  "class_row1-backgroundColor"      : "#EDEDEA",
-  "class_row2-backgroundColor"      : "#EDEDEA"
-};
 
 /**
  * Themizer (Regular mode) Init
