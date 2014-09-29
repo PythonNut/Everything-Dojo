@@ -322,6 +322,14 @@ footer {
 footer a       { color: #bbb; }
 footer a:hover { color: #999; }
 
+.heart {
+  color: red;
+  font-family: Lato, sans-serif;
+  opacity: 0.5;
+  font-size: 0.9em;
+}
+
+
 /**
  * Sticky footer
  * based on http://ryanfait.com/html5-sticky-footer/ with a few modifications
