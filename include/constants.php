@@ -8,7 +8,7 @@
   define("DISCUSS_POSTS_SPECIAL_TABLE", "discuss_posts_special");    //all the posts and replies for special topics
   define("DISCUSS_TOPICS_TRACK_TABLE", "discuss_topics_track");
   define("DISCUSS_TOPICS_TRACK_SPECIAL_TABLE", "discuss_topics_track_special");
-	
+
   /* Miscellaneous Table Constants */
   define("THEMEDB_TABLE", "theme_database");
   define("USERS_TABLE", "users");
@@ -16,7 +16,7 @@
   /* URL Constants */
   define("URL_DATABASE", "database.php");
   define("URL_DISCUSS", "discuss.php");
-  define("URL_THEMIZER", "themizerindex.php");
+  define("URL_THEMIZER", "themizer.php");
   define("URL_TRYIT", "tryit.php");
   define("SITE_ROOT", "http://rebuild.everythingdojo.com/");
 
