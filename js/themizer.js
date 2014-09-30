@@ -3,13 +3,33 @@
  *   THEMIZER JS   *
  *******************/
 
+// Specify base theme
+var baseTheme = "core";
+
+// Set object for styling
+var styles = {
+  "body-backgroundColor"              : "white",
+  "body-backgroundImage"              : "",
+  "body-backgroundRepeat"             : "",
+  "body-fontFamily"                   : "",
+  "id_header-backgroundColor"         : "#EDEDEA",
+  "id_wrapper-backgroundColor"        : "#EDEDEA",
+  "class_entry-backgroundColor"       : "#EDEDEA",
+  "class_entrywrap-backgroundColor"   : "#EDEDEA",
+  "class_comment-backgroundColor"     : "#EDEDEA",
+  "class_commentwrap-backgroundColor" : "#EDEDEA",
+  "id_headerspaceh1-color"              : "#000000",
+  "class_row1-backgroundColor"        : "#EDEDEA",
+  "class_row2-backgroundColor"        : "#EDEDEA"
+};
+
 /**
  * Themizer (Regular mode) Init
  */
 function themizerRegular () {
   sliderSidebar();
   // Base style
-  $("head").append("<link href='blog/css/core.css' type='text/css' rel='stylesheet' id='base-theme'>");
+  $("head").append("<link href='blog/css/core.css' rel='stylesheet' id='base-theme'>");
 
   /* Get Code */
   $("#submit").click(function () {
@@ -29,7 +49,7 @@ function themizerRegular () {
     var selectors = {};
     for (var i in styles) {
       var split = i.split('-'),
-          selector = split[0].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("class_", ".").replace("id_", "#"),
+          selector = split[0].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("space", " ").replace("class_", ".").replace("id_", "#"),
           attribute = split[1].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase(),
           value = styles[i];
       if (selectors.hasOwnProperty(selector) === false) {
@@ -111,7 +131,7 @@ function themizerRegular () {
             // spectrum-<selector>-<CSSProperty (camelCased)>
             // Hence, we can deconstruct the id to produce our desired selectors.
             var id   = $(this).attr("id").split(/-/),
-                el   = id[1].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("class_", ".").replace("id_", "#"),
+                el   = id[1].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("space", " ").replace("class_", ".").replace("id_", "#"),
                 prop = id[2].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase();
             $(this).prevAll(".text").val(color);
             $(el).css(prop, color);
@@ -124,8 +144,9 @@ function themizerRegular () {
   $(".spectrum.text").keyup(function () {
     var color  = $(this).val(),
         id     = $(this).attr("id").split(/-/),
-        el     = id[1].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("class_", ".").replace("id_", "#"),
+        el     = id[1].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("space", " ").replace("class_", ".").replace("id_", "#"),
         prop   = id[2].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase();
+        console.log(el);
     $(el).css(prop, color);
     $(this).nextAll(".color-picker").spectrum("set", color);
 
@@ -168,4 +189,3 @@ function themizerDev () {
 
   $(window).mousemove();
 }
-

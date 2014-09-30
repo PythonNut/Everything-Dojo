@@ -57,6 +57,9 @@
   color: #aaa;
   font-family: inherit;
   font-size: inherit;
+  margin: 0;
+  padding: 0.1em 0.2em;
+  border-radius: 0;
   border: none;
   outline: none;
 }
