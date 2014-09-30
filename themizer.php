@@ -162,6 +162,7 @@
                 <select name="base">
                   <option value="core">Core by Dojo</option>
                   <option value="calm">Calm by Red</option>
+                  <option value="warped">Warped by Red</option>
                 </select>
               </p>
               <?php endif; ?>
@@ -224,6 +225,31 @@
             </section>
           </section>
 
+          <section class="option" id="option-header">
+            <section class="option-title">
+              <h5>Header</h5>
+              <span class="collapsebutton"></span>
+            </section>
+            <section class="option-wrap">
+              <section data-name="backgroundColor">
+                <span class="title">Background Color</span>
+                <p>
+                  <input type="text" class="spectrum text" id="text-id_header-backgroundColor" value="#EDEDEA" spellcheck="false">
+                  <span class="random-color" onclick="$(this).styleRandomColor();" title="Style with random color"></span>
+                  <input type="color" class="spectrum color-picker" id="spectrum-id_header-backgroundColor" value="#EDEDEA">
+                </p>
+              </section>
+              <section data-name="Title Color">
+                <span class="title">Title Color</span>
+                <p>
+                  <input type="text" class="spectrum text" id="text-id_headerspaceh1-color" value="#000000" spellcheck="false">
+                  <span class="random-color" onclick="$(this).styleRandomColor();" title="Style with random color"></span>
+                  <input type="color" class="spectrum color-picker" id="spectrum-id_headerspaceh1-color" value="#000000">
+                </p>
+              </section>
+            </section>
+          </section>
+
           <section class="option" id="option-wrapper">
             <section class="option-title">
               <h5>Wrapper</h5>
@@ -259,6 +285,29 @@
                   <input type="text" class="spectrum text" id="text-class_entrywrap-backgroundColor" value="#EDEDEA" spellcheck="false">
                   <span class="random-color" onclick="$(this).styleRandomColor();" title="Style with random color"></span>
                   <input type="color" class="spectrum color-picker" id="spectrum-class_entrywrap-backgroundColor" value="#EDEDEA">
+                </p>
+              </section>
+            </section>
+          </section>
+
+          <section class="option" id="option-comments">
+            <section class="option-title">
+              <h5>Comments</h5>
+              <span class="collapsebutton"></span>
+            </section>
+            <section class="option-wrap">
+              <section data-name="backgroundColor">
+                <span class="title">Background Color <span class="small">(Comments)</span></span>
+                <p>
+                  <input type="text" class="spectrum text" id="text-class_comment-backgroundColor" value="#EDEDEA" spellcheck="false">
+                  <span class="random-color" onclick="$(this).styleRandomColor();" title="Style with random color"></span>
+                  <input type="color" class="spectrum color-picker" id="spectrum-class_comment-backgroundColor" value="#EDEDEA">
+                </p>
+                <span class="title">Background Color <span class="small">(Commentwrap)</span></span>
+                <p>
+                  <input type="text" class="spectrum text" id="text-class_commentwrap-backgroundColor" value="#EDEDEA" spellcheck="false">
+                  <span class="random-color" onclick="$(this).styleRandomColor();" title="Style with random color"></span>
+                  <input type="color" class="spectrum color-picker" id="spectrum-class_commentwrap-backgroundColor" value="#EDEDEA">
                 </p>
               </section>
             </section>
