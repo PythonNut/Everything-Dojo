@@ -91,8 +91,8 @@
       function thankpost(post_id) {
         if ($.inArray(post_id, thankedPosts) >= 0) {
           $.post("include/discuss/topic_ajax.php", {action: "thank", mode: <?php if (intval($_GET['f']) == 1) { echo "3"; } else { echo "2"; } ?>, id: post_id}, function(data) {
-            if (data == "success") {
-              $('#topic-reply-thanks-'+post_id).html("&uArr; &nbsp;&nbsp;Thank");
+            if (data.substr(0,7) == "success") {
+              $('#topic-reply-thanks-'+post_id).html("&uArr; &nbsp;&nbsp;"+data.substr(8)+" Thanks");
               $('#topic-reply-thanks-'+post_id).removeClass('topic-reply-thanked');
               thankedPosts.pop($.inArray(post_id, thankedPosts));
             } else {
@@ -101,8 +101,8 @@
           });
         } else {
           $.post("include/discuss/topic_ajax.php", {action: "thank", mode: <?php if (intval($_GET['f']) == 1) { echo "3"; } else { echo "2"; } ?>, id: post_id}, function(data) {
-            if (data == "success") {
-              $('#topic-reply-thanks-'+post_id).html("&uArr; &nbsp;&nbsp;Thanked!");
+            if (data.substr(0,7) == "success") {
+              $('#topic-reply-thanks-'+post_id).html("&uArr; &nbsp;&nbsp;"+data.substr(8)+" Thanks!");
               $('#topic-reply-thanks-'+post_id).addClass('topic-reply-thanked');
               thankedPosts.push(post_id);
             } else {

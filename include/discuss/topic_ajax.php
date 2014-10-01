@@ -6,9 +6,12 @@ include('../discuss.php');
 switch ($_POST['action']) {
   case "thank":
     $discuss = new discuss($dbc);
-    $discuss->thanks(intval($_POST['id']), intval($_POST['mode']), intval($_SESSION['user_id']));
-    echo "success";
+    $result = $discuss->thanks(intval($_POST['id']), intval($_POST['mode']), intval($_SESSION['user_id']));
+    if ($result >= 0){
+      echo "success|".$result;
+    }
     break;
+  case "":
   default:
     echo "No action exists or defined. Try again.";
 }

@@ -10,28 +10,6 @@
   include("include/include.php");
   session_start();
   $extra_style = "<link rel=\"stylesheet\" href=\"css/blog-style.css\">
-<<<<<<< HEAD
-  <link rel=\"stylesheet\" href=\"css/themizer.css\">
-  <link rel=\"stylesheet\" href=\"css/spectrum.min.css\">
-  <link href=\"css/prettify-desert.css\" rel=\"stylesheet\" />";
-  $extra_js = "<script src=\"js/blog-fn.js\"></script>
-  <script src=\"js/spectrum-1.3.4.min.js\" onload=\"$.fn.spectrum.load = false;\"></script>
-  <script src=\"js/prettify.js\"></script>
-  <script src=\"js/ZeroClipboard.js\"></script>
-  <script>
-  $(function(){
-    /* Lightbox Utility */
-    $('#lightbox').click(function(){
-      $(this).hide();
-    });
-    $('#lightbox-wrap').click(function(e){
-        e.stopPropagation();
-    });
-
-    $().sliderSidebar();
-    themizer();
-  });</script>";
-=======
   <link rel=\"stylesheet\" href=\"css/slidersidebar.css\">" .
   ($_GET["mode"] == "regular"
   ?
@@ -60,7 +38,6 @@
   :
   "<script src=\"js/codemirror-4.4.min.js\"></script>
   <script>$(function () { themizerDev(); });</script>");
->>>>>>> master
 
   get_header();
 ?>
@@ -71,11 +48,7 @@
 
       <section class="option" id="option-options">
         <section class="option-title">
-<<<<<<< HEAD
-          <h5>Blog Page</h5>
-=======
           <h5>Options</h5>
->>>>>>> master
           <span class="collapsebutton"></span>
         </section>
         <section class="option-wrap">
@@ -101,22 +74,6 @@
       </section>
 
       <?php if ($_GET["mode"] == "regular"): ?>
-<<<<<<< HEAD
-
-      <section class="option" id="option-base">
-        <section class="option-title">
-          <h5>Base Theme</h5>
-          <span class="collapsebutton"></span>
-        </section>
-        <section class="option-wrap">
-          <select name="base">
-            <option value="core">Core by Dojo</option>
-            <option value="calm">Calm by Red</option>
-          </select>
-        </section>
-      </section>
-=======
->>>>>>> master
 
       <section class="option" id="option-body">
         <section class="option-title expanded">
@@ -243,21 +200,6 @@
           <span class="collapsebutton"></span>
         </section>
         <section class="option-wrap">
-<<<<<<< HEAD
-          <!-- add codemirror -->
-          <!--------------------!
-           ! ADD-ONS:           !
-           ! active-line.js     !
-           ! closebrackets.js   !
-           ! css-hint.js        !
-           ! lint.js            !
-           ! matchbrackets.js   !
-           ! runmode.js         !
-           !--------------------!-->
-        </section>
-      </section>
-
-=======
           <textarea id="editor" style="font-family:Monaco,Consolas,'Courier New',monospace"></textarea>
         </section>
       </section>
@@ -283,7 +225,6 @@
       });
       </script>
 
->>>>>>> master
       <?php endif; ?>
 
     </section>
