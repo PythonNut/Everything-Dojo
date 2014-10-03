@@ -123,6 +123,9 @@ body {
 /*--TYPESETTING--*/
 h1 {
   font-family: "PT Sans", sans-serif;
+  position: absolute;
+  width: 90%;
+  left: 5%;
 }
 
 .scale {
@@ -130,6 +133,14 @@ h1 {
   width: 90%;
   height: 20%;
   left: 5%;
+}
+
+.step .scale:first-child h1 {
+  top: 0;
+}
+
+.step .scale:last-child h1 {
+  bottom: 0;
 }
 
 .step .scale:first-child {
