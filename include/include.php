@@ -1,4 +1,5 @@
 <?php
+//error_reporting("off"); //uncomment for unnecessary "warnings" that PHP is smart enough to ignore
 // database connection
 include("db.php");
 // recaptcha

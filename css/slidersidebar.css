@@ -1,0 +1,491 @@
+/* sliderSidebar CSS */
+
+@import url('fonts.css');
+
+
+/*--COLORS--*/
+.database { background: #d553cb; }
+.themizer { background: #51b835; }
+.tryit    { background: #ff6c00; }
+.discuss  { background: #509aff; }
+
+
+/*--LAYOUT--*/
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  color: #fafafa;
+  font-family: Amble, HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: left;
+  text-rendering: optimizeLegibility;
+  overflow-x: visible;
+  z-index: 1000;
+  /* Prevent accidental selection of content in sidebar when resizing */
+  cursor: auto;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#sidebar-inner {
+  position: relative;
+  width: 32vh;
+  height: 100%;
+  box-sizing: border-box;
+  background: #101010;
+  padding-top: 4.32em;
+  padding-bottom: 4.2em;
+}
+
+#sidebar-inner-scrollable {
+  height: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+  padding-top: 1em;
+}
+
+
+/*--GENERAL--*/
+#sidebar input:not([type='checkbox']),
+#sidebar select,
+#sidebar option {
+  width: 100%;
+  background-color: #212121;
+  color: #aaa;
+  font-family: inherit;
+  font-size: inherit;
+  margin: 0;
+  padding: 0.1em 0.2em;
+  border-radius: 0;
+  border: none;
+  outline: none;
+}
+
+#sidebar input[type='checkbox'] { position: relative; top: 2.5px; }
+
+.text {
+  height: 1.7em;
+  padding: 0.1em 0.2em;
+}
+
+.title {
+  font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+  font-weight: 400;
+  white-space: pre;
+}
+
+.label {
+  color: #ccc;
+  font-size: 0.9em;
+}
+
+.optional::after {
+  content: " (Optional)";
+  font-size: 0.62em;
+}
+
+.linkbutton {
+  display: block;
+  color: #48a730;
+  background: transparent;
+  -moz-appearance: none;
+  font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0.3em;
+  border: 1px solid #5dc350;
+  margin: 0.3em;
+  cursor: pointer;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+
+.linkbutton.disabled { color: #444; border: 1px solid #444; cursor: default; }
+
+.linkbutton:not(.disabled):hover,
+.linkbutton.zeroclipboard-is-hover {
+  background-color: #41962c;
+  border-color: #40902a;
+  color: #fafafa;
+}
+
+.reg.linkbutton  { font-size: 1.7em; padding: 0.3em; }
+.long.linkbutton { font-size: 1.2em; padding: 0.6em 0.3em 0.5em; }
+
+
+/*--HEADER--*/
+#sideheadbar {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 1.6em;
+  font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+  font-size: 2.7em;
+  line-height: 1.6em;
+  color: #fafafa;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 0.5em;
+  z-index: 100;
+}
+
+#sideheadbar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 2vh;
+  height: 1.6em;
+  pointer-events: none;
+  z-index: 100;
+}
+
+#sideheadbar.themizer::after { background: #57c639; }
+#sideheadbar.tryit::after    { background: #F16500; }
+
+.opened #sideheadbar::after { right: -2vh; }
+.closed #sideheadbar::after { left: 0; }
+
+
+/*--RESIZER--*/
+#side-resizer {
+  position: absolute;
+  top: 0;
+  right: -5vh;
+  width: 3vh;
+  height: 100vh;
+  cursor: e-resize;
+  pointer-events: all;
+}
+
+.closed #side-resizer { pointer-events: none; }
+
+
+/*--SLIDE BUTTONS--*/
+.slideButton {
+  position: absolute;
+  cursor: pointer;
+}
+
+#side-button {
+  width: 2vh;
+  height: 100%;
+  top: 0;
+  background: #212121;
+  color: #aaa;
+  line-height: 100vh;
+  text-indent: 0.1em;
+  vertical-align: middle;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.closed #side-button {
+  height: 5vh;
+  top: 47.5vh;
+  line-height: 5vh;
+  border-radius: 0 0.3em 0.3em 0;
+  background: #101010;
+}
+
+#side-button.targeted {
+  top: 0;
+  height: 100vh;
+  width: 4vh;
+  line-height: 100vh;
+  text-indent: 0.5em;
+  border-radius: 0;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+
+/*--OPTION SLIDES--*/
+.option {
+  border: 3px solid #444;
+  margin: 0 0.8em;
+}
+
+.option-wrap {
+  padding: 0.6em 0.8em;
+  margin: 0;
+  display: none; /* as a default so there's not loading delay */
+}
+
+.option-title {
+  position: relative;
+  display: block;
+  background: #444;
+  padding: 0.2em 0.5em;
+  border-bottom: 1px solid #101010;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.option-title h5 {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+  font-weight: 400;
+  height: 1.5em;
+  line-height: 1.5em;
+  font-size: 1.5em;
+}
+
+.option:last-of-type .option-title { border-bottom: none; }
+
+/**
+ * Collapse option button styling
+ */
+.collapsebutton {
+  position: relative;
+  float: right;
+}
+
+.collapsebutton::before,
+.collapsebutton::after {
+  content: "";
+  position: absolute;
+  top: 1em;
+  right: 0.9em;
+  width: 0.43em;
+  height: 0.2em;
+  background: #fafafa;
+  -webkit-transition: -webkit-transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out;
+}
+
+.collapsebutton::after { right: 0.5em; }
+
+.expanded .collapsebutton::before,
+.collapsed .collapsebutton::after {
+  -webkit-transform: skewY(-20deg);
+  transform: skewY(-20deg);
+}
+
+.expanded .collapsebutton::after,
+.collapsed .collapsebutton::before {
+  -webkit-transform: skewY(20deg);
+  transform: skewY(20deg);
+}
+
+
+/*--INPUTS--*/
+.radio,
+.checkbox {
+  position: absolute;
+  right: 0;
+  opacity: 0;
+  margin: 0;
+  z-index: 10;
+}
+
+.radio + .input-button,
+.checkbox + .input-button {
+  position: absolute;
+  right: 0;
+  width: 0.5em;
+  height: 0.5em;
+  background: #ccc;
+  border: 0.3em solid #ccc;
+}
+
+.radio:checked + .input-button, .checkbox:checked + .input-button { background: #337cff; }
+
+.radio + .input-button { border-radius: 50%; }
+
+/**
+ * Styling for Spectrum components
+ *
+ * .spectrum              - Text inputs that bind with Spectrum
+ *
+ * .random-color          - Random colour button
+ *
+ * .sp-replacer           - The Spectrum replacer
+ *   .sp-preview          - Acts as a mask for the Spectrum colour swatch
+ *     .sp-preview-inner  - The Spectrum colour swatch
+ *   .sp-dd               - The cute little arrow in the replacer.
+ *
+ * .sp-container          - Contains the Spectrum colour picker
+ *   .sp-picker-container - Contains the Spectrum colour sliders
+ *     .sp-alpha          - Acts as a mask for the Spectrum alpha slider
+ *       .sp-alpha-inner  - The Spectrum alpha slider
+ *     .sp-thumb-el       - The Spectrum initial colour swatch
+ */
+
+.spectrum { padding-right: 3.6em; box-sizing: border-box; }
+
+.random-color {
+  position: absolute;
+  top: 0.1em;
+  right: 1.8em;
+  width: 1.6em;
+  height: 1.5em;
+  z-index: 1;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAeCAYAAABqpJ3BAAAEZUlEQVRYhc1YTUsrZxQe+0WXlV66EZL3OTPmA43cIghKwO8adWWqizYJkUIFLUWjNCk2oBeCmkRJrwtJYwMKLsRGK2JgTFbtoptCSxeF9he0tItCd/3ydFEnTJzRfBh7PfCskvc5zzMz7znnfSXpAQURuQAwgC+sVuvrz1pPzaEzwAD+EULs2Gy2R89aV9WhGWhtbWUi0oz8BuC9vr6+F0wXAZipFkT0FhENtbS0vHoXoRaLpVmW5QEAkwDe1fE/AcBut5uz2Sx7PB7NBBPR90KIPjMDXAcuAXwnhJi3WCzN1YgGYAeQBPDD1fob+d1uNxeLRS4Wi5xIJLirq0tv5ESWZcVgIBgMVsTU1BQPDw+z3W7XJ/wFQOAW4VYiOtELdDgcPDQ0xF6vlwOBgCHP/Px8yUCxWGRVVTkUCunz/gFgUwjxSsmAfkElqKrKqVSKBwcH9UZ2Ozs7X9SLF0JMA/gdACuKwoFAgDOZDF9cXNSUT0Mul2O/36/fH7/WZUBDoVDgaDTKra2tGuGpJEnPS5LUREQbGrfX6+XDw8O6cpghlUqxoigMgO9kQEM6nWaXy6WZ+FQTrygKR6PRhgnP5/OGT6lkYHZ2tiIWFhZ4bW2Nz87ODOQ+n69sIyqKwtvb26ZCTk5OOBaLcTgcNs0TiUQMa9bW1rizs9O4meupQi6Xizc2NkrkW1tb+u+SiYhjsZhBxNHREfv9fpZl+VZ+fRW6Xk4BfFNWToUQkRqwDuArTWQ4HOZcLscdHR1lAkKhkEF8IpFgp9Op/edPABcAngL4SOMnopRmwGzDEtE7kiQ9V03Zvi2aALwP4JKIuLu7u0z86OgoFwqFMvHxeLz01InocyKymBFrndjpdLLD4TCWzEYGEX1o9mnlcrky8Ts7O6WKQURPJElquoVTPwsZm1ajA0BGnzCZTJaJPz4+5sePH2tiPq7EpzPwrenY0Oiw2WyPrl4xB4NBQ48YGxvTzP3U1tb2UpUGvhRCvHzv4iVJkgB8AoB7eno4n8+XGYhEItery1Ylvv/1DRDRLP4bfS/39vbKxO/v77PNZjMrkTHpAeyBJgAfAPgbgKHTqqrKvb29ZcLHx8f1G7mxVYiINmoBgK+1PrC4uGio93Nzc2Xiu7u7+fz8nJPJ5PU+UADwVM8thMjW3Aca0Yk1rK+vl3VkRVE4m83ebyfWflhaWqoKN81CmUzm+jmBfT6f6Sx0enrK8Xicw+GwaY7V1dXaZ6G7TIm7u7vc3t6uke8TURwAy7LMy8vLhs58L9NoPYSFQoFXVlb0Feczrd4LISK4Ojp6PB4+ODhoiIlisQHnAVVVeXNzkwcGBkqvVAixc71ZEdGbAH4GwDabjaenpzmdTt/PiWxycrIqjIyMGM7ERPT2TTXXYrE0X40cf2lr7HY79/f388TEhGmOmZkZwwOreCauEfXcSlgBJAD8WIm/1luJqRrxxl3vhWRZfo2I3FardeIa95JmoOp7oYcUdd3MPaSo5270Xxe2MMwztryBAAAAAElFTkSuQmCC');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+.sp-replacer,
+.sp-preview,
+.sp-container {
+  padding: 0 !important;
+  border: 0 !important;
+  margin: 0 !important;
+}
+
+.sp-preview,
+.sp-alpha,
+.sp-thumb-el {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gcZAggl+4iZ2wAAACRJREFUGNNjnDlzJgMq2LNnD5oIEwMRYDAqYsH0i4uLy3DxHQBdFQcZw8RJyQAAAABJRU5ErkJggg==') !important;
+}
+
+.sp-replacer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #101010 !important;
+  width: 1.7em;
+  height: 1.7em;
+  box-sizing: border-box;
+  vertical-align: top !important;
+  margin-left: -2% !important;
+}
+
+.sp-preview {
+  width: 100% !important;
+  height: 1.7em !important;
+}
+
+.sp-dd { display: none; }
+
+.sp-container {
+  position: fixed !important;
+  background: #222 !important;
+  box-shadow: 0 0 3px 2px #222;
+}
+
+.sp-picker-container { border-left: none !important; }
+
+.sp-alpha { background-size: contain; }
+
+.sp-alpha-inner {
+  background-image: -webkit-linear-gradient(left, transparent, black) !important;
+  background-image: linear-gradient(to right, transparent, black) !important;
+}
+
+
+/*--MISCELLANEOUS CLASSES--*/
+#sidebar p,
+#sidebar section[data-name] {
+  position: relative;
+  margin-top: 0.3em;
+  margin-bottom: 0.6em;
+}
+
+#sidebar i, #sidebar .i { font-family: AmbleItalic, sans-serif; }
+
+#sidebar code { font-family: Monaco, "Courier New", Courier, monospace; }
+
+#sidebar .small { font-size: 0.65em; }
+
+#sidebar .clear { clear: both; }
+
+#sidebar .inline { display: inline; }
+
+/* Validate inputs */
+#sidebar .invalid,
+#sidebar :invalid {
+  box-shadow: none; /* Prevent Firefox from automatically applying box-shadow to invalid inputs */
+}
+
+#sidebar .invalid { background: #a00 !important; }
+
+#sidebar .invalid-msg {
+  color: #c00;
+  font-size: 0.8em;
+  margin-top: -0.3em;
+  margin-bottom: 0.3em;
+}
+
+
+/*--SCROLLBARS--*/
+#sidebar ::-webkit-scrollbar {
+  width: 0.4em;
+  height: 0.5em;
+}
+
+#sidebar ::-webkit-scrollbar-track {
+  background: #222;
+  box-shadow: inset 0 0 0.6em #111;
+}
+
+#sidebar ::-webkit-scrollbar-thumb {
+  background: #222;
+  box-shadow: inset 0 0 0.4em #444;
+  border-radius: 1em;
+}
+
+
+/*--LIGHTBOX--*/
+/* Only used in Themizer (Reg) */
+#lightbox {
+  position: fixed; /* keeps the lightbox window in the current viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  text-align: left;
+  z-index: 200; /* to beat the #sidebar! */
+}
+
+#lightbox-wrap {
+  position: relative;
+  background: #ddd;
+  width: 65%;
+  height: 70%;
+  margin: 5em auto;
+  box-shadow: 0 0 25px #111;
+  padding: 2em;
+}
+
+#lightbox-wrap pre {
+  overflow: auto;
+  height: 70%;
+  padding: 1.5em;
+  box-shadow: 0 0 1.3em #000 inset;
+}
+
+#close-button {
+  position: absolute;
+  top: 0.2em;
+  right: 0.3em;
+  width: 1em;
+  color: #000;
+  font-family: Lato, sans-serif;
+  font-size: 1.7em;
+  line-height: 1em;
+  text-align: center;
+  cursor: pointer;
+}
+#close-button:hover {
+  color: #444;
+}
+
+/* Themizer (Dev) */
+
+#sidebar.development #sidebar-inner {
+  padding-bottom: 5.32em;
+}

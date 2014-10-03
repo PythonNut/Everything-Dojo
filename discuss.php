@@ -4,21 +4,53 @@
   include("include/discuss.php");
   session_start();
   $extra_style = "<link rel=\"stylesheet\" href=\"css/discuss.css\" />
-  <link rel=\"stylesheet\" href=\"css/prism.css\" />";
+  <link rel=\"stylesheet\" href=\"css/prism.min.css\" />";
   $extra_js = "<script src=\"js/discuss.js\"></script>
-  <script src=\"js/prism.js\"></script>";
+  <script src=\"js/prism.min.js\"></script>
+  <script src=\"js/marked.min.js\"></script>
+  <script>$(function(){\$('pre code').each(function(){var h=$(this).html();h=h.replace(/&amp;quot;/g,'\"').replace(/&amp;#039;/g,'\'');$(this).html(h)})})</script>";
   get_header();
 
-  if($_SESSION['user_id'] != NULL){
+  if ($_SESSION['user_id'] != NULL) {
     $unread_count = $notification->count_unread($_SESSION['user_id']);
     $notification_data = $notification->get_notifications($_SESSION['user_id']);
   }
 
-  if (empty($_GET['view'])){
+  if (empty($_GET['view'])) {
     $view = '';
-  }
-  else{
+  } else {
     $view = $_GET['view'];
+  }
+
+  $mode = $_POST['mode'];
+  $_SESSION['mode'] = $mode;
+  switch ($mode) {
+    case 'post':
+      $data = $_POST;
+      $data['t'] = $_POST['t'];
+      $result = $discuss->insert_post($_POST['forum'], $_SESSION['user_id'], $data);
+      $f = $result['f'];
+      $t = $result['t'];
+
+      if (empty($result['err'])) {
+        header('Location: ' . SITE_ROOT . URL_DISCUSS . '?view=topic&f=' . $f . '&t=' . $t . '#last');
+      } else {
+        header('Location: ' . SITE_ROOT . URL_DISCUSS . '?view=topic&f=' . $f . '&t=' . $t . '#form');
+      }
+      break;
+    case 'topic':
+      $data = $_POST;
+      $result = $discuss->insert_topic($_POST['forum'], $_SESSION['user_id'], $data);
+      $f = $result['f'];
+      $t = $result['t'];
+      $_SESSION['err'] = $result['err'];
+
+      if (empty($result['err'])) {
+        header('Location: ' . SITE_ROOT . URL_DISCUSS . '?view=topic&f=' . $f . '&t=' . $t);
+      } else {
+        header('Location: ' . SITE_ROOT . URL_DISCUSS . '?view=topic&f=' . $f . '#form');
+      }
+      break;
   }
 ?>
 <section id="content">
@@ -30,7 +62,7 @@
           <a href="javascript:;" style="float: right; margin-right: 2vw;" onClick="mark_all_read(<?php echo $_SESSION['user_id']; ?>)">Mark all read</a>
       </div>
       <?php
-      if(count($notification_data) == 0){
+      if (count($notification_data) == 0) {
       ?>
       <a href="javascript:;">
       <div id="notification-0" class="notification read">
@@ -39,9 +71,8 @@
       </div>
       </a>
       <?php
-      }
-      else{
-        foreach($notification_data as $notif){
+      } else {
+        foreach ($notification_data as $notif) {
           $notif_data = $notification->get_notif_obj($notif['notification_type'], $notif['item_id']);
       ?>
       <a href="<?php echo $notif_data['url']; ?>" onClick="mark_read(<?php echo $notif['id']; ?>)">
@@ -64,20 +95,20 @@
       </div>
     </div>
   </div>
-        <div id="navigation">
-          <nav class="discuss-nav">
-            <ul>
-              <li><a href="/" id="nav-home">EvDo Home</a></li>
-            <?php if(isset($_SESSION['user_id'])) { ?>
-              <li><a href="javascript:;" class="notification-link" onClick="show_notifications()">Notifications (<?php echo $unread_count; ?>)</a></li>
-            <?php } ?>
-            </ul>
-          </nav>
-        </div>
-  <?php if (!empty($_SESSION['user_id'])){ ?>
+  <div id="navigation">
+    <nav class="discuss-nav">
+      <ul>
+        <li><a href="/" id="nav-home">EvDo Home</a></li>
+      <?php if (isset($_SESSION['user_id'])) { ?>
+        <li><a href="javascript:;" class="notification-link" onClick="show_notifications()">Notifications (<?php echo $unread_count; ?>)</a></li>
+      <?php } ?>
+      </ul>
+    </nav>
+  </div>
+  <?php if (!empty($_SESSION['user_id'])) { ?>
   <h3>Welcome, <?php echo get_user($_SESSION['user_id']);?>!</h3>
   <br/>
-  <?php } else{ ?>
+  <?php } else { ?>
   <h3>Hello Guest. Please <a href="login.php">sign in</a>.</h3>
   <br/>
   <?php } ?>
@@ -95,7 +126,7 @@
     <div id="discuss-announcements">
     <?php
       $key = 1;
-      foreach($announcements as $announce) {
+      foreach ($announcements as $announce) {
         echo "<div class=\"discuss-announcement\" id=\"discuss-announcement-".$key."\" style=\"display: block;\">".$announce."</div>";
         $key += 1;
       }
@@ -179,7 +210,7 @@
     <?php } ?>
     <br/>
     <?php
-    switch($view){
+    switch ($view) {
       case '':
         include('include/discuss/index_body.php');
         break;
@@ -193,8 +224,7 @@
       default:
         echo "<b>Something wrong happened!</b> Discuss can't handle this request because it doesn't know how to do it! Don't worry, though; Try going <a href='discuss.php'>back to Discuss home page</a> or try our other services!";
         break;
-    }
-    ?>
+    } ?>
 </section>
 
 <?php get_footer(); ?>

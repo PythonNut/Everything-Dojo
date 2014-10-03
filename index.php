@@ -1,15 +1,14 @@
 <?php
   $title = "Home";
   include("include/include.php");
-  $extra_js = "<script src=\"js/index.js\"></script>";
   session_start();
 
-	if($_SESSION['user_id'] != NULL){
-		$notification_unread_count = $notification->count_unread($_SESSION['user_id']);
-		$notification_data = $notification->get_notifications($_SESSION['user_id']);
-	}
-	
-	get_header(0);
+  if (isset($_SESSION['user_id'])) {
+    $notification_unread_count = $notification->count_unread($_SESSION['user_id']);
+    $notification_data = $notification->get_notifications($_SESSION['user_id']);
+  }
+
+  get_header(0);
 ?>
 <section id="content">
   <div id="notifications">
@@ -19,9 +18,7 @@
         <b>Notifications:</b>
         <a href="javascript:;" style="float: right; margin-right: 2vw;" onClick="mark_all_read(<?php echo $_SESSION['user_id']; ?>)">Mark all read</a>
       </div>
-      <?php
-      if(count($notification_data) == 0) {
-      ?>
+      <?php if (count($notification_data) == 0) { ?>
       <a href="javascript:;">
       <div id="notification-0" class="notification-item read">
         <div class="notification-color" style="background-color: #ccc"></div>
@@ -30,7 +27,7 @@
       </a>
       <?php
       } else {
-        foreach($notification_data as $notif) {
+        foreach ($notification_data as $notif) {
           $notif_data = $notification->get_notif_obj($notif['notification_type'], $notif['item_id']);
       ?>
       <a href="<?php echo $notif_data['url']; ?>" class="notification-item-link" onClick="mark_read(<?php echo $notif['id']; ?>)">
@@ -54,7 +51,7 @@
     </div>
   </div>
 
-  <?php if(!empty($_GET['msg']))  {
+  <?php if (!empty($_GET['msg']))  {
     echo "<p class=\"msg\">" . filter($_GET['msg']) . "</p>";
   } ?>
 

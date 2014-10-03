@@ -1,14 +1,14 @@
 <?php
-  /**** PAGE PROTECT CODE  ********************************
-  This code protects pages to only logged in users. If users have not logged in then it will redirect to login page. Remember this code must be placed on very top of any html or php page.
-  ********************************************************/
+  /* FUNCTIONS */
+  //Generally linked to the login system.
 
+  /* Page Protect: Redirects to index.php if visiting a page while not logged in that is protected by this function.*/
   function page_protect() {
     session_start();
 
     global $db;
 
-    /* Secure against Session Hijacking by checking user agent */
+    /* Secure against session hijacking by checking user agent */
     if (isset($_SESSION['HTTP_USER_AGENT'])) {
       if ($_SESSION['HTTP_USER_AGENT'] != md5($_SERVER['HTTP_USER_AGENT'])) {
         logout();
@@ -22,7 +22,7 @@
     }
   }
 
-  function get_user($user_id){
+  function get_user($user_id) {
     global $dbc;
 
       $sth = $dbc->prepare("SELECT * FROM `users` WHERE `id` = :id");
@@ -34,7 +34,7 @@
       return $name;
   }
 
-  function get_all_user($user_id){
+  function get_all_user($user_id) {
       global $dbc;
 
       $sth = $dbc->prepare("SELECT * FROM `users` WHERE `id` = :id");
@@ -77,7 +77,7 @@
   }
 
   function isEmail($email) {
-    return preg_match('/^\S+@[\w\d.-]{2,}\.[\w]{2,6}$/iU', $email) ? TRUE : FALSE;
+    return preg_match('/^\S+@[\w\d.-]{2,}\.[a-z]{2,6}$/iU', $email) ? TRUE : FALSE;
   }
 
   function isUserID($username) {
@@ -86,7 +86,7 @@
     } else {
       return false;
     }
-   }
+  }
 
   function isURL($url) {
     if (preg_match('/^(http|https|ftp):\/\/([A-Z0-9][A-Z0-9_-]*(?:\.[A-Z0-9][A-Z0-9_-]*)+):?(\d+)?\/?/i', $url)) {
@@ -113,15 +113,12 @@
     $i = 0;
 
     while ($i < $length) {
+      $char = substr($possible, mt_rand(0, strlen($possible)-1), 1);
 
-    $char = substr($possible, mt_rand(0, strlen($possible)-1), 1);
-
-
-    if (!strstr($password, $char)) {
-      $password .= $char;
-      $i++;
-    }
-
+      if (!strstr($password, $char)) {
+        $password .= $char;
+        $i++;
+      }
     }
 
     return $password;
@@ -146,7 +143,6 @@
     }
 
     return $password;
-
   }
 
   function logout() {
@@ -159,7 +155,7 @@
       $result->execute(array($_SESSION['user_id']));
     }
 
-    /************ Delete the sessions****************/
+    //delete the session information
     unset($_SESSION['user_id']);
     unset($_SESSION['user_name']);
     unset($_SESSION['user_level']);
@@ -214,8 +210,7 @@
     return $implode;
   }
 
-  function br2nl($string)
-  {
+  function br2nl($string) {
     return preg_replace('/\<br(\s*)?\/?\>/i', "\n", $string);
   }
 
@@ -223,7 +218,7 @@
     $description = br2nl($description);
     $count = str_word_count($description);
     $description = implode(' ', array_slice(explode(' ', $description), 0, 10));
-    if(strlen($description) > 80){
+    if(strlen($description) > 80) {
       $description = substr($description, 0, 80);
     }
     if($count > 10){
@@ -233,8 +228,7 @@
     return $description;
   }
 
-  function redirect($url)
-  {
+  function redirect($url) {
     $string = '<script type="text/javascript">';
     $string .= 'window.location = "' . $url . '"';
     $string .= '</script>';
@@ -245,11 +239,11 @@
   /****************************END OF LOGIN SCRIPT FUNCTIONS*********************************/
   /*regular site functions*/
 
-  function get_header($n=0) {
+  function get_header($n = 0) {
     include(str_repeat('../', $n) . "include/header.php");
   }
 
-  function get_footer($n=0) {
+  function get_footer($n = 0) {
     include(str_repeat('../', $n) . "include/footer.php");
   }
 ?>

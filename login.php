@@ -4,13 +4,13 @@ include("include/include.php");
 $table = TB_NAME;
 $err = array();
 
-foreach($_GET as $key => $value) {
+foreach ($_GET as $key => $value) {
   $get[$key] = filter($value); //get variables are filtered.
 }
 
 if (isset($_POST['doLogin'])) {
 
-  foreach($_POST as $key => $value) {
+  foreach ($_POST as $key => $value) {
     $data[$key] = filter($value); // post variables are filtered
   }
 
@@ -33,13 +33,13 @@ if (isset($_POST['doLogin'])) {
   } elseif (intval(explode("|", $logins_attempted)[0]) < 5 || (time() - $last_attempted_login >= 600)) { // time limit expired || user was not brute-forced
     // Match row found with more than 1 results  - the user is authenticated.
     if ($username_match > 0) {
-      if(!$user_array['approved']) {
+      if (!$user_array['approved']) {
         $err[] = "Account not activated. Please contact the administrator to activate.";
       }
 
       //check against salt
       if ($pwd === PwdHash($pass, substr($pwd, 0, 9))) {
-        if(empty($err)) {
+        if (empty($err)) {
           // this sets session and logs user in
           session_start();
           session_regenerate_id(TRUE); //prevent against session fixation attacks.
@@ -92,11 +92,11 @@ To reactivate your account, please visit http://$host/activate.php and enter you
 
 We apologize for the inconvenience.
 
-Administrator @Login Site
+Administrator @ Everything Dojo
 __________________________________________________________
 This is an automated response. Do not reply to this email.";
 
-    mail($user_array['user_email'], "Your account on http://$host may have been hacked", $message, "From: \"Login Site Forgotbot\" <auto-reply@$host>\r\n");
+    mail($user_array['user_email'], "Your account on http://$host may have been hacked", $message, "From: \"Everything Dojo Forgotbot\" <no-reply@$host>\r\n");
     header("Location: index.php?msg=This account has been disabled");
 
     exit();
@@ -111,7 +111,7 @@ This is an automated response. Do not reply to this email.";
 ?>
 <section id="content">
   <?php //spit out all errors
-  if(!empty($err))  {
+  if (!empty($err))  {
     echo "<p id=\"errors\">";
     foreach ($err as $e) {
       echo $e."<br />";

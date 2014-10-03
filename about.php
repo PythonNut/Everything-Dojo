@@ -2,6 +2,10 @@
   $title = "About";
   include("include/include.php");
   session_start();
+  if (isset($_SESSION['user_id'])) {
+    $notification_unread_count = $notification->count_unread($_SESSION['user_id']);
+    $notification_data = $notification->get_notifications($_SESSION['user_id']);
+  }
   get_header();
 ?>
 <section id="content">
@@ -29,7 +33,7 @@
   <p>If you have found a problem with a theme, or just want to tell the author that you like it, Discuss is the place for you. Every time a theme is approved, a topic is automatically created in the discussion area for conversation about that theme. There is also a section in the discussion area for feedback, bug reports, and questions about the site itself.</p>
 
   <h1>How did this start?</h1>
-  The original version of this site was written by an AoPS user named Dojo. It contained all the same main sections as the current website, but looked a lot different. On May 27, 2014, Dojo announced that he was looking for help rebuilding the site. That rebuild resulted in the site you are looking at now.</p>
+  <p>The original version of this site was written by an AoPS user named Dojo. It contained all the same main sections as the current website, but looked a lot different. On May 27, 2014, Dojo announced that he was looking for help rebuilding the site. That rebuild resulted in the site you are looking at now.</p>
 
   <h1>Who are we?</h1>
   This website was written and is maintained by a collection of volunteer AoPS users. The team is led by Dojo, and consists of:

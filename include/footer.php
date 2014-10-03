@@ -23,35 +23,34 @@
     </article>
 
     <footer>
-      <p><a href="/">Home</a> &bull; <a href="/about.php">About</a> &bull; <a href="javascript:;" onclick="$('#credits').popUp('1%')">Credits</a> <?php
+      <p><a href="/">Home</a> &bull; <a href="/about.php">About</a> &bull; <a href="javascript:;" onclick="$('#credits').popUp('1%')">Credits</a> &bull; <a href="https://github.com/Deeg-Kim/Everything-Dojo">GitHub</a> <?php
               // will not work if dbc is not included on page
-              if (checkAdmin()) {
+              if (isset($_SESSION['user_level']) && checkAdmin()) {
               ?>
               &bull; <a href="/admin.php" id="menu-admin">Admin CP</a>
               <?php } //end admin ?></p>
-      <p>&copy;2014 Everything Dojo. The source code of this website is available on <a href="https://github.com/Deeg-Kim/Everything-Dojo">GitHub</a> and is licensed under the terms of the <a href="/LICENSE.txt">GNU General Public License version 3</a>. Individual styles are copyright their creators.</p>
-      <?php if ($_GET['unicorns']): ?>
-      <p>This website has unicorn powers.</p>
-      <?php endif; ?>
+      <p>&copy;2014 Everything Dojo. Individual styles are copyright their creators.</p>
+      <p>Made with <span class="heart">&hearts;</span><?php if (isset($_GET['unicorns'])) { echo " and unicorns"; } ?>.</p>
       <p>Server Time: <?php echo date("m/d/y G:i T"); ?></p>
+      <p></p>
     </footer>
 
     <!-- Unicorns should be sticky -->
     <script class="js-unicorns">
       // Function to get search parameters as an associative array. Written by StackOverflow user weltraumpirat at http://stackoverflow.com/questions/5448545/how-to-retrieve-get-parameters-from-javascript/5448635#5448635
       function getSearchParameters() {
-            var prmstr = window.location.search.substr(1);
-            return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
+        var prmstr = window.location.search.substr(1);
+        return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
       }
 
       function transformToAssocArray( prmstr ) {
-          var params = {};
-          var prmarr = prmstr.split("&");
-          for ( var i = 0; i < prmarr.length; i++) {
-              var tmparr = prmarr[i].split("=");
-              params[tmparr[0]] = tmparr[1];
-          }
-          return params;
+        var params = {};
+        var prmarr = prmstr.split("&");
+        for ( var i = 0; i < prmarr.length; i++) {
+            var tmparr = prmarr[i].split("=");
+            params[tmparr[0]] = tmparr[1];
+        }
+        return params;
       }
 
       var params = getSearchParameters();

@@ -20,7 +20,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
 </div>
 <div class="manage-item" id="manage-1">
   <div class="option-title manage-header expanded" id="header-1">
-    <h4>Unapproved Themes (<?php echo count($data['unapproved']) ?>)</h4>
+    <h4>Unapproved Themes (<?php echo count($data['unapproved']); ?>)</h4>
     <span class="collapsebutton"></span>
   </div>
   <div class="option-wrap">
@@ -35,9 +35,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
         </tr>
       </thead>
        <tbody>
-      <?php 
-        if(count($data['unapproved']) == 0){
-      ?>
+      <?php if (count($data['unapproved']) == 0) { ?>
         <tr>
           <td><b>No unapproved themes</b></td>
           <td>-</td>
@@ -46,9 +44,8 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
           <td>-</td>
         </tr>
       <?php
-        }
-        else{
-          for($i=0;$i<count($data['unapproved']);$i++){
+        } else {
+          for ($i = 0; $i < count($data['unapproved']); $i++) {
             $description = shorten_desc($data['unapproved'][$i]['description']);
       ?>
         <tr class="style">
@@ -68,7 +65,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
 </div>
 <div class="manage-item" id="manage-2"option-title >
   <div class="option-title manage-header" id="header-2">
-    <h4>Approved Themes (<?php echo count($data['approved']) ?>)</h4>
+    <h4>Approved Themes (<?php echo count($data['approved']); ?>)</h4>
     <span class="collapsebutton"></span>
   </div>
    <div class="option-wrap">
@@ -83,9 +80,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
         </tr>
       </thead>
        <tbody>
-      <?php 
-        if(count($data['approved']) == 0){
-      ?>
+      <?php if (count($data['approved']) == 0) { ?>
         <tr>
           <td><b>No approved themes</b></td>
           <td>-</td>
@@ -96,7 +91,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
       <?php
         }
         else{
-          for($i=0;$i<count($data['approved']);$i++){
+          for ($i = 0; $i < count($data['approved']); $i++) {
             $description = shorten_desc($data['approved'][$i]['description']);
       ?>
         <tr class="style">
@@ -116,7 +111,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
 </div>
 <div class="manage-item" id="manage-3">
   <div class="option-title manage-header" id="header-3">
-    <h4>Themes with Validation Request (<?php echo count($data['validate_request']) ?>)</h4>
+    <h4>Themes with Validation Request (<?php echo count($data['validate_request']); ?>)</h4>
     <span class="collapsebutton"></span>
   </div>
   <div class="option-wrap">
@@ -131,9 +126,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
         </tr>
       </thead>
        <tbody>
-      <?php 
-        if(count($data['validate_request']) == 0){
-      ?>
+      <?php if (count($data['validate_request']) == 0) { ?>
         <tr>
           <td><b>No themes with validate request.</b></td>
           <td>-</td>
@@ -142,9 +135,8 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
           <td>-</td>
         </tr>
       <?php
-        }
-        else{
-          for($i=0;$i<count($data['validate_request']);$i++){
+        } else {
+          for ($i = 0; $i < count($data['validate_request']); $i++) {
             $description = shorten_desc($data['validate_request'][$i]['description']);
       ?>
         <tr class="style">
@@ -164,7 +156,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
 </div>
 <div class="manage-item" id="manage-4">
   <div class="option-title manage-header" id="header-4">
-    <h4>Validated Themes (<?php echo count($data['validated']) ?>)</h4>
+    <h4>Validated Themes (<?php echo count($data['validated']); ?>)</h4>
     <span class="collapsebutton"></span>
   </div>
   <div class="option-wrap">
@@ -179,9 +171,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
         </tr>
       </thead>
        <tbody>
-      <?php 
-        if(count($data['validated']) == 0){
-      ?>
+      <?php if(count($data['validated']) == 0) { ?>
         <tr>
           <td><b>No validated themes</b></td>
           <td>-</td>
@@ -190,9 +180,8 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
           <td>-</td>
         </tr>
       <?php
-        }
-        else{
-          for($i=0;$i<count($data['validated']);$i++){
+        } else {
+          for ( $i = 0; $i < count($data['validated']); $i++) {
             $description = shorten_desc($data['validated'][$i]['description']);
       ?>
         <tr class="style">
