@@ -47,6 +47,7 @@ $(function () {
           });
         });
         $("#post").prop("disabled", "disabled");
+        $(this).parent().parent().parent().children(".post-edit").prop("disabled", "disabled");
       } else if ($(this).val().length > 40000) {
         message.assign("The message cannot have more than 40000 characters", "error").show(function () {
           $("[name='desc-source']").next().css({
@@ -55,6 +56,7 @@ $(function () {
           });
         });
         $("#post").prop("disabled", "disabled");
+        $(this).parent().parent().parent().children(".post-edit").prop("disabled", "disabled");
       } else {
         message.purge();
         $(this).parent().next().children("[name='preview']").html(marked($(this).val(), {
@@ -64,6 +66,7 @@ $(function () {
         Prism.highlightAll(document.querySelector("[name='preview'] pre"));
         if ($("[name='title']").val().match(/\S/g) !== null && $("[name='title']").val().match(/\S/g).length >= 5) {
           $("#post").prop("disabled", "");
+          $(this).parent().parent().parent().children(".post-edit").prop("disabled", "");
         }
       }
     }
@@ -80,6 +83,7 @@ $(function () {
   $("[name='title'], [name='desc-source']").keydown(function (e) {
     if (e.keyCode == 27) {
       $("#cancel").trigger("click");
+      $(this).parent().parent().parent().children(".cancel-edit").trigger("click");
     }
   });
 });

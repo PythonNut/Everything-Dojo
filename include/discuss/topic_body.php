@@ -53,14 +53,47 @@
             <?php if (($_SESSION['user_id'] > 0)) { ?>
             <div class="topic-reply-panel">
               <?php $thanks = $discuss->thanks($post['post_id'], $typearg, $_SESSION['user_id']); ?>
-              <?php if ($_SESSION['user_id'] != $user['id']){?><div class="topic-reply-thanks<?php if (in_array($_SESSION['user_id'],$thanks)){ echo " topic-reply-thanked"; $thankedposts[] = $post['post_id'];}?>" id="topic-reply-thanks-<?php echo $post['post_id'];?>" onclick="thankpost(<?php echo $post['post_id']?>)">&uArr; &nbsp;&nbsp;<?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div><?php } else if ($_SESSION['user_id'] == $user['id']) {echo "<div class=\"topic-reply-disabled\">".count($thanks)." Thank"; if (count($thanks) != 1){echo "s";} echo "</div>"; echo "<div class=\"topic-reply-edit\" id=\"topic-reply-edit-".$post['post_id']."\"><img alt=\"Edit Post\" src=\"\\images\\edit.png\" style=\"width: 0.75em; height: 0.75em;\"> Edit Post</div>";} if ($_SESSION['user_level'] >= 5) {if ($_SESSION['user_id'] != $user['id']) {echo "<div class=\"topic-reply-edit\" id=\"topic-reply-edit-".$post['post_id']."\"><img alt=\"Edit Post\" src=\"\\images\\edit.png\" style=\"width: 0.75em; height: 0.75em;\"> Edit Post</div>";} echo "<div class=\"topic-reply-hide\" id=\"topic-reply-hide-".$post['post_id']."\"><img alt=\"Hide Post\" src=\"\\images\\reject.png\" style=\"width: 0.75em; height: 0.75em;\"> Hide Post</div>"; echo "<div class=\"topic-reply-delete\" id=\"topic-reply-delete-".$post['post_id']."\"><img alt=\"Delete Post\" src=\"\\images\\trash.png\" style=\"width: 0.55em; height: 0.75em;\"> Delete Post</div>"; echo "<div class=\"topic-reply-move\" id=\"topic-reply-move-".$post['post_id']."\">&rArr; Move Post</div>"; echo "<div class=\"topic-reply-cleanthanks\" id=\"topic-reply-cleanthanks-".$post['post_id']."\">&dArr; Clear Thanks</div>";}?>
+              <?php if ($_SESSION['user_id'] != $user['id']){?><div class="topic-reply-thanks<?php if (in_array($_SESSION['user_id'],$thanks)){ echo " topic-reply-thanked"; $thankedposts[] = $post['post_id'];}?>" id="topic-reply-thanks-<?php echo $post['post_id'];?>" onclick="thankpost(<?php echo $post['post_id']?>)">&uArr; &nbsp;&nbsp;<?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div><?php } else if ($_SESSION['user_id'] == $user['id']) {echo "<div class=\"topic-reply-disabled\">".count($thanks)." Thank"; if (count($thanks) != 1){echo "s";} echo "</div>"; echo "<div class=\"topic-reply-edit\" id=\"topic-reply-edit-".$post['post_id']."\"><img alt=\"Edit Post\" src=\"\\images\\edit.png\" style=\"width: 0.75em; height: 0.75em;\"> Edit Post</div>";} if ($_SESSION['user_level'] >= 5) {if ($_SESSION['user_id'] != $user['id']) {echo "<div class=\"topic-reply-edit\" id=\"topic-reply-edit-".$post['post_id']."\"><img alt=\"Edit Post\" src=\"\\images\\edit.png\" style=\"width: 0.75em; height: 0.75em;\"> Edit Post</div>";} echo "<div class=\"topic-reply-hide\" id=\"topic-reply-hide-".$post['post_id']."\"><img alt=\"Hide Post\" src=\"\\images\\reject.png\" style=\"width: 0.75em; height: 0.75em;\"> Hide Post</div>"; echo "<div class=\"topic-reply-delete\" id=\"topic-reply-delete-".$post['post_id']."\"><img alt=\"Delete Post\" src=\"\\images\\trash.png\" style=\"width: 0.55em; height: 0.75em;\"> Delete Post</div>"; echo "<div class=\"topic-reply-move\" id=\"topic-reply-move-".$post['post_id']."\">&rArr; Move Post</div>"; echo "<div class=\"topic-reply-cleanthanks".((count($thanks) > 0) ? "" : " topic-reply-disabled")."\" id=\"topic-reply-cleanthanks-".$post['post_id']."\"".((count($thanks) > 0) ? "" : " disabled=\"disabled\"").">&dArr; Clear Thanks</div>";} //this php tho ?>
             </div>
             <?php } else { ?>
             <?php $thanks = $discuss->thanks($post['post_id'], $typearg); ?>
             <div style="opacity: 0.6; text-decoration: italic; display:inline-block; margin-left: 2em;"><?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div>
             <?php } ?>
           </div>
-          <?php echo $post['text']; ?>
+          <?php 
+            echo "<div id='topic-reply-message-".$post['post_id']."'>".$post['text']."</div>"; 
+            if (($_SESSION['user_id'] == $user['id']) or $_SESSION['user_level'] >= 5){
+              echo 
+              "
+              <form id='topic-reply-edit-box-".$post['post_id']."'>
+                <div class=\"field\">
+                  <div class=\"field split left\">
+                    Edit Comment: <a href=\"https://help.github.com/articles/github-flavored-markdown\" title=\"Github Flavored Markdown\" style=\"color:#777;font-size:.8em;line-height:2em\" target=\"_blank\" tabindex=\"1\">(Parsed with Github Flavored Markdown)</a>
+                    <br/>
+                    <textarea placeholder='Write your new comment here...' style='height:200px; vertical-align:top;' name='desc-source'>".$post['source']."</textarea>
+                    <input type=\"hidden\" name=\"desc\" />
+                  </div>
+                  <div class=\"field split right\">
+                    <div class=\"topic-text\" name=\"preview\"></div>
+                  </div>
+                </div>
+                <input type=\"button\" value=\"Cancel\" class=\"danger cancel-edit\" id=\"cancel-edit-".$post['post_id']."\" />
+                <input type=\"button\" value=\"Edit\" disabled id=\"post-edit-".$post['post_id']."\" class=\"post-edit\" />
+                <br/>
+                <br/>
+              </form>
+              <script> 
+              \$('#topic-reply-edit-box-".$post['post_id']."').hide(); 
+              \$('#topic-reply-edit-".$post['post_id'].", #cancel-edit-".$post['post_id']."').on('click', function() {
+                \$('#topic-reply-message-".$post['post_id']."').slideToggle(300); 
+                \$('#topic-reply-edit-box-".$post['post_id']."').slideToggle(300);
+              });
+              \$('#post-edit-".$post['post_id']."').on('click', function() {
+                
+              });
+              </script>";
+            } 
+          ?>
         </div>
 <?php /*      <form action="discuss.php" method="post" id="edit" style="display:none">
           <textarea name="edit"></textarea>
@@ -84,7 +117,8 @@
           <input type="submit" style="display:none" />
         </form> */ ?>
       </div>
-    <?php } ?>
+    <?php 
+    } ?>
     <?php if ($_SESSION['user_id']) { ?>
     <script>
       var thankedPosts = [<?php echo implode(",", $thankedposts); ?>];

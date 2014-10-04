@@ -389,7 +389,7 @@ textarea {
   box-sizing: border-box;
 }
 
-#cancel { float: left; }
-#post { float: right; }
+#cancel, .cancel-edit { float: left; }
+#post, .post-edit { float: right; }
 
 .note { left: auto; right: -0.5rem; }

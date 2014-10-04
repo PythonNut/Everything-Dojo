@@ -11,7 +11,12 @@ switch ($_POST['action']) {
       echo "success|".$result;
     }
     break;
-  case "":
+  case "edit":
+    
+    if ($_SESSION['user_id']){
+    
+    }
+    break;
   default:
     echo "No action exists or defined. Try again.";
 }
