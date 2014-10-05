@@ -32,7 +32,7 @@
     <h1 style="text-align:center;"><?php echo $topic['title'];?></h1>
   </div>
   <div id="topic-main">
-    <?php if (isset($_GET["unicorns"]) { ?><img class="avatar" src=<?php echo "\"http://unicornify.appspot.com/avatar/" . md5(get_all_user(intval($post["user_id"]))["user_email"]) . "?s=128\"" ?>><?php } ?>
+    <?php if (isset($_GET["unicorns"])) { ?><img class="avatar" src=<?php echo "\"http://unicornify.appspot.com/avatar/" . md5(get_all_user(intval($post["user_id"]))["user_email"]) . "?s=128\"" ?>><?php } ?>
     <div class="topic-text" id="topic-main-text">
       <?php $user = get_user(intval($topic['user_id'])); ?>
       <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $topic['title'];?></h2>
@@ -45,7 +45,7 @@
     <?php $thankedposts = [];
     foreach ($posts as $post){ ?>
       <div class="topic-reply" id="<?php echo $post['post_id']; ?>">
-        <?php if (isset($_GET["unicorns"]) { ?><img class="avatar" src=<?php echo "\"http://unicornify.appspot.com/avatar/" . md5(get_all_user(intval($post["user_id"]))["user_email"]) . "?s=128\"" ?>><?php } ?>
+        <?php if (isset($_GET["unicorns"])) { ?><img class="avatar" src=<?php echo "\"http://unicornify.appspot.com/avatar/" . md5(get_all_user(intval($post["user_id"]))["user_email"]) . "?s=128\"" ?>><?php } ?>
         <div class="topic-text topic-reply-text" <?php if($post == end($posts)) echo 'id="last"'; ?>>
           <?php $user = get_all_user($post['user_id']);?>
           <div class="topic-reply-top">
