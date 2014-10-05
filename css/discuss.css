@@ -334,6 +334,11 @@ td.tiny-col { width: 3%; }
   padding-bottom: 1em;
 }
 
+.avatar {
+  float: right;
+  border-radius: 10%;
+}
+
 .topic-text > pre[class*="language-"] {
   width: 90%;
   padding: 1em;

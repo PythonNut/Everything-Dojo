@@ -32,6 +32,7 @@
     <h1 style="text-align:center;"><?php echo $topic['title'];?></h1>
   </div>
   <div id="topic-main">
+    <?php if (isset($_GET["unicorns"]) { ?><img class="avatar" src=<?php echo "\"http://unicornify.appspot.com/avatar/" . md5(get_all_user(intval($post["user_id"]))["user_email"]) . "?s=128\"" ?>><?php } ?>
     <div class="topic-text" id="topic-main-text">
       <?php $user = get_user(intval($topic['user_id'])); ?>
       <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $topic['title'];?></h2>
@@ -44,6 +45,7 @@
     <?php $thankedposts = [];
     foreach ($posts as $post){ ?>
       <div class="topic-reply" id="<?php echo $post['post_id']; ?>">
+        <?php if (isset($_GET["unicorns"]) { ?><img class="avatar" src=<?php echo "\"http://unicornify.appspot.com/avatar/" . md5(get_all_user(intval($post["user_id"]))["user_email"]) . "?s=128\"" ?>><?php } ?>
         <div class="topic-text topic-reply-text" <?php if($post == end($posts)) echo 'id="last"'; ?>>
           <?php $user = get_all_user($post['user_id']);?>
           <div class="topic-reply-top">
@@ -60,10 +62,10 @@
             <div style="opacity: 0.6; text-decoration: italic; display:inline-block; margin-left: 2em;"><?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div>
             <?php } ?>
           </div>
-          <?php 
-            echo "<div id='topic-reply-message-".$post['post_id']."'>".$post['text']."</div>"; 
+          <?php
+            echo "<div id='topic-reply-message-".$post['post_id']."'>".$post['text']."</div>";
             if (($_SESSION['user_id'] == $user['id']) or $_SESSION['user_level'] >= 5){
-              echo 
+              echo
               "
               <form id='topic-reply-edit-box-".$post['post_id']."'>
                 <div class=\"field\">
@@ -82,17 +84,17 @@
                 <br/>
                 <br/>
               </form>
-              <script> 
-              \$('#topic-reply-edit-box-".$post['post_id']."').hide(); 
+              <script>
+              \$('#topic-reply-edit-box-".$post['post_id']."').hide();
               \$('#topic-reply-edit-".$post['post_id'].", #cancel-edit-".$post['post_id']."').on('click', function() {
-                \$('#topic-reply-message-".$post['post_id']."').slideToggle(300); 
+                \$('#topic-reply-message-".$post['post_id']."').slideToggle(300);
                 \$('#topic-reply-edit-box-".$post['post_id']."').slideToggle(300);
               });
               \$('#post-edit-".$post['post_id']."').on('click', function() {
-                
+
               });
               </script>";
-            } 
+            }
           ?>
         </div>
 <?php /*      <form action="discuss.php" method="post" id="edit" style="display:none">
@@ -117,7 +119,7 @@
           <input type="submit" style="display:none" />
         </form> */ ?>
       </div>
-    <?php 
+    <?php
     } ?>
     <?php if ($_SESSION['user_id']) { ?>
     <script>
