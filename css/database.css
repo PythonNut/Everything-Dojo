@@ -257,14 +257,14 @@ div.code {
   right: 2rem;
   height: 2rem;
   padding: 0 0 0 7px;
-  
+
   border-right: none;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
-  
+
   -webkit-transition: all 0.75s ease;
           transition: all 0.75s ease;
-          
+
   color: #aaa;
 }
 
@@ -291,32 +291,32 @@ div.code {
 .search-icon::after {
   content: "";
   position: absolute;
-  top: 50%;
+  top: 1rem;
   left: 0;
 }
 
 .search-icon::before,
 .search-icon::after {
-  margin: -8px 0 0;
+  margin: -0.4rem 0 0;
   background: white;
 }
 
 .search-icon::before {
-  width:9px;
-  height:9px;
-  left: 10px;
-  top: 20px;
-  border: 4px solid white;
+  width:0.5rem;
+  height:0.5rem;
+  left: 0.25rem;
+  top: 0.75rem;
+  border: 0.2rem solid white;
   background: transparent;
   /* css3 */
-  border-radius: 12px;
+  border-radius: 0.5rem;
 }
 
 .search-icon::after {
-  left: 25px;
-  top: 23px;
-  width: 4px;
-  height: 12px;
+  left: 1.1rem;
+  top:0.91rem;
+  width: 0.2rem;
+  height: 0.75rem;
   margin-top: 0;
   /* css3 */
   -webkit-transform: rotate(-45deg);
