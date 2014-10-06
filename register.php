@@ -50,13 +50,13 @@ if((isset($_POST['ajax']) && $_POST['ajax'] === "true") && $ajax) {
 
   // Check/validate fields
   if (!$resp->is_valid) {
-    exit("recaptcha");
+    $err[] = "r";
   } elseif (!isUserID($data['user_name'])) {
-    exit("username");
+    $err[] = "n";
   } elseif (!isEmail($data['usr_email'])) {
-    exit("email");
+    $err[] = "e";
   } elseif (!checkPwd($data['pwd'], $data['pwd2'])) {
-    exit("password");
+    $err[] = "p";
   }
 
 } elseif (isset($_POST['doRegister'])) {
@@ -95,14 +95,25 @@ if (!empty($_POST)) {
   $usr_email = $data['usr_email'];
   $user_name = $data['user_name'];
 
-  $query = "SELECT count(*) AS total FROM $table WHERE user_email=? OR user_name=?";
-  $rs_duplicate = $dbc->prepare($query);
-  $rs_duplicate->execute(array($usr_email, $user_name));
-  list($total) = $rs_duplicate->fetchColumn();
+  $email = "SELECT count(*) AS total FROM $table WHERE user_email=?";
+  $name = "SELECT count(*) AS total FROM $table WHERE user_name=?";
+  $email_duplicate = $dbc->prepare($email);
+  $email_duplicate->execute(array($usr_email));
+  $name_duplicate = $dbc->prepare($name);
+  $name_duplicate->execute(array($user_name));
+  list($email_total) = $email_duplicate->fetchColumn();
+  list($name_total) = $name_duplicate->fetchColumn();
 
-  if ($total > 0) {
+  if ($email_total > 0) {
     if ($ajax) {
-      exit("username or email exists");
+      $err[] = "a";
+    } else {
+      $err[] = "The username/email already exists. Please try again with different username and email." ;
+    }
+  }
+  if ($name_total > 0) {
+    if ($ajax) {
+      $err[] = "u";
     } else {
       $err[] = "The username/email already exists. Please try again with different username and email." ;
     }
@@ -138,7 +149,12 @@ EOT;
     if (!$ajax) {
       header("Location: register.php?done=yes");
     }
-    exit("success");
+    exit("s");
+  } elseif ($ajax) {
+    foreach ($err as $e) {
+      echo $e;
+    }
+    exit();
   }
 }
 

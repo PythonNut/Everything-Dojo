@@ -20,12 +20,10 @@ document.onready = function () {
       userPwdVal = new Message("[name='pwd2']");
 
   // Timeouts
-  var userTimeout,
-      emailTimeout;
+  var userTimeout;
 
   // AJAX stuff
-  var ajaxName  = new XMLHttpRequest(),
-      ajaxEmail = new XMLHttpRequest();
+  var ajaxName  = new XMLHttpRequest();
 
   // Submit button
   var submit = document.getElementById("doRegister");
@@ -48,7 +46,6 @@ document.onready = function () {
         submit.setAttribute("disabled", true);
       } else {
         clearTimeout(userTimeout);
-        ajaxEmail.abort();
         userName.purge();
         userName.el.parentNode.lastElementChild.style.display = "inline"; // show loading gif
         // ajax to verify username
@@ -92,45 +89,11 @@ document.onready = function () {
 
     if ((keycode > 47 && keycode < 60) || (keycode > 64 && keycode < 91) || (keycode > 95 && keycode < 112) || (keycode > 185 && keycode < 193) || (keycode > 218 && keycode < 223) || keycode == 32 || keycode == 8 || keycode == 13 || keycode == 46) {
       if (!/^\S+@(localhost|([\w\d-]{2,}\.){1,2}[a-z]{2,6})$/i.test(email)) {
-        clearTimeout(emailTimeout);
-        ajaxEmail.abort();
         userEmail.assign("Email entered is not a valid email.", "error").show();
-        userEmail.el.parentNode.lastElementChild.style.display = "none"; // hide loading gif
         submit.setAttribute("disabled", true);
       } else {
-        clearTimeout(emailTimeout);
-        ajaxEmail.abort();
         userEmail.purge();
-        userEmail.el.parentNode.lastElementChild.style.display = "inline"; // show loading gif
-        // ajax to verify email
-        ajaxEmail.onreadystatechange = function () {
-          if (ajaxEmail.readyState == 4 ) {
-            if (ajaxEmail.status == 200) {
-              if (ajaxEmail.responseText == "success") {
-                userEmail.assign("Email is valid.", "correct").show();
-                toggleSubmitDisabled();
-              } else if (ajaxEmail.responseText == "error") {
-                userEmail.assign("Email address already exists in our database! Please do not create multis.", "error").show();
-                submit.setAttribute("disabled", true);
-              }
-            } else {
-              userEmail.assign("A " + ajaxEmail.status + " error occurred. Please try again.", "error").show();
-              submit.setAttribute("disabled", true);
-            }
-            userEmail.el.parentNode.lastElementChild.style.display = "none"; // hide loading gif
-          }
-        };
-
-        // set 400ms timeout for same reasons as with username
-        emailTimeout = setTimeout(function () {
-          try {
-            ajaxEmail.open("GET", "register.php?email=" + email, true);
-            ajaxEmail.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-            ajaxEmail.send();
-          } catch (error) {
-            throw new Error("An AJAX error occured: " + error);
-          }
-        }, 300);
+        toggleSubmitDisabled();
       }
     }
   };
@@ -244,37 +207,35 @@ document.onready = function () {
         },
         success: function (msg) {
           setTimeout(function () {
-            switch (msg) {
-              case "recaptcha":
-                recaptchaMsg.assign("Recaptcha failed! Please try again.", "error").show(function () {
-                  recaptchaMsg.el.nextElementSibling.style.bottom = "1em";
-                  recaptchaMsg.el.nextElementSibling.style.left = "325px";
-                });
-                submit.removeAttribute("disabled");
-                break;
-              case "username":
-                userName.assign("Username is not a valid username.", "error").show();
-                break;
-              case "useremail exists":
-                userName.assign("Username/email already exists in database.", "error").show();
-                userEmail.assign("Username/email already exists in database.", "error").show();
-                break;
-              case "email":
-                userEmail.assign("Email is not a valid email.", "error").show();
-                break;
-              case "password":
-                userPwd.assign("Passwords did not meet the requirements or did not match.", "error").show();
-                userPwdVal.assign("Passwords did not meet the requirements or did not match.", "error").show();
-                break;
-              case "success":
-                $("#content").animate({
-                  opacity: 0
-                }, 500, function () {
-                  $(this).css("opacity", 1).html("<p>Thank you; your registration is now complete. After activation, you can login <a href='login.php'>here</a>.</p>");
-                });
-                break;
-              default:
-                window.alert("Unknown response received");
+            if (msg.indexOf("r") !== -1) {
+              recaptchaMsg.assign("Recaptcha failed! Please try again.", "error").show(function () {
+                recaptchaMsg.el.nextElementSibling.style.bottom = "1em";
+                recaptchaMsg.el.nextElementSibling.style.left = "325px";
+              });
+              submit.removeAttribute("disabled");
+            }
+            if (msg.indexOf("n") !== -1) {
+              userName.assign("Username is not a valid username.", "error").show();
+            }
+            if (msg.indexOf("e") !== -1) {
+              userEmail.assign("Email is not a valid email.", "error").show();
+            }
+            if (msg.indexOf("u") !== -1) {
+              userName.assign("Username already exists in database.", "error").show();
+            }
+            if (msg.indexOf("a") !== -1) {
+              userEmail.assign("Email already exists in database.", "error").show();
+            }
+            if (msg.indexOf("p") !== -1) {
+              userPwd.assign("Passwords did not meet the requirements or did not match.", "error").show();
+              userPwdVal.assign("Passwords did not meet the requirements or did not match.", "error").show();
+            }
+            if (msg.indexOf("s") !== -1) {
+              $("#content").animate({
+                opacity: 0
+              }, 500, function () {
+                $(this).css("opacity", 1).html("<p>Thank you; your registration is now complete. After activation, you can login <a href='login.php'>here</a>.</p>");
+              });
             }
             $submit.next().css("display", "");
             Recaptcha.reload(); // automatically reload reCAPTCHA
