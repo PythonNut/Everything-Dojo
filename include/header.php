@@ -75,34 +75,6 @@
         </section>
       </header>
 
-      <?php } elseif ($title == "Try-It") { ?>
-
-      <header class="database">
-        <section id="headerwrap">
-          <a href="<?php echo URL_DATABASE; ?>"><h1><?php echo $title ?></h1></a>
-          <?php
-          global $mode;
-
-          if ($mode == "view") { ?>
-            <div class="search-container">
-              <script src="/js/db-search.js"></script>
-              <input class="search" type="text" placeholder="Search...">
-              <div class="icon-box">
-                <span class="search-icon"></span>
-              </div>
-          <?php } ?>
-
-        </section>
-      </header>
-
-      <?php } elseif ($title == "Discuss") { ?>
-
-      <header class="discuss">
-        <section id="headerwrap">
-          <a href="<?php echo URL_DISCUSS; ?>"><h1>Discuss</h1></a>
-        </section>
-      </header>
-
       <?php } elseif ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)" && $title !== "Try-It") { ?>
 
       <?php global $notification_unread_count; ?>
