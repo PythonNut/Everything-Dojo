@@ -63,7 +63,10 @@
             <?php } ?>
           </div>
           <?php
-            echo "<div id='topic-reply-message-".$post['post_id']."'>".$post['text']."</div>";
+            echo "<div id='topic-reply-message-".$post['post_id']."'>".$post['text']."</div>"; 
+          ?>
+            <?php if($post['edit_id'] > 0){ ?><p class="small">Edited by <?php echo get_user($post['edit_id']); ?> on <?php echo date('M d, Y g:i a', $post['last_timestamp']);?></p><?php } ?>
+          <?php
             if (($_SESSION['user_id'] == $user['id']) or $_SESSION['user_level'] >= 5){
               echo
               "
