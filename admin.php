@@ -8,10 +8,9 @@ if(!checkAdmin()) {
 }
 
 $table = TB_NAME;
-
 $page_limit = 10;
 
-if(isset($_POST['announcementsSubmit'])) {
+if (isset($_POST['announcementsSubmit'])) {
   $announcearray = $_POST['announcements'];
   $implode = "";
   foreach ($announcearray as $value) {
@@ -39,12 +38,12 @@ list($active) = $rs_active;
   //dbc already included
   page_protect();
 
-  if($_SESSION['user_id'] != NULL) {
-    $unread_count = $notification->count_unread($_SESSION['user_id']);
+  if ($_SESSION['user_id'] != NULL) {
+    $notification_unread_count = $notification->count_unread($_SESSION['user_id']);
     $notification_data = $notification->get_notifications($_SESSION['user_id']);
   }
 
-  get_header(0, $unread_count);
+  get_header(0, $notification_unread_count);
 ?>
 <section id="content">
   <div id="notifications">
@@ -54,9 +53,7 @@ list($active) = $rs_active;
         <b>Notifications:</b>
         <a href="javascript:;" style="float: right; margin-right: 2vw;" onClick="mark_all_read(<?php echo $_SESSION['user_id']; ?>)">Mark all read</a>
       </div>
-      <?php
-      if(count($notification_data) == 0) {
-      ?>
+      <?php if (count($notification_data) == 0) { ?>
       <a href="javascript:;">
       <div id="notification-0" class="notification-item read">
         <div class="notification-color" style="background-color: #ccc"></div>
@@ -65,7 +62,7 @@ list($active) = $rs_active;
       </a>
       <?php
       } else {
-        foreach($notification_data as $notif) {
+        foreach ($notification_data as $notif) {
           $notif_data = $notification->get_notif_obj($notif['notification_type'], $notif['item_id']);
       ?>
       <a href="<?php echo $notif_data['url']; ?>" class="notification-item-link" onClick="mark_read(<?php echo $notif['id']; ?>)">
@@ -160,7 +157,6 @@ list($active) = $rs_active;
   </table>
   <?php } ?>
   <?php
-
   $result = $dbc->prepare("SELECT data FROM data WHERE fetchname='announcements' limit 1");
   $result->execute();
   $result = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -214,8 +210,7 @@ list($active) = $rs_active;
   <form name="announcements" method="post" action="admin.php">
     <h4>Announcements</h4>
     <label class="small">You may write up to 10 announcements. The announcements that are visible when you submit this form will be the announcements. Any empty fields will be ignored. If there should be no announcements, leave the original field blank. Do NOT use the character "~" in announcements.</label>
-    <?php
-    if (count($announcements) == 0) { ?>
+    <?php if (count($announcements) == 0) { ?>
     <div id="textboxgroup">
       <div id="textboxdiv1">
         <label class="inline">1 </label><input type="text" id="textbox1" name="announcements[]" autocomplete="off" size="100" />
