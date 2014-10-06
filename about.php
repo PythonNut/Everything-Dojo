@@ -2,16 +2,55 @@
   $title = "About";
   include("include/include.php");
   session_start();
+  if (isset($_SESSION['user_id'])) {
+    $notification_unread_count = $notification->count_unread($_SESSION['user_id']);
+    $notification_data = $notification->get_notifications($_SESSION['user_id']);
+  }
   get_header();
 ?>
 <section id="content">
-  <p>Everything Dojo is an awesome blogs tool.</p>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  <h1>What is this?</h1>
+  <p>Everything Dojo is a website that is aimed at assisting AoPS users in writing and choosing CSS styles. It consists of four main sections: the Theme Database, the Themizer, the Try-It, and the discussion area.</p>
+  <h2>Theme Database</h2>
+  <p>The Theme Database (henceforth referred to as the Theme DB) is a collection of styles written for AoPS blogs. All of them have been approved by a team of AoPS users like you, and are guaranteed to follow the following guidelines:
+    <ul>
+      <li>They don't contain any content which your parents wouldn't want you to see.</li>
+      <li>They don't make the blog impossible to use.</li>
+      <li>They aren't simple alterations of already existing themes (e. g. only background is changed or only the colour of the links is different).</li>
+    </ul>
+    There are no limitations on the style of the theme, so you can probably find one that is just right for you and your blog.
+  </p>
+
+  <h2>Themizer</h2>
+  <p>The Themizer is a tool for creating your own simple themes. You can choose one of several base themes from which to start, then choose your background colour, the colour of the border around the entries, and the font. You can also add some of your own rules to the stylesheet for even more customization.</p>
+  <br />
+  <p>If you are experienced with CSS, you can also use the Themizer in developer mode to test your style as you write it.</p>
+
+  <h2>Try-It</h2>
+  <p>The Try-It lets you test any theme in the Theme DB without having to actually put it on your blog. You choose from a list of themes, and it is automatically applied to a test blog with several entries so that you can easily see what it would look like when applied to your blog.</p>
+
+  <h2>Discuss</h2>
+  <p>If you have found a problem with a theme, or just want to tell the author that you like it, Discuss is the place for you. Every time a theme is approved, a topic is automatically created in the discussion area for conversation about that theme. There is also a section in the discussion area for feedback, bug reports, and questions about the site itself.</p>
+
+  <h1>How did this start?</h1>
+  <p>The original version of this site was written by an AoPS user named Dojo. It contained all the same main sections as the current website, but looked a lot different. On May 27, 2014, Dojo announced that he was looking for help rebuilding the site. That rebuild resulted in the site you are looking at now.</p>
+
+  <h1>Who are we?</h1>
+  This website was written and is maintained by a collection of volunteer AoPS users. The team is led by Dojo, and consists of:
+  <ul>
+    <li>Dojo</li>
+    <li>knittingfrenzy18</li>
+    <li>PythonNut</li>
+    <li>thatmathgeek</li>
+    <li>Tungsten</li>
+    <li>thkim1011</li>
+    <li>NeoMathematicalKid</li>
+    <li>El_Ectric</li>
+    <li>nxt</li>
+    <li>csmath</li>
+    <li>gamjawon</li>
+  </ul>
+  We can all be reached via PM on AoPS if you have any questions or comments.
 </section>
 
 <?php get_footer(); ?>

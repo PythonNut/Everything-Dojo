@@ -6,7 +6,7 @@ class account_urgent {
     $this->id = $item_id;
   }
 
-  function get_data () {
+  function get_data() {
     $data = array(
       'subject'  => 'Your account may have been hacked. Click here to change your password.',
       'color'    => 'B00',
@@ -15,7 +15,7 @@ class account_urgent {
     return $data;
   }
 
-  function get_url () {
+  function get_url() {
     $url = SITE_ROOT . "mysettings.php";
     return $url;
   }
