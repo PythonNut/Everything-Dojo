@@ -76,7 +76,7 @@
                   <div class=\"field split left\">
                     Edit Comment: <a href=\"https://help.github.com/articles/github-flavored-markdown\" title=\"Github Flavored Markdown\" style=\"color:#777;font-size:.8em;line-height:2em\" target=\"_blank\" tabindex=\"1\">(Parsed with Github Flavored Markdown)</a>
                     <br/>
-                    <textarea placeholder='Write your new comment here...' style='height:200px; vertical-align:top;' name='desc-source' id='topic-reply-edit-desc-source-".$post['post_id']."'>".$post['source']."</textarea>
+                    <textarea placeholder='Write your new comment here...' style='height:200px; vertical-align:top;' name='desc-source' id='topic-reply-edit-desc-source-".$post['post_id']."'>".$post['text']."</textarea>
                     <input type=\"hidden\" name=\"desc\" />
                   </div>
                   <div class=\"field split right\">
