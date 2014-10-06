@@ -38,7 +38,7 @@
       <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $topic['title'];?></h2>
       <div style="display:inline-block; opacity: 0.6;">Posted by <?php echo $user;?> on <?php echo date('M d, Y g:i a', $topic['time']);?></div>
       <p><?php echo $topic['text'];?></p>
-      <?php if($topic['edit_id'] > 0){ ?><p class="small">Edited by <?php echo get_user($topic['edit_id']); ?> on <?php echo date('M d, Y g:i a', $topic['last_timestamp']);?></p><?php } ?>
+      <?php if($topic['edit_id'] > 0){ ?><p class="small">Last edited by <?php echo get_user($topic['edit_id']); ?> on <?php echo date('M d, Y g:i a', $topic['last_timestamp']);?></p><?php } ?>
     </div>
   </div>
   <?php if (!empty($posts)) { ?>
@@ -65,7 +65,7 @@
           <?php
             echo "<div id='topic-reply-message-".$post['post_id']."'>".$post['text']."</div>"; 
           ?>
-            <?php if($post['edit_id'] > 0){ ?><p class="small">Edited by <?php echo get_user($post['edit_id']); ?> on <?php echo date('M d, Y g:i a', $post['last_timestamp']);?></p><?php } ?>
+            <?php if($post['edit_id'] > 0){ ?><p class="small">Last edited by <?php echo get_user($post['edit_id']); ?> on <?php echo date('M d, Y g:i a', $post['last_timestamp']);?></p><?php } ?>
           <?php
             if (($_SESSION['user_id'] == $user['id']) or $_SESSION['user_level'] >= 5){
               echo
