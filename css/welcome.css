@@ -193,11 +193,10 @@ li:nth-child(2n) { color: #2A9BD9; }
 
 /*--IMAGES--*/
 img {
-  position: absolute;
-  height: 45%;
-  width: 45%;
-  top: 27.5%;
-  left: 27.5%;
+  margin-top: 20%;
+  height: 50%;
+  width: auto; /*To properly scale an image*/
+  top: 25%;
 }
 
 
