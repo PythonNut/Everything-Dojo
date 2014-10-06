@@ -66,11 +66,12 @@
               echo 
               "
               <form id='topic-reply-edit-box-".$post['post_id']."'>
-                <div class=\"field\">
+              <span class='msg warn' id='msg-reply-edit-errors-".$post['post_id']."'>No errors yet.</span>
+                <div class=\"field\" id=\"msg-reply-edit-field-".$post['post_id']."\" style=\"margin-top: 0;\">
                   <div class=\"field split left\">
                     Edit Comment: <a href=\"https://help.github.com/articles/github-flavored-markdown\" title=\"Github Flavored Markdown\" style=\"color:#777;font-size:.8em;line-height:2em\" target=\"_blank\" tabindex=\"1\">(Parsed with Github Flavored Markdown)</a>
                     <br/>
-                    <textarea placeholder='Write your new comment here...' style='height:200px; vertical-align:top;' name='desc-source'>".$post['source']."</textarea>
+                    <textarea placeholder='Write your new comment here...' style='height:200px; vertical-align:top;' name='desc-source' id='topic-reply-edit-desc-source-".$post['post_id']."'>".$post['source']."</textarea>
                     <input type=\"hidden\" name=\"desc\" />
                   </div>
                   <div class=\"field split right\">
@@ -83,13 +84,43 @@
                 <br/>
               </form>
               <script> 
+              \$('#topic-reply-message-".$post['post_id']."').html(marked(\$('#topic-reply-message-".$post['post_id']."').text()));
+              \$('#msg-reply-edit-errors-".$post['post_id']."').hide();
               \$('#topic-reply-edit-box-".$post['post_id']."').hide(); 
               \$('#topic-reply-edit-".$post['post_id'].", #cancel-edit-".$post['post_id']."').on('click', function() {
                 \$('#topic-reply-message-".$post['post_id']."').slideToggle(300); 
                 \$('#topic-reply-edit-box-".$post['post_id']."').slideToggle(300);
               });
-              \$('#post-edit-".$post['post_id']."').on('click', function() {
-                
+              \$('#post-edit-".$post['post_id']."').on('click', function(e) {
+                e.preventDefault();
+                if ($('#post-edit-".$post['post_id']."').prop('disabled') != true){
+                  \$.post('include/discuss/topic_ajax.php', {action: 'edit', id: ".intval($post['post_id']).", mode: ".intval($typearg).", text: $('#topic-reply-edit-desc-source-".$post['post_id']."').val()}, function(data) {
+                    var data_words = 'Could not parse message.';
+                    switch (data.substr(0,6)){
+                      case 'unauth':
+                        data_words = 'You are not authorized to use this feature on someone else\'s post.';
+                        break;
+                      case 'textov':
+                        data_words = 'The message must have at least 10 characters (excluding whitespace).';
+                        break;
+                      case 'deaddb':
+                        data_words = 'Couldn\'t connect to database for some reason. Try again later.';
+                        break;
+                      case 'samusr':
+                        data_words = 'Edited your post successfully.';
+                        \$('#topic-reply-message-".$post['post_id']."').html(marked(data.substr(8)));
+                        break;
+                      case 'op_mod':
+                        data_words = 'Edited ".get_user($post['user_id'])."\'s post successfully.';
+                        \$('#topic-reply-message-".$post['post_id']."').html(marked(data.substr(8)));
+                        break;
+                      default:
+                        data_words = 'Could not parse message.';
+                    }
+                    \$('#msg-reply-edit-errors-".$post['post_id']."').html(data_words).fadeIn(300).fadeOut(10000);
+                    \$('#msg-reply-edit-field-".$post['post_id']."').animate({'margin-top': '4rem'},300).delay(8000).animate({'margin-top': '0rem'}, 2000);
+                  });
+                }
               });
               </script>";
             } 

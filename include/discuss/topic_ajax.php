@@ -3,6 +3,34 @@ error_reporting(E_ALL);
 session_start();
 include('../include.php');
 include('../discuss.php');
+
+function edit_post($text, $mode, $pid){
+    global $dbc, $_SESSION;
+    if ($_SESSION['user_id'] <= 0){
+      return false;
+    }
+    else if ($mode == 1){
+      $update_post = $dbc->prepare("UPDATE ".DISCUSS_POSTS_SPECIAL_TABLE." SET text = :text, edit_id = :eid, last_timestamp = :time WHERE post_id = :pid");
+      $update_post = $update_post->execute(array(
+        ':text' => $text,
+        ':pid' => intval($pid),
+        ':eid' => intval($_SESSION['user_id']),
+        ':time' => time()
+      ));
+      return $update_post;
+    }
+    else{
+      $update_post = $dbc->prepare("UPDATE ".DISCUSS_POSTS_TABLE." SET text = :text, edit_id = :eid, last_timestamp = :time WHERE post_id = :pid");
+      $update_post = $update_post->execute(array(
+        ':text' => $text,
+        ':pid' => intval($pid),
+        ':eid' => intval($_SESSION['user_id']),
+        ':time' => time()
+      ));
+      return $update_post;
+    }
+}
+
 switch ($_POST['action']) {
   case "thank":
     $discuss = new discuss($dbc);
@@ -12,9 +40,45 @@ switch ($_POST['action']) {
     }
     break;
   case "edit":
-    
-    if ($_SESSION['user_id']){
-    
+    if ($_SESSION['user_id'] > 0){
+      if ($_POST['mode'] == 1){
+        $selected_post = $dbc->prepare("SELECT * FROM ".DISCUSS_POSTS_SPECIAL_TABLE." WHERE post_id = :pid");
+        $selected_post->execute(array(
+          ':pid' => intval($_POST['id'])
+        ));
+        $selected_post = $selected_post->fetchAll(PDO::FETCH_ASSOC);
+        $selected_post = $selected_post[0];
+      }
+      else{
+        $selected_post = $dbc->prepare("SELECT * FROM ".DISCUSS_POSTS_TABLE." WHERE post_id = :pid");
+        $selected_post->execute(array(
+          ':pid' => intval($_POST['id'])
+        ));
+        $selected_post = $selected_post->fetchAll(PDO::FETCH_ASSOC);
+        $selected_post = $selected_post[0];
+      }
+      if (strlen(trim($_POST['text'])) < 10){
+        echo "textov";
+      }
+      else if ($_SESSION['user_id'] == $selected_post['user_id']){
+        if (edit_post($discuss->filter_swear_words(htmlspecialchars($_POST['text'])), intval($_POST['mode']), intval($_POST['id'])) == true){
+          echo "samusr|".$discuss->filter_swear_words(htmlspecialchars($_POST['text']));
+        }
+        else{
+          echo "deaddb";
+        }
+      }
+      else if ($_SESSION['user_level'] >= 5){
+        if (edit_post($discuss->filter_swear_words(htmlspecialchars($_POST['text'])), intval($_POST['mode']), intval($_POST['id'])) == true){
+          echo "op_mod|".$discuss->filter_swear_words(htmlspecialchars($_POST['text']));
+        }
+        else{
+          echo "deaddb";
+        }
+      }
+      else{
+        echo "unauth";
+      }
     }
     break;
   default:

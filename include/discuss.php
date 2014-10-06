@@ -452,7 +452,7 @@ class discuss {
     }
 
     if ($user_id != 'all') {
-
+      
       if ($topic_id != 'all') {
         $query = $query." AND user_id = :user";
         $sth = $this->dbc->prepare($query);
