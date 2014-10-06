@@ -379,7 +379,7 @@ class discuss {
         ':topic' => intval($data['t']),
         ':time' => time(),
         ':title' => htmlspecialchars($data['title']),
-        ':text' => $this->filter_swear_words($data['desc']),
+        ':text' => $this->filter_swear_words($data['desc-source']),
         ':source' => $this->filter_swear_words($data['desc-source'])
       ));
       $this->delete_views($data['t'], $user_id, 0);
