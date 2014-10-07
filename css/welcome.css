@@ -128,6 +128,11 @@ h1 {
   left: 5%;
 }
 
+.joke {
+  text-align: left;
+  bottom: 5%;
+}
+
 .scale {
   position: absolute;
   width: 90%;
@@ -165,7 +170,7 @@ h2 {
   height: 10%;
   width: 90%;
   left: 5%;
-  top: 45%;
+  top: 35%;
 }
 
 ul {
@@ -230,6 +235,7 @@ iframe {
   width: 80%;
 }
 
+
 /*--HINT--*/
 .hint {
   display: none;
@@ -255,6 +261,7 @@ iframe {
   -o-transition:    opacity 1s,    -o-transform 0.5s 1s;
   transition:     opacity 1s,     transform 0.5s 1s;
 }
+
 .impress-enabled .hint { display: block }
 .impress-on-show-hint .hint {
 opacity: 1;
@@ -269,5 +276,6 @@ opacity: 1;
   -o-transition:      opacity 1s 5s,      -o-transform 0.5s 4.5s;
   transition:         opacity 1s 5s,         transform 0.5s 4.5s;
 }
+
 .impress-enabled          { pointer-events: none }
 .impress-enabled #impress { pointer-events: auto }

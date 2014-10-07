@@ -96,7 +96,7 @@
   <section class="step slide color orange" data-x="22010" data-y="9830" data-rotate-x="-14" data-rotate-y="-55" data-rotate-z="-12" data-scale="0.1">
     <h1>(No need for applause)</h1>
     <img src="images/unicorn.svg"/>
-    <h1 style="text-align:left">*To please NMK ;D</h1>
+    <h1 class="joke">*To please NMK ;D</h1>
   </section>
 </div>
 
@@ -121,7 +121,7 @@ $(document).ready(function() {
   $(".emp").delay(750).animate({
     zoom: 1
   });
-  $("h1").wrap("<span class='scale'></span>");
+  $("h1:not(.joke)").wrap("<span class='scale'></span>");
   
   $(".scale").textfill({
     innerTag: "h1",
