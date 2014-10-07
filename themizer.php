@@ -52,7 +52,7 @@
       </article>
       <article class="tile">
         <h2>Developer Mode</h2>
-        <p>With the excellent CodeMirror and linting planned to be added, it's made for developers, for developers.</p>
+        <p>With the excellent CodeMirror and linting planned to be added, it's made by developers, for developers.</p>
       </article>
     </section>
   </section>
