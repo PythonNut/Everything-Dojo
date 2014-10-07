@@ -8,7 +8,7 @@
 
 <body>
 <div id="impress">
-  <section class="step slide color orange" data-x="1610" data-y="1382" data-scale="3">
+  <section class="step slide color orange" data-x="1610" data-y="1382" data-scale="3" id="show-hint">
     <h1>Tired of all AoPS Blogs</h1>
     <span class="emp"><h2>Looking the same?</h2></span>
     <h1>We are too.</h1>
@@ -99,6 +99,15 @@
     <h1 style="text-align:left">*To please NMK ;D</h1>
   </section>
 </div>
+
+<div class="hint">
+    <p>Use a spacebar or arrow keys to navigate</p>
+</div>
+<script>
+if ("ontouchstart" in document.documentElement) { 
+    document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+}
+</script>
 
 <script src="js/jquery-2.1.1.min.js"></script>
 <script src="js/impress.js"></script>
