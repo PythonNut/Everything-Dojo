@@ -142,7 +142,7 @@
         <section id="sidebar-inner-scrollable">
 
           <section class="option" id="option-options">
-            <section class="option-title">
+            <section class="option-title expanded">
               <h5>Options</h5>
               <span class="collapsebutton"></span>
             </section>
@@ -172,7 +172,7 @@
           <?php if ($_GET["mode"] == "regular"): ?>
 
           <section class="option" id="option-body">
-            <section class="option-title expanded">
+            <section class="option-title">
               <h5>Body</h5>
               <span class="collapsebutton"></span>
             </section>
@@ -267,13 +267,14 @@
             </section>
           </section>
 
-          <section class="option" id="option-entries">
+          <section class="option" id="option-posts">
             <section class="option-title">
-              <h5>Entries</h5>
+              <h5>Posts</h5>
               <span class="collapsebutton"></span>
             </section>
             <section class="option-wrap">
-              <section data-name="backgroundColor">
+              <section data-name="entries-backgroundColor">
+                <h3 style="margin-top:0">Entries</h3>
                 <span class="title">Background Color <span class="small">(Entries)</span></span>
                 <p>
                   <input type="text" class="spectrum text" id="text-class_entry-backgroundColor" value="#EDEDEA" spellcheck="false">
@@ -287,16 +288,8 @@
                   <input type="color" class="spectrum color-picker" id="spectrum-class_entrywrap-backgroundColor" value="#EDEDEA">
                 </p>
               </section>
-            </section>
-          </section>
-
-          <section class="option" id="option-comments">
-            <section class="option-title">
-              <h5>Comments</h5>
-              <span class="collapsebutton"></span>
-            </section>
-            <section class="option-wrap">
-              <section data-name="backgroundColor">
+              <section data-name="comments-backgroundColor">
+                <h3>Comments</h3>
                 <span class="title">Background Color <span class="small">(Comments)</span></span>
                 <p>
                   <input type="text" class="spectrum text" id="text-class_comment-backgroundColor" value="#EDEDEA" spellcheck="false">

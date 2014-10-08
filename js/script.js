@@ -244,66 +244,6 @@ Message.prototype.purge = function (fn) {
     return this;
   };
 
-  /**
-   * Style an element with a CSS property and a valid value, with the
-   * former two being derived from `<selector>` and the latter being
-   * derived from `<selector>`'s value.
-   *
-   * @param {Boolean} [useName] Whether or not the fields should be selected by their `name` attribute
-   * @param {String}  [value]   An optional value to assign to the CSS property
-   */
-
-  $.fn.style = function (useName, value) {
-    var // Get selector of corresponding field
-        id       = useName === true ? "[name='" + this.attr("name") + "']" : "#" + this.attr("id"),
-        // Create a temp variable from which we decompose the selector and property
-        cssId    = useName === true ? this.attr("name") : this.attr("id"),
-        cssArray = cssId.split("-"),
-        // Get selector for elements
-        el       = cssArray[0].replace(/([a-z])(?=[A-Z])/, "$1-").toLowerCase().replace("class_", ".").replace("id_", "#"),
-        // Get CSS property
-        prop     = cssArray[1].replace(/([a-z])([A-Z])/, "$1-$2").toLowerCase(),
-        thisVal;
-
-    this.change(function () {
-      thisVal = useName !== true ? value || this.value : null; // this.val() throws error
-
-      if (!$(this).hasClass("invalid")) {
-        switch(prop) {
-          // font-family
-          case "font-family":
-            if (thisVal.indexOf(" ") !== -1) {
-              thisVal = '"' + thisVal + '"';
-            }
-            $(el).css("font-family", thisVal ? (thisVal + ", Calibri, Verdana, Arial, sans-serif") : "");
-            break;
-
-          // background-image
-          case "background-image":
-            if (thisVal) {
-              thisVal = "url('" + ((thisVal.indexOf("http") !== 0 && thisVal.indexOf("//") !== 0) ? "//" + thisVal : thisVal) + "')";
-            }
-            $(el).css("background-image", thisVal);
-            break;
-
-          // background-repeat
-          case "background-repeat":
-            thisVal = $(id + ":checked").val();
-            $(el).css("background-repeat", thisVal);
-            break;
-
-          // default case
-          default:
-            $(el).css(prop, thisVal);
-        }
-
-        styles[cssId] = thisVal;
-      }
-    });
-
-    return this;
-  };
-
 }(jQuery));
 
 /**
@@ -430,12 +370,6 @@ function sliderSidebar () { //referring to the exact and non-general (for lack o
       $(".text").trigger("keyup");
     });
   });
-  $("[name='base']").change(function () {
-    $("link[id='base-theme']").attr('href', "blog/css/" + $("[name='base'] :checked").val() + ".css", function () {
-      $(".text").trigger("keyup");
-    });
-    baseTheme = $("[name='base'] :checked").val();
-  });
 
   // resize sidebar
   // modified from https://stackoverflow.com/a/4139860
@@ -444,13 +378,12 @@ function sliderSidebar () { //referring to the exact and non-general (for lack o
       var mousePosX = event.pageX;
       sideWidth = mousePosX > 34*vh ? mousePosX : sideWidth; // set original width as minimum
       $("#sidebar-inner").css({
-        "width": sideWidth - 2*vh,
-        "transition": "0.1s linear"
+        "width": sideWidth - 2*vh
       });
       // move sideButton and remove transitions as they screw the former up
       $("#side-button").css({
         "left": sideWidth - 2*vh,
-        "transition": "0.1s linear"
+        "transition": "0s linear"
       });
     });
   });
