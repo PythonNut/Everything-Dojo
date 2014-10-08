@@ -22,21 +22,6 @@ if ($ajax) {
       exit("success");
     }
   }
-
-  // Checks if emails exist in database
-  if (isset($_GET['email'])) {
-    $email = $_GET['email'];
-    $query = "SELECT count(*) AS total FROM $table WHERE user_email=?";
-    $rs_duplicate = $dbc->prepare($query);
-    $rs_duplicate->execute(array($email));
-    list($total) = $rs_duplicate->fetchColumn();
-
-    if ($total > 0) {
-      exit("error");
-    } else {
-      exit("success");
-    }
-  }
 }
 
 if((isset($_POST['ajax']) && $_POST['ajax'] === "true") && $ajax) {
@@ -194,7 +179,6 @@ EOT;
     <label class="small i">Must be valid. We'll use it to send you confirmation information and other important things like that. We'll keep it completely hush-hush, promise.</label>
     <div class="field">
       <input name="usr_email" type="text" class="required email">
-      <img class="wait" src="images/loading.gif" alt="Please wait...">
     </div>
     <label>Password</label>
     <label class="small i">Must be at least 6 characters long.</label>
