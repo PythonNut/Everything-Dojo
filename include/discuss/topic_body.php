@@ -109,10 +109,10 @@
                 <br/>
                 <br/>
               </form>
-              <script> 
+              <script>
               \$('#topic-reply-message-".$post['post_id']."').html(marked(\$('#topic-reply-message-".$post['post_id']."').text()));
               \$('#msg-reply-edit-errors-".$post['post_id']."').hide();
-              \$('#topic-reply-edit-box-".$post['post_id']."').hide(); 
+              \$('#topic-reply-edit-box-".$post['post_id']."').hide();
               \$('#topic-reply-edit-".$post['post_id'].", #cancel-edit-".$post['post_id']."').on('click', function() {
                 \$('#topic-reply-message-".$post['post_id']."').slideToggle(300);
                 \$('#topic-reply-edit-box-".$post['post_id']."').slideToggle(300);
