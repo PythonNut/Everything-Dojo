@@ -88,9 +88,35 @@
   </section>
 
   <section id="overview" class="step" data-x="10000" data-y="5000" data-z="5000" data-scale="15">
-    <a href="http://everythingdojo.com">
-      <img src="images/logo.svg" />
-    </a>
+    <svg width="100%" height="100%" viewbox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g>
+      <!-- E -->
+      <a xlink:href="/database.php" style="cursor: pointer">
+        <path style="fill:#d554cb;stroke:none;" d="M0 0L0 29L29 29L29 0L0 0z"/>
+        <path style="fill:#fdfeff;stroke:none;" d="M9 6L9 23L19 23L19 22L10 22L10 15L17.5 15L17.5 14L10 14L10 7L19 7L19 6z"/>
+      </a>
+
+      <!-- V -->
+      <a xlink:href="/themizer.php" style="cursor: pointer">
+        <path style="fill:#57c639;stroke:none;" d="M35 0L35 29L64 29L64 0L35 0z"/>
+        <path style="fill:#fdfeff;stroke:none;" d="M42 6.5L49 23.5L50 23.5L57 6.5L55.7 6.5L49.5 22.2L43.3 6.5z"/>
+      </a>
+
+      <!-- D -->
+      <a xlink:href="/tryit.php" style="cursor: pointer">
+        <path style="fill:#ff6d00;stroke:none;" d="M0 35L0 64L29 64L29 35L0 35z"/>
+        <path style="fill:#fdfeff;stroke:none;" d="M8 41L8 58L14 58C23.7471 57.6773 23.658 41.3205 14 41z"/>
+        <path style="fill:#ff6d00;stroke:none;" d="M9 42L9 57L14 57C22.3471 56.4773 22.258 42.5205 14 42z"/>
+      </a>
+
+      <!-- O -->
+      <a xlink:href="/discuss.php" style="cursor: pointer">
+        <path style="fill:#5099ff;stroke:none;" d="M35 35L35 64L64 64L64 35L35 35z"/>
+        <path style="fill:#fdfeff;stroke:none;" d="M47.6088 41.5469C37.5529 43.8383 42.0527 62.0864 53.4414 56.8812C60.5862 52.5513 56.7254 39.2215 47.6088 41.5469z"/>
+        <path style="fill:#5099ff;stroke:none;" d="M47.1088 42.7469C39.5529 45.8383 43.5527 59.4864 51.9414 56.3812C59.5862 53.5513 55.7254 39.2215 47.1088 42.7469z"/>
+      </a>
+    </g>
+    </svg>
   </section>
 
   <section class="step slide color orange" data-x="22010" data-y="9830" data-rotate-x="-14" data-rotate-y="-55" data-rotate-z="-12" data-scale="0.1">
@@ -104,7 +130,7 @@
     <p>Use a spacebar or arrow keys to navigate</p>
 </div>
 <script>
-if ("ontouchstart" in document.documentElement) { 
+if ("ontouchstart" in document.documentElement) {
     document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
 }
 </script>
@@ -122,7 +148,7 @@ $(document).ready(function() {
     zoom: 1
   });
   $("h1:not(.joke)").wrap("<span class='scale'></span>");
-  
+
   $(".scale").textfill({
     innerTag: "h1",
     debug: true,
