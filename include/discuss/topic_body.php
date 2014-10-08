@@ -55,7 +55,7 @@
             <?php if (($_SESSION['user_id'] > 0)) { ?>
             <div class="topic-reply-panel">
               <?php $thanks = $discuss->thanks($post['post_id'], $typearg, $_SESSION['user_id']); ?>
-              <?php if ($_SESSION['user_id'] != $user['id']){?><div class="topic-reply-thanks<?php if (in_array($_SESSION['user_id'],$thanks)){ echo " topic-reply-thanked"; $thankedposts[] = $post['post_id'];}?>" id="topic-reply-thanks-<?php echo $post['post_id'];?>" onclick="thankpost(<?php echo $post['post_id']?>)">&uArr; &nbsp;&nbsp;<?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div><?php } else if ($_SESSION['user_id'] == $user['id']) {echo "<div class=\"topic-reply-disabled\">".count($thanks)." Thank"; if (count($thanks) != 1){echo "s";} echo "</div>"; echo "<div class=\"topic-reply-edit\" id=\"topic-reply-edit-".$post['post_id']."\"><img alt=\"Edit Post\" src=\"\\images\\edit.png\" style=\"width: 0.75em; height: 0.75em;\"> Edit Post</div>";} if ($_SESSION['user_level'] >= 5) {if ($_SESSION['user_id'] != $user['id']) {echo "<div class=\"topic-reply-edit\" id=\"topic-reply-edit-".$post['post_id']."\"><img alt=\"Edit Post\" src=\"\\images\\edit.png\" style=\"width: 0.75em; height: 0.75em;\"> Edit Post</div>";} echo "<div class=\"topic-reply-hide\" id=\"topic-reply-hide-".$post['post_id']."\"><img alt=\"Hide Post\" src=\"\\images\\reject.png\" style=\"width: 0.75em; height: 0.75em;\"> Hide Post</div>"; echo "<div class=\"topic-reply-delete\" id=\"topic-reply-delete-".$post['post_id']."\"><img alt=\"Delete Post\" src=\"\\images\\trash.png\" style=\"width: 0.55em; height: 0.75em;\"> Delete Post</div>"; echo "<div class=\"topic-reply-move\" id=\"topic-reply-move-".$post['post_id']."\">&rArr; Move Post</div>"; echo "<div class=\"topic-reply-cleanthanks".((count($thanks) > 0) ? "" : " topic-reply-disabled")."\" id=\"topic-reply-cleanthanks-".$post['post_id']."\"".((count($thanks) > 0) ? "" : " disabled=\"disabled\"").">&dArr; Clear Thanks</div>";} //this php tho ?>
+              <?php if ($_SESSION['user_id'] != $user['id']){?><div class="topic-reply-thanks<?php if (in_array($_SESSION['user_id'],$thanks)){ echo " topic-reply-thanked"; $thankedposts[] = $post['post_id'];}?>" id="topic-reply-thanks-<?php echo $post['post_id'];?>" onclick="thankpost(<?php echo $post['post_id']?>)">&uArr; &nbsp;&nbsp;<?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div><?php } else if ($_SESSION['user_id'] == $user['id']) {echo "<div class=\"topic-reply-disabled\">".count($thanks)." Thank"; if (count($thanks) != 1){echo "s";} echo "</div>"; echo "<div class=\"topic-reply-edit\" id=\"topic-reply-edit-".$post['post_id']."\"><img alt=\"Edit Post\" src=\"/images/edit.png\" style=\"width: 0.75em; height: 0.75em;\"> Edit Post</div>";} if ($_SESSION['user_level'] >= 5) {if ($_SESSION['user_id'] != $user['id']) {echo "<div class=\"topic-reply-edit\" id=\"topic-reply-edit-".$post['post_id']."\"><img alt=\"Edit Post\" src=\"\\images\\edit.png\" style=\"width: 0.75em; height: 0.75em;\"> Edit Post</div>";} echo "<div class=\"topic-reply-hide\" id=\"topic-reply-hide-".$post['post_id']."\"><img alt=\"Hide Post\" src=\"\\images\\reject.png\" style=\"width: 0.75em; height: 0.75em;\"> Hide Post</div>"; echo "<div class=\"topic-reply-delete\" id=\"topic-reply-delete-".$post['post_id']."\"><img alt=\"Delete Post\" src=\"\\images\\trash.png\" style=\"width: 0.55em; height: 0.75em;\"> Delete Post</div>"; echo "<div class=\"topic-reply-move\" id=\"topic-reply-move-".$post['post_id']."\">&rArr; Move Post</div>"; echo "<div class=\"topic-reply-cleanthanks".((count($thanks) > 0) ? "" : " topic-reply-disabled")."\" id=\"topic-reply-cleanthanks-".$post['post_id']."\"".((count($thanks) > 0) ? "" : " disabled=\"disabled\"").">&dArr; Clear Thanks</div>";} //this php tho ?>
             </div>
             <?php } else { ?>
             <?php $thanks = $discuss->thanks($post['post_id'], $typearg); ?>
@@ -63,7 +63,7 @@
             <?php } ?>
           </div>
           <?php
-            echo "<div id='topic-reply-message-".$post['post_id']."'>".$post['text']."</div>"; 
+            echo "<div id='topic-reply-message-".$post['post_id']."'>".$post['text']."</div>";
           ?>
             <?php if($post['edit_id'] > 0){ ?><p class="small">Last edited by <?php echo get_user($post['edit_id']); ?> on <?php echo date('M d, Y g:i a', $post['last_timestamp']);?></p><?php } ?>
           <?php
@@ -88,10 +88,10 @@
                 <br/>
                 <br/>
               </form>
-              <script> 
+              <script>
               \$('#topic-reply-message-".$post['post_id']."').html(marked(\$('#topic-reply-message-".$post['post_id']."').text()));
               \$('#msg-reply-edit-errors-".$post['post_id']."').hide();
-              \$('#topic-reply-edit-box-".$post['post_id']."').hide(); 
+              \$('#topic-reply-edit-box-".$post['post_id']."').hide();
               \$('#topic-reply-edit-".$post['post_id'].", #cancel-edit-".$post['post_id']."').on('click', function() {
                 \$('#topic-reply-message-".$post['post_id']."').slideToggle(300);
                 \$('#topic-reply-edit-box-".$post['post_id']."').slideToggle(300);
