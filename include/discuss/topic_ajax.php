@@ -68,7 +68,7 @@ switch ($_POST['action']) {
           echo "deaddb";
         }
       }
-      else if ($_SESSION['user_level'] >= 5){
+      else if ($_SESSION['user_level'] >= 3){
         if (edit_post($discuss->filter_swear_words(htmlspecialchars($_POST['text'])), intval($_POST['mode']), intval($_POST['id'])) == true){
           echo "op_mod|".$discuss->filter_swear_words(htmlspecialchars($_POST['text']));
         }
@@ -79,6 +79,52 @@ switch ($_POST['action']) {
       else{
         echo "unauth";
       }
+    }
+    break;
+  case "delete":
+    if ($_SESSION['user_level'] >= 3){
+      if (intval($_POST['mode']) == 1){
+        $selected_post = $dbc->prepare("UPDATE ".DISCUSS_POSTS_SPECIAL_TABLE." SET type = '1', edit_id = :usr_id, last_timestamp = :tme WHERE post_id = :pid");
+        $selected_post->execute(array(
+          ':usr_id' => intval($_SESSION['user_id']),
+          ':tme' => time(),
+          ':pid' => intval($_POST['id'])
+        ));
+        echo "good";
+      }
+      else{
+        $selected_post = $dbc->prepare("UPDATE ".DISCUSS_POSTS_TABLE." SET type = '1', edit_id = :usr_id, last_timestamp = :tme WHERE post_id = :pid");
+        $selected_post->execute(array(
+          ':usr_id' => intval($_SESSION['user_id']),
+          ':tme' => time(),
+          ':pid' => intval($_POST['id'])
+        ));
+        echo "good";
+      }
+    }
+    else{
+      echo "fail";
+    }
+    break;
+  case "clear_thanks":
+    if ($_SESSION['user_level'] >= 3){
+      if (intval($_POST['mode']) == 1){
+        $selected_post = $dbc->prepare("UPDATE ".DISCUSS_POSTS_SPECIAL_TABLE." SET thanks = '' WHERE post_id = :pid");
+        $selected_post->execute(array(
+          ':pid' => intval($_POST['id'])
+        ));
+        echo "good";
+      }
+      else{
+        $selected_post = $dbc->prepare("UPDATE ".DISCUSS_POSTS_TABLE." SET thanks = '' WHERE post_id = :pid");
+        $selected_post->execute(array(
+          ':pid' => intval($_POST['id'])
+        ));
+        echo "good";
+      }
+    }
+    else{
+      echo "fail";
     }
     break;
   default:

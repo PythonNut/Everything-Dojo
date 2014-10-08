@@ -32,11 +32,19 @@
     <h1 style="text-align:center;"><?php echo $topic['title'];?></h1>
   </div>
   <div id="topic-main">
-    <?php if (isset($_GET["unicorns"])) { ?><img class="avatar" src=<?php echo "\"http://unicornify.appspot.com/avatar/" . md5(get_all_user(intval($post["user_id"]))["user_email"]) . "?s=128\"" ?>><?php } ?>
+    <?php if (isset($_GET["unicorns"])) { ?><img class="avatar" src=<?php echo "\"http://unicornify.appspot.com/avatar/" . md5(get_all_user(intval($post["user_id"]))["user_email"]) . "?s=128\"" ?> ><?php } ?>
     <div class="topic-text" id="topic-main-text">
       <?php $user = get_user(intval($topic['user_id'])); ?>
       <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $topic['title'];?></h2>
       <div style="display:inline-block; opacity: 0.6;">Posted by <?php echo $user;?> on <?php echo date('M d, Y g:i a', $topic['time']);?></div>
+      <?php if (($_SESSION['user_id'] == $topic['user_id']) or ($_SESSION['user_level']) >= 3) { ?>
+    <div class="topic-reply-panel">
+      <? if ($_SESSION['user_id'] == $topic['user_id']) {echo "<div class=\"topic-top-edit\" id=\"topic-top-edit-".$topic['post_id']."\"><img alt=\"Edit Post\" src=\"\\images\\edit.png\" style=\"width: 0.75em; height: 0.75em;\"> Edit Topic</div>";} if ($_SESSION['user_level'] >= 5) {if ($_SESSION['user_id'] != $topic['user_id']) {echo "<div class=\"topic-top-edit\" id=\"topic-top-edit\"><img alt=\"Edit Post\" src=\"\\images\\edit.png\" style=\"width: 0.75em; height: 0.75em;\"> Edit Topic</div>";} echo "<div class=\"topic-top-archive\" id=\"topic-top-archive\"><img alt=\"Archive Topic\" src=\"\\images\\trash.png\" style=\"width: 0.55em; height: 0.75em;\"> Archive Topic</div>"; echo "<div class=\"topic-top-move\" id=\"topic-top-move\" style=\"border-right: 0 solid #000000;\">&rArr; Move Topic</div>";} //this php tho ?>
+      <script>
+        
+      </script>
+    </div>
+    <?php } ?>
       <p><?php echo $topic['text'];?></p>
       <?php if($topic['edit_id'] > 0){ ?><p class="small">Last edited by <?php echo get_user($topic['edit_id']); ?> on <?php echo date('M d, Y g:i a', $topic['last_timestamp']);?></p><?php } ?>
     </div>
@@ -49,23 +57,36 @@
         <div class="topic-text topic-reply-text" <?php if($post == end($posts)) echo 'id="last"'; ?>>
           <?php $user = get_all_user($post['user_id']);?>
           <div class="topic-reply-top">
+            <?php if ($post['type'] == 0) {?>
             <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $post['title'];?></h2>
             <div style="display:inline-block; opacity: 0.6;">
               Posted by <?php echo $user['user_name'];?> on <?php echo date('M d, Y g:i a', $post['time']);?></div>
             <?php if (($_SESSION['user_id'] > 0)) { ?>
             <div class="topic-reply-panel">
               <?php $thanks = $discuss->thanks($post['post_id'], $typearg, $_SESSION['user_id']); ?>
-              <?php if ($_SESSION['user_id'] != $user['id']){?><div class="topic-reply-thanks<?php if (in_array($_SESSION['user_id'],$thanks)){ echo " topic-reply-thanked"; $thankedposts[] = $post['post_id'];}?>" id="topic-reply-thanks-<?php echo $post['post_id'];?>" onclick="thankpost(<?php echo $post['post_id']?>)">&uArr; &nbsp;&nbsp;<?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div><?php } else if ($_SESSION['user_id'] == $user['id']) {echo "<div class=\"topic-reply-disabled\">".count($thanks)." Thank"; if (count($thanks) != 1){echo "s";} echo "</div>"; echo "<div class=\"topic-reply-edit\" id=\"topic-reply-edit-".$post['post_id']."\"><img alt=\"Edit Post\" src=\"\\images\\edit.png\" style=\"width: 0.75em; height: 0.75em;\"> Edit Post</div>";} if ($_SESSION['user_level'] >= 5) {if ($_SESSION['user_id'] != $user['id']) {echo "<div class=\"topic-reply-edit\" id=\"topic-reply-edit-".$post['post_id']."\"><img alt=\"Edit Post\" src=\"\\images\\edit.png\" style=\"width: 0.75em; height: 0.75em;\"> Edit Post</div>";} echo "<div class=\"topic-reply-hide\" id=\"topic-reply-hide-".$post['post_id']."\"><img alt=\"Hide Post\" src=\"\\images\\reject.png\" style=\"width: 0.75em; height: 0.75em;\"> Hide Post</div>"; echo "<div class=\"topic-reply-delete\" id=\"topic-reply-delete-".$post['post_id']."\"><img alt=\"Delete Post\" src=\"\\images\\trash.png\" style=\"width: 0.55em; height: 0.75em;\"> Delete Post</div>"; echo "<div class=\"topic-reply-move\" id=\"topic-reply-move-".$post['post_id']."\">&rArr; Move Post</div>"; echo "<div class=\"topic-reply-cleanthanks".((count($thanks) > 0) ? "" : " topic-reply-disabled")."\" id=\"topic-reply-cleanthanks-".$post['post_id']."\"".((count($thanks) > 0) ? "" : " disabled=\"disabled\"").">&dArr; Clear Thanks</div>";} //this php tho ?>
+              <?php if ($_SESSION['user_id'] != $user['id']){?><div class="topic-reply-thanks<?php if (in_array($_SESSION['user_id'],$thanks)){ echo " topic-reply-thanked"; $thankedposts[] = $post['post_id'];}?>" id="topic-reply-thanks-<?php echo $post['post_id'];?>" onclick="thankpost(<?php echo $post['post_id']?>)">&uArr; &nbsp;&nbsp;<?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div><?php } else if ($_SESSION['user_id'] == $user['id']) {echo "<div class=\"topic-reply-disabled\">".count($thanks)." Thank"; if (count($thanks) != 1){echo "s";} echo "</div>"; echo "<div class=\"topic-reply-edit\" id=\"topic-reply-edit-".$post['post_id']."\"><img alt=\"Edit Post\" src=\"\\images\\edit.png\" style=\"width: 0.75em; height: 0.75em;\"> Edit Post</div>";} if ($_SESSION['user_level'] >= 3) {if ($_SESSION['user_id'] != $user['id']) {echo "<div class=\"topic-reply-edit\" id=\"topic-reply-edit-".$post['post_id']."\"><img alt=\"Edit Post\" src=\"\\images\\edit.png\" style=\"width: 0.75em; height: 0.75em;\"> Edit Post</div>";} echo "<div class=\"topic-reply-delete\" id=\"topic-reply-delete-".$post['post_id']."\"><img alt=\"Delete Post\" src=\"\\images\\trash.png\" style=\"width: 0.55em; height: 0.75em;\"> Delete Post</div>"; echo "<div class=\"topic-reply-cleanthanks".((count($thanks) > 0) ? "" : " topic-reply-disabled")."\" id=\"topic-reply-cleanthanks-".$post['post_id']."\"".((count($thanks) > 0) ? "" : " disabled=\"disabled\"").">&dArr; Clear Thanks</div>";} //this php tho ?>
             </div>
             <?php } else { ?>
             <?php $thanks = $discuss->thanks($post['post_id'], $typearg); ?>
             <div style="opacity: 0.6; text-decoration: italic; display:inline-block; margin-left: 2em;"><?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div>
-            <?php } ?>
+            <?php 
+                  } 
+                }
+            ?>
           </div>
           <?php
-            echo "<div id='topic-reply-message-".$post['post_id']."'>".$post['text']."</div>"; 
+            if ($post['type'] == 0) {
+              echo "<div id='topic-reply-message-".$post['post_id']."'>".$post['text']."</div>"; 
+            }
+            else{
+              echo 
+                "<div id='topic-reply-messageD-".$post['post_id']."' style='opacity: 0.6'>
+                  <h2>Deleted Post</h2>
+                  <p>This post was deleted by ".get_user($post['edit_id'])." on ".date('M d, Y g:i a', $post['last_timestamp']).".</p>
+                </div>"; 
+            }
           ?>
-            <?php if($post['edit_id'] > 0){ ?><p class="small">Last edited by <?php echo get_user($post['edit_id']); ?> on <?php echo date('M d, Y g:i a', $post['last_timestamp']);?></p><?php } ?>
+            <?php if($post['edit_id'] > 0 and $post['type'] == 0){ ?><p class="small">Last edited by <?php echo get_user($post['edit_id']); ?> on <?php echo date('M d, Y g:i a', $post['last_timestamp']);?></p><?php } ?>
           <?php
             if (($_SESSION['user_id'] == $user['id']) or $_SESSION['user_level'] >= 5){
               echo
@@ -96,38 +117,64 @@
                 \$('#topic-reply-message-".$post['post_id']."').slideToggle(300);
                 \$('#topic-reply-edit-box-".$post['post_id']."').slideToggle(300);
               });
-              \$('#post-edit-".$post['post_id']."').on('click', function(e) {
-                e.preventDefault();
-                if ($('#post-edit-".$post['post_id']."').prop('disabled') != true){
-                  \$.post('include/discuss/topic_ajax.php', {action: 'edit', id: ".intval($post['post_id']).", mode: ".intval($typearg).", text: $('#topic-reply-edit-desc-source-".$post['post_id']."').val()}, function(data) {
-                    var data_words = 'Could not parse message.';
-                    switch (data.substr(0,6)){
-                      case 'unauth':
-                        data_words = 'You are not authorized to use this feature on someone else\'s post.';
-                        break;
-                      case 'textov':
-                        data_words = 'The message must have at least 10 characters (excluding whitespace).';
-                        break;
-                      case 'deaddb':
-                        data_words = 'Couldn\'t connect to database for some reason. Try again later.';
-                        break;
-                      case 'samusr':
-                        data_words = 'Edited your post successfully.';
-                        \$('#topic-reply-message-".$post['post_id']."').html(marked(data.substr(8)));
-                        break;
-                      case 'op_mod':
-                        data_words = 'Edited ".get_user($post['user_id'])."\'s post successfully.';
-                        \$('#topic-reply-message-".$post['post_id']."').html(marked(data.substr(8)));
-                        break;
-                      default:
-                        data_words = 'Could not parse message.';
+              ";
+              if ($_SESSION['user_level'] >= 3){
+                echo "
+                \$('#topic-reply-cleanthanks-".$post['post_id']."').on('click', function(e) {
+                  \$.post('include/discuss/topic_ajax.php', {action: 'clear_thanks', id: ".intval($post['post_id']).", mode: ".intval($typearg)."}, function(data) {
+                    if (data == \"good\"){
+                      window.location.reload();
                     }
-                    \$('#msg-reply-edit-errors-".$post['post_id']."').html(data_words).fadeIn(300).fadeOut(10000);
-                    \$('#msg-reply-edit-field-".$post['post_id']."').animate({'margin-top': '4rem'},300).delay(8000).animate({'margin-top': '0rem'}, 2000);
+                    else{
+                      alert(\"Something wrong happened. Please try again.\");
+                    }
                   });
-                }
-              });
-              </script>";
+                });
+                
+                \$('#topic-reply-delete-".$post['post_id']."').on('click', function(e) {
+                  \$.post('include/discuss/topic_ajax.php', {action: 'delete', id: ".intval($post['post_id']).", mode: ".intval($typearg)."}, function(data) {
+                    if (data == \"good\"){
+                      window.location.reload();
+                    }
+                    else{
+                      alert(\"Something wrong happened. Please try again.\");
+                    }
+                  });
+                });
+                
+                \$('#post-edit-".$post['post_id']."').on('click', function(e) {
+                  e.preventDefault();
+                  if ($('#post-edit-".$post['post_id']."').prop('disabled') != true){
+                    \$.post('include/discuss/topic_ajax.php', {action: 'edit', id: ".intval($post['post_id']).", mode: ".intval($typearg).", text: $('#topic-reply-edit-desc-source-".$post['post_id']."').val()}, function(data) {
+                      var data_words = 'Could not parse message.';
+                      switch (data.substr(0,6)){
+                        case 'unauth':
+                          data_words = 'You are not authorized to use this feature on someone else\'s post.';
+                          break;
+                        case 'textov':
+                          data_words = 'The message must have at least 10 characters (excluding whitespace).';
+                          break;
+                        case 'deaddb':
+                          data_words = 'Couldn\'t connect to database for some reason. Try again later.';
+                          break;
+                        case 'samusr':
+                          data_words = 'Edited your post successfully.';
+                          \$('#topic-reply-message-".$post['post_id']."').html(marked(data.substr(8)));
+                          break;
+                        case 'op_mod':
+                          data_words = 'Edited ".get_user($post['user_id'])."\'s post successfully.';
+                          \$('#topic-reply-message-".$post['post_id']."').html(marked(data.substr(8)));
+                          break;
+                        default:
+                          data_words = 'Could not parse message.';
+                      }
+                      \$('#msg-reply-edit-errors-".$post['post_id']."').html(data_words).fadeIn(300).fadeOut(10000);
+                      \$('#msg-reply-edit-field-".$post['post_id']."').animate({'margin-top': '4rem'},300).delay(8000).animate({'margin-top': '0rem'}, 2000);
+                    });
+                  }
+                });";
+              }
+              echo "</script>";
             }
           ?>
         </div>
