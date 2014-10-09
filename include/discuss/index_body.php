@@ -8,6 +8,7 @@
 <h2 style="text-align: center;">EverythingDojo Discussion Forum</h2>
 <section id="fora">
   <?php foreach ($fora as $forum) { ?>
+  <?php if ($forum['id'] != 4) {?>
   <a href="<?php echo URL_DISCUSS; ?>?view=forum&f=<?php echo $forum['id']; ?>">
 	<section class="discuss-fora <?php if ($forum['read'] == 1) {echo 'read-forum'; } else { echo 'unread-forum'; }; ?>">
   	<div class="discuss-arrow-up"></div>
@@ -19,4 +20,4 @@
     </div>
 	</section>
   </a>
-  <?php } ?>
+  <?php }} ?>

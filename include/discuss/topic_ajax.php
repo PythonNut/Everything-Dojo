@@ -127,6 +127,29 @@ switch ($_POST['action']) {
       echo "fail";
     }
     break;
+  case "move":
+    if ($_SESSION['user_level'] >= 3){
+      if (intval($_POST['mode']) == 1){
+        echo "bad_noThemeDBExport";
+      }
+      else{
+        if (in_array(intval($_POST['location']), array(2,3,4))){
+          $selected_post = $dbc->prepare("UPDATE ".DISCUSS_TOPIC_TABLE." SET forum_id = :fid WHERE topic_id = :tid");
+          $selected_post->execute(array(
+            ':fid' => intval($_POST['location']),
+            ':tid' => intval($_POST['id'])
+          ));
+          echo "good";
+        }
+        else{
+          echo intval($_POST['location'])."bad_notInRange";
+        }
+      }
+    }
+    else{
+      echo "fail";
+    }
+    break;
   default:
     echo "No action exists or defined. Try again.";
 }

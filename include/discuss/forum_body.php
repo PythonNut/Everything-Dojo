@@ -1,7 +1,7 @@
 <?php
   $id = $_GET['f'];
   if (empty($id)) {
-    $id = 0;
+    $id = 1;
   } elseif($id == '') {
     redirect(URL_DISCUSS);
   } else {
@@ -15,6 +15,10 @@
 
   if ($id == 1) {
     $typearg = 1;
+  } else if ($id == 4) {
+    if ($_SESSION['user_level'] < 3){
+      echo "<meta http-equiv=\"refresh\" content=\"0;URL=/discuss.php\">";
+    }
   } else {
     $typearg = 0;
   }

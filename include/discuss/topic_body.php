@@ -17,6 +17,10 @@
   if (!empty($_SESSION['user_id'])) {
     if ($_GET['f'] == 1) {
       $type = 0;
+    } else if (intval($_GET['f']) == 4) {
+      if ($_SESSION['user_level'] < 3){
+        echo "<meta http-equiv=\"refresh\" content=\"0;URL=/discuss.php\">";
+      }
     } else {
       $type = 1;
     }
@@ -29,7 +33,7 @@
 <a href="<?php echo URL_DISCUSS; ?>?view=forum&f=<?php echo intval($topic['forum_id']);?>">&laquo; Back to <?php echo $data['name'];?></a>
 <section id="topic" style="margin-top: 1em;">
   <div id="discuss-topic-header">
-    <h1 style="text-align:center;"><?php echo $topic['title'];?></h1>
+    <h1 style="text-align:center;"><?php echo $topic['title']; if (intval($_GET['f']) == 0) {echo " (archived)";}?></h1>
   </div>
   <div id="topic-main">
     <?php if (isset($_GET["unicorns"])) { ?><img class="avatar" src=<?php echo "\"http://unicornify.appspot.com/avatar/" . md5(get_all_user(intval($post["user_id"]))["user_email"]) . "?s=128\"" ?> ><?php } ?>
@@ -39,10 +43,32 @@
       <div style="display:inline-block; opacity: 0.6;">Posted by <?php echo $user;?> on <?php echo date('M d, Y g:i a', $topic['time']);?></div>
       <?php if (($_SESSION['user_id'] == $topic['user_id']) or ($_SESSION['user_level']) >= 3) { ?>
     <div class="topic-reply-panel">
-      <? if ($_SESSION['user_id'] == $topic['user_id']) {echo "<div class=\"topic-top-edit\" id=\"topic-top-edit-".$topic['post_id']."\"><img alt=\"Edit Post\" src=\"\\images\\edit.png\" style=\"width: 0.75em; height: 0.75em;\"> Edit Topic</div>";} if ($_SESSION['user_level'] >= 5) {if ($_SESSION['user_id'] != $topic['user_id']) {echo "<div class=\"topic-top-edit\" id=\"topic-top-edit\"><img alt=\"Edit Post\" src=\"\\images\\edit.png\" style=\"width: 0.75em; height: 0.75em;\"> Edit Topic</div>";} echo "<div class=\"topic-top-archive\" id=\"topic-top-archive\"><img alt=\"Archive Topic\" src=\"\\images\\trash.png\" style=\"width: 0.55em; height: 0.75em;\"> Archive Topic</div>"; echo "<div class=\"topic-top-move\" id=\"topic-top-move\" style=\"border-right: 0 solid #000000;\">&rArr; Move Topic</div>";} //this php tho ?>
+      <? if ($_SESSION['user_level'] >= 3 and $typearg != 1) {echo "<div class=\"topic-top-archive\" id=\"topic-top-archive\"><img alt=\"Archive Topic\" src=\"\\images\\trash.png\" style=\"width: 0.55em; height: 0.75em;\"> Archive Topic</div>"; echo "<div class=\"topic-top-move\" id=\"topic-top-move\" style=\"border-right: 0 solid #000000;\">&rArr; Move Topic</div>"; } //this php tho ?>
+      <?php if ($_SESSION['user_level'] >= 3 and $typearg != 1) { ?>
       <script>
-        
+        $('#topic-top-move').on('click', function(e) {
+          var loc = prompt("Choose forum_id to move to.\n2) Feature Requests\n3) Bug Reports\n4) Archives");
+          $.post('include/discuss/topic_ajax.php', {action: 'move', id: <?php echo intval($topic['topic_id']); ?>, location: loc, mode: <?php echo $typearg; ?>}, function(data) {
+            if (data == "good"){
+              window.location.href = 'discuss.php?view=topic&f='+loc+'&t=<?php echo $topic['topic_id'];?>';
+            }
+            else{
+              alert("Something wrong happened. Please try again.");
+            }
+          });
+        });
+        $('#topic-top-archive').on('click', function(e) {
+          $.post('include/discuss/topic_ajax.php', {action: 'move', id: <?php echo intval($topic['topic_id']); ?>, location: 4, mode: <?php echo $typearg; ?>}, function(data) {
+            if (data == "good"){
+              window.location.href = 'discuss.php?view=topic&f=4&t=<?php echo $topic['topic_id'];?>';
+            }
+            else{
+              alert("Something wrong happened. Please try again.");
+            }
+          });
+        });
       </script>
+      <?php } ?>
     </div>
     <?php } ?>
       <p><?php echo $topic['text'];?></p>
@@ -56,7 +82,7 @@
         <?php if (isset($_GET["unicorns"])) { ?><img class="avatar" src=<?php echo "\"http://unicornify.appspot.com/avatar/" . md5(get_all_user(intval($post["user_id"]))["user_email"]) . "?s=128\"" ?>><?php } ?>
         <div class="topic-text topic-reply-text" <?php if($post == end($posts)) echo 'id="last"'; ?>>
           <?php $user = get_all_user($post['user_id']);?>
-          <div class="topic-reply-top">
+          <div class="topic-reply-top" <?php if ($post['type'] == 1){ echo "style=\"padding:0.35em;\""; }?> >
             <?php if ($post['type'] == 0) {?>
             <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $post['title'];?></h2>
             <div style="display:inline-block; opacity: 0.6;">
