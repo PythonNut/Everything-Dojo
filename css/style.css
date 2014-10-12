@@ -204,8 +204,6 @@ code { font-family: Monaco, "Courier New", Courier, monospace; }
 
 
 /*--LAYOUT--*/
-:root:not(svg), body { height: 100%; }
-
 :root:not(svg) {
   font-family: Amble, HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 2.22vh;
@@ -660,10 +658,8 @@ table a { color: #F99819; }
   width: 40%;
   height: 94%;
   background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #7DCFE2),color-stop(1, #A3F9FF));
-  background-image: -o-linear-gradient(bottom, #7DCFE2 0%, #A3F9FF 100%);
-  background-image: -moz-linear-gradient(bottom, #7DCFE2 0%, #A3F9FF 100%);
   background-image: -webkit-linear-gradient(bottom, #7DCFE2 0%, #A3F9FF 100%);
-  background-image: -ms-linear-gradient(bottom, #7DCFE2 0%, #A3F9FF 100%);
+  background-image: -webkit-linear-gradient(top, #7DCFE2 0%, #A3F9FF 100%);
   background-image: linear-gradient(to bottom, #7DCFE2 0%, #A3F9FF 100%);
   z-index: 60;
   padding: 2%;
@@ -673,8 +669,8 @@ table a { color: #F99819; }
 }
 
 #credits ul {
-	list-style: none;
-	font-size: 200%;
+  list-style: none;
+  font-size: 200%;
 }
 
 

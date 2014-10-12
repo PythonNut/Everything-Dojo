@@ -42,9 +42,12 @@
       <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $topic['title'];?></h2>
       <div style="display:inline-block; opacity: 0.6;">Posted by <?php echo $user;?> on <?php echo date('M d, Y g:i a', $topic['time']);?></div>
       <?php if (($_SESSION['user_id'] == $topic['user_id']) or ($_SESSION['user_level']) >= 3) { ?>
-    <div class="topic-reply-panel">
-      <? if ($_SESSION['user_level'] >= 3 and $typearg != 1) {echo "<div class=\"topic-top-archive\" id=\"topic-top-archive\"><img alt=\"Archive Topic\" src=\"\\images\\trash.png\" style=\"width: 0.55em; height: 0.75em;\"> Archive Topic</div>"; echo "<div class=\"topic-top-move\" id=\"topic-top-move\" style=\"border-right: 0 solid #000000;\">&rArr; Move Topic</div>"; } //this php tho ?>
       <?php if ($_SESSION['user_level'] >= 3 and $typearg != 1) { ?>
+      <div class="topic-reply-panel">
+        <div class="topic-top-archive" id="topic-top-archive">
+        <img alt="Archive Topic" src="/images/trash.png" style="width: 0.55em; height: 0.75em;"> Archive Topic</div>;
+        <div class="topic-top-move" id="topic-top-move" style="border-right: 0 solid #000000;">&rArr; Move Topic</div>;
+      </div>
       <script>
         $('#topic-top-move').on('click', function(e) {
           var loc = prompt("Choose forum_id to move to.\n2) Feature Requests\n3) Bug Reports\n4) Archives");
@@ -68,9 +71,8 @@
           });
         });
       </script>
-      <?php } ?>
-    </div>
-    <?php } ?>
+      <?php }
+      } ?>
       <p><?php echo $topic['text'];?></p>
       <?php if($topic['edit_id'] > 0){ ?><p class="small">Last edited by <?php echo get_user($topic['edit_id']); ?> on <?php echo date('M d, Y g:i a', $topic['last_timestamp']);?></p><?php } ?>
     </div>
@@ -90,26 +92,26 @@
             <?php if (($_SESSION['user_id'] > 0)) { ?>
             <div class="topic-reply-panel">
               <?php $thanks = $discuss->thanks($post['post_id'], $typearg, $_SESSION['user_id']); ?>
-              <?php if ($_SESSION['user_id'] != $user['id']){?><div class="topic-reply-thanks<?php if (in_array($_SESSION['user_id'],$thanks)){ echo " topic-reply-thanked"; $thankedposts[] = $post['post_id'];}?>" id="topic-reply-thanks-<?php echo $post['post_id'];?>" onclick="thankpost(<?php echo $post['post_id']?>)">&uArr; &nbsp;&nbsp;<?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div><?php } else if ($_SESSION['user_id'] == $user['id']) {echo "<div class=\"topic-reply-disabled\">".count($thanks)." Thank"; if (count($thanks) != 1){echo "s";} echo "</div>"; echo "<div class=\"topic-reply-edit\" id=\"topic-reply-edit-".$post['post_id']."\"><img alt=\"Edit Post\" src=\"\\images\\edit.png\" style=\"width: 0.75em; height: 0.75em;\"> Edit Post</div>";} if ($_SESSION['user_level'] >= 3) {if ($_SESSION['user_id'] != $user['id']) {echo "<div class=\"topic-reply-edit\" id=\"topic-reply-edit-".$post['post_id']."\"><img alt=\"Edit Post\" src=\"\\images\\edit.png\" style=\"width: 0.75em; height: 0.75em;\"> Edit Post</div>";} echo "<div class=\"topic-reply-delete\" id=\"topic-reply-delete-".$post['post_id']."\"><img alt=\"Delete Post\" src=\"\\images\\trash.png\" style=\"width: 0.55em; height: 0.75em;\"> Delete Post</div>"; echo "<div class=\"topic-reply-cleanthanks".((count($thanks) > 0) ? "" : " topic-reply-disabled")."\" id=\"topic-reply-cleanthanks-".$post['post_id']."\"".((count($thanks) > 0) ? "" : " disabled=\"disabled\"").">&dArr; Clear Thanks</div>";} //this php tho ?>
+              <?php if ($_SESSION['user_id'] != $user['id']){?><div class="topic-reply-thanks<?php if (in_array($_SESSION['user_id'],$thanks)){ echo " topic-reply-thanked"; $thankedposts[] = $post['post_id'];}?>" id="topic-reply-thanks-<?php echo $post['post_id'];?>" onclick="thankpost(<?php echo $post['post_id']?>)">&uArr; &nbsp;&nbsp;<?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div><?php } else if ($_SESSION['user_id'] == $user['id']) {echo "<div class=\"topic-reply-disabled\">".count($thanks)." Thank"; if (count($thanks) != 1){echo "s";} echo "</div>"; echo "<div class=\"topic-reply-edit\" id=\"topic-reply-edit-".$post['post_id']."\"><img alt=\"Edit Post\" src=\"/images/edit.png\" style=\"width: 0.75em; height: 0.75em;\"> Edit Post</div>";} if ($_SESSION['user_level'] >= 3) {if ($_SESSION['user_id'] != $user['id']) {echo "<div class=\"topic-reply-edit\" id=\"topic-reply-edit-".$post['post_id']."\"><img alt=\"Edit Post\" src=\"/images/edit.png\" style=\"width: 0.75em; height: 0.75em;\"> Edit Post</div>";} echo "<div class=\"topic-reply-delete\" id=\"topic-reply-delete-".$post['post_id']."\"><img alt=\"Delete Post\" src=\"/images/trash.png\" style=\"width: 0.55em; height: 0.75em;\"> Delete Post</div>"; echo "<div class=\"topic-reply-cleanthanks".((count($thanks) > 0) ? "" : " topic-reply-disabled")."\" id=\"topic-reply-cleanthanks-".$post['post_id']."\"".((count($thanks) > 0) ? "" : " disabled=\"disabled\"").">&dArr; Clear Thanks</div>";} //this php tho ?>
             </div>
             <?php } else { ?>
             <?php $thanks = $discuss->thanks($post['post_id'], $typearg); ?>
             <div style="opacity: 0.6; text-decoration: italic; display:inline-block; margin-left: 2em;"><?php echo count($thanks);?> Thank<?php if (count($thanks) != 1){echo "s";}?></div>
-            <?php 
-                  } 
+            <?php
+                  }
                 }
             ?>
           </div>
           <?php
             if ($post['type'] == 0) {
-              echo "<div id='topic-reply-message-".$post['post_id']."'>".$post['text']."</div>"; 
+              echo "<div id='topic-reply-message-".$post['post_id']."'>".$post['text']."</div>";
             }
             else{
-              echo 
+              echo
                 "<div id='topic-reply-messageD-".$post['post_id']."' style='opacity: 0.6'>
                   <h2>Deleted Post</h2>
                   <p>This post was deleted by ".get_user($post['edit_id'])." on ".date('M d, Y g:i a', $post['last_timestamp']).".</p>
-                </div>"; 
+                </div>";
             }
           ?>
             <?php if($post['edit_id'] > 0 and $post['type'] == 0){ ?><p class="small">Last edited by <?php echo get_user($post['edit_id']); ?> on <?php echo date('M d, Y g:i a', $post['last_timestamp']);?></p><?php } ?>
@@ -156,7 +158,7 @@
                     }
                   });
                 });
-                
+
                 \$('#topic-reply-delete-".$post['post_id']."').on('click', function(e) {
                   \$.post('include/discuss/topic_ajax.php', {action: 'delete', id: ".intval($post['post_id']).", mode: ".intval($typearg)."}, function(data) {
                     if (data == \"good\"){
@@ -167,7 +169,7 @@
                     }
                   });
                 });
-                
+
                 \$('#post-edit-".$post['post_id']."').on('click', function(e) {
                   e.preventDefault();
                   if ($('#post-edit-".$post['post_id']."').prop('disabled') != true){
