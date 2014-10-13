@@ -229,17 +229,12 @@
 
     </section>
 
-<<<<<<< HEAD
-    <!-- `span` and not `a` to avoid accidental styling in Firefox  -->
-    <span href="#" class="linkbutton" id="submit">Get Code</span>
-=======
     <?php if ($_GET["mode"] == "regular"): ?>
     <!-- `span` and not `a` to avoid accidental styling in Firefox  -->
     <span href="#" class="reg linkbutton" id="submit">Get Code</span>
     <?php elseif ($_GET["mode"] == "development"): ?>
     <span class="long linkbutton" id="copycode" data-clipboard-target="dev-style">Copy Code to Clipboard</span>
     <?php endif; ?>
->>>>>>> master
 
   </section>
   <div id="side-resizer"></div>
