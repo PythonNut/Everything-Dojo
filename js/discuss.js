@@ -59,10 +59,7 @@ $(function () {
         $(this).parent().parent().parent().children(".post-edit").prop("disabled", "disabled");
       } else {
         message.purge();
-        $(this).parent().next().children("[name='preview']").html(marked($(this).val(), {
-          sanitize: true,
-          breaks: true
-        }));
+        $(this).parent().next().children("[name='preview']").html(marked($(this).val(), markedOptions));
         Prism.highlightAll(document.querySelector("[name='preview'] pre"));
         if ($("[name='title']").val().match(/\S/g) !== null && $("[name='title']").val().match(/\S/g).length >= 5) {
           $("#post").prop("disabled", "");
@@ -75,15 +72,14 @@ $(function () {
   // make form submit on ctrl+enter/cmd+enter
   $("[name='desc-source']").keydown(function (e) {
     if ((e.keyCode == 10 || e.keyCode == 13) && (e.ctrlKey || e.keyCode == 224 || e.keyCode == 17 || e.keyCode == 91) && !$("#post").is("[disabled]")) {
-      $("#post").trigger("click");
+      $(this).parent().parent().next().next().trigger("click");
     }
   });
 
   // close form on escape
   $("[name='title'], [name='desc-source']").keydown(function (e) {
     if (e.keyCode == 27) {
-      $("#cancel").trigger("click");
-      $(this).parent().parent().parent().children(".cancel-edit").trigger("click");
+      $(this).parents("form").children(".cancel").trigger("click");
     }
   });
 });
@@ -102,3 +98,10 @@ function mark_all_read(forum_id, user_id) {
     }
   });
 }
+
+// marked options
+
+var markedOptions = {
+  sanitize: true,
+  breaks: true
+};

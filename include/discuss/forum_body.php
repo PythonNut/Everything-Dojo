@@ -64,10 +64,10 @@
         <div class="topic-text" name="preview"></div>
       </div>
     </div>
+    <input type="button" value="Cancel" class="danger cancel" id="cancel" />
+    <input type="button" value="Post" id="post" disabled />
     <input type="hidden" name="forum" value="<?php echo $id;?>" />
     <input type="hidden" name="mode" value="topic">
-    <input type="button" value="Cancel" class="danger" id="cancel" />
-    <input type="button" value="Post" id="post" disabled />
     <input type="submit" style="display:none" />
   </form>
   </fieldset>
@@ -117,7 +117,7 @@
   <?php } ?>
       </tbody>
     </table>
-  <?php } 
+  <?php }
   if ($_SESSION['user_id'] != 0) { ?>
   <br/>
   <a href="javascript:;" onClick="mark_all_read(<?php echo $id . ', ' . $_SESSION['user_id']; ?>)" style="left: 5%; position: relative;">Mark All Read</a>

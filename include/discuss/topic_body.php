@@ -44,9 +44,7 @@
       <?php if (($_SESSION['user_id'] == $topic['user_id']) or ($_SESSION['user_level']) >= 3) { ?>
       <?php if ($_SESSION['user_level'] >= 3 and $typearg != 1) { ?>
       <div class="topic-reply-panel">
-        <div class="topic-top-archive" id="topic-top-archive">
-        <img alt="Archive Topic" src="/images/trash.png" style="width: 0.55em; height: 0.75em;"> Archive Topic</div>;
-        <div class="topic-top-move" id="topic-top-move" style="border-right: 0 solid #000000;">&rArr; Move Topic</div>;
+        <div class="topic-top-archive" id="topic-top-archive"><img alt="Archive Topic" src="/images/trash.png" style="width: 0.55em; height: 0.75em;"> Archive Topic</div><div class="topic-top-move" id="topic-top-move" style="border-right: 0 solid #000000;">&rArr; Move Topic</div>
       </div>
       <script>
         $('#topic-top-move').on('click', function(e) {
@@ -132,13 +130,13 @@
                     <div class=\"topic-text\" name=\"preview\"></div>
                   </div>
                 </div>
-                <input type=\"button\" value=\"Cancel\" class=\"danger cancel-edit\" id=\"cancel-edit-".$post['post_id']."\" />
+                <input type=\"button\" value=\"Cancel\" class=\"danger cancel\" id=\"cancel-edit-".$post['post_id']."\" />
                 <input type=\"button\" value=\"Edit\" disabled id=\"post-edit-".$post['post_id']."\" class=\"post-edit\" />
                 <br/>
                 <br/>
               </form>
               <script>
-              \$('#topic-reply-message-".$post['post_id']."').html(marked(\$('#topic-reply-message-".$post['post_id']."').text()));
+              \$('#topic-reply-message-".$post['post_id']."').html(marked(\$('#topic-reply-message-".$post['post_id']."').text(), markedOptions));
               \$('#msg-reply-edit-errors-".$post['post_id']."').hide();
               \$('#topic-reply-edit-box-".$post['post_id']."').hide();
               \$('#topic-reply-edit-".$post['post_id'].", #cancel-edit-".$post['post_id']."').on('click', function() {
@@ -187,15 +185,17 @@
                           break;
                         case 'samusr':
                           data_words = 'Edited your post successfully.';
-                          \$('#topic-reply-message-".$post['post_id']."').html(marked(data.substr(8)));
+                          \$('#topic-reply-message-".$post['post_id']."').html(marked(data.substr(8), markedOptions));
                           break;
                         case 'op_mod':
                           data_words = 'Edited ".get_user($post['user_id'])."\'s post successfully.';
-                          \$('#topic-reply-message-".$post['post_id']."').html(marked(data.substr(8)));
+                          \$('#topic-reply-message-".$post['post_id']."').html(marked(data.substr(8), markedOptions));
                           break;
                         default:
                           data_words = 'Could not parse message.';
                       }
+                      \$('#topic-reply-message-".$post['post_id']."').slideToggle(300);
+                      \$('#topic-reply-edit-box-".$post['post_id']."').slideToggle(300);
                       \$('#msg-reply-edit-errors-".$post['post_id']."').html(data_words).fadeIn(300).fadeOut(10000);
                       \$('#msg-reply-edit-field-".$post['post_id']."').animate({'margin-top': '4rem'},300).delay(8000).animate({'margin-top': '0rem'}, 2000);
                     });
@@ -290,11 +290,11 @@
       <div class="topic-text" name="preview"></div>
     </div>
   </div>
+  <input type="button" value="Cancel" class="danger cancel" id="cancel" />
+  <input type="button" value="Comment" id="post" disabled />
   <input type="hidden" name="forum" value="<?php echo $topic['forum_id'];?>" />
   <input type="hidden" name="mode" value="post">
   <input type="hidden" name="t" value="<?php echo $topic['topic_id'];?>" />
-  <input type="button" value="Cancel" class="danger" id="cancel" />
-  <input type="button" value="Comment" id="post" disabled />
   <input type="submit" style="display:none" />
 </form>
 </fieldset>

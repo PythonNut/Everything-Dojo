@@ -318,7 +318,7 @@ footer,
   box-sizing: border-box;
 }
 
-#wrap { min-height: 100%; margin: 0 auto -17.0156vh; }
+#wrap { min-height: 100vh; margin: 0 auto -17.0156vh; }
 
 
 /*--MISCELLANEOUS CLASSES AND IDS--*/
