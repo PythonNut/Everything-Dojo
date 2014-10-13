@@ -118,12 +118,11 @@
               echo
               "
               <form id='topic-reply-edit-box-".$post['post_id']."'>
-              <span class='msg warn' id='msg-reply-edit-errors-".$post['post_id']."'>No errors yet.</span>
                 <div class=\"field\" id=\"msg-reply-edit-field-".$post['post_id']."\" style=\"margin-top: 0;\">
                   <div class=\"field split left\">
                     Edit Comment: <a href=\"https://help.github.com/articles/github-flavored-markdown\" title=\"Github Flavored Markdown\" style=\"color:#777;font-size:.8em;line-height:2em\" target=\"_blank\" tabindex=\"1\">(Parsed with Github Flavored Markdown)</a>
                     <br/>
-                    <textarea placeholder='Write your new comment here...' style='height:200px; vertical-align:top;' name='desc-source' id='topic-reply-edit-desc-source-".$post['post_id']."'>".$post['text']."</textarea>
+                    <textarea placeholder='Write your new comment here...' style='height:200px; vertical-align:top;' name='desc-source' id='topic-reply-edit-desc-source-".$post['post_id']."'>".trim($post['text'])."</textarea>
                     <input type=\"hidden\" name=\"desc\" />
                   </div>
                   <div class=\"field split right\">
@@ -135,6 +134,7 @@
                 <br/>
                 <br/>
               </form>
+              <span class='msg warn' id='msg-reply-edit-errors-".$post['post_id']."' style='padding:0.6em'>No errors yet.</span>
               <script>
               \$('#topic-reply-message-".$post['post_id']."').html(marked(\$('#topic-reply-message-".$post['post_id']."').text(), markedOptions));
               \$('#msg-reply-edit-errors-".$post['post_id']."').hide();
@@ -166,9 +166,10 @@
                       alert(\"Something wrong happened. Please try again.\");
                     }
                   });
-                });
+                });";
+              }
 
-                \$('#post-edit-".$post['post_id']."').on('click', function(e) {
+              echo "\$('#post-edit-".$post['post_id']."').on('click', function(e) {
                   e.preventDefault();
                   if ($('#post-edit-".$post['post_id']."').prop('disabled') != true){
                     \$.post('include/discuss/topic_ajax.php', {action: 'edit', id: ".intval($post['post_id']).", mode: ".intval($typearg).", text: $('#topic-reply-edit-desc-source-".$post['post_id']."').val()}, function(data) {
@@ -200,9 +201,8 @@
                       \$('#msg-reply-edit-field-".$post['post_id']."').animate({'margin-top': '4rem'},300).delay(8000).animate({'margin-top': '0rem'}, 2000);
                     });
                   }
-                });";
-              }
-              echo "</script>";
+                });
+                </script>";
             }
           ?>
         </div>
