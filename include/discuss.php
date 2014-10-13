@@ -400,7 +400,7 @@ class discuss {
     if (strlen(trim($data['title'])) < 5) {
       $error[] = 'Your title needs to have at least 5 characters (excluding spaces)!';
     }
-    if (strlen(trim($data['desc'])) < 5) {
+    if (strlen(trim($data['desc-source'])) < 10) {
       $error[] = 'Your message needs to have at least 10 characters (excluding spaces)!';
     }
 
