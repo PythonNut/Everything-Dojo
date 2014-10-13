@@ -376,12 +376,18 @@ textarea {
   box-sizing: border-box;
 }
 
-.split { width: 50%; }
+.split {
+  width: 50%;
+  padding-right: 0.2em;
+  box-sizing: border-box;
+}
 .split.right {
   position: absolute;
   top: 1.6em;
   bottom: 0.3em;
   right: 0;
+  padding-right: 0;
+  padding-left: 0.2em;
 }
 
 [name='preview'] {
