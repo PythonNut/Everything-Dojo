@@ -1,0 +1,16 @@
+/*
+Shadows CSS
+2014 nxt of the everythingdojo.com team (open-source, yay!)
+A nod to old (really old) websites that loved using image shadows
+With CSS3, shadows can be done with 3 lines of code
+This is probably the shortest theme on everythingdojo.com ;D
+Please do not plagiarize
+
+Themizer Tailored Version
+*/
+#navigation_box, #wrapper, #header, .entrywrap, #shout_post, #blog_searchform {
+  border-bottom: none;
+  -webkit-box-shadow: 0px 4px 12px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    0px 4px 12px 0px rgba(50, 50, 50, 0.75);
+  box-shadow:         0px 4px 12px 0px rgba(50, 50, 50, 0.75);
+}

@@ -8,7 +8,7 @@
 
 <body>
 <div id="impress">
-  <section class="step slide color orange" data-x="1610" data-y="1382" data-scale="3">
+  <section class="step slide color orange" data-x="1610" data-y="1382" data-scale="3" id="show-hint">
     <h1>Tired of all AoPS Blogs</h1>
     <span class="emp"><h2>Looking the same?</h2></span>
     <h1>We are too.</h1>
@@ -41,7 +41,7 @@
 
   <section class="step slide" data-x="10363" data-y="2995" data-scale="5">
     <h1>No need to decide - we did everything! (dojo)</h1>
-    <img src="images/logo.svg" style="margin-top:35%;"/>
+    <img src="images/logo.svg"/>
   </section>
 
   <section class="step slide color dark" data-x="9202" data-y="6543" data-rotate-z="-51" data-scale="2">
@@ -75,9 +75,9 @@
   </section>
 
   <section class="step slide color dark" data-x="14675" data-y="6925" data-rotate-z="83" data-scale="2">
-    <h1 style="font-size:100%">Finish the long-suffering Themizer?</h1>
+    <h1>Finish the long-suffering Themizer?</h1>
     <img src="images/themizer.png"/>
-    <h1 style="font-size:110%">What else did you expect?</h1>
+    <h1>What else did you expect?</h1>
   </section>
 
   <section class="step slide color orange" data-x="21818" data-y="4132" data-scale="10">
@@ -88,21 +88,55 @@
   </section>
 
   <section id="overview" class="step" data-x="10000" data-y="5000" data-z="5000" data-scale="15">
-    <a href="http://everythingdojo.com">
-      <img src="images/logo.svg" />
-    </a>
+    <svg width="100%" height="100%" viewbox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g>
+      <!-- E -->
+      <a xlink:href="/database.php" style="cursor: pointer">
+        <path style="fill:#d554cb;stroke:none;" d="M0 0L0 29L29 29L29 0L0 0z"/>
+        <path style="fill:#fdfeff;stroke:none;" d="M9 6L9 23L19 23L19 22L10 22L10 15L17.5 15L17.5 14L10 14L10 7L19 7L19 6z"/>
+      </a>
+
+      <!-- V -->
+      <a xlink:href="/themizer.php" style="cursor: pointer">
+        <path style="fill:#57c639;stroke:none;" d="M35 0L35 29L64 29L64 0L35 0z"/>
+        <path style="fill:#fdfeff;stroke:none;" d="M42 6.5L49 23.5L50 23.5L57 6.5L55.7 6.5L49.5 22.2L43.3 6.5z"/>
+      </a>
+
+      <!-- D -->
+      <a xlink:href="/tryit.php" style="cursor: pointer">
+        <path style="fill:#ff6d00;stroke:none;" d="M0 35L0 64L29 64L29 35L0 35z"/>
+        <path style="fill:#fdfeff;stroke:none;" d="M8 41L8 58L14 58C23.7471 57.6773 23.658 41.3205 14 41z"/>
+        <path style="fill:#ff6d00;stroke:none;" d="M9 42L9 57L14 57C22.3471 56.4773 22.258 42.5205 14 42z"/>
+      </a>
+
+      <!-- O -->
+      <a xlink:href="/discuss.php" style="cursor: pointer">
+        <path style="fill:#5099ff;stroke:none;" d="M35 35L35 64L64 64L64 35L35 35z"/>
+        <path style="fill:#fdfeff;stroke:none;" d="M47.6088 41.5469C37.5529 43.8383 42.0527 62.0864 53.4414 56.8812C60.5862 52.5513 56.7254 39.2215 47.6088 41.5469z"/>
+        <path style="fill:#5099ff;stroke:none;" d="M47.1088 42.7469C39.5529 45.8383 43.5527 59.4864 51.9414 56.3812C59.5862 53.5513 55.7254 39.2215 47.1088 42.7469z"/>
+      </a>
+    </g>
+    </svg>
   </section>
 
   <section class="step slide color orange" data-x="22010" data-y="9830" data-rotate-x="-14" data-rotate-y="-55" data-rotate-z="-12" data-scale="0.1">
-    <h1>(No need for applause)</h1>
     <img src="images/unicorn.svg"/>
-    <h1 style="font-size:90%;text-align:left">*To please NMK ;D</h1>
+    <h1 class="joke">*;D</h1>
   </section>
 </div>
 
+<div class="hint">
+    <p>Use a spacebar or arrow keys to navigate</p>
+</div>
+<script>
+if ("ontouchstart" in document.documentElement) {
+    document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+}
+</script>
+
 <script src="js/jquery-2.1.1.min.js"></script>
 <script src="js/impress.js"></script>
-<script src="js/bigtext.js"></script>
+<script src="js/jquery.textfill.min.js"></script>
 <script>
 $(document).ready(function() {
   impress().init();
@@ -112,8 +146,13 @@ $(document).ready(function() {
   $(".emp").delay(750).animate({
     zoom: 1
   });
-  $("h1").wrap("<div class='scale'></div>"); //Wrap all headers in a <div> so bigtext() can do its magic
-  $(".scale").bigtext({maxfontsize: 200});
+  $("h1:not(.joke)").wrap("<span class='scale'></span>");
+
+  $(".scale").textfill({
+    innerTag: "h1",
+    debug: true,
+    maxFontPixels: 200
+  });
 });
 </script>
 </body>

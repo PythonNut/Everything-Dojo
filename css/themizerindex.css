@@ -22,6 +22,7 @@ h6 {
   -webkit-transition: 0.5s ease;
   transition: 0.5s ease;
 }
+
 .linkbutton:hover {
   background-color: #41962c;
   border-color: #40902a;
@@ -45,7 +46,6 @@ h6 {
   border-right: 1px solid #bbb;
   margin-right: -1px;
 }
-
 
 .tile:last-child { float: right; }
 

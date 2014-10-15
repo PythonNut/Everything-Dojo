@@ -18,18 +18,6 @@
   });</script>";
 
   get_header();
-  
-  echo '<div id="blog-body">';
-  include("blog-blog.html");
-  
-  if (!empty($_GET['select'])) {
-    $themedb = new themedb($dbc);
-    $style = $themedb->get_themes(intval($_GET['select']), TRUE);
-    echo "<style>";
-    echo htmlspecialchars_decode($style['code']);
-    echo "</style>";
-  }
-  echo '</div>';
 ?>
 
 <aside id="sidebar">
@@ -205,7 +193,7 @@
 
     </section>
 
-    <span <?php if(!empty($_GET['select'])) { ?>onClick="window.location.href='database.php?mode=view&view=style&id=<?php echo intval($_GET['select']); ?>'"<?php } ?> class="long linkbutton<?php if(empty($_GET['select'])) { echo ' disabled'; } ?>" id="view">View style in Database</span>
+    <span <?php if($_GET['select']) { ?>onClick="window.location.href='database.php?mode=view&view=style&id=<?php echo intval($_GET['select']); ?>'"<?php } ?> class="long linkbutton<?php if (!$_GET['select']) { echo ' disabled'; } ?>" id="view">View style in Database</span>
 
   </section>
   <div id="side-resizer"></div>

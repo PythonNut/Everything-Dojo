@@ -5,19 +5,18 @@
   session_start();
   $extra_style = "<link rel=\"stylesheet\" href=\"css/prism.css\" />
   <link rel=\"stylesheet\" href=\"css/database.css\" />";
-  $extra_js = "<script src=\"js/prism.js\"></script>
+  $extra_js = "<script src=\"js/prism.min.js\"></script>
   <script src=\"js/database.js\"></script>";
+  if(isset($_GET['mode'])) {
+    $mode = $_GET['mode'];
+  } else {
+    $mode = 'index';
+  }
   get_header();
 
   if ($_SESSION['user_id'] != NULL) {
     $unread_count = $notification->count_unread($_SESSION['user_id']);
     $notification_data = $notification->get_notifications($_SESSION['user_id']);
-  }
-
-  if (isset($_GET['mode'])) {
-    $mode = $_GET['mode'];
-  } else {
-    $mode = 'index';
   }
 ?>
 <section id="content">

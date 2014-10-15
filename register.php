@@ -95,14 +95,25 @@ if (!empty($_POST)) {
   $usr_email = $data['usr_email'];
   $user_name = $data['user_name'];
 
-  $query = "SELECT count(*) AS total FROM $table WHERE user_email=? OR user_name=?";
-  $rs_duplicate = $dbc->prepare($query);
-  $rs_duplicate->execute(array($usr_email, $user_name));
-  list($total) = $rs_duplicate->fetchColumn();
+  $email = "SELECT count(*) AS total FROM $table WHERE user_email=?";
+  $name = "SELECT count(*) AS total FROM $table WHERE user_name=?";
+  $email_duplicate = $dbc->prepare($email);
+  $email_duplicate->execute(array($usr_email));
+  $name_duplicate = $dbc->prepare($name);
+  $name_duplicate->execute(array($user_name));
+  list($email_total) = $email_duplicate->fetchColumn();
+  list($name_total) = $name_duplicate->fetchColumn();
 
-  if ($total > 0) {
+  if ($email_total > 0) {
     if ($ajax) {
       exit("username or email exists");
+    } else {
+      $err[] = "The username/email already exists. Please try again with different username and email." ;
+    }
+  }
+  if ($name_total > 0) {
+    if ($ajax) {
+      $err[] = "u";
     } else {
       $err[] = "The username/email already exists. Please try again with different username and email." ;
     }
@@ -138,7 +149,12 @@ EOT;
     if (!$ajax) {
       header("Location: register.php?done=yes");
     }
-    exit("success");
+    exit("s");
+  } elseif ($ajax) {
+    foreach ($err as $e) {
+      echo $e;
+    }
+    exit();
   }
 }
 
@@ -178,7 +194,6 @@ EOT;
     <label class="small i">Must be valid. We'll use it to send you confirmation information and other important things like that. We'll keep it completely hush-hush, promise.</label>
     <div class="field">
       <input name="usr_email" type="text" class="required email">
-      <img class="wait" src="images/loading.gif" alt="Please wait...">
     </div>
     <label>Password</label>
     <label class="small i">Must be at least 6 characters long.</label>

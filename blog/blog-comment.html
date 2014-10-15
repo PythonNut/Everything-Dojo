@@ -1,0 +1,265 @@
+<div id="navigation_box">
+	<div id="left_navigation_box">
+		<a href="#">Community</a> &#187; <a href="#">Blogs</a> &#187; <a href="#">Your Blog</a> &#187; <a href="#">Entry Title</a> &#187; <a href="#">Comment</a>
+	</div>
+	<div id="right_navigation_box">
+		<a href="#">Blog Control Panel</a>
+	</div>
+	<div class="clear"></div>
+</div>
+
+	<div id="wrapper">
+		<div id="header">
+			<h1>Your Blog</h1>
+		</div>
+		<div id="content">
+			<div id="main">
+				
+				<form id="postform" name="postform">
+					<h3>Post a Comment</h3>
+
+					<fieldset class="fields1">
+						
+					<tr valign="middle" align="left">
+						<td colspan="2">
+							<script type="text/javascript">
+							// <![CDATA[
+							
+							// Define the bbCode tags
+							var bbcode = new Array();
+							var bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[quote]','[/quote]','[code]','[/code]','[list]','[/list]','[list=]','[/list]','[img]','[/img]','[url]','[/url]','[flash=]', '[/flash]','[size=]','[/size]','[hide]','[/hide]');
+							var imageTag = false;
+							
+							// Helpline messages
+							var help_line = {
+								b: 'Bold text: [b]text[/b]',
+								i: 'Italic text: [i]text[/i]',
+								u: 'Underline text: [u]text[/u]',
+								q: 'Quote text: [quote]text[/quote]',
+								c: 'Code display: [code]code[/code]',
+								l: 'List: [list]text[/list]',
+								o: 'Ordered list: [list=]text[/list]',
+								p: 'Insert image: [img]http://image_url[/img]',
+								w: 'Insert URL: [url]http://url[/url] or [url=http://url]URL text[/url]',
+								s: 'Font color: [color=red]text[/color]  Tip: you can also use color=#FF0000',
+								f: 'Font size: [size=85]small text[/size]',
+								e: 'List: Add list element',
+								d: 'Flash: [flash=width,height]http://url[/flash]',
+								t: '{ BBCODE_T_HELP }',
+								h: 'Hide part of message: [hide]Text to hide[/hide]',
+								g: 'Click to add an image using Geogebra. Requires Popups and Java.',
+								tip: 'Tip: Styles can be applied quickly to selected text.'
+								
+							}
+							var show_panel = 'options-panel';
+
+							// ]]>
+							</script>
+							<script type="text/javascript" src="./styles/aops/template/editor.js"></script>
+
+
+							<input type="button" class="btnbbcode" accesskey="b" name="addbbcode0" value=" B " style="font-weight:bold; width: 30px;" onclick="bbstyle(0)" onmouseover="helpline('b')" onmouseout="helpline('tip')" />
+							<input type="button" class="btnbbcode" accesskey="i" name="addbbcode2" value=" i " style="font-style:italic; width: 30px;" onclick="bbstyle(2)" onmouseover="helpline('i')" onmouseout="helpline('tip')" />
+							<input type="button" class="btnbbcode" accesskey="u" name="addbbcode4" value=" u " style="text-decoration: underline; width: 30px;" onclick="bbstyle(4)" onmouseover="helpline('u')" onmouseout="helpline('tip')" />
+							
+							<input type="button" class="btnbbcode" accesskey="q" name="addbbcode6" value="Quote" style="width: 50px" onclick="bbstyle(6)" onmouseover="helpline('q')" onmouseout="helpline('tip')" />
+							
+							<input type="button" class="btnbbcode" accesskey="h" name="addbbcode22" value="Hide" style="width: 50px" onclick="bbstyle(22)" onmouseover="helpline('h')" onmouseout="helpline('tip')" />
+							<input type="button" class="btnbbcode" accesskey="c" name="addbbcode8" value="Code" style="width: 40px" onclick="bbstyle(8)" onmouseover="helpline('c')" onmouseout="helpline('tip')" />
+							<input type="button" class="btnbbcode" accesskey="l" name="addbbcode10" value="List" style="width: 40px" onclick="bbstyle(10)" onmouseover="helpline('l')" onmouseout="helpline('tip')" />
+							<input type="button" class="btnbbcode" accesskey="o" name="addbbcode12" value="List=" style="width: 40px" onclick="bbstyle(12)" onmouseover="helpline('o')" onmouseout="helpline('tip')" />
+							<input type="button" class="btnbbcode" accesskey="t" name="addlitsitem" value="[*]" style="width: 40px" onclick="bbstyle(-1)" onmouseover="helpline('e')" onmouseout="helpline('tip')" />				
+							
+							<input type="button" class="btnbbcode" accesskey="p" name="addbbcode14" value="Img" style="width: 40px" onclick="bbstyle(14)" onmouseover="helpline('p')" onmouseout="helpline('tip')" />
+						
+							<input type="button" class="btnbbcode" accesskey="w" name="addbbcode16" value="URL" style="text-decoration: underline; width: 40px" onclick="bbstyle(16)" onmouseover="helpline('w')" onmouseout="helpline('tip')" />
+							
+
+							<input type="button" class="btnbbcode" accesskey="g" name="addbbcode19" value="Geogebra" onmouseover="helpline('g')" onmouseout="helpline('tip')"
+									 onclick="window.open('geogebra.php', '__geogebra', 'width=640, height=480, toolbar=0, scrollbars=1, location=0, status=0, menubar=0, resizable=0');return false;" />
+
+							<span class="genmed nowrap">
+								Font size:
+								<select class="gensmall" name="addbbcode20" onchange="bbfontstyle('[size=' + this.form.addbbcode20.options[this.form.addbbcode20.selectedIndex].value + ']', '[/size]');this.form.addbbcode20.selectedIndex = 2;" onmouseover="helpline('f')" onmouseout="helpline('tip')">
+									<option value="50">Tiny</option>
+									<option value="85">Small</option>
+									<option value="100" selected="selected">Normal</option>
+									<option value="150">Large</option>
+									<option value="200">Huge</option>
+								</select>
+							</span>
+
+						</td>
+					</tr>
+
+					<tr>
+						<td><input type="text" readonly="readonly" name="helpbox" style="width:100%" class="helpline" value="Tip: Styles can be applied quickly to selected text." /></td>
+						
+							<td class="genmed" align="center"></td>
+						
+					</tr>
+
+
+						<div id="smiley-box">
+							
+								<strong>Smilies</strong><br />
+								
+									<a href="#" onclick="insert_text(':D', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/icon_mrgreen.gif" width="19" height="19" alt=":D" title="Mr. Green" /></a>
+								
+									<a href="#" onclick="insert_text(':lol:', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/biggrin.gif" width="20" height="20" alt=":lol:" title="Very Happy" /></a>
+								
+									<a href="#" onclick="insert_text(':blush:', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/redface_anim.gif" width="19" height="19" alt=":blush:" title="Blush" /></a>
+								
+									<a href="#" onclick="insert_text(':maybe:', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/unsure.gif" width="20" height="20" alt=":maybe:" title="maybe" /></a>
+								
+									<a href="#" onclick="insert_text(':)', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/smile.gif" width="20" height="20" alt=":)" title="Smile" /></a>
+								
+									<a href="#" onclick="insert_text(':(', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/sad.gif" width="20" height="20" alt=":(" title="Sad" /></a>
+								
+									<a href="#" onclick="insert_text(':o', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/ohmy.gif" width="20" height="20" alt=":o" title="Shocked" /></a>
+								
+									<a href="#" onclick="insert_text(':mad:', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/mad.gif" width="20" height="20" alt=":mad:" title="Mad" /></a>
+								
+									<a href="#" onclick="insert_text(':P', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/tongue.gif" width="20" height="20" alt=":P" title="Razz" /></a>
+								
+									<a href="#" onclick="insert_text(':oops:', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/blush.gif" width="20" height="20" alt=":oops:" title="Embarassed" /></a>
+								
+									<a href="#" onclick="insert_text(':roll:', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/rolleyes.gif" width="20" height="20" alt=":roll:" title="Rolling Eyes" /></a>
+								
+									<a href="#" onclick="insert_text(':wink:', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/wink.gif" width="20" height="20" alt=":wink:" title="Wink" /></a>
+								
+									<a href="#" onclick="insert_text(':!:', true); return false;"><img src="http://www.artofproblemsolving.com/Forum/images/smilies/exclaim.gif" width="19" height="19" alt=":!:" title="Exclamation" /></a>
+								
+								<br /><a href="#" onclick="popup(this.href, 300, 350, '_phpbbsmilies'); return false;">View more smilies</a>
+							<hr />
+							<a href="#">BBCode</a> is <em>ON</em><br />
+							
+								[img] is <em>ON</em><br />
+								[url] is <em>ON</em><br />
+								Smilies are <em>ON</em>
+							
+						</div>
+
+						
+
+						<div id="message-box">
+							<textarea class="inputbox" name="message" id="message" rows="15" cols="76" tabindex="3" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" class="inputbox"></textarea>
+						</div>
+					</fieldset>
+
+					
+					
+					<div class="panel bg2">
+						<fieldset class="submit-buttons">
+
+							<input type="submit" tabindex="5" name="preview" value="Preview" class="button1" onclick="document.getElementById('postform').action += '#preview';" />&nbsp;
+							<input type="submit" accesskey="s" tabindex="6" name="post" value="Submit" class="button1" />&nbsp;
+
+						</fieldset>
+					</div>
+
+
+					<div id="tabs">
+						<ul>
+							<li id="options-panel-tab" class="activetab"><a href="#tabs" onclick="subPanels('options-panel'); return false;"><span>Options</span></a></li>
+							<li id="subscriptions-panel-tab" ><a href="#tabs" onclick="subPanels('subscriptions-panel'); return false;"><span>Subscription</span></a></li>
+							<li id="attach-panel-tab" ><a href="#tabs" onclick="subPanels('attach-panel'); return false;"><span>Upload attachment</span></a></li>
+						</ul>
+					</div>
+
+
+					<div class="panel bg3" id="options-panel">
+						<fieldset class="fields1">
+							
+							<div><label for="disable_bbcode"><input type="checkbox" name="disable_bbcode" id="disable_bbcode" /> Disable BBCode</label></div>
+						
+							<div><label for="disable_smilies"><input type="checkbox" name="disable_smilies" id="disable_smilies" /> Disable smilies</label></div>
+						
+							<div><label for="disable_magic_url"><input type="checkbox" name="disable_magic_url" id="disable_magic_url" /> Do not automatically parse URLs</label></div>
+							
+						</fieldset>
+					</div>
+
+					<script type="text/javascript">
+					// <![CDATA[
+						/**
+						* Show upload progress bar
+						*/
+						function popup_progress_bar() {
+							close_waitscreen = 0;
+							// no scrollbars
+							popup('./posting.php?mode=popup', 400, 200, '_upload');
+						}
+					// ]]>
+					</script>
+
+	
+
+</script>
+
+<div class="panel bg2" id="attach-panel">
+<fieldset>
+	<p>
+		<span class="gensmall">If you wish to attach one or more files enter the details below.</span>
+	</p>
+
+	<table>
+	<tr>
+		<td>
+			<span style="font-size:12px">Filename</span>
+		</td>
+		<td>
+			<input type="file" name="fileupload" size="40" maxlength="524288" value="" class="btnfile" />
+		</td>
+	</tr>
+
+	<tr>
+		<td style="vertical-align:top">
+			<span style="font-size:12px">File comment</span>
+		</td>
+		<td>
+			<textarea class="post" name="filecomment" rows="3" cols="35"></textarea>&nbsp;</td>
+		</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>
+			<input class="button2" type="submit" style="width:150px" name="add_file" value="Add the file" onclick="popup_progress_bar();" />
+		</td>
+	</tr>
+	</table>
+
+
+</fieldset>
+</div>
+					<div class="panel bg3" id="subscriptions-panel">
+						<fieldset>
+							<dl>
+								<dt>Select how you would like to be notified of future replies made to this blog.<br />If you've already subscribed to this blog, your current subscription options are shown (and whatever you select will be your new subscription selection).</dt>
+								
+									<dd><label for=""><input type="checkbox" name="subscription_1" id="subscription_1"  /> Private message</label></dd>
+								
+									<dd><label for=""><input type="checkbox" name="subscription_2" id="subscription_2"  /> E-mail</label></dd>
+								
+							</dl>
+						</fieldset>
+					</div>
+
+					<!--input hiddens were here-->
+					
+				</form>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+
+
+<script type="text/javascript">
+// <![CDATA[
+	var panels = new Array('options-panel', 'permissions-panel', 'subscriptions-panel', 'attach-panel', 'tags-panel');
+	subPanels(show_panel);
+
+	var form_name = 'postform';
+	var text_name = 'message';
+// ]]>
+</script>

@@ -9,7 +9,6 @@
   }
 
   get_header(0);
-
 ?>
 <section id="content">
   <div id="notifications">

@@ -9,7 +9,7 @@
     <link href="/images/favicon.ico" rel="shortcut icon">
     <link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon.png">
     <?php if ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)" && $title != "Try-It") { ?>
-    <link href="/css/normalize.css" rel="stylesheet">
+    <link href="/css/normalize.min.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <?php } ?>
     <?php global $extra_style; print $extra_style; ?>
@@ -45,27 +45,30 @@
     <main id="wrap">
 
       <?php if ($title == "Database") { ?>
-
+      
       <header class="database">
         <section id="headerwrap">
-          <a href="<?php echo URL_DATABASE; ?>"><h1><?php echo $title ?></h1></a>
+          <a href="<?php echo URL_DATABASE; ?>"><h1>Database</h1></a>
+
           <?php
           global $mode;
 
           if ($mode == "view") { ?>
             <div class="search-container">
+              <script src="/js/highlight.js"></script>
               <script src="/js/db-search.js"></script>
               <input class="search" type="text" placeholder="Search...">
               <div class="icon-box">
                 <span class="search-icon"></span>
               </div>
+            </div>
           <?php } ?>
 
         </section>
       </header>
 
       <?php } elseif ($title == "Discuss") { ?>
-
+      
       <header class="discuss">
         <section id="headerwrap">
           <a href="<?php echo URL_DISCUSS; ?>"><h1>Discuss</h1></a>
@@ -75,7 +78,7 @@
       <?php } elseif ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)" && $title !== "Try-It") { ?>
 
       <?php global $notification_unread_count; ?>
-      
+
       <header>
         <section id="headerwrap">
 

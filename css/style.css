@@ -159,19 +159,32 @@ label { display: block; }
 /*--TYPESETTING--*/
 #headerwrap h1 {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
-  font-size: 1.5rem;
   font-weight: 400;
   display: inline-block; /* prevent body from being pushed down by sticky footer */
   text-transform: uppercase;
   height: 1.334em;
   border-bottom: none;
   position: absolute;
+}
+
+.database #headerwrap h1,
+.discuss #headerwrap h1 {
+  color: white;
+  font-size: 2.82rem;
+  line-height: 1.25em;
+  padding: 0.24rem 0.6rem;
+  margin: 0.6rem;
+}
+
+#headerwrap .breadcrumbs h1 {
   color: black;
+  font-size: 1.5rem;
   line-height: 4rem;
   padding: 0;
   margin: 0 0.4rem;
 }
 
+#headerwrap h1 a { color: white; }
 #headerwrap .breadcrumbs a { color: #666; }
 
 h1,
@@ -204,6 +217,8 @@ code { font-family: Monaco, "Courier New", Courier, monospace; }
 
 
 /*--LAYOUT--*/
+:root:not(svg), body { height: 100%; }
+
 :root:not(svg) {
   font-family: Amble, HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 2.22vh;
@@ -307,6 +322,14 @@ footer {
 footer a       { color: #bbb; }
 footer a:hover { color: #999; }
 
+.heart {
+  color: red;
+  font-family: Lato, sans-serif;
+  opacity: 0.5;
+  font-size: 0.9em;
+}
+
+
 /**
  * Sticky footer
  * based on http://ryanfait.com/html5-sticky-footer/ with a few modifications
@@ -318,7 +341,7 @@ footer,
   box-sizing: border-box;
 }
 
-#wrap { min-height: 100vh; margin: 0 auto -17.0156vh; }
+#wrap { min-height: 100%; margin: 0 auto -17.0156vh; }
 
 
 /*--MISCELLANEOUS CLASSES AND IDS--*/
@@ -648,29 +671,6 @@ table a { color: #F99819; }
   line-height: 5vh;
   text-align: center;
   vertical-align: middle;
-}
-/*--CREDITS--*/
-#credits {
-  display: none;
-  position: fixed;
-  top: 3%;
-  left: 30%;
-  width: 40%;
-  height: 94%;
-  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #7DCFE2),color-stop(1, #A3F9FF));
-  background-image: -webkit-linear-gradient(bottom, #7DCFE2 0%, #A3F9FF 100%);
-  background-image: -webkit-linear-gradient(top, #7DCFE2 0%, #A3F9FF 100%);
-  background-image: linear-gradient(to bottom, #7DCFE2 0%, #A3F9FF 100%);
-  z-index: 60;
-  padding: 2%;
-  border-radius: 15px;
-  font-family: 'lato';
-  text-align: center;
-}
-
-#credits ul {
-  list-style: none;
-  font-size: 200%;
 }
 
 

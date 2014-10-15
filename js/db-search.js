@@ -34,7 +34,7 @@ $(document).ready(function () {
 
       // Author filter
       var authors = query.match(authorRegex);
-
+      
       var authorMatch = false;
 
       if (authors !== null) {
@@ -56,7 +56,7 @@ $(document).ready(function () {
 
       // Release stage filter
       var releases = query.match(releaseRegex);
-
+      
       var releaseMatch = false;
 
       if (releases !== null) {
@@ -78,7 +78,7 @@ $(document).ready(function () {
 
       // Required word filter
       var requireds = query.match(requiredRegex);
-
+      
       var requiredMatch = true;
 
       if (requireds !== null) {
@@ -95,7 +95,7 @@ $(document).ready(function () {
 
       // Forbidden word filter
       var forbiddens = query.match(forbiddenRegex);
-
+      
       var forbiddenMatch = true;
 
       if (forbiddens !== null) {

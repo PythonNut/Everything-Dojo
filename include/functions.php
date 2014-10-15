@@ -8,11 +8,11 @@
 
     global $db;
 
-    /* Secure against session hijacking by checking user agent */
-    if (isset($_SESSION['HTTP_USER_AGENT'])) {
-      if ($_SESSION['HTTP_USER_AGENT'] != md5($_SERVER['HTTP_USER_AGENT'])) {
+    /* Secure against session hijacking by checking user agent & user ip */
+    if (isset($_SESSION['HTTP_USER_AGENT']) && (isset($_SESSION['HTTP_X_FORWARDED_FOR']) || isset($_SESSION['REMOTE_ADDR']))) {
+      if ($_SESSION['HTTP_USER_AGENT'] != sha1($_SERVER['HTTP_USER_AGENT']) && ($_SESSION['HTTP_X_FORWARDED_FOR'] != sha1($_SERVER['HTTP_X_FORWARDED_FOR']) || $_SESSION['REMOTE_ADDR'] != sha1($_SERVER['REMOTE_ADDR']))) {
         logout();
-        exit;
+        exit();
       }
     }
 

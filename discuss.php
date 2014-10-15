@@ -4,9 +4,9 @@
   include("include/discuss.php");
   session_start();
   $extra_style = "<link rel=\"stylesheet\" href=\"css/discuss.css\" />
-  <link rel=\"stylesheet\" href=\"css/prism.css\" />";
+  <link rel=\"stylesheet\" href=\"css/prism.min.css\" />";
   $extra_js = "<script src=\"js/discuss.js\"></script>
-  <script src=\"js/prism.js\"></script>
+  <script src=\"js/prism.min.js\"></script>
   <script src=\"js/marked.min.js\"></script>
   <script>$(function(){\$('pre code').each(function(){var h=$(this).html();h=h.replace(/&amp;quot;/g,'\"').replace(/&amp;#039;/g,'\'');$(this).html(h)})})</script>";
   get_header();
@@ -21,6 +21,7 @@
   } else {
     $view = $_GET['view'];
   }
+
   $mode = $_POST['mode'];
   $_SESSION['mode'] = $mode;
   switch ($mode) {

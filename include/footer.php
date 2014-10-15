@@ -23,22 +23,21 @@
     </article>
 
     <footer>
-      <p><a href="/">Home</a> &bull; <a href="/about.php">About</a> &bull; <a href="javascript:;" onclick="$('#credits').popUp('1%')">Credits</a> <?php
+      <p><a href="/">Home</a> &bull; <a href="/about.php">About</a> &bull; <a href="javascript:;" onclick="$('#credits').popUp('1%')">Credits</a> &bull; <a href="https://github.com/Deeg-Kim/Everything-Dojo">GitHub</a> <?php
               // will not work if dbc is not included on page
               if (isset($_SESSION['user_level']) && checkAdmin()) {
               ?>
               &bull; <a href="/admin.php" id="menu-admin">Admin CP</a>
               <?php } //end admin ?></p>
-      <p>&copy;2014 Everything Dojo. The source code of this website is available on <a href="https://github.com/Deeg-Kim/Everything-Dojo">GitHub</a> and is licensed under the terms of the <a href="/LICENSE.txt">GNU General Public License version 3</a>. Individual styles are copyright their creators.</p>
-      <?php if (isset($_GET['unicorns'])) { ?>
-      <p>This website has unicorn powers.</p>
-      <?php } ?>
+      <p>&copy;2014 Everything Dojo. Individual styles are copyright their creators.</p>
+      <p>Made with <span class="heart">&hearts;</span><?php if (isset($_GET['unicorns'])) { echo " and unicorns"; } ?>.</p>
       <p>Server Time: <?php echo date("m/d/y G:i T"); ?></p>
+      <p></p>
     </footer>
 
     <!-- Unicorns should be sticky -->
     <script class="js-unicorns">
-      // Function to get search parameters as an associative array. Written by StackOverflow user weltraumpirat at http://stackoverflow.com/questions/5448545/how-to-retrieve-get-parameters-from-javascript/5448635#5448635
+      // Function to get search parameters as an associative array. Written by Stack Overflow user weltraumpirat at http://stackoverflow.com/questions/5448545/how-to-retrieve-get-parameters-from-javascript/5448635#5448635
       function getSearchParameters() {
         var prmstr = window.location.search.substr(1);
         return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
@@ -56,28 +55,18 @@
 
       var params = getSearchParameters();
 
-      if (params["unicorns"] == "true") {
-        // Code for finding all internal links by Chris Coyier at http://css-tricks.com/snippets/jquery/find-all-internal-links/
-        var siteURL = "http://" + top.location.host.toString();
+      if (params["unicorns"] !== undefined) {
+        $(document).ready(function () {
+          $("a").each(function () {
+            if ($(this).attr("href").indexOf(".php") > -1) {
+              $(this).attr("href", $(this).attr("href") + ($(this).attr("href").indexOf("?") > -1 ? "&unicorns" : "?unicorns"));
+            }
 
-        $("a[href^='"+siteURL+"'], a[href^='/'], a[href^='./'], a[href^='../'], a[href^='#']").each(function() {
-          var href = $(this).attr("href");
-
-          if (href.indexOf(".php") > -1) { // Find php files
-            $(this).attr("href", href + (href.indexOf("?") > -1 ? "&unicorns=true" : "?unicorns=true"));
-          }
-
-          if (href == "rebuild.everythingdojo.com" || href == "rebuild.everythingdojo.com/") { // Links to the home page don't have .php in their URL
-            $(this).attr("href", "rebuild.everythingdojo.com?unicorns=true");
-          }
-
-          if (href == "/") {
-            $(this).attr("href", "/?unicorns=true");
-          }
+            else {
+              $(this).attr("href", $(this).attr("href") + ($(this).attr("href").indexOf("everythingdojo.com") > -1 ? "?unicorns" : "?unicorns"));
+            }
+          });
         });
-
-        // FIXME this doesn't work for the tools links
-        $(document).ready(function () {$(".index-link").attr("href", $(".index-link").attr("href") + "?unicorns=true");}); // For some reason, the links to the various bits of the site need to wait until the DOM is loaded
       }
     </script>
 

@@ -382,6 +382,7 @@ class discuss {
         ':text' => $this->filter_swear_words($data['desc-source']),
         ':source' => $this->filter_swear_words($data['desc-source'])
       ));
+
       $this->delete_views($data['t'], $user_id, 0);
     }
 
@@ -531,7 +532,7 @@ class discuss {
         }
 
       } elseif ($mode == 2) {
-        $query = "SELECT thanks FROM ".DISCUSS_POSTS_TABLE." WHERE post_id = :id";
+        $query = "SELECT thanks FROM ".DISCUSS_POSTS_SPECIAL_TABLE." WHERE post_id = :id";
         $sth = $this->dbc->prepare($query);
         $sth->execute(array(
           ':id' => intval($post_id)
