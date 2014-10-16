@@ -1,6 +1,17 @@
 <?php
   $data = $themedb->get_themes();
   $view = $_GET['view'];
+  
+  $tableHeader = '
+  <thead>
+    <tr class="headingTr">
+      <td>Theme</td>
+      <td class="med-col">Author</td>
+      <td class="small-col">Version</td>
+      <td class="small-col">Stage</td>
+    <tr>
+  </thead>
+  ';
 
   switch ($view) {
     case '';
@@ -28,14 +39,7 @@
     <h2>Completed Themes</h2>
 
     <table class="database-table">
-      <thead style="border-bottom: 1px black solid;">
-        <tr>
-          <td>Theme</td>
-          <td class="med-col">Author</td>
-          <td class="small-col">Version</td>
-          <td class="small-col">Stage</td>
-        <tr>
-      </thead>
+      <?php echo $tableHeader; ?>
       <tbody>
       <?php
       for ($i = 0; $i < count($data['validated']['id']); $i++) {
@@ -57,14 +61,7 @@
     <h2>Themes in Development</h2>
 
     <table class="database-table">
-      <thead style="border-bottom: 1px black solid;">
-        <tr>
-          <td>Theme</td>
-          <td class="med-col">Author</td>
-          <td class="small-col">Version</td>
-          <td class="small-col">Stage</td>
-        <tr>
-      </thead>
+      <?php echo $tableHeader; ?>
       <tbody>
       <?php
       for ($i = 0; $i < count($data['unvalidated']['id']); $i++) {
