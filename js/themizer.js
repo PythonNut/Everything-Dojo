@@ -22,7 +22,7 @@ var styles = {
   "class_entrywrap-backgroundColor"   : "#EDEDEA",
   "class_comment-backgroundColor"     : "#EDEDEA",
   "class_commentwrap-backgroundColor" : "#EDEDEA",
-  "id_headerspaceh1-color"              : "#000000",
+  "id_headerspaceh1-color"            : "#000000",
   "class_row1-backgroundColor"        : "#EDEDEA",
   "class_row2-backgroundColor"        : "#EDEDEA"
 };
