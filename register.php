@@ -16,6 +16,8 @@ if ($ajax) {
     $rs_duplicate->execute(array($username));
     list($total) = $rs_duplicate->fetchColumn();
 
+    // set delay to avoid abuse, then return either error or success
+    usleep(300000);
     if ($total > 0) {
       exit("error");
     } else {
@@ -134,11 +136,13 @@ EOT;
     if (!$ajax) {
       header("Location: register.php?done=yes");
     }
+    sleep(2); // delay to avoid abuse
     exit("s");
   } elseif ($ajax) {
     foreach ($err as $e) {
       echo $e;
     }
+    sleep(2);
     exit();
   }
 }

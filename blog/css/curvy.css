@@ -1,0 +1,93 @@
+@charset "utf-8";
+
+/*
+Curvy
+By AoPS user Tungsten, licensed under the GNU GPL v3 or later.
+Created as a base theme for the Themizer tool at Everything Dojo.
+*/
+
+* {
+  border-color: black !important;
+  box-sizing: border-box;
+}
+
+#wrapper,
+#header,
+#main,
+#side {
+  background: transparent;
+}
+
+#wrapper {
+  width: 100%;
+}
+
+#main,
+#side {
+  width: 70%;
+}
+
+#side {
+  width: 30%;
+}
+
+.entry,
+.comment {
+  border: none !important;
+}
+
+.commentwrap {
+  margin-bottom: 0 !important;
+  margin-top: 10px !important;
+}
+
+div.entrywrap,
+div.commentwrap,
+.avatar img,
+#shouts-widget {
+  border: 1px solid black;
+  border-radius: 1vw;
+}
+
+.avatar img {
+  border: none;
+}
+
+#header {
+  border: none;
+}
+
+#navigation_box {
+  border: none;
+}
+
+#shouts-widget {
+  padding: 1vh;
+}
+
+fieldset {
+  border-width: 1px;
+  margin: 2px;
+  border-style: solid;
+}
+
+#shouts-widget .inputbox {
+  position: relative;
+  width: 100%;
+}
+
+.quotetitle {
+  border-radius: 1vh 1vh 0 0;
+  padding: 0 1vh;
+}
+
+.quotecontent {
+  border-radius: 0 0 1vh 1vh;
+  padding: 0 1vh;
+}
+
+input {
+  padding: 0 1vh;
+  border-radius: 1vh;
+  background-color: transparent;
+}

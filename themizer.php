@@ -161,8 +161,9 @@
               <p>
                 <select name="base">
                   <option value="core">Core by Dojo</option>
-                  <option value="calm">Calm by Red</option>
                   <option value="warped">Warped by Red</option>
+                  <option value="shadows">Shadows by nxt</option>
+                  <option value="curvy">Curvy by Tungsten</option>
                 </select>
               </p>
               <?php endif; ?>

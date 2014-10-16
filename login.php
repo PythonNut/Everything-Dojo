@@ -47,7 +47,11 @@ if (isset($_POST['doLogin'])) {
           $_SESSION['user_id']= $user_array['id'];
           $_SESSION['user_name'] = $user_array['user_name'];
           $_SESSION['user_level'] = $user_array['user_level'];
-          $_SESSION['HTTP_USER_AGENT'] = md5($_SERVER['HTTP_USER_AGENT']);
+          $_SESSION['HTTP_USER_AGENT'] = sha1($_SERVER['HTTP_USER_AGENT']);
+          $_SESSION['REMOTE_ADDR'] = sha1($_SERVER['REMOTE_ADDR']);
+          if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $_SESSION['HTTP_X_FORWARDED_FOR'] = sha1($_SERVER['HTTP_X_FORWARDED_FOR']);
+          }
 
           //update the timestamp and key for cookie
           $stamp = time();
