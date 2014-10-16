@@ -25,24 +25,24 @@
   function get_user($user_id) {
     global $dbc;
 
-      $sth = $dbc->prepare("SELECT * FROM `users` WHERE `id` = :id");
-      $sth->execute(array(
-        ':id' => intval($user_id)
-      ));
-      $name = $sth->fetch(PDO::FETCH_ASSOC);
-      $name = $name['user_name'];
-      return $name;
+    $sth = $dbc->prepare("SELECT * FROM `users` WHERE `id` = :id");
+    $sth->execute(array(
+      ':id' => intval($user_id)
+    ));
+    $name = $sth->fetch(PDO::FETCH_ASSOC);
+    $name = $name['user_name'];
+    return $name;
   }
 
   function get_all_user($user_id) {
-      global $dbc;
+    global $dbc;
 
-      $sth = $dbc->prepare("SELECT * FROM `users` WHERE `id` = :id");
-      $sth->execute(array(
-        ':id' => intval($user_id)
-      ));
-      $user = $sth->fetchAll(PDO::FETCH_ASSOC);
-      return $user[0];
+    $sth = $dbc->prepare("SELECT * FROM `users` WHERE `id` = :id");
+    $sth->execute(array(
+      ':id' => intval($user_id)
+    ));
+    $user = $sth->fetchAll(PDO::FETCH_ASSOC);
+    return $user[0];
   }
 
 
@@ -257,12 +257,10 @@
   function curl_post($url, array $post = NULL, array $options = array()) {
     $defaults = array(
       CURLOPT_POST => 1,
-      CURLOPT_HEADER => 0,
       CURLOPT_URL => $url,
-      CURLOPT_FRESH_CONNECT => 1,
       CURLOPT_RETURNTRANSFER => 1,
-      CURLOPT_FORBID_REUSE => 1,
-      CURLOPT_TIMEOUT => 4,
+      CURLOPT_CONNECTTIMEOUT => 20,
+      CURLOPT_TIMEOUT => 20,
       CURLOPT_POSTFIELDS => http_build_query($post)
     );
 
@@ -270,6 +268,7 @@
     curl_setopt_array($ch, ($options + $defaults));
     if (!$result = curl_exec($ch)) {
       trigger_error(curl_error($ch));
+      echo $url;
     }
     curl_close($ch);
     return $result;
