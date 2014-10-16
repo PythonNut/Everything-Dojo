@@ -63,7 +63,7 @@ if((isset($_POST['ajax']) && $_POST['ajax'] === "true") && $ajax) {
   }
 
   // Validate Email
-  if(!isEmail($data['usr_email'])) {
+  if (!isEmail($data['usr_email'])) {
     $err[] = "Invalid email address! Well, it just wasn't an email address.";
   }
   // Check User Passwords

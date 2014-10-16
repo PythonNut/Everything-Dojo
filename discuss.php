@@ -76,7 +76,7 @@
           $notif_data = $notification->get_notif_obj($notif['notification_type'], $notif['item_id']);
       ?>
       <a href="<?php echo $notif_data['url']; ?>" onClick="mark_read(<?php echo $notif['id']; ?>)">
-        <div id="notification-<?php echo $notif['id']; ?>" class="notification <?php if($notif['read'] == 0){ echo 'unread'; }else{ echo 'read'; } ?> ">
+        <div id="notification-<?php echo $notif['id']; ?>" class="notification <?php if ($notif['read'] == 0) { echo 'unread'; } else { echo 'read'; } ?> ">
           <div class="notification-color" style="background-color: #<?php echo $notif_data['data']['color']; ?>"><?php echo substr($notif_data['data']['location'], 0, 1); ?></div>
           <div class="notification-text">
             <?php echo $notif_data['data']['subject']; ?>

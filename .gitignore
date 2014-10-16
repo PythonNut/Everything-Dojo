@@ -36,12 +36,14 @@
 
 error_log
 
-# database creds
+# sensitive information and the like
 #
 # added to .gitignore so that people
 # can't randomly view on GitHub
 
 include/db.php
+include/recaptcha.php
+include/trello.php
 
 # Node.js plugins
 

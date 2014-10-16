@@ -165,7 +165,7 @@
   $("#post").click(function () {
     $("[name='desc']").val($("[name='preview']").html());
     $("#form").submit();
-  })
+  });
 </script>
 <?php }
 } else {

@@ -9,7 +9,7 @@
 <section id="fora">
   <?php foreach ($fora as $forum) { ?>
   <a href="<?php echo URL_DISCUSS; ?>?view=forum&f=<?php echo $forum['id']; ?>">
-	<section class="discuss-fora <?php if ($forum['read'] == 1) {echo 'read-forum'; } else { echo 'unread-forum'; }; ?>">
+	<section class="discuss-fora <?php if ($forum['read'] == 1) { echo 'read-forum'; } else { echo 'unread-forum'; } ?>">
   	<div class="discuss-arrow-up"></div>
 		<div class="discuss-fora-text">
     	<div class="discuss-fora-text-inner">

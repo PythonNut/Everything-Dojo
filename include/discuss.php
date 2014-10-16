@@ -6,7 +6,7 @@
 
 class discuss {
 
-  function __construct($dbc){
+  function __construct($dbc) {
     $this->dbc = $dbc;
   }
 

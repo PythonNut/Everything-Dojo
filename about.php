@@ -36,21 +36,26 @@
   <p>The original version of this site was written by an AoPS user named Dojo. It contained all the same main sections as the current website, but looked a lot different. On May 27, 2014, Dojo announced that he was looking for help rebuilding the site. That rebuild resulted in the site you are looking at now.</p>
 
   <h1>Who are we?</h1>
-  This website was written and is maintained by a collection of volunteer AoPS users. The team is led by Dojo, and consists of:
+  <p>This website was written and is maintained by a collection of volunteer AoPS users. Everything Dojo was originally created by <strong>Dojo</strong>, and since has multiplied staff. There are two teams of people who work on this project, The Staff and The Team.</p>
+  <p>The Staff helps maintain the site and provide user support. If you need styles approved, posts moderated, or questions answered, let these guys know:</p>
+  <ul>
+    <li>csmath</li>
+    <li>El_Ectric</li>
+    <li>RTG</li>
+  </ul>
+  <br />
+  <p>The Team contributes to EvDo by coding the website, fixing bugs, and adding more features. Those who have worked long hours on bringing you 2.0 include:</p>
   <ul>
     <li>Dojo</li>
     <li>knittingfrenzy18</li>
-    <li>PythonNut</li>
-    <li>thatmathgeek</li>
-    <li>Tungsten</li>
-    <li>thkim1011</li>
     <li>NeoMathematicalKid</li>
-    <li>El_Ectric</li>
+    <li>Tungsten</li>
+    <li>thatmathgeek</li>
     <li>nxt</li>
-    <li>csmath</li>
-    <li>gamjawon</li>
+    <li>PythonNut</li>
   </ul>
-  We can all be reached via PM on AoPS if you have any questions or comments.
+  <br />
+  <p>If you'd like to help contribute to Everything Dojo by joining one of the two teams, please contact us through our contact form, or private message knittingfrenzy18 on AoPS.</p>
 </section>
 
 <?php get_footer(); ?>
