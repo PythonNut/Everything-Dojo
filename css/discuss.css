@@ -48,6 +48,14 @@
   width: 30vw;
 }
 
+/**
+ * Messages
+ */
+
+.msg + * {
+  margin-top: 0;
+}
+
 
 /*--ANNOUNCEMENTS--*/
 #announcements h3 { text-align: center; }

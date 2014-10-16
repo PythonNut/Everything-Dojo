@@ -94,7 +94,12 @@ function mark_all_read(forum_id, user_id) {
     },
     type: 'post',
     success: function() {
-      location.reload();
+      $(".topic-icon.unread-icon").removeClass("unread-icon").addClass("read-icon");
+      $(".msg").html("All posts have been marked as read.");
+      $(".msg").fadeIn(300);
+      setTimeout(function () {
+        $(".msg").fadeOut(2000);
+      }, 5000);
     }
   });
 }

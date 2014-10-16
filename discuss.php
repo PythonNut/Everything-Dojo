@@ -54,6 +54,7 @@
   }
 ?>
 <section id="content">
+  <p class="msg" style="display:none"></p>
   <div id="notifications">
     <div class="notification-arrow-up"></div>
     <div id="notification-body">
