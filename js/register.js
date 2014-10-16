@@ -55,29 +55,33 @@ document.onready = function () {
               if (ajaxName.responseText == "success") {
                 userName.assign("Username is valid.", "correct").show();
                 toggleSubmitDisabled();
+                userName.el.parentNode.lastElementChild.style.display = "none"; // hide loading gif
               } else if (ajaxName.responseText == "error") {
                 userName.assign("Username already exists! Please choose a new one.", "error").show();
                 submit.setAttribute("disabled", true);
+                userName.el.parentNode.lastElementChild.style.display = "none";
               }
-            } else {
+            } else if (ajaxName.status !== 0) { // if an error actually occured, not just a request being aborted
               userName.assign("A " + ajaxName.status + " error occurred. Please try again.", "error").show();
               submit.setAttribute("disabled", true);
+              userName.el.parentNode.lastElementChild.style.display = "none";
             }
-            userName.el.parentNode.lastElementChild.style.display = "none"; // hide loading gif
           }
         };
 
-        // set 400ms timeout because we're getting results too fast, and
-        // users won't know whether the AJAX got through or not :P
+        // set 100ms timeout to account for typing
         userTimeout = setTimeout(function () {
           try {
             ajaxName.open("GET", "register.php?username=" + user, true);
             ajaxName.setRequestHeader("X-Requested-With", "XMLHttpRequest");
             ajaxName.send();
           } catch (error) {
-            throw new Error("An AJAX error occured: " + error);
+            window.alert("An AJAX error occured. Please check your internet connection and try again.");
+            if (window.evdoDebug === true) {
+              console.log("Error: " + error);
+            }
           }
-        }, 300);
+        }, 100);
       }
     }
   };
@@ -239,7 +243,7 @@ document.onready = function () {
             }
             $submit.next().css("display", "");
             Recaptcha.reload(); // automatically reload reCAPTCHA
-          }, 3000);
+          }, 1000);
         }
       });
     });
