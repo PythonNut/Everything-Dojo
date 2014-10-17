@@ -208,27 +208,7 @@
             }
           ?>
         </div>
-<?php /*      <form action="discuss.php" method="post" id="edit" style="display:none">
-          <textarea name="edit"></textarea>
-          <div class="field" style="display:none">
-            Title: <input type="text" name="title" value="RE: <?php echo $topic['title']; ?>" /><br/>
-          </div>
-          <div class="field">
-            <div class="field split left">
-              Edit: <a href="https://help.github.com/articles/github-flavored-markdown" title="Github Flavored Markdown" style="color:#777;font-size:.8em;line-height:2em" target="_blank" tabindex="1">(Parsed with Github Flavored Markdown)</a>
-              <br />
-              <textarea name="desc-source" style="vertical-align:top; height:200px;"><?php echo $post['source']; ?></textarea>
-              <input type="hidden" name="desc" />
-            </div>
-            <div class="field split right">
-              <div class="topic-text" name="preview"><?php echo $post['text'] ?></div>
-            </div>
-          </div>
-          <input type="hidden" name="mode" value="edit" />
-          <input type="button" value="Cancel" class="danger" id="cancel_edit" />
-          <input type="button" value="Edit" id="edit" disabled />
-          <input type="submit" style="display:none" />
-        </form> */ ?>
+        <?php echo "<a href='#{$i}' title='Permalink for comment #{$i}'>#{$i}</a>" ?>
       </div>
     <?php
     } ?>

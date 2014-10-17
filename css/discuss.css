@@ -335,6 +335,26 @@ td.tiny-col { width: 3%; }
   background: #3589fb;
 }
 
+.topic-reply > a {
+  position: absolute;
+  top: 0;
+  left: -2.4em;
+  color: #888;
+  font-family: Lato, sans-serif;
+  opacity: 0.6;
+  padding: 1.5em 0.4em;
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+}
+
+.topic-reply:hover > a {
+  opacity: 0.8;
+}
+
+.topic-reply > a:hover {
+  opacity: 1;
+}
+
 .topic-reply-top { padding: 1em 1em; }
 
 .topic-reply-text > *:not(.topic-reply-top) {
@@ -374,6 +394,21 @@ td.tiny-col { width: 3%; }
 .topic-reply-text:target {
   -webkit-animation: targetPost 2.3s linear;
   animation: targetPost 2.3s linear;
+}
+
+.topic-reply:target::before {
+  background-color: #bebe35;
+}
+
+/* hack to make targeted comment's coloured bar entirely within post */
+.topic-reply:target + .topic-reply::before {
+  top: -1px;
+  height: calc(100% + 2px);
+}
+
+.topic-reply:target > a {
+  color: #a3a312;
+  opacity: 0.8;
 }
 
 /*--POSTING--*/
@@ -418,4 +453,8 @@ button {
 #cancel, .cancel-edit { float: left; }
 #post, .post-edit { float: right; }
 
-.note { left: auto; right: -0.5rem; }
+.note {
+  left: auto;
+  right: -0.5rem;
+  z-index: 999;
+}
