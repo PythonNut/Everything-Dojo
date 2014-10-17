@@ -320,7 +320,7 @@ td.tiny-col { width: 3%; }
   border: 1px solid black;
 
   border-radius: 0;
-  margin-left: 2em;
+  margin-left: 2.3em;
   border-left: none;
   border-top: 0 solid white;
 }
@@ -338,11 +338,13 @@ td.tiny-col { width: 3%; }
 .topic-reply > a {
   position: absolute;
   top: 0;
-  left: -2.4em;
+  left: -2.8em;
+  width: 2.3em;
   color: #888;
   font-family: Lato, sans-serif;
+  text-align: right;
   opacity: 0.6;
-  padding: 1.5em 0.4em;
+  padding: 1.5em 0.3em 1.5em 0;
   -webkit-transition: opacity 0.3s ease;
   transition: opacity 0.3s ease;
 }
