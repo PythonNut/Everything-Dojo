@@ -14,7 +14,6 @@
     <?php } ?>
     <?php global $extra_style; print $extra_style; ?>
 
-    <?php //I've decided to go back to having jQuery on all pages; it is important to have script.js on all bc notifications; and come on, it isn't noticiably more loading time. nmk read this note, remove it. -Red ?>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="/js/script.js"></script><?php //important notfication js has been moved to script.js ?>
     <?php global $extra_js; print $extra_js; ?>
@@ -45,7 +44,7 @@
     <main id="wrap">
 
       <?php if ($title == "Database") { ?>
-      
+
       <header class="database">
         <section id="headerwrap">
           <a href="<?php echo URL_DATABASE; ?>"><h1>Database</h1></a>
@@ -68,7 +67,7 @@
       </header>
 
       <?php } elseif ($title == "Discuss") { ?>
-      
+
       <header class="discuss">
         <section id="headerwrap">
           <a href="<?php echo URL_DISCUSS; ?>"><h1>Discuss</h1></a>
@@ -86,7 +85,11 @@
             <div id="logo">
               <a href="/"><?php print isset($_GET['unicorns']) ? '<img src="/images/unicorns.png" alt="Unicorns" style="margin-top:1rem" />' : '<img src="/images/logo.svg" alt="Logo" />'; ?></a>
             </div>
-            <h1 class="big">> <?php echo $title; ?></h1>
+            <?php if ($title != "Home" && $title != "Discuss" && $title != "Database" && $title != "Themizer Index") {
+              echo "<h1 class='big'>> $title</h1>";
+            } elseif ($title == "Themizer Index") {
+              echo "<h1 class='big'>> Themizer</h1>";
+            } ?>
           </nav>
 
           <?php if ($title == "Themizer Index") { ?>
@@ -100,7 +103,6 @@
           <?php } else { ?>
           <nav>
             <ul>
-              <li><a href="/" id="nav-home">Home</a></li>
               <?php if(isset($_SESSION['user_id'])) { ?>
               <li><a href="/myaccount.php" id="menu-myaccount">My Account</a></li>
               <li><a href="/mysettings.php" id="menu-mysettings">My Settings</a></li>

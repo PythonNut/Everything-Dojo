@@ -181,11 +181,16 @@ label { display: block; }
   font-size: 1.5rem;
   line-height: 4rem;
   padding: 0;
-  margin: 0 0.4rem;
+  margin: 0 1rem;
+  -webkit-transition: 0.4s ease-in-out;
+  transition: 0.4s ease-in-out;
+}
+
+#headerwrap .breadcrumbs h1:hover {
+  color: #444;
 }
 
 #headerwrap h1 a { color: white; }
-#headerwrap .breadcrumbs a { color: #666; }
 
 h1,
 h2,
@@ -306,9 +311,13 @@ nav ul a {
   line-height: 2.5em;
   padding: 0.167rem 0.417rem;
   text-decoration: none;
+  -webkit-transition: 0.4s ease-in-out;
+  transition: 0.4s ease-in-out;
 }
 
-nav ul a:hover { color: #666; }
+nav ul a:hover {
+  color: #555;
+}
 
 
 /*--FOOTER--*/
@@ -427,7 +436,7 @@ button[disabled], input[disabled], button[disabled]:hover, input[disabled]:hover
 
 /*--TABLES--*/
 /*original table design from smashingmagazine.com, thank you*/
-table { 
+table {
   width: 90%;
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
   font-size: 0.7rem;
