@@ -7,7 +7,6 @@ if (isset($_POST['submit'])) {
   foreach($_POST as $key => $value) {
     $data[$key] = filter($value);
   }
-
   unset($data['submit']);
 
   require_once('recaptchalib.php');
@@ -77,11 +76,12 @@ if (isset($_POST['submit'])) {
   $postdata['key'] = $trellokey;
   $postdata['token'] = $trellotoken;
   $postdata['name'] = $data['subject'];
-  $postdata['desc'] = "Email: ".$data['email'];
+  $postdata['desc'] .= "###Title: ".$data['email'];
+  $postdata['desc'] .= "**Email**: ".$data['email'];
   if (isset($data['id'])) {
-    $postdata['desc'] .= "\nHas EvDo account: ".$data['username']." (ID ".$data['id'].")";
+    $postdata['desc'] .= "\n**Has EvDo account**: ".$data['username']." (ID ".$data['id'].")";
   }
-  $postdata['desc'] .= "\n\n\"".$data['message']."\"";
+  $postdata['desc'] .= "\n\n**Message**:\n\n".$data['message']."\n\n";
   $postdata['due'] = null;
   $postdata['labels'] = $data['label'];
   $postdata['idList'] = $trellolistid;
@@ -114,8 +114,14 @@ if (isset($_POST['submit'])) {
     <input type="text" name="name">
     <br /><br />
     <label for="email">Email</label>
-    <label class="small">So we can contact you back. If you have an account on Everything Dojo, please use the same email you used to register so that we can identify your account.</label>
-    <input type="text" name="email">
+    <?php if ($_SESSION['user_id'] > 0){ ?>
+      <label class="small">So we can contact you back. You are logged in as <b><?php echo get_user($_SESSION['user_id']); ?>.</b></label>
+      <input type="text" name="email-dolly" value="<?php echo get_all_user($_SESSION['user_id'])['user_email'];?>" style="width:<?php echo strlen(get_all_user($_SESSION['user_id'])['user_email'])*11;?>px;" disabled="disabled">
+      <input type="text" name="email" value="<?php echo get_all_user($_SESSION['user_id'])['user_email'];?>" hidden="hidden">
+    <?php } else { ?>
+      <label class="small">So we can contact you back. If you have an account on Everything Dojo, please use the same email you used to register so that we can identify your account or sign in.</label>
+      <input type="text" name="email">
+    <?php } ?>
     <br /><br />
     <label for="reason">What's your reason for contacting us?</label>
     <select name="reason">
@@ -128,9 +134,7 @@ if (isset($_POST['submit'])) {
     <label for="subject">Subject</label>
     <input type="text" name="subject">
     <label for="message">Message</label>
-    <textarea name="message" rows="10">Hi Everything Dojo,
-
-    </textarea>
+    <textarea name="message" rows="10">Hi Everything Dojo,</textarea>
     <br />
     <?php
       require_once('recaptchalib.php');
