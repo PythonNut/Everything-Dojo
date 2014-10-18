@@ -273,3 +273,34 @@ div.code {
   -webkit-transform: rotate(-45deg);
           transform: rotate(-45deg);
 }
+
+/*--TABLES--*/
+table {
+  width: 97%;
+  min-width: 500px;
+  border-collapse: collapse;
+  font-weight: bold;
+  color: #000267;
+  font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+  padding-bottom: 20px;
+}
+table tr {
+  height: 50px;
+  background: #ffd2ff;
+  border-bottom: rgba(0, 0, 0, 0.05) 1px solid;
+}
+table td {
+  box-sizing: border-box;
+  padding-left: 30px;
+}
+table .headingTr {
+  padding: 7px;
+  background: #83cdff;
+  color: #f2f3f4;
+  border: 0px solid;
+  font-size: 150%;
+}
+.theme-name {
+  color: #1D6799;
+  font-size: 120%;
+}

@@ -427,7 +427,7 @@ button[disabled], input[disabled], button[disabled]:hover, input[disabled]:hover
 
 /*--TABLES--*/
 /*original table design from smashingmagazine.com, thank you*/
-table {
+table { 
   width: 90%;
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
   font-size: 0.7rem;
