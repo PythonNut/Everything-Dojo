@@ -4,8 +4,6 @@
 include("db.php");
 // recaptcha
 include("recaptcha.php");
-// trello
-include("trello.php");
 // functions
 include("functions.php");
 // constants
